@@ -59,10 +59,10 @@ public class ParseObjectReader {
         String displayName = object.getString(ParseObjectConstant.kPAPFieldDisplayNameKey);
         Date startDate = object.getDate(ParseObjectConstant.kPAPFieldStartDateKey);
         Date endDate = object.getDate(ParseObjectConstant.kPAPFieldEndDateKey);
-        String whatToEat= object.getString(ParseObjectConstant.kPAPFieldWhatToEatKey);
-        String remarks= object.getString(ParseObjectConstant.kPAPFieldRemarksKey);
-        String waiter= object.getString(ParseObjectConstant.kPAPFieldWaiterKey);
-        String restaurantRef= object.getString(ParseObjectConstant.kPAPFieldLocalRestaurantKey);
+        String whatToEat = object.getString(ParseObjectConstant.kPAPFieldWhatToEatKey);
+        String remarks = object.getString(ParseObjectConstant.kPAPFieldRemarksKey);
+        String waiter = object.getString(ParseObjectConstant.kPAPFieldWaiterKey);
+        String restaurantRef = object.getString(ParseObjectConstant.kPAPFieldLocalRestaurantKey);
 
 
         model.setUUID(uuid);
@@ -110,10 +110,10 @@ public class ParseObjectReader {
         String uuid = object.getString(ParseObjectConstant.kPAPFieldObjectUUIDKey);
         Date objectCreatedDate = object.getDate(ParseObjectConstant.kPAPFieldObjectCreatedDateKey);
         String originalUrl = object.getString(ParseObjectConstant.kPAPFieldOriginalUrlKey);
-        String thumbnailUrl= object.getString(ParseObjectConstant.kPAPFieldThumbnailImageKey);
-        String usedRef= object.getString(ParseObjectConstant.kPAPFieldUsedRefKey);
-        int usedType= object.getInt(ParseObjectConstant.kPAPFieldUsedTypeKey);
-        String restaurantRef= object.getString(ParseObjectConstant.kPAPFieldLocalRestaurantKey);
+        String thumbnailUrl = object.getString(ParseObjectConstant.kPAPFieldThumbnailImageKey);
+        String usedRef = object.getString(ParseObjectConstant.kPAPFieldUsedRefKey);
+        int usedType = object.getInt(ParseObjectConstant.kPAPFieldUsedTypeKey);
+        String restaurantRef = object.getString(ParseObjectConstant.kPAPFieldLocalRestaurantKey);
 
         model.setUUID(uuid);
         model.setObjectCreatedDate(objectCreatedDate);
@@ -127,6 +127,20 @@ public class ParseObjectReader {
     }
 
     public static DBRecipe reader(ParseObject object, DBRecipe model) {
+        String uuid = object.getString(ParseObjectConstant.kPAPFieldObjectUUIDKey);
+        Date objectCreatedDate = object.getDate(ParseObjectConstant.kPAPFieldObjectCreatedDateKey);
+        String displayName = object.getString(ParseObjectConstant.kPAPFieldDisplayNameKey);
+        String orderedPeopleRef = object.getString(ParseObjectConstant.kPAPFieldOrderedPeopleRefKey);
+        String price = object.getString(ParseObjectConstant.kPAPFieldPriceKey);
+        String eventRef = object.getString(ParseObjectConstant.kPAPFieldEventRefKey);
+
+        model.setUUID(uuid);
+        model.setObjectCreatedDate(objectCreatedDate);
+        model.setDisplayName(displayName);
+        model.setOrderedPeopleRef(orderedPeopleRef);
+        model.setPrice(price);
+        model.setEventRef(eventRef);
+
         return model;
     }
 

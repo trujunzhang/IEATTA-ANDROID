@@ -35,4 +35,9 @@ public final class ParseObjectConstant {
     public static final String kPAPFieldUsedTypeKey = "usedType";
     public static final String kPAPFieldOSTypeKey = "osType";
 
+    // For Recipe
+    public static final String kPAPFieldPriceKey = "price";
+    public static final String kPAPFieldEventRefKey = "eventRef";
+    public static final String kPAPFieldOrderedPeopleRefKey = "orderedPeopleRef";    
+
 }
