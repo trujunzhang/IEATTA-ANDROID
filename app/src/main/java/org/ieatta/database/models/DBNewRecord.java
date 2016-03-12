@@ -46,13 +46,4 @@ public class DBNewRecord extends RealmObject {
     public void setModelPoint(String modelPoint) {
         this.modelPoint = modelPoint;
     }
-
-    @Override
-    public String toString() {
-        return "NewRecord: {" +
-                "UUID='" + UUID + '\'' +
-                ", modelType=" + modelType +
-                ", modelPoint='" + modelPoint + '\'' +
-                '}';
-    }
 }
