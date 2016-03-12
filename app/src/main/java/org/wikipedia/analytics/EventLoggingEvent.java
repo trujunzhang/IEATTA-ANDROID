@@ -2,7 +2,7 @@ package org.wikipedia.analytics;
 
 import android.net.Uri;
 import android.util.Log;
-import com.github.kevinsawicki.http.HttpRequest;
+//import com.github.kevinsawicki.http.HttpRequest;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.ieatta.IEATTAApp;
@@ -54,28 +54,28 @@ public class EventLoggingEvent {
      * Returns immediately after queueing the network request in the background.
      */
     public void log() {
-        new LogEventTask(data).execute();
+//        new LogEventTask(data).execute();
     }
 
-    private class LogEventTask extends SaneAsyncTask<Integer> {
-        private final JSONObject data;
-        LogEventTask(JSONObject data) {
-            this.data = data;
-        }
-
-        @Override
-        public Integer performTask() throws Throwable {
-            String elUrl = EVENTLOG_URL;
-            String dataURL = Uri.parse(elUrl)
-                    .buildUpon().query(data.toString())
-                    .build().toString();
-            return HttpRequest.get(dataURL).header("User-Agent", userAgent).code();
-        }
-
-        @Override
-        public void onCatch(Throwable caught) {
-            // Do nothing bad. EL data is ok to lose.
-            Log.d(Funnel.ANALYTICS_TAG, "Lost EL data: " + data.toString());
-        }
-    }
+//    private class LogEventTask extends SaneAsyncTask<Integer> {
+//        private final JSONObject data;
+//        LogEventTask(JSONObject data) {
+//            this.data = data;
+//        }
+//
+//        @Override
+//        public Integer performTask() throws Throwable {
+//            String elUrl = EVENTLOG_URL;
+//            String dataURL = Uri.parse(elUrl)
+//                    .buildUpon().query(data.toString())
+//                    .build().toString();
+//            return HttpRequest.get(dataURL).header("User-Agent", userAgent).code();
+//        }
+//
+//        @Override
+//        public void onCatch(Throwable caught) {
+//            // Do nothing bad. EL data is ok to lose.
+//            Log.d(Funnel.ANALYTICS_TAG, "Lost EL data: " + data.toString());
+//        }
+//    }
 }
