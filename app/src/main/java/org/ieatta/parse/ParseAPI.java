@@ -4,6 +4,8 @@ import android.content.Context;
 
 import com.parse.Parse;
 import com.parse.ParseACL;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 public class ParseAPI {
@@ -22,5 +24,8 @@ public class ParseAPI {
         // Optionally enable public read access.
         // defaultACL.setPublicReadAccess(true);
         ParseACL.setDefaultACL(defaultACL, true);
+
+        // Finally, cleanup the last cache.
+        ParseQuery.clearAllCachedResults();
     }
 }
