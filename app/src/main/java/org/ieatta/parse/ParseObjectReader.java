@@ -53,7 +53,6 @@ public class ParseObjectReader {
         String waiter = object.getString(ParseObjectConstant.kPAPFieldWaiterKey);
         String restaurantRef = object.getString(ParseObjectConstant.kPAPFieldLocalRestaurantKey);
 
-
         model.setUUID(uuid);
         model.setObjectCreatedDate(objectCreatedDate);
         model.setDisplayName(displayName);
