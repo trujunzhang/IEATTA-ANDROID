@@ -12,6 +12,8 @@ import org.ieatta.database.models.DBRestaurant;
 import org.ieatta.database.models.DBReview;
 import org.ieatta.database.models.DBTeam;
 
+import java.util.Date;
+
 public class ParseObjectReader {
 
     public static void reader(ParseObject object,DBEvent event){
@@ -19,7 +21,15 @@ public class ParseObjectReader {
     }
 
     public static void reader(ParseObject object,DBNewRecord newRecord){
+        String uuid = object.getString(ParseObjectConstant.kPAPFieldObjectUUIDKey);
+        Date objectCreatedDate = object.getDate(ParseObjectConstant.kPAPFieldObjectCreatedDateKey);
+        int type = object.getInt(ParseObjectConstant.kPAPFieldModelTypeKey);
+        String modelPoint = object.getString(ParseObjectConstant.kPAPFieldModelPointKey);
 
+        newRecord.setUUID(uuid);
+        newRecord.setObjectCreatedDate(objectCreatedDate);
+        newRecord.setModelType(type);
+        newRecord.setModelPoint(modelPoint);
     }
 
     public static void reader(ParseObject object,DBPeopleInEvent peopleInEvent){

@@ -1,7 +1,9 @@
 package org.ieatta.parse;
 
+import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
+import org.ieatta.database.models.DBNewRecord;
 import org.ieatta.database.provide.PQueryModelType;
 
 import java.util.Date;
@@ -17,6 +19,17 @@ public class ParseQueryUtils {
 
         if (lastAsyncDate != null)
             query.whereGreaterThan(ParseObjectConstant.kPAPFieldModelOnlineCreatedAtKey, lastAsyncDate);
+
+        return query;
+    }
+
+    public static ParseQuery createQueryForRecorded(ParseObject newRecordObject) {
+        DBNewRecord newRecord = new DBNewRecord();
+        ParseObjectReader.reader(newRecordObject, newRecord);
+
+        PQueryModelType modelType = PQueryModelType.getInstance(newRecord.getModelType());
+        ParseQuery query = ParseQuery.getQuery(modelType.toString());
+
 
         return query;
     }

@@ -1,6 +1,5 @@
 package org.ieatta.server.recurring.tasks;
 
-
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
@@ -15,14 +14,12 @@ import java.util.List;
 
 import bolts.Continuation;
 import bolts.Task;
+import io.realm.RealmObject;
 
-/**
- * Created by djzhang on 11/30/15.
- */
 public final class ServerTask {
 
     public static Task<Void> getFromServer(ParseQuery query){
-        Task<List<ParseObject>> inBackground = query.findInBackground();
+        final Task<List<ParseObject>> inBackground = query.findInBackground();
         return inBackground.onSuccessTask(new Continuation<List<ParseObject>, Task<Void>>() {
             @Override
             public Task<Void> then(Task<List<ParseObject>> task) throws Exception {
@@ -61,10 +58,10 @@ public final class ServerTask {
      * - parameter newRecordObject: A row data on the NewRecord table.
      */
     private static Task<Void> getObjectsFromServerTask(ParseObject newRecordObject) {
-        final Date lastCreateAt = newRecordObject.getCreatedAt();
+        Date lastCreateAt = newRecordObject.getCreatedAt();
 
 //         1. Create model instance from record's modelType.
-        DBNewRecord newRecord = new DBNewRecord();
+        final RealmObject newRecord = new DBNewRecord();
         ParseObjectReader.reader(newRecordObject, newRecord);
         L.d(" get NewRecordObject's instance: " + newRecord.toString());
 
