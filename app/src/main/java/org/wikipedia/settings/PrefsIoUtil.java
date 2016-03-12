@@ -9,7 +9,6 @@ import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 
 import org.ieatta.IEATTAApp;
-import org.wikipedia.WikipediaApp;
 
 /** Shared preferences input / output utility providing set* functionality that writes to SP on the
  * client's behalf, IO without client supplied {@link Context}, and wrappers for using string

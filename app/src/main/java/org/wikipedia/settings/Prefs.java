@@ -3,7 +3,9 @@ package org.wikipedia.settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
+import org.ieatta.IEATTAApp;
 import org.ieatta.R;
+import org.ieatta.SharedPreferenceCookieManager;
 import org.wikipedia.analytics.SessionData;
 import org.wikipedia.analytics.SessionFunnel;
 import org.wikipedia.util.StringUtil;
@@ -60,14 +62,6 @@ public final class Prefs {
         setString(R.string.preference_key_language, code);
     }
 
-    public static int getThemeId() {
-        return getInt(R.string.preference_key_color_theme, Theme.getFallback().getMarshallingId());
-    }
-
-    public static void setThemeId(int theme) {
-        setInt(R.string.preference_key_color_theme, theme);
-    }
-
     @NonNull
     public static String getCookieDomains() {
         return getString(R.string.preference_key_cookie_domains, "");
@@ -101,7 +95,7 @@ public final class Prefs {
 
     public static boolean isShowDeveloperSettingsEnabled() {
         return getBoolean(R.string.preference_key_show_developer_settings,
-                WikipediaApp.getInstance().isDevRelease());
+                IEATTAApp.getInstance().isDevRelease());
     }
 
     public static void setShowDeveloperSettingsEnabled(boolean enabled) {
@@ -194,34 +188,8 @@ public final class Prefs {
         setString(R.string.preference_key_remote_config, json);
     }
 
-    public static void setTabs(@NonNull List<Tab> tabs) {
-        setString(R.string.preference_key_tabs, GsonMarshaller.marshal(tabs));
-    }
-
-    @NonNull
-    public static List<Tab> getTabs() {
-        return hasTabs()
-                ? TabUnmarshaller.unmarshal(getString(R.string.preference_key_tabs, null))
-                : Collections.<Tab>emptyList();
-    }
-
-    public static boolean hasTabs() {
-        return contains(R.string.preference_key_tabs);
-    }
-
     public static void clearTabs() {
         remove(R.string.preference_key_tabs);
-    }
-
-    public static void setSessionData(@NonNull SessionData data) {
-        setString(R.string.preference_key_session_data, GsonMarshaller.marshal(data));
-    }
-
-    @NonNull
-    public static SessionData getSessionData() {
-        return hasSessionData()
-                ? SessionUnmarshaller.unmarshal(getString(R.string.preference_key_session_data, null))
-                : new SessionData();
     }
 
     public static boolean hasSessionData() {
