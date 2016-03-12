@@ -37,4 +37,15 @@ public enum PhotoUsedType {
     }
 
 
+    @Override
+    public String toString() {
+        String[] names = {
+                "Restaurant",
+                "Waiter",
+                "Recipe",
+                "People",
+                "unknow",
+        };
+        return names[type];
+    }
 }
