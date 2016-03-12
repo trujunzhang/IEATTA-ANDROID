@@ -32,7 +32,7 @@ public class ParseObjectReaderTest {
         Date nowDate = new Date();
         newRecord.setObjectCreatedDate(nowDate);
 
-        assertThat("equal type each other.", newRecord.getModelType() == PQueryModelType.Event.getType());
+        assertThat("type equal each other.", newRecord.getModelType() == PQueryModelType.Event.getType());
     }
 
 }
