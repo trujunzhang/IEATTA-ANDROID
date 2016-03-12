@@ -27,6 +27,7 @@ public class SyncInfoTest {
 
     @Test
     public void testStoreAndRead() {
+//        SyncInfo syncInfo = new SyncInfo(SyncInfo.TAG_NEW_RECORD_DATE);
         Date lastRunDate = new Date();
         Prefs.setLastRunTime("sync", lastRunDate.getTime());
 
