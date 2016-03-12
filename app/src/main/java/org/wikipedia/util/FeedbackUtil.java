@@ -11,9 +11,9 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.wikipedia.R;
 import org.ieatta.IEATTAApp;
-import org.wikipedia.page.PageActivity;
+import org.ieatta.R;
+//import org.wikipedia.page.PageActivity;
 
 import java.util.concurrent.TimeUnit;
 
@@ -95,12 +95,12 @@ public final class FeedbackUtil {
     }
 
     private static View findBestView(Activity activity) {
-        if (activity instanceof PageActivity
-                && ((PageActivity) activity).getCurPageFragment() != null) {
-            return activity.findViewById(R.id.page_contents_container);
-        } else {
+//        if (activity instanceof PageActivity
+//                && ((PageActivity) activity).getCurPageFragment() != null) {
+//            return activity.findViewById(R.id.page_contents_container);
+//        } else {
             return activity.findViewById(android.R.id.content);
-        }
+//        }
     }
 
     private FeedbackUtil() {

@@ -24,6 +24,8 @@
     <string name="err_cannot_save_file">Cannot save file</string>
     <string name="error_can_not_process_link">Could not display this link</string>
     <string name="error_no_maps_app">Could not find any apps that provide directions.</string>
+    <string name="privacy_policy_url">https://m.wikimediafoundation.org/wiki/Privacy_Policy</string>
+    <string name="error_network_error_try_again">Could not reach the network, please try again.</string>
 
     <!-- Crash reporter -->
     <string name="crash_report_dialog_title">Sorry, app crashed last time</string>

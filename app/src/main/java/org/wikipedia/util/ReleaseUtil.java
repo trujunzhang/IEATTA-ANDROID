@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 
-import org.wikipedia.BuildConfig;
+import org.ieatta.BuildConfig;
 import org.wikipedia.settings.Prefs;
 
 public final class ReleaseUtil {

@@ -8,12 +8,10 @@ import android.text.format.DateUtils;
 import android.util.SparseArray;
 import android.view.View;
 
+import org.ieatta.R;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.wikipedia.R;
 import org.ieatta.IEATTAApp;
-import org.wikipedia.bridge.CommunicationBridge;
-import org.wikipedia.interlanguage.LanguageUtil;
 import org.wikipedia.page.PageTitle;
 
 import java.util.Arrays;
@@ -49,31 +47,7 @@ public final class L10nUtil {
         return Arrays.binarySearch(RTL_LANGS, lang, null) >= 0;
     }
 
-    /**
-     * Set up directionality for both UI and content elements in a webview.
-     *
-     * @param contentLang The Content language to use to set directionality. Wiki Language code.
-     * @param uiLang The UI language to use to set directionality. Java language code.
-     * @param bridge The CommunicationBridge to use to communicate with the WebView
-     */
-    public static void setupDirectionality(String contentLang, String uiLang, CommunicationBridge bridge) {
-        JSONObject payload = new JSONObject();
-        try {
-            if (isLangRTL(contentLang)) {
-                payload.put("contentDirection", "rtl");
-            } else {
-                payload.put("contentDirection", "ltr");
-            }
-            if (isLangRTL(LanguageUtil.languageCodeToWikiLanguageCode(uiLang))) {
-                payload.put("uiDirection", "rtl");
-            } else {
-                payload.put("uiDirection", "ltr");
-            }
-        } catch (JSONException e) {
-            throw new RuntimeException(e);
-        }
-        bridge.sendMessage("setDirectionality", payload);
-    }
+
 
     /**
      * Sets text direction (RTL / LTR) for given view based on given lang.
@@ -103,21 +77,6 @@ public final class L10nUtil {
         }
     }
 
-    /**
-     * Returns true if the translated string for the stylized WP wordmark is equivalent to the
-     * English one, so that the PNG image could be used instead. We'd like to avoid bloating up our
-     * APK size with extra fonts just to show the logo in the correct font, which we only use
-     * rarely (Initial onboarding and ShareAFact).
-     * As a compromise we use the PNG image with the correct font for the mainly used
-     * languages (and also for languages that haven't translated this value). For all other
-     * languages we use a font already available in Android.
-     *
-     * @param context any valid Context will do (even ApplicationContext)
-     * @return true if the translated stylized WP logo text is the same as in English.
-     */
-    public static boolean canLangUseImageForWikipediaWordmark(Context context) {
-        return "<big>W</big>IKIPEDI<big>A</big>".equals(context.getString(R.string.wp_stylized));
-    }
 
     /**
      * Returns true if the device languages is set to an RTL language. Note that this includes
