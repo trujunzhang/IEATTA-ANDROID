@@ -3,7 +3,7 @@ package org.wikipedia.analytics;
 import android.support.annotation.NonNull;
 
 import org.json.JSONObject;
-import org.wikipedia.WikipediaApp;
+import org.ieatta.IEATTAApp;
 
 public class CreateAccountFunnel extends Funnel {
     private static final String SCHEMA_NAME = "MobileWikiAppCreateAccount";
@@ -11,7 +11,7 @@ public class CreateAccountFunnel extends Funnel {
 
     private final String requestSource;
 
-    public CreateAccountFunnel(WikipediaApp app, String requestSource) {
+    public CreateAccountFunnel(IEATTAApp app, String requestSource) {
         super(app, SCHEMA_NAME, REVISION);
         this.requestSource = requestSource;
     }

@@ -1,6 +1,6 @@
 package org.wikipedia.analytics;
 
-import org.wikipedia.WikipediaApp;
+import org.ieatta.IEATTAApp;
 import org.wikipedia.history.HistoryEntry;
 import org.json.JSONObject;
 import org.wikipedia.settings.Prefs;
@@ -24,7 +24,7 @@ public class SessionFunnel extends Funnel {
     private long leadSectionStartTime;
     private long restSectionsStartTime;
 
-    public SessionFunnel(WikipediaApp app) {
+    public SessionFunnel(IEATTAApp app) {
         super(app, SCHEMA_NAME, REVISION, app.isProdRelease() ? Funnel.SAMPLE_LOG_100 : Funnel.SAMPLE_LOG_ALL);
 
         sessionData = Prefs.getSessionData();

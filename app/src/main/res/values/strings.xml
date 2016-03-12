@@ -1,3 +1,36 @@
-<resources>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">IEATTA</string>
+
+    <string name="app_name_prod">Wikipedia</string>
+    <string name="app_name_beta" tools:ignore="UnusedResources">Wikipedia Beta</string>
+    <string name="app_name_alpha" tools:ignore="UnusedResources">Wikipedia Alpha</string>
+
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+
+    <string name="search_hint">Search Wikipedia</string>
+    <string name="nav_item_history">History</string>
+    <string name="error_network_error">Cannot connect to the Internet.</string>
+    <string name="page_error_retry">Retry</string>
+    <string name="page_error_back_to_main">Go back</string>
+    <string name="menu_clear_all_history">Clear history</string>
+    <string name="menu_clear_all_saved_pages">Clear saved pages</string>
+    <string name="page_does_not_exist_error">This page does not exist.</string>
+    <string name="nav_item_today">Today</string>
+
+
+    <!-- Crash reporter -->
+    <string name="crash_report_dialog_title">Sorry, app crashed last time</string>
+    <string name="crash_report_dialog_text">Would you like to send a crash report to HockeyApp / a third-party service provider so that Wikimedia can review your crash and fix the bug that caused it?</string>
+    <string name="crash_report_dialog_dont_send_button">Skip</string>
+    <string name="crash_report_dialog_always_send_button">Always send</string>
+    <string name="crash_report_dialog_send_button">Send</string>
+    <string name="crash_report_activity_title">Application error</string>
+    <string name="crash_report_relaunch_or_quit">We\'re sorry, the Wikipedia app has experienced an error and was terminated.\n\nWould you like to start over or quit?</string>
+    <string name="crash_report_relaunch">Start over</string>
+    <string name="crash_report_quit">Quit</string>
+    <!-- /Crash reporter -->
+
+
 </resources>

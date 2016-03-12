@@ -14,7 +14,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import org.wikipedia.R;
-import org.wikipedia.WikipediaApp;
+import org.ieatta.IEATTAApp;
 import org.wikipedia.page.PageTitle;
 import org.wikipedia.settings.Prefs;
 
@@ -64,7 +64,7 @@ public final class UriUtil {
      * @return A fully qualified, protocol specified URL
      */
     public static String resolveProtocolRelativeUrl(String url) {
-        return (url.startsWith("//") ? WikipediaApp.getInstance().getNetworkProtocol() + ":" + url : url);
+        return (url.startsWith("//") ? IEATTAApp.getInstance().getNetworkProtocol() + ":" + url : url);
     }
 
     public static boolean isValidPageLink(Uri uri) {
@@ -73,7 +73,7 @@ public final class UriUtil {
     }
 
     public static void handleExternalLink(final Context context, final Uri uri) {
-        if (WikipediaApp.getInstance().getWikipediaZeroHandler().isZeroEnabled()) {
+        if (IEATTAApp.getInstance().getWikipediaZeroHandler().isZeroEnabled()) {
             if (Prefs.isShowZeroInterstitialEnabled()) {
                 AlertDialog.Builder alert = new AlertDialog.Builder(context);
                 alert.setTitle(context.getString(R.string.zero_interstitial_title));

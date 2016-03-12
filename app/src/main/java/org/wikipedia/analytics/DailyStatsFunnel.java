@@ -5,7 +5,7 @@ import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 
 import org.json.JSONObject;
-import org.wikipedia.WikipediaApp;
+import org.ieatta.IEATTAApp;
 
 import java.util.concurrent.TimeUnit;
 
@@ -14,7 +14,7 @@ public class DailyStatsFunnel extends Funnel {
     private static final String SCHEMA_NAME = "MobileWikiAppDailyStats";
     private static final int SCHEMA_REVISION = 12637385;
 
-    public DailyStatsFunnel(WikipediaApp app) {
+    public DailyStatsFunnel(IEATTAApp app) {
         super(app, SCHEMA_NAME, SCHEMA_REVISION, Funnel.SAMPLE_LOG_100);
     }
 

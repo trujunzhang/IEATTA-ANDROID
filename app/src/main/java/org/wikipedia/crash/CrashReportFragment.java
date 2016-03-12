@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import org.wikipedia.R;
-import org.wikipedia.WikipediaApp;
+import org.ieatta.IEATTAApp;
 import org.wikipedia.activity.CallbackFragment;
 import org.wikipedia.drawable.DrawableUtil;
 
@@ -42,7 +42,7 @@ public class CrashReportFragment extends CallbackFragment<CrashReportFragmentCal
 
     @ColorInt
     private int getContrastingThemeColor() {
-        return WikipediaApp.getInstance().getContrastingThemeColor();
+        return IEATTAApp.getInstance().getContrastingThemeColor();
     }
 
     private void setOnClickListener(View view, @IdRes int id, View.OnClickListener listener) {

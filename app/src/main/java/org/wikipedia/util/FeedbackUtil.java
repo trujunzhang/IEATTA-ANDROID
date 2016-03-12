@@ -12,7 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import org.wikipedia.R;
-import org.wikipedia.WikipediaApp;
+import org.ieatta.IEATTAApp;
 import org.wikipedia.page.PageActivity;
 
 import java.util.concurrent.TimeUnit;
@@ -72,7 +72,7 @@ public final class FeedbackUtil {
      * Ask user to try connecting again upon (hopefully) recoverable network failure.
      */
     public static void toastNetworkFail() {
-        Toast.makeText(WikipediaApp.getInstance(), R.string.error_network_error_try_again, Toast.LENGTH_LONG).show();
+        Toast.makeText(IEATTAApp.getInstance(), R.string.error_network_error_try_again, Toast.LENGTH_LONG).show();
     }
 
     /**

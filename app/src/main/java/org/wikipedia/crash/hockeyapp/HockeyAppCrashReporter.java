@@ -8,7 +8,7 @@ import android.support.annotation.NonNull;
 import net.hockeyapp.android.CrashManager;
 import net.hockeyapp.android.ExceptionHandler;
 
-import org.wikipedia.WikipediaApp;
+import org.ieatta.IEATTAApp;
 import org.wikipedia.crash.BaseCrashReporter;
 import org.wikipedia.crash.CrashReportActivity;
 import org.wikipedia.util.log.L;
@@ -88,7 +88,7 @@ public class HockeyAppCrashReporter extends BaseCrashReporter {
         }
 
         private void launchCrashReportActivity() {
-            Context context = WikipediaApp.getInstance();
+            Context context = IEATTAApp.getInstance();
             int flags = FLAG_ACTIVITY_NEW_TASK | FLAG_ACTIVITY_CLEAR_TASK;
             Intent intent = new Intent(context, CrashReportActivity.class).addFlags(flags);
             context.startActivity(intent);

@@ -4,7 +4,7 @@ import android.support.annotation.NonNull;
 
 import org.json.JSONObject;
 import org.wikipedia.Site;
-import org.wikipedia.WikipediaApp;
+import org.ieatta.IEATTAApp;
 
 public class FindInPageFunnel extends TimedFunnel {
     private static final String SCHEMA_NAME = "MobileWikiAppFindInPage";
@@ -16,7 +16,7 @@ public class FindInPageFunnel extends TimedFunnel {
     private int numFindPrev;
     private String findText;
 
-    public FindInPageFunnel(WikipediaApp app, Site site, int pageId) {
+    public FindInPageFunnel(IEATTAApp app, Site site, int pageId) {
         super(app, SCHEMA_NAME, REV_ID, Funnel.SAMPLE_LOG_ALL, site);
         this.pageId = pageId;
     }

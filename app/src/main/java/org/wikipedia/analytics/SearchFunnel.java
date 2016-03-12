@@ -2,13 +2,13 @@ package org.wikipedia.analytics;
 
 import android.support.annotation.NonNull;
 
-import org.wikipedia.WikipediaApp;
+import org.ieatta.IEATTAApp;
 
 public class SearchFunnel extends Funnel {
     private static final String SCHEMA_NAME = "MobileWikiAppSearch";
     private static final int REVISION = 10641988;
 
-    public SearchFunnel(WikipediaApp app) {
+    public SearchFunnel(IEATTAApp app) {
         super(app, SCHEMA_NAME, REVISION, Funnel.SAMPLE_LOG_100);
     }
 

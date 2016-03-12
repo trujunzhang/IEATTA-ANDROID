@@ -3,7 +3,7 @@ package org.wikipedia.analytics;
 import android.support.annotation.NonNull;
 
 import org.json.JSONObject;
-import org.wikipedia.WikipediaApp;
+import org.ieatta.IEATTAApp;
 
 public class AppLanguageSelectFunnel extends TimedFunnel {
     private static final String SCHEMA_NAME = "MobileWikiAppLangSelect";
@@ -13,11 +13,11 @@ public class AppLanguageSelectFunnel extends TimedFunnel {
     private final String previousLanguage;
 
     public AppLanguageSelectFunnel(boolean initiatedFromSearchBar) {
-        this(initiatedFromSearchBar, WikipediaApp.getInstance().getAppOrSystemLanguageCode());
+        this(initiatedFromSearchBar, IEATTAApp.getInstance().getAppOrSystemLanguageCode());
     }
 
     public AppLanguageSelectFunnel(boolean initiatedFromSearchBar, String previousLanguage) {
-        super(WikipediaApp.getInstance(), SCHEMA_NAME, REV_ID, Funnel.SAMPLE_LOG_100);
+        super(IEATTAApp.getInstance(), SCHEMA_NAME, REV_ID, Funnel.SAMPLE_LOG_100);
         this.initiatedFromSearchBar = initiatedFromSearchBar;
         this.previousLanguage = previousLanguage;
     }

@@ -11,7 +11,7 @@ import android.view.View;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.wikipedia.R;
-import org.wikipedia.WikipediaApp;
+import org.ieatta.IEATTAApp;
 import org.wikipedia.bridge.CommunicationBridge;
 import org.wikipedia.interlanguage.LanguageUtil;
 import org.wikipedia.page.PageTitle;
@@ -160,13 +160,13 @@ public final class L10nUtil {
     }
 
     private static Configuration getCurrentConfiguration() {
-        return new Configuration(WikipediaApp.getInstance().getResources().getConfiguration());
+        return new Configuration(IEATTAApp.getInstance().getResources().getConfiguration());
     }
 
     private static SparseArray<String> getTargetStrings(@StringRes int[] strings, Configuration altConfig) {
         SparseArray<String> localizedStrings = new SparseArray<>();
-        Resources targetResources = new Resources(WikipediaApp.getInstance().getResources().getAssets(),
-                                                  WikipediaApp.getInstance().getResources().getDisplayMetrics(),
+        Resources targetResources = new Resources(IEATTAApp.getInstance().getResources().getAssets(),
+                                                  IEATTAApp.getInstance().getResources().getDisplayMetrics(),
                                                   altConfig);
         for (int stringRes : strings) {
             localizedStrings.put(stringRes, targetResources.getString(stringRes));
@@ -179,8 +179,8 @@ public final class L10nUtil {
      * @param defaultConfig The original system configuration
      */
     private static void resetConfiguration(Configuration defaultConfig) {
-        new Resources(WikipediaApp.getInstance().getResources().getAssets(),
-                      WikipediaApp.getInstance().getResources().getDisplayMetrics(),
+        new Resources(IEATTAApp.getInstance().getResources().getAssets(),
+                      IEATTAApp.getInstance().getResources().getDisplayMetrics(),
                       defaultConfig);
     }
 

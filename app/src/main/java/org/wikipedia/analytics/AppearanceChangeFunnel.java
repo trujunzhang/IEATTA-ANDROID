@@ -3,15 +3,13 @@ package org.wikipedia.analytics;
 import android.support.annotation.NonNull;
 
 import org.json.JSONObject;
-import org.wikipedia.Site;
-import org.wikipedia.WikipediaApp;
-import org.wikipedia.theme.Theme;
+import org.ieatta.IEATTAApp;
 
 public class AppearanceChangeFunnel extends Funnel {
     private static final String SCHEMA_NAME = "MobileWikiAppAppearanceSettings";
     private static final int REV_ID = 10375462;
 
-    public AppearanceChangeFunnel(WikipediaApp app, Site site) {
+    public AppearanceChangeFunnel(IEATTAApp app, Site site) {
         super(app, SCHEMA_NAME, REV_ID, site);
     }
 

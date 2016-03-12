@@ -3,7 +3,7 @@ package org.wikipedia.analytics;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import org.wikipedia.WikipediaApp;
+import org.ieatta.IEATTAApp;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +13,7 @@ public class TabFunnel extends Funnel {
     private static final int SCHEMA_REVISION = 12453651;
 
     public TabFunnel() {
-        super(WikipediaApp.getInstance(), SCHEMA_NAME, SCHEMA_REVISION, Funnel.SAMPLE_LOG_100);
+        super(IEATTAApp.getInstance(), SCHEMA_NAME, SCHEMA_REVISION, Funnel.SAMPLE_LOG_100);
     }
 
     public void logOpenInNew(int size) {

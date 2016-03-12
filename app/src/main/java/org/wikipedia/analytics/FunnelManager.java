@@ -2,7 +2,7 @@ package org.wikipedia.analytics;
 
 import org.wikipedia.page.PageTitle;
 import org.wikipedia.Site;
-import org.wikipedia.WikipediaApp;
+import org.ieatta.IEATTAApp;
 
 import java.util.Hashtable;
 
@@ -10,11 +10,11 @@ import java.util.Hashtable;
  * Creates and stores analytics tracking funnels.
  */
 public class FunnelManager {
-    private final WikipediaApp app;
+    private final IEATTAApp app;
     private final Hashtable<PageTitle, EditFunnel> editFunnels = new Hashtable<>();
     private final Hashtable<Site, SavedPagesFunnel> savedPageFunnels = new Hashtable<>();
 
-    public FunnelManager(WikipediaApp app) {
+    public FunnelManager(IEATTAApp app) {
         this.app = app;
     }
 

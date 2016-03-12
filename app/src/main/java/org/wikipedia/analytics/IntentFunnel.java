@@ -3,13 +3,13 @@ package org.wikipedia.analytics;
 import android.support.annotation.NonNull;
 
 import org.json.JSONObject;
-import org.wikipedia.WikipediaApp;
+import org.ieatta.IEATTAApp;
 
 public class IntentFunnel extends Funnel {
     private static final String SCHEMA_NAME = "MobileWikiAppIntents";
     private static final int REV_ID = 15237384;
 
-    public IntentFunnel(WikipediaApp app) {
+    public IntentFunnel(IEATTAApp app) {
         super(app, SCHEMA_NAME, REV_ID);
     }
 

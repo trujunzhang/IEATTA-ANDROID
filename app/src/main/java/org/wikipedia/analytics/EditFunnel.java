@@ -6,7 +6,7 @@ import android.support.annotation.Nullable;
 import org.json.JSONObject;
 import org.wikipedia.page.PageTitle;
 import org.wikipedia.R;
-import org.wikipedia.WikipediaApp;
+import org.ieatta.IEATTAApp;
 
 public class EditFunnel extends Funnel {
     private static final String SCHEMA_NAME = "MobileWikiAppEdit";
@@ -14,7 +14,7 @@ public class EditFunnel extends Funnel {
 
     private final PageTitle title;
 
-    public EditFunnel(WikipediaApp app, PageTitle title) {
+    public EditFunnel(IEATTAApp app, PageTitle title) {
         super(app, SCHEMA_NAME, REV_ID, title.getSite());
         this.title = title;
     }
