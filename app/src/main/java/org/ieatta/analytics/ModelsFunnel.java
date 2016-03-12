@@ -23,7 +23,17 @@ public class ModelsFunnel extends Funnel {
     }
 
     public void logEvent(DBEvent event) {
-
+        String log = "Event{" +
+                "UUID='" + event.getUUID() + '\'' +
+                ", restaurantRef='" + event.getRestaurantRef() + '\'' +
+                ", displayName='" + event.getDisplayName() + '\'' +
+                ", startDate=" + event.getStartDate() +
+                ", endDate=" + event.getEndDate() +
+                ", whatToEat='" + event.getWhatToEat() + '\'' +
+                ", remarks='" + event.getRemarks() + '\'' +
+                ", waiter='" + event.getWaiter() + '\'' +
+                '}';
+        log(log);
     }
 
     public void logNewRecord(DBNewRecord newRecord) {
