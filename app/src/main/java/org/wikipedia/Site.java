@@ -109,8 +109,6 @@ public class Site implements Parcelable {
         return IEATTAApp.getInstance().getNetworkProtocol() + "://" + getDomain() + getScriptPath(script);
     }
 
-
-
     public String getLanguageCode() {
         return languageCode;
     }

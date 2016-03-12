@@ -79,7 +79,6 @@ public class IEATTAApp extends Application {
     @NonNull
     private Theme currentTheme = Theme.getFallback();
 
-
     public IEATTAApp() {
         INSTANCE = this;
     }
@@ -105,7 +104,6 @@ public class IEATTAApp extends Application {
         ViewAnimations.init(resources);
         screenDensity = resources.getDisplayMetrics().density;
 
-
         // Integrating with Stetho is intended to be seamless and straightforward for most existing Android applications.
         Stetho.initializeWithDefaults(this);
     }
@@ -113,7 +111,6 @@ public class IEATTAApp extends Application {
     public Bus getBus() {
         return bus;
     }
-
 
     /**
      * Get this app's unique install ID, which is a UUID that should be unique for each install
@@ -156,7 +153,6 @@ public class IEATTAApp extends Application {
         return enabled;
     }
 
-
     /**
      * Gets the currently-selected theme for the app.
      * @return Theme that is currently selected, which is the actual theme ID that can
@@ -179,8 +175,6 @@ public class IEATTAApp extends Application {
     public int getContrastingThemeColor() {
         return getCurrentTheme().getContrastingColor();
     }
-
-
 
     /**
      * Apply a tint to the provided drawable.
