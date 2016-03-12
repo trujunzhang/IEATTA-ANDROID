@@ -24,12 +24,12 @@ public abstract class AbstractImageUtils {
     /**
      * Query the disk cache's url path.
      * <p/>
-     * - parameter objectUUID: Photo's objectUUID
+     * - parameter UUID: Photo's tUUID
      * <p/>
      * - returns: Image Cache's url
      */
-    public File getCacheImageUrl(String objectUUID) {
-        return this.getImageCache().get(objectUUID);
+    public File getCacheImageUrl(String UUID) {
+        return this.getImageCache().get(UUID);
     }
 
     public File getCacheImageUrl(DBPhoto model) {

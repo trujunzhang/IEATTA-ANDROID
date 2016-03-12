@@ -12,7 +12,8 @@ public class CacheImageUtils extends AbstractImageUtils {
     public final static CacheImageUtils sharedInstance = new CacheImageUtils();
 
     /**
-     * This SDImageCache constructor's namespace is "Cache". Store images on the folder: "Cache/com.virtualbreak.IEATTA.cache"
+     * This SDImageCache constructor's namespace is "Cache".
+     * Store images on the folder: "Cache/com.virtualbreak.IEATTA.cache"
      * <p/>
      * - returns: SDImageCache's instance
      */

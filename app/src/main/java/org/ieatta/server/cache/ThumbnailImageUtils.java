@@ -11,7 +11,8 @@ public class ThumbnailImageUtils extends AbstractImageUtils {
     public final static ThumbnailImageUtils sharedInstance = new ThumbnailImageUtils();
 
     /**
-     * This SDImageCache constructor's namespace is "Thumbnail". Store images on the folder: "Thumbnail/com.virtualbreak.IEATTA.thumbnail"
+     * This SDImageCache constructor's namespace is "Thumbnail".
+     * Store images on the folder: "Thumbnail/com.virtualbreak.IEATTA.thumbnail"
      * <p/>
      * - returns: SDImageCache's instance
      */

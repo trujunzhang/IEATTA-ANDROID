@@ -17,7 +17,8 @@ public class OriginalImageUtils extends AbstractImageUtils {
     public final static OriginalImageUtils sharedInstance = new OriginalImageUtils();
 
     /**
-     * This SDImageCache constructor's namespace is "Original". Store images on the folder: "Original/com.virtualbreak.IEATTA.original"
+     * This SDImageCache constructor's namespace is "Original".
+     * Store images on the folder: "Original/com.virtualbreak.IEATTA.original"
      * <p/>
      * - returns: SDImageCache's instance
      */
