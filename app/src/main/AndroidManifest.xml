@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="ieatta.com.ieatta_android">
+    package="com.ieatta">
 
     <application
         android:allowBackup="true"
