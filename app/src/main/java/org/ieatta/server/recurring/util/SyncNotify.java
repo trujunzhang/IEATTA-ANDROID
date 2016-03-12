@@ -1,4 +1,4 @@
-package org.ieatta.server.recurring;
+package org.ieatta.server.recurring.util;
 
 /**
  * Created by djzhang on 11/30/15.
