@@ -22,7 +22,6 @@ public class ParseObjectReader {
 
     }
 
-
     public void reader(ParseObject object,DBPeopleInEvent peopleInEvent){
 
     }
