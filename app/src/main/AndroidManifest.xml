@@ -3,13 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="org.ieatta"
     android:installLocation="auto">
+
     <!--
        If the build is intended to be Google Play-updateable, the package name
        should be the same as for Google Play (name depends on Beta or Stable).
        Otherwise, if the build is not intended to be Google Play-updateable (e.g.,
        updateable via an alternative appstore update mechanism), the package name
        should be specific to the update mechanism channel.
-       -->
+    -->
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -17,38 +18,50 @@
 
     <!-- For Nearby feature -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-feature android:name="android.hardware.location" android:required="false" />
-    <uses-feature android:name="android.hardware.location.gps" android:required="false" />
-    <uses-feature android:name="android.hardware.location.network" android:required="false" />
+
+    <uses-feature
+        android:name="android.hardware.location"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.location.gps"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.location.network"
+        android:required="false" />
 
     <!--
         Don't let Google Play filter out devices that just have fake touch
         (e.g. mouse and keyboard instead of a real touchscreen).
     -->
-    <uses-feature android:name="android.hardware.touchscreen" android:required="false" />
-    <uses-feature android:name="android.hardware.faketouch" android:required="true" />
+    <uses-feature
+        android:name="android.hardware.touchscreen"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.faketouch"
+        android:required="true" />
 
     <application
-        android:allowBackup="false"
-        tools:replace="android:allowBackup"
-        android:supportsRtl="true"
         android:name=".IEATTAApp"
+        android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme">
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        tools:replace="android:allowBackup">
 
         <!--
         The following is used for determining the distribution channel.
         Set "value" to "Google Play" for Google Play Store.
         -->
-        <meta-data android:name="net.hockeyapp.android.appIdentifier"
+        <meta-data
+            android:name="net.hockeyapp.android.appIdentifier"
             android:value="@string/hockeyapp_app_id" />
 
-        <activity android:name="org.wikipedia.crash.CrashReportActivity"
-            android:label="@string/crash_report_activity_title"
-            android:noHistory="true"
+        <activity
+            android:name="org.wikipedia.crash.CrashReportActivity"
             android:excludeFromRecents="true"
-            />
+            android:label="@string/crash_report_activity_title"
+            android:noHistory="true" />
 
         <!--
         This is a receiver that receives an intent from the Play Store app upon first launch
@@ -63,6 +76,12 @@
             </intent-filter>
         </receiver>
 
+        <activity android:name=".activity.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

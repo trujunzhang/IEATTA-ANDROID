@@ -23,7 +23,7 @@
 
     <!-- Default width of the lead image to be downloaded -->
     <dimen name="leadImageWidth">640dp</dimen>
-    <item type="dimen" format="float" name="articleHeaderViewScreenHeightRatio">0.571</item>
+    <item name="articleHeaderViewScreenHeightRatio" format="float" type="dimen">0.571</item>
     <!-- Default font size of the page title -->
     <dimen name="titleTextSize">28sp</dimen>
     <!-- Default font size of the Wikidata description for the page -->
@@ -46,8 +46,8 @@
     <!-- Default height with which the Link Preview peeks out from the bottom -->
     <dimen name="linkPreviewPeekHeight">320dp</dimen>
 
-    <item type="dimen" format="float" name="linkPreviewThumbPressScale">1.03</item>
-    <item type="dimen" format="float" name="linkPreviewThumbPressOverScale">1.05</item>
+    <item name="linkPreviewThumbPressScale" format="float" type="dimen">1.03</item>
+    <item name="linkPreviewThumbPressOverScale" format="float" type="dimen">1.05</item>
 
     <!-- Share-a-fact image preview -->
     <dimen name="share_image_width">320dp</dimen>
