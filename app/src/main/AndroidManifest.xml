@@ -1,12 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="org.ieatta">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="org.ieatta"
+    android:installLocation="auto">
+    <!--
+       If the build is intended to be Google Play-updateable, the package name
+       should be the same as for Google Play (name depends on Beta or Stable).
+       Otherwise, if the build is not intended to be Google Play-updateable (e.g.,
+       updateable via an alternative appstore update mechanism), the package name
+       should be specific to the update mechanism channel.
+       -->
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <!-- For Nearby feature -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-feature android:name="android.hardware.location" android:required="false" />
+    <uses-feature android:name="android.hardware.location.gps" android:required="false" />
+    <uses-feature android:name="android.hardware.location.network" android:required="false" />
+
+    <!--
+        Don't let Google Play filter out devices that just have fake touch
+        (e.g. mouse and keyboard instead of a real touchscreen).
+    -->
+    <uses-feature android:name="android.hardware.touchscreen" android:required="false" />
+    <uses-feature android:name="android.hardware.faketouch" android:required="true" />
 
     <application
-        android:allowBackup="true"
+        android:allowBackup="false"
+        tools:replace="android:allowBackup"
+        android:supportsRtl="true"
+        android:name=".IEATTAApp"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:supportsRtl="true"
-        android:theme="@style/AppTheme"></application>
+        android:theme="@style/AppTheme">
+
+    </application>
 
 </manifest>
