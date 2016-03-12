@@ -29,7 +29,7 @@ public class SyncHandler {
 //                });
     }
 
-    private void endAsyncTasks(Exception error) {
+    private void endTasks(Exception error) {
         if (error != null) {
             L.d("Error when async database: " + error.getLocalizedMessage());
         } else {
@@ -48,15 +48,12 @@ public class SyncHandler {
 
         // 1. Prepare tasks.
         this.didEndAsync = false;
-        this.execute().continueWith(new Continuation() {
-                    @Override
-                    public Object then(Task task) throws Exception {
-                        self.endAsyncTasks(task.getError());
-                        return null;
-                    }
-                });
-
+        this.execute().continueWith(new Continuation<Void, Void>() {
+            @Override
+            public Void then(Task<Void> task) throws Exception {
+                self.endTasks(task.getError());
+                return null;
+            }
+        });
     }
-
-
 }
