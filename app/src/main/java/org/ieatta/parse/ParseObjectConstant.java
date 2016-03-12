@@ -13,4 +13,12 @@ public final class ParseObjectConstant {
     // For NewRecord
     public static final String kPAPFieldModelTypeKey = "modelType";
     public static final String kPAPFieldModelPointKey = "modelPoint";
+    
+    // For Event
+    public static final String kPAPFieldStartDateKey = "startDate";
+    public static final String kPAPFieldEndDateKey = "endDate";
+    public static final String kPAPFieldWhatToEatKey = "whatToEat";
+    public static final String kPAPFieldRemarksKey = "remarks";
+    public static final String kPAPFieldWaiterKey = "waiter";
+    public static final String kPAPFieldLocalRestaurantKey = "restaurantRef";
 }
