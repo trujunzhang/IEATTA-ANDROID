@@ -82,15 +82,14 @@ public abstract class AbstractImageUtils {
     }
 
     /**
-     * Save photo's image as a offline file.
+     * Save photo's image as an offline file.
      * <p/>
      * - parameter image:           saved image
      * - parameter model:           photo's instance
-     * - parameter completionBlock: callback variable
      */
     public Task<Bitmap> saveTakenPhoto(Bitmap image, DBPhoto model) {
 
-        // ** Important ** Must store to Disk.
+        // ** Important ** (Must store to Disk).
         try {
             this.getImageCache().save(model.getUUID(), image);
         } catch (IOException e) {
@@ -100,9 +99,15 @@ public abstract class AbstractImageUtils {
         return Task.forResult(image);
     }
 
+    /**
+     * Save photo's InputStream as an offline file.
+     * <p/>
+     * - parameter image:           saved image's InputStream
+     * - parameter model:           photo's instance
+     */
     public Task<Void> saveTakenPhoto(InputStream inputStream, DBPhoto model) {
 
-        // ** Important ** Must store to Disk.
+        // ** Important ** (Must store to Disk).
         try {
             this.getImageCache().save(model.getUUID(), inputStream, null);
         } catch (IOException e) {
@@ -113,7 +118,7 @@ public abstract class AbstractImageUtils {
     }
 
     /**
-     * Generate a specail type image, then save it as the offline image.
+     * Generate a special type image, then save it as the offline image.
      * <p/>
      * - parameter image: taken photo
      * - parameter model: photo's instance
