@@ -1,5 +1,6 @@
 package org.ieatta.parse;
 
+import com.parse.ParseFile;
 import com.parse.ParseGeoPoint;
 import com.parse.ParseObject;
 
@@ -101,8 +102,12 @@ public class ParseObjectReader {
     public static DBPhoto reader(ParseObject object, DBPhoto model) {
         String uuid = object.getString(ParseObjectConstant.kPAPFieldObjectUUIDKey);
         Date objectCreatedDate = object.getDate(ParseObjectConstant.kPAPFieldObjectCreatedDateKey);
-        String originalUrl = object.getString(ParseObjectConstant.kPAPFieldOriginalUrlKey);
-        String thumbnailUrl = object.getString(ParseObjectConstant.kPAPFieldThumbnailImageKey);
+
+        ParseFile originalFile = object.getParseFile(ParseObjectConstant.kPAPFieldOriginalImageKey);
+        ParseFile thumbnailFile = object.getParseFile(ParseObjectConstant.kPAPFieldThumbnailImageKey);
+        String originalUrl = originalFile.getUrl();
+        String thumbnailUrl = thumbnailFile.getUrl();
+
         String usedRef = object.getString(ParseObjectConstant.kPAPFieldUsedRefKey);
         int usedType = object.getInt(ParseObjectConstant.kPAPFieldUsedTypeKey);
         String restaurantRef = object.getString(ParseObjectConstant.kPAPFieldLocalRestaurantKey);
