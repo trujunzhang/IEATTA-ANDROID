@@ -1,8 +1,6 @@
-package org.ieatta.server.sync;
+package org.ieatta.test.sync;
 
-import android.content.Context;
 import android.content.SharedPreferences;
-import com.parse.ParseQuery;
 
 import java.util.Date;
 

@@ -1,12 +1,4 @@
-package org.ieatta.server.sync.tasks;
-
-import com.parse.ParseObject;
-import com.parse.ParseQuery;
-
-import java.util.List;
-
-import bolts.Continuation;
-import bolts.Task;
+package org.ieatta.test.sync.tasks;
 
 /**
  * Created by djzhang on 11/30/15.

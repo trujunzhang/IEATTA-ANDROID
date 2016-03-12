@@ -1,4 +1,4 @@
-package org.ieatta.server.sync;
+package org.ieatta.test.sync;
 
 import java.text.DateFormat;
 import java.util.Date;
@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * Created by djzhang on 11/30/15.
  */
-public class ParseAsyncTimer {
+public class IEATTASyncTimer {
     final static DateFormat fmt = DateFormat.getTimeInstance(DateFormat.LONG);
 
     // Create a scheduled thread pool with 5 core threads
@@ -48,7 +48,7 @@ public class ParseAsyncTimer {
         @Override
         public void run() {
             try {
-//                everyTask();
+                everyTask();
                 Thread.sleep(10 * 1000);
             } catch (Exception e) {
             }
@@ -56,9 +56,9 @@ public class ParseAsyncTimer {
     };
 
 
-//    private void everyTask() {
-//        ParseAsyncHandler.sharedInstance.executeParseAsyncHandler();
-//    }
+    private void everyTask() {
+        IEATTASyncHandler.sharedInstance.startTask();
+    }
 
     public void prepareTimer() {
         //      ScheduledFuture<?> oneShotFuture = sch.schedule(oneShotTask, 5, TimeUnit.SECONDS);

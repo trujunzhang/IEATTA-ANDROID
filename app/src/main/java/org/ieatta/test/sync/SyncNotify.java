@@ -1,4 +1,4 @@
-package org.ieatta.server.sync;
+package org.ieatta.test.sync;
 
 /**
  * Created by djzhang on 11/30/15.

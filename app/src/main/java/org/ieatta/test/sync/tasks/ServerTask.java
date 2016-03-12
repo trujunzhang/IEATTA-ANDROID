@@ -1,16 +1,5 @@
-package org.ieatta.server.sync.tasks;
+package org.ieatta.test.sync.tasks;
 
-
-import com.parse.ParseObject;
-import com.parse.ParseQuery;
-
-import org.wikipedia.util.log.L;
-
-import java.util.Date;
-import java.util.List;
-
-import bolts.Continuation;
-import bolts.Task;
 
 /**
  * Created by djzhang on 11/30/15.
