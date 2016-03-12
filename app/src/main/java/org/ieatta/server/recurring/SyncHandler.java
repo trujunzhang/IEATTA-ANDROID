@@ -1,6 +1,7 @@
 package org.ieatta.server.recurring;
 
 
+import org.ieatta.server.recurring.tasks.ServerTask;
 import org.wikipedia.util.log.L;
 
 import bolts.Continuation;
@@ -18,6 +19,7 @@ public class SyncHandler {
     private boolean didEndRecurringTask = true;
 
     public Task<Void> execute() {
+//        ServerTask(new SyncInfo(SyncInfo.TAG_NEW_RECORD_DATE).createQuery(NUMBER_FETCH_NEW_RECORD))
         return null;
 //        return ServerTask(new SyncInfo(SyncInfo.TAG_NEW_RECORD_DATE).createQuery(NUMBER_FETCH_NEW_RECORD))
 //                .onSuccessTask(new Continuation<Void, Task<Void>>() {
