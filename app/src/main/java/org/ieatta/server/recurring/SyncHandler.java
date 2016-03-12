@@ -15,7 +15,7 @@ public class SyncHandler {
 
     public static final SyncHandler sharedInstance = new SyncHandler();
 
-    private boolean didEndAsync = true;
+    private boolean didEndRecurringTask = true;
 
     public Task<Void> execute() {
         return null;
@@ -35,18 +35,18 @@ public class SyncHandler {
             L.d("Async database task end successfully!");
         }
 
-        this.didEndAsync = true;
+        this.didEndRecurringTask = true;
     }
 
     /**
      * Start Point
      */
     public void startTask() {
-        if (this.didEndAsync == false)
+        if (this.didEndRecurringTask == false)
             return;
 
         // 1. Prepare tasks.
-        this.didEndAsync = false;
+        this.didEndRecurringTask = false;
         this.execute().continueWith(new Continuation<Void, Void>() {
             @Override
             public Void then(Task<Void> task) throws Exception {
