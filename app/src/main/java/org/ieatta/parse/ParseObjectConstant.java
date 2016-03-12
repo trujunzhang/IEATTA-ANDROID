@@ -42,6 +42,7 @@ public final class ParseObjectConstant {
 
     // For Restaurant
     public static final String kPAPFieldLocationKey = "location";
+    // Also for Team
     public static final String kPAPFieldAddressKey = "address";
     public static final String kPAPFieldCityStateKey = "cityState";
 
@@ -52,5 +53,6 @@ public final class ParseObjectConstant {
     public static final String kPAPFieldReviewRefKey = "reviewRef";
     public static final String kPAPFieldReviewTypeKey = "reviewType";
 
-
+    // For Team
+    public static final String kPAPFieldEmailKey = "email";
 }

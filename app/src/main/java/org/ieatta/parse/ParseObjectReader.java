@@ -183,6 +183,18 @@ public class ParseObjectReader {
     }
 
     public static DBTeam reader(ParseObject object, DBTeam model) {
+        String uuid = object.getString(ParseObjectConstant.kPAPFieldObjectUUIDKey);
+        Date objectCreatedDate = object.getDate(ParseObjectConstant.kPAPFieldObjectCreatedDateKey);
+        String displayName = object.getString(ParseObjectConstant.kPAPFieldDisplayNameKey);
+        String email = object.getString(ParseObjectConstant.kPAPFieldEmailKey);
+        String address = object.getString(ParseObjectConstant.kPAPFieldAddressKey);
+
+        model.setUUID(uuid);
+        model.setObjectCreatedDate(objectCreatedDate);
+        model.setDisplayName(displayName);
+        model.setEmail(email);
+        model.setAddress(address);
+
         return model;
     }
 }
