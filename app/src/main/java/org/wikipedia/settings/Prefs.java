@@ -6,7 +6,6 @@ import android.support.annotation.Nullable;
 import org.ieatta.IEATTAApp;
 import org.ieatta.R;
 import org.wikipedia.SharedPreferenceCookieManager;
-import org.wikipedia.analytics.SessionFunnel;
 import org.wikipedia.util.StringUtil;
 
 import java.util.List;
@@ -194,10 +193,6 @@ public final class Prefs {
         return contains(R.string.preference_key_session_data);
     }
 
-    public static int getSessionTimeout() {
-        // return the timeout, but don't let it be less than the minimum
-        return Math.max(getInt(R.string.preference_key_session_timeout, SessionFunnel.DEFAULT_SESSION_TIMEOUT), SessionFunnel.MIN_SESSION_TIMEOUT);
-    }
 
     public static int getTextSizeMultiplier() {
         return getInt(R.string.preference_key_text_size_multiplier, 0);
