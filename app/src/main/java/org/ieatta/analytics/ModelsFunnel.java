@@ -1,6 +1,7 @@
 package org.ieatta.analytics;
 
 import org.ieatta.IEATTAApp;
+import org.ieatta.database.provide.PQueryModelType;
 import org.wikipedia.analytics.Funnel;
 
 import org.ieatta.database.models.DBEvent;
@@ -17,39 +18,44 @@ public class ModelsFunnel extends Funnel {
     private static final String SCHEMA_NAME = "MobileIEATTAModels";
     private static final int REV_ID = 101010;
 
-    ModelsFunnel(IEATTAApp app, String schemaName, int revision) {
+    public ModelsFunnel(IEATTAApp app, String schemaName, int revision) {
         super(app, SCHEMA_NAME, REV_ID, SAMPLE_LOG_1K);
     }
 
-    public void logEvent(DBEvent event){
+    public void logEvent(DBEvent event) {
 
     }
 
-    public void logNewRecord(DBNewRecord newRecord){
+    public void logNewRecord(DBNewRecord newRecord) {
+        String log = "NewRecord{" +
+                "UUID='" + newRecord.getUUID() + '\'' +
+                ", modelType=" + PQueryModelType.getInstance(newRecord.getModelType()).toString() +
+                ", modelPoint='" + newRecord.getModelPoint() + '\'' +
+                '}';
+        log(log);
+    }
+
+    public void logPeopleInEvent(DBPeopleInEvent peopleInEvent) {
 
     }
 
-    public void logPeopleInEvent(DBPeopleInEvent peopleInEvent){
+    public void logPhoto(DBPhoto photo) {
 
     }
 
-    public void logPhoto(DBPhoto photo){
+    public void logRecipe(DBRecipe recipe) {
 
     }
 
-    public void logRecipe(DBRecipe recipe){
+    public void logRestaurant(DBRestaurant restaurant) {
 
     }
 
-    public void logRestaurant(DBRestaurant restaurant){
+    public void logReview(DBReview review) {
 
     }
 
-    public void logReview(DBReview review){
-
-    }
-
-    public void logTeam(DBTeam team){
+    public void logTeam(DBTeam team) {
 
     }
 
