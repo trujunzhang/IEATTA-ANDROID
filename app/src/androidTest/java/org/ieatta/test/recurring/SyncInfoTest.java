@@ -11,6 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 
 /**
@@ -28,10 +29,11 @@ public class SyncInfoTest {
     @Test
     public void testStoreAndRead() {
         SyncInfo syncInfo = new SyncInfo(SyncInfo.TAG_NEW_RECORD_DATE);
-        Date emptyDate = syncInfo.getLastRunTime();
-        assertThat("Current last date Must be null", emptyDate.equals(null));
 
-        Date lastRunDate = new Date();
+        Date emptyDate = syncInfo.getLastRunTime();
+        assertThat("Current last date Must be null", (emptyDate == null));
+
+        final Date lastRunDate = new Date();
         String lastRunDateString = getSimpleDateFormat().format(lastRunDate);
 
         // 1. store the lastRunDate
@@ -41,7 +43,7 @@ public class SyncInfoTest {
         long lastRunTime = syncInfo.getLastRunTime().getTime();
         String storedDateString = getSimpleDateFormat().format(new Date(lastRunTime));
 
-        assertThat("equal each other.",lastRunDateString.equals(storedDateString));
+        assertThat("equal each other.", lastRunDateString.equals(storedDateString));
     }
 
 }
