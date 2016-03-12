@@ -1,9 +1,5 @@
 package org.ieatta.server.recurring;
 
-import android.content.SharedPreferences;
-
-import com.parse.ParseQuery;
-
 import org.wikipedia.settings.Prefs;
 
 import java.util.Date;
