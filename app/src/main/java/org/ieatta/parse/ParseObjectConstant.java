@@ -19,10 +19,20 @@ public final class ParseObjectConstant {
     public static final String kPAPFieldWhatToEatKey = "whatToEat";
     public static final String kPAPFieldRemarksKey = "remarks";
     public static final String kPAPFieldWaiterKey = "waiter";
+    // Also for Photo
     public static final String kPAPFieldLocalRestaurantKey = "restaurantRef";
 
     // For PeopleInEvent
     public static final String kPAPFieldUserKey = "userRef";
     public static final String kPAPFieldEventKey = "eventRef";
+
+    // For Photo
+    public static final String kPAPFieldOriginalImageKey = "originalFile";
+    public static final String kPAPFieldThumbnailImageKey = "thumbnailFile";
+    public static final String kPAPFieldOriginalUrlKey = "originalUrl";
+    public static final String kPAPFieldThumbnailUrlKey = "thumbnailUrl";
+    public static final String kPAPFieldUsedRefKey = "usedRef";
+    public static final String kPAPFieldUsedTypeKey = "usedType";
+    public static final String kPAPFieldOSTypeKey = "osType";
 
 }

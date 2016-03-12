@@ -107,6 +107,22 @@ public class ParseObjectReader {
     }
 
     public static DBPhoto reader(ParseObject object, DBPhoto model) {
+        String uuid = object.getString(ParseObjectConstant.kPAPFieldObjectUUIDKey);
+        Date objectCreatedDate = object.getDate(ParseObjectConstant.kPAPFieldObjectCreatedDateKey);
+        String originalUrl = object.getString(ParseObjectConstant.kPAPFieldOriginalUrlKey);
+        String thumbnailUrl= object.getString(ParseObjectConstant.kPAPFieldThumbnailImageKey);
+        String usedRef= object.getString(ParseObjectConstant.kPAPFieldUsedRefKey);
+        int usedType= object.getInt(ParseObjectConstant.kPAPFieldUsedTypeKey);
+        String restaurantRef= object.getString(ParseObjectConstant.kPAPFieldLocalRestaurantKey);
+
+        model.setUUID(uuid);
+        model.setObjectCreatedDate(objectCreatedDate);
+        model.setOriginalUrl(originalUrl);
+        model.setThumbnailUrl(thumbnailUrl);
+        model.setUsedRef(usedRef);
+        model.setUsedType(usedType);
+        model.setRestaurantRef(restaurantRef);
+
         return model;
     }
 
