@@ -4,6 +4,7 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
 import org.ieatta.database.models.DBNewRecord;
+import org.ieatta.database.provide.PQueryModelType;
 import org.ieatta.parse.ParseObjectReader;
 import org.ieatta.parse.ParseQueryUtils;
 import org.ieatta.server.recurring.util.SerialTasksManager;
@@ -14,6 +15,7 @@ import java.util.List;
 
 import bolts.Continuation;
 import bolts.Task;
+import io.realm.RealmObject;
 
 public final class ServerTask {
 
@@ -71,7 +73,9 @@ public final class ServerTask {
                     L.d("The getFirst request failed.");
                 } else {
                     L.d("Retrieved the object.");
+                    ParseObjectReader.read(object, PQueryModelType.getInstance(newRecord.getModelType()));
                 }
+
                 return null;
             }
         });
