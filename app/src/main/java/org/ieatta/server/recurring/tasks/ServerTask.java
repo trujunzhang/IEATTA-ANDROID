@@ -1,17 +1,10 @@
 package org.ieatta.server.recurring.tasks;
 
-import android.util.Log;
-
-import com.parse.GetCallback;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
-import com.parse.ParseException;
 
-import org.ieatta.database.models.DBNewRecord;
-import org.ieatta.parse.ParseObjectReader;
 import org.ieatta.parse.ParseQueryUtils;
-import org.ieatta.server.recurring.SerialTasksManager;
-import org.ieatta.server.recurring.SyncInfo;
+import org.ieatta.server.recurring.util.SerialTasksManager;
 import org.wikipedia.util.log.L;
 
 import java.util.Date;
@@ -19,7 +12,6 @@ import java.util.List;
 
 import bolts.Continuation;
 import bolts.Task;
-import io.realm.RealmObject;
 
 public final class ServerTask {
 

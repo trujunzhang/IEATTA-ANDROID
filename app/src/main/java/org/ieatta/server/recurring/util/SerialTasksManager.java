@@ -1,12 +1,9 @@
-package org.ieatta.server.recurring;
+package org.ieatta.server.recurring.util;
 
 
 import java.util.LinkedList;
 import java.util.List;
 
-/**
- * Created by djzhang on 12/16/15.
- */
 public class SerialTasksManager<T> {
     private List<T> array = new LinkedList<T>();
 
