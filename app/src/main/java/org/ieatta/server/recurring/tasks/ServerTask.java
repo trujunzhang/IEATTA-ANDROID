@@ -2,6 +2,7 @@ package org.ieatta.server.recurring.tasks;
 
 import android.content.res.Resources;
 
+import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
@@ -69,40 +70,26 @@ public final class ServerTask {
         ParseObjectReader.reader(newRecordObject, newRecord);
 
         ParseQuery<ParseObject> query = ParseQueryUtils.createQueryForRecorded(newRecord);
-        return query.getFirstInBackground().onSuccessTask(new Continuation<ParseObject, Task<RealmObject>>() {
+        return query.getFirstInBackground().onSuccessTask(new Continuation<ParseObject, Task<Void>>() {
             @Override
-            public Task<RealmObject> then(Task<ParseObject> task) throws Exception {
+            public Task<Void> then(Task<ParseObject> task) throws Exception {
                 ParseObject object = task.getResult();
                 if (object == null) {
                     L.d("The getFirst request failed.");
                 } else {
                     L.d("Retrieved the object.");
                     RealmObject realmObject = ParseObjectReader.read(object, PQueryModelType.getInstance(newRecord.getModelType()));
-//                    return new ModelWriter().save(realmObject, PQueryModelType.getInstance(newRecord.getModelType()));
-                    return Task.forResult(realmObject);
+                    return new ModelWriter().save(realmObject, PQueryModelType.getInstance(newRecord.getModelType()));
                 }
 
                 return Task.forError(new Resources.NotFoundException("The getFirst request failed."));
             }
-        }).onSuccessTask(new Continuation<RealmObject, Task<Void>>() {
+        }).onSuccess(new Continuation<Void, Void>() {
             @Override
-            public Task<Void> then(Task<RealmObject> task) throws Exception {
-                RealmObject realmObject = task.getResult();
-
-                // Model type is photo, we need download photo's images here first.
-                if(newRecord.getModelType()== PQueryModelType.Photo.getType()){
-
-                }
-
+            public Void then(Task<Void> task) throws Exception {
+                new SyncInfo(SyncInfo.TAG_NEW_RECORD_DATE).setLastRunTime(lastCreateAt);
                 return null;
             }
-        })
-                .onSuccess(new Continuation<Void, Void>() {
-                    @Override
-                    public Void then(Task<Void> task) throws Exception {
-                        new SyncInfo(SyncInfo.TAG_NEW_RECORD_DATE).setLastRunTime(lastCreateAt);
-                        return null;
-                    }
-                });
+        });
     }
 }
