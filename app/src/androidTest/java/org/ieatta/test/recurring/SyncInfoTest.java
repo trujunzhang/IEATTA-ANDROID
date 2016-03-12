@@ -1,9 +1,8 @@
-package org.ieatta.test.sync;
+package org.ieatta.test.recurring;
 
 import android.support.test.runner.AndroidJUnit4;
 
-import junit.framework.TestCase;
-
+import org.ieatta.server.recurring.SyncInfo;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -14,8 +13,8 @@ import org.junit.runner.RunWith;
 public class SyncInfoTest {
 
     @Test
-    public void testDOMLoaded() {
-
+    public void testStoreAndRead() {
+        SyncInfo info;
     }
 
 }

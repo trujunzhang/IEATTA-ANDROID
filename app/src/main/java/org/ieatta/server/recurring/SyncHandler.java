@@ -1,8 +1,6 @@
-package org.ieatta.test.sync;
+package org.ieatta.server.recurring;
 
 
-import org.ieatta.database.models.DBNewRecord;
-import org.ieatta.test.sync.tasks.ClientTask;
 import org.wikipedia.util.log.L;
 
 import bolts.Continuation;
@@ -11,12 +9,12 @@ import bolts.Task;
 /**
  * Created by djzhang on 11/27/15.
  */
-public class IEATTASyncHandler {
-    private IEATTASyncHandler self = this;
+public class SyncHandler {
+    private SyncHandler self = this;
     private static final int NUMBER_FETCH_NEW_RECORD = 20;
     private static final int NUMBER_PUSH_NEW_RECORD = 6;
 
-    public static final IEATTASyncHandler sharedInstance = new IEATTASyncHandler();
+    public static final SyncHandler sharedInstance = new SyncHandler();
 
     private boolean didEndAsync = true;
 
@@ -40,7 +38,6 @@ public class IEATTASyncHandler {
 
         this.didEndAsync = true;
     }
-
 
     /**
      * Start Point

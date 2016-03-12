@@ -1,12 +1,8 @@
-package org.ieatta.test.sync;
+package org.ieatta.server.recurring;
 
 import android.content.SharedPreferences;
-
 import java.util.Date;
 
-/**
- * Created by djzhang on 11/27/15.
- */
 public class SyncInfo {
 
     public static final String TAG_NEW_RECORD_DATE = "LastPulledNewRecordCreatedAt";
@@ -19,7 +15,6 @@ public class SyncInfo {
     SharedPreferences sharedPreferences;
 
     private SyncInfo() {
-//        assert(false, "This constructor is not allowed!");
     }
 
     public SyncInfo(String storeKey) {

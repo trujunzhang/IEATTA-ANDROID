@@ -1,4 +1,4 @@
-package com.ieatta.com.parse.async;
+package org.ieatta.server.recurring;
 
 
 import java.util.LinkedList;

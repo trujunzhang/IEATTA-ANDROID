@@ -1,4 +1,4 @@
-package org.ieatta.test.sync.tasks;
+package org.ieatta.server.recurring.tasks;
 
 
 /**

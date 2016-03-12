@@ -1,4 +1,4 @@
-package org.ieatta.test.sync;
+package org.ieatta.server.recurring;
 
 import java.text.DateFormat;
 import java.util.Date;
@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * Created by djzhang on 11/30/15.
  */
-public class IEATTASyncTimer {
+public class RecurringTask {
     final static DateFormat fmt = DateFormat.getTimeInstance(DateFormat.LONG);
 
     // Create a scheduled thread pool with 5 core threads
@@ -57,7 +57,7 @@ public class IEATTASyncTimer {
 
 
     private void everyTask() {
-        IEATTASyncHandler.sharedInstance.startTask();
+        SyncHandler.sharedInstance.startTask();
     }
 
     public void prepareTimer() {

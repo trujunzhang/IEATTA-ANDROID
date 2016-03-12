@@ -1,4 +1,4 @@
-package org.ieatta.test.sync;
+package org.ieatta.server.recurring;
 
 /**
  * Created by djzhang on 11/30/15.
