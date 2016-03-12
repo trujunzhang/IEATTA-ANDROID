@@ -1,7 +1,6 @@
 package org.ieatta.database.realm;
 
 import org.ieatta.IEATTAApp;
-import org.ieatta.database.models.DBEvent;
 import org.ieatta.database.provide.PQueryModelType;
 
 import bolts.Task;
