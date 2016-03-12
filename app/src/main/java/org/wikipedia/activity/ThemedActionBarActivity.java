@@ -9,8 +9,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.ViewConfiguration;
 
-import org.wikipedia.R;
-import org.wikipedia.WikipediaApp;
+import org.ieatta.IEATTAApp;
+import org.ieatta.R;
 import org.wikipedia.util.ApiUtil;
 
 import java.lang.reflect.Field;
@@ -47,11 +47,11 @@ public abstract class ThemedActionBarActivity extends AppCompatActivity {
     }
 
     protected void setTheme() {
-        setTheme(WikipediaApp.getInstance().getCurrentTheme().getResourceId());
+        setTheme(IEATTAApp.getInstance().getCurrentTheme().getResourceId());
     }
 
     protected void setActionBarTheme() {
-        setTheme(WikipediaApp.getInstance().isCurrentThemeLight()
+        setTheme(IEATTAApp.getInstance().isCurrentThemeLight()
                 ? R.style.Theme_Light_ActionBar
                 : R.style.Theme_Dark_ActionBar);
     }
