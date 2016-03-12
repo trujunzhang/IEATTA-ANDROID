@@ -1,4 +1,4 @@
-package org.ieatta;
+package org.wikipedia;
 
 import android.content.res.Resources;
 import android.support.v4.view.ViewCompat;

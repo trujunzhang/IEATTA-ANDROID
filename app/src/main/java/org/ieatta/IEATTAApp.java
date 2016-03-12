@@ -3,19 +3,15 @@ package org.ieatta;
 import android.app.Activity;
 import android.app.Application;
 import android.content.res.Resources;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.ColorInt;
 import android.support.annotation.IntRange;
 import android.support.annotation.NonNull;
-import android.view.Window;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.stetho.Stetho;
 import com.squareup.otto.Bus;
 
-import org.wikipedia.analytics.FunnelManager;
-import org.wikipedia.analytics.SessionFunnel;
+import org.wikipedia.ViewAnimations;
 import org.wikipedia.crash.CrashReporter;
 import org.wikipedia.crash.hockeyapp.HockeyAppCrashReporter;
 import org.wikipedia.drawable.DrawableUtil;
@@ -28,8 +24,6 @@ import java.util.Locale;
 import java.util.Random;
 import java.util.TimeZone;
 import java.util.UUID;
-
-import static org.wikipedia.util.DimenUtil.getFontSizeFromSp;
 
 public class IEATTAApp extends Application {
     private static final String HTTPS_PROTOCOL = "https";

@@ -1,4 +1,4 @@
-package org.ieatta;
+package org.wikipedia;
 
 import android.support.annotation.NonNull;
 

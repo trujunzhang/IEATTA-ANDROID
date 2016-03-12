@@ -5,12 +5,10 @@ import android.support.annotation.Nullable;
 
 import org.ieatta.IEATTAApp;
 import org.ieatta.R;
-import org.ieatta.SharedPreferenceCookieManager;
-import org.wikipedia.analytics.SessionData;
+import org.wikipedia.SharedPreferenceCookieManager;
 import org.wikipedia.analytics.SessionFunnel;
 import org.wikipedia.util.StringUtil;
 
-import java.util.Collections;
 import java.util.List;
 
 import retrofit.RestAdapter;
