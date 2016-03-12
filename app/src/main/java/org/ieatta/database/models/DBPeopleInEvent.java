@@ -1,4 +1,4 @@
-package com.ieatta.com.parse.engine.realm.models;
+package org.ieatta.database.models;
 
 import java.util.Date;
 

@@ -1,4 +1,4 @@
-package com.ieatta.com.parse.engine.realm.models;
+package org.ieatta.database.models;
 
 import java.util.Date;
 
@@ -19,7 +19,6 @@ public class DBRestaurant extends RealmObject {
 
     // Variables invoked by viewController
     private String googleMapAddress = "";
-
 
     public String getUUID() {
         return UUID;

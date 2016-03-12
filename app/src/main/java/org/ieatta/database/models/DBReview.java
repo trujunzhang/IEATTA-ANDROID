@@ -1,6 +1,7 @@
-package com.ieatta.com.parse.engine.realm.models;
+package org.ieatta.database.models;
 
-import com.ieatta.com.parse.models.enums.ReviewType;
+
+import org.ieatta.database.provide.ReviewType;
 
 import java.util.Date;
 
@@ -21,7 +22,7 @@ public class DBReview extends RealmObject {
     private int rate = 1;
     private String userRef = "";// Point of Team
     private String reviewRef = "";
-    private int reviewType = ReviewType.Review_Unknow.ordinal();
+    private int reviewType = ReviewType.Review_Unknow.getType();
 
     public String getUUID() {
         return UUID;

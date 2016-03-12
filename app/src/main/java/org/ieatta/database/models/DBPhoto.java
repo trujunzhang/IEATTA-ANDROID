@@ -1,6 +1,6 @@
-package com.ieatta.com.parse.engine.realm.models;
+package org.ieatta.database.models;
 
-import com.ieatta.com.parse.models.enums.PhotoUsedType;
+import org.ieatta.database.provide.PhotoUsedType;
 
 import java.util.Date;
 
@@ -19,7 +19,7 @@ public class DBPhoto extends RealmObject {
     private String restaurantRef = "";
 
     private String usedRef = "";
-    private int usedType = PhotoUsedType.Photo_Used_Unknow.ordinal();
+    private int usedType = PhotoUsedType.PU_Unknow.getType();
 
     // MARK: Variable for pushing to server.
     private String originalUrl = "";

@@ -1,6 +1,6 @@
-package com.ieatta.com.parse.engine.realm.models;
+package org.ieatta.database.models;
 
-import com.ieatta.com.parse.models.enums.PQueryModelType;
+import org.ieatta.database.provide.PQueryModelType;
 
 import java.util.Date;
 
@@ -15,7 +15,7 @@ public class DBNewRecord extends RealmObject {
     private String UUID = "";
     private Date objectCreatedDate = new Date();
 
-    private int modelType = PQueryModelType.unkown.ordinal();
+    private int modelType = PQueryModelType.unkown.getType();
     private String modelPoint = "";
 
     public String getUUID() {

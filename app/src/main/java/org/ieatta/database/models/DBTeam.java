@@ -1,6 +1,5 @@
-package com.ieatta.com.parse.engine.realm.models;
+package org.ieatta.database.models;
 
-import com.ieatta.com.parse.models.Team;
 
 import java.util.Date;
 

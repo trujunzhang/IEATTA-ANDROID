@@ -1,6 +1,7 @@
 package org.ieatta.database.models;
 
-import com.ieatta.com.parse.models.enums.ParseModelFlag;
+
+import org.ieatta.database.provide.ParseObjectFlag;
 
 import java.util.Date;
 
@@ -23,7 +24,7 @@ public class DBEvent extends RealmObject {
     private String waiter = "";
     private String restaurantRef = "";
 
-    private int flag = ParseModelFlag.Normal.ordinal();
+    private int flag = ParseObjectFlag.Normal.getStatus();
 
     public String getUUID() {
         return UUID;
