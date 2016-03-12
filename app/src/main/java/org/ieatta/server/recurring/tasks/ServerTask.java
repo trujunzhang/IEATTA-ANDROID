@@ -1,10 +1,15 @@
 package org.ieatta.server.recurring.tasks;
 
+import android.util.Log;
+
+import com.parse.GetCallback;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+import com.parse.ParseException;
 
 import org.ieatta.database.models.DBNewRecord;
 import org.ieatta.parse.ParseObjectReader;
+import org.ieatta.parse.ParseQueryUtils;
 import org.ieatta.server.recurring.SerialTasksManager;
 import org.ieatta.server.recurring.SyncInfo;
 import org.wikipedia.util.log.L;
@@ -18,9 +23,9 @@ import io.realm.RealmObject;
 
 public final class ServerTask {
 
-    public static Task<Void> getFromServer(ParseQuery query){
-        final Task<List<ParseObject>> inBackground = query.findInBackground();
-        return inBackground.onSuccessTask(new Continuation<List<ParseObject>, Task<Void>>() {
+    public static Task<Void> getFromServer(ParseQuery query) {
+        final Task<List<ParseObject>> task = query.findInBackground();
+        return task.onSuccessTask(new Continuation<List<ParseObject>, Task<Void>>() {
             @Override
             public Task<Void> then(Task<List<ParseObject>> task) throws Exception {
                 return ServerTask.executeSerialTasks(task);
@@ -29,7 +34,7 @@ public final class ServerTask {
     }
 
     private static Task<Void> executeSerialTasks(Task<List<ParseObject>> previous) {
-        List<ParseObject> results =  previous.getResult();
+        List<ParseObject> results = previous.getResult();
         L.d("get count in Pulling objects from Server: " + results.size());
 
         final SerialTasksManager<ParseObject> manager = new SerialTasksManager<>(results);
@@ -60,26 +65,19 @@ public final class ServerTask {
     private static Task<Void> getObjectsFromServerTask(ParseObject newRecordObject) {
         Date lastCreateAt = newRecordObject.getCreatedAt();
 
-//         1. Create model instance from record's modelType.
-        final RealmObject newRecord = new DBNewRecord();
-        ParseObjectReader.reader(newRecordObject, newRecord);
-        L.d(" get NewRecordObject's instance: " + newRecord.toString());
+        ParseQuery<ParseObject> query = ParseQueryUtils.createQueryForRecorded(newRecordObject);
 
-        // 2. Pull from server.
-        return model.pullFromServerAndPin()
-                .onSuccess(new Continuation<Void, Void>() {
-                    @Override
-                    public Void then(Task<Void> task) throws Exception {
-
-                        /// 1. Update last synched date.
-                        new SyncInfo(SyncInfo.TAG_NEW_RECORD_DATE).storeNewRecordDate(lastCreateAt);
-
-                        /// 2. When pull from server successfully, sometimes need to notify have new parse models.
-//                          SyncNotify.notify(model);
-                        return null;
-                    }
-                });
-
+        return query.getFirstInBackground().onSuccessTask(new Continuation<ParseObject, Task<Void>>() {
+            @Override
+            public Task<Void> then(Task<ParseObject> task) throws Exception {
+                ParseObject object = task.getResult();
+                if (object == null) {
+                    L.d("The getFirst request failed.");
+                } else {
+                    L.d("Retrieved the object.");
+                }
+                return null;
+            }
+        });
     }
-
 }
