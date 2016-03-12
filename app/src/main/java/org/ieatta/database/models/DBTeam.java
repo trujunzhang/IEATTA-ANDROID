@@ -1,14 +1,10 @@
 package org.ieatta.database.models;
 
-
 import java.util.Date;
 
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
-/**
- * Created by djzhang on 12/20/15.
- */
 public class DBTeam extends RealmObject {
     @PrimaryKey
     private String UUID = "";

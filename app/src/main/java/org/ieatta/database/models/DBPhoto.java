@@ -7,9 +7,6 @@ import java.util.Date;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
-/**
- * Created by djzhang on 12/20/15.
- */
 public class DBPhoto extends RealmObject {
     @PrimaryKey
     private String UUID = "";

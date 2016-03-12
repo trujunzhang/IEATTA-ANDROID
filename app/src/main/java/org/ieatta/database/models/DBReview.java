@@ -1,6 +1,5 @@
 package org.ieatta.database.models;
 
-
 import org.ieatta.database.provide.ReviewType;
 
 import java.util.Date;
@@ -8,9 +7,6 @@ import java.util.Date;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
-/**
- * Created by djzhang on 12/20/15.
- */
 public class DBReview extends RealmObject {
     @PrimaryKey
     private String UUID = "";
