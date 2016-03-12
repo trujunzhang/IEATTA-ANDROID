@@ -27,16 +27,19 @@ public class SyncInfoTest {
 
     @Test
     public void testStoreAndRead() {
-//        SyncInfo syncInfo = new SyncInfo(SyncInfo.TAG_NEW_RECORD_DATE);
-        Date lastRunDate = new Date();
-        Prefs.setLastRunTime("sync", lastRunDate.getTime());
+        SyncInfo syncInfo = new SyncInfo(SyncInfo.TAG_NEW_RECORD_DATE);
+        Date emptyDate = syncInfo.getLastRunTime();
+        assertThat("Current last date Must be null", emptyDate.equals(null));
 
+        Date lastRunDate = new Date();
         String lastRunDateString = getSimpleDateFormat().format(lastRunDate);
 
-        long lastRunTime = Prefs.getLastRunTime("sync");
-        Date storedDate = new Date(lastRunTime);
+        // 1. store the lastRunDate
+        syncInfo.setLastRunTime(lastRunDate);
 
-        String storedDateString = getSimpleDateFormat().format(storedDate);
+        // 2. get the lastRunDate
+        long lastRunTime = syncInfo.getLastRunTime().getTime();
+        String storedDateString = getSimpleDateFormat().format(new Date(lastRunTime));
 
         assertThat("equal each other.",lastRunDateString.equals(storedDateString));
     }

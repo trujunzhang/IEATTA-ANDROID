@@ -11,7 +11,7 @@ import java.util.Date;
 public class SyncInfo {
     public static final String TAG_NEW_RECORD_DATE = "lastRunDate";
 
-    public Date lastRecordCreateAt = null;
+    public Date lastRecordCreateAt;
     private String task;
 
     private SyncInfo() {
@@ -23,20 +23,20 @@ public class SyncInfo {
         this.lastRecordCreateAt = null;
 
         long lastRunTime = Prefs.getLastRunTime(task);
-        if(lastRunTime != 0){
+        if (lastRunTime != 0) {
             this.lastRecordCreateAt = new Date(lastRunTime);
         }
     }
 
-    public void setLastRunTime(Date newDate){
+    public void setLastRunTime(Date newDate) {
         // 1. Set last date.
         this.lastRecordCreateAt = newDate;
 
-        Prefs.setLastRunTime(this.task,newDate.getTime());
+        Prefs.setLastRunTime(this.task, newDate.getTime());
     }
 
-    public Date getLastRunTime(){
-        return  this.lastRecordCreateAt;
+    public Date getLastRunTime() {
+        return this.lastRecordCreateAt;
     }
 
 //    public ParseQuery createQuery(int limit) {
