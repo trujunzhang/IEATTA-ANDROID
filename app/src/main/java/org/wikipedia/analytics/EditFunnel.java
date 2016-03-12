@@ -3,9 +3,9 @@ package org.wikipedia.analytics;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
+import org.ieatta.R;
 import org.json.JSONObject;
 import org.wikipedia.page.PageTitle;
-import org.wikipedia.R;
 import org.ieatta.IEATTAApp;
 
 public class EditFunnel extends Funnel {
@@ -115,25 +115,25 @@ public class EditFunnel extends Funnel {
      * @param summaryTagStringID String resource id of the summary tag tapped
      */
     public void logEditSummaryTap(int summaryTagStringID) {
-        String summaryTag;
-        switch (summaryTagStringID) {
-            case R.string.edit_summary_tag_typo:
-                summaryTag = "typo";
-                break;
-            case R.string.edit_summary_tag_grammar:
-                summaryTag = "grammar";
-                break;
-            case R.string.edit_summary_tag_links:
-                summaryTag = "links";
-                break;
-            case R.string.edit_summary_tag_other:
-                summaryTag = "other";
-                break;
-            default:
-                // Unknown summary tag. Must throw exception so whoever is testing
-                // can add the entry here
-                throw new RuntimeException("Need to add new summary tags to EditFunnel");
-        }
+        String summaryTag = "";
+//        switch (summaryTagStringID) {
+//            case R.string.edit_summary_tag_typo:
+//                summaryTag = "typo";
+//                break;
+//            case R.string.edit_summary_tag_grammar:
+//                summaryTag = "grammar";
+//                break;
+//            case R.string.edit_summary_tag_links:
+//                summaryTag = "links";
+//                break;
+//            case R.string.edit_summary_tag_other:
+//                summaryTag = "other";
+//                break;
+//            default:
+//                // Unknown summary tag. Must throw exception so whoever is testing
+//                // can add the entry here
+//                throw new RuntimeException("Need to add new summary tags to EditFunnel");
+//        }
 
         log(
                 "action", "editSummaryTap",
@@ -149,15 +149,15 @@ public class EditFunnel extends Funnel {
 
     @Override
     protected JSONObject preprocessData(@NonNull JSONObject eventData) {
-        if (getApp().getUserInfoStorage().isLoggedIn()) {
-            if (getApp().getUserInfoStorage().getUser().getUserID() == 0) {
-                // Means we are logged in, but before we started counting UserID.
-                // Send -1 to record these
-                preprocessData(eventData, "userID", -1);
-            } else {
-                preprocessData(eventData, "userID", getApp().getUserInfoStorage().getUser().getUserID());
-            }
-        }
+//        if (getApp().getUserInfoStorage().isLoggedIn()) {
+//            if (getApp().getUserInfoStorage().getUser().getUserID() == 0) {
+//                // Means we are logged in, but before we started counting UserID.
+//                // Send -1 to record these
+//                preprocessData(eventData, "userID", -1);
+//            } else {
+//                preprocessData(eventData, "userID", getApp().getUserInfoStorage().getUser().getUserID());
+//            }
+//        }
         preprocessData(eventData, "pageNS", title.getNamespace());
         return super.preprocessData(eventData);
     }

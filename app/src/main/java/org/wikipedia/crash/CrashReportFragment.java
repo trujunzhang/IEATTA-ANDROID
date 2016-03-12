@@ -10,8 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import org.wikipedia.R;
 import org.ieatta.IEATTAApp;
+import org.ieatta.R;
 import org.wikipedia.activity.CallbackFragment;
 import org.wikipedia.drawable.DrawableUtil;
 

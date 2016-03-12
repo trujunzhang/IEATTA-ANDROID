@@ -129,40 +129,32 @@ import java.util.UUID;
             return;
         }
 
-        int rate = getSampleRate();
-        if (rate != SAMPLE_LOG_DISABLE) {
-            boolean chosen = app.getEventLogSamplingID() % rate == 0 || app.isDevRelease();
-
-            if (chosen) {
-                JSONObject eventData = new JSONObject();
-
-                //Build the string which is logged to debug EventLogging code
-                String logString = this.getClass().getSimpleName() + ": Sending event";
-                for (int i = 0; i < params.length; i += 2) {
-                    preprocessData(eventData, params[i].toString(), params[i + 1]);
-                    logString += ", event_" + params[i] + " = " + params[i + 1];
-                }
-                Log.d(ANALYTICS_TAG, logString);
-
-                new EventLoggingEvent(
-                        schemaName,
-                        revision,
-                        getDBNameForSite(site == null ? getApp().getSite() : site),
-                        app.getUserAgent(),
-                        preprocessData(eventData)
-                ).log();
-            }
-        }
+//        int rate = getSampleRate();
+//        if (rate != SAMPLE_LOG_DISABLE) {
+//            boolean chosen = app.getEventLogSamplingID() % rate == 0 || app.isDevRelease();
+//
+//            if (chosen) {
+//                JSONObject eventData = new JSONObject();
+//
+//                //Build the string which is logged to debug EventLogging code
+//                String logString = this.getClass().getSimpleName() + ": Sending event";
+//                for (int i = 0; i < params.length; i += 2) {
+//                    preprocessData(eventData, params[i].toString(), params[i + 1]);
+//                    logString += ", event_" + params[i] + " = " + params[i + 1];
+//                }
+//                Log.d(ANALYTICS_TAG, logString);
+//
+//                new EventLoggingEvent(
+//                        schemaName,
+//                        revision,
+//                        getDBNameForSite(site == null ? getApp().getSite() : site),
+//                        app.getUserAgent(),
+//                        preprocessData(eventData)
+//                ).log();
+//            }
+//        }
     }
 
-    /**
-     * @return Sampling rate for this funnel, as given by the remote config parameter for this
-     * funnel (the name of which is defined as "[schema name]_rate"), with a fallback to the
-     * hard-coded sampling rate passed into the constructor.
-     */
-    protected int getSampleRate() {
-        return app.getRemoteConfig().getConfig().optInt(sampleRateRemoteParamName, sampleRate);
-    }
 
     /** @return The application installation identifier field used by {@link #preprocessAppInstallID}. */
     @NonNull protected String getAppInstallIDField() {

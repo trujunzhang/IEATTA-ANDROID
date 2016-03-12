@@ -3,7 +3,9 @@ package org.ieatta;
 import android.app.Activity;
 import android.app.Application;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.ColorInt;
 import android.support.annotation.IntRange;
 import android.support.annotation.NonNull;
 
@@ -16,6 +18,7 @@ import org.wikipedia.crash.CrashReporter;
 import org.wikipedia.crash.hockeyapp.HockeyAppCrashReporter;
 import org.wikipedia.drawable.DrawableUtil;
 import org.wikipedia.settings.Prefs;
+import org.wikipedia.theme.Theme;
 import org.wikipedia.util.ReleaseUtil;
 import org.wikipedia.util.log.L;
 
@@ -73,6 +76,8 @@ public class IEATTAApp extends Application {
     private static IEATTAApp INSTANCE;
 
     private Bus bus;
+    @NonNull
+    private Theme currentTheme = Theme.getFallback();
 
 
     public IEATTAApp() {
@@ -153,6 +158,31 @@ public class IEATTAApp extends Application {
 
 
     /**
+     * Gets the currently-selected theme for the app.
+     * @return Theme that is currently selected, which is the actual theme ID that can
+     * be passed to setTheme() when creating an activity.
+     */
+    @NonNull
+    public Theme getCurrentTheme() {
+        return currentTheme;
+    }
+
+    public boolean isCurrentThemeLight() {
+        return getCurrentTheme().isLight();
+    }
+
+    public boolean isCurrentThemeDark() {
+        return getCurrentTheme().isDark();
+    }
+
+    @ColorInt
+    public int getContrastingThemeColor() {
+        return getCurrentTheme().getContrastingColor();
+    }
+
+
+
+    /**
      * Apply a tint to the provided drawable.
      * @param d Drawable to be tinted.
      * @param tintColor Color of the tint. Setting to 0 will remove the tint.
@@ -163,6 +193,15 @@ public class IEATTAApp extends Application {
         } else {
             DrawableUtil.setTint(d, tintColor);
         }
+    }
+
+    /**
+     * Make adjustments to a Drawable object to look better in the current theme.
+     * (e.g. apply a white color filter for night mode)
+     * @param d Drawable to be adjusted.
+     */
+    public void adjustDrawableToTheme(Drawable d) {
+        setDrawableTint(d, isCurrentThemeDark() ? Color.WHITE : Color.TRANSPARENT);
     }
 
     public void putCrashReportProperty(String key, String value) {

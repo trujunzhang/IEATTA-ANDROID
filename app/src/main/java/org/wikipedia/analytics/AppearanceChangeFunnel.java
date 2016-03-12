@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 
 import org.json.JSONObject;
 import org.ieatta.IEATTAApp;
+import org.wikipedia.Site;
 
 public class AppearanceChangeFunnel extends Funnel {
     private static final String SCHEMA_NAME = "MobileWikiAppAppearanceSettings";
@@ -18,14 +19,6 @@ public class AppearanceChangeFunnel extends Funnel {
                 "action", "fontSizeChange",
                 "currentValue", String.valueOf(currentFontSize),
                 "newValue", String.valueOf(newFontSize)
-        );
-    }
-
-    public void logThemeChange(Theme currentTheme, Theme newTheme) {
-        log(
-                "action", "themeChange",
-                "currentValue", currentTheme.getFunnelName(),
-                "newValue", newTheme.getFunnelName()
         );
     }
 
