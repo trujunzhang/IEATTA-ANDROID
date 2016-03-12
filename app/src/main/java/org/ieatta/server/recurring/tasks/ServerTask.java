@@ -3,6 +3,8 @@ package org.ieatta.server.recurring.tasks;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
+import org.ieatta.database.models.DBNewRecord;
+import org.ieatta.parse.ParseObjectReader;
 import org.ieatta.parse.ParseQueryUtils;
 import org.ieatta.server.recurring.util.SerialTasksManager;
 import org.wikipedia.util.log.L;
@@ -57,8 +59,10 @@ public final class ServerTask {
     private static Task<Void> getObjectsFromServerTask(ParseObject newRecordObject) {
         Date lastCreateAt = newRecordObject.getCreatedAt();
 
-        ParseQuery<ParseObject> query = ParseQueryUtils.createQueryForRecorded(newRecordObject);
+        final DBNewRecord newRecord = new DBNewRecord();
+        ParseObjectReader.reader(newRecordObject, newRecord);
 
+        ParseQuery<ParseObject> query = ParseQueryUtils.createQueryForRecorded(newRecord);
         return query.getFirstInBackground().onSuccessTask(new Continuation<ParseObject, Task<Void>>() {
             @Override
             public Task<Void> then(Task<ParseObject> task) throws Exception {

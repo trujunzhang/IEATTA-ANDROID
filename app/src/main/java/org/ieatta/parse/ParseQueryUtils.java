@@ -23,12 +23,10 @@ public class ParseQueryUtils {
         return query;
     }
 
-    public static ParseQuery<ParseObject> createQueryForRecorded(ParseObject newRecordObject) {
-        DBNewRecord newRecord = new DBNewRecord();
-        ParseObjectReader.reader(newRecordObject, newRecord);
+    public static ParseQuery<ParseObject> createQueryForRecorded(DBNewRecord newRecord) {
+        PQueryModelType type = PQueryModelType.getInstance(newRecord.getModelType());
 
-        PQueryModelType modelType = PQueryModelType.getInstance(newRecord.getModelType());
-        ParseQuery<ParseObject> query = ParseQuery.getQuery(modelType.toString());
+        ParseQuery<ParseObject> query = ParseQuery.getQuery(type.toString());
 
         // *** Import *** The newest row in the table.
         query.orderByDescending(ParseObjectConstant.kPAPFieldObjectCreatedDateKey);
