@@ -39,7 +39,7 @@ public class ModelsFunnel extends Funnel {
                 ", remarks='" + event.getRemarks() + '\'' +
                 ", waiter='" + event.getWaiter() + '\'' +
                 '}';
-        log(log);
+        log("info",log);
     }
 
     public void logNewRecord(DBNewRecord newRecord) {
@@ -48,7 +48,7 @@ public class ModelsFunnel extends Funnel {
                 ", modelType=" + PQueryModelType.getInstance(newRecord.getModelType()).toString() +
                 ", modelPoint='" + newRecord.getModelPoint() + '\'' +
                 '}';
-        log(log);
+        log("info",log);
     }
 
     public void logPeopleInEvent(DBPeopleInEvent peopleInEvent) {
@@ -57,7 +57,7 @@ public class ModelsFunnel extends Funnel {
                 ", userRef='" + peopleInEvent.getUserRef() + '\'' +
                 ", eventRef='" + peopleInEvent.getEventRef() + '\'' +
                 '}';
-        log(log);
+        log("info",log);
     }
 
     public void logPhoto(DBPhoto photo) {
@@ -69,7 +69,7 @@ public class ModelsFunnel extends Funnel {
                 ", originalUrl='" + photo.getOriginalUrl() + '\'' +
                 ", usedType=" + PhotoUsedType.getInstance(photo.getUsedType()).toString() +
                 '}';
-        log(log);
+        log("info",log);
     }
 
     public void logRecipe(DBRecipe recipe) {
@@ -79,7 +79,7 @@ public class ModelsFunnel extends Funnel {
                 ", eventRef='" + recipe.getEventRef() + '\'' +
                 ", orderedPeopleRef='" + recipe.getOrderedPeopleRef() + '\'' +
                 '}';
-        log(log);
+        log("info",log);
     }
 
     public void logRestaurant(DBRestaurant restaurant) {
@@ -89,7 +89,7 @@ public class ModelsFunnel extends Funnel {
 //                ", location=" + restaurant +
                 ", googleMapAddress='" + restaurant.getGoogleMapAddress() + '\'' +
                 '}';
-        log(log);
+        log("info",log);
     }
 
     public void logReview(DBReview review) {
@@ -101,7 +101,7 @@ public class ModelsFunnel extends Funnel {
                 ", reviewRef='" + review.getReviewRef() + '\'' +
                 ", reviewType=" + ReviewType.getInstance(review.getReviewType()).toString() +
                 '}';
-        log(log);
+        log("info",log);
     }
 
     public void logTeam(DBTeam team) {
@@ -111,7 +111,7 @@ public class ModelsFunnel extends Funnel {
                 ", email='" + team.getEmail() + '\'' +
                 ", address='" + team.getAddress() + '\'' +
                 '}';
-        log(log);
+        log("info",log);
     }
 
 }
