@@ -16,13 +16,20 @@ import bolts.Task;
 public final class ServerTask {
 
     public static Task<Void> getFromServer(ParseQuery query) {
-        final Task<List<ParseObject>> task = query.findInBackground();
-        return task.onSuccessTask(new Continuation<List<ParseObject>, Task<Void>>() {
+        return query.findInBackground().continueWith(new Continuation() {
             @Override
-            public Task<Void> then(Task<List<ParseObject>> task) throws Exception {
-                return ServerTask.executeSerialTasks(task);
+            public Object then(Task task) throws Exception {
+                Exception error = task.getError();
+                return null;
             }
         });
+//        final Task<List<ParseObject>> task = query.findInBackground();
+//        return task.onSuccessTask(new Continuation<List<ParseObject>, Task<Void>>() {
+//            @Override
+//            public Task<Void> then(Task<List<ParseObject>> task) throws Exception {
+//                return ServerTask.executeSerialTasks(task);
+//            }
+//        });
     }
 
     private static Task<Void> executeSerialTasks(Task<List<ParseObject>> previous) {

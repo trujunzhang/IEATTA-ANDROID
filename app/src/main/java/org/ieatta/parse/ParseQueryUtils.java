@@ -11,7 +11,8 @@ import java.util.Date;
 public class ParseQueryUtils {
 
     public static ParseQuery createQueryForNewRecord(Date lastAsyncDate, int limit) {
-        ParseQuery query = ParseQuery.getQuery(PQueryModelType.NewRecord.toString());
+        String className = PQueryModelType.NewRecord.toString();
+        ParseQuery query = ParseQuery.getQuery(className);
         query.setLimit(limit);
 
         // *** Important (used orderByAscending) ***

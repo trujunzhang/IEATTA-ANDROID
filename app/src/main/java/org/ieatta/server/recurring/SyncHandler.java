@@ -9,7 +9,7 @@ import bolts.Continuation;
 import bolts.Task;
 
 public class SyncHandler {
-    private static final int NUMBER_FETCH_NEW_RECORD = 20;
+    private static final int NUMBER_FETCH_NEW_RECORD = 10;
     private static final int NUMBER_PUSH_NEW_RECORD = 6;
 
     public static final SyncHandler sharedInstance = new SyncHandler();
@@ -18,7 +18,7 @@ public class SyncHandler {
 
     public Task<Void> execute() {
         ParseQuery query = new SyncInfo(SyncInfo.TAG_NEW_RECORD_DATE).createQuery(NUMBER_FETCH_NEW_RECORD);
-        return ServerTask.getFromServer(query).continueWith(new Continuation<Void, Void>() {
+        return ServerTask.getFromServer(query).onSuccess(new Continuation<Void, Void>() {
             @Override
             public Void then(Task<Void> task) throws Exception {
                 return null;
