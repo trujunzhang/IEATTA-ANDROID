@@ -27,7 +27,7 @@ public final class ServerTask {
 
     private static Task<Void> executeSerialTasks(Task<List<ParseObject>> previous) {
         List<ParseObject> results = previous.getResult();
-        L.d("get count in Pulling objects from Server: " + results.size());
+        L.d("Get count after pulling objects from Server: " + results.size());
 
         final SerialTasksManager<ParseObject> manager = new SerialTasksManager<>(results);
         if (manager.hasNext() == false) {
