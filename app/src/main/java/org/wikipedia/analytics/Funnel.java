@@ -12,7 +12,7 @@ import java.util.UUID;
 
 /** Schemas for this abstract funnel are expected to have appInstallID and sessionToken fields. When
  * these fields are not present or differently named, preprocess* or get*Field should be overridden. */
-/*package*/ abstract class Funnel {
+/*package*/public abstract class Funnel {
     protected static final int SAMPLE_LOG_1K = 1000;
     protected static final int SAMPLE_LOG_100 = 100;
     protected static final int SAMPLE_LOG_10 = 10;
@@ -36,19 +36,19 @@ import java.util.UUID;
      */
     public static final String ANALYTICS_TAG = "Analytics";
 
-    /*package*/ Funnel(IEATTAApp app, String schemaName, int revision) {
+    /*package*/public Funnel(IEATTAApp app, String schemaName, int revision) {
         this(app, schemaName, revision, SAMPLE_LOG_ALL);
     }
 
-    /*package*/ Funnel(IEATTAApp app, String schemaName, int revision, @Nullable Site site) {
+    /*package*/public Funnel(IEATTAApp app, String schemaName, int revision, @Nullable Site site) {
         this(app, schemaName, revision, SAMPLE_LOG_ALL, site);
     }
 
-    /*package*/ Funnel(IEATTAApp app, String schemaName, int revision, int sampleRate) {
+    /*package*/public Funnel(IEATTAApp app, String schemaName, int revision, int sampleRate) {
         this(app, schemaName, revision, sampleRate, null);
     }
 
-    /*package*/ Funnel(IEATTAApp app, String schemaName, int revision, int sampleRate, @Nullable Site site) {
+    /*package*/public Funnel(IEATTAApp app, String schemaName, int revision, int sampleRate, @Nullable Site site) {
         this.app = app;
         this.schemaName = schemaName;
         this.revision = revision;
