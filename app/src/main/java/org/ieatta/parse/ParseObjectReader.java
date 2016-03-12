@@ -93,6 +93,15 @@ public class ParseObjectReader {
     }
 
     public static DBPeopleInEvent reader(ParseObject object, DBPeopleInEvent model) {
+        String uuid = object.getString(ParseObjectConstant.kPAPFieldObjectUUIDKey);
+        Date objectCreatedDate = object.getDate(ParseObjectConstant.kPAPFieldObjectCreatedDateKey);
+        String userRef = object.getString(ParseObjectConstant.kPAPFieldUserKey);
+        String eventRef = object.getString(ParseObjectConstant.kPAPFieldEventKey);
+
+        model.setUUID(uuid);
+        model.setObjectCreatedDate(objectCreatedDate);
+        model.setUserRef(userRef);
+        model.setEventRef(eventRef);
 
         return model;
     }

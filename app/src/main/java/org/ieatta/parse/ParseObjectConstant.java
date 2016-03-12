@@ -9,7 +9,6 @@ public final class ParseObjectConstant {
     public static final String kPAPFieldDisplayNameKey = "displayName";
     public static final String kPAPFieldFlagKey = "flag";
 
-
     // For NewRecord
     public static final String kPAPFieldModelTypeKey = "modelType";
     public static final String kPAPFieldModelPointKey = "modelPoint";
@@ -21,4 +20,9 @@ public final class ParseObjectConstant {
     public static final String kPAPFieldRemarksKey = "remarks";
     public static final String kPAPFieldWaiterKey = "waiter";
     public static final String kPAPFieldLocalRestaurantKey = "restaurantRef";
+
+    // For PeopleInEvent
+    public static final String kPAPFieldUserKey = "userRef";
+    public static final String kPAPFieldEventKey = "eventRef";
+
 }
