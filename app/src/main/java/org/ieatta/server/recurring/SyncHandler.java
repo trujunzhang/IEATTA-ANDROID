@@ -10,7 +10,6 @@ import bolts.Task;
  * Created by djzhang on 11/27/15.
  */
 public class SyncHandler {
-    private SyncHandler self = this;
     private static final int NUMBER_FETCH_NEW_RECORD = 20;
     private static final int NUMBER_PUSH_NEW_RECORD = 6;
 
@@ -51,7 +50,7 @@ public class SyncHandler {
         this.execute().continueWith(new Continuation<Void, Void>() {
             @Override
             public Void then(Task<Void> task) throws Exception {
-                self.endTasks(task.getError());
+                SyncHandler.this.endTasks(task.getError());
                 return null;
             }
         });

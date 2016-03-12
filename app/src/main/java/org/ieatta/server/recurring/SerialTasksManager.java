@@ -8,7 +8,6 @@ import java.util.List;
  * Created by djzhang on 12/16/15.
  */
 public class SerialTasksManager<T> {
-    private SerialTasksManager self = this;
     private List<T> array = new LinkedList<T>();
 
     public SerialTasksManager(List<T> array) {
@@ -19,24 +18,24 @@ public class SerialTasksManager<T> {
     int taskStep = 0;
 
     public boolean hasNext() {
-        if (taskStep < self.array.size())
+        if (taskStep < this.array.size())
             return true;
 
         return false;
     }
 
     public T next() {
-        T model = (T) self.array.get(self.taskStep);
-        self.taskStep += 1;
+        T model = (T) this.array.get(this.taskStep);
+        this.taskStep += 1;
 
         return model;
     }
 
     public int index() {
-        return self.taskStep;
+        return this.taskStep;
     }
 
     public int getFetchedCount() {
-        return self.array.size();
+        return this.array.size();
     }
 }
