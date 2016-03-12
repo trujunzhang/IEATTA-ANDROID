@@ -14,20 +14,9 @@ import org.ieatta.database.models.DBTeam;
 import org.ieatta.database.provide.PQueryModelType;
 
 import java.util.Date;
-
-import org.ieatta.database.models.DBEvent;
-import org.ieatta.database.models.DBNewRecord;
-import org.ieatta.database.models.DBPeopleInEvent;
-import org.ieatta.database.models.DBPhoto;
-import org.ieatta.database.models.DBRecipe;
-import org.ieatta.database.models.DBRestaurant;
-import org.ieatta.database.models.DBReview;
-import org.ieatta.database.models.DBTeam;
-
 import io.realm.RealmObject;
 
 public class ParseObjectReader {
-
 
     public static RealmObject read(ParseObject object, PQueryModelType type) {
         switch (type) {
@@ -52,7 +41,6 @@ public class ParseObjectReader {
         }
         return null;
     }
-
 
     public static DBEvent reader(ParseObject object, DBEvent model) {
         String uuid = object.getString(ParseObjectConstant.kPAPFieldObjectUUIDKey);
