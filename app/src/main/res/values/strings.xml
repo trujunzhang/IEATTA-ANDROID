@@ -17,6 +17,13 @@
     <string name="page_does_not_exist_error">This page does not exist.</string>
     <string name="nav_item_today">Today</string>
 
+    <string name="share_via">Share via</string>
+    <string name="gallery_menu_share">Share</string>
+    <string name="gallery_share_error">Could not share image: %s</string>
+    <string name="gallery_menu_save">Save to device</string>
+    <string name="err_cannot_save_file">Cannot save file</string>
+    <string name="error_can_not_process_link">Could not display this link</string>
+    <string name="error_no_maps_app">Could not find any apps that provide directions.</string>
 
     <!-- Crash reporter -->
     <string name="crash_report_dialog_title">Sorry, app crashed last time</string>

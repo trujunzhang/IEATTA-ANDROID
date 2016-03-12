@@ -13,8 +13,8 @@ import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.util.Log;
 
-import org.wikipedia.R;
 import org.ieatta.IEATTAApp;
+import org.ieatta.R;
 import org.wikipedia.page.PageTitle;
 import org.wikipedia.settings.Prefs;
 
@@ -73,29 +73,29 @@ public final class UriUtil {
     }
 
     public static void handleExternalLink(final Context context, final Uri uri) {
-        if (IEATTAApp.getInstance().getWikipediaZeroHandler().isZeroEnabled()) {
-            if (Prefs.isShowZeroInterstitialEnabled()) {
-                AlertDialog.Builder alert = new AlertDialog.Builder(context);
-                alert.setTitle(context.getString(R.string.zero_interstitial_title));
-                alert.setMessage(context.getString(R.string.zero_interstitial_leave_app));
-                alert.setPositiveButton(context.getString(R.string.zero_interstitial_continue), new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        visitInExternalBrowser(context, uri);
-                    }
-                });
-                alert.setNegativeButton(context.getString(R.string.zero_interstitial_cancel), new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.dismiss();
-                    }
-                });
-                AlertDialog ad = alert.create();
-                ad.show();
-            } else {
-                visitInExternalBrowser(context, uri);
-            }
-        } else {
-            visitInExternalBrowser(context, uri);
-        }
+//        if (IEATTAApp.getInstance().getWikipediaZeroHandler().isZeroEnabled()) {
+//            if (Prefs.isShowZeroInterstitialEnabled()) {
+//                AlertDialog.Builder alert = new AlertDialog.Builder(context);
+//                alert.setTitle(context.getString(R.string.zero_interstitial_title));
+//                alert.setMessage(context.getString(R.string.zero_interstitial_leave_app));
+//                alert.setPositiveButton(context.getString(R.string.zero_interstitial_continue), new DialogInterface.OnClickListener() {
+//                    public void onClick(DialogInterface dialog, int id) {
+//                        visitInExternalBrowser(context, uri);
+//                    }
+//                });
+//                alert.setNegativeButton(context.getString(R.string.zero_interstitial_cancel), new DialogInterface.OnClickListener() {
+//                    public void onClick(DialogInterface dialog, int id) {
+//                        dialog.dismiss();
+//                    }
+//                });
+//                AlertDialog ad = alert.create();
+//                ad.show();
+//            } else {
+//                visitInExternalBrowser(context, uri);
+//            }
+//        } else {
+//            visitInExternalBrowser(context, uri);
+//        }
     }
 
     public static void sendGeoIntent(@NonNull Activity activity,
@@ -115,7 +115,8 @@ public final class UriUtil {
     }
 
     public static String getUrlWithProvenance(Context context, PageTitle title, @StringRes int provId) {
-        return title.getCanonicalUri() + "?wprov=" + context.getString(provId);
+//        return title.getCanonicalUri() + "?wprov=" + context.getString(provId);
+        return "";
     }
 
     private UriUtil() {

@@ -12,9 +12,8 @@ import android.support.annotation.Nullable;
 import android.support.v4.content.FileProvider;
 import android.widget.Toast;
 
-import org.wikipedia.BuildConfig;
-import org.wikipedia.R;
-import org.wikipedia.concurrency.SaneAsyncTask;
+import org.ieatta.BuildConfig;
+import org.ieatta.R;
 import org.wikipedia.page.PageTitle;
 import org.wikipedia.util.log.L;
 
@@ -64,28 +63,28 @@ public final class ShareUtil {
     public static void shareImage(final Context context, final Bitmap bmp,
                                   final String imageFileName, final String subject,
                                   final String text) {
-        new SaneAsyncTask<Uri>() {
-            @Override
-            public Uri performTask() throws Throwable {
-                File processedBitmap = processBitmapForSharing(context, bmp, imageFileName);
-                return getUri(context, processedBitmap);
-            }
-
-            @Override
-            public void onFinish(Uri result) {
-                if (result == null) {
-                    displayShareErrorMessage(context);
-                    return;
-                }
-                Intent chooserIntent = buildImageShareChooserIntent(context, subject, text, result);
-                context.startActivity(chooserIntent);
-            }
-
-            @Override
-            public void onCatch(Throwable caught) {
-                displayOnCatchMessage(caught, context);
-            }
-        }.execute();
+//        new SaneAsyncTask<Uri>() {
+//            @Override
+//            public Uri performTask() throws Throwable {
+//                File processedBitmap = processBitmapForSharing(context, bmp, imageFileName);
+//                return getUri(context, processedBitmap);
+//            }
+//
+//            @Override
+//            public void onFinish(Uri result) {
+//                if (result == null) {
+//                    displayShareErrorMessage(context);
+//                    return;
+//                }
+//                Intent chooserIntent = buildImageShareChooserIntent(context, subject, text, result);
+//                context.startActivity(chooserIntent);
+//            }
+//
+//            @Override
+//            public void onCatch(Throwable caught) {
+//                displayOnCatchMessage(caught, context);
+//            }
+//        }.execute();
     }
 
     public static Intent buildImageShareChooserIntent(Context context, String subject, String text, Uri uri) {
