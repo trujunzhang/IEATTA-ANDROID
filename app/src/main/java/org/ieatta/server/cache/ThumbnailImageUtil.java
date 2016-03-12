@@ -6,9 +6,9 @@ import com.nostra13.universalimageloader.utils.StorageUtils;
 import org.ieatta.IEATTAApp;
 import java.io.File;
 
-public class ThumbnailImageUtils extends AbstractImageUtils {
+public class ThumbnailImageUtil extends AbstractImageUtil {
 
-    public final static ThumbnailImageUtils sharedInstance = new ThumbnailImageUtils();
+    public final static ThumbnailImageUtil sharedInstance = new ThumbnailImageUtil();
 
     /**
      * This SDImageCache constructor's namespace is "Thumbnail".

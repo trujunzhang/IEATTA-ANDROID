@@ -1,7 +1,5 @@
 package org.ieatta.server.cache;
 
-import android.graphics.Bitmap;
-
 import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiskCache;
 import com.nostra13.universalimageloader.utils.StorageUtils;
 
@@ -10,11 +8,9 @@ import org.ieatta.database.models.DBPhoto;
 
 import java.io.File;
 
-import bolts.Task;
+public class OriginalImageUtil extends AbstractImageUtil {
 
-public class OriginalImageUtils extends AbstractImageUtils {
-
-    public final static OriginalImageUtils sharedInstance = new OriginalImageUtils();
+    public final static OriginalImageUtil sharedInstance = new OriginalImageUtil();
 
     /**
      * This SDImageCache constructor's namespace is "Original".

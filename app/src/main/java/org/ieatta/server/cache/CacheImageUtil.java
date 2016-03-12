@@ -7,9 +7,9 @@ import org.ieatta.IEATTAApp;
 
 import java.io.File;
 
-public class CacheImageUtils extends AbstractImageUtils {
+public class CacheImageUtil extends AbstractImageUtil {
 
-    public final static CacheImageUtils sharedInstance = new CacheImageUtils();
+    public final static CacheImageUtil sharedInstance = new CacheImageUtil();
 
     /**
      * This SDImageCache constructor's namespace is "Cache".
