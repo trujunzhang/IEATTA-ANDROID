@@ -166,7 +166,8 @@ public class ParseObjectReader {
         String uuid = object.getString(ParseObjectConstant.kPAPFieldObjectUUIDKey);
         Date objectCreatedDate = object.getDate(ParseObjectConstant.kPAPFieldObjectCreatedDateKey);
         int rate = object.getInt(ParseObjectConstant.kPAPFieldRateKey);
-        String reviewRef = object.getString(ParseObjectConstant.kPAPFieldReviewTypeKey);
+        int reviewType = object.getInt(ParseObjectConstant.kPAPFieldReviewTypeKey);
+        String reviewRef = object.getString(ParseObjectConstant.kPAPFieldReviewRefKey);
         String userRef = object.getString(ParseObjectConstant.kPAPFieldUserRefKey);
         String content = object.getString(ParseObjectConstant.kPAPFieldContentKey);
 
@@ -174,6 +175,7 @@ public class ParseObjectReader {
         model.setObjectCreatedDate(objectCreatedDate);
         model.setRate(rate);
         model.setReviewRef(reviewRef);
+        model.setReviewType(reviewType);
         model.setUserRef(userRef);
         model.setContent(content);
 
