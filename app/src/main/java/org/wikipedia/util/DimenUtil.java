@@ -8,8 +8,8 @@ import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.Window;
 
-import org.wikipedia.R;
 import org.ieatta.IEATTAApp;
+import org.ieatta.R;
 
 public final class DimenUtil {
     public static float dpToPx(float dp) {
