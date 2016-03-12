@@ -14,35 +14,35 @@ import org.ieatta.database.models.DBTeam;
 
 public class ParseObjectWrite {
 
-    public void write(ParseObject object,DBEvent event){
+    public static void write(ParseObject object,DBEvent event){
 
     }
 
-    public void write(ParseObject object,DBNewRecord newRecord){
+    public static void write(ParseObject object,DBNewRecord newRecord){
 
     }
 
-    public void write(ParseObject object,DBPeopleInEvent peopleInEvent){
+    public static void write(ParseObject object,DBPeopleInEvent peopleInEvent){
 
     }
 
-    public void write(ParseObject object,DBPhoto photo){
+    public static void write(ParseObject object,DBPhoto photo){
 
     }
 
-    public void write(ParseObject object,DBRecipe recipe){
+    public static void write(ParseObject object,DBRecipe recipe){
 
     }
 
-    public void write(ParseObject object,DBRestaurant restaurant){
+    public static void write(ParseObject object,DBRestaurant restaurant){
 
     }
 
-    public void write(ParseObject object,DBReview review){
+    public static void write(ParseObject object,DBReview review){
 
     }
 
-    public void write(ParseObject object,DBTeam team){
+    public static void write(ParseObject object,DBTeam team){
 
     }
 }

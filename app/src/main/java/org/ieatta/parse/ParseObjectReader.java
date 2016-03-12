@@ -14,35 +14,35 @@ import org.ieatta.database.models.DBTeam;
 
 public class ParseObjectReader {
 
-    public void reader(ParseObject object,DBEvent event){
+    public static void reader(ParseObject object,DBEvent event){
 
     }
 
-    public void reader(ParseObject object,DBNewRecord newRecord){
+    public static void reader(ParseObject object,DBNewRecord newRecord){
 
     }
 
-    public void reader(ParseObject object,DBPeopleInEvent peopleInEvent){
+    public static void reader(ParseObject object,DBPeopleInEvent peopleInEvent){
 
     }
 
-    public void reader(ParseObject object,DBPhoto photo){
+    public static void reader(ParseObject object,DBPhoto photo){
 
     }
 
-    public void reader(ParseObject object,DBRecipe recipe){
+    public static void reader(ParseObject object,DBRecipe recipe){
 
     }
 
-    public void reader(ParseObject object,DBRestaurant restaurant){
+    public static void reader(ParseObject object,DBRestaurant restaurant){
 
     }
 
-    public void reader(ParseObject object,DBReview review){
+    public static void reader(ParseObject object,DBReview review){
 
     }
 
-    public void reader(ParseObject object,DBTeam team){
+    public static void reader(ParseObject object,DBTeam team){
 
     }
 }

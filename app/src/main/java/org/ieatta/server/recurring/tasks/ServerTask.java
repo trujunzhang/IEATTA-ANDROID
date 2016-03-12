@@ -4,6 +4,8 @@ package org.ieatta.server.recurring.tasks;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
+import org.ieatta.database.models.DBNewRecord;
+import org.ieatta.parse.ParseObjectReader;
 import org.ieatta.server.recurring.SerialTasksManager;
 import org.ieatta.server.recurring.SyncInfo;
 import org.wikipedia.util.log.L;
@@ -56,14 +58,15 @@ public final class ServerTask {
     /**
      * Pull online objects from Parse.com.
      * <p/>
-     * - parameter pulledNewRecordObject: A row data on the NewRecord table.
+     * - parameter newRecordObject: A row data on the NewRecord table.
      */
-    private static Task<Void> getObjectsFromServerTask(ParseObject pulledNewRecordObject) {
-        final Date lastCreateAt = pulledNewRecordObject.getCreatedAt();
+    private static Task<Void> getObjectsFromServerTask(ParseObject newRecordObject) {
+        final Date lastCreateAt = newRecordObject.getCreatedAt();
 
 //         1. Create model instance from record's modelType.
-        final ParseModelAbstract model = NewRecord.getRecordedInstance(pulledNewRecordObject);
-        LogUtils.debug(" [NewRecord from parse.com]: " + model.printDescription());
+        DBNewRecord newRecord = new DBNewRecord();
+        ParseObjectReader.reader(newRecordObject, newRecord);
+        L.d(" get NewRecordObject's instance: " + newRecord.toString());
 
         // 2. Pull from server.
         return model.pullFromServerAndPin()
