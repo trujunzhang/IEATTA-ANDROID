@@ -13,6 +13,7 @@ import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.stetho.Stetho;
 import com.squareup.otto.Bus;
 
+import org.ieatta.parse.ParseAPI;
 import org.ieatta.server.recurring.RecurringTask;
 import org.wikipedia.ViewAnimations;
 import org.wikipedia.crash.CrashReporter;
@@ -96,6 +97,8 @@ public class IEATTAApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        ParseAPI.setup(this);
         initExceptionHandling();
 
         Fresco.initialize(this);
