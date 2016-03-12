@@ -5,7 +5,8 @@ import android.support.annotation.IdRes;
 import android.support.annotation.LayoutRes;
 import android.view.MenuItem;
 
-import org.wikipedia.R;
+import org.ieatta.R;
+
 
 /** Boilerplate for a {@link android.support.v4.app.FragmentActivity} containing a single stack of
  *  Fragments. */
