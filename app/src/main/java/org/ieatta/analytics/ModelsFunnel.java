@@ -48,11 +48,10 @@ public class ModelsFunnel extends Funnel {
     }
 
     public void logPeopleInEvent(DBPeopleInEvent peopleInEvent) {
-        String log =  "Team{" +
+        String log = "PeopleInEvent{" +
                 "UUID='" + peopleInEvent.getUUID() + '\'' +
-                ", displayName='" + displayName + '\'' +
-                ", email='" + email + '\'' +
-                ", address='" + address + '\'' +
+                ", userRef='" + peopleInEvent.getUserRef() + '\'' +
+                ", eventRef='" + peopleInEvent.getEventRef() + '\'' +
                 '}';
         log(log);
     }
@@ -64,7 +63,7 @@ public class ModelsFunnel extends Funnel {
                 ", restaurantRef='" + photo.getRestaurantRef() + '\'' +
                 ", thumbnailUrl='" + photo.getThumbnailUrl() + '\'' +
                 ", originalUrl='" + photo.getOriginalUrl() + '\'' +
-                ", usedType=" + PhotoUsedType.getInstance(photo.getUsedType()) +
+                ", usedType=" + PhotoUsedType.getInstance(photo.getUsedType()).toString() +
                 '}';
         log(log);
     }
@@ -80,7 +79,7 @@ public class ModelsFunnel extends Funnel {
     }
 
     public void logRestaurant(DBRestaurant restaurant) {
-        String log =  "Restaurant{" +
+        String log = "Restaurant{" +
                 "UUID='" + restaurant.getUUID() + '\'' +
                 ", displayName='" + restaurant.getDisplayName() + '\'' +
 //                ", location=" + restaurant +
@@ -90,24 +89,24 @@ public class ModelsFunnel extends Funnel {
     }
 
     public void logReview(DBReview review) {
-        String log =  "Review{" +
+        String log = "Review{" +
                 "UUID='" + review.getUUID() + '\'' +
                 ", content='" + review.getContent() + '\'' +
                 ", rate=" + review.getRate() +
                 ", userRef='" + review.getUserRef() + '\'' +
                 ", reviewRef='" + review.getReviewRef() + '\'' +
-                ", reviewType=" + ReviewType.getInstance(review.getReviewType()) +
+                ", reviewType=" + ReviewType.getInstance(review.getReviewType()).toString() +
                 '}';
         log(log);
     }
 
     public void logTeam(DBTeam team) {
-String log =  "Team{" +
-        "UUID='" + team.getUUID() + '\'' +
-        ", displayName='" + team.getDisplayName() + '\'' +
-        ", email='" + team.getEmail() + '\'' +
-        ", address='" + team.getAddress() + '\'' +
-        '}';
+        String log = "Team{" +
+                "UUID='" + team.getUUID() + '\'' +
+                ", displayName='" + team.getDisplayName() + '\'' +
+                ", email='" + team.getEmail() + '\'' +
+                ", address='" + team.getAddress() + '\'' +
+                '}';
         log(log);
     }
 
