@@ -15,8 +15,14 @@ public class SyncHandler {
     private boolean didEndRecurringTask = true;
 
     public Task<Void> execute() {
-//        ServerTask(new SyncInfo(SyncInfo.TAG_NEW_RECORD_DATE).createQuery(NUMBER_FETCH_NEW_RECORD))
-        return null;
+
+        return ServerTask.getFromServer(new SyncInfo(SyncInfo.TAG_NEW_RECORD_DATE).createQuery(NUMBER_FETCH_NEW_RECORD)).continueWith(new Continuation<Void, Void>() {
+            @Override
+            public Void then(Task<Void> task) throws Exception {
+                return null;
+            }
+        });
+//        return null;
 //        return ServerTask(new SyncInfo(SyncInfo.TAG_NEW_RECORD_DATE).createQuery(NUMBER_FETCH_NEW_RECORD))
 //                .onSuccessTask(new Continuation<Void, Task<Void>>() {
 //                    @Override
