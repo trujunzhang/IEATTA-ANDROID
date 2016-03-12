@@ -13,6 +13,7 @@ import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.stetho.Stetho;
 import com.squareup.otto.Bus;
 
+import org.ieatta.server.recurring.RecurringTask;
 import org.wikipedia.ViewAnimations;
 import org.wikipedia.crash.CrashReporter;
 import org.wikipedia.crash.hockeyapp.HockeyAppCrashReporter;
@@ -106,6 +107,8 @@ public class IEATTAApp extends Application {
 
         // Integrating with Stetho is intended to be seamless and straightforward for most existing Android applications.
         Stetho.initializeWithDefaults(this);
+
+        new RecurringTask().prepareTimer();
     }
 
     public Bus getBus() {
