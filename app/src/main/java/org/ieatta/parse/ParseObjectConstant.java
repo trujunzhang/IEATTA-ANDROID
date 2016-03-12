@@ -38,6 +38,11 @@ public final class ParseObjectConstant {
     // For Recipe
     public static final String kPAPFieldPriceKey = "price";
     public static final String kPAPFieldEventRefKey = "eventRef";
-    public static final String kPAPFieldOrderedPeopleRefKey = "orderedPeopleRef";    
+    public static final String kPAPFieldOrderedPeopleRefKey = "orderedPeopleRef";
+
+    // For Restaurant
+    public static final String kPAPFieldLocationKey = "location";
+    public static final String kPAPFieldAddressKey = "address";
+    public static final String kPAPFieldCityStateKey = "cityState";
 
 }

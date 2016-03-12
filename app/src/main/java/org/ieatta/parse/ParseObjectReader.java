@@ -1,5 +1,6 @@
 package org.ieatta.parse;
 
+import com.parse.ParseGeoPoint;
 import com.parse.ParseObject;
 
 import org.ieatta.database.models.DBEvent;
@@ -145,6 +146,19 @@ public class ParseObjectReader {
     }
 
     public static DBRestaurant reader(ParseObject object, DBRestaurant model) {
+        String uuid = object.getString(ParseObjectConstant.kPAPFieldObjectUUIDKey);
+        Date objectCreatedDate = object.getDate(ParseObjectConstant.kPAPFieldObjectCreatedDateKey);
+        String displayName = object.getString(ParseObjectConstant.kPAPFieldDisplayNameKey);
+        String googleMapAddress = object.getString(ParseObjectConstant.kPAPFieldAddressKey);
+        ParseGeoPoint geoPoint = object.getParseGeoPoint(ParseObjectConstant.kPAPFieldLocationKey);
+
+        model.setUUID(uuid);
+        model.setObjectCreatedDate(objectCreatedDate);
+        model.setDisplayName(displayName);
+        model.setGoogleMapAddress(googleMapAddress);
+        model.setLatitude(geoPoint.getLatitude());
+        model.setLongitude(geoPoint.getLongitude());
+
         return model;
     }
 
