@@ -1,5 +1,8 @@
 package org.ieatta.server.recurring;
 
+import com.parse.ParseQuery;
+
+import org.ieatta.parse.ParseQueryUtils;
 import org.wikipedia.settings.Prefs;
 
 import java.util.Date;
@@ -35,7 +38,7 @@ public class SyncInfo {
         return this.lastRecordCreateAt;
     }
 
-//    public ParseQuery createQuery(int limit) {
-//        return new NewRecord().createQueryForPullObjectsFromServer(this.lastRecordCreateAt, limit);
-//    }
+    public ParseQuery createQuery(int limit) {
+        return ParseQueryUtils.createQueryForNewRecord(this.lastRecordCreateAt,limit);
+    }
 }
