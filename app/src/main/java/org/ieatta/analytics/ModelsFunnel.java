@@ -29,7 +29,7 @@ public class ModelsFunnel extends Funnel {
     }
 
     public void logEvent(DBEvent event) {
-        String log = "Event{" +
+        String log = "Event: {" +
                 "UUID='" + event.getUUID() + '\'' +
                 ", restaurantRef='" + event.getRestaurantRef() + '\'' +
                 ", displayName='" + event.getDisplayName() + '\'' +
@@ -43,7 +43,7 @@ public class ModelsFunnel extends Funnel {
     }
 
     public void logNewRecord(DBNewRecord newRecord) {
-        String log = "NewRecord{" +
+        String log = "NewRecord: {" +
                 "UUID='" + newRecord.getUUID() + '\'' +
                 ", modelType=" + PQueryModelType.getInstance(newRecord.getModelType()).toString() +
                 ", modelPoint='" + newRecord.getModelPoint() + '\'' +
@@ -52,7 +52,7 @@ public class ModelsFunnel extends Funnel {
     }
 
     public void logPeopleInEvent(DBPeopleInEvent peopleInEvent) {
-        String log = "PeopleInEvent{" +
+        String log = "PeopleInEvent: {" +
                 "UUID='" + peopleInEvent.getUUID() + '\'' +
                 ", userRef='" + peopleInEvent.getUserRef() + '\'' +
                 ", eventRef='" + peopleInEvent.getEventRef() + '\'' +
@@ -61,7 +61,7 @@ public class ModelsFunnel extends Funnel {
     }
 
     public void logPhoto(DBPhoto photo) {
-        String log = "Photo{" +
+        String log = "Photo: {" +
                 "UUID='" + photo.getUUID() + '\'' +
                 ", usedRef='" + photo.getUsedRef() + '\'' +
                 ", restaurantRef='" + photo.getRestaurantRef() + '\'' +
@@ -73,7 +73,7 @@ public class ModelsFunnel extends Funnel {
     }
 
     public void logRecipe(DBRecipe recipe) {
-        String log = "Recipe{" +
+        String log = "Recipe: {" +
                 "UUID='" + recipe.getUUID() + '\'' +
                 ", price=" + recipe.getPrice() +
                 ", eventRef='" + recipe.getEventRef() + '\'' +
@@ -83,7 +83,7 @@ public class ModelsFunnel extends Funnel {
     }
 
     public void logRestaurant(DBRestaurant restaurant) {
-        String log = "Restaurant{" +
+        String log = "Restaurant: {" +
                 "UUID='" + restaurant.getUUID() + '\'' +
                 ", displayName='" + restaurant.getDisplayName() + '\'' +
 //                ", location=" + restaurant +
@@ -93,7 +93,7 @@ public class ModelsFunnel extends Funnel {
     }
 
     public void logReview(DBReview review) {
-        String log = "Review{" +
+        String log = "Review: {" +
                 "UUID='" + review.getUUID() + '\'' +
                 ", content='" + review.getContent() + '\'' +
                 ", rate=" + review.getRate() +
@@ -105,7 +105,7 @@ public class ModelsFunnel extends Funnel {
     }
 
     public void logTeam(DBTeam team) {
-        String log = "Team{" +
+        String log = "Team: {" +
                 "UUID='" + team.getUUID() + '\'' +
                 ", displayName='" + team.getDisplayName() + '\'' +
                 ", email='" + team.getEmail() + '\'' +
