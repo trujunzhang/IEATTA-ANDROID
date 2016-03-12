@@ -2,6 +2,8 @@ package org.ieatta.analytics;
 
 import org.ieatta.IEATTAApp;
 import org.ieatta.database.provide.PQueryModelType;
+import org.ieatta.database.provide.PhotoUsedType;
+import org.ieatta.database.provide.ReviewType;
 import org.wikipedia.analytics.Funnel;
 
 import org.ieatta.database.models.DBEvent;
@@ -46,27 +48,67 @@ public class ModelsFunnel extends Funnel {
     }
 
     public void logPeopleInEvent(DBPeopleInEvent peopleInEvent) {
-
+        String log =  "Team{" +
+                "UUID='" + peopleInEvent.getUUID() + '\'' +
+                ", displayName='" + displayName + '\'' +
+                ", email='" + email + '\'' +
+                ", address='" + address + '\'' +
+                '}';
+        log(log);
     }
 
     public void logPhoto(DBPhoto photo) {
-
+        String log = "Photo{" +
+                "UUID='" + photo.getUUID() + '\'' +
+                ", usedRef='" + photo.getUsedRef() + '\'' +
+                ", restaurantRef='" + photo.getRestaurantRef() + '\'' +
+                ", thumbnailUrl='" + photo.getThumbnailUrl() + '\'' +
+                ", originalUrl='" + photo.getOriginalUrl() + '\'' +
+                ", usedType=" + PhotoUsedType.getInstance(photo.getUsedType()) +
+                '}';
+        log(log);
     }
 
     public void logRecipe(DBRecipe recipe) {
-
+        String log = "Recipe{" +
+                "UUID='" + recipe.getUUID() + '\'' +
+                ", price=" + recipe.getPrice() +
+                ", eventRef='" + recipe.getEventRef() + '\'' +
+                ", orderedPeopleRef='" + recipe.getOrderedPeopleRef() + '\'' +
+                '}';
+        log(log);
     }
 
     public void logRestaurant(DBRestaurant restaurant) {
-
+        String log =  "Restaurant{" +
+                "UUID='" + restaurant.getUUID() + '\'' +
+                ", displayName='" + restaurant.getDisplayName() + '\'' +
+//                ", location=" + restaurant +
+                ", googleMapAddress='" + restaurant.getGoogleMapAddress() + '\'' +
+                '}';
+        log(log);
     }
 
     public void logReview(DBReview review) {
-
+        String log =  "Review{" +
+                "UUID='" + review.getUUID() + '\'' +
+                ", content='" + review.getContent() + '\'' +
+                ", rate=" + review.getRate() +
+                ", userRef='" + review.getUserRef() + '\'' +
+                ", reviewRef='" + review.getReviewRef() + '\'' +
+                ", reviewType=" + ReviewType.getInstance(review.getReviewType()) +
+                '}';
+        log(log);
     }
 
     public void logTeam(DBTeam team) {
-
+String log =  "Team{" +
+        "UUID='" + team.getUUID() + '\'' +
+        ", displayName='" + team.getDisplayName() + '\'' +
+        ", email='" + team.getEmail() + '\'' +
+        ", address='" + team.getAddress() + '\'' +
+        '}';
+        log(log);
     }
 
 }
