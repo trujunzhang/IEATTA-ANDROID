@@ -163,6 +163,20 @@ public class ParseObjectReader {
     }
 
     public static DBReview reader(ParseObject object, DBReview model) {
+        String uuid = object.getString(ParseObjectConstant.kPAPFieldObjectUUIDKey);
+        Date objectCreatedDate = object.getDate(ParseObjectConstant.kPAPFieldObjectCreatedDateKey);
+        int rate = object.getInt(ParseObjectConstant.kPAPFieldRateKey);
+        String reviewRef = object.getString(ParseObjectConstant.kPAPFieldReviewTypeKey);
+        String userRef = object.getString(ParseObjectConstant.kPAPFieldUserRefKey);
+        String content = object.getString(ParseObjectConstant.kPAPFieldContentKey);
+
+        model.setUUID(uuid);
+        model.setObjectCreatedDate(objectCreatedDate);
+        model.setRate(rate);
+        model.setReviewRef(reviewRef);
+        model.setUserRef(userRef);
+        model.setContent(content);
+
         return model;
     }
 

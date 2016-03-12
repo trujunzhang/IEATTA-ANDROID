@@ -45,4 +45,10 @@ public final class ParseObjectConstant {
     public static final String kPAPFieldAddressKey = "address";
     public static final String kPAPFieldCityStateKey = "cityState";
 
+    // For Review
+    public static final String kPAPFieldContentKey = "content";
+    public static final String kPAPFieldRateKey = "rate";
+    public static final String kPAPFieldUserRefKey = "userRef";
+    public static final String kPAPFieldReviewRefKey = "reviewRef";
+    public static final String kPAPFieldReviewTypeKey = "reviewType";
 }
