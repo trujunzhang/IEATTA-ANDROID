@@ -3,6 +3,7 @@ package org.ieatta.parse;
 import com.parse.ParseGeoPoint;
 import com.parse.ParseObject;
 
+import org.ieatta.analytics.ModelsFunnel;
 import org.ieatta.database.models.DBEvent;
 import org.ieatta.database.models.DBNewRecord;
 import org.ieatta.database.models.DBPeopleInEvent;
@@ -63,6 +64,7 @@ public class ParseObjectReader {
         model.setWaiter(waiter);
         model.setRestaurantRef(restaurantRef);
 
+        new ModelsFunnel().logEvent(model);
         return model;
     }
 
@@ -77,6 +79,7 @@ public class ParseObjectReader {
         model.setModelType(type);
         model.setModelPoint(modelPoint);
 
+        new ModelsFunnel().logNewRecord(model);
         return model;
     }
 
@@ -91,6 +94,7 @@ public class ParseObjectReader {
         model.setUserRef(userRef);
         model.setEventRef(eventRef);
 
+        new ModelsFunnel().logPeopleInEvent(model);
         return model;
     }
 
@@ -111,6 +115,7 @@ public class ParseObjectReader {
         model.setUsedType(usedType);
         model.setRestaurantRef(restaurantRef);
 
+        new ModelsFunnel().logPhoto(model);
         return model;
     }
 
@@ -129,6 +134,7 @@ public class ParseObjectReader {
         model.setPrice(price);
         model.setEventRef(eventRef);
 
+        new ModelsFunnel().logRecipe(model);
         return model;
     }
 
@@ -146,6 +152,7 @@ public class ParseObjectReader {
         model.setLatitude(geoPoint.getLatitude());
         model.setLongitude(geoPoint.getLongitude());
 
+        new ModelsFunnel().logRestaurant(model);
         return model;
     }
 
@@ -166,6 +173,7 @@ public class ParseObjectReader {
         model.setUserRef(userRef);
         model.setContent(content);
 
+        new ModelsFunnel().logReview(model);
         return model;
     }
 
@@ -182,6 +190,7 @@ public class ParseObjectReader {
         model.setEmail(email);
         model.setAddress(address);
 
+        new ModelsFunnel().logTeam(model);
         return model;
     }
 }

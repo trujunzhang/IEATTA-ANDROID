@@ -24,6 +24,10 @@ public class ModelsFunnel extends Funnel {
         super(app, SCHEMA_NAME, REV_ID, SAMPLE_LOG_1K);
     }
 
+    public ModelsFunnel(){
+        super(IEATTAApp.getInstance(),SCHEMA_NAME,REV_ID,SAMPLE_LOG_1K);
+    }
+
     public void logEvent(DBEvent event) {
         String log = "Event{" +
                 "UUID='" + event.getUUID() + '\'' +
