@@ -1,15 +1,11 @@
 package org.ieatta.server.recurring;
 
-
 import org.ieatta.server.recurring.tasks.ServerTask;
 import org.wikipedia.util.log.L;
 
 import bolts.Continuation;
 import bolts.Task;
 
-/**
- * Created by djzhang on 11/27/15.
- */
 public class SyncHandler {
     private static final int NUMBER_FETCH_NEW_RECORD = 20;
     private static final int NUMBER_PUSH_NEW_RECORD = 6;

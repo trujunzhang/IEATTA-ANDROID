@@ -7,10 +7,6 @@ import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-
-/**
- * Created by djzhang on 11/30/15.
- */
 public class RecurringTask {
     final static DateFormat fmt = DateFormat.getTimeInstance(DateFormat.LONG);
 

@@ -20,7 +20,6 @@ public class SyncInfo {
         this.task = task;
 
         this.lastRecordCreateAt = null;
-
         long lastRunTime = Prefs.getLastRunTime(task);
         if (lastRunTime != 0) {
             this.lastRecordCreateAt = new Date(lastRunTime);
@@ -28,9 +27,7 @@ public class SyncInfo {
     }
 
     public void setLastRunTime(Date newDate) {
-        // 1. Set last date.
         this.lastRecordCreateAt = newDate;
-
         Prefs.setLastRunTime(this.task, newDate.getTime());
     }
 
