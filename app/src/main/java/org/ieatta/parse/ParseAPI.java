@@ -9,7 +9,6 @@ import com.parse.ParseUser;
 public class ParseAPI {
 
     public static void setup(Context context) {
-
         // Enable Local Datastore.
         Parse.enableLocalDatastore(context);
 

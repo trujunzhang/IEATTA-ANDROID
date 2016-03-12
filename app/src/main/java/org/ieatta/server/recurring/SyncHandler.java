@@ -17,7 +17,6 @@ public class SyncHandler {
     private boolean didEndRecurringTask = true;
 
     public Task<Void> execute() {
-
         ParseQuery query = new SyncInfo(SyncInfo.TAG_NEW_RECORD_DATE).createQuery(NUMBER_FETCH_NEW_RECORD);
         return ServerTask.getFromServer(query).continueWith(new Continuation<Void, Void>() {
             @Override
