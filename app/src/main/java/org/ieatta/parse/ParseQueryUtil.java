@@ -8,7 +8,7 @@ import org.ieatta.database.provide.PQueryModelType;
 
 import java.util.Date;
 
-public class ParseQueryUtils {
+public class ParseQueryUtil {
 
     public static ParseQuery createQueryForNewRecord(Date lastAsyncDate, int limit) {
         ParseQuery query = ParseQuery.getQuery(PQueryModelType.NewRecord.toString());

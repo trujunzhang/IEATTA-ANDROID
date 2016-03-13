@@ -111,7 +111,7 @@ public class IEATTAApp extends Application {
         // Integrating with Stetho is intended to be seamless and straightforward for most existing Android applications.
         Stetho.initializeWithDefaults(this);
 
-        new RecurringTask().prepareTimer();
+//        new RecurringTask().prepareTimer();
     }
 
     public Bus getBus() {

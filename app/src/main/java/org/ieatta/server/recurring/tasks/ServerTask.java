@@ -8,9 +8,9 @@ import com.parse.ParseQuery;
 import org.ieatta.analytics.ServerTaskFunnel;
 import org.ieatta.database.models.DBNewRecord;
 import org.ieatta.database.provide.PQueryModelType;
-import org.ieatta.database.realm.ModelWriter;
+import org.ieatta.database.realm.RealmModelWriter;
 import org.ieatta.parse.ParseObjectReader;
-import org.ieatta.parse.ParseQueryUtils;
+import org.ieatta.parse.ParseQueryUtil;
 import org.ieatta.server.recurring.SyncInfo;
 import org.ieatta.server.recurring.util.SerialTasksManager;
 import org.wikipedia.util.log.L;
@@ -68,7 +68,7 @@ public final class ServerTask {
 
         final DBNewRecord newRecord = new ParseObjectReader().reader(newRecordObject, new DBNewRecord());
 
-        ParseQuery<ParseObject> query = ParseQueryUtils.createQueryForRecorded(newRecord);
+        ParseQuery<ParseObject> query = ParseQueryUtil.createQueryForRecorded(newRecord);
         return query.getFirstInBackground().onSuccessTask(new Continuation<ParseObject, Task<RealmObject>>() {
             @Override
             public Task<RealmObject> then(Task<ParseObject> task) throws Exception {
@@ -85,7 +85,7 @@ public final class ServerTask {
         }).onSuccessTask(new Continuation<RealmObject, Task<Void>>() {
             @Override
             public Task<Void> then(Task<RealmObject> task) throws Exception {
-                return new ModelWriter().save(task.getResult(), PQueryModelType.getInstance(newRecord.getModelType()));
+                return new RealmModelWriter().save(task.getResult(), PQueryModelType.getInstance(newRecord.getModelType()));
             }
         }).onSuccess(new Continuation<Void, Void>() {
             @Override

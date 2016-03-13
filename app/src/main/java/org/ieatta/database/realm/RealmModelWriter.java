@@ -16,7 +16,7 @@ import org.ieatta.database.models.DBRestaurant;
 import org.ieatta.database.models.DBReview;
 import org.ieatta.database.models.DBTeam;
 
-public class ModelWriter<T extends RealmObject> {
+public class RealmModelWriter<T extends RealmObject> {
 
     public Task<Void> save(T model,PQueryModelType type) {
         // Obtain a Realm instance
