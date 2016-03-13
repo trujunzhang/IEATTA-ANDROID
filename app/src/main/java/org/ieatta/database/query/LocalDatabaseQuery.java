@@ -13,8 +13,15 @@ import java.util.List;
 
 import bolts.Continuation;
 import bolts.Task;
+import io.realm.RealmObject;
 
-public class LocalDatabaseQuery {
+public class LocalDatabaseQuery <T extends RealmObject> {
+
+    private Class<T > clazz;
+
+    public LocalDatabaseQuery(Class<T> clazz) {
+        this.clazz = clazz;
+    }
 
     public static Task<List<DBRestaurant>> queryNearRestaurants(Location location){
         String containedEncodeHash = GeoHashUtil.getEncodeHash(location);
@@ -22,4 +29,8 @@ public class LocalDatabaseQuery {
         return new RealmModelReader(DBRestaurant.class).fetchResults(builder);
     }
 
+    public  Task<T> fetchObject(String UUID){
+        DBBuilder builder = new DBBuilder().whereEqualTo("UUID",UUID);
+        return new RealmModelReader(clazz).fetchResults(builder);
+    }
 }
