@@ -7,12 +7,12 @@ import java.util.List;
 import java.util.Objects;
 
 public class DBBuilder {
-    private HashMap<String, Object> equalMap = new LinkedHashMap<>();
-    private HashMap<String, Object> greaterMap = new LinkedHashMap<>();
-    private HashMap<String, String> matchersMap = new LinkedHashMap<>();
-    public HashMap<String, Object> containedMap = new LinkedHashMap<>();
-    private List<String> orderedByDescendingList = new LinkedList<>();
-    private List<String> orderedByAscendingList = new LinkedList<>();
+    public HashMap<String, Object> equalMap = new LinkedHashMap<>();
+    public HashMap<String, Object> greaterMap = new LinkedHashMap<>();
+    public HashMap<String, String> matchersMap = new LinkedHashMap<>();
+    public HashMap<String, String> containedMap = new LinkedHashMap<>();
+    public List<String> orderedByDescendingList = new LinkedList<>();
+    public List<String> orderedByAscendingList = new LinkedList<>();
     public int limit = -1; // negative limits mean, do not send a limit
 
     public DBBuilder whereEqualTo(String key, Object value) {
@@ -25,7 +25,7 @@ public class DBBuilder {
         return this;
     }
 
-    public DBBuilder whereContainedIn(String key, Object value) {
+    public DBBuilder whereContainedIn(String key, String value) {
         this.containedMap.put(key, value);
         return this;
     }
