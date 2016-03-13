@@ -33,10 +33,10 @@ public class RestaurantDetailTask {
         }).onSuccessTask(new Continuation<List<DBPhoto>,Task<List<DBEvent>>>() {
             @Override
             public Task<List<DBEvent>> then(Task<List<DBPhoto>> task) throws Exception {
+                RestaurantDetailTask.this.galleryCollection = task.getResult();
                 return null;
             }
         });
-
 
 
 //        Event.queryEventsRelatedRestaurant(self.restaurant)
