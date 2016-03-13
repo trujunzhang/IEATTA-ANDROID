@@ -43,7 +43,7 @@ public class ParseObjectReader {
             default:
                 break;
         }
-        return null;
+        return Task.forError(new NullPointerException(""));
     }
 
     public Task<RealmObject> reader(ParseObject object, DBEvent model) {
