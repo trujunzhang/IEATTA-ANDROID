@@ -22,7 +22,7 @@ import io.realm.RealmObject;
 
 public class ParseObjectReader {
 
-    public static Task<RealmObject> read(ParseObject object, PQueryModelType type) {
+    public Task<RealmObject> read(ParseObject object, PQueryModelType type) {
         switch (type) {
             case Recipe:
                 return reader(object, new DBRecipe());
@@ -46,7 +46,7 @@ public class ParseObjectReader {
         return null;
     }
 
-    public static Task<RealmObject> reader(ParseObject object, DBEvent model) {
+    public Task<RealmObject> reader(ParseObject object, DBEvent model) {
         String uuid = object.getString(ParseObjectConstant.kPAPFieldObjectUUIDKey);
         Date objectCreatedDate = object.getDate(ParseObjectConstant.kPAPFieldObjectCreatedDateKey);
         String displayName = object.getString(ParseObjectConstant.kPAPFieldDisplayNameKey);
@@ -71,7 +71,7 @@ public class ParseObjectReader {
         return Task.forResult((RealmObject) model);
     }
 
-    public static Task<RealmObject> reader(ParseObject object, DBNewRecord model) {
+    public Task<RealmObject> reader(ParseObject object, DBNewRecord model) {
         String uuid = object.getString(ParseObjectConstant.kPAPFieldObjectUUIDKey);
         Date objectCreatedDate = object.getDate(ParseObjectConstant.kPAPFieldObjectCreatedDateKey);
         int type = object.getInt(ParseObjectConstant.kPAPFieldModelTypeKey);
@@ -86,7 +86,7 @@ public class ParseObjectReader {
         return Task.forResult((RealmObject) model);
     }
 
-    public static Task<RealmObject> reader(ParseObject object, DBPeopleInEvent model) {
+    public Task<RealmObject> reader(ParseObject object, DBPeopleInEvent model) {
         String uuid = object.getString(ParseObjectConstant.kPAPFieldObjectUUIDKey);
         Date objectCreatedDate = object.getDate(ParseObjectConstant.kPAPFieldObjectCreatedDateKey);
         String userRef = object.getString(ParseObjectConstant.kPAPFieldUserKey);
@@ -101,7 +101,7 @@ public class ParseObjectReader {
         return Task.forResult((RealmObject) model);
     }
 
-    public static Task<RealmObject> reader(ParseObject object, DBPhoto model) {
+    public Task<RealmObject> reader(ParseObject object, DBPhoto model) {
         String uuid = object.getString(ParseObjectConstant.kPAPFieldObjectUUIDKey);
         Date objectCreatedDate = object.getDate(ParseObjectConstant.kPAPFieldObjectCreatedDateKey);
 
@@ -126,7 +126,7 @@ public class ParseObjectReader {
         return Task.forResult((RealmObject) model);
     }
 
-    public static Task<RealmObject> reader(ParseObject object, DBRecipe model) {
+    public Task<RealmObject> reader(ParseObject object, DBRecipe model) {
         String uuid = object.getString(ParseObjectConstant.kPAPFieldObjectUUIDKey);
         Date objectCreatedDate = object.getDate(ParseObjectConstant.kPAPFieldObjectCreatedDateKey);
         String displayName = object.getString(ParseObjectConstant.kPAPFieldDisplayNameKey);
@@ -145,7 +145,7 @@ public class ParseObjectReader {
         return Task.forResult((RealmObject) model);
     }
 
-    public static Task<RealmObject> reader(ParseObject object, DBRestaurant model) {
+    public Task<RealmObject> reader(ParseObject object, DBRestaurant model) {
         String uuid = object.getString(ParseObjectConstant.kPAPFieldObjectUUIDKey);
         Date objectCreatedDate = object.getDate(ParseObjectConstant.kPAPFieldObjectCreatedDateKey);
         String displayName = object.getString(ParseObjectConstant.kPAPFieldDisplayNameKey);
@@ -163,7 +163,7 @@ public class ParseObjectReader {
         return Task.forResult((RealmObject) model);
     }
 
-    public static Task<RealmObject> reader(ParseObject object, DBReview model) {
+    public Task<RealmObject> reader(ParseObject object, DBReview model) {
         String uuid = object.getString(ParseObjectConstant.kPAPFieldObjectUUIDKey);
         Date objectCreatedDate = object.getDate(ParseObjectConstant.kPAPFieldObjectCreatedDateKey);
         int rate = object.getInt(ParseObjectConstant.kPAPFieldRateKey);
@@ -184,7 +184,7 @@ public class ParseObjectReader {
         return Task.forResult((RealmObject) model);
     }
 
-    public static Task<RealmObject> reader(ParseObject object, DBTeam model) {
+    public Task<RealmObject> reader(ParseObject object, DBTeam model) {
         String uuid = object.getString(ParseObjectConstant.kPAPFieldObjectUUIDKey);
         Date objectCreatedDate = object.getDate(ParseObjectConstant.kPAPFieldObjectCreatedDateKey);
         String displayName = object.getString(ParseObjectConstant.kPAPFieldDisplayNameKey);
