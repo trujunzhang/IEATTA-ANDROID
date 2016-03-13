@@ -14,9 +14,12 @@ import org.ieatta.database.models.DBRestaurant;
 import org.ieatta.database.models.DBReview;
 import org.ieatta.database.models.DBTeam;
 import org.ieatta.database.provide.PQueryModelType;
+import org.ieatta.server.cache.ThumbnailImageUtil;
 
+import java.io.InputStream;
 import java.util.Date;
 
+import bolts.Continuation;
 import bolts.Task;
 import io.realm.RealmObject;
 
@@ -101,7 +104,7 @@ public class ParseObjectReader {
         return Task.forResult((RealmObject) model);
     }
 
-    public Task<RealmObject> reader(ParseObject object, DBPhoto model) {
+    public Task<RealmObject> reader(ParseObject object, final DBPhoto model) {
         String uuid = object.getString(ParseObjectConstant.kPAPFieldObjectUUIDKey);
         Date objectCreatedDate = object.getDate(ParseObjectConstant.kPAPFieldObjectCreatedDateKey);
 
@@ -123,7 +126,18 @@ public class ParseObjectReader {
         model.setRestaurantRef(restaurantRef);
 
         new ModelsFunnel().logPhoto(model);
-        return Task.forResult((RealmObject) model);
+
+        return thumbnailFile.getDataStreamInBackground().onSuccessTask(new Continuation<InputStream, Task<Void>>() {
+            @Override
+            public Task<Void> then(Task<InputStream> task) throws Exception {
+                return ThumbnailImageUtil.sharedInstance.saveTakenPhoto(task.getResult(),model);
+            }
+        }).onSuccessTask(new Continuation<Void, Task<RealmObject>>() {
+            @Override
+            public Task<RealmObject> then(Task<Void> task) throws Exception {
+                return Task.forResult((RealmObject) model);
+            }
+        });
     }
 
     public Task<RealmObject> reader(ParseObject object, DBRecipe model) {
