@@ -7,6 +7,7 @@ import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiskCache;
 import org.ieatta.database.models.DBPhoto;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
@@ -108,10 +109,15 @@ public abstract class AbstractImageUtil {
     public Task<Void> saveTakenPhoto(InputStream inputStream, DBPhoto model) {
 
         // ** Important ** (Must store to Disk).
+        boolean save = false;
         try {
-            this.getImageCache().save(model.getUUID(), inputStream, null);
+            save = this.getImageCache().save(model.getUUID(), inputStream, null);
         } catch (IOException e) {
             return Task.forError(e);
+        }
+
+        if(save ==false){
+            return Task.forError(new FileNotFoundException("Cache thumbnail image failed"));
         }
 
         return Task.forResult(null);

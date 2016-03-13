@@ -14,6 +14,8 @@ import org.ieatta.database.provide.PhotoUsedType;
 import org.ieatta.database.provide.ReviewType;
 import org.wikipedia.analytics.Funnel;
 
+import java.io.File;
+
 public class PhotoFunnel extends Funnel {
 
     private static final String SCHEMA_NAME = "PhotoFunnel";
@@ -27,8 +29,11 @@ public class PhotoFunnel extends Funnel {
         super(IEATTAApp.getInstance(), SCHEMA_NAME, REV_ID, SAMPLE_LOG_1K);
     }
 
-    public void logDownloadThumbnail(DBPhoto photo) {
+    public void logDownloadThumbnail(String thumbnailUrl) {
+         log("Download thumbnail url",thumbnailUrl);
+    }
 
-        // log("info",log);
+    public void logCacheThumbnail(File thumbnailFile) {
+         log("Cached thumbnail path",thumbnailFile.getAbsolutePath());
     }
 }

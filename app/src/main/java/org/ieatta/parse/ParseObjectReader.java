@@ -5,6 +5,7 @@ import com.parse.ParseGeoPoint;
 import com.parse.ParseObject;
 
 import org.ieatta.analytics.ModelsFunnel;
+import org.ieatta.analytics.PhotoFunnel;
 import org.ieatta.database.models.DBEvent;
 import org.ieatta.database.models.DBNewRecord;
 import org.ieatta.database.models.DBPeopleInEvent;
@@ -105,13 +106,13 @@ public class ParseObjectReader {
     }
 
     public Task<RealmObject> reader(ParseObject object, final DBPhoto model) {
-        String uuid = object.getString(ParseObjectConstant.kPAPFieldObjectUUIDKey);
+        final String uuid = object.getString(ParseObjectConstant.kPAPFieldObjectUUIDKey);
         Date objectCreatedDate = object.getDate(ParseObjectConstant.kPAPFieldObjectCreatedDateKey);
 
         ParseFile originalFile = object.getParseFile(ParseObjectConstant.kPAPFieldOriginalImageKey);
         ParseFile thumbnailFile = object.getParseFile(ParseObjectConstant.kPAPFieldThumbnailImageKey);
         String originalUrl = originalFile.getUrl();
-        String thumbnailUrl = thumbnailFile.getUrl();
+        final String thumbnailUrl = thumbnailFile.getUrl();
 
         String usedRef = object.getString(ParseObjectConstant.kPAPFieldUsedRefKey);
         int usedType = object.getInt(ParseObjectConstant.kPAPFieldUsedTypeKey);
@@ -130,11 +131,13 @@ public class ParseObjectReader {
         return thumbnailFile.getDataStreamInBackground().onSuccessTask(new Continuation<InputStream, Task<Void>>() {
             @Override
             public Task<Void> then(Task<InputStream> task) throws Exception {
+                new PhotoFunnel().logDownloadThumbnail(thumbnailUrl);
                 return ThumbnailImageUtil.sharedInstance.saveTakenPhoto(task.getResult(),model);
             }
         }).onSuccessTask(new Continuation<Void, Task<RealmObject>>() {
             @Override
             public Task<RealmObject> then(Task<Void> task) throws Exception {
+                new PhotoFunnel().logCacheThumbnail(ThumbnailImageUtil.sharedInstance.getTakenPhotoFile(uuid));
                 return Task.forResult((RealmObject) model);
             }
         });
