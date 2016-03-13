@@ -17,7 +17,7 @@ public class RealmModelReader<T extends RealmObject> {
         this.clazz = clazz;
     }
 
-    public void fetchRestaurants(){
+    public void fetchResults(DBBuilder builder){
         Realm realm = Realm.getInstance(IEATTAApp.getInstance());
 
         RealmQuery<T> query = realm.where(this.clazz);
