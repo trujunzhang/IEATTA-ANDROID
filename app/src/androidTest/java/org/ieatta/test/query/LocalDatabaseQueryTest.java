@@ -26,21 +26,21 @@ public class LocalDatabaseQueryTest {
     @Test
     public void testQueryNearRestaurants() {
         Location location = getLocation();
-
-        // 'gedz62b7yu1v'
-        String encodeHash = GeoHash.encodeHash(location.getLatitude(), location.getLongitude());
-
-        // 'dr5ru0r0y4xj','dr5ru1nwsk1v','dr5ru22mf339','dr5ru0r24xuf','dr5ru22mf339','dr5ru0nzfv5q','wtv8r4whgz2y'
-
-        LocalDatabaseQuery.queryNearRestaurants(null);
-
-//        assertThat("type equal each other.", newRecord.getModelType() == PQueryModelType.Event.getType());
+        LocalDatabaseQuery.queryNearRestaurants(location);
     }
 
+    /**
+     * // 'dr5ru0r0y4xj','dr5ru1nwsk1v','dr5ru22mf339','dr5ru0r24xuf','dr5ru22mf339','dr5ru0nzfv5q','wtv8r4whgz2y'
+     * @return
+     */
     private Location getLocation() {
+        double[][] data = {
+                // {40.738821,-73.994026},// 'dr5ru0r0y4xj'
+                {40.738687, -73.993098},// 'dr5ru0rb5cej' (Region test)
+        };
         Location location = new Location("");
-        location.setLatitude(65.9667);
-        location.setLongitude(-18.5333);
+        location.setLatitude(data[0][0]);
+        location.setLongitude(data[0][1]);
 
         return location;
     }
