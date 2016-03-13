@@ -17,7 +17,7 @@ public class RealmModelReader<T extends RealmObject> {
         // Execute the query:
         RealmResults<DBRestaurant> result= query.findAll();
 
-
+        int size = result.size();
     }
 
 }

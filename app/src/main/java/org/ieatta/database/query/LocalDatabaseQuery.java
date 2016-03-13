@@ -10,7 +10,7 @@ import bolts.Task;
 public class LocalDatabaseQuery {
 
     public static Task<DBRestaurant> queryNearRestaurants(Location location){
-//        RealmModelReader.readList
+        new RealmModelReader().fetchRestaurants();
         return null;
     }
 
