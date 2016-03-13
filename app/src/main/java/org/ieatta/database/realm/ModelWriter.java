@@ -26,7 +26,7 @@ public class ModelWriter<T extends RealmObject> {
             realm.beginTransaction();
 
             // add or update objects here ...
-            this.write(realm, model,type);
+            realm.copyToRealmOrUpdate(model);
 
             realm.commitTransaction();
         } catch (Exception e) {
