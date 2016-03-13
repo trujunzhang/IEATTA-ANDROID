@@ -14,7 +14,6 @@ import java.util.TimeZone;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 
-
 @RunWith(AndroidJUnit4.class)
 public class SyncInfoTest {
 

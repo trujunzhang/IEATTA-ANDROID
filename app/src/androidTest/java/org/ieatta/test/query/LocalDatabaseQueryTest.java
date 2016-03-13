@@ -13,6 +13,7 @@ import org.ieatta.server.recurring.SyncInfo;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.wikipedia.settings.Prefs;
+import org.wikipedia.testlib.TestLatch;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -28,16 +29,22 @@ import static org.hamcrest.MatcherAssert.assertThat;
 @RunWith(AndroidJUnit4.class)
 public class LocalDatabaseQueryTest {
 
+    private TestLatch completionLatch;
     @Test
     public void testQueryNearRestaurants() {
+        completionLatch = new TestLatch();
         Location location = getLocation();
         LocalDatabaseQuery.queryNearRestaurants(location).onSuccess(new Continuation<List<DBRestaurant>, Void>() {
             @Override
             public Void then(Task<List<DBRestaurant>> task) throws Exception {
                 List<DBRestaurant> result = task.getResult();
+                assertThat("Fetched restaurants length", (1 == 2));
+                completionLatch.countDown();
                 return null;
             }
         });
+
+        completionLatch.await();
     }
 
     /**
