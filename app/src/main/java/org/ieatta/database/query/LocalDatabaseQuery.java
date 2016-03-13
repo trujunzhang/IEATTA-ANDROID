@@ -42,4 +42,14 @@ public class LocalDatabaseQuery<T extends RealmObject> {
         DBBuilder builder = new DBBuilder().whereEqualTo("UUID", UUID);
         return new RealmModelReader(clazz).fetchResults(builder);
     }
+
+    public Task<T> queryFromRealm(DBBuilder builder){
+        return new RealmModelReader(clazz).fetchResults(builder);
+    }
+
+//    public DBBuilder getBuilder(){
+//        return
+//    }
+
+
 }
