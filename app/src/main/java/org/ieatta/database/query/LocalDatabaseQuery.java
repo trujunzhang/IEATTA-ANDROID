@@ -14,11 +14,9 @@ import bolts.Task;
 public class LocalDatabaseQuery {
 
     public static Task<DBRestaurant> queryNearRestaurants(Location location){
-        String encodeHash = GeoHashUtil.getEncodeHash(location);
+        String containedEncodeHash = GeoHashUtil.getEncodeHash(location);
 
-
-        DBBuilder builder = new DBBuilder();
-        builder.whereContainedIn("geoHash",encodeHash);
+        DBBuilder builder = new DBBuilder().whereContainedIn("geoHash",containedEncodeHash);
 
         new RealmModelReader(DBRestaurant.class).fetchResults(builder);
 

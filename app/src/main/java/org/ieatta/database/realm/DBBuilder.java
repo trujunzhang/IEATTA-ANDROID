@@ -15,32 +15,39 @@ public class DBBuilder {
     private List<String> orderedByAscendingList = new LinkedList<>();
     public int limit = -1; // negative limits mean, do not send a limit
 
-    public void whereEqualTo(String key, Object value) {
+    public DBBuilder whereEqualTo(String key, Object value) {
         this.equalMap.put(key, value);
+        return this;
     }
 
-    public void whereGreaterThan(String key, Object value) {
+    public DBBuilder whereGreaterThan(String key, Object value) {
         this.greaterMap.put(key, value);
+        return this;
     }
 
-    public void whereContainedIn(String key, Object value) {
+    public DBBuilder whereContainedIn(String key, Object value) {
         this.containedMap.put(key, value);
+        return this;
     }
 
-    public void whereMatchers(String key, String keyword) {
+    public DBBuilder whereMatchers(String key, String keyword) {
         this.matchersMap.put(key, keyword);
+        return this;
     }
 
-    public void orderByDescending(String key) {
+    public DBBuilder orderByDescending(String key) {
         this.orderedByDescendingList.add(key);
+        return this;
     }
 
-    public void orderByAscending(String key) {
+    public DBBuilder orderByAscending(String key) {
         this.orderedByAscendingList.add(key);
+        return this;
     }
 
-    public void setLimit(int newLimit) {
+    public DBBuilder setLimit(int newLimit) {
         this.limit = newLimit;
+        return this;
     }
 
 }
