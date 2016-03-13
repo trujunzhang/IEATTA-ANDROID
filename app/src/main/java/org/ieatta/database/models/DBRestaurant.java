@@ -17,6 +17,9 @@ public class DBRestaurant extends RealmObject {
     // Variables invoked by viewController
     private String googleMapAddress = "";
 
+    // Variable for searching near restaurants.
+    private String geoHash = "";
+
     public String getUUID() {
         return UUID;
     }
@@ -63,5 +66,13 @@ public class DBRestaurant extends RealmObject {
 
     public void setGoogleMapAddress(String googleMapAddress) {
         this.googleMapAddress = googleMapAddress;
+    }
+
+    public String getGeoHash() {
+        return geoHash;
+    }
+
+    public void setGeoHash(String geoHash) {
+        this.geoHash = geoHash;
     }
 }

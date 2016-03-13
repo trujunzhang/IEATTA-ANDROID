@@ -1,5 +1,6 @@
 package org.ieatta.parse;
 
+import com.github.davidmoten.geo.GeoHash;
 import com.parse.ParseFile;
 import com.parse.ParseGeoPoint;
 import com.parse.ParseObject;
@@ -182,6 +183,9 @@ public class ParseObjectReader {
         model.setGoogleMapAddress(googleMapAddress);
         model.setLatitude(geoPoint.getLatitude());
         model.setLongitude(geoPoint.getLongitude());
+
+        String geoHash = GeoHash.encodeHash(geoPoint.getLatitude(),geoPoint.getLongitude());
+        model.setGeoHash(geoHash);
 
         new ModelsFunnel().logRestaurant(model);
         return Task.forResult((RealmObject) model);
