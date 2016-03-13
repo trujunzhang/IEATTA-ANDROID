@@ -6,6 +6,7 @@ import org.ieatta.database.models.DBRestaurant;
 import java.lang.reflect.ParameterizedType;
 import java.util.Date;
 
+import bolts.Task;
 import io.realm.Realm;
 import io.realm.RealmObject;
 import io.realm.RealmQuery;
@@ -19,28 +20,34 @@ public class RealmModelReader<T extends RealmObject> {
         this.clazz = clazz;
     }
 
-    public void fetchResults(DBBuilder builder){
-        Realm realm = Realm.getInstance(IEATTAApp.getInstance());
+    public Task<RealmResults<T>> fetchResults(DBBuilder builder){
         RealmResults<T> result = null;
+
+        Realm realm = Realm.getInstance(IEATTAApp.getInstance());
         try {
             RealmQuery<T> query = realm.where(this.clazz);
 
-            buildGreaterMap(builder, query);
-
-            buildContainedMap(builder, query);
-
-            buildEqualMap(builder, query);
+            buildAll(builder, query);
 
             // Execute the query:
             result= query.findAll();
 
             resultSorted(builder, result);
         } catch (Exception e) {
-            e.printStackTrace();
+            return Task.forError(e);
         } finally {
             realm.close();
         }
 
+        return Task.forResult(result);
+    }
+
+    private void buildAll(DBBuilder builder, RealmQuery<T> query) {
+        buildGreaterMap(builder, query);
+
+        buildContainedMap(builder, query);
+
+        buildEqualMap(builder, query);
     }
 
     private void resultSorted(DBBuilder builder, RealmResults<T> result) {
