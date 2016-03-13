@@ -18,27 +18,28 @@ import bolts.Continuation;
 import bolts.Task;
 import io.realm.RealmObject;
 
-public class LocalDatabaseQuery <T extends RealmObject> {
+public class LocalDatabaseQuery<T extends RealmObject> {
 
-    private Class<T > clazz;
+    private Class<T> clazz;
 
     public LocalDatabaseQuery(Class<T> clazz) {
         this.clazz = clazz;
     }
 
-    public static Task<List<DBRestaurant>> queryNearRestaurants(Location location){
+    public static Task<List<DBRestaurant>> queryNearRestaurants(Location location) {
         String containedEncodeHash = GeoHashUtil.getEncodeHash(location);
         DBBuilder builder = new DBBuilder().whereContainedIn("geoHash", containedEncodeHash);
         return new RealmModelReader(DBRestaurant.class).fetchResults(builder);
     }
 
     public static Task<List<DBPhoto>> queryPhotosForRestaurant(String UUID) {
-        DBBuilder builder = new DBBuilder().whereEqualTo("restaurantRef",UUID).orderByDescending(ParseObjectConstant.kPAPFieldObjectCreatedDateKey);
+        DBBuilder builder = new DBBuilder().whereEqualTo("restaurantRef", UUID)
+                .orderByDescending(ParseObjectConstant.kPAPFieldObjectCreatedDateKey);
         return new RealmModelReader(DBPhoto.class).fetchResults(builder);
     }
 
-    public  Task<T> fetchObject(String UUID){
-        DBBuilder builder = new DBBuilder().whereEqualTo("UUID",UUID);
+    public Task<T> fetchObject(String UUID) {
+        DBBuilder builder = new DBBuilder().whereEqualTo("UUID", UUID);
         return new RealmModelReader(clazz).fetchResults(builder);
     }
 }
