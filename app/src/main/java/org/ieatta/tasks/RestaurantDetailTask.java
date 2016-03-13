@@ -26,7 +26,12 @@ public class RestaurantDetailTask {
      * @return
      */
     public Task<Void> executeTask(String UUID){
-        new LocalDatabaseQuery(DBRestaurant.class).fetchObject(UUID);
+        new LocalDatabaseQuery(DBRestaurant.class).fetchObject(UUID).onSuccessTask(new Continuation<DBRestaurant, Task <List< DBEvent >>>() {
+            @Override
+            public Task<List<DBEvent>> then(Task<DBRestaurant> task) throws Exception {
+                return null;
+            }
+        });
 
 
 
