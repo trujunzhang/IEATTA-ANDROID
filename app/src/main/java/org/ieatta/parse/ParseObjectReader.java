@@ -43,7 +43,7 @@ public class ParseObjectReader {
             default:
                 break;
         }
-        return Task.forError(new NullPointerException(""));
+        return Task.forError(new NullPointerException("unknown model type."));
     }
 
     public Task<RealmObject> reader(ParseObject object, DBEvent model) {
