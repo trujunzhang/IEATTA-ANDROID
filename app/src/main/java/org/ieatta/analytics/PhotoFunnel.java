@@ -18,8 +18,8 @@ import java.io.File;
 
 public class PhotoFunnel extends Funnel {
 
-    private static final String SCHEMA_NAME = "PhotoFunnel";
-    private static final int REV_ID = 101123;
+    private static final String SCHEMA_NAME = "ServerTaskFunnel";
+    private static final int REV_ID = 101002;
 
     public PhotoFunnel(IEATTAApp app, String schemaName, int revision) {
         super(app, SCHEMA_NAME, REV_ID, SAMPLE_LOG_1K);

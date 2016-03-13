@@ -18,7 +18,7 @@ import org.ieatta.database.models.DBTeam;
 public class ModelsFunnel extends Funnel {
 
     private static final String SCHEMA_NAME = "MobileIEATTAModels";
-    private static final int REV_ID = 101010;
+    private static final int REV_ID = 101001;
 
     public ModelsFunnel(IEATTAApp app, String schemaName, int revision) {
         super(app, SCHEMA_NAME, REV_ID, SAMPLE_LOG_1K);

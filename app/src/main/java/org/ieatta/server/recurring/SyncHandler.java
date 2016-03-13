@@ -9,7 +9,7 @@ import bolts.Continuation;
 import bolts.Task;
 
 public class SyncHandler {
-    private static final int NUMBER_FETCH_NEW_RECORD = 10;
+    private static final int NUMBER_FETCH_NEW_RECORD = 20;
     private static final int NUMBER_PUSH_NEW_RECORD = 6;
 
     public static final SyncHandler sharedInstance = new SyncHandler();
