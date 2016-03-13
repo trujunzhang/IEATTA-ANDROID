@@ -9,18 +9,17 @@ import org.ieatta.database.realm.DBBuilder;
 import org.ieatta.database.realm.RealmModelReader;
 import org.ieatta.utils.GeoHashUtil;
 
+import java.util.List;
+
+import bolts.Continuation;
 import bolts.Task;
 
 public class LocalDatabaseQuery {
 
-    public static Task<DBRestaurant> queryNearRestaurants(Location location){
+    public static Task<List<DBRestaurant>> queryNearRestaurants(Location location){
         String containedEncodeHash = GeoHashUtil.getEncodeHash(location);
-
         DBBuilder builder = new DBBuilder().whereContainedIn("geoHash",containedEncodeHash);
-
-        new RealmModelReader(DBRestaurant.class).fetchResults(builder);
-
-        return null;
+        return new RealmModelReader(DBRestaurant.class).fetchResults(builder);
     }
 
 }
