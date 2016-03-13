@@ -162,6 +162,13 @@ public class ParseObjectReader {
         return Task.forResult((RealmObject) model);
     }
 
+    /**
+     * Read variables from the ParseObject to realm object.
+     * Generate 'Geohash' for the restaurant to implement nearby search.
+     * @param object    : ParseObject's instance
+     * @param model     : new Instance of Realm Object
+     * @return
+     */
     public Task<RealmObject> reader(ParseObject object, DBRestaurant model) {
         String uuid = object.getString(ParseObjectConstant.kPAPFieldObjectUUIDKey);
         Date objectCreatedDate = object.getDate(ParseObjectConstant.kPAPFieldObjectCreatedDateKey);
