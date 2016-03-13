@@ -70,19 +70,23 @@ public final class ServerTask {
         ParseObjectReader.reader(newRecordObject, newRecord);
 
         ParseQuery<ParseObject> query = ParseQueryUtils.createQueryForRecorded(newRecord);
-        return query.getFirstInBackground().onSuccessTask(new Continuation<ParseObject, Task<Void>>() {
+        return query.getFirstInBackground().onSuccessTask(new Continuation<ParseObject, Task<RealmObject>>() {
             @Override
-            public Task<Void> then(Task<ParseObject> task) throws Exception {
+            public Task<RealmObject> then(Task<ParseObject> task) throws Exception {
                 ParseObject object = task.getResult();
                 if (object == null) {
                     L.d("The getFirst request failed.");
                 } else {
                     L.d("Retrieved the object.");
-                    RealmObject realmObject = ParseObjectReader.read(object, PQueryModelType.getInstance(newRecord.getModelType()));
-                    return new ModelWriter().save(realmObject, PQueryModelType.getInstance(newRecord.getModelType()));
+                    return ParseObjectReader.read(object, PQueryModelType.getInstance(newRecord.getModelType()));
                 }
 
                 return Task.forError(new Resources.NotFoundException("The getFirst request failed."));
+            }
+        }).onSuccessTask(new Continuation<RealmObject, Task<Void>>() {
+            @Override
+            public Task<Void> then(Task<RealmObject> task) throws Exception {
+                return new ModelWriter().save(task.getResult(), PQueryModelType.getInstance(newRecord.getModelType()));
             }
         }).onSuccess(new Continuation<Void, Void>() {
             @Override
