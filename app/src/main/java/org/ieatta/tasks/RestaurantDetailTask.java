@@ -4,6 +4,7 @@ package org.ieatta.tasks;
 import android.location.Location;
 
 import org.ieatta.database.models.DBEvent;
+import org.ieatta.database.models.DBPhoto;
 import org.ieatta.database.models.DBRestaurant;
 import org.ieatta.database.models.DBReview;
 import org.ieatta.database.query.LocalDatabaseQuery;
@@ -19,9 +20,10 @@ public class RestaurantDetailTask {
     private DBRestaurant restaurant;
     private List<DBEvent> events;
     private List<DBReview> reviews;
+    private List<DBPhoto> galleryCollection;
 
     /**
-     *
+     * Execute Task for Restaurant detail.
      * @param UUID    restaurant's UUID
      * @return
      */
@@ -29,6 +31,7 @@ public class RestaurantDetailTask {
         new LocalDatabaseQuery(DBRestaurant.class).fetchObject(UUID).onSuccessTask(new Continuation<DBRestaurant, Task <List< DBEvent >>>() {
             @Override
             public Task<List<DBEvent>> then(Task<DBRestaurant> task) throws Exception {
+                RestaurantDetailTask.this.restaurant = task.getResult();
                 return null;
             }
         });

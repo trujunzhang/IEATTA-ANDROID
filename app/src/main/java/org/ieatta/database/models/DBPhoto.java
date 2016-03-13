@@ -9,18 +9,18 @@ import io.realm.annotations.PrimaryKey;
 
 public class DBPhoto extends RealmObject {
     @PrimaryKey
-    private String UUID = "";
+    private String UUID ;
     private Date objectCreatedDate = new Date();
 
     // Required
-    private String restaurantRef = "";
+    private String restaurantRef ;
 
-    private String usedRef = "";
     private int usedType = PhotoUsedType.PU_Unknow.getType();
+    private String usedRef;
 
     // MARK: Variable for pushing to server.
-    private String originalUrl = "";
-    private String thumbnailUrl = "";
+    private String originalUrl;
+    private String thumbnailUrl;
 
     public String getUUID() {
         return UUID;
