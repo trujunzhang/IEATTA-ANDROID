@@ -38,7 +38,7 @@ public class LocalDatabaseQueryTest {
             @Override
             public Void then(Task<List<DBRestaurant>> task) throws Exception {
                 List<DBRestaurant> result = task.getResult();
-                assertThat("Fetched restaurants length", (1 == 2));
+                assertThat("Fetched restaurants length", (result.size() == 2));
                 completionLatch.countDown();
                 return null;
             }
