@@ -179,6 +179,7 @@ dependencies {
 
     compile 'io.realm:realm-android:0.87.0'
     compile 'com.parse:parse-android:1.13.0'
+    compile 'com.github.davidmoten:geo:0.7.4'
 
     // Stetho is a sophisticated debug bridge for Android applications.
     // for okhttp:2.7.2
