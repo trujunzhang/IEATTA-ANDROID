@@ -36,8 +36,8 @@ public class ParseObjectReader {
                 return reader(object, new DBEvent());
             case Restaurant:
                 return reader(object, new DBRestaurant());
-            case NewRecord:
-                return reader(object, new DBNewRecord());
+            //case NewRecord:
+            //    return reader(object, new DBNewRecord());
             case PeopleInEvent:
                 return reader(object, new DBPeopleInEvent());
             default:
@@ -71,7 +71,7 @@ public class ParseObjectReader {
         return Task.forResult((RealmObject) model);
     }
 
-    public Task<RealmObject> reader(ParseObject object, DBNewRecord model) {
+    public DBNewRecord reader(ParseObject object, DBNewRecord model) {
         String uuid = object.getString(ParseObjectConstant.kPAPFieldObjectUUIDKey);
         Date objectCreatedDate = object.getDate(ParseObjectConstant.kPAPFieldObjectCreatedDateKey);
         int type = object.getInt(ParseObjectConstant.kPAPFieldModelTypeKey);
@@ -83,7 +83,7 @@ public class ParseObjectReader {
         model.setModelPoint(modelPoint);
 
         new ModelsFunnel().logNewRecord(model);
-        return Task.forResult((RealmObject) model);
+        return model;
     }
 
     public Task<RealmObject> reader(ParseObject object, DBPeopleInEvent model) {

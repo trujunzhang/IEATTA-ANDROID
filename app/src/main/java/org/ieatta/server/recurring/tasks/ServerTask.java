@@ -66,8 +66,7 @@ public final class ServerTask {
     private static Task<Void> getObjectsFromServerTask(ParseObject newRecordObject) {
         final Date lastCreateAt = newRecordObject.getCreatedAt();
 
-        final DBNewRecord newRecord = new DBNewRecord();
-        ParseObjectReader.reader(newRecordObject, newRecord);
+        final DBNewRecord newRecord = new ParseObjectReader().reader(newRecordObject, new DBNewRecord());
 
         ParseQuery<ParseObject> query = ParseQueryUtils.createQueryForRecorded(newRecord);
         return query.getFirstInBackground().onSuccessTask(new Continuation<ParseObject, Task<RealmObject>>() {
