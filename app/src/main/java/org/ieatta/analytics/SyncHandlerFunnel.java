@@ -12,7 +12,15 @@ public class SyncHandlerFunnel extends Funnel {
         super(app, SCHEMA_NAME, REV_ID, SAMPLE_LOG_1K);
     }
 
-    public SyncHandlerFunnel(){
+    public SyncHandlerFunnel() {
         super(IEATTAApp.getInstance(), SCHEMA_NAME, REV_ID, SAMPLE_LOG_1K);
+    }
+
+    public void logError(String localizedMessage) {
+        log("Error when async database: ", localizedMessage);
+    }
+
+    public void logSuccess() {
+        log("SyncHandler: ", "Async database task end successfully!");
     }
 }

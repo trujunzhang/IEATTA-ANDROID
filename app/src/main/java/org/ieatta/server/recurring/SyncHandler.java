@@ -2,6 +2,7 @@ package org.ieatta.server.recurring;
 
 import com.parse.ParseQuery;
 
+import org.ieatta.analytics.SyncHandlerFunnel;
 import org.ieatta.server.recurring.tasks.ServerTask;
 import org.wikipedia.util.log.L;
 
@@ -36,9 +37,9 @@ public class SyncHandler {
 
     private void endTasks(Exception error) {
         if (error != null) {
-            L.d("Error when async database: " + error.getLocalizedMessage());
+            new SyncHandlerFunnel().logError(error.getLocalizedMessage());
         } else {
-            L.d("Async database task end successfully!");
+            new SyncHandlerFunnel().logSuccess();
         }
 
         this.didEndRecurringTask = true;
