@@ -6,6 +6,7 @@ import android.support.test.runner.AndroidJUnit4;
 import com.github.davidmoten.geo.GeoHash;
 
 import org.ieatta.database.models.DBNewRecord;
+import org.ieatta.database.models.DBRestaurant;
 import org.ieatta.database.provide.PQueryModelType;
 import org.ieatta.database.query.LocalDatabaseQuery;
 import org.ieatta.server.recurring.SyncInfo;
@@ -15,8 +16,12 @@ import org.wikipedia.settings.Prefs;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
+
+import bolts.Continuation;
+import bolts.Task;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -26,7 +31,13 @@ public class LocalDatabaseQueryTest {
     @Test
     public void testQueryNearRestaurants() {
         Location location = getLocation();
-        LocalDatabaseQuery.queryNearRestaurants(location);
+        LocalDatabaseQuery.queryNearRestaurants(location).onSuccess(new Continuation<List<DBRestaurant>, Void>() {
+            @Override
+            public Void then(Task<List<DBRestaurant>> task) throws Exception {
+                List<DBRestaurant> result = task.getResult();
+                return null;
+            }
+        });
     }
 
     /**
