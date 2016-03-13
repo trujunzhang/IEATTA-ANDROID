@@ -1,16 +1,12 @@
 package org.ieatta.tasks;
 
 
-import android.location.Location;
-
 import org.ieatta.database.models.DBEvent;
 import org.ieatta.database.models.DBPhoto;
 import org.ieatta.database.models.DBRestaurant;
 import org.ieatta.database.models.DBReview;
 import org.ieatta.database.query.LocalDatabaseQuery;
 
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import bolts.Continuation;
@@ -27,11 +23,16 @@ public class RestaurantDetailTask {
      * @param UUID    restaurant's UUID
      * @return
      */
-    public Task<Void> executeTask(String UUID){
-        new LocalDatabaseQuery(DBRestaurant.class).fetchObject(UUID).onSuccessTask(new Continuation<DBRestaurant, Task <List< DBEvent >>>() {
+    public Task<Void> executeTask(final String UUID){
+        new LocalDatabaseQuery(DBRestaurant.class).fetchObject(UUID).onSuccessTask(new Continuation<DBRestaurant, Task<List<DBPhoto>>>() {
             @Override
-            public Task<List<DBEvent>> then(Task<DBRestaurant> task) throws Exception {
+            public Task<List<DBPhoto>> then(Task<DBRestaurant> task) throws Exception {
                 RestaurantDetailTask.this.restaurant = task.getResult();
+                return LocalDatabaseQuery.queryPhotosForRestaurant(UUID);
+            }
+        }).onSuccessTask(new Continuation<List<DBPhoto>,Task<List<DBEvent>>>() {
+            @Override
+            public Task<List<DBEvent>> then(Task<List<DBPhoto>> task) throws Exception {
                 return null;
             }
         });
