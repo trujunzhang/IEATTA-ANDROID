@@ -2,7 +2,6 @@ package org.ieatta.server.recurring.tasks;
 
 import android.content.res.Resources;
 
-import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
