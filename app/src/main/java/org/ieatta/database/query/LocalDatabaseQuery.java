@@ -15,7 +15,7 @@ public class LocalDatabaseQuery {
     public static Task<DBRestaurant> queryNearRestaurants(Location location){
         String encodeHash = GeoHash.encodeHash(location.getLatitude(), location.getLongitude());
 
-        new RealmModelReader<DBRestaurant>(DBRestaurant.class).fetchRestaurants();
+        new RealmModelReader(DBRestaurant.class).fetchRestaurants();
 
         return null;
     }
