@@ -34,7 +34,7 @@ public class LocalDatabaseQueryTest {
                 return null;
             }
         });
-        assertThat("", completionLatch.await(TASK_COMPLETION_TIMEOUT, TimeUnit.MILLISECONDS));
+        completionLatch.await(TASK_COMPLETION_TIMEOUT, TimeUnit.MILLISECONDS);
     }
 
     /**
