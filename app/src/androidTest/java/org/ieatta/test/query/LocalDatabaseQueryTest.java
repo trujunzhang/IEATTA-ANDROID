@@ -34,7 +34,7 @@ public class LocalDatabaseQueryTest {
     private static final int TASK_COMPLETION_TIMEOUT = 20000;
 
     @Test
-    public void testQueryNearRestaurants() {
+    public void testQueryNearRestaurants() throws InterruptedException {
         final CountDownLatch completionLatch = new CountDownLatch(1);
         Location location = getLocation();
         LocalDatabaseQuery.queryNearRestaurants(location).onSuccess(new Continuation<List<DBRestaurant>, Void>() {
@@ -46,12 +46,7 @@ public class LocalDatabaseQueryTest {
                 return null;
             }
         });
-
-        try {
-            completionLatch.await(TASK_COMPLETION_TIMEOUT, TimeUnit.MILLISECONDS);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        assertThat("",completionLatch.await(TASK_COMPLETION_TIMEOUT, TimeUnit.MILLISECONDS));
     }
 
     /**
