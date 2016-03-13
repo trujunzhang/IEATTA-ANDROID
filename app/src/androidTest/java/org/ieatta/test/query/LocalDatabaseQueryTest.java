@@ -27,7 +27,10 @@ public class LocalDatabaseQueryTest {
     public void testQueryNearRestaurants() {
         Location location = getLocation();
 
+        // 'gedz62b7yu1v'
         String encodeHash = GeoHash.encodeHash(location.getLatitude(), location.getLongitude());
+
+        // 'dr5ru0r0y4xj','dr5ru1nwsk1v','dr5ru22mf339','dr5ru0r24xuf','dr5ru22mf339','dr5ru0nzfv5q','wtv8r4whgz2y'
 
         LocalDatabaseQuery.queryNearRestaurants(null);
 
