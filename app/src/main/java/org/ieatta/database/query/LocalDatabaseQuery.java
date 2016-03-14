@@ -27,8 +27,6 @@ public class LocalDatabaseQuery {
     }
 
     public static DBBuilder get(String UUID) {
-        DBBuilder builder = new DBBuilder().whereEqualTo("UUID", UUID);
-        return builder;
+        return new DBBuilder().whereEqualTo(DBConstant.kPAPFieldObjectUUIDKey, UUID);
     }
-
 }
