@@ -37,5 +37,4 @@ public class RestaurantDetailTaskTest {
         });
         completionLatch.await(TASK_COMPLETION_TIMEOUT, TimeUnit.MILLISECONDS);
     }
-
 }
