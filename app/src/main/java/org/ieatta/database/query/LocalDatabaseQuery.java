@@ -39,7 +39,7 @@ public class LocalDatabaseQuery {
     }
 
     public static DBBuilder getObjectsByUUIDs(List<String> UUIDs) {
-        return new DBBuilder().whereContainedIn(DBConstant.kPAPFieldEventKey, UUIDs)
+        return new DBBuilder().whereContainedIn(DBConstant.kPAPFieldObjectUUIDKey, UUIDs)
                 .orderByDescending(DBConstant.kPAPFieldObjectCreatedDateKey);
     }
 }

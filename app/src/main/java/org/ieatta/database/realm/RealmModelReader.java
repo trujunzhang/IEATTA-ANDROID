@@ -3,6 +3,7 @@ package org.ieatta.database.realm;
 import org.ieatta.IEAApp;
 
 import java.util.Date;
+import java.util.List;
 
 import bolts.Task;
 import io.realm.Realm;
@@ -68,10 +69,25 @@ public class RealmModelReader<T extends RealmObject> {
 
     private void buildAll(DBBuilder builder, RealmQuery<T> query) {
         buildGreaterMap(builder, query);
-
         buildContainedMap(builder, query);
-
+        buildContainedListMap(builder, query);
         buildEqualMap(builder, query);
+    }
+
+    private void buildContainedListMap(DBBuilder builder, RealmQuery<T> query) {
+        for(String key :builder.containedListMap.keySet()) {
+            List<String> list = builder.containedListMap.get(key);
+            RealmQuery<T> beginGroup = query.beginGroup();
+            for(String value: list){
+                beginGroup.equalTo(key,value).or();
+            }
+            query.endGroup();
+//            query.beginGroup()
+//                    .equalTo("name", "Peter")
+//                    .or()
+//                    .contains("name", "Jo")
+//                    .endGroup();
+        }
     }
 
     private void resultSorted(DBBuilder builder, RealmResults<T> result) {
