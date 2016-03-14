@@ -1,6 +1,8 @@
 apply plugin: 'android-sdk-manager'
 apply plugin: 'com.android.application'
 apply from: '../config/quality.gradle'
+apply plugin: 'android-apt'
+apply plugin: 'realm-android'
 
 import com.android.ddmlib.DdmPreferences
 
@@ -166,6 +168,7 @@ dependencies {
     String okHttpVersion = '2.7.2'
     String supportVersion = '23.1.1'
     String espressoVersion = '2.2.1'
+    String permissionsVersion = '2.0.7'
 
     compile "com.android.support:appcompat-v7:$supportVersion" // includes support-v4
     compile "com.android.support:design:$supportVersion"
@@ -189,9 +192,12 @@ dependencies {
     }
     compile 'net.hockeyapp.android:HockeySDK:3.7.0'
 
-    compile 'io.realm:realm-android:0.87.0'
+//    compile 'io.realm:realm-android:0.87.0'
     compile 'com.parse:parse-android:1.13.0'
     compile 'com.github.davidmoten:geo:0.7.4'
+
+    compile "com.github.hotchemi:permissionsdispatcher:$permissionsVersion"
+    apt "com.github.hotchemi:permissionsdispatcher-processor:$permissionsVersion"
 
     // Stetho is a sophisticated debug bridge for Android applications.
     // for okhttp:2.7.2
