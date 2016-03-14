@@ -24,30 +24,39 @@ public class EventDetailTask {
     /**
      * Execute Task for Restaurant detail.
      *
-     * @param UUID restaurant's UUID
+     * @param restaurantUUID restaurant's UUID
+     * @param eventUUID      event's UUID
      * @return
      */
-    public Task<Void> executeTask(final String UUID) {
-        return new RealmModelReader<DBRestaurant>(DBRestaurant.class).getFirstObject(LocalDatabaseQuery.get(UUID), false).onSuccessTask(new Continuation<DBRestaurant, Task<RealmResults<DBEvent>>>() {
-            @Override
-            public Task<RealmResults<DBEvent>> then(Task<DBRestaurant> task) throws Exception {
-                EventDetailTask.this.restaurant = task.getResult();
-                return new RealmModelReader<DBEvent>(DBEvent.class).fetchResults(
-                        new DBBuilder().whereEqualTo(DBConstant.kPAPFieldLocalRestaurantKey, UUID), false);
-            }
-        }).onSuccessTask(new Continuation<RealmResults<DBEvent>, Task<RealmResults<DBReview>>>() {
-            @Override
-            public Task<RealmResults<DBReview>> then(Task<RealmResults<DBEvent>> task) throws Exception {
-                return new RealmModelReader<DBReview>(DBReview.class).fetchResults(
-                        new DBBuilder().whereEqualTo(DBConstant.kPAPFieldReviewRefKey, UUID)
-                                .whereEqualTo(DBConstant.kPAPFieldReviewTypeKey, ReviewType.Review_Restaurant.getType()), false);
-            }
-        }).onSuccess(new Continuation<RealmResults<DBReview>, Void>() {
-            @Override
-            public Void then(Task<RealmResults<DBReview>> task) throws Exception {
-                EventDetailTask.this.reviews = task.getResult();
-                return null;
-            }
-        });
+    public Task<Void> executeTask(final String restaurantUUID, final String eventUUID) {
+        return new RealmModelReader<DBRestaurant>(DBRestaurant.class).getFirstObject(LocalDatabaseQuery.get(restaurantUUID), false)
+                .onSuccessTask(new Continuation<DBRestaurant, Task<DBEvent>>() {
+                    @Override
+                    public Task<DBEvent> then(Task<DBRestaurant> task) throws Exception {
+                        EventDetailTask.this.restaurant = task.getResult();
+                        return new RealmModelReader<DBEvent>(DBEvent.class).getFirstObject(LocalDatabaseQuery.get(eventUUID),false);
+                    }
+                })
+                .onSuccessTask(new Continuation<DBEvent, Task<RealmResults<DBEvent>>>() {
+                    @Override
+                    public Task<RealmResults<DBEvent>> then(Task<DBEvent> task) throws Exception {
+                        EventDetailTask.this.event = task.getResult();
+                        return new RealmModelReader<DBEvent>(DBEvent.class).fetchResults(
+                                new DBBuilder().whereEqualTo(DBConstant.kPAPFieldLocalRestaurantKey, restaurantUUID), false);
+                    }
+                }).onSuccessTask(new Continuation<RealmResults<DBEvent>, Task<RealmResults<DBReview>>>() {
+                    @Override
+                    public Task<RealmResults<DBReview>> then(Task<RealmResults<DBEvent>> task) throws Exception {
+                        return new RealmModelReader<DBReview>(DBReview.class).fetchResults(
+                                new DBBuilder().whereEqualTo(DBConstant.kPAPFieldReviewRefKey, restaurantUUID)
+                                        .whereEqualTo(DBConstant.kPAPFieldReviewTypeKey, ReviewType.Review_Restaurant.getType()), false);
+                    }
+                }).onSuccess(new Continuation<RealmResults<DBReview>, Void>() {
+                    @Override
+                    public Void then(Task<RealmResults<DBReview>> task) throws Exception {
+                        EventDetailTask.this.reviews = task.getResult();
+                        return null;
+                    }
+                });
     }
 }
