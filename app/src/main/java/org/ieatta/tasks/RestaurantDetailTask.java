@@ -38,14 +38,16 @@ public class RestaurantDetailTask {
             public Task<RealmResults<DBEvent>> then(Task<RealmResults<DBPhoto>> task) throws Exception {
                 RestaurantDetailTask.this.galleryCollection = task.getResult();
                 return new RealmModelReader<DBEvent>(DBEvent.class).fetchResults(
-                        new DBBuilder().whereEqualTo(DBConstant.kPAPFieldLocalRestaurantKey, restaurantUUID), false);
+                        new DBBuilder()
+                                .whereEqualTo(DBConstant.kPAPFieldLocalRestaurantKey, restaurantUUID), false);
             }
         }).onSuccessTask(new Continuation<RealmResults<DBEvent>, Task<RealmResults<DBReview>>>() {
             @Override
             public Task<RealmResults<DBReview>> then(Task<RealmResults<DBEvent>> task) throws Exception {
                 RestaurantDetailTask.this.events = task.getResult();
                 return new RealmModelReader<DBReview>(DBReview.class).fetchResults(
-                        new DBBuilder().whereEqualTo(DBConstant.kPAPFieldReviewRefKey, restaurantUUID)
+                        new DBBuilder()
+                                .whereEqualTo(DBConstant.kPAPFieldReviewRefKey, restaurantUUID)
                                 .whereEqualTo(DBConstant.kPAPFieldReviewTypeKey, ReviewType.Review_Restaurant.getType()), false);
             }
         }).onSuccess(new Continuation<RealmResults<DBReview>, Void>() {
