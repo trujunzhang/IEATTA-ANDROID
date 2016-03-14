@@ -2,19 +2,19 @@ package org.wikipedia.analytics;
 
 import android.support.annotation.NonNull;
 
+import org.ieatta.IEAApp;
 import org.wikipedia.Site;
-import org.ieatta.IEATTAApp;
 import org.json.JSONObject;
 import java.util.concurrent.TimeUnit;
 
 /*package*/ abstract class TimedFunnel extends Funnel {
     private long startTime;
 
-    /*package*/ TimedFunnel(IEATTAApp app, String schemaName, int revision, int sampleRate) {
+    /*package*/ TimedFunnel(IEAApp app, String schemaName, int revision, int sampleRate) {
         this(app, schemaName, revision, sampleRate, null);
     }
 
-    /*package*/ TimedFunnel(IEATTAApp app, String schemaName, int revision, int sampleRate, Site site) {
+    /*package*/ TimedFunnel(IEAApp app, String schemaName, int revision, int sampleRate, Site site) {
         super(app, schemaName, revision, sampleRate, site);
         startTime = System.currentTimeMillis();
     }

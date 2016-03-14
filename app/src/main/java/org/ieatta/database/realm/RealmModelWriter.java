@@ -1,6 +1,6 @@
 package org.ieatta.database.realm;
 
-import org.ieatta.IEATTAApp;
+import org.ieatta.IEAApp;
 import org.ieatta.database.provide.PQueryModelType;
 
 import bolts.Task;
@@ -20,7 +20,7 @@ public class RealmModelWriter<T extends RealmObject> {
 
     public Task<Void> save(T model,PQueryModelType type) {
         // Obtain a Realm instance
-        Realm realm = Realm.getInstance(IEATTAApp.getInstance());
+        Realm realm = Realm.getInstance(IEAApp.getInstance());
 
         try {
             realm.beginTransaction();

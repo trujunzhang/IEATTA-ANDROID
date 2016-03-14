@@ -2,8 +2,8 @@ package org.wikipedia.analytics;
 
 import android.support.annotation.NonNull;
 
+import org.ieatta.IEAApp;
 import org.json.JSONObject;
-import org.ieatta.IEATTAApp;
 
 public class InstallReferrerFunnel extends Funnel {
     private static final String SCHEMA_NAME = "MobileWikiAppInstallReferrer";
@@ -15,7 +15,7 @@ public class InstallReferrerFunnel extends Funnel {
     public static final String PARAM_CAMPAIGN_ID = "campaign_id";
     public static final String PARAM_CAMPAIGN_INSTALL_ID = "install_id";
 
-    public InstallReferrerFunnel(IEATTAApp app) {
+    public InstallReferrerFunnel(IEAApp app) {
         super(app, SCHEMA_NAME, REV_ID);
     }
 

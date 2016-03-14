@@ -11,7 +11,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.ieatta.IEATTAApp;
+import org.ieatta.IEAApp;
 import org.ieatta.R;
 //import org.wikipedia.page.PageActivity;
 
@@ -72,7 +72,7 @@ public final class FeedbackUtil {
      * Ask user to try connecting again upon (hopefully) recoverable network failure.
      */
     public static void toastNetworkFail() {
-        Toast.makeText(IEATTAApp.getInstance(), R.string.error_network_error_try_again, Toast.LENGTH_LONG).show();
+        Toast.makeText(IEAApp.getInstance(), R.string.error_network_error_try_again, Toast.LENGTH_LONG).show();
     }
 
     /**

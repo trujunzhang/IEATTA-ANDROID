@@ -2,15 +2,15 @@ package org.wikipedia.analytics;
 
 import android.support.annotation.NonNull;
 
+import org.ieatta.IEAApp;
 import org.json.JSONObject;
-import org.ieatta.IEATTAApp;
 import org.wikipedia.Site;
 
 public class AppearanceChangeFunnel extends Funnel {
     private static final String SCHEMA_NAME = "MobileWikiAppAppearanceSettings";
     private static final int REV_ID = 10375462;
 
-    public AppearanceChangeFunnel(IEATTAApp app, Site site) {
+    public AppearanceChangeFunnel(IEAApp app, Site site) {
         super(app, SCHEMA_NAME, REV_ID, site);
     }
 

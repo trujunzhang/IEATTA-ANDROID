@@ -8,7 +8,7 @@ import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.Window;
 
-import org.ieatta.IEATTAApp;
+import org.ieatta.IEAApp;
 import org.ieatta.R;
 
 public final class DimenUtil {
@@ -59,7 +59,7 @@ public final class DimenUtil {
 
     // TODO: use getResources().getDimensionPixelSize()?  Define leadImageWidth with px, not dp?
     public static int calculateLeadImageWidth() {
-        Resources res = IEATTAApp.getInstance().getResources();
+        Resources res = IEAApp.getInstance().getResources();
         return (int) (res.getDimension(R.dimen.leadImageWidth) / res.getDisplayMetrics().density);
     }
 
@@ -99,7 +99,7 @@ public final class DimenUtil {
     }
 
     private static Resources getResources() {
-        return IEATTAApp.getInstance().getResources();
+        return IEAApp.getInstance().getResources();
     }
 
 

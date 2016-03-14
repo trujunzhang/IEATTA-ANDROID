@@ -1,14 +1,10 @@
 package org.wikipedia;
 
-import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.text.TextUtils;
 
 
-import org.ieatta.IEATTAApp;
-
-import java.util.Locale;
+import org.ieatta.IEAApp;
 
 /**
  * Represents a particular wiki.
@@ -106,7 +102,7 @@ public class Site implements Parcelable {
     }
 
     public String getFullUrl(String script) {
-        return IEATTAApp.getInstance().getNetworkProtocol() + "://" + getDomain() + getScriptPath(script);
+        return IEAApp.getInstance().getNetworkProtocol() + "://" + getDomain() + getScriptPath(script);
     }
 
     public String getLanguageCode() {

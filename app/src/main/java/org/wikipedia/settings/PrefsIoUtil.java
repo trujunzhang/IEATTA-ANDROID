@@ -8,7 +8,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 
-import org.ieatta.IEATTAApp;
+import org.ieatta.IEAApp;
 
 /** Shared preferences input / output utility providing set* functionality that writes to SP on the
  * client's behalf, IO without client supplied {@link Context}, and wrappers for using string
@@ -119,7 +119,7 @@ import org.ieatta.IEATTAApp;
 
     @NonNull
     private static Context getContext() {
-        return IEATTAApp.getInstance();
+        return IEAApp.getInstance();
     }
 
     private PrefsIoUtil() { }

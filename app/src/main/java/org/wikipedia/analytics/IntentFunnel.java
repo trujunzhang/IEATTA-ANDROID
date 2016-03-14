@@ -2,14 +2,14 @@ package org.wikipedia.analytics;
 
 import android.support.annotation.NonNull;
 
+import org.ieatta.IEAApp;
 import org.json.JSONObject;
-import org.ieatta.IEATTAApp;
 
 public class IntentFunnel extends Funnel {
     private static final String SCHEMA_NAME = "MobileWikiAppIntents";
     private static final int REV_ID = 15237384;
 
-    public IntentFunnel(IEATTAApp app) {
+    public IntentFunnel(IEAApp app) {
         super(app, SCHEMA_NAME, REV_ID);
     }
 

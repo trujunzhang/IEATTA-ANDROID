@@ -2,9 +2,9 @@ package org.wikipedia.analytics;
 
 import android.support.annotation.NonNull;
 
+import org.ieatta.IEAApp;
 import org.json.JSONObject;
 import org.wikipedia.Site;
-import org.ieatta.IEATTAApp;
 
 public class ToCInteractionFunnel extends TimedFunnel {
     private static final String SCHEMA_NAME = "MobileWikiAppToCInteraction";
@@ -13,7 +13,7 @@ public class ToCInteractionFunnel extends TimedFunnel {
     private final int pageId;
     private final int numSections;
 
-    public ToCInteractionFunnel(IEATTAApp app, Site site, int pageId, int numSections) {
+    public ToCInteractionFunnel(IEAApp app, Site site, int pageId, int numSections) {
         super(app, SCHEMA_NAME, REV_ID, Funnel.SAMPLE_LOG_100, site);
         this.pageId = pageId;
         this.numSections = numSections;

@@ -1,6 +1,6 @@
 package org.ieatta.analytics;
 
-import org.ieatta.IEATTAApp;
+import org.ieatta.IEAApp;
 import org.ieatta.database.provide.PQueryModelType;
 import org.ieatta.database.provide.PhotoUsedType;
 import org.ieatta.database.provide.ReviewType;
@@ -20,12 +20,12 @@ public class ModelsFunnel extends Funnel {
     private static final String SCHEMA_NAME = "MobileIEATTAModels";
     private static final int REV_ID = 101001;
 
-    public ModelsFunnel(IEATTAApp app, String schemaName, int revision) {
+    public ModelsFunnel(IEAApp app, String schemaName, int revision) {
         super(app, SCHEMA_NAME, REV_ID, SAMPLE_LOG_1K);
     }
 
     public ModelsFunnel(){
-        super(IEATTAApp.getInstance(),SCHEMA_NAME,REV_ID,SAMPLE_LOG_1K);
+        super(IEAApp.getInstance(),SCHEMA_NAME,REV_ID,SAMPLE_LOG_1K);
     }
 
     public void logEvent(DBEvent event) {

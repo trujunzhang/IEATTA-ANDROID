@@ -1,12 +1,9 @@
 package org.ieatta.database.realm;
 
-import org.ieatta.IEATTAApp;
-import org.ieatta.database.models.DBRestaurant;
+import org.ieatta.IEAApp;
 
-import java.lang.reflect.ParameterizedType;
 import java.util.Date;
 
-import bolts.Continuation;
 import bolts.Task;
 import io.realm.Realm;
 import io.realm.RealmObject;
@@ -24,7 +21,7 @@ public class RealmModelReader<T extends RealmObject> {
     public Task<RealmResults<T>> fetchResults(DBBuilder builder, boolean needClose){
         RealmResults<T> result = null;
 
-        Realm realm = Realm.getInstance(IEATTAApp.getInstance());
+        Realm realm = Realm.getInstance(IEAApp.getInstance());
         try {
             RealmQuery<T> query = realm.where(this.clazz);
 
@@ -48,7 +45,7 @@ public class RealmModelReader<T extends RealmObject> {
     public Task<T> getFirstObject(DBBuilder builder, boolean needClose){
         T result = null;
 
-        Realm realm = Realm.getInstance(IEATTAApp.getInstance());
+        Realm realm = Realm.getInstance(IEAApp.getInstance());
         try {
             RealmQuery<T> query = realm.where(this.clazz);
 

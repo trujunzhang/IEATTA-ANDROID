@@ -2,8 +2,8 @@ package org.wikipedia.analytics;
 
 import android.support.annotation.NonNull;
 
+import org.ieatta.IEAApp;
 import org.json.JSONObject;
-import org.ieatta.IEATTAApp;
 import org.wikipedia.settings.Prefs;
 
 public class LinkPreviewFunnel extends TimedFunnel {
@@ -11,7 +11,7 @@ public class LinkPreviewFunnel extends TimedFunnel {
     private static final int REV_ID = 14095177;
     private static final int PROD_LINK_PREVIEW_VERSION = 3;
 
-    public LinkPreviewFunnel(IEATTAApp app) {
+    public LinkPreviewFunnel(IEAApp app) {
         super(app, SCHEMA_NAME, REV_ID, app.isProdRelease() ? Funnel.SAMPLE_LOG_100 : Funnel.SAMPLE_LOG_ALL);
     }
 

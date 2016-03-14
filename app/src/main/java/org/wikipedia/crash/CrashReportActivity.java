@@ -3,7 +3,7 @@ package org.wikipedia.crash;
 import android.content.Intent;
 import android.os.Bundle;
 
-import org.ieatta.IEATTAApp;
+import org.ieatta.IEAApp;
 import org.wikipedia.activity.ActivityUtil;
 import org.wikipedia.activity.CompatSingleFragmentActivity;
 
@@ -17,7 +17,7 @@ public class CrashReportActivity extends CompatSingleFragmentActivity<CrashRepor
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        IEATTAApp.getInstance().checkCrashes(this);
+        IEAApp.getInstance().checkCrashes(this);
     }
 
     @Override

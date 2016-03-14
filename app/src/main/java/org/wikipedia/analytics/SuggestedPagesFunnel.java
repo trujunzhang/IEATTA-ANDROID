@@ -5,7 +5,7 @@ import android.text.TextUtils;
 
 import org.json.JSONObject;
 import org.wikipedia.page.PageTitle;
-import org.ieatta.IEATTAApp;
+import org.ieatta.IEAApp;
 
 import java.util.List;
 
@@ -19,7 +19,7 @@ public class SuggestedPagesFunnel extends Funnel {
     private int readMoreSource;
     private long latency;
 
-    public SuggestedPagesFunnel(IEATTAApp app) {
+    public SuggestedPagesFunnel(IEAApp app) {
         super(app, SCHEMA_NAME, REV_ID, Funnel.SAMPLE_LOG_100);
         this.readMoreSource = app.isFeatureReadMoreSearchOpeningTextEnabled() ? READ_MORE_SOURCE_OPENING_TEXT : READ_MORE_SOURCE_MORELIKE;
     }

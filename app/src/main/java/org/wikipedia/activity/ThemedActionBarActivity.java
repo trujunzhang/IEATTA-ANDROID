@@ -9,7 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.ViewConfiguration;
 
-import org.ieatta.IEATTAApp;
+import org.ieatta.IEAApp;
 import org.ieatta.R;
 import org.wikipedia.util.ApiUtil;
 
@@ -47,11 +47,11 @@ public abstract class ThemedActionBarActivity extends AppCompatActivity {
     }
 
     protected void setTheme() {
-        setTheme(IEATTAApp.getInstance().getCurrentTheme().getResourceId());
+        setTheme(IEAApp.getInstance().getCurrentTheme().getResourceId());
     }
 
     protected void setActionBarTheme() {
-        setTheme(IEATTAApp.getInstance().isCurrentThemeLight()
+        setTheme(IEAApp.getInstance().isCurrentThemeLight()
                 ? R.style.Theme_Light_ActionBar
                 : R.style.Theme_Dark_ActionBar);
     }

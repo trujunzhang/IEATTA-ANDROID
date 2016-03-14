@@ -3,20 +3,17 @@ package org.wikipedia.util;
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.Location;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
-import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.util.Log;
 
-import org.ieatta.IEATTAApp;
+import org.ieatta.IEAApp;
 import org.ieatta.R;
 import org.wikipedia.page.PageTitle;
-import org.wikipedia.settings.Prefs;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
@@ -64,7 +61,7 @@ public final class UriUtil {
      * @return A fully qualified, protocol specified URL
      */
     public static String resolveProtocolRelativeUrl(String url) {
-        return (url.startsWith("//") ? IEATTAApp.getInstance().getNetworkProtocol() + ":" + url : url);
+        return (url.startsWith("//") ? IEAApp.getInstance().getNetworkProtocol() + ":" + url : url);
     }
 
     public static boolean isValidPageLink(Uri uri) {
@@ -73,7 +70,7 @@ public final class UriUtil {
     }
 
     public static void handleExternalLink(final Context context, final Uri uri) {
-//        if (IEATTAApp.getInstance().getWikipediaZeroHandler().isZeroEnabled()) {
+//        if (IEAApp.getInstance().getWikipediaZeroHandler().isZeroEnabled()) {
 //            if (Prefs.isShowZeroInterstitialEnabled()) {
 //                AlertDialog.Builder alert = new AlertDialog.Builder(context);
 //                alert.setTitle(context.getString(R.string.zero_interstitial_title));

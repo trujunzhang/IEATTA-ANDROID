@@ -2,14 +2,14 @@ package org.wikipedia.analytics;
 
 import android.support.annotation.NonNull;
 
+import org.ieatta.IEAApp;
 import org.json.JSONObject;
-import org.ieatta.IEATTAApp;
 
 public class PageScrollFunnel extends TimedFunnel {
     private static final String SCHEMA_NAME = "MobileWikiAppPageScroll";
     private static final int REV_ID = 14591606;
 
-    private final IEATTAApp app;
+    private final IEAApp app;
     private final int pageId;
     private int viewportHeight;
     private int pageHeight;
@@ -17,7 +17,7 @@ public class PageScrollFunnel extends TimedFunnel {
     private int scrollFluxUp;
     private int maxScrollY;
 
-    public PageScrollFunnel(IEATTAApp app, int pageId) {
+    public PageScrollFunnel(IEAApp app, int pageId) {
         super(app, SCHEMA_NAME, REV_ID, app.isProdRelease() ? Funnel.SAMPLE_LOG_100 : Funnel.SAMPLE_LOG_ALL);
         this.app = app;
         this.pageId = pageId;

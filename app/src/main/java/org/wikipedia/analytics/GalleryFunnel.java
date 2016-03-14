@@ -5,7 +5,7 @@ import android.support.annotation.NonNull;
 import org.json.JSONObject;
 import org.wikipedia.page.PageTitle;
 import org.wikipedia.Site;
-import org.ieatta.IEATTAApp;
+import org.ieatta.IEAApp;
 
 public class GalleryFunnel extends TimedFunnel {
     public static final int SOURCE_LEAD_IMAGE = 0;
@@ -17,7 +17,7 @@ public class GalleryFunnel extends TimedFunnel {
 
     private final int source;
 
-    public GalleryFunnel(IEATTAApp app, Site site, int source) {
+    public GalleryFunnel(IEAApp app, Site site, int source) {
         super(app, SCHEMA_NAME, REV_ID, Funnel.SAMPLE_LOG_100, site);
         this.source = source;
     }

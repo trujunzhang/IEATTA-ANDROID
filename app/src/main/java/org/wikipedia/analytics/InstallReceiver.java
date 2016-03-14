@@ -1,6 +1,6 @@
 package org.wikipedia.analytics;
 
-import org.ieatta.IEATTAApp;
+import org.ieatta.IEAApp;
 //import org.wikipedia.page.PageActivity;
 import org.wikipedia.util.ReleaseUtil;
 import org.wikipedia.util.ShareUtil;
@@ -73,7 +73,7 @@ public final class InstallReceiver extends BroadcastReceiver {
         // log the event only if at least one of the parameters is nonempty
         if (!TextUtils.isEmpty(refUrl) || !TextUtils.isEmpty(refCampaignId)
                 || !TextUtils.isEmpty(refCampaignInstallId)) {
-            InstallReferrerFunnel funnel = new InstallReferrerFunnel(IEATTAApp.getInstance());
+            InstallReferrerFunnel funnel = new InstallReferrerFunnel(IEAApp.getInstance());
             funnel.logInstall(refUrl, refCampaignId, refCampaignInstallId);
         }
         if (!TextUtils.isEmpty(refUrl) && ShareUtil.canOpenUrlInApp(ctx, refUrl)) {

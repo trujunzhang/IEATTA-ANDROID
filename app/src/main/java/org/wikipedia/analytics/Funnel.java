@@ -4,10 +4,10 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
+import org.ieatta.IEAApp;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.wikipedia.Site;
-import org.ieatta.IEATTAApp;
 
 import java.util.UUID;
 
@@ -29,7 +29,7 @@ import java.util.UUID;
     private final int revision;
     private final int sampleRate;
     private final String sampleRateRemoteParamName;
-    private final IEATTAApp app;
+    private final IEAApp app;
     @Nullable
     private final Site site;
 
@@ -41,22 +41,22 @@ import java.util.UUID;
     public static final String ANALYTICS_TAG = "Analytics";
 
     /*package*/
-    public Funnel(IEATTAApp app, String schemaName, int revision) {
+    public Funnel(IEAApp app, String schemaName, int revision) {
         this(app, schemaName, revision, SAMPLE_LOG_ALL);
     }
 
     /*package*/
-    public Funnel(IEATTAApp app, String schemaName, int revision, @Nullable Site site) {
+    public Funnel(IEAApp app, String schemaName, int revision, @Nullable Site site) {
         this(app, schemaName, revision, SAMPLE_LOG_ALL, site);
     }
 
     /*package*/
-    public Funnel(IEATTAApp app, String schemaName, int revision, int sampleRate) {
+    public Funnel(IEAApp app, String schemaName, int revision, int sampleRate) {
         this(app, schemaName, revision, sampleRate, null);
     }
 
     /*package*/
-    public Funnel(IEATTAApp app, String schemaName, int revision, int sampleRate, @Nullable Site site) {
+    public Funnel(IEAApp app, String schemaName, int revision, int sampleRate, @Nullable Site site) {
         this.app = app;
         this.schemaName = schemaName;
         this.revision = revision;
@@ -65,7 +65,7 @@ import java.util.UUID;
         sampleRateRemoteParamName = schemaName + "_rate";
     }
 
-    protected IEATTAApp getApp() {
+    protected IEAApp getApp() {
         return app;
     }
 

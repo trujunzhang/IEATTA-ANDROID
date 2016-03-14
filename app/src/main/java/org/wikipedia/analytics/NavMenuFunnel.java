@@ -1,6 +1,6 @@
 package org.wikipedia.analytics;
 
-import org.ieatta.IEATTAApp;
+import org.ieatta.IEAApp;
 
 public class NavMenuFunnel extends Funnel {
     private static final String SCHEMA_NAME = "MobileWikiAppNavMenu";
@@ -15,7 +15,7 @@ public class NavMenuFunnel extends Funnel {
     private static final String NAV_MENU_RANDOM = "Random";
 
     public NavMenuFunnel() {
-        super(IEATTAApp.getInstance(), SCHEMA_NAME, REV_ID, Funnel.SAMPLE_LOG_100);
+        super(IEAApp.getInstance(), SCHEMA_NAME, REV_ID, Funnel.SAMPLE_LOG_100);
     }
 
     public void logToday() {

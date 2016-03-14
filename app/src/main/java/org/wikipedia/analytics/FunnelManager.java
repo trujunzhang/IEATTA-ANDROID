@@ -1,8 +1,7 @@
 package org.wikipedia.analytics;
 
-import org.wikipedia.page.PageTitle;
 import org.wikipedia.Site;
-import org.ieatta.IEATTAApp;
+import org.ieatta.IEAApp;
 
 import java.util.Hashtable;
 
@@ -10,10 +9,10 @@ import java.util.Hashtable;
  * Creates and stores analytics tracking funnels.
  */
 public class FunnelManager {
-    private final IEATTAApp app;
+    private final IEAApp app;
     private final Hashtable<Site, SavedPagesFunnel> savedPageFunnels = new Hashtable<>();
 
-    public FunnelManager(IEATTAApp app) {
+    public FunnelManager(IEAApp app) {
         this.app = app;
     }
 

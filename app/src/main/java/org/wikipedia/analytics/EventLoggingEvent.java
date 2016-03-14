@@ -1,12 +1,9 @@
 package org.wikipedia.analytics;
 
-import android.net.Uri;
-import android.util.Log;
 //import com.github.kevinsawicki.http.HttpRequest;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.ieatta.IEATTAApp;
-import org.wikipedia.concurrency.SaneAsyncTask;
+import org.ieatta.IEAApp;
 
 /**
  * Base class for all various types of events that are logged to EventLogging.
@@ -18,7 +15,7 @@ import org.wikipedia.concurrency.SaneAsyncTask;
 public class EventLoggingEvent {
     private static final String EVENTLOG_URL_PROD = "https://meta.wikimedia.org/beacon/event";
     private static final String EVENTLOG_URL_DEV = "http://deployment.wikimedia.beta.wmflabs.org/beacon/event";
-    private static final String EVENTLOG_URL = IEATTAApp.getInstance().isPreBetaRelease()
+    private static final String EVENTLOG_URL = IEAApp.getInstance().isPreBetaRelease()
             ? EVENTLOG_URL_DEV : EVENTLOG_URL_PROD;
 
     private final JSONObject data;

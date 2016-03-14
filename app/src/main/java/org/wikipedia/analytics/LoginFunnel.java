@@ -3,8 +3,8 @@ package org.wikipedia.analytics;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
+import org.ieatta.IEAApp;
 import org.json.JSONObject;
-import org.ieatta.IEATTAApp;
 
 /**
  * Schema: https://meta.wikimedia.org/wiki/Schema:MobileWikiAppLogin
@@ -17,7 +17,7 @@ public class LoginFunnel extends Funnel {
     public static final String SOURCE_EDIT = "edit";
     public static final String SOURCE_BLOCKED = "blocked";
 
-    public LoginFunnel(IEATTAApp app) {
+    public LoginFunnel(IEAApp app) {
         super(app, SCHEMA_NAME, REVISION);
     }
 

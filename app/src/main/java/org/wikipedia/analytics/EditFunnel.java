@@ -3,10 +3,9 @@ package org.wikipedia.analytics;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import org.ieatta.R;
 import org.json.JSONObject;
 import org.wikipedia.page.PageTitle;
-import org.ieatta.IEATTAApp;
+import org.ieatta.IEAApp;
 
 public class EditFunnel extends Funnel {
     private static final String SCHEMA_NAME = "MobileWikiAppEdit";
@@ -14,7 +13,7 @@ public class EditFunnel extends Funnel {
 
     private final PageTitle title;
 
-    public EditFunnel(IEATTAApp app, PageTitle title) {
+    public EditFunnel(IEAApp app, PageTitle title) {
         super(app, SCHEMA_NAME, REV_ID, title.getSite());
         this.title = title;
     }

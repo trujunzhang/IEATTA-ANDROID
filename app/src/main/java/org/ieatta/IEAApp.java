@@ -14,7 +14,6 @@ import com.facebook.stetho.Stetho;
 import com.squareup.otto.Bus;
 
 import org.ieatta.parse.ParseAPI;
-import org.ieatta.server.recurring.RecurringTask;
 import org.ieatta.tasks.RestaurantDetailTask;
 import org.wikipedia.ViewAnimations;
 import org.wikipedia.crash.CrashReporter;
@@ -34,7 +33,7 @@ import java.util.UUID;
 import bolts.Continuation;
 import bolts.Task;
 
-public class IEATTAApp extends Application {
+public class IEAApp extends Application {
     private static final String HTTPS_PROTOCOL = "https";
     private static final int EVENT_LOG_TESTING_ID = new Random().nextInt(Integer.MAX_VALUE);
 
@@ -77,24 +76,24 @@ public class IEATTAApp extends Application {
     }
 
     /**
-     * Singleton instance of IEATTAApp
+     * Singleton instance of IEAApp
      */
-    private static IEATTAApp INSTANCE;
+    private static IEAApp INSTANCE;
 
     private Bus bus;
     @NonNull
     private Theme currentTheme = Theme.getFallback();
 
-    public IEATTAApp() {
+    public IEAApp() {
         INSTANCE = this;
     }
 
     /**
-     * Returns the singleton instance of the IEATTAApp
+     * Returns the singleton instance of the IEAApp
      *
      * This is ok, since android treats it as a singleton anyway.
      */
-    public static IEATTAApp getInstance() {
+    public static IEAApp getInstance() {
         return INSTANCE;
     }
 

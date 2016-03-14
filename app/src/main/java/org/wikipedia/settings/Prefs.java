@@ -3,7 +3,7 @@ package org.wikipedia.settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import org.ieatta.IEATTAApp;
+import org.ieatta.IEAApp;
 import org.ieatta.R;
 import org.wikipedia.SharedPreferenceCookieManager;
 import org.wikipedia.util.StringUtil;
@@ -92,7 +92,7 @@ public final class Prefs {
 
     public static boolean isShowDeveloperSettingsEnabled() {
         return getBoolean(R.string.preference_key_show_developer_settings,
-                IEATTAApp.getInstance().isDevRelease());
+                IEAApp.getInstance().isDevRelease());
     }
 
     public static void setShowDeveloperSettingsEnabled(boolean enabled) {

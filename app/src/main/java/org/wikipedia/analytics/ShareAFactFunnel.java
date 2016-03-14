@@ -4,7 +4,7 @@ import android.support.annotation.NonNull;
 
 import org.json.JSONObject;
 import org.wikipedia.page.PageTitle;
-import org.ieatta.IEATTAApp;
+import org.ieatta.IEAApp;
 import org.wikipedia.settings.Prefs;
 
 // https://meta.wikimedia.org/wiki/Schema:MobileWikiAppShareAFact
@@ -22,7 +22,7 @@ public class ShareAFactFunnel extends Funnel {
     private final int pageId;
     private final long revisionId;
 
-    public ShareAFactFunnel(IEATTAApp app, PageTitle pageTitle, int pageId, long revisionId) {
+    public ShareAFactFunnel(IEAApp app, PageTitle pageTitle, int pageId, long revisionId) {
         super(app, SCHEMA_NAME, REV_ID, pageTitle.getSite());
         this.pageTitle = pageTitle.getDisplayText();
         this.pageId = pageId;

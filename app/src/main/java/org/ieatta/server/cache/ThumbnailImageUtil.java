@@ -3,7 +3,8 @@ package org.ieatta.server.cache;
 import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiskCache;
 import com.nostra13.universalimageloader.utils.StorageUtils;
 
-import org.ieatta.IEATTAApp;
+import org.ieatta.IEAApp;
+
 import java.io.File;
 
 public class ThumbnailImageUtil extends AbstractImageUtil {
@@ -18,7 +19,7 @@ public class ThumbnailImageUtil extends AbstractImageUtil {
      */
     @Override
     public UnlimitedDiskCache getImageCache() {
-        File cacheDir = StorageUtils.getCacheDirectory(IEATTAApp.getInstance(), "thumbnail");
+        File cacheDir = StorageUtils.getCacheDirectory(IEAApp.getInstance(), "thumbnail");
         return new UnlimitedDiskCache(cacheDir);
     }
 

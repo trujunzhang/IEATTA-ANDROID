@@ -2,15 +2,15 @@ package org.wikipedia.analytics;
 
 import android.support.annotation.NonNull;
 
+import org.ieatta.IEAApp;
 import org.json.JSONObject;
 import org.wikipedia.Site;
-import org.ieatta.IEATTAApp;
 
 public class SavedPagesFunnel extends Funnel {
     private static final String SCHEMA_NAME = "MobileWikiAppSavedPages";
     private static final int REV_ID = 10375480;
 
-    public SavedPagesFunnel(IEATTAApp app, Site site) {
+    public SavedPagesFunnel(IEAApp app, Site site) {
         super(app, SCHEMA_NAME, REV_ID, site);
     }
 
