@@ -34,12 +34,21 @@ public class LocalDatabaseQuery {
     }
 
     public static DBBuilder getQueryOrderedPeople(String eventUUID) {
-        return new DBBuilder().whereEqualTo(DBConstant.kPAPFieldEventKey, eventUUID)
+        return new DBBuilder()
+                .whereEqualTo(DBConstant.kPAPFieldEventKey, eventUUID)
                 .orderByDescending(DBConstant.kPAPFieldObjectCreatedDateKey);
     }
 
     public static DBBuilder getObjectsByUUIDs(List<String> UUIDs) {
-        return new DBBuilder().whereContainedIn(DBConstant.kPAPFieldObjectUUIDKey, UUIDs)
+        return new DBBuilder()
+                .whereContainedIn(DBConstant.kPAPFieldObjectUUIDKey, UUIDs)
+                .orderByDescending(DBConstant.kPAPFieldObjectCreatedDateKey);
+    }
+
+    public static DBBuilder getForRecipes(String teamUUID,String eventUUID) {
+        return new DBBuilder()
+                .whereEqualTo(DBConstant.kPAPFieldOrderedPeopleRefKey, teamUUID)
+                .whereEqualTo(DBConstant.kPAPFieldEventRefKey, eventUUID)
                 .orderByDescending(DBConstant.kPAPFieldObjectCreatedDateKey);
     }
 }
