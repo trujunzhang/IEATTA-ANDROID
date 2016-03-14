@@ -14,6 +14,7 @@ import java.util.List;
 
 import bolts.Continuation;
 import bolts.Task;
+import io.realm.RealmResults;
 
 public class NearRestaurantsTask {
     static class SortByName implements Comparator {
@@ -24,21 +25,21 @@ public class NearRestaurantsTask {
         }
     }
 
-    public static List<DBRestaurant> sort(List<DBRestaurant> list) {
+    public static RealmResults<DBRestaurant> sort(RealmResults<DBRestaurant> list) {
         Collections.sort(list, new SortByName());
         return list;
     }
 
-    private List<DBRestaurant> restaurants;
+    private RealmResults<DBRestaurant> restaurants;
 
-    public List<DBRestaurant> getRestaurants() {
+    public RealmResults<DBRestaurant> getRestaurants() {
         return restaurants;
     }
 
     public Task<Void> executeTask(Location location){
-        return LocalDatabaseQuery.queryNearRestaurants(location).onSuccess(new Continuation<List<DBRestaurant>, Void>() {
+        return LocalDatabaseQuery.queryNearRestaurants(location).onSuccess(new Continuation<RealmResults<DBRestaurant>, Void>() {
             @Override
-            public Void then(Task<List<DBRestaurant>> task) throws Exception {
+            public Void then(Task<RealmResults<DBRestaurant>> task) throws Exception {
                 NearRestaurantsTask.this.restaurants = NearRestaurantsTask.sort(task.getResult());
                 return null;
             }

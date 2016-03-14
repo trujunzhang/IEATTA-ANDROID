@@ -12,19 +12,20 @@ import org.ieatta.utils.GeoHashUtil;
 import java.util.List;
 
 import bolts.Task;
+import io.realm.RealmResults;
 
 public class LocalDatabaseQuery {
 
-    public static Task<List<DBRestaurant>> queryNearRestaurants(Location location) {
+    public static Task<RealmResults<DBRestaurant>> queryNearRestaurants(Location location) {
         String containedEncodeHash = GeoHashUtil.getEncodeHash(location);
         DBBuilder builder = new DBBuilder().whereContainedIn("geoHash", containedEncodeHash);
-        return new RealmModelReader(DBRestaurant.class).fetchResults(builder, true);
+        return new RealmModelReader<DBRestaurant>(DBRestaurant.class).fetchResults(builder, false);
     }
 
-    public static Task<List<DBPhoto>> queryPhotosForRestaurant(String UUID) {
+    public static Task<RealmResults<DBPhoto>> queryPhotosForRestaurant(String UUID) {
         DBBuilder builder = new DBBuilder().whereEqualTo("restaurantRef", UUID)
                 .orderByDescending(ParseObjectConstant.kPAPFieldObjectCreatedDateKey);
-        return new RealmModelReader(DBPhoto.class).fetchResults(builder, true);
+        return new RealmModelReader<DBPhoto>(DBPhoto.class).fetchResults(builder, false);
     }
 
     public static DBBuilder get(String UUID) {

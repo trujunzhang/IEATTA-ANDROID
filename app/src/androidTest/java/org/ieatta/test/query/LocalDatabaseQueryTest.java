@@ -14,6 +14,7 @@ import java.util.concurrent.TimeUnit;
 
 import bolts.Continuation;
 import bolts.Task;
+import io.realm.RealmResults;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -25,10 +26,10 @@ public class LocalDatabaseQueryTest {
     public void testQueryNearRestaurants() throws InterruptedException {
         final CountDownLatch completionLatch = new CountDownLatch(1);
         Location location = getLocation();
-        LocalDatabaseQuery.queryNearRestaurants(location).onSuccess(new Continuation<List<DBRestaurant>, Void>() {
+        LocalDatabaseQuery.queryNearRestaurants(location).onSuccess(new Continuation<RealmResults<DBRestaurant>, Void>() {
             @Override
-            public Void then(Task<List<DBRestaurant>> task) {
-                List<DBRestaurant> result = task.getResult();
+            public Void then(Task<RealmResults<DBRestaurant>> task) {
+                RealmResults<DBRestaurant> result = task.getResult();
                 assertThat("Fetched restaurants length", (result.size() == 2));
                 completionLatch.countDown();
                 return null;
