@@ -30,15 +30,6 @@ public class RestaurantDetailTask {
      * @return
      */
     public Task<Void> executeTask(final String UUID) {
-//        return new RealmModelReader<DBRestaurant>(DBRestaurant.class).getFirstObject(LocalDatabaseQuery.get(UUID), false).onSuccess(new Continuation<DBRestaurant, Void>() {
-//            @Override
-//            public Void then(Task<DBRestaurant> task) throws Exception {
-//                DBRestaurant result = task.getResult();
-//                String displayName = result.getDisplayName();
-//                return null;
-//            }
-//        });
-
         return new RealmModelReader<DBRestaurant>(DBRestaurant.class).getFirstObject(LocalDatabaseQuery.get(UUID), false).onSuccessTask(new Continuation<DBRestaurant, Task<RealmResults<DBPhoto>>>() {
             @Override
             public Task<RealmResults<DBPhoto>> then(Task<DBRestaurant> task) throws Exception {
@@ -51,15 +42,15 @@ public class RestaurantDetailTask {
                 RestaurantDetailTask.this.galleryCollection = task.getResult();
                 return new RealmModelReader<DBEvent>(DBEvent.class).fetchResults(
                         new DBBuilder().whereEqualTo(ParseObjectConstant.kPAPFieldLocalRestaurantKey, UUID), false);
-        }
-    }).onSuccessTask(new Continuation<RealmResults<DBEvent>, Task<RealmResults<DBReview>>>() {
+            }
+        }).onSuccessTask(new Continuation<RealmResults<DBEvent>, Task<RealmResults<DBReview>>>() {
             @Override
             public Task<RealmResults<DBReview>> then(Task<RealmResults<DBEvent>> task) throws Exception {
                 return new RealmModelReader<DBReview>(DBReview.class).fetchResults(
                         new DBBuilder().whereEqualTo(ParseObjectConstant.kPAPFieldReviewRefKey, UUID)
                                 .whereEqualTo(ParseObjectConstant.kPAPFieldReviewTypeKey, ReviewType.Review_Restaurant.getType()), false);
             }
-        }).onSuccess(new Continuation<RealmResults<DBReview>,Void>() {
+        }).onSuccess(new Continuation<RealmResults<DBReview>, Void>() {
             @Override
             public Void then(Task<RealmResults<DBReview>> task) throws Exception {
                 RestaurantDetailTask.this.reviews = task.getResult();
