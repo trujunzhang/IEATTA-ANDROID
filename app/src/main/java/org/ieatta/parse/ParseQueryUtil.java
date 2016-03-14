@@ -15,10 +15,10 @@ public class ParseQueryUtil {
         query.setLimit(limit);
 
         // *** Important (used orderByAscending) ***
-        query.orderByAscending(ParseObjectConstant.kPAPFieldModelOnlineCreatedAtKey);
+        query.orderByAscending(DBConstant.kPAPFieldModelOnlineCreatedAtKey);
 
         if (lastAsyncDate != null)
-            query.whereGreaterThan(ParseObjectConstant.kPAPFieldModelOnlineCreatedAtKey, lastAsyncDate);
+            query.whereGreaterThan(DBConstant.kPAPFieldModelOnlineCreatedAtKey, lastAsyncDate);
 
         return query;
     }
@@ -29,8 +29,8 @@ public class ParseQueryUtil {
         ParseQuery<ParseObject> query = ParseQuery.getQuery(type.toString());
 
         // *** Import *** The newest row in the table.
-        query.orderByDescending(ParseObjectConstant.kPAPFieldObjectCreatedDateKey);
-        query.whereEqualTo(ParseObjectConstant.kPAPFieldObjectUUIDKey, newRecord.getModelPoint());
+        query.orderByDescending(DBConstant.kPAPFieldObjectCreatedDateKey);
+        query.whereEqualTo(DBConstant.kPAPFieldObjectUUIDKey, newRecord.getModelPoint());
 
         return query;
     }

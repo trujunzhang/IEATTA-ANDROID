@@ -1,6 +1,8 @@
 package org.ieatta.parse;
 
-public final class ParseObjectConstant {
+public final class DBConstant {
+    public final static String kPAPFieldModelGEOHASH = "geoHash";
+
     public final static String kPAPFieldModelOnlineCreatedAtKey = "createdAt";
 
     // Common fields

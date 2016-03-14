@@ -1,6 +1,5 @@
 package org.ieatta.tasks;
 
-
 import org.ieatta.database.models.DBEvent;
 import org.ieatta.database.models.DBPhoto;
 import org.ieatta.database.models.DBRestaurant;
@@ -9,9 +8,7 @@ import org.ieatta.database.provide.ReviewType;
 import org.ieatta.database.query.LocalDatabaseQuery;
 import org.ieatta.database.realm.DBBuilder;
 import org.ieatta.database.realm.RealmModelReader;
-import org.ieatta.parse.ParseObjectConstant;
-
-import java.util.List;
+import org.ieatta.parse.DBConstant;
 
 import bolts.Continuation;
 import bolts.Task;
@@ -41,14 +38,14 @@ public class RestaurantDetailTask {
             public Task<RealmResults<DBEvent>> then(Task<RealmResults<DBPhoto>> task) throws Exception {
                 RestaurantDetailTask.this.galleryCollection = task.getResult();
                 return new RealmModelReader<DBEvent>(DBEvent.class).fetchResults(
-                        new DBBuilder().whereEqualTo(ParseObjectConstant.kPAPFieldLocalRestaurantKey, UUID), false);
+                        new DBBuilder().whereEqualTo(DBConstant.kPAPFieldLocalRestaurantKey, UUID), false);
             }
         }).onSuccessTask(new Continuation<RealmResults<DBEvent>, Task<RealmResults<DBReview>>>() {
             @Override
             public Task<RealmResults<DBReview>> then(Task<RealmResults<DBEvent>> task) throws Exception {
                 return new RealmModelReader<DBReview>(DBReview.class).fetchResults(
-                        new DBBuilder().whereEqualTo(ParseObjectConstant.kPAPFieldReviewRefKey, UUID)
-                                .whereEqualTo(ParseObjectConstant.kPAPFieldReviewTypeKey, ReviewType.Review_Restaurant.getType()), false);
+                        new DBBuilder().whereEqualTo(DBConstant.kPAPFieldReviewRefKey, UUID)
+                                .whereEqualTo(DBConstant.kPAPFieldReviewTypeKey, ReviewType.Review_Restaurant.getType()), false);
             }
         }).onSuccess(new Continuation<RealmResults<DBReview>, Void>() {
             @Override
