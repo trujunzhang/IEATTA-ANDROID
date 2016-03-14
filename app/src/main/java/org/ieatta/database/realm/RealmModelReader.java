@@ -6,6 +6,7 @@ import org.ieatta.database.models.DBRestaurant;
 import java.lang.reflect.ParameterizedType;
 import java.util.Date;
 
+import bolts.Continuation;
 import bolts.Task;
 import io.realm.Realm;
 import io.realm.RealmObject;
@@ -20,7 +21,7 @@ public class RealmModelReader<T extends RealmObject> {
         this.clazz = clazz;
     }
 
-    public Task<RealmResults<T>> fetchResults(DBBuilder builder){
+    public Task<RealmResults<T>> fetchResults(DBBuilder builder, boolean needClose){
         RealmResults<T> result = null;
 
         Realm realm = Realm.getInstance(IEATTAApp.getInstance());
@@ -36,11 +37,37 @@ public class RealmModelReader<T extends RealmObject> {
         } catch (Exception e) {
             return Task.forError(e);
         } finally {
-            realm.close();
+            if(needClose) {
+                realm.close();
+            }
         }
 
         return Task.forResult(result);
     }
+
+    public Task<T> getFirstObject(DBBuilder builder, boolean needClose){
+        T result = null;
+
+        Realm realm = Realm.getInstance(IEATTAApp.getInstance());
+        try {
+            RealmQuery<T> query = realm.where(this.clazz);
+
+            buildAll(builder, query);
+
+            // Execute the query:
+            result= query.findFirst();
+
+        } catch (Exception e) {
+            return Task.forError(e);
+        } finally {
+            if(needClose) {
+                realm.close();
+            }
+        }
+
+        return Task.forResult(result);
+    }
+
 
     private void buildAll(DBBuilder builder, RealmQuery<T> query) {
         buildGreaterMap(builder, query);

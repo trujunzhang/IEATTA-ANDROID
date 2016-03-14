@@ -15,6 +15,7 @@ import com.squareup.otto.Bus;
 
 import org.ieatta.parse.ParseAPI;
 import org.ieatta.server.recurring.RecurringTask;
+import org.ieatta.tasks.RestaurantDetailTask;
 import org.wikipedia.ViewAnimations;
 import org.wikipedia.crash.CrashReporter;
 import org.wikipedia.crash.hockeyapp.HockeyAppCrashReporter;
@@ -29,6 +30,9 @@ import java.util.Locale;
 import java.util.Random;
 import java.util.TimeZone;
 import java.util.UUID;
+
+import bolts.Continuation;
+import bolts.Task;
 
 public class IEATTAApp extends Application {
     private static final String HTTPS_PROTOCOL = "https";
@@ -111,7 +115,23 @@ public class IEATTAApp extends Application {
         // Integrating with Stetho is intended to be seamless and straightforward for most existing Android applications.
         Stetho.initializeWithDefaults(this);
 
-        new RecurringTask().prepareTimer();
+//        new RecurringTask().prepareTimer();
+
+        String UUID = "1CE562A4-A978-4B75-9B7B-2F3CF9F42A04";
+        RestaurantDetailTask task = new RestaurantDetailTask();
+        task.executeTask(UUID).onSuccess(new Continuation<Void, Void>() {
+            @Override
+            public Void then(Task<Void> task) throws Exception {
+
+                return null;
+            }
+        }).continueWith(new Continuation<Void, Void>() {
+            @Override
+            public Void then(Task<Void> task) throws Exception {
+                Exception error = task.getError();
+                return null;
+            }
+        });
     }
 
     public Bus getBus() {
