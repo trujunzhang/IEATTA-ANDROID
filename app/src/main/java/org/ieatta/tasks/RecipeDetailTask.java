@@ -6,8 +6,12 @@ import org.ieatta.database.models.DBRecipe;
 import org.ieatta.database.models.DBRestaurant;
 import org.ieatta.database.models.DBReview;
 import org.ieatta.database.models.DBTeam;
+import org.ieatta.database.provide.PhotoUsedType;
+import org.ieatta.database.provide.ReviewType;
 import org.ieatta.database.query.LocalDatabaseQuery;
+import org.ieatta.database.realm.DBBuilder;
 import org.ieatta.database.realm.RealmModelReader;
+import org.ieatta.parse.DBConstant;
 
 import bolts.Continuation;
 import bolts.Task;
@@ -52,10 +56,24 @@ public class RecipeDetailTask {
                         RecipeDetailTask.this.team = task.getResult();
                         return new RealmModelReader<DBRecipe>(DBRecipe.class).getFirstObject(LocalDatabaseQuery.get(recipeUUID), false);
                     }
-                }).onSuccess(new Continuation<DBRecipe, Void>() {
+                }).onSuccessTask(new Continuation<DBRecipe, Task<RealmResults<DBPhoto>>>() {
                     @Override
-                    public Void then(Task<DBRecipe> task) throws Exception {
+                    public Task<RealmResults<DBPhoto>> then(Task<DBRecipe> task) throws Exception {
                         RecipeDetailTask.this.recipe = task.getResult();
+                        return LocalDatabaseQuery.queryPhotos(recipeUUID, PhotoUsedType.PU_Recipe.getType());
+                    }
+                }).onSuccessTask(new Continuation<RealmResults<DBPhoto>, Task<RealmResults<DBReview>>>() {
+                    @Override
+                    public Task<RealmResults<DBReview>> then(Task<RealmResults<DBPhoto>> task) throws Exception {
+                        RecipeDetailTask.this.galleryCollection = task.getResult();
+                        return new RealmModelReader<DBReview>(DBReview.class).fetchResults(
+                                new DBBuilder().whereEqualTo(DBConstant.kPAPFieldReviewRefKey, restaurantUUID)
+                                        .whereEqualTo(DBConstant.kPAPFieldReviewTypeKey, ReviewType.Review_Recipe.getType()), false);
+                    }
+                }).onSuccess(new Continuation<RealmResults<DBReview>, Void>() {
+                    @Override
+                    public Void then(Task<RealmResults<DBReview>> task) throws Exception {
+                        RecipeDetailTask.this.reviews = task.getResult();
                         return null;
                     }
                 });
