@@ -18,10 +18,10 @@ import bolts.Task;
 import io.realm.RealmResults;
 
 public class RestaurantDetailTask {
-    private DBRestaurant restaurant;
-    private RealmResults<DBEvent> events;
-    private RealmResults<DBReview> reviews;
-    private RealmResults<DBPhoto> galleryCollection;
+    public DBRestaurant restaurant;
+    public RealmResults<DBEvent> events;
+    public RealmResults<DBReview> reviews;
+    public RealmResults<DBPhoto> galleryCollection;
 
     /**
      * Execute Task for Restaurant detail.
