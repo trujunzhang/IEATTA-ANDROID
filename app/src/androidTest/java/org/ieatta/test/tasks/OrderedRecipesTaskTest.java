@@ -19,7 +19,7 @@ public class OrderedRecipesTaskTest {
     private OrderedRecipesTask task = new OrderedRecipesTask();
     private String restaurantUUID = "1CE562A4-A978-4B75-9B7B-2F3CF9F42A04";
     private String eventUUID = "07B2D33C-F11D-404B-9D78-016D16BEE9FE";
-    private String teamUUID = "";
+    private String teamUUID = "5C52C84D-4E0B-4727-B3FD-274C9F004580";
 
     @Test
     public void testOrderedRecipes() throws InterruptedException {
