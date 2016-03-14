@@ -27,6 +27,7 @@ public class RecipeDetailTask {
      * @param restaurantUUID restaurant's UUID
      * @param eventUUID      event's UUID
      * @param teamUUID       team's UUID
+     * @param recipeUUID     recipe's UUID
      * @return
      */
     public Task<Void> executeTask(final String restaurantUUID, final String eventUUID, final String teamUUID, final String recipeUUID) {
