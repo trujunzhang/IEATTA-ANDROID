@@ -9,6 +9,8 @@ import org.ieatta.database.realm.RealmModelReader;
 import org.ieatta.parse.DBConstant;
 import org.ieatta.utils.GeoHashUtil;
 
+import java.util.List;
+
 import bolts.Task;
 import io.realm.RealmResults;
 
@@ -33,6 +35,11 @@ public class LocalDatabaseQuery {
 
     public static DBBuilder getQueryOrderedPeople(String eventUUID) {
         return new DBBuilder().whereEqualTo(DBConstant.kPAPFieldEventKey, eventUUID)
+                .orderByDescending(DBConstant.kPAPFieldObjectCreatedDateKey);
+    }
+
+    public static DBBuilder getObjectsByUUIDs(List<String> UUIDs) {
+        return new DBBuilder().whereContainedIn(DBConstant.kPAPFieldEventKey, UUIDs)
                 .orderByDescending(DBConstant.kPAPFieldObjectCreatedDateKey);
     }
 }

@@ -12,6 +12,9 @@ import org.ieatta.database.realm.DBBuilder;
 import org.ieatta.database.realm.RealmModelReader;
 import org.ieatta.parse.DBConstant;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import bolts.Continuation;
 import bolts.Task;
 import io.realm.RealmResults;
@@ -45,15 +48,17 @@ public class EventDetailTask {
                         return new RealmModelReader<DBPeopleInEvent>(DBPeopleInEvent.class).fetchResults(
                                 LocalDatabaseQuery.getQueryOrderedPeople(eventUUID), false);
                     }
-                }).onSuccessTask(new Continuation<RealmResults<DBPeopleInEvent>, Task<Void>>() {
+                }).onSuccessTask(new Continuation<RealmResults<DBPeopleInEvent>, Task<RealmResults<DBTeam>>>() {
                     @Override
-                    public Task<Void> then(Task<RealmResults<DBPeopleInEvent>> task) throws Exception {
-                        return null;
+                    public Task<RealmResults<DBTeam>> then(Task<RealmResults<DBPeopleInEvent>> task) throws Exception {
+                        List<String> peoplePoints = EventDetailTask.this.getPeoplePoints(task.getResult());
+                        return new RealmModelReader<DBTeam>(DBTeam.class).fetchResults(LocalDatabaseQuery.getObjectsByUUIDs(peoplePoints),false);
                     }
                 })
-                .onSuccessTask(new Continuation<RealmResults<DBEvent>, Task<RealmResults<DBReview>>>() {
+                .onSuccessTask(new Continuation<RealmResults<DBTeam>, Task<RealmResults<DBReview>>>() {
                     @Override
-                    public Task<RealmResults<DBReview>> then(Task<RealmResults<DBEvent>> task) throws Exception {
+                    public Task<RealmResults<DBReview>> then(Task<RealmResults<DBTeam>> task) throws Exception {
+                        EventDetailTask.this.teams = task.getResult();
                         return new RealmModelReader<DBReview>(DBReview.class).fetchResults(
                                 new DBBuilder().whereEqualTo(DBConstant.kPAPFieldReviewRefKey, restaurantUUID)
                                         .whereEqualTo(DBConstant.kPAPFieldReviewTypeKey, ReviewType.Review_Restaurant.getType()), false);
@@ -65,5 +70,15 @@ public class EventDetailTask {
                         return null;
                     }
                 });
+    }
+
+    private List<String> getPeoplePoints(List<DBPeopleInEvent> peopleInEvent) {
+        List<String> peoplePoints = new LinkedList<>();
+
+        for (DBPeopleInEvent model : peopleInEvent) {
+            peoplePoints.add(model.getUserRef());
+        }
+
+        return peoplePoints;
     }
 }

@@ -11,6 +11,7 @@ public class DBBuilder {
     public HashMap<String, Object> greaterMap = new LinkedHashMap<>();
     public HashMap<String, String> matchersMap = new LinkedHashMap<>();
     public HashMap<String, String> containedMap = new LinkedHashMap<>();
+    public HashMap<String, List<String>> containedListMap = new LinkedHashMap<>();
     public List<String> orderedByDescendingList = new LinkedList<>();
     public List<String> orderedByAscendingList = new LinkedList<>();
     public int limit = -1; // negative limits mean, do not send a limit
@@ -27,6 +28,11 @@ public class DBBuilder {
 
     public DBBuilder whereContainedIn(String key, String value) {
         this.containedMap.put(key, value);
+        return this;
+    }
+
+    public DBBuilder whereContainedIn(String key, List<String> list) {
+        this.containedListMap.put(key, list);
         return this;
     }
 
