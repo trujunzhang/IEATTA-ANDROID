@@ -60,7 +60,8 @@ public class EventDetailTask {
                     public Task<RealmResults<DBReview>> then(Task<RealmResults<DBTeam>> task) throws Exception {
                         EventDetailTask.this.teams = task.getResult();
                         return new RealmModelReader<DBReview>(DBReview.class).fetchResults(
-                                new DBBuilder().whereEqualTo(DBConstant.kPAPFieldReviewRefKey, restaurantUUID)
+                                new DBBuilder()
+                                        .whereEqualTo(DBConstant.kPAPFieldReviewRefKey, restaurantUUID)
                                         .whereEqualTo(DBConstant.kPAPFieldReviewTypeKey, ReviewType.Review_Restaurant.getType()), false);
                     }
                 }).onSuccess(new Continuation<RealmResults<DBReview>, Void>() {
