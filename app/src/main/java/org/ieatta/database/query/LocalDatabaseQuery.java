@@ -30,4 +30,9 @@ public class LocalDatabaseQuery {
     public static DBBuilder get(String UUID) {
         return new DBBuilder().whereEqualTo(DBConstant.kPAPFieldObjectUUIDKey, UUID);
     }
+
+    public static DBBuilder getQueryOrderedPeople(String eventUUID) {
+        return new DBBuilder().whereEqualTo(DBConstant.kPAPFieldEventKey, eventUUID)
+                .orderByDescending(DBConstant.kPAPFieldObjectCreatedDateKey);
+    }
 }

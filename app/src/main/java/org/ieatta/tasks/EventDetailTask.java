@@ -1,6 +1,7 @@
 package org.ieatta.tasks;
 
 import org.ieatta.database.models.DBEvent;
+import org.ieatta.database.models.DBPeopleInEvent;
 import org.ieatta.database.models.DBPhoto;
 import org.ieatta.database.models.DBRestaurant;
 import org.ieatta.database.models.DBReview;
@@ -37,14 +38,20 @@ public class EventDetailTask {
                         return new RealmModelReader<DBEvent>(DBEvent.class).getFirstObject(LocalDatabaseQuery.get(eventUUID),false);
                     }
                 })
-                .onSuccessTask(new Continuation<DBEvent, Task<RealmResults<DBEvent>>>() {
+                .onSuccessTask(new Continuation<DBEvent, Task<RealmResults<DBPeopleInEvent>>>() {
                     @Override
-                    public Task<RealmResults<DBEvent>> then(Task<DBEvent> task) throws Exception {
+                    public Task<RealmResults<DBPeopleInEvent>> then(Task<DBEvent> task) throws Exception {
                         EventDetailTask.this.event = task.getResult();
-                        return new RealmModelReader<DBEvent>(DBEvent.class).fetchResults(
-                                new DBBuilder().whereEqualTo(DBConstant.kPAPFieldLocalRestaurantKey, restaurantUUID), false);
+                        return new RealmModelReader<DBPeopleInEvent>(DBPeopleInEvent.class).fetchResults(
+                                LocalDatabaseQuery.getQueryOrderedPeople(eventUUID), false);
                     }
-                }).onSuccessTask(new Continuation<RealmResults<DBEvent>, Task<RealmResults<DBReview>>>() {
+                }).onSuccessTask(new Continuation<RealmResults<DBPeopleInEvent>, Task<Void>>() {
+                    @Override
+                    public Task<Void> then(Task<RealmResults<DBPeopleInEvent>> task) throws Exception {
+                        return null;
+                    }
+                })
+                .onSuccessTask(new Continuation<RealmResults<DBEvent>, Task<RealmResults<DBReview>>>() {
                     @Override
                     public Task<RealmResults<DBReview>> then(Task<RealmResults<DBEvent>> task) throws Exception {
                         return new RealmModelReader<DBReview>(DBReview.class).fetchResults(
