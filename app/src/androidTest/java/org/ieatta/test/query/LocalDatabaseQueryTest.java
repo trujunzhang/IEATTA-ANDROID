@@ -7,6 +7,7 @@ import org.ieatta.database.models.DBRestaurant;
 import org.ieatta.database.query.LocalDatabaseQuery;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.wikipedia.util.log.L;
 
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
@@ -22,6 +23,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class LocalDatabaseQueryTest {
     private static final int TASK_COMPLETION_TIMEOUT = 20000;
 
+
     @Test
     public void testQueryNearRestaurants() throws InterruptedException {
         final CountDownLatch completionLatch = new CountDownLatch(1);
@@ -30,7 +32,9 @@ public class LocalDatabaseQueryTest {
             @Override
             public Void then(Task<RealmResults<DBRestaurant>> task) {
                 RealmResults<DBRestaurant> result = task.getResult();
-                assertThat("Fetched restaurants length", (result.size() == 2));
+                int size = result.size();
+                L.d("Size of the Restaurants: "+ size);
+                assertThat("Fetched restaurants length", (size == 3));
                 completionLatch.countDown();
                 return null;
             }
@@ -44,8 +48,11 @@ public class LocalDatabaseQueryTest {
      */
     private Location getLocation() {
         double[][] data = {
-                // {40.738821,-73.994026},// 'dr5ru0r0y4xj'
-                {40.738687, -73.993098},// 'dr5ru0rb5cej' (Region test)
+                // 'dr5ru0r0y4xj'
+                // {40.738821,-73.994026},
+                // 'dr5ru0rb5cej' (Region test)
+                // matched: ['dr5ru0r0y4xj','dr5ru0r24xuf','dr5ru0nzfv5q']
+                {40.738687, -73.993098},
         };
         Location location = new Location("");
         location.setLatitude(data[0][0]);
