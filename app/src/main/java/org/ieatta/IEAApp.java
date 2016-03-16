@@ -10,11 +10,9 @@ import android.support.annotation.IntRange;
 import android.support.annotation.NonNull;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
-import com.facebook.stetho.Stetho;
 import com.squareup.otto.Bus;
 
 import org.ieatta.parse.ParseAPI;
-import org.ieatta.tasks.RestaurantDetailTask;
 import org.wikipedia.ViewAnimations;
 import org.wikipedia.crash.CrashReporter;
 import org.wikipedia.crash.hockeyapp.HockeyAppCrashReporter;
@@ -29,9 +27,6 @@ import java.util.Locale;
 import java.util.Random;
 import java.util.TimeZone;
 import java.util.UUID;
-
-import bolts.Continuation;
-import bolts.Task;
 
 public class IEAApp extends Application {
     private static final String HTTPS_PROTOCOL = "https";
@@ -110,9 +105,6 @@ public class IEAApp extends Application {
         final Resources resources = getResources();
         ViewAnimations.init(resources);
         screenDensity = resources.getDisplayMetrics().density;
-
-        // Integrating with Stetho is intended to be seamless and straightforward for most existing Android applications.
-        Stetho.initializeWithDefaults(this);
 
 //        new RecurringTask().prepareTimer();
     }

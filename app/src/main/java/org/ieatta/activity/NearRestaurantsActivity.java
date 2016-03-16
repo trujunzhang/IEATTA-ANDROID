@@ -31,7 +31,7 @@ enum NearRestaurantSection {
 }
 
 public class NearRestaurantsActivity extends AppCompatActivity {
-    private RecycleViewManager manager = new RecycleViewManager(this);
+//    private RecycleViewManager manager = new RecycleViewManager(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,8 +54,8 @@ public class NearRestaurantsActivity extends AppCompatActivity {
     }
 
     private void setupUI() {
-        this.manager.setRegisterCellClassWhenSelected(IEANearRestaurantsCell.getType(), NearRestaurantSection.sectionRestaurants.ordinal());
-        this.manager.setRegisterCellClassWhenSelected(IEANearRestaurantMoreCell.getType(), NearRestaurantSection.sectionMoreItems.ordinal());
+//        this.manager.setRegisterCellClassWhenSelected(IEANearRestaurantsCell.getType(), NearRestaurantSection.sectionRestaurants.ordinal());
+//        this.manager.setRegisterCellClassWhenSelected(IEANearRestaurantMoreCell.getType(), NearRestaurantSection.sectionMoreItems.ordinal());
     }
 
     private void configModelsInMoreSection() {
