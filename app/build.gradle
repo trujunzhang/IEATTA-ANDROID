@@ -190,11 +190,11 @@ dependencies {
     compile('com.mapbox.mapboxsdk:mapbox-android-sdk:2.3.0@aar') {
         transitive = true
     }
-    compile 'net.hockeyapp.android:HockeySDK:3.7.0'
+    compile 'net.hockeyapp.android:HockeySDK:3.7.1'
 
+    compile 'com.google.android.gms:play-services:8.4.0'
     compile 'com.parse:parse-android:1.13.0'
     compile 'com.github.davidmoten:geo:0.7.4'
-
     compile "com.github.hotchemi:permissionsdispatcher:$permissionsVersion"
     apt "com.github.hotchemi:permissionsdispatcher-processor:$permissionsVersion"
 
