@@ -12,7 +12,14 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.tableview.storage.DTTableViewManager;
+
 import org.ieatta.R;
+
+enum NearRestaurantSection {
+    sectionMoreItems,//= 0
+    sectionRestaurants, //= 1
+}
 
 public class NearRestaurantsActivity extends AppCompatActivity {
 
