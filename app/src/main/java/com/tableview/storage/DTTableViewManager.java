@@ -12,40 +12,38 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
 public class DTTableViewManager {
-    private DTTableViewManager self = this;
-
     public TableViewConfiguration configuration;
     public MemoryStorage memoryStorage;
 
     public DTTableViewManager(TableViewConfiguration configuration) {
-        self.configuration = configuration;
-        self.memoryStorage = new MemoryStorage(new TableViewControllerAdapter(configuration.builder.context, self, configuration.builder.itemClickListener));
+        this.configuration = configuration;
+        this.memoryStorage = new MemoryStorage(new TableViewControllerAdapter(configuration.builder.context, this, configuration.builder.itemClickListener));
     }
 
     public TableViewControllerAdapter getAdapter() {
-        return self.memoryStorage.adapter;
+        return this.memoryStorage.adapter;
     }
 
     public int getItemCount() {
-        return self.memoryStorage.getItemCount();
+        return this.memoryStorage.getItemCount();
     }
 
     public void registerHeaderClass(CellType type) {
-        self.memoryStorage.cellTypeUtils.registerType(type);
+        this.memoryStorage.cellTypeUtils.registerType(type);
     }
 
     public void registerFooterClass(CellType type) {
-        self.memoryStorage.cellTypeUtils.registerType(type);
+        this.memoryStorage.cellTypeUtils.registerType(type);
     }
 
     public IEAViewHolder createViewHolder(ViewGroup parent, int viewType) {
-        CellType cellType = self.memoryStorage.cellTypeUtils.getModelType(viewType);
+        CellType cellType = this.memoryStorage.cellTypeUtils.getModelType(viewType);
         Class cellClass = cellType.cellClass;
         int layoutResId = cellType.layoutResId;
 
         Constructor[] ctors = cellClass.getDeclaredConstructors();
         Constructor viewConstructor = TableViewFactory.getConstructorForView(ctors);
-        View view = LayoutInflater.from(self.configuration.builder.context).inflate(layoutResId, parent, false);
+        View view = LayoutInflater.from(this.configuration.builder.context).inflate(layoutResId, parent, false);
 
         IEAViewHolder viewHolder = null;
         try {
@@ -62,10 +60,10 @@ public class DTTableViewManager {
     }
 
     public void registerCellClass(CellType type, int forSectionIndex) {
-        self.memoryStorage.registerCellClass(type, forSectionIndex);
+        this.memoryStorage.registerCellClass(type, forSectionIndex);
     }
 
     public void registerCellClassInSpecialRow(CellType type, int forSectionIndex, int forRowIndex) {
-        self.memoryStorage.registerCellClassInSpecialRow(type, forSectionIndex, forRowIndex);
+        this.memoryStorage.registerCellClassInSpecialRow(type, forSectionIndex, forRowIndex);
     }
 }

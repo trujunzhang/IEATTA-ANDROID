@@ -6,8 +6,6 @@ import android.view.View;
 import com.tableview.adapter.enums.ViewHolderType;
 
 public abstract class IEAViewHolder extends RecyclerView.ViewHolder implements ModelTransfer, View.OnClickListener, View.OnLongClickListener {
-    private IEAViewHolder self = this;
-
     protected boolean shouldClickItem() {
         return true;
     }
@@ -22,8 +20,8 @@ public abstract class IEAViewHolder extends RecyclerView.ViewHolder implements M
     public IEAViewHolder(View itemView) {
         super(itemView);
 
-        itemView.setTag(self.getViewHolderType().ordinal());
-        if (self.shouldClickItem() == true) {
+        itemView.setTag(this.getViewHolderType().ordinal());
+        if (this.shouldClickItem() == true) {
             itemView.setOnClickListener(this);
             itemView.setOnLongClickListener(this);
         }
