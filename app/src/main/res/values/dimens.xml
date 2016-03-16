@@ -84,4 +84,50 @@
 
     <!-- Article menu bar -->
     <dimen name="view_article_menu_bar_button_padding">12dp</dimen>
+
+    <!--IEATTA-->
+    <dimen name="Edit_Cell_Height">60dip</dimen>
+    <dimen name="DEFAULT_SECTION_TITLE_HEADER_HEIGHT">50dip</dimen>
+    <dimen name="SECTION_PHOTO_GALLERY_HEADER_HEIGHT">56dip</dimen>
+    <dimen name="SECTION_BUTTON_FOOTER_HEIGHT">60dip</dimen>
+    <dimen name="DEFAULT_SECTION_HEADER_HEIGHT">4dip</dimen>
+
+    <dimen name="review_star_width">37.0dip</dimen>
+    <dimen name="review_star_height">30.0dip</dimen>
+
+    <dimen name="Empty_info">42.0dip</dimen>
+
+    <!--Photo gallery-->
+    <dimen name="Gallery_Cell_Collection_Width">132.0dip</dimen>
+    <dimen name="Gallery_Cell_Collection_Height">132.0dip</dimen>
+    <dimen name="Gallery_Cell_Height">132.0dip</dimen>
+    <!--GoogleMapAddress-->
+    <dimen name="Google_MapAddress">44dip</dimen>
+    <dimen name="Edit_Cell">56dip</dimen>
+    <!--Near Restaurant-->
+    <dimen name="NearRestaurant_More">44dip</dimen>
+    <dimen name="Left_Image_View_Width">31dp</dimen>
+    <dimen name="Left_Image_View_Height">31dp</dimen>
+    <dimen name="Restaurant_More_Image_View_Width">24dp</dimen>
+    <dimen name="Restaurant_More_Image_View_Height">24dp</dimen>
+    <dimen name="NearRestaurant_Restaurants">58dip</dimen>
+    <!--Restaurant detail-->
+    <dimen name="RestaurantDetail_Header">160dip</dimen>
+    <dimen name="RestaurantDetail_Reviews">162dip</dimen>
+    <dimen name="RestaurantDetail_Events">54dip</dimen>
+    <!--Event detail-->
+    <dimen name="EventDetail_Header">180dip</dimen>
+    <dimen name="EventDetail_OrderedPeople">60dip</dimen>
+    <!--Ordered Recipes-->
+    <dimen name="OrderedRecipes_Recipes">80dip</dimen>
+    <!--Recipe detail-->
+    <dimen name="RecipeDetail_Header">180dip</dimen>
+    <!--Edit Event-->
+    <dimen name="Edit_Event_WriteReview">150dip</dimen>
+    <!--Choice People-->
+    <dimen name="People_Info">100dip</dimen>
+    <!--Read Reviews-->
+    <dimen name="Read_Reviews_Header">50dip</dimen>
+    <dimen name="Read_Reviews">40dip</dimen>
+
 </resources>

@@ -7,8 +7,8 @@
 
     <ImageView
         android:id="@+id/avatarView"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
+        android:layout_width="@dimen/Restaurant_More_Image_View_Width"
+        android:layout_height="@dimen/Restaurant_More_Image_View_Height"
         android:layout_gravity="center_vertical"
         android:layout_marginLeft="@dimen/activity_horizontal_margin" />
 
