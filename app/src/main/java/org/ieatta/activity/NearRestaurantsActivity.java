@@ -20,7 +20,9 @@ import com.tableview.utils.CollectionUtil;
 import org.ieatta.R;
 import org.ieatta.cells.IEANearRestaurantMoreCell;
 import org.ieatta.cells.IEANearRestaurantsCell;
+import org.ieatta.cells.SectionTitleCellModel;
 import org.ieatta.cells.model.IEANearRestaurantMore;
+import org.ieatta.provide.IEAEditKey;
 import org.ieatta.provide.MainSegueIdentifier;
 
 import java.util.List;
@@ -64,7 +66,7 @@ public class NearRestaurantsActivity extends AppCompatActivity {
 
     private void configModelsInMoreSection() {
 
-        this.manager.setSectionItems(new List(getMoresItems()), NearRestaurantSection.sectionMoreItems.ordinal());
+//        this.manager.setSectionItems(new List(getMoresItems()), NearRestaurantSection.sectionMoreItems.ordinal());
     }
 
     @Override
