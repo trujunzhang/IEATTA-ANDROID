@@ -1,5 +1,6 @@
 package org.ieatta.activity;
 
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -12,9 +13,15 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.tableview.manage.RecycleViewManager;
 import com.tableview.storage.DTTableViewManager;
+import com.tableview.utils.CollectionUtil;
 
 import org.ieatta.R;
+import org.ieatta.cells.model.IEANearRestaurantMore;
+import org.ieatta.provide.MainSegueIdentifier;
+
+import java.util.List;
 
 enum NearRestaurantSection {
     sectionMoreItems,//= 0
@@ -22,6 +29,7 @@ enum NearRestaurantSection {
 }
 
 public class NearRestaurantsActivity extends AppCompatActivity {
+    private RecycleViewManager manager = new RecycleViewManager(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +48,37 @@ public class NearRestaurantsActivity extends AppCompatActivity {
             }
         });
 
+        this.setupUI();
     }
+
+    private void setupUI() {
+//        this.manager.setRegisterCellClassWhenSelected(IEANearRestaurantsCell.getType(), NearRestaurantSection.sectionRestaurants.ordinal());
+    }
+
+    private void configModelsInMoreSection() {
+//        this.manager.setRegisterCellClassWhenSelected(IEANearRestaurantMoreCell.getType(), NearRestaurantSection.sectionMoreItems.ordinal());
+//        this.manager.appendSectionTitleCell(new SectionTitleCellModel(IEAEditKey.Section_Title, R.string.More), NearRestaurantSection.sectionMoreItems.ordinal());
+//        this.manager.setSectionItems(new List(getNearRestaurantMoresItems()), NearRestaurantSection.sectionMoreItems.ordinal());
+    }
+
+    @NonNull
+    private List<IEANearRestaurantMore> getNearRestaurantMoresItems() {
+        // "Manager Restaurant"
+        IEANearRestaurantMore managerRestaurantItem = new IEANearRestaurantMore(R.drawable.restaurants_icon, R.string.Add_a_Restaurant, MainSegueIdentifier.editRestaurantSegueIdentifier);
+
+        // "Search Restaurant"
+        IEANearRestaurantMore searchRestaurant = new IEANearRestaurantMore(R.drawable.nav_search, R.string.Search_Restaurants, MainSegueIdentifier.searchRestaurantSegueIdentifier);
+
+        // "Manager People"
+        IEANearRestaurantMore managerPeople = new IEANearRestaurantMore(R.drawable.nav_add_friends, R.string.Manage_Friends, MainSegueIdentifier.managerPeopleSegueIdentifier);
+
+        // "Read Reviews"
+        IEANearRestaurantMore readReviews = new IEANearRestaurantMore(R.drawable.nav_passport_reviews, R.string.Read_Reviews, MainSegueIdentifier.readReviewsSegueIdentifier);
+
+        IEANearRestaurantMore[] mores = {managerRestaurantItem, searchRestaurant, managerPeople, readReviews};
+        return CollectionUtil.createList(mores);
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

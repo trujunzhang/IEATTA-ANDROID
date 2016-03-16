@@ -7,13 +7,13 @@ import java.util.List;
 public class CollectionUtil {
 
     public static List createList(Object item) {
-        LinkedList list = new LinkedList();
+        List list = new LinkedList();
         list.add(item);
         return list;
     }
 
     public static List createList(Object[] items) {
-        LinkedList list = new LinkedList(Arrays.asList(items));
+        List list = new LinkedList(Arrays.asList(items));
         return list;
     }
 
