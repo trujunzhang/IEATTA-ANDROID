@@ -63,20 +63,12 @@ public class NearRestaurantsActivity extends AppCompatActivity {
 
     @NonNull
     private List<IEANearRestaurantMore> getNearRestaurantMoresItems() {
-        // "Manager Restaurant"
         IEANearRestaurantMore managerRestaurantItem = new IEANearRestaurantMore(R.drawable.restaurants_icon, R.string.Add_a_Restaurant, MainSegueIdentifier.editRestaurantSegueIdentifier);
-
-        // "Search Restaurant"
         IEANearRestaurantMore searchRestaurant = new IEANearRestaurantMore(R.drawable.nav_search, R.string.Search_Restaurants, MainSegueIdentifier.searchRestaurantSegueIdentifier);
-
-        // "Manager People"
         IEANearRestaurantMore managerPeople = new IEANearRestaurantMore(R.drawable.nav_add_friends, R.string.Manage_Friends, MainSegueIdentifier.managerPeopleSegueIdentifier);
-
-        // "Read Reviews"
         IEANearRestaurantMore readReviews = new IEANearRestaurantMore(R.drawable.nav_passport_reviews, R.string.Read_Reviews, MainSegueIdentifier.readReviewsSegueIdentifier);
 
-        IEANearRestaurantMore[] mores = {managerRestaurantItem, searchRestaurant, managerPeople, readReviews};
-        return CollectionUtil.createList(mores);
+        return CollectionUtil.createList(new IEANearRestaurantMore[]{managerRestaurantItem, searchRestaurant, managerPeople, readReviews});
     }
 
 

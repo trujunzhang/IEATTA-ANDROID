@@ -1,17 +1,24 @@
 package org.ieatta.provide;
 
 
+import android.app.Activity;
 
 public enum MainSegueIdentifier {
 
-    Unspecified("", null);
+    Unspecified("", null),
 
-//    // Four menus in the near restaurant page.
+    // Four menus in the near restaurant page.
 //    editRestaurantSegueIdentifier("addEditRestaurant", IEAEditRestaurantViewController.class),
-//
 //    searchRestaurantSegueIdentifier("searchRestaurant", IEASearchRestaurantViewController.class),
 //    managerPeopleSegueIdentifier("managerPeople", IEAManagerPeopleViewController.class),
 //    readReviewsSegueIdentifier("addEditRestaurant", IEAReadReviewsViewController.class),
+
+    editRestaurantSegueIdentifier("addEditRestaurant", Activity.class),
+    searchRestaurantSegueIdentifier("searchRestaurant", Activity.class),
+    managerPeopleSegueIdentifier("managerPeople", Activity.class),
+    readReviewsSegueIdentifier("addEditRestaurant", Activity.class),
+
+
 //    // Four detail pages.
 //    detailRestaurantSegueIdentifier("detailRestaurant", IEARestaurantDetailViewController.class),
 //    detailEventSegueIdentifier("detailEvent", IEAEventDetailViewController.class),
@@ -35,6 +42,8 @@ public enum MainSegueIdentifier {
 //    postReviewSegueIdentifier("postReview", IEAWriteReviewViewController.class),
 //
 //    photoPagesControllerSegueIdentifier("photoPagesController", PhotoGalleryPagerActivity.class);
+
+    photoPagesControllerSegueIdentifier("photoPagesController", Activity.class);
 
 
     private String name;

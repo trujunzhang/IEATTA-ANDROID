@@ -28,4 +28,175 @@
     <string name="hockeyapp_crash_dialog_positive_button" tools:ignore="UnusedResources">@string/crash_report_dialog_send_button</string>
     <!-- /Crash reporter -->
 
+
+    <!--_Common                                                                       -->
+    <string name="PhotosGallery">Photos</string>
+
+    <string name="menu_post_review">Post</string>
+    <string name="menu_add">Add</string>
+    <string name="menu_edit">Edit</string>
+    <string name="menu_save">Save</string>
+    <string name="menu_update">Update</string>
+    <string name="prompt_post">Post a Review</string>
+
+    <!--_Nearby_Restaurant_screen                                                     -->
+    <string name="Nearby_Restaurants">Nearby Restaurants</string>
+    <string name="Add_a_Restaurant">Add a Restaurant</string>
+    <string name="Search_Restaurants">Search Restaurants</string>
+    <string name="Read_Reviews">Read Reviews</string>
+    <string name="Manage_Friends">Manage Friends</string>
+
+    <!--_Recipe                                                                       -->
+    <string name="add_Friends">Add Friends</string>
+    <string name="add_a_Recipe">Add a Recipe</string>
+
+    <!--_Edit_Recipe                                                                  -->
+    <!--<string name="recipe_name">Recipe's name</string>-->
+    <string name="recipe_price">Recipe\'s price</string>
+    <string name="price">Price</string>
+
+    <!--_Edit_restaurant_screen                                                       -->
+    <string name="Add_Restaurant">Add Restaurant</string>
+    <string name="Restaurant_Information">Restaurant Information</string>
+    <!--<string name="Restaurant_Name">Restaurant's Name</string>-->
+    <string name="Address">Address</string>
+    <string name="City_State">City, State</string>
+    <string name="Save_photo_Failure.">Save photo Failure.</string>
+
+    <!--_Review_detail                                                                -->
+    <string name="Review_Information">Review Information</string>
+    <string name="Date_of_visit">Date of visit</string>
+    <string name="Restaurant_Name_info">Restaurant Name</string>
+    <string name="Event_Name_info">Event Name</string>
+    <string name="Recipe_Name_info">Recipe Name</string>
+
+    <!--_Restaurant_detail                                                            -->
+    <string name="Review_Highlights">Review Highlights</string>
+    <string name="Events_Recorded">Events Recorded</string>
+    <string name="Warn_still_fetching_recipes">Still is fetching recipes!</string>
+    <string name="Warn_deleted_Person_already_ordered">Deleted Person has already ordered %d recipes!</string>
+
+    <!--_Event                                                                        -->
+    <string name="Select_people_failure">Select people failure!</string>
+
+    <!--_Ordered_People                                                               -->
+    <string name="Ordered_Recipes">Ordered Recipes</string>
+    <string name="People_Ordered">People Ordered</string>
+
+    <!--_Select_people_screen                                                         -->
+    <string name="Select_People">Select People</string>
+    <string name="Recipe_Information">Recipe Information</string>
+    <string name="Post_Review">Post Review</string>
+
+    <!--_Recipe_Detail                                                                -->
+    <string name="Fetch_recipe_count_failure">Fetch recipe count failure!</string>
+    <string name="Recipes_Ordered_Count">Recipes Ordered</string>
+    <string name="Ordered_People">Ordered People</string>
+
+    <!--_Edit_Event_screen                                                            -->
+    <string name="Event_Information">Event Information</string>
+    <string name="Date_of_Event">Date of Event</string>
+    <string name="Current_GPS_Location">Current GPS Location</string>
+    <string name="Event_Name">Event Name</string>
+    <string name="Server_Name">Server Name</string>
+    <string name="Who_served_for_you">Who served for you</string>
+    <string name="Start_Time">Start Time</string>
+    <string name="End_Time">End Time</string>
+    <string name="What_had_to_eat">What had to eat</string>
+    <string name="When">When</string>
+    <string name="Name_of_Server">Name of Server</string>
+    <string name="What__Why">What  Why</string>
+    <string name="Remarks">Remarks</string>
+    <string name="Add_a_Event">Add a Event</string>
+
+    <!--_Edit_People                                                                  -->
+    <string name="People_Information">Edit Person</string>
+    <string name="Edit_People">Edit People</string>
+    <string name="Who_are_they">Who are they</string>
+    <string name="Type_their_address">Type their address</string>
+    <string name="Type_their_email">Type their email</string>
+    <string name="Display_Name">Display Name</string>
+    <string name="Email">Email</string>
+    <string name="Add_People">Add People</string>
+    <string name="Add_People_Ordered">Add People Ordered</string>
+
+    <!--_Location_Manager                                                             -->
+    <string name="Registration_Failed">Registration Failed</string>
+
+    <!--_Common                                                                       -->
+    <string name="Take_a_Photo">Take a Photo</string>
+    <string name="More">More</string>
+    <string name="Cancel">Cancel</string>
+    <string name="Hold_On">Hold On...</string>
+    <string name="OK">OK</string>
+    <string name="Update">Update</string>
+    <string name="Save">Save</string>
+    <string name="Saved_Failure">Saved Failure</string>
+    <string name="Update_Failure">Update Failure</string>
+    <string name="Reviews">Reviews</string>
+    <string name="Events">Events</string>
+    <string name="Take_a_Photo_failure">Take a Photo failure</string>
+    <string name="Edit">Edit</string>
+    <string name="Dismiss">Dismiss</string>
+    <string name="Back">Back</string>
+    <string name="Post">Post</string>
+    <string name="See_All_Photos">See All </string>
+    <string name="See_More_Reviews"> More Reviews</string>
+    <string name="See_More_Highlights"> More Highlights</string>
+    <string name="No_More_Reviews">No More Reviews</string>
+
+    <string name="Nearby">Nearby</string>
+
+    <string name="Write_Review">Write Review</string>
+    <string name="See_Reviews">See Reviews</string>
+
+    <string name="Restaurant">Restaurant</string>
+    <string name="Event">Event</string>
+    <string name="Recipe">Recipe</string>
+
+    <string name="Add_Event">Add Event</string>
+
+    <string name="Edit_Event">Edit Event</string>
+    <string name="Edit_Restaurant">Edit Restaurant</string>
+    <string name="Edit_Recipe">Edit Recipe</string>
+
+
+    <string name="Add_Right_Button">Add</string>
+
+    <string name="No_waiters_servered_for_you">No waiters servered for you</string>
+
+    <string name="Current_Address">Current Address</string>
+    <string name="Still_converting_GPS_to_Address">Still converting GPS to address on Parse.com.</string>
+
+    <string name="Delete_the_ordered_people_failed">Delete the ordered people failed</string>
+    <string name="Select_Person">Select Person</string>
+    <string name="Select_Person_Title">SELECT PERSON</string>
+
+    <string name="Segment_Restaurant">Restaurant</string>
+    <string name="Segment_Event">Event</string>
+    <string name="Segment_Recipe">Recipe</string>
+
+    <string name="Add_Food_Button">Add food</string>
+    <string name="Alert">Alert</string>
+    <string name="Alert_Take_Photo_Lost">All taken photos will be lost.</string>
+
+    <string name="Search_Title">Name:</string>
+    <string name="Search_Hint_Restaurant">Restaurant\'s name</string>
+    <string name="Search_Hint_Team">People\'s name</string>
+    <string name="Search_Hint_Review">Review\'s name</string>
+    <string name="Search_Hint_Recipe">Recipe\'s name</string>
+    <string name="Search_Hint_Event">Event\'s name</string>
+    <string name="Search">Search</string>
+
+
+    <!--// Handling an empty UITableView. Print a friendly message.-->
+    <string name="Empty_for_Restaurant">No restaurants found</string>
+    <string name="Empty_for_Event">This Restaurant has no events</string>
+    <string name="Empty_for_Review">No reviews post</string>
+    <string name="Empty_for_Ordered_People">This Event has no ordered people</string>
+    <string name="Empty_for_Ordered_Recipe">This Person has no Recips ordered</string>
+    <string name="Empty_for_Friends">No friends recorded</string>
+
+    <string name="No_Photos">No Photos</string>
+
 </resources>
