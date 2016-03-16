@@ -18,6 +18,8 @@ import com.tableview.storage.DTTableViewManager;
 import com.tableview.utils.CollectionUtil;
 
 import org.ieatta.R;
+import org.ieatta.cells.IEANearRestaurantMoreCell;
+import org.ieatta.cells.IEANearRestaurantsCell;
 import org.ieatta.cells.model.IEANearRestaurantMore;
 import org.ieatta.provide.MainSegueIdentifier;
 
@@ -52,17 +54,17 @@ public class NearRestaurantsActivity extends AppCompatActivity {
     }
 
     private void setupUI() {
-//        this.manager.setRegisterCellClassWhenSelected(IEANearRestaurantsCell.getType(), NearRestaurantSection.sectionRestaurants.ordinal());
+        this.manager.setRegisterCellClassWhenSelected(IEANearRestaurantsCell.getType(), NearRestaurantSection.sectionRestaurants.ordinal());
+        this.manager.setRegisterCellClassWhenSelected(IEANearRestaurantMoreCell.getType(), NearRestaurantSection.sectionMoreItems.ordinal());
     }
 
     private void configModelsInMoreSection() {
-//        this.manager.setRegisterCellClassWhenSelected(IEANearRestaurantMoreCell.getType(), NearRestaurantSection.sectionMoreItems.ordinal());
 //        this.manager.appendSectionTitleCell(new SectionTitleCellModel(IEAEditKey.Section_Title, R.string.More), NearRestaurantSection.sectionMoreItems.ordinal());
-//        this.manager.setSectionItems(new List(getNearRestaurantMoresItems()), NearRestaurantSection.sectionMoreItems.ordinal());
+//        this.manager.setSectionItems(new List(getMoresItems()), NearRestaurantSection.sectionMoreItems.ordinal());
     }
 
     @NonNull
-    private List<IEANearRestaurantMore> getNearRestaurantMoresItems() {
+    private List<IEANearRestaurantMore> getMoresItems() {
         IEANearRestaurantMore managerRestaurantItem = new IEANearRestaurantMore(R.drawable.restaurants_icon, R.string.Add_a_Restaurant, MainSegueIdentifier.editRestaurantSegueIdentifier);
         IEANearRestaurantMore searchRestaurant = new IEANearRestaurantMore(R.drawable.nav_search, R.string.Search_Restaurants, MainSegueIdentifier.searchRestaurantSegueIdentifier);
         IEANearRestaurantMore managerPeople = new IEANearRestaurantMore(R.drawable.nav_add_friends, R.string.Manage_Friends, MainSegueIdentifier.managerPeopleSegueIdentifier);
