@@ -52,17 +52,19 @@ public class NearRestaurantsActivity extends AppCompatActivity {
 
         manager = new RecycleViewManager(this.getApplicationContext());
 
-//        this.setupUI();
+        this.setupUI();
     }
 
     private void setupUI() {
-//        this.manager.setRegisterCellClassWhenSelected(IEANearRestaurantsCell.getType(), NearRestaurantSection.sectionRestaurants.ordinal());
-//        this.manager.setRegisterCellClassWhenSelected(IEANearRestaurantMoreCell.getType(), NearRestaurantSection.sectionMoreItems.ordinal());
+        this.manager.setRegisterCellClassWhenSelected(IEANearRestaurantsCell.getType(), NearRestaurantSection.sectionRestaurants.ordinal());
+        this.manager.setRegisterCellClassWhenSelected(IEANearRestaurantMoreCell.getType(), NearRestaurantSection.sectionMoreItems.ordinal());
+
+        this.manager.appendSectionTitleCell(new SectionTitleCellModel(IEAEditKey.Section_Title, R.string.More), NearRestaurantSection.sectionMoreItems.ordinal());
     }
 
     private void configModelsInMoreSection() {
-//        this.manager.appendSectionTitleCell(new SectionTitleCellModel(IEAEditKey.Section_Title, R.string.More), NearRestaurantSection.sectionMoreItems.ordinal());
-//        this.manager.setSectionItems(new List(getMoresItems()), NearRestaurantSection.sectionMoreItems.ordinal());
+
+        this.manager.setSectionItems(new List(getMoresItems()), NearRestaurantSection.sectionMoreItems.ordinal());
     }
 
     @Override
