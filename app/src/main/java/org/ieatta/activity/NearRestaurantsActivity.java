@@ -31,7 +31,7 @@ enum NearRestaurantSection {
 }
 
 public class NearRestaurantsActivity extends AppCompatActivity {
-//    private RecycleViewManager manager = new RecycleViewManager(this);
+    private RecycleViewManager manager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +50,8 @@ public class NearRestaurantsActivity extends AppCompatActivity {
             }
         });
 
+        manager = new RecycleViewManager(this.getApplicationContext());
+
 //        this.setupUI();
     }
 
@@ -63,15 +65,7 @@ public class NearRestaurantsActivity extends AppCompatActivity {
 //        this.manager.setSectionItems(new List(getMoresItems()), NearRestaurantSection.sectionMoreItems.ordinal());
     }
 
-    @NonNull
-    private List<IEANearRestaurantMore> getMoresItems() {
-        IEANearRestaurantMore managerRestaurantItem = new IEANearRestaurantMore(R.drawable.restaurants_icon, R.string.Add_a_Restaurant, MainSegueIdentifier.editRestaurantSegueIdentifier);
-        IEANearRestaurantMore searchRestaurant = new IEANearRestaurantMore(R.drawable.nav_search, R.string.Search_Restaurants, MainSegueIdentifier.searchRestaurantSegueIdentifier);
-        IEANearRestaurantMore managerPeople = new IEANearRestaurantMore(R.drawable.nav_add_friends, R.string.Manage_Friends, MainSegueIdentifier.managerPeopleSegueIdentifier);
-        IEANearRestaurantMore readReviews = new IEANearRestaurantMore(R.drawable.nav_passport_reviews, R.string.Read_Reviews, MainSegueIdentifier.readReviewsSegueIdentifier);
 
-        return CollectionUtil.createList(new IEANearRestaurantMore[]{managerRestaurantItem, searchRestaurant, managerPeople, readReviews});
-    }
 
 
     @Override

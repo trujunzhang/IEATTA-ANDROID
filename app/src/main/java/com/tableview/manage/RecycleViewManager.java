@@ -17,7 +17,7 @@ import java.util.List;
 public class RecycleViewManager {
     public DTTableViewManager manager = null;
 
-    public RecycleViewManager(Activity context) {
+    public RecycleViewManager(Context context) {
         TableViewConfiguration config =
                 new TableViewConfiguration.Builder(context)
                         .setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false))
