@@ -1,6 +1,7 @@
 package org.ieatta.activity;
 
 import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -24,6 +25,7 @@ import org.ieatta.cells.SectionTitleCellModel;
 import org.ieatta.cells.model.IEANearRestaurantMore;
 import org.ieatta.provide.IEAEditKey;
 import org.ieatta.provide.MainSegueIdentifier;
+import org.wikipedia.activity.CompatSingleFragmentActivity;
 
 import java.util.List;
 
@@ -32,11 +34,11 @@ enum NearRestaurantSection {
     sectionRestaurants, //= 1
 }
 
-public class NearRestaurantsActivity extends AppCompatActivity {
+public class NearRestaurantsActivity extends CompatSingleFragmentActivity<NearRestaurantsFragment> {
     private RecycleViewManager manager;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_near_restaurants);
 
@@ -52,9 +54,9 @@ public class NearRestaurantsActivity extends AppCompatActivity {
             }
         });
 
-        manager = new RecycleViewManager(this.getApplicationContext());
-        this.setupUI();
-        this.manager.setSectionItems(IEANearRestaurantMore.getMoresItems(), NearRestaurantSection.sectionMoreItems.ordinal());
+//        manager = new RecycleViewManager(this.getApplicationContext());
+//        this.setupUI();
+//        this.manager.setSectionItems(IEANearRestaurantMore.getMoresItems(), NearRestaurantSection.sectionMoreItems.ordinal());
     }
 
     private void setupUI() {
@@ -66,7 +68,6 @@ public class NearRestaurantsActivity extends AppCompatActivity {
 
     private void configModelsInMoreSection() {
 
-//
     }
 
     @Override
@@ -91,4 +92,12 @@ public class NearRestaurantsActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    protected NearRestaurantsFragment createFragment(){
+        return NearRestaurantsFragment.newInstance();
+    }
+
+    @Override
+    protected void addFragment(NearRestaurantsFragment fragment) {
+
+    }
 }
