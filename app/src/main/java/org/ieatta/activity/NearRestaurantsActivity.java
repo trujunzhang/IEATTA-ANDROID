@@ -50,7 +50,7 @@ public class NearRestaurantsActivity extends AppCompatActivity {
             }
         });
 
-        this.setupUI();
+//        this.setupUI();
     }
 
     private void setupUI() {
