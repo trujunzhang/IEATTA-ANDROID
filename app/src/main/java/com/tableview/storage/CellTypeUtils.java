@@ -3,6 +3,7 @@ package com.tableview.storage;
 import com.tableview.storage.models.CellType;
 import com.tableview.storage.models.RowModel;
 
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 
 public class CellTypeUtils {
@@ -18,9 +19,9 @@ public class CellTypeUtils {
      * key: cell's type, also is viewType.
      * value: cell's class.
      */
-    private LinkedHashMap<Integer, Class> rowTypes = new LinkedHashMap<>();
+    private HashMap<Integer, Class> rowTypes = new LinkedHashMap<>();
 
-    private LinkedHashMap<Class, Integer> modelTypes = new LinkedHashMap<>();
+    private HashMap<Class, Integer> modelTypes = new LinkedHashMap<>();
 
     public void registerType(CellType type) {
         modelTypes.put(type.cellClass, type.layoutResId);
@@ -33,12 +34,12 @@ public class CellTypeUtils {
 
     public int getRowModelType(RowModel rowModel) {
         for (Integer index : self.rowTypes.keySet()) {
-            Class classzz = self.rowTypes.get(index);
-            if (classzz == null) {
+            Class clazz = self.rowTypes.get(index);
+            if (clazz == null) {
                 int x = 0;
-//                assert("not found class type: "+classzz.getName()+",you need to register it.");
+//                assert("not found class type: "+clazz.getName()+",you need to register it.");
             }
-            if (rowModel.cellType.cellClass.equals(classzz)) {
+            if (rowModel.cellType.cellClass.equals(clazz)) {
                 return index.intValue();
             }
         }
