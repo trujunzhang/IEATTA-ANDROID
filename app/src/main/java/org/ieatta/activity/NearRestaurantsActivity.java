@@ -53,8 +53,8 @@ public class NearRestaurantsActivity extends AppCompatActivity {
         });
 
         manager = new RecycleViewManager(this.getApplicationContext());
-
         this.setupUI();
+        this.manager.setSectionItems(IEANearRestaurantMore.getMoresItems(), NearRestaurantSection.sectionMoreItems.ordinal());
     }
 
     private void setupUI() {
@@ -66,7 +66,7 @@ public class NearRestaurantsActivity extends AppCompatActivity {
 
     private void configModelsInMoreSection() {
 
-//        this.manager.setSectionItems(new List(getMoresItems()), NearRestaurantSection.sectionMoreItems.ordinal());
+//
     }
 
     @Override
