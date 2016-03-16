@@ -1,5 +1,7 @@
 package org.ieatta.cells.model;
 
+import org.ieatta.provide.IEAEditKey;
+
 public class EditBaseCellModel {
     public IEAEditKey editKey = IEAEditKey.Unknow;
     public String editValue;
