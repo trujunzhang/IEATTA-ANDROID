@@ -30,8 +30,10 @@ public class CrashReportFragment extends CallbackFragment<CrashReportFragmentCal
         setOnClickListener(view, R.id.crash_report_start_over, new StartOverOnClickListener());
         setOnClickListener(view, R.id.crash_report_quit, new QuitOnClickListener());
 
-        setIconColor(view.findViewById(R.id.crash_report_icon).getBackground().mutate(),
-                getContrastingThemeColor());
+        View viewById = view.findViewById(R.id.crash_report_icon);
+        Drawable background = viewById.getBackground();
+        Drawable mutate = background.mutate();
+        setIconColor(mutate,getContrastingThemeColor());
 
         return view;
     }
