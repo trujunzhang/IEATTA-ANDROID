@@ -47,8 +47,9 @@ import android.widget.TextView;
 import org.ieatta.R;
 import org.ieatta.activity.fragments.NearRestaurantsFragment;
 import org.wikipedia.activity.PlatformSingleFragmentActivity;
+import org.wikipedia.activity.ThemedActionBarActivity;
 
-public class PageActivity extends PlatformSingleFragmentActivity<NearRestaurantsFragment> {
+public class PageActivity extends ThemedActionBarActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -94,8 +95,4 @@ public class PageActivity extends PlatformSingleFragmentActivity<NearRestaurants
         return NearRestaurantsFragment.newInstance();
     }
 
-    @Override
-    protected void addFragment(NearRestaurantsFragment fragment) {
-
-    }
 }
