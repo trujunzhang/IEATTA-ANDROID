@@ -1,17 +1,40 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+    <!--<style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">-->
+        <!--&lt;!&ndash; Customize your theme here. &ndash;&gt;-->
+        <!--<item name="colorPrimary">@color/colorPrimary</item>-->
+        <!--<item name="colorPrimaryDark">@color/colorPrimaryDark</item>-->
+        <!--<item name="colorAccent">@color/colorAccent</item>-->
+        <!--<item name="android:statusBarColor" tools:ignore="NewApi">@color/status_bar_background</item>-->
+    <!--</style>-->
+
+    <style name="AppTheme" parent="Theme.Light">
+        <item name="editTextAutoSummarizePreferenceStyle">@style/EditTextAutoSummarizePreference</item>
+        <item name="longPreferenceStyle">@style/LongPreference</item>
+        <item name="intPreferenceStyle">@style/IntPreference</item>
+        <item name="android:windowBackground">@drawable/splash_bg</item>
         <item name="android:statusBarColor" tools:ignore="NewApi">@color/status_bar_background</item>
     </style>
 
-    <style name="AppTheme.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
+
+    <style name="EditTextAutoSummarizePreference">
+        <!-- parent="@android:style/Preference.DialogPreference.EditTextPreference" is not exposed. -->
     </style>
+
+    <style name="LongPreference" parent="EditTextAutoSummarizePreference">
+        <item name="android:inputType">number</item>
+        <item name="android:maxLength">20</item>
+        <item name="android:gravity">right|end</item>
+    </style>
+
+    <style name="IntPreference" parent="LongPreference">
+        <item name="android:maxLength">11</item>
+    </style>
+
+    <!--<style name="AppTheme.NoActionBar">-->
+        <!--<item name="windowActionBar">false</item>-->
+        <!--<item name="windowNoTitle">true</item>-->
+    <!--</style>-->
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
