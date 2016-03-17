@@ -230,8 +230,6 @@ public class PageActivity extends ThemedActionBarActivity {
 
         searchBarHideHandler = new SearchBarHideHandler(this, toolbarContainer);
 
-        boolean languageChanged = false;
-
         if (savedInstanceState != null) {
             isZeroEnabled = savedInstanceState.getBoolean("pausedZeroEnabledState");
             if (savedInstanceState.getBoolean("isSearching")) {
