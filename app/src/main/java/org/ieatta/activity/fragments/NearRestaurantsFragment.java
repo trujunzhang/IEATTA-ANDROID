@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import org.ieatta.R;
 
 public class NearRestaurantsFragment extends IEAFragment {
+//    private RecycleViewManager manager;
     public static NearRestaurantsFragment newInstance() {
         return new NearRestaurantsFragment();
     }
