@@ -8,7 +8,7 @@ import java.util.LinkedHashMap;
 
 public class CellTypeUtils {
     public CellType getModelType(int viewType) {
-        Class aClass = this.rowTypes.get(new Integer(viewType));
+        Class aClass = this.rowTypes.get(Integer.valueOf(viewType));
         int layResId = this.modelTypes.get(aClass).intValue();
         return new CellType(aClass, layResId);
     }
@@ -26,7 +26,7 @@ public class CellTypeUtils {
 
         if (this.isExistRegisterType(type.cellClass) == false) {
             int size = this.rowTypes.size();
-            this.rowTypes.put(new Integer(size), type.cellClass);
+            this.rowTypes.put(Integer.valueOf(size), type.cellClass);
         }
     }
 
