@@ -16,7 +16,7 @@ public class MemoryStorage {
     private TableViewUtils tableViewUtils = new TableViewUtils();
 
     public HashMap<Integer, SectionModel> sections = new LinkedHashMap<>();
-    public CellTypeUtils cellTypeUtils = new CellTypeUtils();
+    public CellTypeUtil cellTypeUtil = new CellTypeUtil();
 
     public MemoryStorage(TableViewControllerAdapter adapter) {
         this.adapter = adapter;
@@ -52,7 +52,7 @@ public class MemoryStorage {
     /// - Parameter sectionIndex: index of section for setting header
     public void setSectionHeaderModel(Object model, int forSectionIndex, CellType type) {
         // Step1: Register cell type.
-        cellTypeUtils.registerType(type);
+        cellTypeUtil.registerType(type);
 
         // Step2: Create/Add a Header Section.
         SectionModel section = this.verifySection(forSectionIndex);
@@ -67,7 +67,7 @@ public class MemoryStorage {
     /// - Parameter sectionIndex: index of section for setting footer
     public void setSectionFooterModel(Object model, int forSectionIndex, CellType type) {
         // Step1: Register cell type.
-        cellTypeUtils.registerType(type);
+        cellTypeUtil.registerType(type);
 
         // Step2: Create/Add a Footer Section.
         SectionModel section = this.verifySection(forSectionIndex);
@@ -94,7 +94,7 @@ public class MemoryStorage {
 
     public void registerCellClass(CellType type, int forSectionIndex) {
         // Step1: Register class type
-        cellTypeUtils.registerType(type);
+        cellTypeUtil.registerType(type);
 
         // Step2: Create/Modify a section.
         SectionModel section = this.verifySection(forSectionIndex);
@@ -103,7 +103,7 @@ public class MemoryStorage {
 
     public void registerCellClassInSpecialRow(CellType type, int forSectionIndex, int forRowIndex) {
         // Step1: Register class type
-        cellTypeUtils.registerType(type);
+        cellTypeUtil.registerType(type);
 
         // Step2: Create/Modify a section.
         SectionModel section = this.verifySection(forSectionIndex);
@@ -125,7 +125,7 @@ public class MemoryStorage {
 
     public int getItemViewType(int position) {
         RowModel rowModel = this.getRowModelFromPosition(position);
-        int type = cellTypeUtils.getRowModelType(rowModel);
+        int type = cellTypeUtil.getRowModelType(rowModel);
         return type;
     }
 

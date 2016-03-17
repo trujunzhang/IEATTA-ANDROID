@@ -25,7 +25,6 @@ public class RecycleViewManager {
                 new TableViewConfiguration.Builder(context)
                         .setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false))
                         .setItemDecoration(new TableViewDividerDecoration(context))
-//                        .setOnItemClickListener(context)
                         .setDebugInfo("Activity_Table_View")
                         .build();
         this.manager = new DTTableViewManager(config);

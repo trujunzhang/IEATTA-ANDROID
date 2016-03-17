@@ -4,6 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.tableview.adapter.RecyclerItemClickListener;
 import com.tableview.adapter.TableViewControllerAdapter;
 import com.tableview.adapter.IEAViewHolder;
 import com.tableview.storage.models.CellType;
@@ -17,7 +18,11 @@ public class DTTableViewManager {
 
     public DTTableViewManager(TableViewConfiguration configuration) {
         this.configuration = configuration;
-        this.memoryStorage = new MemoryStorage(new TableViewControllerAdapter(configuration.builder.context, this, configuration.builder.itemClickListener));
+        this.memoryStorage = new MemoryStorage(new TableViewControllerAdapter(configuration.builder.context, this));
+    }
+
+    public RecyclerItemClickListener getItemClickListener(){
+        return configuration.builder.itemClickListener;
     }
 
     public TableViewControllerAdapter getAdapter() {
@@ -29,15 +34,15 @@ public class DTTableViewManager {
     }
 
     public void registerHeaderClass(CellType type) {
-        this.memoryStorage.cellTypeUtils.registerType(type);
+        this.memoryStorage.cellTypeUtil.registerType(type);
     }
 
     public void registerFooterClass(CellType type) {
-        this.memoryStorage.cellTypeUtils.registerType(type);
+        this.memoryStorage.cellTypeUtil.registerType(type);
     }
 
     public IEAViewHolder createViewHolder(ViewGroup parent, int viewType) {
-        CellType cellType = this.memoryStorage.cellTypeUtils.getModelType(viewType);
+        CellType cellType = this.memoryStorage.cellTypeUtil.getModelType(viewType);
         Class cellClass = cellType.cellClass;
         int layoutResId = cellType.layoutResId;
 

@@ -11,12 +11,10 @@ import com.tableview.storage.models.RowModel;
 public class TableViewControllerAdapter extends RecyclerView.Adapter<IEAViewHolder> {
     private Context context;
     private DTTableViewManager manager;
-    private RecyclerItemClickListener itemClickListener;
 
-    public TableViewControllerAdapter(Context context, DTTableViewManager manager, RecyclerItemClickListener itemClickListener) {
+    public TableViewControllerAdapter(Context context, DTTableViewManager manager) {
         this.context = context;
         this.manager = manager;
-        this.itemClickListener = itemClickListener;
     }
 
     @Override
@@ -32,7 +30,7 @@ public class TableViewControllerAdapter extends RecyclerView.Adapter<IEAViewHold
             @Override
             public void onClick(View view, int position, boolean isLongClick) {
                 RowModel item = TableViewControllerAdapter.this.manager.memoryStorage.getItem(position);
-                TableViewControllerAdapter.this.itemClickListener.onItemClick(view, item.indexPath, item.model, position, isLongClick);
+                TableViewControllerAdapter.this.manager.getItemClickListener().onItemClick(view, item.indexPath, item.model, position, isLongClick);
             }
         });
     }

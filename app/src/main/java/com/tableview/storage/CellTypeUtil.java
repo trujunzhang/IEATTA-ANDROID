@@ -6,7 +6,7 @@ import com.tableview.storage.models.RowModel;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 
-public class CellTypeUtils {
+public class CellTypeUtil {
     public CellType getModelType(int viewType) {
         Class aClass = this.rowTypes.get(Integer.valueOf(viewType));
         int layResId = this.modelTypes.get(aClass).intValue();
