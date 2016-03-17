@@ -6,10 +6,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.tableview.manage.RecycleViewManager;
+
 import org.ieatta.R;
 
 public class NearRestaurantsFragment extends PageFragment {
-//    private RecycleViewManager manager;
+    private RecycleViewManager manager;
     public static NearRestaurantsFragment newInstance() {
         return new NearRestaurantsFragment();
     }

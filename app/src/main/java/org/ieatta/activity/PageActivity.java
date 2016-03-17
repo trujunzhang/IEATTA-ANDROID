@@ -246,6 +246,7 @@ public class PageActivity extends ThemedActionBarActivity {
             // then we must have been launched with an Intent, so... handle it!
             handleIntent(getIntent());
         }
+        loadMainPageIfNoTabs();
 
         // Conditionally execute all recurring tasks
 //        new RecurringTasksExecutor(app).run();
@@ -542,8 +543,44 @@ public class PageActivity extends ThemedActionBarActivity {
     }
 
     private void loadMainPageIfNoTabs() {
-//        loadMainPage(false, TabPosition.CURRENT_TAB, true);
+        loadPage(new NearRestaurantsFragment(),TabPosition.CURRENT_TAB, false, true);
     }
+
+    public void loadPage(PageFragment fragment,final TabPosition position,
+                         boolean allowStateLoss,
+                         final boolean mustBeEmpty) {
+        if (isDestroyed()) {
+            return;
+        }
+
+//        app.putCrashReportProperty("api", title.getSite().getDomain());
+//        app.putCrashReportProperty("title", title.toString());
+
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            closeNavDrawer();
+        }
+
+        pushFragment(fragment, allowStateLoss);
+
+        fragmentContainerView.post(new Runnable() {
+            @Override
+            public void run() {
+                PageFragment frag = getCurPageFragment();
+                if (frag == null) {
+                    return;
+                }
+                if (position == TabPosition.CURRENT_TAB) {
+//                    frag.loadPage(title, entry, PageLoadStrategy.Cache.FALLBACK, true);
+                } else if (position == TabPosition.NEW_TAB_BACKGROUND) {
+//                    frag.openInNewBackgroundTabFromMenu(title, entry);
+                } else {
+//                    frag.openInNewForegroundTabFromMenu(title, entry);
+                }
+//                app.getSessionFunnel().pageViewed(entry);
+            }
+        });
+    }
+
 
     private class EventBusMethods {
 //        @Subscribe
