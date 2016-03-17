@@ -9,7 +9,7 @@ import android.support.annotation.VisibleForTesting;
 
 import org.ieatta.IEAApp;
 import org.ieatta.activity.editing.EditHandler;
-import org.ieatta.activity.fragments.IEAFragment;
+import org.ieatta.activity.fragments.PageFragment;
 
 import org.wikipedia.util.log.L;
 
@@ -65,14 +65,14 @@ public class JsonPageLoadStrategy implements PageLoadStrategy {
     private ErrorCallback networkErrorCallback;
 
     // copied fields
-    private IEAFragment fragment;
+    private PageFragment fragment;
     private PageActivity activity;
     @NonNull private final IEAApp app = IEAApp.getInstance();
     private EditHandler editHandler;
 
     @Override
     @SuppressWarnings("checkstyle:parameternumber")
-    public void setUp(@NonNull IEAFragment fragment,
+    public void setUp(@NonNull PageFragment fragment,
                         @NonNull List<PageBackStackItem> backStack) {
         this.fragment = fragment;
         activity = (PageActivity) fragment.getActivity();

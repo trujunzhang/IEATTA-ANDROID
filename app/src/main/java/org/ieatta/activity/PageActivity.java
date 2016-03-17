@@ -2,10 +2,43 @@ package org.ieatta.activity;
 
 import android.os.Bundle;
 
+import android.os.Looper;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.view.GravityCompat;
+import android.support.v7.view.ActionMode;
+import android.text.format.DateUtils;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.TextView;
+
+import com.squareup.otto.Bus;
+import com.squareup.otto.Subscribe;
+
+import org.ieatta.IEAApp;
+import org.ieatta.R;
+import org.ieatta.activity.fragments.NearRestaurantsFragment;
+import org.ieatta.activity.fragments.search.SearchArticlesFragment;
+import org.ieatta.activity.fragments.search.SearchBarHideHandler;
+import org.ieatta.views.WikiDrawerLayout;
+import org.wikipedia.activity.ThemedActionBarActivity;
+
+
+import org.wikipedia.BackPressedHandler;
+import org.wikipedia.Site;
+import org.wikipedia.activity.ActivityUtil;
+import org.wikipedia.activity.ThemedActionBarActivity;
+import org.wikipedia.ViewAnimations;
+import org.wikipedia.analytics.IntentFunnel;
+import org.wikipedia.settings.Prefs;
+import org.wikipedia.util.ApiUtil;
+import org.wikipedia.util.FeedbackUtil;
+import org.wikipedia.util.log.L;
+
 
 import android.annotation.TargetApi;
 import android.app.SearchManager;
@@ -44,55 +77,744 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import org.ieatta.R;
-import org.ieatta.activity.fragments.NearRestaurantsFragment;
-import org.wikipedia.activity.PlatformSingleFragmentActivity;
-import org.wikipedia.activity.ThemedActionBarActivity;
-
 public class PageActivity extends ThemedActionBarActivity {
+
+    public enum TabPosition {
+        CURRENT_TAB,
+        NEW_TAB_BACKGROUND,
+        NEW_TAB_FOREGROUND
+    }
+
+    public static final int ACTIVITY_REQUEST_LANGLINKS = 0;
+    public static final int ACTIVITY_REQUEST_EDIT_SECTION = 1;
+    public static final int ACTIVITY_REQUEST_GALLERY = 2;
+
+    public static final int PROGRESS_BAR_MAX_VALUE = 10000;
+
+    public static final String ACTION_PAGE_FOR_TITLE = "org.wikipedia.page_for_title";
+    public static final String EXTRA_PAGETITLE = "org.wikipedia.pagetitle";
+    public static final String EXTRA_HISTORYENTRY  = "org.wikipedia.history.historyentry";
+    public static final String EXTRA_SEARCH_FROM_WIDGET = "searchFromWidget";
+    public static final String EXTRA_FEATURED_ARTICLE_FROM_WIDGET = "featuredArticleFromWidget";
+
+    private static final String ZERO_ON_NOTICE_PRESENTED = "org.wikipedia.zero.zeroOnNoticePresented";
+    private static final String LANGUAGE_CODE_BUNDLE_KEY = "language";
+    private static final String PLAIN_TEXT_MIME_TYPE = "text/plain";
+    private static final String LINK_PREVIEW_FRAGMENT_TAG = "link_preview_dialog";
+
+    private Bus bus;
+    private EventBusMethods busMethods;
+    private IEAApp app;
+    private View fragmentContainerView;
+    private View tabsContainerView;
+    private WikiDrawerLayout drawerLayout;
+    private Menu navMenu;
+    private SearchArticlesFragment searchFragment;
+    private TextView searchHintText;
+    private View toolbarContainer;
+    private CompatActionMode currentActionMode;
+    private ActionBarDrawerToggle mDrawerToggle;
+    private SearchBarHideHandler searchBarHideHandler;
+    private boolean isZeroEnabled;
+    private ZeroConfig currentZeroConfig;
+    private ThemeChooserDialog themeChooser;
+    private RandomHandler randomHandler;
+    private NavDrawerHelper navDrawerHelper;
+    private boolean navItemSelected;
+    private WikipediaZeroUsageFunnel zeroFunnel;
+
+    public View getContentView() {
+        return fragmentContainerView;
+    }
+
+    public View getTabsContainerView() {
+        return tabsContainerView;
+    }
+
+    public ActionBarDrawerToggle getDrawerToggle() {
+        return mDrawerToggle;
+    }
+
+    public SearchBarHideHandler getSearchBarHideHandler() {
+        return searchBarHideHandler;
+    }
+
+    public Menu getNavMenu() {
+        return navMenu;
+    }
+
+    /**
+     * Get the Fragment that is currently at the top of the Activity's backstack.
+     * This activity's fragment container will hold multiple fragments stacked onto
+     * each other using FragmentManager, and this function will return the current
+     * topmost Fragment. It's up to the caller to cast the result to a more specific
+     * fragment class, and perform actions on it.
+     * @return Fragment at the top of the backstack.
+     */
+    public Fragment getTopFragment() {
+        return getSupportFragmentManager().findFragmentById(R.id.content_fragment_container);
+    }
+
+    /**
+     * Get the PageViewFragment that is currently at the top of the Activity's backstack.
+     * If the current topmost fragment is not a PageViewFragment, return null.
+     * @return The PageViewFragment at the top of the backstack, or null if the current
+     * top fragment is not a PageViewFragment.
+     */
+    @Nullable public PageFragment getCurPageFragment() {
+        Fragment f = getTopFragment();
+        if (f instanceof PageFragment) {
+            return (PageFragment) f;
+        } else {
+            return null;
+        }
+    }
+
+    public void setNavItemSelected(boolean wasSelected) {
+        navItemSelected = wasSelected;
+    }
+
+    private boolean wasNavItemSelected() {
+        return navItemSelected;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        app = (IEAApp) getApplicationContext();
+        app.checkCrashes(this);
+
         setContentView(R.layout.activity_page);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        setSupportActionBar((Toolbar) findViewById(R.id.main_toolbar));
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        toolbarContainer = findViewById(R.id.main_toolbar_container);
+
+        busMethods = new EventBusMethods();
+        registerBus();
+
+        fragmentContainerView = findViewById(R.id.content_fragment_container);
+        tabsContainerView = findViewById(R.id.tabs_container);
+
+        drawerLayout = (WikiDrawerLayout) findViewById(R.id.drawer_layout);
+        if (!ApiUtil.hasLollipop()) {
+            drawerLayout.setDrawerShadow(R.drawable.nav_drawer_shadow, GravityCompat.START);
+        }
+        NavigationView navDrawer = (NavigationView) findViewById(R.id.navdrawer);
+        navMenu = navDrawer.getMenu();
+        navDrawerHelper = new NavDrawerHelper(this, navDrawer.getHeaderView(0));
+        navDrawer.setNavigationItemSelectedListener(navDrawerHelper.getNewListener());
+
+        randomHandler = navDrawerHelper.getNewRandomHandler();
+
+        searchFragment = (SearchArticlesFragment) getSupportFragmentManager().findFragmentById(R.id.search_fragment);
+        searchHintText = (TextView) findViewById(R.id.main_search_bar_text);
+        searchHintText.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+            public void onClick(View v) {
+                searchFragment.openSearch();
+            }
+        });
+
+        mDrawerToggle = new MainDrawerToggle(
+                this,                  /* host Activity */
+                drawerLayout,          /* DrawerLayout object */
+                R.string.app_name,     /* "open drawer" description */
+                R.string.app_name      /* "close drawer" description */
+        );
+
+        // Set the drawer toggle as the DrawerListener
+        drawerLayout.setDrawerListener(mDrawerToggle);
+        drawerLayout.setDragEdgeWidth(
+                getResources().getDimensionPixelSize(R.dimen.drawer_drag_margin));
+        getSupportActionBar().setTitle("");
+
+        searchBarHideHandler = new SearchBarHideHandler(this, toolbarContainer);
+
+        boolean languageChanged = false;
+
+        zeroFunnel = app.getWikipediaZeroHandler().getZeroFunnel();
+        if (savedInstanceState != null) {
+            isZeroEnabled = savedInstanceState.getBoolean("pausedZeroEnabledState");
+            currentZeroConfig = savedInstanceState.getParcelable("pausedZeroConfig");
+            if (savedInstanceState.containsKey("themeChooserShowing")) {
+                if (savedInstanceState.getBoolean("themeChooserShowing")) {
+                    showThemeChooser();
+                }
+            }
+            if (savedInstanceState.getBoolean("isSearching")) {
+                searchFragment.openSearch();
+            }
+            String language = savedInstanceState.getString(LANGUAGE_CODE_BUNDLE_KEY);
+            languageChanged = !app.getAppOrSystemLanguageCode().equals(language);
+
+            // Note: when system language is enabled, and the system language is changed outside of
+            // the app, MRU languages are not updated. There's no harm in doing that here but since
+            // the user didin't choose that language in app, it may be unexpected.
+        }
+        searchHintText.setText(getString(isZeroEnabled ? R.string.zero_search_hint : R.string.search_hint));
+
+        if (languageChanged) {
+            app.resetSite();
+            loadMainPageInForegroundTab();
+        }
+
+        if (savedInstanceState == null) {
+            // if there's no savedInstanceState, and we're not coming back from a Theme change,
+            // then we must have been launched with an Intent, so... handle it!
+            handleIntent(getIntent());
+        }
+
+        // Conditionally execute all recurring tasks
+        new RecurringTasksExecutor(app).run();
+    }
+
+    private void finishActionMode() {
+        currentActionMode.finish();
+    }
+
+    private void nullifyActionMode() {
+        currentActionMode = null;
+    }
+
+    private class MainDrawerToggle extends ActionBarDrawerToggle {
+        private boolean oncePerSlideLock = false;
+
+        MainDrawerToggle(android.app.Activity activity,
+                         android.support.v4.widget.DrawerLayout drawerLayout,
+                         int openDrawerContentDescRes, int closeDrawerContentDescRes) {
+            super(activity, drawerLayout, openDrawerContentDescRes, closeDrawerContentDescRes);
+        }
+
+        @Override
+        public void onDrawerClosed(View view) {
+            super.onDrawerClosed(view);
+            // if we want to change the title upon closing:
+            //getSupportActionBar().setTitle("");
+            if (!wasNavItemSelected()) {
+                navDrawerHelper.getFunnel().logCancel();
+            }
+            setNavItemSelected(false);
+        }
+
+        @Override
+        public void onDrawerOpened(View drawerView) {
+            super.onDrawerOpened(drawerView);
+            // if we want to change the title upon opening:
+            //getSupportActionBar().setTitle("");
+            // If we're in the search state, then get out of it.
+            if (isSearching()) {
+                searchFragment.closeSearch();
+            }
+            // also make sure we're not inside an action mode
+            if (isCabOpen()) {
+                finishActionMode();
+            }
+            updateNavDrawerSelection(getTopFragment());
+            navDrawerHelper.getFunnel().logOpen();
+        }
+
+        @Override
+        public void onDrawerSlide(View drawerView, float slideOffset) {
+            super.onDrawerSlide(drawerView, 0);
+            if (!oncePerSlideLock) {
+                // Hide the keyboard when the drawer is opened
+                hideSoftKeyboard(PageActivity.this);
+                //also make sure ToC is hidden
+                if (getCurPageFragment() != null) {
+                    getCurPageFragment().toggleToC(PageFragment.TOC_ACTION_HIDE);
+                }
+                //and make sure to update dynamic items and highlights
+                navDrawerHelper.setupDynamicNavDrawerItems();
+                oncePerSlideLock = true;
+            }
+            // and make sure the Toolbar is showing
+            showToolbar();
+        }
+
+        @Override
+        public void onDrawerStateChanged(int newState) {
+            super.onDrawerStateChanged(newState);
+            if (newState == DrawerLayout.STATE_IDLE) {
+                oncePerSlideLock = false;
+            }
+        }
+    }
+
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        // Sync the toggle state after onRestoreInstanceState has occurred.
+        mDrawerToggle.syncState();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        mDrawerToggle.onConfigurationChanged(newConfig);
+    }
+
+    // Note: this method is invoked even when in CAB mode.
+    @Override
+    public boolean dispatchKeyEvent(@NonNull KeyEvent event) {
+        return isBackKeyUp(event) && ToolTipUtil.dismissToolTip(this)
+                || super.dispatchKeyEvent(event);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Pass the event to ActionBarDrawerToggle, if it returns
+        // true, then it has handled the app icon touch event
+        if (mDrawerToggle.onOptionsItemSelected(item)) {
+            return true;
+        }
+        // Handle other action bar items...
+        return ActivityUtil.defaultOnOptionsItemSelected(this, item)
+                || super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onSearchRequested() {
+        showToolbar();
+        searchFragment.openSearch();
+        return true;
+    }
+
+    public void showToolbar() {
+        ViewAnimations.ensureTranslationY(toolbarContainer, 0);
+    }
+
+    public void setNavMenuItemRandomEnabled(boolean enabled) {
+        navMenu.findItem(R.id.nav_item_random).setEnabled(enabled);
+    }
+
+    /** @return True if the contextual action bar is open. */
+    public boolean isCabOpen() {
+        return currentActionMode != null;
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(intent);
+        handleIntent(intent);
+    }
+
+    private void handleIntent(Intent intent) {
+        if (Intent.ACTION_VIEW.equals(intent.getAction()) && intent.getData() != null) {
+            Site site = new Site(intent.getData().getAuthority());
+            PageTitle title = site.titleForUri(intent.getData());
+            HistoryEntry historyEntry = new HistoryEntry(title, HistoryEntry.SOURCE_EXTERNAL_LINK);
+            loadPageInForegroundTab(title, historyEntry);
+        } else if (ACTION_PAGE_FOR_TITLE.equals(intent.getAction())) {
+            PageTitle title = intent.getParcelableExtra(EXTRA_PAGETITLE);
+            HistoryEntry historyEntry = intent.getParcelableExtra(EXTRA_HISTORYENTRY);
+            loadPage(title, historyEntry);
+        } else if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+            String query = intent.getStringExtra(SearchManager.QUERY);
+            PageTitle title = new PageTitle(query, app.getSite());
+            HistoryEntry historyEntry = new HistoryEntry(title, HistoryEntry.SOURCE_SEARCH);
+            loadPageInForegroundTab(title, historyEntry);
+        } else if (Intent.ACTION_SEND.equals(intent.getAction())
+                && PLAIN_TEXT_MIME_TYPE.equals(intent.getType())) {
+            new IntentFunnel(app).logShareIntent();
+            handleShareIntent(intent);
+        } else if (Intent.ACTION_PROCESS_TEXT.equals(intent.getAction())
+                && PLAIN_TEXT_MIME_TYPE.equals(intent.getType())) {
+            new IntentFunnel(app).logProcessTextIntent();
+            handleProcessTextIntent(intent);
+        } else if (intent.hasExtra(EXTRA_SEARCH_FROM_WIDGET)) {
+            new IntentFunnel(app).logSearchWidgetTap();
+            openSearch();
+        } else if (intent.hasExtra(EXTRA_FEATURED_ARTICLE_FROM_WIDGET)) {
+            new IntentFunnel(app).logFeaturedArticleWidgetTap();
+            loadMainPageInForegroundTab();
+        } else {
+            loadMainPageIfNoTabs();
+        }
+    }
+
+    private void handleShareIntent(Intent intent) {
+        String text = intent.getStringExtra(Intent.EXTRA_TEXT);
+        openSearch(text == null ? null : text.trim());
+    }
+
+    @TargetApi(Build.VERSION_CODES.M)
+    private void handleProcessTextIntent(Intent intent) {
+        if (!ApiUtil.hasMarshmallow()) {
+            return;
+        }
+        String text = intent.getStringExtra(Intent.EXTRA_PROCESS_TEXT);
+        openSearch(text == null ? null : text.trim());
+    }
+
+    private void openSearch() {
+        openSearch(null);
+    }
+
+    private void openSearch(@Nullable final CharSequence query) {
+        fragmentContainerView.post(new Runnable() {
+            @Override
+            public void run() {
+                searchFragment.setLaunchedFromWidget(true);
+                searchFragment.openSearch();
+                if (query != null) {
+                    searchFragment.setSearchText(query);
+                }
+            }
+        });
+    }
+
+    /**
+     * Returns whether we're currently in a "searching" state (i.e. the search fragment is shown).
+     * @return True if currently searching, false otherwise.
+     */
+    public boolean isSearching() {
+        return searchFragment != null && searchFragment.isSearchActive();
+    }
+
+    public void closeNavDrawer() {
+        drawerLayout.closeDrawer(GravityCompat.START);
+    }
+
+    private void removeAllFragments() {
+        getSupportFragmentManager().popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+    }
+
+    /**
+     * Add a new fragment to the top of the activity's backstack.
+     * @param f New fragment to place on top.
+     */
+    public void pushFragment(Fragment f) {
+        pushFragment(f, false);
+    }
+
+    /**
+     * Add a new fragment to the top of the activity's backstack, and optionally allow state loss.
+     * Useful for cases where we might push a fragment from an AsyncTask result.
+     * @param f New fragment to place on top.
+     * @param allowStateLoss Whether to allow state loss.
+     */
+    public void pushFragment(Fragment f, boolean allowStateLoss) {
+        closeNavDrawer();
+        searchBarHideHandler.setForceNoFade(false);
+        searchBarHideHandler.setFadeEnabled(false);
+        // if the new fragment is the same class as the current topmost fragment,
+        // then just keep the previous fragment there.
+        // e.g. if the user selected History, and there's already a History fragment on top,
+        // then there's no need to load a new History fragment.
+        if (getTopFragment() != null && (getTopFragment().getClass() == f.getClass())) {
+            return;
+        }
+
+        removeAllFragments();
+        FragmentTransaction trans = getSupportFragmentManager().beginTransaction();
+        trans.add(R.id.content_fragment_container, f);
+        trans.addToBackStack(null);
+        if (allowStateLoss) {
+            trans.commitAllowingStateLoss();
+        } else {
+            trans.commit();
+        }
+
+        // and make sure the ActionBar is visible
+        showToolbar();
+    }
+
+    public void resetAfterClearHistory() {
+        removeAllFragments();
+        Prefs.clearTabs();
+        loadMainPageIfNoTabs();
+    }
+
+    /**
+     * Load a new page, and put it on top of the backstack.
+     * @param title Title of the page to load.
+     * @param entry HistoryEntry associated with this page.
+     */
+    public void loadPage(PageTitle title, HistoryEntry entry) {
+        loadPage(title, entry, TabPosition.CURRENT_TAB, false);
+    }
+
+    // Note: back button first handled in {@link #onOptionsItemSelected()};
+    @Override
+    public void onBackPressed() {
+        if (isCabOpen()) {
+            finishActionMode();
+            return;
+        }
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            closeNavDrawer();
+            return;
+        }
+        if (searchFragment.onBackPressed()) {
+            if (searchFragment.isLaunchedFromWidget()) {
+                finish();
+            }
+            return;
+        }
+        boolean onBackPressed = ((BackPressedHandler) getTopFragment()).onBackPressed();
+        if (getTopFragment() instanceof BackPressedHandler
+                && onBackPressed) {
+            return;
+        } else if (!(getTopFragment() instanceof PageFragment)) {
+            pushFragment(new PageFragment(), false);
+            return;
+        }
+        finish();
+    }
+
+    /*package*/ void showPageSavedMessage(@NonNull String title, boolean success) {
+        FeedbackUtil.showMessage(this, getString(success
+                ? R.string.snackbar_saved_page_format
+                : R.string.snackbar_saved_page_missing_images, title));
+    }
+
+    private void loadMainPageIfNoTabs() {
+        loadMainPage(false, TabPosition.CURRENT_TAB, true);
+    }
+
+    private class EventBusMethods {
+        @Subscribe
+        public void onChangeTextSize(ChangeTextSizeEvent event) {
+            if (getCurPageFragment() != null && getCurPageFragment().getWebView() != null) {
+                getCurPageFragment().updateFontSize();
+            }
+        }
+
+        @Subscribe
+        public void onChangeTheme(ThemeChangeEvent event) {
+            PageActivity.this.recreate();
+        }
+
+        @Subscribe
+        public void onWikipediaZeroStateChangeEvent(WikipediaZeroStateChangeEvent event) {
+            boolean latestZeroEnabledState = app.getWikipediaZeroHandler().isZeroEnabled();
+            ZeroConfig latestZeroConfig = app.getWikipediaZeroHandler().getZeroConfig();
+
+            if (leftZeroRatedNetwork(latestZeroEnabledState)) {
+                app.getWikipediaZeroHandler().showZeroOffBanner(PageActivity.this,
+                        getString(R.string.zero_charged_verbiage),
+                        getResources().getColor(R.color.holo_red_dark),
+                        getResources().getColor(android.R.color.white));
+                navDrawerHelper.setupDynamicNavDrawerItems();
+            }
+
+            if (enteredNewZeroRatedNetwork(latestZeroConfig, latestZeroEnabledState)) {
+                app.getWikipediaZeroHandler().showZeroBanner(PageActivity.this, latestZeroConfig);
+                if (!hasSeenZeroInfoDialog()) {
+                    showZeroInfoDialog(latestZeroConfig);
+                    setZeroInfoDialogSeen();
+                }
+                navDrawerHelper.setupDynamicNavDrawerItems();
+            }
+
+            isZeroEnabled = latestZeroEnabledState;
+            currentZeroConfig = latestZeroConfig;
+            searchHintText.setText(getString(
+                    latestZeroEnabledState
+                            ? R.string.zero_search_hint
+                            : R.string.search_hint));
+        }
+    }
+
+    private void showZeroInfoDialog(ZeroConfig zeroConfig) {
+        AlertDialog.Builder alert = new AlertDialog.Builder(this)
+                .setMessage(buildZeroDialogMessage(zeroConfig.getMessage(), getString(R.string.zero_learn_more)))
+                .setPositiveButton(getString(R.string.zero_learn_more_learn_more), getZeroMoreInfoListener())
+                .setNegativeButton(getString(R.string.zero_learn_more_dismiss), getDismissClickListener());
+        AlertDialog dialog = alert.create();
+        dialog.show();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (bus == null) {
+            registerBus();
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        app.resetSite();
+        app.getSessionFunnel().touchSession();
+        boolean latestWikipediaZeroDisposition = app.getWikipediaZeroHandler().isZeroEnabled();
+        if (isZeroEnabled && !latestWikipediaZeroDisposition) {
+            bus.post(new WikipediaZeroStateChangeEvent());
+        }
+        navDrawerHelper.setupDynamicNavDrawerItems();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        isZeroEnabled = app.getWikipediaZeroHandler().isZeroEnabled();
+        currentZeroConfig = app.getWikipediaZeroHandler().getZeroConfig();
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        saveState(outState);
+    }
+
+    public void updateNavDrawerSelection(Fragment fragment) {
+        navDrawerHelper.updateItemSelection(fragment);
+    }
+
+    private void saveState(Bundle outState) {
+        outState.putBoolean("pausedZeroEnabledState", isZeroEnabled);
+        outState.putParcelable("pausedZeroConfig", currentZeroConfig);
+        if (themeChooser != null) {
+            outState.putBoolean("themeChooserShowing", themeChooser.isShowing());
+        }
+        outState.putBoolean("isSearching", isSearching());
+        outState.putString(LANGUAGE_CODE_BUNDLE_KEY, app.getAppOrSystemLanguageCode());
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, final Intent data) {
+        if (bus == null) {
+            registerBus();
+        }
+        if (settingsActivityRequested(requestCode)) {
+            handleSettingsActivityResult(resultCode);
+        }else if (newArticleLanguageSelected(requestCode, resultCode) || galleryFilePageSelected(requestCode, resultCode)) {
+            handleLangLinkOrFilePageResult(data);
+        } else {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
+    }
+
+    private void handleLangLinkOrFilePageResult(final Intent data) {
+        fragmentContainerView.post(new Runnable() {
+            @Override
+            public void run() {
+                handleIntent(data);
             }
         });
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
+    protected void onStop() {
+        if (themeChooser != null && themeChooser.isShowing()) {
+            themeChooser.dismiss();
+        }
+        app.getSessionFunnel().persistSession();
+
+        super.onStop();
+        unregisterBus();
+    }
+
+    /**
+     * ActionMode that is invoked when the user long-presses inside the WebView.
+     * @param mode ActionMode under which this context is starting.
+     */
+    @Override
+    public void onSupportActionModeStarted(ActionMode mode) {
+        if (!isCabOpen()) {
+            conditionallyInjectCustomCabMenu(mode);
+        }
+        freezeToolbar();
+        super.onSupportActionModeStarted(mode);
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+    public void onSupportActionModeFinished(ActionMode mode) {
+        super.onSupportActionModeFinished(mode);
+        nullifyActionMode();
+        searchBarHideHandler.setForceNoFade(false);
+    }
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+    @Override
+    public void onActionModeStarted(android.view.ActionMode mode) {
+        if (!isCabOpen()) {
+            conditionallyInjectCustomCabMenu(mode);
         }
-
-        return super.onOptionsItemSelected(item);
+        freezeToolbar();
+        super.onActionModeStarted(mode);
     }
 
-    protected NearRestaurantsFragment createFragment(){
-        return NearRestaurantsFragment.newInstance();
+    @Override
+    public void onActionModeFinished(android.view.ActionMode mode) {
+        super.onActionModeFinished(mode);
+        nullifyActionMode();
+        searchBarHideHandler.setForceNoFade(false);
     }
 
+    private <T> void conditionallyInjectCustomCabMenu(T mode) {
+        currentActionMode = new CompatActionMode(mode);
+        if (currentActionMode.shouldInjectCustomMenu(PageActivity.this)) {
+            currentActionMode.injectCustomMenu(PageActivity.this);
+        }
+    }
+
+    private void freezeToolbar() {
+        getSearchBarHideHandler().setForceNoFade(true);
+    }
+
+    private void registerBus() {
+        bus = app.getBus();
+        bus.register(busMethods);
+        L.d("Registered bus.");
+    }
+
+    private void unregisterBus() {
+        bus.unregister(busMethods);
+        bus = null;
+        L.d("Unregistered bus.");
+    }
+
+    private void handleSettingsActivityResult(int resultCode) {
+        if (languageChanged(resultCode)) {
+            loadNewLanguageMainPage();
+        }
+    }
+
+    private boolean settingsActivityRequested(int requestCode) {
+        return requestCode == SettingsActivity.ACTIVITY_REQUEST_SHOW_SETTINGS;
+    }
+
+    private boolean newArticleLanguageSelected(int requestCode, int resultCode) {
+        return requestCode == ACTIVITY_REQUEST_LANGLINKS && resultCode == LangLinksActivity.ACTIVITY_RESULT_LANGLINK_SELECT;
+    }
+
+    private boolean galleryFilePageSelected(int requestCode, int resultCode) {
+        return requestCode == ACTIVITY_REQUEST_GALLERY && resultCode == GalleryActivity.ACTIVITY_RESULT_FILEPAGE_SELECT;
+    }
+
+    private boolean languageChanged(int resultCode) {
+        return resultCode == SettingsActivity.ACTIVITY_RESULT_LANGUAGE_CHANGED;
+    }
+
+    /**
+     * Reload the main page in the new language, after delaying for one second in order to:
+     * (1) Make sure that onStart in PageActivity gets called, thus registering the activity for the bus.
+     * (2) Ensure a smooth transition, which is very jarring without a delay.
+     */
+    private void loadNewLanguageMainPage() {
+        Handler uiThread = new Handler(Looper.getMainLooper());
+        uiThread.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                loadMainPageInForegroundTab();
+                updateFeaturedPageWidget();
+            }
+        }, DateUtils.SECOND_IN_MILLIS);
+    }
+
+    /**
+     * Update any instances of our Featured Page widget, since it will change with the currently selected language.
+     */
+    private void updateFeaturedPageWidget() {
+        Intent widgetIntent = new Intent(this, WidgetProviderFeaturedPage.class);
+        widgetIntent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
+        int[] ids = AppWidgetManager.getInstance(getApplication()).getAppWidgetIds(
+                new ComponentName(this, WidgetProviderFeaturedPage.class));
+        widgetIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids);
+        sendBroadcast(widgetIntent);
+    }
 }

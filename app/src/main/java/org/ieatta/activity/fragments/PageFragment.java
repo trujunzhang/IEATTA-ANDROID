@@ -8,10 +8,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import org.ieatta.R;
+import org.wikipedia.BackPressedHandler;
 
-public class IEAFragment extends Fragment {
-    public static IEAFragment newInstance() {
-        return new IEAFragment();
+public class PageFragment extends Fragment implements BackPressedHandler {
+    public static PageFragment newInstance() {
+        return new PageFragment();
     }
 
     @Nullable
@@ -22,5 +23,10 @@ public class IEAFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_recycleview, container, false);
 
         return view;
+    }
+
+    @Override
+    public boolean onBackPressed() {
+        return false;
     }
 }

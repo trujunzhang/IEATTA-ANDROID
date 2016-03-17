@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 
 import org.ieatta.activity.editing.EditHandler;
-import org.ieatta.activity.fragments.IEAFragment;
+import org.ieatta.activity.fragments.PageFragment;
 
 import java.util.List;
 
@@ -35,7 +35,7 @@ public interface PageLoadStrategy {
     }
 
     @SuppressWarnings("checkstyle:parameternumber")
-    void setUp(@NonNull IEAFragment fragment,
+    void setUp(@NonNull PageFragment fragment,
                @NonNull List<PageBackStackItem> backStack);
 
     void load(boolean pushBackStack, @NonNull Cache cachePreference, int stagedScrollY);
