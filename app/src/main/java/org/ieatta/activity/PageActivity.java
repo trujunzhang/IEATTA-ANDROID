@@ -111,7 +111,6 @@ public class PageActivity extends ThemedActionBarActivity {
     private EventBusMethods busMethods;
     private IEAApp app;
     private View fragmentContainerView;
-    private View tabsContainerView;
     private WikiDrawerLayout drawerLayout;
     private Menu navMenu;
     private SearchArticlesFragment searchFragment;
@@ -125,10 +124,6 @@ public class PageActivity extends ThemedActionBarActivity {
 
     public View getContentView() {
         return fragmentContainerView;
-    }
-
-    public View getTabsContainerView() {
-        return tabsContainerView;
     }
 
     public ActionBarDrawerToggle getDrawerToggle() {
@@ -195,7 +190,6 @@ public class PageActivity extends ThemedActionBarActivity {
         registerBus();
 
         fragmentContainerView = findViewById(R.id.content_fragment_container);
-        tabsContainerView = findViewById(R.id.tabs_container);
 
         drawerLayout = (WikiDrawerLayout) findViewById(R.id.drawer_layout);
         if (!ApiUtil.hasLollipop()) {

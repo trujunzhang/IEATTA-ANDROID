@@ -18,24 +18,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
-        <!-- The tabs container -->
-        <FrameLayout
-            android:id="@+id/tabs_container"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="gone">
-            <ListView
-                android:id="@+id/tabs_list"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:divider="@null"
-                android:dividerHeight="0dp"
-                android:stackFromBottom="true"
-                android:transcriptMode="alwaysScroll"
-                android:listSelector="?attr/tab_item_selector"
-                />
-        </FrameLayout>
-
         <!-- The search container -->
         <fragment
             android:layout_width="match_parent"
