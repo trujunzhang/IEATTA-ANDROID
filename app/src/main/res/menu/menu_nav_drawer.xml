@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:tools="http://schemas.android.com/tools">
+    <group android:id="@+id/group_main">
+        <item android:id="@+id/nav_item_today"
+            android:title="@string/nav_item_today"
+            android:icon="@drawable/nav_events"
+            android:checkable="true"
+            />
+        <item android:id="@+id/nav_item_history"
+            android:title="@string/nav_item_history"
+            android:icon="@drawable/nav_events"
+            android:checkable="true"
+            />
+        <item android:id="@+id/nav_item_saved_pages"
+            android:title="@string/nav_item_history"
+            android:icon="@drawable/nav_events"
+            android:checkable="true"
+            />
+        <item android:id="@+id/nav_item_nearby"
+            android:title="@string/nav_item_history"
+            android:icon="@drawable/nav_events"
+            android:checkable="true"
+            />
+        <item android:id="@+id/nav_item_random"
+            android:title="@string/nav_item_history"
+            android:icon="@drawable/nav_events"
+            />
+    </group>
+    <group android:id="@+id/group_user">
+        <item android:id="@+id/nav_item_logout"
+            android:title="@string/nav_item_history"
+            android:icon="@drawable/nav_events"
+            />
+    </group>
+    <group android:id="@+id/group_zero">
+        <item android:id="@+id/nav_item_zero"
+            android:title=""
+            tools:title="W0 sample carrier message"
+            />
+    </group>
+    <group android:id="@+id/group_more">
+        <item android:id="@+id/nav_item_more"
+            android:title="@string/nav_item_history"
+            android:icon="@drawable/nav_events" />
+        <item android:id="@+id/nav_item_donate"
+            android:title="@string/nav_item_history"
+            android:icon="@drawable/nav_events"/>
+    </group>
+</menu>
