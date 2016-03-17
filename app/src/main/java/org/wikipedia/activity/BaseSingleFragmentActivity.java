@@ -3,6 +3,7 @@ package org.wikipedia.activity;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.annotation.LayoutRes;
+import android.support.v4.app.Fragment;
 import android.view.MenuItem;
 
 import org.ieatta.R;
@@ -17,7 +18,11 @@ public abstract class BaseSingleFragmentActivity<T> extends ThemedActionBarActiv
         setContentView(getLayout());
 
         if (!isFragmentCreated()) {
-            addFragment(createFragment());
+            T fragment = createFragment();
+            if(fragment instanceof Fragment){
+                Class<?> aClass = fragment.getClass();
+            }
+            addFragment(fragment);
         }
     }
 

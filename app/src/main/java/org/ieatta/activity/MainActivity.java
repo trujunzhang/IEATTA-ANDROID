@@ -1,40 +1,19 @@
 package org.ieatta.activity;
 
-import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.tableview.manage.RecycleViewManager;
-import com.tableview.storage.DTTableViewManager;
-import com.tableview.utils.CollectionUtil;
 
 import org.ieatta.R;
-import org.ieatta.cells.IEANearRestaurantMoreCell;
-import org.ieatta.cells.IEANearRestaurantsCell;
-import org.ieatta.cells.SectionTitleCellModel;
-import org.ieatta.cells.model.IEANearRestaurantMore;
-import org.ieatta.provide.IEAEditKey;
-import org.ieatta.provide.MainSegueIdentifier;
-import org.wikipedia.activity.CompatSingleFragmentActivity;
+import org.ieatta.activity.fragments.NearRestaurantsFragment;
+import org.wikipedia.activity.PlatformSingleFragmentActivity;
 
-import java.util.List;
 
-enum NearRestaurantSection {
-    sectionMoreItems,//= 0
-    sectionRestaurants, //= 1
-}
 
-public class NearRestaurantsActivity extends CompatSingleFragmentActivity<NearRestaurantsFragment> {
+public class MainActivity extends PlatformSingleFragmentActivity<NearRestaurantsFragment> {
     private RecycleViewManager manager;
 
     @Override
@@ -59,12 +38,12 @@ public class NearRestaurantsActivity extends CompatSingleFragmentActivity<NearRe
 //        this.manager.setSectionItems(IEANearRestaurantMore.getMoresItems(), NearRestaurantSection.sectionMoreItems.ordinal());
     }
 
-    private void setupUI() {
-        this.manager.setRegisterCellClassWhenSelected(IEANearRestaurantsCell.getType(), NearRestaurantSection.sectionRestaurants.ordinal());
-        this.manager.setRegisterCellClassWhenSelected(IEANearRestaurantMoreCell.getType(), NearRestaurantSection.sectionMoreItems.ordinal());
-
-        this.manager.appendSectionTitleCell(new SectionTitleCellModel(IEAEditKey.Section_Title, R.string.More), NearRestaurantSection.sectionMoreItems.ordinal());
-    }
+//    private void setupUI() {
+//        this.manager.setRegisterCellClassWhenSelected(IEANearRestaurantsCell.getType(), NearRestaurantSection.sectionRestaurants.ordinal());
+//        this.manager.setRegisterCellClassWhenSelected(IEANearRestaurantMoreCell.getType(), NearRestaurantSection.sectionMoreItems.ordinal());
+//
+//        this.manager.appendSectionTitleCell(new SectionTitleCellModel(IEAEditKey.Section_Title, R.string.More), NearRestaurantSection.sectionMoreItems.ordinal());
+//    }
 
     private void configModelsInMoreSection() {
 
