@@ -81,7 +81,12 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".activity.PageActivity" android:theme="@style/AppTheme.NoActionBar">
+        <activity
+            android:name=".activity.PageActivity"
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTask"
+            android:theme="@style/PageTheme"
+            android:windowSoftInputMode="stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

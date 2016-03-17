@@ -24,7 +24,7 @@ public abstract class ThemedActionBarActivity extends AppCompatActivity {
         ActivityUtil.requestFullUserOrientation(this);
 
 //        setTheme();
-//        removeSplashBackground();
+        removeSplashBackground();
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
