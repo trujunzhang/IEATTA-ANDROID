@@ -11,6 +11,7 @@ import android.support.annotation.NonNull;
 import android.view.Gravity;
 import android.view.View;
 
+import org.ieatta.R;
 import org.ieatta.views.ObservableWebView;
 import org.wikipedia.ViewAnimations;
 import org.wikipedia.util.GradientUtil;
