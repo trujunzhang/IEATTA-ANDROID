@@ -146,8 +146,8 @@
         android:background="@color/nav_background_light"
         app:headerLayout="@layout/inflate_header_nav_drawer"
         app:menu="@menu/menu_nav_drawer"
-        app:itemTextColor="?attr/nav_item_color"
-        app:itemIconTint="?attr/nav_item_color"
+        app:itemTextColor="@color/nav_item_selector_light"
+        app:itemIconTint="@color/nav_item_selector_light"
         android:fitsSystemWindows="false" />
 
 </org.wikipedia.views.WikiDrawerLayout>
