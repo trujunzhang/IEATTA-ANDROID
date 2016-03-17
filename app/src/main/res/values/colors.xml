@@ -105,4 +105,7 @@
     <color name="widget_content_text">#303030</color>
 
     <color name="holo_red_dark">#c00</color>
+
+    <!--<color name="recycle_view_background">#f6f6f6</color>-->
+    <color name="recycle_view_background">#000000</color>
 </resources>

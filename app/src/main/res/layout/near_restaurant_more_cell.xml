@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="@dimen/NearRestaurant_More"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:background="#049748">
 
 
     <ImageView
@@ -18,5 +19,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:textAppearance="@style/UiTestTextView"
         android:text="Medium Text" />
 </LinearLayout>

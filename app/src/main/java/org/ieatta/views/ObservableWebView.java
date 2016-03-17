@@ -102,15 +102,6 @@ public class ObservableWebView extends RecyclerView {
         void onFastScroll();
     }
 
-    public void copyToClipboard() {
-        // Simulate a Ctrl-C key press, which copies the current selection to the clipboard.
-        // Seems to work across all APIs.
-        dispatchKeyEvent(new KeyEvent(SystemClock.uptimeMillis(), SystemClock.uptimeMillis(),
-                KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_C, 0, KeyEvent.META_CTRL_ON));
-        dispatchKeyEvent(new KeyEvent(SystemClock.uptimeMillis(), SystemClock.uptimeMillis(),
-                KeyEvent.ACTION_UP, KeyEvent.KEYCODE_C, 0, KeyEvent.META_CTRL_ON));
-    }
-
     public ObservableWebView(Context context) {
         super(context);
         init();
@@ -188,12 +179,12 @@ public class ObservableWebView extends RecyclerView {
         return super.onTouchEvent(event);
     }
 
-//    @Override
-//    protected void onDraw(Canvas canvas) {
-//        super.onDraw(canvas);
-//        if (isInEditMode()) {
-//            return;
-//        }
+    @Override
+    public void onDraw(Canvas canvas) {
+        super.onDraw(canvas);
+        if (isInEditMode()) {
+            return;
+        }
 //        if (contentHeight != getContentHeight()) {
 //            contentHeight = getContentHeight();
 //            for (OnContentHeightChangedListener listener : onContentHeightChangedListeners) {
@@ -201,5 +192,5 @@ public class ObservableWebView extends RecyclerView {
 //            }
 //        }
 //        IEAApp.getInstance().getBus().post(INVALIDATE_EVENT);
-//    }
+    }
 }
