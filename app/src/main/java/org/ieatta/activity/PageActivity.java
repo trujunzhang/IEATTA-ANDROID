@@ -7,7 +7,6 @@ import android.support.design.widget.Snackbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-
 import android.annotation.TargetApi;
 import android.app.SearchManager;
 import android.appwidget.AppWidgetManager;
