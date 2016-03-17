@@ -7,4 +7,9 @@ public class SearchArticlesFragment extends PageFragment {
     public boolean isSearchActive() {
         return false;
     }
+
+    @Override
+    public void loadPage() {
+
+    }
 }
