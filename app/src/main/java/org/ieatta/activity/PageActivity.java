@@ -98,7 +98,7 @@ public class PageActivity extends ThemedActionBarActivity {
 
     public static final String ACTION_PAGE_FOR_TITLE = "org.wikipedia.page_for_title";
     public static final String EXTRA_PAGETITLE = "org.wikipedia.pagetitle";
-    public static final String EXTRA_HISTORYENTRY  = "org.wikipedia.history.historyentry";
+    public static final String EXTRA_HISTORYENTRY = "org.wikipedia.history.historyentry";
     public static final String EXTRA_SEARCH_FROM_WIDGET = "searchFromWidget";
     public static final String EXTRA_FEATURED_ARTICLE_FROM_WIDGET = "featuredArticleFromWidget";
 
@@ -144,6 +144,7 @@ public class PageActivity extends ThemedActionBarActivity {
      * each other using FragmentManager, and this function will return the current
      * topmost Fragment. It's up to the caller to cast the result to a more specific
      * fragment class, and perform actions on it.
+     *
      * @return Fragment at the top of the backstack.
      */
     public Fragment getTopFragment() {
@@ -153,10 +154,12 @@ public class PageActivity extends ThemedActionBarActivity {
     /**
      * Get the PageViewFragment that is currently at the top of the Activity's backstack.
      * If the current topmost fragment is not a PageViewFragment, return null.
+     *
      * @return The PageViewFragment at the top of the backstack, or null if the current
      * top fragment is not a PageViewFragment.
      */
-    @Nullable public PageFragment getCurPageFragment() {
+    @Nullable
+    public PageFragment getCurPageFragment() {
         Fragment f = getTopFragment();
         if (f instanceof PageFragment) {
             return (PageFragment) f;
@@ -433,6 +436,7 @@ public class PageActivity extends ThemedActionBarActivity {
 
     /**
      * Returns whether we're currently in a "searching" state (i.e. the search fragment is shown).
+     *
      * @return True if currently searching, false otherwise.
      */
     public boolean isSearching() {
@@ -449,6 +453,7 @@ public class PageActivity extends ThemedActionBarActivity {
 
     /**
      * Add a new fragment to the top of the activity's backstack.
+     *
      * @param f New fragment to place on top.
      */
     public void pushFragment(Fragment f) {
@@ -458,7 +463,8 @@ public class PageActivity extends ThemedActionBarActivity {
     /**
      * Add a new fragment to the top of the activity's backstack, and optionally allow state loss.
      * Useful for cases where we might push a fragment from an AsyncTask result.
-     * @param f New fragment to place on top.
+     *
+     * @param f              New fragment to place on top.
      * @param allowStateLoss Whether to allow state loss.
      */
     public void pushFragment(Fragment f, boolean allowStateLoss) {
@@ -495,6 +501,7 @@ public class PageActivity extends ThemedActionBarActivity {
 
     /**
      * Load a new page, and put it on top of the backstack.
+     *
      * @param title Title of the page to load.
      * @param entry HistoryEntry associated with this page.
      */
@@ -519,13 +526,17 @@ public class PageActivity extends ThemedActionBarActivity {
 //            }
             return;
         }
-        boolean onBackPressed = ((BackPressedHandler) getTopFragment()).onBackPressed();
-        if (getTopFragment() instanceof BackPressedHandler
-                && onBackPressed) {
-            return;
-        } else if (!(getTopFragment() instanceof PageFragment)) {
-            pushFragment(new PageFragment(), false);
-            return;
+
+        Fragment topFragment = getTopFragment();
+        if (topFragment != null) {
+            boolean onBackPressed = ((BackPressedHandler) topFragment).onBackPressed();
+            if (topFragment instanceof BackPressedHandler
+                    && onBackPressed) {
+                return;
+            } else if (!(topFragment instanceof PageFragment)) {
+                pushFragment(new PageFragment(), false);
+                return;
+            }
         }
         finish();
     }
@@ -609,6 +620,7 @@ public class PageActivity extends ThemedActionBarActivity {
 
     /**
      * ActionMode that is invoked when the user long-presses inside the WebView.
+     *
      * @param mode ActionMode under which this context is starting.
      */
     @Override
