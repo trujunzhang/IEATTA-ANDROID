@@ -118,10 +118,8 @@ public class PageActivity extends ThemedActionBarActivity {
     private ActionBarDrawerToggle mDrawerToggle;
     private SearchBarHideHandler searchBarHideHandler;
     private boolean isZeroEnabled;
-    private RandomHandler randomHandler;
     private NavDrawerHelper navDrawerHelper;
     private boolean navItemSelected;
-    private WikipediaZeroUsageFunnel zeroFunnel;
 
     public View getContentView() {
         return fragmentContainerView;
@@ -206,8 +204,6 @@ public class PageActivity extends ThemedActionBarActivity {
         navDrawerHelper = new NavDrawerHelper(this, navDrawer.getHeaderView(0));
         navDrawer.setNavigationItemSelectedListener(navDrawerHelper.getNewListener());
 
-        randomHandler = navDrawerHelper.getNewRandomHandler();
-
         searchFragment = (SearchArticlesFragment) getSupportFragmentManager().findFragmentById(R.id.search_fragment);
         searchHintText = (TextView) findViewById(R.id.main_search_bar_text);
         searchHintText.setOnClickListener(new View.OnClickListener() {
@@ -234,7 +230,6 @@ public class PageActivity extends ThemedActionBarActivity {
 
         boolean languageChanged = false;
 
-        zeroFunnel = app.getWikipediaZeroHandler().getZeroFunnel();
         if (savedInstanceState != null) {
             isZeroEnabled = savedInstanceState.getBoolean("pausedZeroEnabledState");
             if (savedInstanceState.getBoolean("isSearching")) {
