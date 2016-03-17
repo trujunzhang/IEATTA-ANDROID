@@ -21,8 +21,8 @@ import org.ieatta.views.ObservableWebView;
 
 public class NearRestaurantsFragment extends PageFragment {
     enum NearRestaurantSection {
-        sectionMoreItems,//= 0
-        sectionRestaurants, //= 1
+        section_more_items,//= 0
+        section_restaurants, //= 1
     }
 
     private IEAApp app;
@@ -48,10 +48,10 @@ public class NearRestaurantsFragment extends PageFragment {
     }
 
     private void setupUI() {
-        this.manager.setRegisterCellClassWhenSelected(IEANearRestaurantsCell.getType(), NearRestaurantSection.sectionRestaurants.ordinal());
-        this.manager.setRegisterCellClassWhenSelected(IEANearRestaurantMoreCell.getType(), NearRestaurantSection.sectionMoreItems.ordinal());
+        this.manager.setRegisterCellClassWhenSelected(IEANearRestaurantsCell.getType(), NearRestaurantSection.section_restaurants.ordinal());
+        this.manager.setRegisterCellClassWhenSelected(IEANearRestaurantMoreCell.getType(), NearRestaurantSection.section_more_items.ordinal());
 
-        this.manager.appendSectionTitleCell(new SectionTitleCellModel(IEAEditKey.Section_Title, R.string.More), NearRestaurantSection.sectionMoreItems.ordinal());
+        this.manager.appendSectionTitleCell(new SectionTitleCellModel(IEAEditKey.Section_Title, R.string.More), NearRestaurantSection.section_more_items.ordinal());
     }
 
     @Override
@@ -65,6 +65,6 @@ public class NearRestaurantsFragment extends PageFragment {
         });
 
         this.setupUI();
-        this.manager.setSectionItems(IEANearRestaurantMore.getMoresItems(), NearRestaurantSection.sectionMoreItems.ordinal());
+        this.manager.setSectionItems(IEANearRestaurantMore.getMoresItems(), NearRestaurantSection.section_more_items.ordinal());
     }
 }
