@@ -22,11 +22,11 @@ public class CellTypeUtil {
     private HashMap<Class, Integer> modelTypes = new LinkedHashMap<>();
 
     public void registerType(CellType type) {
-        modelTypes.put(type.cellClass, type.layoutResId);
+        modelTypes.put(type.cellClazz, type.layoutResId);
 
-        if (this.isExistRegisterType(type.cellClass) == false) {
+        if (this.isExistRegisterType(type.cellClazz) == false) {
             int size = this.rowTypes.size();
-            this.rowTypes.put(Integer.valueOf(size), type.cellClass);
+            this.rowTypes.put(Integer.valueOf(size), type.cellClazz);
         }
     }
 
@@ -37,7 +37,7 @@ public class CellTypeUtil {
                 int x = 0;
 //                assert("not found class type: "+clazz.getName()+",you need to register it.");
             }
-            if (rowModel.cellType.cellClass.equals(clazz)) {
+            if (rowModel.cellType.cellClazz.equals(clazz)) {
                 return index.intValue();
             }
         }

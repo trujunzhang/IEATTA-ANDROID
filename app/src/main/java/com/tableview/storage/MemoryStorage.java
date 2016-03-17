@@ -13,7 +13,7 @@ import java.util.List;
 
 public class MemoryStorage {
     public TableViewControllerAdapter adapter;
-    private TableViewUtils tableViewUtils = new TableViewUtils();
+    private TableViewUtil tableViewUtil = new TableViewUtil();
 
     public HashMap<Integer, SectionModel> sections = new LinkedHashMap<>();
     public CellTypeUtil cellTypeUtil = new CellTypeUtil();
@@ -30,7 +30,7 @@ public class MemoryStorage {
     }
 
     private void reloadTableView() {
-        this.tableViewUtils.generateItems(this.sections);
+        this.tableViewUtil.generateItems(this.sections);
 
         this.adapter.notifyDataSetChanged();
     }
@@ -41,7 +41,8 @@ public class MemoryStorage {
     public void setItems(List items, int forSectionIndex) {
         SectionModel section = this.verifySection(forSectionIndex);
         section.items = items;
-        this.sections.put(new Integer(forSectionIndex), section);
+
+        this.sections.put(forSectionIndex, section);
 
         this.reloadTableView();
     }
@@ -77,12 +78,12 @@ public class MemoryStorage {
     }
 
     private SectionModel verifySection(int forSectionIndex) {
-        SectionModel model = this.sections.get(new Integer(forSectionIndex));
+        SectionModel model = this.sections.get(Integer.valueOf(forSectionIndex));
         if (model != null) {
             return model;
         }
         model = new SectionModel(forSectionIndex);
-        this.sections.put(new Integer(forSectionIndex), model);
+        this.sections.put(forSectionIndex, model);
         return model;
     }
 
@@ -107,11 +108,11 @@ public class MemoryStorage {
 
         // Step2: Create/Modify a section.
         SectionModel section = this.verifySection(forSectionIndex);
-        section.specialRows.put(new Integer(forRowIndex), type);
+        section.specialRows.put(forRowIndex, type);
     }
 
     public RowModel getRowModelFromPosition(int position) {
-        return this.tableViewUtils.getItem(position);
+        return this.tableViewUtil.getItem(position);
     }
 
     public Object getRowModel(int position) {
@@ -120,7 +121,7 @@ public class MemoryStorage {
     }
 
     public int getItemCount() {
-        return tableViewUtils.getItemCount();
+        return tableViewUtil.getItemCount();
     }
 
     public int getItemViewType(int position) {
@@ -130,6 +131,6 @@ public class MemoryStorage {
     }
 
     public RowModel getItem(int position) {
-        return this.tableViewUtils.getItem(position);
+        return this.tableViewUtil.getItem(position);
     }
 }

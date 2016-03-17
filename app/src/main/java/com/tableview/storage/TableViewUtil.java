@@ -9,7 +9,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
-public class TableViewUtils {
+public class TableViewUtil {
     private HashMap<Integer, Integer> sectionInfo;
     private int rowLength = 0;
 

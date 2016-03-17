@@ -2,10 +2,10 @@ package com.tableview.storage.models;
 
 public class CellType {
     public int layoutResId;
-    public Class cellClass;
+    public Class cellClazz;
 
-    public CellType(Class cellClass, int layoutResId) {
+    public CellType(Class cellClazz, int layoutResId) {
         this.layoutResId = layoutResId;
-        this.cellClass = cellClass;
+        this.cellClazz = cellClazz;
     }
 }

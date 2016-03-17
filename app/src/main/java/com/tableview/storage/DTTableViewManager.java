@@ -43,7 +43,7 @@ public class DTTableViewManager {
 
     public IEAViewHolder createViewHolder(ViewGroup parent, int viewType) {
         CellType cellType = this.memoryStorage.cellTypeUtil.getModelType(viewType);
-        Class cellClass = cellType.cellClass;
+        Class cellClass = cellType.cellClazz;
         int layoutResId = cellType.layoutResId;
 
         Constructor[] ctors = cellClass.getDeclaredConstructors();
