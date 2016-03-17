@@ -26,6 +26,7 @@ import org.ieatta.activity.fragments.PageFragment;
 import org.ieatta.activity.fragments.search.SearchArticlesFragment;
 import org.ieatta.activity.fragments.search.SearchBarHideHandler;
 import org.ieatta.activity.history.HistoryEntry;
+import org.ieatta.activity.settings.SettingsActivity;
 import org.ieatta.views.WikiDrawerLayout;
 import org.wikipedia.activity.ThemedActionBarActivity;
 
@@ -39,6 +40,7 @@ import org.wikipedia.analytics.IntentFunnel;
 import org.wikipedia.page.PageTitle;
 import org.wikipedia.settings.Prefs;
 import org.wikipedia.util.ApiUtil;
+import org.wikipedia.util.DeviceUtil;
 import org.wikipedia.util.FeedbackUtil;
 import org.wikipedia.util.log.L;
 
@@ -209,7 +211,7 @@ public class PageActivity extends ThemedActionBarActivity {
         searchHintText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                searchFragment.openSearch();
+//                searchFragment.openSearch();
             }
         });
 
@@ -241,7 +243,7 @@ public class PageActivity extends ThemedActionBarActivity {
             // the app, MRU languages are not updated. There's no harm in doing that here but since
             // the user didin't choose that language in app, it may be unexpected.
         }
-        searchHintText.setText(getString(isZeroEnabled ? R.string.zero_search_hint : R.string.search_hint));
+//        searchHintText.setText(getString(isZeroEnabled ? R.string.zero_search_hint : R.string.search_hint));
 
 
         if (savedInstanceState == null) {
@@ -251,7 +253,7 @@ public class PageActivity extends ThemedActionBarActivity {
         }
 
         // Conditionally execute all recurring tasks
-        new RecurringTasksExecutor(app).run();
+//        new RecurringTasksExecutor(app).run();
     }
 
     private class MainDrawerToggle extends ActionBarDrawerToggle {
@@ -281,12 +283,12 @@ public class PageActivity extends ThemedActionBarActivity {
             //getSupportActionBar().setTitle("");
             // If we're in the search state, then get out of it.
             if (isSearching()) {
-                searchFragment.closeSearch();
+//                searchFragment.closeSearch();
             }
             // also make sure we're not inside an action mode
-            if (isCabOpen()) {
-                finishActionMode();
-            }
+//            if (isCabOpen()) {
+//                finishActionMode();
+//            }
             updateNavDrawerSelection(getTopFragment());
             navDrawerHelper.getFunnel().logOpen();
         }
@@ -296,10 +298,10 @@ public class PageActivity extends ThemedActionBarActivity {
             super.onDrawerSlide(drawerView, 0);
             if (!oncePerSlideLock) {
                 // Hide the keyboard when the drawer is opened
-                hideSoftKeyboard(PageActivity.this);
+                DeviceUtil.hideSoftKeyboard(PageActivity.this);
                 //also make sure ToC is hidden
                 if (getCurPageFragment() != null) {
-                    getCurPageFragment().toggleToC(PageFragment.TOC_ACTION_HIDE);
+//                    getCurPageFragment().toggleToC(PageFragment.TOC_ACTION_HIDE);
                 }
                 //and make sure to update dynamic items and highlights
                 navDrawerHelper.setupDynamicNavDrawerItems();
@@ -332,11 +334,11 @@ public class PageActivity extends ThemedActionBarActivity {
     }
 
     // Note: this method is invoked even when in CAB mode.
-    @Override
-    public boolean dispatchKeyEvent(@NonNull KeyEvent event) {
-        return isBackKeyUp(event) && ToolTipUtil.dismissToolTip(this)
-                || super.dispatchKeyEvent(event);
-    }
+//    @Override
+//    public boolean dispatchKeyEvent(@NonNull KeyEvent event) {
+//        return isBackKeyUp(event) && ToolTipUtil.dismissToolTip(this)
+//                || super.dispatchKeyEvent(event);
+//    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -353,7 +355,7 @@ public class PageActivity extends ThemedActionBarActivity {
     @Override
     public boolean onSearchRequested() {
         showToolbar();
-        searchFragment.openSearch();
+//        searchFragment.openSearch();
         return true;
     }
 
@@ -373,37 +375,37 @@ public class PageActivity extends ThemedActionBarActivity {
     }
 
     private void handleIntent(Intent intent) {
-        if (Intent.ACTION_VIEW.equals(intent.getAction()) && intent.getData() != null) {
-            Site site = new Site(intent.getData().getAuthority());
-            PageTitle title = site.titleForUri(intent.getData());
-            HistoryEntry historyEntry = new HistoryEntry(title, HistoryEntry.SOURCE_EXTERNAL_LINK);
-            loadPageInForegroundTab(title, historyEntry);
-        } else if (ACTION_PAGE_FOR_TITLE.equals(intent.getAction())) {
-            PageTitle title = intent.getParcelableExtra(EXTRA_PAGETITLE);
-            HistoryEntry historyEntry = intent.getParcelableExtra(EXTRA_HISTORYENTRY);
-            loadPage(title, historyEntry);
-        } else if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
-            String query = intent.getStringExtra(SearchManager.QUERY);
-            PageTitle title = new PageTitle(query, app.getSite());
-            HistoryEntry historyEntry = new HistoryEntry(title, HistoryEntry.SOURCE_SEARCH);
-            loadPageInForegroundTab(title, historyEntry);
-        } else if (Intent.ACTION_SEND.equals(intent.getAction())
-                && PLAIN_TEXT_MIME_TYPE.equals(intent.getType())) {
-            new IntentFunnel(app).logShareIntent();
-            handleShareIntent(intent);
-        } else if (Intent.ACTION_PROCESS_TEXT.equals(intent.getAction())
-                && PLAIN_TEXT_MIME_TYPE.equals(intent.getType())) {
-            new IntentFunnel(app).logProcessTextIntent();
-            handleProcessTextIntent(intent);
-        } else if (intent.hasExtra(EXTRA_SEARCH_FROM_WIDGET)) {
-            new IntentFunnel(app).logSearchWidgetTap();
-            openSearch();
-        } else if (intent.hasExtra(EXTRA_FEATURED_ARTICLE_FROM_WIDGET)) {
-            new IntentFunnel(app).logFeaturedArticleWidgetTap();
-            loadMainPageInForegroundTab();
-        } else {
-            loadMainPageIfNoTabs();
-        }
+//        if (Intent.ACTION_VIEW.equals(intent.getAction()) && intent.getData() != null) {
+//            Site site = new Site(intent.getData().getAuthority());
+//            PageTitle title = site.titleForUri(intent.getData());
+//            HistoryEntry historyEntry = new HistoryEntry(title, HistoryEntry.SOURCE_EXTERNAL_LINK);
+//            loadPageInForegroundTab(title, historyEntry);
+//        } else if (ACTION_PAGE_FOR_TITLE.equals(intent.getAction())) {
+//            PageTitle title = intent.getParcelableExtra(EXTRA_PAGETITLE);
+//            HistoryEntry historyEntry = intent.getParcelableExtra(EXTRA_HISTORYENTRY);
+//            loadPage(title, historyEntry);
+//        } else if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+//            String query = intent.getStringExtra(SearchManager.QUERY);
+//            PageTitle title = new PageTitle(query, app.getSite());
+//            HistoryEntry historyEntry = new HistoryEntry(title, HistoryEntry.SOURCE_SEARCH);
+//            loadPageInForegroundTab(title, historyEntry);
+//        } else if (Intent.ACTION_SEND.equals(intent.getAction())
+//                && PLAIN_TEXT_MIME_TYPE.equals(intent.getType())) {
+//            new IntentFunnel(app).logShareIntent();
+//            handleShareIntent(intent);
+//        } else if (Intent.ACTION_PROCESS_TEXT.equals(intent.getAction())
+//                && PLAIN_TEXT_MIME_TYPE.equals(intent.getType())) {
+//            new IntentFunnel(app).logProcessTextIntent();
+//            handleProcessTextIntent(intent);
+//        } else if (intent.hasExtra(EXTRA_SEARCH_FROM_WIDGET)) {
+//            new IntentFunnel(app).logSearchWidgetTap();
+//            openSearch();
+//        } else if (intent.hasExtra(EXTRA_FEATURED_ARTICLE_FROM_WIDGET)) {
+//            new IntentFunnel(app).logFeaturedArticleWidgetTap();
+//            loadMainPageInForegroundTab();
+//        } else {
+//            loadMainPageIfNoTabs();
+//        }
     }
 
     private void handleShareIntent(Intent intent) {
@@ -425,16 +427,16 @@ public class PageActivity extends ThemedActionBarActivity {
     }
 
     private void openSearch(@Nullable final CharSequence query) {
-        fragmentContainerView.post(new Runnable() {
-            @Override
-            public void run() {
-                searchFragment.setLaunchedFromWidget(true);
-                searchFragment.openSearch();
-                if (query != null) {
-                    searchFragment.setSearchText(query);
-                }
-            }
-        });
+//        fragmentContainerView.post(new Runnable() {
+//            @Override
+//            public void run() {
+//                searchFragment.setLaunchedFromWidget(true);
+//                searchFragment.openSearch();
+//                if (query != null) {
+//                    searchFragment.setSearchText(query);
+//                }
+//            }
+//        });
     }
 
     /**
@@ -505,24 +507,24 @@ public class PageActivity extends ThemedActionBarActivity {
      * @param entry HistoryEntry associated with this page.
      */
     public void loadPage(PageTitle title, HistoryEntry entry) {
-        loadPage(title, entry, TabPosition.CURRENT_TAB, false);
+//        loadPage(title, entry, TabPosition.CURRENT_TAB, false);
     }
 
     // Note: back button first handled in {@link #onOptionsItemSelected()};
     @Override
     public void onBackPressed() {
-        if (isCabOpen()) {
-            finishActionMode();
-            return;
-        }
+//        if (isCabOpen()) {
+//            finishActionMode();
+//            return;
+//        }
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             closeNavDrawer();
             return;
         }
         if (searchFragment.onBackPressed()) {
-            if (searchFragment.isLaunchedFromWidget()) {
-                finish();
-            }
+//            if (searchFragment.isLaunchedFromWidget()) {
+//                finish();
+//            }
             return;
         }
         boolean onBackPressed = ((BackPressedHandler) getTopFragment()).onBackPressed();
@@ -536,14 +538,8 @@ public class PageActivity extends ThemedActionBarActivity {
         finish();
     }
 
-    /*package*/ void showPageSavedMessage(@NonNull String title, boolean success) {
-        FeedbackUtil.showMessage(this, getString(success
-                ? R.string.snackbar_saved_page_format
-                : R.string.snackbar_saved_page_missing_images, title));
-    }
-
     private void loadMainPageIfNoTabs() {
-        loadMainPage(false, TabPosition.CURRENT_TAB, true);
+//        loadMainPage(false, TabPosition.CURRENT_TAB, true);
     }
 
     private class EventBusMethods {
@@ -595,13 +591,13 @@ public class PageActivity extends ThemedActionBarActivity {
         if (bus == null) {
             registerBus();
         }
-        if (settingsActivityRequested(requestCode)) {
-            handleSettingsActivityResult(resultCode);
-        }else if (newArticleLanguageSelected(requestCode, resultCode) || galleryFilePageSelected(requestCode, resultCode)) {
-            handleLangLinkOrFilePageResult(data);
-        } else {
-            super.onActivityResult(requestCode, resultCode, data);
-        }
+//        if (settingsActivityRequested(requestCode)) {
+//            handleSettingsActivityResult(resultCode);
+//        }else if (newArticleLanguageSelected(requestCode, resultCode) || galleryFilePageSelected(requestCode, resultCode)) {
+//            handleLangLinkOrFilePageResult(data);
+//        } else {
+//            super.onActivityResult(requestCode, resultCode, data);
+//        }
     }
 
     private void handleLangLinkOrFilePageResult(final Intent data) {
@@ -673,14 +669,6 @@ public class PageActivity extends ThemedActionBarActivity {
         return requestCode == SettingsActivity.ACTIVITY_REQUEST_SHOW_SETTINGS;
     }
 
-    private boolean newArticleLanguageSelected(int requestCode, int resultCode) {
-        return requestCode == ACTIVITY_REQUEST_LANGLINKS && resultCode == LangLinksActivity.ACTIVITY_RESULT_LANGLINK_SELECT;
-    }
-
-    private boolean galleryFilePageSelected(int requestCode, int resultCode) {
-        return requestCode == ACTIVITY_REQUEST_GALLERY && resultCode == GalleryActivity.ACTIVITY_RESULT_FILEPAGE_SELECT;
-    }
-
     private boolean languageChanged(int resultCode) {
         return resultCode == SettingsActivity.ACTIVITY_RESULT_LANGUAGE_CHANGED;
     }
@@ -692,24 +680,24 @@ public class PageActivity extends ThemedActionBarActivity {
      */
     private void loadNewLanguageMainPage() {
         Handler uiThread = new Handler(Looper.getMainLooper());
-        uiThread.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                loadMainPageInForegroundTab();
-                updateFeaturedPageWidget();
-            }
-        }, DateUtils.SECOND_IN_MILLIS);
+//        uiThread.postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                loadMainPageInForegroundTab();
+//                updateFeaturedPageWidget();
+//            }
+//        }, DateUtils.SECOND_IN_MILLIS);
     }
 
     /**
      * Update any instances of our Featured Page widget, since it will change with the currently selected language.
      */
     private void updateFeaturedPageWidget() {
-        Intent widgetIntent = new Intent(this, WidgetProviderFeaturedPage.class);
-        widgetIntent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
-        int[] ids = AppWidgetManager.getInstance(getApplication()).getAppWidgetIds(
-                new ComponentName(this, WidgetProviderFeaturedPage.class));
-        widgetIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids);
-        sendBroadcast(widgetIntent);
+//        Intent widgetIntent = new Intent(this, WidgetProviderFeaturedPage.class);
+//        widgetIntent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
+//        int[] ids = AppWidgetManager.getInstance(getApplication()).getAppWidgetIds(
+//                new ComponentName(this, WidgetProviderFeaturedPage.class));
+//        widgetIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids);
+//        sendBroadcast(widgetIntent);
     }
 }
