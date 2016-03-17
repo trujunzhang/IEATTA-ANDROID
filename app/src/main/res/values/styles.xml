@@ -17,6 +17,13 @@
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 
+    <style name="AppTheme.ToolbarTheme" parent="@style/ThemeOverlay.AppCompat.ActionBar">
+        <item name="android:colorControlNormal">@android:color/white</item>
+        <item name="colorControlNormal">@android:color/white</item>
+        <item name="colorControlActivated">@color/actionbar_highlight</item>
+        <item name="colorControlHighlight">@color/actionbar_highlight</item>
+    </style>
+
     <style name="AppTheme.ActionModeStyle" parent="@style/Widget.AppCompat.ActionMode">
         <item name="background">@color/actionbar_background</item>
         <item name="android:background">@color/actionbar_background</item>

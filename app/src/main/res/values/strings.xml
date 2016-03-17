@@ -39,5 +39,13 @@
     <string name="crash_report_quit">Quit</string>
     <!-- /Crash reporter -->
 
+    <string name="preferences_general_heading">General</string>
+    <string name="preferences_privacy_settings_heading">Privacy</string>
+    <string name="zero_wikipedia_zero_heading">Wikipedia Zero</string>
+    <string name="about_activity_title">About</string>
+    <string name="preference_title_show_link_previews">Show link previews</string>
+    <string name="preference_summary_show_link_previews">Show a quick preview of articles when tapping on links.</string>
+    <string name="preference_title_language">Wikipedia language</string>
+    <string name="preference_languages_filter_hint">Search</string>
 
 </resources>
