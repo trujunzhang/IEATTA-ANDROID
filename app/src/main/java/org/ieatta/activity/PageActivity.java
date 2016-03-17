@@ -22,8 +22,10 @@ import com.squareup.otto.Subscribe;
 import org.ieatta.IEAApp;
 import org.ieatta.R;
 import org.ieatta.activity.fragments.NearRestaurantsFragment;
+import org.ieatta.activity.fragments.PageFragment;
 import org.ieatta.activity.fragments.search.SearchArticlesFragment;
 import org.ieatta.activity.fragments.search.SearchBarHideHandler;
+import org.ieatta.activity.history.HistoryEntry;
 import org.ieatta.views.WikiDrawerLayout;
 import org.wikipedia.activity.ThemedActionBarActivity;
 
@@ -34,6 +36,7 @@ import org.wikipedia.activity.ActivityUtil;
 import org.wikipedia.activity.ThemedActionBarActivity;
 import org.wikipedia.ViewAnimations;
 import org.wikipedia.analytics.IntentFunnel;
+import org.wikipedia.page.PageTitle;
 import org.wikipedia.settings.Prefs;
 import org.wikipedia.util.ApiUtil;
 import org.wikipedia.util.FeedbackUtil;
@@ -112,12 +115,9 @@ public class PageActivity extends ThemedActionBarActivity {
     private SearchArticlesFragment searchFragment;
     private TextView searchHintText;
     private View toolbarContainer;
-    private CompatActionMode currentActionMode;
     private ActionBarDrawerToggle mDrawerToggle;
     private SearchBarHideHandler searchBarHideHandler;
     private boolean isZeroEnabled;
-    private ZeroConfig currentZeroConfig;
-    private ThemeChooserDialog themeChooser;
     private RandomHandler randomHandler;
     private NavDrawerHelper navDrawerHelper;
     private boolean navItemSelected;
@@ -237,17 +237,10 @@ public class PageActivity extends ThemedActionBarActivity {
         zeroFunnel = app.getWikipediaZeroHandler().getZeroFunnel();
         if (savedInstanceState != null) {
             isZeroEnabled = savedInstanceState.getBoolean("pausedZeroEnabledState");
-            currentZeroConfig = savedInstanceState.getParcelable("pausedZeroConfig");
-            if (savedInstanceState.containsKey("themeChooserShowing")) {
-                if (savedInstanceState.getBoolean("themeChooserShowing")) {
-                    showThemeChooser();
-                }
-            }
             if (savedInstanceState.getBoolean("isSearching")) {
-                searchFragment.openSearch();
+//                searchFragment.openSearch();
             }
             String language = savedInstanceState.getString(LANGUAGE_CODE_BUNDLE_KEY);
-            languageChanged = !app.getAppOrSystemLanguageCode().equals(language);
 
             // Note: when system language is enabled, and the system language is changed outside of
             // the app, MRU languages are not updated. There's no harm in doing that here but since
@@ -255,10 +248,6 @@ public class PageActivity extends ThemedActionBarActivity {
         }
         searchHintText.setText(getString(isZeroEnabled ? R.string.zero_search_hint : R.string.search_hint));
 
-        if (languageChanged) {
-            app.resetSite();
-            loadMainPageInForegroundTab();
-        }
 
         if (savedInstanceState == null) {
             // if there's no savedInstanceState, and we're not coming back from a Theme change,
@@ -268,14 +257,6 @@ public class PageActivity extends ThemedActionBarActivity {
 
         // Conditionally execute all recurring tasks
         new RecurringTasksExecutor(app).run();
-    }
-
-    private void finishActionMode() {
-        currentActionMode.finish();
-    }
-
-    private void nullifyActionMode() {
-        currentActionMode = null;
     }
 
     private class MainDrawerToggle extends ActionBarDrawerToggle {
@@ -387,11 +368,6 @@ public class PageActivity extends ThemedActionBarActivity {
 
     public void setNavMenuItemRandomEnabled(boolean enabled) {
         navMenu.findItem(R.id.nav_item_random).setEnabled(enabled);
-    }
-
-    /** @return True if the contextual action bar is open. */
-    public boolean isCabOpen() {
-        return currentActionMode != null;
     }
 
     @Override
@@ -576,57 +552,14 @@ public class PageActivity extends ThemedActionBarActivity {
     }
 
     private class EventBusMethods {
-        @Subscribe
-        public void onChangeTextSize(ChangeTextSizeEvent event) {
-            if (getCurPageFragment() != null && getCurPageFragment().getWebView() != null) {
-                getCurPageFragment().updateFontSize();
-            }
-        }
-
-        @Subscribe
-        public void onChangeTheme(ThemeChangeEvent event) {
-            PageActivity.this.recreate();
-        }
-
-        @Subscribe
-        public void onWikipediaZeroStateChangeEvent(WikipediaZeroStateChangeEvent event) {
-            boolean latestZeroEnabledState = app.getWikipediaZeroHandler().isZeroEnabled();
-            ZeroConfig latestZeroConfig = app.getWikipediaZeroHandler().getZeroConfig();
-
-            if (leftZeroRatedNetwork(latestZeroEnabledState)) {
-                app.getWikipediaZeroHandler().showZeroOffBanner(PageActivity.this,
-                        getString(R.string.zero_charged_verbiage),
-                        getResources().getColor(R.color.holo_red_dark),
-                        getResources().getColor(android.R.color.white));
-                navDrawerHelper.setupDynamicNavDrawerItems();
-            }
-
-            if (enteredNewZeroRatedNetwork(latestZeroConfig, latestZeroEnabledState)) {
-                app.getWikipediaZeroHandler().showZeroBanner(PageActivity.this, latestZeroConfig);
-                if (!hasSeenZeroInfoDialog()) {
-                    showZeroInfoDialog(latestZeroConfig);
-                    setZeroInfoDialogSeen();
-                }
-                navDrawerHelper.setupDynamicNavDrawerItems();
-            }
-
-            isZeroEnabled = latestZeroEnabledState;
-            currentZeroConfig = latestZeroConfig;
-            searchHintText.setText(getString(
-                    latestZeroEnabledState
-                            ? R.string.zero_search_hint
-                            : R.string.search_hint));
-        }
+//        @Subscribe
+//        public void onChangeTextSize(ChangeTextSizeEvent event) {
+//            if (getCurPageFragment() != null && getCurPageFragment().getWebView() != null) {
+//                getCurPageFragment().updateFontSize();
+//            }
+//        }
     }
 
-    private void showZeroInfoDialog(ZeroConfig zeroConfig) {
-        AlertDialog.Builder alert = new AlertDialog.Builder(this)
-                .setMessage(buildZeroDialogMessage(zeroConfig.getMessage(), getString(R.string.zero_learn_more)))
-                .setPositiveButton(getString(R.string.zero_learn_more_learn_more), getZeroMoreInfoListener())
-                .setNegativeButton(getString(R.string.zero_learn_more_dismiss), getDismissClickListener());
-        AlertDialog dialog = alert.create();
-        dialog.show();
-    }
 
     @Override
     protected void onStart() {
@@ -639,20 +572,11 @@ public class PageActivity extends ThemedActionBarActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        app.resetSite();
-        app.getSessionFunnel().touchSession();
-        boolean latestWikipediaZeroDisposition = app.getWikipediaZeroHandler().isZeroEnabled();
-        if (isZeroEnabled && !latestWikipediaZeroDisposition) {
-            bus.post(new WikipediaZeroStateChangeEvent());
-        }
-        navDrawerHelper.setupDynamicNavDrawerItems();
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        isZeroEnabled = app.getWikipediaZeroHandler().isZeroEnabled();
-        currentZeroConfig = app.getWikipediaZeroHandler().getZeroConfig();
     }
 
     @Override
@@ -667,12 +591,8 @@ public class PageActivity extends ThemedActionBarActivity {
 
     private void saveState(Bundle outState) {
         outState.putBoolean("pausedZeroEnabledState", isZeroEnabled);
-        outState.putParcelable("pausedZeroConfig", currentZeroConfig);
-        if (themeChooser != null) {
-            outState.putBoolean("themeChooserShowing", themeChooser.isShowing());
-        }
         outState.putBoolean("isSearching", isSearching());
-        outState.putString(LANGUAGE_CODE_BUNDLE_KEY, app.getAppOrSystemLanguageCode());
+//        outState.putString(LANGUAGE_CODE_BUNDLE_KEY, app.getAppOrSystemLanguageCode());
     }
 
     @Override
@@ -700,11 +620,6 @@ public class PageActivity extends ThemedActionBarActivity {
 
     @Override
     protected void onStop() {
-        if (themeChooser != null && themeChooser.isShowing()) {
-            themeChooser.dismiss();
-        }
-        app.getSessionFunnel().persistSession();
-
         super.onStop();
         unregisterBus();
     }
@@ -715,9 +630,6 @@ public class PageActivity extends ThemedActionBarActivity {
      */
     @Override
     public void onSupportActionModeStarted(ActionMode mode) {
-        if (!isCabOpen()) {
-            conditionallyInjectCustomCabMenu(mode);
-        }
         freezeToolbar();
         super.onSupportActionModeStarted(mode);
     }
@@ -725,15 +637,11 @@ public class PageActivity extends ThemedActionBarActivity {
     @Override
     public void onSupportActionModeFinished(ActionMode mode) {
         super.onSupportActionModeFinished(mode);
-        nullifyActionMode();
         searchBarHideHandler.setForceNoFade(false);
     }
 
     @Override
     public void onActionModeStarted(android.view.ActionMode mode) {
-        if (!isCabOpen()) {
-            conditionallyInjectCustomCabMenu(mode);
-        }
         freezeToolbar();
         super.onActionModeStarted(mode);
     }
@@ -741,15 +649,7 @@ public class PageActivity extends ThemedActionBarActivity {
     @Override
     public void onActionModeFinished(android.view.ActionMode mode) {
         super.onActionModeFinished(mode);
-        nullifyActionMode();
         searchBarHideHandler.setForceNoFade(false);
-    }
-
-    private <T> void conditionallyInjectCustomCabMenu(T mode) {
-        currentActionMode = new CompatActionMode(mode);
-        if (currentActionMode.shouldInjectCustomMenu(PageActivity.this)) {
-            currentActionMode.injectCustomMenu(PageActivity.this);
-        }
     }
 
     private void freezeToolbar() {
