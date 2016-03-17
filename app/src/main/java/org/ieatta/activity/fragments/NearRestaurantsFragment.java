@@ -43,6 +43,7 @@ public class NearRestaurantsFragment extends PageFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         app = (IEAApp) getActivity().getApplicationContext();
         manager = new RecycleViewManager(this.getActivity().getApplicationContext());
     }
