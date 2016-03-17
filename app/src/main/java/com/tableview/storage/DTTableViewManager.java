@@ -4,7 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.tableview.adapter.RecyclerItemClickListener;
+import com.tableview.adapter.RecyclerOnItemClickListener;
 import com.tableview.adapter.TableViewControllerAdapter;
 import com.tableview.adapter.IEAViewHolder;
 import com.tableview.storage.models.CellType;
@@ -21,8 +21,8 @@ public class DTTableViewManager {
         this.memoryStorage = new MemoryStorage(new TableViewControllerAdapter(configuration.builder.context, this));
     }
 
-    public RecyclerItemClickListener getItemClickListener(){
-        return configuration.builder.itemClickListener;
+    public RecyclerOnItemClickListener getOnItemClickListener(){
+        return configuration.builder.itemOnClickListener;
     }
 
     public TableViewControllerAdapter getAdapter() {

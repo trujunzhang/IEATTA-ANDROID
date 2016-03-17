@@ -30,7 +30,7 @@ public class TableViewControllerAdapter extends RecyclerView.Adapter<IEAViewHold
             @Override
             public void onClick(View view, int position, boolean isLongClick) {
                 RowModel item = TableViewControllerAdapter.this.manager.memoryStorage.getItem(position);
-                TableViewControllerAdapter.this.manager.getItemClickListener().onItemClick(view, item.indexPath, item.model, position, isLongClick);
+                TableViewControllerAdapter.this.manager.getOnItemClickListener().onItemClick(view, item.indexPath, item.model, position, isLongClick);
             }
         });
     }

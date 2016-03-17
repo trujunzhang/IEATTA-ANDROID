@@ -5,7 +5,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.tableview.adapter.NSIndexPath;
-import com.tableview.adapter.RecyclerItemClickListener;
+import com.tableview.adapter.RecyclerOnItemClickListener;
 import com.tableview.adapter.decoration.TableViewDividerDecoration;
 import com.tableview.storage.DTTableViewManager;
 import com.tableview.storage.MemoryStorage;
@@ -31,7 +31,7 @@ public class RecycleViewManager {
         this.setRegisterHeaderClass(IEAViewForHeaderInSectionCell.getType());
     }
 
-    public void setOnItemClickListener(RecyclerItemClickListener listener){
+    public void setOnItemClickListener(RecyclerOnItemClickListener listener){
         this.manager.configuration.builder.setOnItemClickListener(listener);
     }
 

@@ -3,7 +3,7 @@ package com.tableview.storage;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 
-import com.tableview.adapter.RecyclerItemClickListener;
+import com.tableview.adapter.RecyclerOnItemClickListener;
 
 public class TableViewConfiguration {
     public Builder builder;
@@ -30,7 +30,7 @@ public class TableViewConfiguration {
 
         public RecyclerView.LayoutManager manager;
         public RecyclerView.ItemDecoration decoration;
-        public RecyclerItemClickListener itemClickListener;
+        public RecyclerOnItemClickListener itemOnClickListener;
 
         public Builder setLayoutManager(RecyclerView.LayoutManager manager) {
             this.manager = manager;
@@ -42,8 +42,8 @@ public class TableViewConfiguration {
             return this;
         }
 
-        public Builder setOnItemClickListener(RecyclerItemClickListener itemClickListener) {
-            this.itemClickListener = itemClickListener;
+        public Builder setOnItemClickListener(RecyclerOnItemClickListener itemOnClickListener) {
+            this.itemOnClickListener = itemOnClickListener;
             return this;
         }
 

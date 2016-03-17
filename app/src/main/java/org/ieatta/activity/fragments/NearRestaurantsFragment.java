@@ -7,12 +7,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.tableview.adapter.NSIndexPath;
-import com.tableview.adapter.RecyclerItemClickListener;
+import com.tableview.adapter.RecyclerOnItemClickListener;
 import com.tableview.manage.RecycleViewManager;
 
 import org.ieatta.IEAApp;
 import org.ieatta.R;
-import org.ieatta.activity.JsonPageLoadStrategy;
 import org.ieatta.cells.IEANearRestaurantMoreCell;
 import org.ieatta.cells.IEANearRestaurantsCell;
 import org.ieatta.cells.SectionTitleCellModel;
@@ -58,7 +57,7 @@ public class NearRestaurantsFragment extends PageFragment {
     @Override
     public void loadPage() {
         manager.startManagingWithDelegate(mRecycleView);
-        manager.setOnItemClickListener(new RecyclerItemClickListener() {
+        manager.setOnItemClickListener(new RecyclerOnItemClickListener() {
             @Override
             public void onItemClick(View view, NSIndexPath indexPath, Object model, int position, boolean isLongClick) {
 
