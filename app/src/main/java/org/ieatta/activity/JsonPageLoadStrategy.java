@@ -2,42 +2,20 @@ package org.ieatta.activity;
 
 import android.content.Intent;
 import android.content.res.Resources;
-import android.os.Build;
 import android.support.annotation.DimenRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
-import android.text.TextUtils;
-import android.util.SparseArray;
-import android.view.View;
-import android.view.ViewGroup;
 
 import org.ieatta.IEAApp;
-import org.ieatta.R;
 import org.ieatta.activity.editing.EditHandler;
 import org.ieatta.activity.fragments.IEAFragment;
-import org.json.JSONException;
-import org.json.JSONObject;
 
-import org.wikipedia.page.PageTitle;
-
-import org.wikipedia.util.DimenUtil;
-import org.wikipedia.util.L10nUtil;
-import org.wikipedia.util.ResourceUtil;
 import org.wikipedia.util.log.L;
 
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-
-import retrofit.RetrofitError;
-import retrofit.client.Response;
-
-import static org.wikipedia.util.DimenUtil.calculateLeadImageWidth;
-import static org.wikipedia.util.L10nUtil.getStringsForArticleLanguage;
 
 /**
  * Our old page load strategy, which uses the JSON MW API directly and loads a page in multiple steps:
@@ -88,7 +66,7 @@ public class JsonPageLoadStrategy implements PageLoadStrategy {
 
     // copied fields
     private IEAFragment fragment;
-    private MainActivity activity;
+    private PageActivity activity;
     @NonNull private final IEAApp app = IEAApp.getInstance();
     private EditHandler editHandler;
 
@@ -97,7 +75,7 @@ public class JsonPageLoadStrategy implements PageLoadStrategy {
     public void setUp(@NonNull IEAFragment fragment,
                         @NonNull List<PageBackStackItem> backStack) {
         this.fragment = fragment;
-        activity = (MainActivity) fragment.getActivity();
+        activity = (PageActivity) fragment.getActivity();
 
         this.backStack = backStack;
 

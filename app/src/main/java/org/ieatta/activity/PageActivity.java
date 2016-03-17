@@ -11,9 +11,7 @@ import org.ieatta.R;
 import org.ieatta.activity.fragments.NearRestaurantsFragment;
 import org.wikipedia.activity.PlatformSingleFragmentActivity;
 
-
-
-public class MainActivity extends PlatformSingleFragmentActivity<NearRestaurantsFragment> {
+public class PageActivity extends PlatformSingleFragmentActivity<NearRestaurantsFragment> {
     private RecycleViewManager manager;
 
     @Override
