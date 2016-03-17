@@ -27,7 +27,6 @@ import org.ieatta.activity.fragments.search.SearchArticlesFragment;
 import org.ieatta.activity.fragments.search.SearchBarHideHandler;
 import org.ieatta.activity.history.HistoryEntry;
 import org.ieatta.activity.settings.SettingsActivity;
-import org.ieatta.views.WikiDrawerLayout;
 import org.wikipedia.activity.ThemedActionBarActivity;
 
 
@@ -43,6 +42,7 @@ import org.wikipedia.util.ApiUtil;
 import org.wikipedia.util.DeviceUtil;
 import org.wikipedia.util.FeedbackUtil;
 import org.wikipedia.util.log.L;
+import org.wikipedia.views.WikiDrawerLayout;
 
 
 import android.annotation.TargetApi;
