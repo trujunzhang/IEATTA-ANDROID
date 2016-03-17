@@ -36,7 +36,7 @@ public class RecycleViewManager {
         this.manager.configuration.builder.setOnItemClickListener(listener);
     }
 
-    protected void startManagingWithDelegate(RecyclerView recyclerView) {
+    public void startManagingWithDelegate(RecyclerView recyclerView) {
         recyclerView.setAdapter(this.manager.getAdapter());
         recyclerView.setLayoutManager(this.manager.configuration.builder.manager);
         recyclerView.addItemDecoration(this.manager.configuration.builder.decoration);
