@@ -25,7 +25,8 @@
     <color name="gray_disabled">#80606060</color>
     <color name="gray_highlight">#808080</color>
     <color name="page_info_heading">#555</color>
-    <color name="window_background">#303030</color>
+    <!--<color name="window_background">#303030</color>-->
+    <color name="window_background">#ff0000</color>
     <!-- TODO: replace this color when changing the toolbar color. -->
     <color name="actionbar_background">@color/window_background</color>
     <color name="actionbar_highlight">#808080</color>
