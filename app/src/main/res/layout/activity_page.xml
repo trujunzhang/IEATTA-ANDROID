@@ -126,13 +126,6 @@
                             </LinearLayout>
                         </FrameLayout>
                     </android.support.v7.widget.Toolbar>
-                    <ProgressBar
-                        android:id="@+id/main_progressbar"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="-7.5dp"
-                        android:layout_gravity="top"
-                        style="?android:attr/progressBarStyleHorizontal" />
                 </FrameLayout>
             </LinearLayout>
             <View
@@ -150,7 +143,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:background="?attr/nav_background_color"
+        android:background="@color/nav_background_light"
         app:headerLayout="@layout/inflate_header_nav_drawer"
         app:menu="@menu/menu_nav_drawer"
         app:itemTextColor="?attr/nav_item_color"
