@@ -45,8 +45,18 @@ public class NearRestaurantsFragment extends PageFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         app = (IEAApp) getActivity().getApplicationContext();
-
         manager = new RecycleViewManager(this.getActivity().getApplicationContext());
+    }
+
+    private void setupUI() {
+        this.manager.setRegisterCellClassWhenSelected(IEANearRestaurantsCell.getType(), NearRestaurantSection.sectionRestaurants.ordinal());
+        this.manager.setRegisterCellClassWhenSelected(IEANearRestaurantMoreCell.getType(), NearRestaurantSection.sectionMoreItems.ordinal());
+
+        this.manager.appendSectionTitleCell(new SectionTitleCellModel(IEAEditKey.Section_Title, R.string.More), NearRestaurantSection.sectionMoreItems.ordinal());
+    }
+
+    @Override
+    public void loadPage() {
         manager.startManagingWithDelegate(mRecycleView);
         manager.setOnItemClickListener(new RecyclerItemClickListener() {
             @Override
@@ -57,12 +67,5 @@ public class NearRestaurantsFragment extends PageFragment {
 
         this.setupUI();
         this.manager.setSectionItems(IEANearRestaurantMore.getMoresItems(), NearRestaurantSection.sectionMoreItems.ordinal());
-    }
-
-    private void setupUI() {
-        this.manager.setRegisterCellClassWhenSelected(IEANearRestaurantsCell.getType(), NearRestaurantSection.sectionRestaurants.ordinal());
-        this.manager.setRegisterCellClassWhenSelected(IEANearRestaurantMoreCell.getType(), NearRestaurantSection.sectionMoreItems.ordinal());
-
-        this.manager.appendSectionTitleCell(new SectionTitleCellModel(IEAEditKey.Section_Title, R.string.More), NearRestaurantSection.sectionMoreItems.ordinal());
     }
 }

@@ -535,7 +535,7 @@ public class PageActivity extends ThemedActionBarActivity {
                     && onBackPressed) {
                 return;
             } else if (!(topFragment instanceof PageFragment)) {
-                pushFragment(new PageFragment(), false);
+//                pushFragment(new PageFragment(), false);
                 return;
             }
         }
@@ -570,6 +570,7 @@ public class PageActivity extends ThemedActionBarActivity {
                     return;
                 }
                 if (position == TabPosition.CURRENT_TAB) {
+                    frag.loadPage();
 //                    frag.loadPage(title, entry, PageLoadStrategy.Cache.FALLBACK, true);
                 } else if (position == TabPosition.NEW_TAB_BACKGROUND) {
 //                    frag.openInNewBackgroundTabFromMenu(title, entry);

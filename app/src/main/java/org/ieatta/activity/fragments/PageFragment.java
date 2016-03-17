@@ -74,10 +74,8 @@ import static org.wikipedia.util.UriUtil.decodeURL;
 import static org.wikipedia.util.UriUtil.visitInExternalBrowser;
 
 
-public class PageFragment extends Fragment implements BackPressedHandler {
-    public static PageFragment newInstance() {
-        return new PageFragment();
-    }
+public abstract class PageFragment extends Fragment implements BackPressedHandler {
+    public abstract void loadPage();
 
     @Nullable
     @Override
