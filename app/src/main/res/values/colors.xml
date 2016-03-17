@@ -93,7 +93,8 @@
     <color name="lead_disabled_text_light">#000</color>
     <color name="lead_disabled_text_dark">#fff</color>
 
-    <color name="gallery_background">#303030</color>
+    <!--<color name="gallery_background">#303030</color>-->
+    <color name="gallery_background">#f6f6f6</color>
     <color name="gallery_license_text">#aaa</color>
 
     <color name="syntax_highlight_template_light">#a0a0a0</color>
@@ -106,6 +107,4 @@
 
     <color name="holo_red_dark">#c00</color>
 
-    <!--<color name="recycle_view_background">#f6f6f6</color>-->
-    <color name="recycle_view_background">#000000</color>
 </resources>
