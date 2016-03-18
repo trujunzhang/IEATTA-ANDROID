@@ -1,4 +1,4 @@
-package com.tableview.manage;
+package com.tableview;
 
 import android.content.Context;
 import android.graphics.drawable.NinePatchDrawable;

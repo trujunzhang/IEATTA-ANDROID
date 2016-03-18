@@ -1,5 +1,6 @@
 package com.tableview;
 
+import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import com.tableview.adapter.ItemClickListener;
 import com.tableview.storage.DTTableViewManager;
 import com.tableview.storage.models.RowModel;
 import com.tableview.utils.DrawableUtils;
+import com.tableview.utils.ViewUtils;
 
 import org.ieatta.R;
 
@@ -79,6 +81,11 @@ public class TableViewControllerAdapter
     }
 
     @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    @Override
     public int getItemCount() {
         int itemCount = this.mProvider.getItemCount();
         return itemCount;
@@ -89,7 +96,6 @@ public class TableViewControllerAdapter
         int itemViewType = this.mProvider.memoryStorage.getItemViewType(position);
         return itemViewType;
     }
-
 
     @Override
     public void onMoveItem(int fromPosition, int toPosition) {
@@ -103,9 +109,15 @@ public class TableViewControllerAdapter
 
     @Override
     public boolean onCheckCanStartDrag(IEAViewHolder holder, int position, int x, int y) {
-        return false;
-    }
+        // x, y --- relative from the itemView's top-left
+        final View containerView = holder.mContainer;
+        final View dragHandleView = holder.mContainer;
 
+        final int offsetX = containerView.getLeft() + (int) (ViewCompat.getTranslationX(containerView) + 0.5f);
+        final int offsetY = containerView.getTop() + (int) (ViewCompat.getTranslationY(containerView) + 0.5f);
+
+        return ViewUtils.hitTest(dragHandleView, x - offsetX, y - offsetY);
+    }
     @Override
     public ItemDraggableRange onGetItemDraggableRange(IEAViewHolder holder, int position) {
         // no drag-sortable range specified

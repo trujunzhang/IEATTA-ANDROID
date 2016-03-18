@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 
 import com.tableview.adapter.NSIndexPath;
 import com.tableview.adapter.RecyclerOnItemClickListener;
-import com.tableview.manage.RecycleViewManager;
+import com.tableview.RecycleViewManager;
 
 import org.ieatta.IEAApp;
 import org.ieatta.R;

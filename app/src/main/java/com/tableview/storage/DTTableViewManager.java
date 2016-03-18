@@ -18,7 +18,6 @@ public class DTTableViewManager {
 
     public void setConfiguration(TableViewConfiguration configuration, TableViewControllerAdapter adapter){
         this.configuration = configuration;
-//        TableViewControllerAdapter adapter = new TableViewControllerAdapter(this);
         this.memoryStorage = new MemoryStorage(adapter);
     }
 
