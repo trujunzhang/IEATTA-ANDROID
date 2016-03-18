@@ -39,6 +39,12 @@
     <string name="crash_report_quit">Quit</string>
     <!-- /Crash reporter -->
 
+    <!-- Article menu bar -->
+    <string name="article_menu_bar_bookmark">Save the article for offline reading later</string>
+    <string name="article_menu_bar_share">Share the article link</string>
+    <string name="article_menu_bar_navigate">Navigate to the location of the article</string>
+    <!-- /Article menu bar -->
+
     <string name="preferences_general_heading">General</string>
     <string name="preferences_privacy_settings_heading">Privacy</string>
     <string name="zero_wikipedia_zero_heading">Wikipedia Zero</string>
