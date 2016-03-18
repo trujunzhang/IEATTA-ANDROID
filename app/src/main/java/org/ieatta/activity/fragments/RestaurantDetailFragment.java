@@ -1,6 +1,8 @@
 package org.ieatta.activity.fragments;
 
+import android.graphics.pdf.PdfDocument;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +15,11 @@ import com.tableview.utils.CollectionUtil;
 
 import org.ieatta.IEAApp;
 import org.ieatta.R;
+import org.ieatta.activity.PageLoadStrategy;
+import org.ieatta.activity.editing.EditHandler;
+import org.ieatta.activity.fragments.search.SearchBarHideHandler;
+import org.ieatta.activity.leadimages.ArticleHeaderView;
+import org.ieatta.activity.leadimages.LeadImagesHandler;
 import org.ieatta.cells.IEARestaurantEventsCell;
 import org.ieatta.cells.header.IEARestaurantDetailHeaderCell;
 import org.ieatta.cells.model.IEARestaurantDetailHeader;
@@ -20,6 +27,14 @@ import org.ieatta.cells.model.SectionTitleCellModel;
 import org.ieatta.provide.IEAEditKey;
 import org.ieatta.tasks.RestaurantDetailTask;
 import org.ieatta.views.ObservableWebView;
+import org.wikipedia.analytics.PageScrollFunnel;
+import org.wikipedia.analytics.SavedPagesFunnel;
+import org.wikipedia.analytics.TabFunnel;
+import org.wikipedia.util.DimenUtil;
+import org.wikipedia.views.SwipeRefreshLayoutWithScroll;
+import org.wikipedia.views.WikiDrawerLayout;
+
+import java.util.ArrayList;
 
 import bolts.Continuation;
 import bolts.Task;
@@ -47,15 +62,72 @@ public class RestaurantDetailFragment extends DetailFragment {
 
     private RestaurantDetailTask task = new RestaurantDetailTask();
 
+    public static final int TOC_ACTION_SHOW = 0;
+    public static final int TOC_ACTION_HIDE = 1;
+    public static final int TOC_ACTION_TOGGLE = 2;
+
+    private boolean pageSaved;
+    private boolean pageRefreshed;
+    private boolean savedPageCheckComplete;
+    private boolean errorState = false;
+
+    private static final int TOC_BUTTON_HIDE_DELAY = 2000;
+    private static final int REFRESH_SPINNER_ADDITIONAL_OFFSET = (int) (16 * IEAApp.getInstance().getScreenDensity());
+
+    private PageLoadStrategy pageLoadStrategy;
+    @Nullable private PdfDocument.PageInfo pageInfo;
+
+    @NonNull
+    private TabFunnel tabFunnel = new TabFunnel();
+
+    @Nullable
+    private PageScrollFunnel pageScrollFunnel;
+
+    /**
+     * Whether to save the full page content as soon as it's loaded.
+     * Used in the following cases:
+     * - Stored page content is corrupted
+     * - Page bookmarks are imported from the old app.
+     * In the above cases, loading of the saved page will "fail", and will
+     * automatically bounce to the online version of the page. Once the online page
+     * loads successfully, the content will be saved, thereby reconstructing the
+     * stored version of the page.
+     */
+    private boolean saveOnComplete = false;
+
+    private ArticleHeaderView articleHeaderView;
+    private LeadImagesHandler leadImagesHandler;
+    private SearchBarHideHandler searchBarHideHandler;
+    private ObservableWebView webView;
+    private SwipeRefreshLayoutWithScroll refreshView;
+        private WikiDrawerLayout tocDrawer;
+
+    private EditHandler editHandler;
+
+    private SavedPagesFunnel savedPagesFunnel;
+
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
 
-        View view = inflater.inflate(R.layout.fragment_detail, container, false);
-        mRecycleView = (ObservableWebView) view.findViewById(R.id.recycleView);
+        View rootView = inflater.inflate(R.layout.fragment_detail, container, false);
+        mRecycleView = (ObservableWebView) rootView.findViewById(R.id.recycleView);
 
-        return view;
+
+        tocDrawer = (WikiDrawerLayout) rootView.findViewById(R.id.page_toc_drawer);
+        tocDrawer.setDragEdgeWidth(getResources().getDimensionPixelSize(R.dimen.drawer_drag_margin));
+
+        refreshView = (SwipeRefreshLayoutWithScroll) rootView
+                .findViewById(R.id.page_refresh_container);
+        int swipeOffset = DimenUtil.getContentTopOffsetPx(getActivity()) + REFRESH_SPINNER_ADDITIONAL_OFFSET;
+        refreshView.setProgressViewOffset(false, -swipeOffset, swipeOffset);
+        // if we want to give it a custom color:
+        //refreshView.setProgressBackgroundColor(R.color.swipe_refresh_circle);
+        refreshView.setScrollableChild(webView);
+
+        return rootView;
     }
 
     @Override
