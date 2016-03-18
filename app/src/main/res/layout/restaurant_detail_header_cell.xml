@@ -31,7 +31,6 @@
             android:layout_alignParentBottom="true"
             android:layout_toRightOf="@+id/user_photo"
             android:contentDescription="@null"
-            android:src="@drawable/business_stars_medium"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="12dp" />
 

@@ -38,7 +38,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:text="@string/Edit_Restaurant"
-                android:textAppearance="@style/DollarSignText"
+                android:textAppearance="@style/TitleText"
                 android:textSize="@dimen/abc_text_size_subtitle_material_toolbar" />
         </RelativeLayout>
 

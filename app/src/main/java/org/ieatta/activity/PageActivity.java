@@ -23,6 +23,7 @@ import org.ieatta.IEAApp;
 import org.ieatta.R;
 import org.ieatta.activity.fragments.NearRestaurantsFragment;
 import org.ieatta.activity.fragments.PageFragment;
+import org.ieatta.activity.fragments.RestaurantDetailFragment;
 import org.ieatta.activity.fragments.search.SearchArticlesFragment;
 import org.ieatta.activity.fragments.search.SearchBarHideHandler;
 import org.ieatta.activity.history.HistoryEntry;
@@ -543,7 +544,9 @@ public class PageActivity extends ThemedActionBarActivity {
     }
 
     private void loadMainPageIfNoTabs() {
-        loadPage(new NearRestaurantsFragment(),TabPosition.CURRENT_TAB, false, true);
+//        PageFragment fragment = new NearRestaurantsFragment();
+        PageFragment fragment = new RestaurantDetailFragment();
+        loadPage(fragment,TabPosition.CURRENT_TAB, false, true);
     }
 
     public void loadPage(PageFragment fragment,final TabPosition position,

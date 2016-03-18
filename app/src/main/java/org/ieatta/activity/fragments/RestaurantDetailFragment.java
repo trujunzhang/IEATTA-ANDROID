@@ -68,12 +68,12 @@ public class RestaurantDetailFragment extends PageFragment {
 
     private void setupUI() {
         this.manager.setRegisterCellClass(IEARestaurantDetailHeaderCell.getType(), RestaurantDetailSection.sectionHeader.ordinal());
+        this.manager.setRegisterCellClass(IEARestaurantEventsCell.getType(), RestaurantDetailSection.sectionEvents.ordinal());
 //        this.manager.setSectionItems(CollectionUtil.createList(new IEARestaurantDetailHeader(this.restaurant)), RestaurantDetailSection.sectionHeader.ordinal());
 
 //        this.manager.showGoogleMapAddress(RestaurantDetailSection.sectionGoogleMapAddress.ordinal());
-        this.manager.setRegisterCellClassWhenSelected(IEARestaurantEventsCell.getType(), RestaurantDetailSection.sectionEvents.ordinal());
-        this.manager.appendSectionTitleCell(new SectionTitleCellModel(IEAEditKey.Section_Title, R.string.Events_Recorded), RestaurantDetailSection.sectionEvents.ordinal());
 
+        this.manager.appendSectionTitleCell(new SectionTitleCellModel(IEAEditKey.Section_Title, R.string.Events_Recorded), RestaurantDetailSection.sectionEvents.ordinal());
     }
 
     @Override
@@ -86,9 +86,8 @@ public class RestaurantDetailFragment extends PageFragment {
             }
         });
 
-//        this.setupUI();
-//        this.manager.setSectionItems(IEANearRestaurantMore.getMoresItems(), NearRestaurantSection.section_more_items.ordinal());
-//
+        this.setupUI();
+
 //        Location location = LocationUtil.getLocation();
 //        task.executeTask(location).onSuccess(new Continuation<Void, Object>() {
 //            @Override
