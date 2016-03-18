@@ -58,6 +58,13 @@ public class LocalDatabaseQueryTest {
                 completionLatch.countDown();
                 return null;
             }
+        }).continueWith(new Continuation<Object, Object>() {
+            @Override
+            public Object then(Task<Object> task) throws Exception {
+                assertThat("Fetched photo must not be null", (task.getError() == null));
+                completionLatch.countDown();
+                return null;
+            }
         });
         completionLatch.await(TASK_COMPLETION_TIMEOUT, TimeUnit.MILLISECONDS);
     }
