@@ -5,7 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.tableview.adapter.RecyclerOnItemClickListener;
-import com.tableview.adapter.TableViewControllerAdapter;
+import com.tableview.TableViewControllerAdapter;
 import com.tableview.adapter.IEAViewHolder;
 import com.tableview.storage.models.CellType;
 

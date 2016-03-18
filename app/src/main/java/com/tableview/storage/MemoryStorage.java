@@ -1,6 +1,6 @@
 package com.tableview.storage;
 
-import com.tableview.adapter.TableViewControllerAdapter;
+import com.tableview.TableViewControllerAdapter;
 import com.tableview.adapter.NSIndexPath;
 import com.tableview.storage.models.CellType;
 import com.tableview.storage.models.FooterModel;

@@ -1,10 +1,12 @@
-package com.tableview.adapter;
+package com.tableview;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.tableview.adapter.IEAViewHolder;
+import com.tableview.adapter.ItemClickListener;
 import com.tableview.storage.DTTableViewManager;
 import com.tableview.storage.models.RowModel;
 
