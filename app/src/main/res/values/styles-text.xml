@@ -28,4 +28,9 @@
     <style name="cell_style">
         <item name="android:background">@drawable/list_item_background</item>
     </style>
+
+    <style name="RelativeTimeAgoText">
+        <item name="android:background">@drawable/list_item_background</item>
+    </style>
+
 </resources>

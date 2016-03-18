@@ -16,6 +16,7 @@ import org.ieatta.IEAApp;
 import org.ieatta.R;
 import org.ieatta.cells.IEANearRestaurantMoreCell;
 import org.ieatta.cells.IEANearRestaurantsCell;
+import org.ieatta.cells.IEARestaurantEventsCell;
 import org.ieatta.cells.header.IEARestaurantDetailHeaderCell;
 import org.ieatta.cells.model.IEANearRestaurantMore;
 import org.ieatta.cells.model.IEARestaurantDetailHeader;
@@ -67,7 +68,7 @@ public class RestaurantDetailFragment extends PageFragment {
 
     private void setupUI() {
         this.manager.setRegisterCellClass(IEARestaurantDetailHeaderCell.getType(), RestaurantDetailSection.sectionHeader.ordinal());
-        this.manager.setSectionItems(CollectionUtil.createList(new IEARestaurantDetailHeader(self, self.restaurant)), RestaurantDetailSection.sectionHeader.ordinal());
+//        this.manager.setSectionItems(CollectionUtil.createList(new IEARestaurantDetailHeader(this.restaurant)), RestaurantDetailSection.sectionHeader.ordinal());
 
 //        this.manager.showGoogleMapAddress(RestaurantDetailSection.sectionGoogleMapAddress.ordinal());
         this.manager.setRegisterCellClassWhenSelected(IEARestaurantEventsCell.getType(), RestaurantDetailSection.sectionEvents.ordinal());
@@ -85,23 +86,23 @@ public class RestaurantDetailFragment extends PageFragment {
             }
         });
 
-        this.setupUI();
-        this.manager.setSectionItems(IEANearRestaurantMore.getMoresItems(), NearRestaurantSection.section_more_items.ordinal());
-
-        Location location = LocationUtil.getLocation();
-        task.executeTask(location).onSuccess(new Continuation<Void, Object>() {
-            @Override
-            public Object then(Task<Void> task) throws Exception {
-                RealmResults<DBRestaurant> restaurants = RestaurantDetailFragment.this.task.getRestaurants();
-                RestaurantDetailFragment.this.manager.setSectionItems(restaurants, NearRestaurantSection.section_restaurants.ordinal());
-                return null;
-            }
-        },Task.UI_THREAD_EXECUTOR).continueWith(new Continuation<Object, Object>() {
-            @Override
-            public Object then(Task<Object> task) throws Exception {
-                Exception error = task.getError();
-                return null;
-            }
-        });
+//        this.setupUI();
+//        this.manager.setSectionItems(IEANearRestaurantMore.getMoresItems(), NearRestaurantSection.section_more_items.ordinal());
+//
+//        Location location = LocationUtil.getLocation();
+//        task.executeTask(location).onSuccess(new Continuation<Void, Object>() {
+//            @Override
+//            public Object then(Task<Void> task) throws Exception {
+//                RealmResults<DBRestaurant> restaurants = RestaurantDetailFragment.this.task.getRestaurants();
+//                RestaurantDetailFragment.this.manager.setSectionItems(restaurants, NearRestaurantSection.section_restaurants.ordinal());
+//                return null;
+//            }
+//        },Task.UI_THREAD_EXECUTOR).continueWith(new Continuation<Object, Object>() {
+//            @Override
+//            public Object then(Task<Object> task) throws Exception {
+//                Exception error = task.getError();
+//                return null;
+//            }
+//        });
     }
 }

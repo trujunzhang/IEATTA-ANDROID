@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/cell_style"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/RestaurantDetail_Events">
+
+    <ImageView
+        android:id="@+id/eventIconImageView"
+        android:layout_width="@dimen/Left_Image_View_Width"
+        android:layout_height="@dimen/Left_Image_View_Height"
+        android:layout_centerVertical="true"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:src="@drawable/nav_events" />
+
+    <TextView
+        android:id="@+id/titleTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="8dp"
+        android:layout_toLeftOf="@+id/timeAgoTextView"
+        android:layout_toRightOf="@+id/eventIconImageView"
+        android:text="Medium Text"
+        android:textAppearance="@style/TitleText"
+        android:textSize="@dimen/abc_text_size_menu_material" />
+
+    <TextView
+        android:id="@+id/infoTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/titleTextView"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="2dp"
+        android:layout_toRightOf="@+id/eventIconImageView"
+        android:singleLine="true"
+        android:text="Medium Text"
+        android:textAppearance="@style/SubtitleText" />
+
+    <TextView
+        android:id="@+id/timeAgoTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="8dp"
+        android:singleLine="true"
+        android:text="Medium Text"
+        android:textAppearance="@style/RelativeTimeAgoText" />
+
+</RelativeLayout>
