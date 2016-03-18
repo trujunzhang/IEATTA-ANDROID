@@ -34,11 +34,11 @@ public class RestaurantDetailFragment extends PageFragment {
     };
 
     enum RestaurantDetailSection {
-        sectionHeader,//= 0
-        sectionGoogleMapAddress,//= 1
-        sectionEvents,//= 2
-        sectionPhotos,//= 3
-        sectionReviews,//= 4
+        section_header,//= 0
+        section_google_mapaddress,//= 1
+        section_events,//= 2
+        section_photogallery,//= 3
+        section_reviews,//= 4
     }
 
     private IEAApp app;
@@ -67,10 +67,10 @@ public class RestaurantDetailFragment extends PageFragment {
     }
 
     private void setupUI() {
-        this.manager.setRegisterCellClass(IEARestaurantDetailHeaderCell.getType(), RestaurantDetailSection.sectionHeader.ordinal());
-        this.manager.setRegisterCellClass(IEARestaurantEventsCell.getType(), RestaurantDetailSection.sectionEvents.ordinal());
+        this.manager.setRegisterCellClass(IEARestaurantDetailHeaderCell.getType(), RestaurantDetailSection.section_header.ordinal());
+        this.manager.setRegisterCellClass(IEARestaurantEventsCell.getType(), RestaurantDetailSection.section_events.ordinal());
 
-        this.manager.appendSectionTitleCell(new SectionTitleCellModel(IEAEditKey.Section_Title, R.string.Events_Recorded), RestaurantDetailSection.sectionEvents.ordinal());
+        this.manager.appendSectionTitleCell(new SectionTitleCellModel(IEAEditKey.Section_Title, R.string.Events_Recorded), RestaurantDetailSection.section_events.ordinal());
     }
 
     @Override
@@ -96,7 +96,7 @@ public class RestaurantDetailFragment extends PageFragment {
     }
 
     private void reloadPage() {
-        this.manager.setSectionItems(CollectionUtil.createList(new IEARestaurantDetailHeader(this.task.restaurant)), RestaurantDetailSection.sectionHeader.ordinal());
-//        this.manager.showGoogleMapAddress(RestaurantDetailSection.sectionGoogleMapAddress.ordinal());
+        this.manager.setSectionItems(CollectionUtil.createList(new IEARestaurantDetailHeader(this.task.restaurant)), RestaurantDetailSection.section_header.ordinal());
+//        this.manager.showGoogleMapAddress(RestaurantDetailSection.section_google_mapaddress.ordinal());
     }
 }

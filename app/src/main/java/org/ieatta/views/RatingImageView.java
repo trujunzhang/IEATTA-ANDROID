@@ -10,8 +10,6 @@ import bolts.Continuation;
 import bolts.Task;
 
 public class RatingImageView extends ImageView {
-    private RatingImageView self = this;
-
     public RatingImageView(Context context) {
         super(context);
     }
