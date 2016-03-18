@@ -11,11 +11,9 @@ import com.tableview.storage.DTTableViewManager;
 import com.tableview.storage.models.RowModel;
 
 public class TableViewControllerAdapter extends RecyclerView.Adapter<IEAViewHolder> {
-    private Context context;
     private DTTableViewManager manager;
 
     public TableViewControllerAdapter(Context context, DTTableViewManager manager) {
-        this.context = context;
         this.manager = manager;
     }
 

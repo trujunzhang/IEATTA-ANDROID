@@ -3,9 +3,10 @@ package com.tableview.adapter;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.h6ah4i.android.widget.advrecyclerview.utils.AbstractDraggableItemViewHolder;
 import com.tableview.adapter.enums.ViewHolderType;
 
-public abstract class IEAViewHolder extends RecyclerView.ViewHolder implements ModelTransfer, View.OnClickListener, View.OnLongClickListener {
+public abstract class IEAViewHolder extends AbstractDraggableItemViewHolder implements ModelTransfer, View.OnClickListener, View.OnLongClickListener {
     protected boolean shouldClickItem() {
         return true;
     }
