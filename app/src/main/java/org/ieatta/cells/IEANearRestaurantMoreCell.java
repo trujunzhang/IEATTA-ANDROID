@@ -11,7 +11,7 @@ import org.ieatta.cells.model.IEANearRestaurantMore;
 
 public class IEANearRestaurantMoreCell extends IEAViewHolder {
     public static CellType getType() {
-        return new CellType(IEANearRestaurantMoreCell.class, R.layout.near_restaurant_more_cell);
+        return new CellType(IEANearRestaurantMoreCell.class, R.layout.cell_near_restaurant_more);
     }
 
     private IEANearRestaurantMoreCell self = this;

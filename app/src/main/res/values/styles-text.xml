@@ -1,8 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="UiTestTextView">
-        <item name="android:textColor">#ff0000</item>
-        <item name="android:textSize">16sp</item>
+    <style name="SectionText" parent="@style/TextAppearance.AppCompat.Medium">
+        <item name="android:textSize">18.0sp</item>
+        <item name="android:textColor">@color/BlackText</item>
+
+        <item name="android:gravity">left|bottom</item>
+        <item name="android:paddingBottom">8dp</item>
+        <item name="android:paddingLeft">16dp</item>
+    </style>
+
+    <style name="TitleText" parent="@android:style/TextAppearance">
+        <item name="android:textSize">16.0sp</item>
+        <item name="android:textColor">@color/black_yoni</item>
 
         <item name="android:shadowColor">#ffffff</item>
         <item name="android:shadowDx">1</item>
@@ -10,13 +19,11 @@
         <item name="android:shadowRadius">3</item>
     </style>
 
-    <style name="sectionHeaderItemStyle">
-        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Medium</item>
-        <item name="android:gravity">left|bottom</item>
-        <item name="android:paddingBottom">8dp</item>
-        <item name="android:paddingLeft">16dp</item>
-        <item name="android:textColor">@color/text_black</item>
+    <style name="SubtitleText" parent="@android:style/TextAppearance">
+        <item name="android:textSize">16.0sp</item>
+        <item name="android:textColor">@color/black_yoni</item>
     </style>
+
 
     <style name="cell_style">
         <item name="android:background">@drawable/list_item_background</item>

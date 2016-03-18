@@ -12,7 +12,7 @@ import org.ieatta.cells.model.SectionTitleCellModel;
 
 public class IEAViewForHeaderInSectionCell extends IEAViewHolder {
     public static CellType getType() {
-        return new CellType(IEAViewForHeaderInSectionCell.class, R.layout.list_section_header);
+        return new CellType(IEAViewForHeaderInSectionCell.class, R.layout.cell_section_header);
     }
 
     @Override

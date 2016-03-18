@@ -44,8 +44,8 @@ public class TableViewControllerAdapter
         Object model = this.mProvider.memoryStorage.getRowModel(position);
         holder.render(model);
 
-        if (holder.haveBackground() == true)
-            setBackground(holder);
+//        if (holder.haveBackground() == true)
+//            setBackground(holder);
 
         holder.setClickListener(new ItemClickListener() {
             @Override

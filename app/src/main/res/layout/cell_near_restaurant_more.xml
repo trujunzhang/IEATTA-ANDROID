@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/container"
+    style="@style/cell_style"
     android:layout_width="match_parent"
     android:layout_height="@dimen/NearRestaurant_More"
     android:orientation="horizontal">
@@ -19,5 +20,5 @@
         android:layout_gravity="center_vertical"
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
         android:text="Medium Text"
-        android:textAppearance="@style/UiTestTextView" />
+        android:textAppearance="@style/TitleText" />
 </LinearLayout>

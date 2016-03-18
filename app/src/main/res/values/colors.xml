@@ -113,4 +113,20 @@
     <color name="bg_item_swiping_state">#ffddddff</color>
     <color name="bg_item_swiping_active_state">#ff9999ff</color>
 
+    <color name="BlackText">#ff222222</color>
+    <color name="BlueText">#ff0077bc</color>
+    <color name="CyanText">#ff0097ec</color>
+    <color name="GreenText">#ff0fab0f</color>
+    <color name="GreyLightText">#ffb3b3b3</color>
+    <color name="GreyMidText">#ff888882</color>
+    <color name="GreyText">#ff666662</color>
+    <color name="OrangeLightText">#ffff8001</color>
+    <color name="OrangeText">#fff25210</color>
+    <color name="PurpleText">#ff7129a9</color>
+    <color name="RedText">#ffc41200</color>
+    <color name="WhiteText">#ffffffff</color>
+    <color name="YellowText">#ffecac25</color>
+
+    <color name="black_yoni">#ff222222</color>
+
 </resources>
