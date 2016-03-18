@@ -12,7 +12,7 @@ import com.tableview.storage.MemoryStorage;
 import com.tableview.storage.TableViewConfiguration;
 import com.tableview.storage.models.CellType;
 
-import org.ieatta.cells.IEAViewForHeaderInSectionCell;
+import org.ieatta.cells.header.IEAViewForHeaderInSectionCell;
 import org.ieatta.cells.model.EditBaseCellModel;
 
 import java.util.List;

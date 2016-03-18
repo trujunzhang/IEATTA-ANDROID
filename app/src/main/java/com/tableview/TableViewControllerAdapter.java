@@ -11,6 +11,9 @@ import com.tableview.adapter.IEAViewHolder;
 import com.tableview.adapter.ItemClickListener;
 import com.tableview.storage.DTTableViewManager;
 import com.tableview.storage.models.RowModel;
+import com.tableview.utils.DrawableUtils;
+
+import org.ieatta.R;
 
 public class TableViewControllerAdapter
         extends RecyclerView.Adapter<IEAViewHolder>
@@ -23,6 +26,10 @@ public class TableViewControllerAdapter
 
     public TableViewControllerAdapter(DTTableViewManager mProvider) {
         this.mProvider = mProvider;
+
+        // DraggableItemAdapter requires stable ID, and also
+        // have to implement the getItemId() method appropriately.
+        setHasStableIds(true);
     }
 
     @Override
@@ -34,6 +41,28 @@ public class TableViewControllerAdapter
     public void onBindViewHolder(final IEAViewHolder holder, int position) {
         Object model = this.mProvider.memoryStorage.getRowModel(position);
         holder.render(model);
+
+
+        // set background resource (target view ID: container)
+        final int dragState = holder.getDragStateFlags();
+
+        if (((dragState & Draggable.STATE_FLAG_IS_UPDATED) != 0)) {
+            int bgResId;
+
+            if ((dragState & Draggable.STATE_FLAG_IS_ACTIVE) != 0) {
+                bgResId = R.drawable.bg_item_dragging_active_state;
+
+                // need to clear drawable state here to get correct appearance of the dragging item.
+                DrawableUtils.clearState(holder.mContainer.getForeground());
+            } else if ((dragState & Draggable.STATE_FLAG_DRAGGING) != 0) {
+                bgResId = R.drawable.bg_item_dragging_state;
+            } else {
+                bgResId = R.drawable.bg_item_normal_state;
+            }
+
+            holder.mContainer.setBackgroundResource(bgResId);
+        }
+
         holder.setClickListener(new ItemClickListener() {
             @Override
             public void onClick(View view, int position, boolean isLongClick) {

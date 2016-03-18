@@ -1,4 +1,4 @@
-package org.ieatta.cells;
+package org.ieatta.cells.header;
 
 import android.view.View;
 import android.widget.TextView;
@@ -16,7 +16,7 @@ public class IEAViewForHeaderInSectionCell extends IEAViewHolder {
     }
 
     @Override
-    protected boolean shouldClickItem() {
+    protected boolean shouldOnClickItem() {
         return false;
     }
 

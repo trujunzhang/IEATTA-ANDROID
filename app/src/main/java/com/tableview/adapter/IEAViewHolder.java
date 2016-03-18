@@ -1,15 +1,20 @@
 package com.tableview.adapter;
 
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.h6ah4i.android.widget.advrecyclerview.utils.AbstractDraggableItemViewHolder;
 import com.tableview.adapter.enums.ViewHolderType;
 
+import org.ieatta.R;
+
 public abstract class IEAViewHolder extends AbstractDraggableItemViewHolder implements ModelTransfer, View.OnClickListener, View.OnLongClickListener {
-    protected boolean shouldClickItem() {
+    protected boolean shouldOnClickItem() {
         return true;
     }
+    public ViewGroup mContainer;
+
+//    android:id="@+id/container"
 
     @Override
     public ViewHolderType getViewHolderType() {
@@ -21,8 +26,9 @@ public abstract class IEAViewHolder extends AbstractDraggableItemViewHolder impl
     public IEAViewHolder(View itemView) {
         super(itemView);
 
+        this.mContainer = (ViewGroup) itemView.findViewById(R.id.container);
         itemView.setTag(this.getViewHolderType().ordinal());
-        if (this.shouldClickItem() == true) {
+        if (this.shouldOnClickItem() == true) {
             itemView.setOnClickListener(this);
             itemView.setOnLongClickListener(this);
         }
