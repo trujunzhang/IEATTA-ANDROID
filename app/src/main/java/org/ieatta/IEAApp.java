@@ -13,6 +13,7 @@ import com.facebook.drawee.backends.pipeline.Fresco;
 import com.squareup.otto.Bus;
 
 import org.ieatta.parse.ParseAPI;
+import org.ieatta.server.recurring.RecurringTask;
 import org.wikipedia.ViewAnimations;
 import org.wikipedia.crash.CrashReporter;
 import org.wikipedia.crash.hockeyapp.HockeyAppCrashReporter;
@@ -106,7 +107,7 @@ public class IEAApp extends Application {
         ViewAnimations.init(resources);
         screenDensity = resources.getDisplayMetrics().density;
 
-//        new RecurringTask().prepareTimer();
+        new RecurringTask().prepareTimer();
     }
 
     public Bus getBus() {
