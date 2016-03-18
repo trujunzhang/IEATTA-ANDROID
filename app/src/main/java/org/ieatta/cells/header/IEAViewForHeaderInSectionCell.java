@@ -21,6 +21,11 @@ public class IEAViewForHeaderInSectionCell extends IEAViewHolder {
     }
 
     @Override
+    public boolean haveBackground(){
+        return false;
+    }
+
+    @Override
     public ViewHolderType getViewHolderType() {
         return ViewHolderType.header;
     }

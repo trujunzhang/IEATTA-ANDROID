@@ -42,6 +42,19 @@ public class TableViewControllerAdapter
         Object model = this.mProvider.memoryStorage.getRowModel(position);
         holder.render(model);
 
+        if (holder.haveBackground() == true)
+            setBackground(holder);
+
+        holder.setClickListener(new ItemClickListener() {
+            @Override
+            public void onClick(View view, int position, boolean isLongClick) {
+                RowModel item = TableViewControllerAdapter.this.mProvider.memoryStorage.getItem(position);
+                TableViewControllerAdapter.this.mProvider.getOnItemClickListener().onItemClick(view, item.indexPath, item.model, position, isLongClick);
+            }
+        });
+    }
+
+    private void setBackground(IEAViewHolder holder) {
         // set background resource (target view ID: container)
         final int dragState = holder.getDragStateFlags();
 
@@ -61,14 +74,6 @@ public class TableViewControllerAdapter
 
             holder.mContainer.setBackgroundResource(bgResId);
         }
-
-        holder.setClickListener(new ItemClickListener() {
-            @Override
-            public void onClick(View view, int position, boolean isLongClick) {
-                RowModel item = TableViewControllerAdapter.this.mProvider.memoryStorage.getItem(position);
-                TableViewControllerAdapter.this.mProvider.getOnItemClickListener().onItemClick(view, item.indexPath, item.model, position, isLongClick);
-            }
-        });
     }
 
     @Override

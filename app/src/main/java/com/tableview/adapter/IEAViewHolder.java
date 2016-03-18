@@ -13,6 +13,10 @@ public abstract class IEAViewHolder extends AbstractDraggableItemViewHolder impl
         return true;
     }
 
+    public boolean haveBackground(){
+        return true;
+    }
+
     /**
      * If the Cell have background,
      * Must set root view's id to "android:id="@+id/container"
@@ -29,7 +33,7 @@ public abstract class IEAViewHolder extends AbstractDraggableItemViewHolder impl
     public IEAViewHolder(View itemView) {
         super(itemView);
 
-        if(getViewHolderType() == ViewHolderType.cell) {
+        if(haveBackground() == true) {
             this.mContainer = (ViewGroup) itemView.findViewById(R.id.container);
         }
         itemView.setTag(this.getViewHolderType().ordinal());
