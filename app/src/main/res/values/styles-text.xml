@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="SectionText" parent="@style/TextAppearance.AppCompat.Medium">
-        <item name="android:textSize">18.0sp</item>
+        <item name="android:textSize">12.0sp</item>
         <item name="android:textColor">@color/BlackText</item>
 
         <item name="android:gravity">left|bottom</item>

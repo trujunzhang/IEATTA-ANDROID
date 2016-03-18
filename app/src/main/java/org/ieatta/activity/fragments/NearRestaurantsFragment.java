@@ -83,6 +83,12 @@ public class NearRestaurantsFragment extends PageFragment {
                 NearRestaurantsFragment.this.manager.setSectionItems(NearRestaurantsFragment.this.task.getRestaurants(),NearRestaurantSection.section_restaurants.ordinal());
                 return null;
             }
-        },Task.UI_THREAD_EXECUTOR);
+        },Task.UI_THREAD_EXECUTOR).continueWith(new Continuation<Object, Object>() {
+            @Override
+            public Object then(Task<Object> task) throws Exception {
+                Exception error = task.getError();
+                return null;
+            }
+        });
     }
 }
