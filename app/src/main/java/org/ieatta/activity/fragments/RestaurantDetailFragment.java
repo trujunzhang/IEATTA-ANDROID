@@ -9,15 +9,20 @@ import android.view.ViewGroup;
 import com.tableview.RecycleViewManager;
 import com.tableview.adapter.NSIndexPath;
 import com.tableview.adapter.RecyclerOnItemClickListener;
+import com.tableview.utils.CollectionUtil;
 
 import org.ieatta.IEAApp;
 import org.ieatta.R;
 import org.ieatta.cells.IEARestaurantEventsCell;
 import org.ieatta.cells.header.IEARestaurantDetailHeaderCell;
+import org.ieatta.cells.model.IEARestaurantDetailHeader;
 import org.ieatta.cells.model.SectionTitleCellModel;
 import org.ieatta.provide.IEAEditKey;
 import org.ieatta.tasks.RestaurantDetailTask;
 import org.ieatta.views.ObservableWebView;
+
+import bolts.Continuation;
+import bolts.Task;
 
 public class RestaurantDetailFragment extends PageFragment {
 
@@ -64,9 +69,6 @@ public class RestaurantDetailFragment extends PageFragment {
     private void setupUI() {
         this.manager.setRegisterCellClass(IEARestaurantDetailHeaderCell.getType(), RestaurantDetailSection.sectionHeader.ordinal());
         this.manager.setRegisterCellClass(IEARestaurantEventsCell.getType(), RestaurantDetailSection.sectionEvents.ordinal());
-//        this.manager.setSectionItems(CollectionUtil.createList(new IEARestaurantDetailHeader(this.restaurant)), RestaurantDetailSection.sectionHeader.ordinal());
-
-//        this.manager.showGoogleMapAddress(RestaurantDetailSection.sectionGoogleMapAddress.ordinal());
 
         this.manager.appendSectionTitleCell(new SectionTitleCellModel(IEAEditKey.Section_Title, R.string.Events_Recorded), RestaurantDetailSection.sectionEvents.ordinal());
     }
@@ -78,23 +80,23 @@ public class RestaurantDetailFragment extends PageFragment {
 
         this.setupUI();
 
-        String uuid = "";
-        task.executeTask(uuid);
+        String uuid = "1CE562A4-A978-4B75-9B7B-2F3CF9F42A04";
+        task.executeTask(uuid).onSuccess(new Continuation<Void, Object>() {
+            @Override
+            public Object then(Task<Void> task) throws Exception {
+                RestaurantDetailFragment.this.reloadPage();
+                return null;
+            }
+        }).continueWith(new Continuation<Object, Object>() {
+            @Override
+            public Object then(Task<Object> task) throws Exception {
+                return null;
+            }
+        });
+    }
 
-//        Location location = LocationUtil.getLocation();
-//        task.executeTask(location).onSuccess(new Continuation<Void, Object>() {
-//            @Override
-//            public Object then(Task<Void> task) throws Exception {
-//                RealmResults<DBRestaurant> restaurants = RestaurantDetailFragment.this.task.getRestaurants();
-//                RestaurantDetailFragment.this.manager.setSectionItems(restaurants, NearRestaurantSection.section_restaurants.ordinal());
-//                return null;
-//            }
-//        },Task.UI_THREAD_EXECUTOR).continueWith(new Continuation<Object, Object>() {
-//            @Override
-//            public Object then(Task<Object> task) throws Exception {
-//                Exception error = task.getError();
-//                return null;
-//            }
-//        });
+    private void reloadPage() {
+        this.manager.setSectionItems(CollectionUtil.createList(new IEARestaurantDetailHeader(this.task.restaurant)), RestaurantDetailSection.sectionHeader.ordinal());
+//        this.manager.showGoogleMapAddress(RestaurantDetailSection.sectionGoogleMapAddress.ordinal());
     }
 }

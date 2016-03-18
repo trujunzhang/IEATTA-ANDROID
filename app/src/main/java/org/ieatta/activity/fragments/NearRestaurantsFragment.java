@@ -86,8 +86,7 @@ public class NearRestaurantsFragment extends PageFragment {
         task.executeTask(location).onSuccess(new Continuation<Void, Object>() {
             @Override
             public Object then(Task<Void> task) throws Exception {
-                RealmResults<DBRestaurant> restaurants = NearRestaurantsFragment.this.task.getRestaurants();
-                NearRestaurantsFragment.this.manager.setSectionItems(restaurants,NearRestaurantSection.section_restaurants.ordinal());
+               NearRestaurantsFragment.this.reloadPage();
                 return null;
             }
         },Task.UI_THREAD_EXECUTOR).continueWith(new Continuation<Object, Object>() {
@@ -97,5 +96,10 @@ public class NearRestaurantsFragment extends PageFragment {
                 return null;
             }
         });
+    }
+
+    private void reloadPage(){
+        RealmResults<DBRestaurant> restaurants = NearRestaurantsFragment.this.task.getRestaurants();
+        NearRestaurantsFragment.this.manager.setSectionItems(restaurants,NearRestaurantSection.section_restaurants.ordinal());
     }
 }
