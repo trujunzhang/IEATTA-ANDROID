@@ -29,7 +29,9 @@ public abstract class IEAViewHolder extends AbstractDraggableItemViewHolder impl
     public IEAViewHolder(View itemView) {
         super(itemView);
 
-        this.mContainer = (ViewGroup) itemView.findViewById(R.id.container);
+        if(getViewHolderType() == ViewHolderType.cell) {
+            this.mContainer = (ViewGroup) itemView.findViewById(R.id.container);
+        }
         itemView.setTag(this.getViewHolderType().ordinal());
         if (this.shouldOnClickItem() == true) {
             itemView.setOnClickListener(this);
