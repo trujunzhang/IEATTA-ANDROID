@@ -40,7 +40,8 @@ public class NearRestaurantsTask {
         return LocalDatabaseQuery.queryNearRestaurants(location).onSuccess(new Continuation<RealmResults<DBRestaurant>, Void>() {
             @Override
             public Void then(Task<RealmResults<DBRestaurant>> task) throws Exception {
-                NearRestaurantsTask.this.restaurants = NearRestaurantsTask.sort(task.getResult());
+//                NearRestaurantsTask.this.restaurants = NearRestaurantsTask.sort(task.getResult());
+                NearRestaurantsTask.this.restaurants = task.getResult();
                 return null;
             }
         });

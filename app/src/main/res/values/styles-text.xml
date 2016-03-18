@@ -20,8 +20,8 @@
     </style>
 
     <style name="SubtitleText" parent="@android:style/TextAppearance">
-        <item name="android:textSize">16.0sp</item>
-        <item name="android:textColor">@color/black_yoni</item>
+        <item name="android:textSize">12.0sp</item>
+        <item name="android:textColor">@color/GreyMidText</item>
     </style>
 
 

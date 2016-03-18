@@ -17,6 +17,7 @@ import org.ieatta.cells.IEANearRestaurantMoreCell;
 import org.ieatta.cells.IEANearRestaurantsCell;
 import org.ieatta.cells.model.SectionTitleCellModel;
 import org.ieatta.cells.model.IEANearRestaurantMore;
+import org.ieatta.database.models.DBRestaurant;
 import org.ieatta.provide.IEAEditKey;
 import org.ieatta.tasks.NearRestaurantsTask;
 import org.ieatta.utils.LocationUtil;
@@ -24,6 +25,7 @@ import org.ieatta.views.ObservableWebView;
 
 import bolts.Continuation;
 import bolts.Task;
+import io.realm.RealmResults;
 
 public class NearRestaurantsFragment extends PageFragment {
     enum NearRestaurantSection {
@@ -61,6 +63,7 @@ public class NearRestaurantsFragment extends PageFragment {
         this.manager.setRegisterCellClassWhenSelected(IEANearRestaurantMoreCell.getType(), NearRestaurantSection.section_more_items.ordinal());
 
         this.manager.appendSectionTitleCell(new SectionTitleCellModel(IEAEditKey.Section_Title, R.string.More), NearRestaurantSection.section_more_items.ordinal());
+        this.manager.appendSectionTitleCell(new SectionTitleCellModel(IEAEditKey.Section_Title, R.string.Nearby_Restaurants), NearRestaurantSection.section_restaurants.ordinal());
     }
 
     @Override
@@ -80,7 +83,8 @@ public class NearRestaurantsFragment extends PageFragment {
         task.executeTask(location).onSuccess(new Continuation<Void, Object>() {
             @Override
             public Object then(Task<Void> task) throws Exception {
-                NearRestaurantsFragment.this.manager.setSectionItems(NearRestaurantsFragment.this.task.getRestaurants(),NearRestaurantSection.section_restaurants.ordinal());
+                RealmResults<DBRestaurant> restaurants = NearRestaurantsFragment.this.task.getRestaurants();
+                NearRestaurantsFragment.this.manager.setSectionItems(restaurants,NearRestaurantSection.section_restaurants.ordinal());
                 return null;
             }
         },Task.UI_THREAD_EXECUTOR).continueWith(new Continuation<Object, Object>() {
