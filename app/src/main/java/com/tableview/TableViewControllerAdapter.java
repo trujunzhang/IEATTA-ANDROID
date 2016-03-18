@@ -42,7 +42,6 @@ public class TableViewControllerAdapter
         Object model = this.mProvider.memoryStorage.getRowModel(position);
         holder.render(model);
 
-
         // set background resource (target view ID: container)
         final int dragState = holder.getDragStateFlags();
 
