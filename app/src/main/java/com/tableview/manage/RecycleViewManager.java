@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 
 import com.h6ah4i.android.widget.advrecyclerview.draggable.RecyclerViewDragDropManager;
 import com.h6ah4i.android.widget.advrecyclerview.utils.WrapperAdapterUtils;
+import com.tableview.TableViewControllerAdapter;
 import com.tableview.adapter.NSIndexPath;
 import com.tableview.adapter.RecyclerOnItemClickListener;
 import com.tableview.adapter.decoration.TableViewDividerDecoration;
@@ -39,15 +40,18 @@ public class RecycleViewManager {
             mRecyclerView = null;
         }
 
-//        if (mWrappedAdapter != null) {
-//            WrapperAdapterUtils.releaseAll(mWrappedAdapter);
-//            mWrappedAdapter = null;
-//        }
-//        mAdapter = null;
+        if (mWrappedAdapter != null) {
+            WrapperAdapterUtils.releaseAll(mWrappedAdapter);
+            mWrappedAdapter = null;
+        }
+        mAdapter = null;
     }
 
+    public DTTableViewManager manager;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.Adapter mWrappedAdapter;
     private RecyclerViewDragDropManager mRecyclerViewDragDropManager;
-    public DTTableViewManager manager = null;
+
 
     private void setupDragDropManager(Context context){
         // drag & drop manager
@@ -58,13 +62,24 @@ public class RecycleViewManager {
 
     public RecycleViewManager(Context context) {
         setupDragDropManager(context);
+
         TableViewConfiguration config =
                 new TableViewConfiguration.Builder(context)
                         .setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false))
                         .setItemDecoration(new TableViewDividerDecoration(context))
                         .setDebugInfo("Activity_Table_View")
                         .build();
-        this.manager = new DTTableViewManager(config);
+
+        this.manager = new DTTableViewManager();
+
+        //adapter
+        final TableViewControllerAdapter myItemAdapter = new TableViewControllerAdapter(this.manager);
+        mAdapter = myItemAdapter;
+
+        mWrappedAdapter = mRecyclerViewDragDropManager.createWrappedAdapter(myItemAdapter);      // wrap for dragging
+
+        this.manager.setConfiguration(config,myItemAdapter);
+
         this.setRegisterHeaderClass(IEAViewForHeaderInSectionCell.getType());
     }
 

@@ -16,9 +16,9 @@ public class DTTableViewManager {
     public TableViewConfiguration configuration;
     public MemoryStorage memoryStorage;
 
-    public DTTableViewManager(TableViewConfiguration configuration) {
+    public void setConfiguration(TableViewConfiguration configuration, TableViewControllerAdapter adapter){
         this.configuration = configuration;
-        TableViewControllerAdapter adapter = new TableViewControllerAdapter(this);
+//        TableViewControllerAdapter adapter = new TableViewControllerAdapter(this);
         this.memoryStorage = new MemoryStorage(adapter);
     }
 
