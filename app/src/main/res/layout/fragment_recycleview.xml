@@ -8,6 +8,7 @@
         android:id="@+id/recycleview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/statelist_item_background"
         android:paddingTop="?android:attr/actionBarSize" />
 
 </LinearLayout>
