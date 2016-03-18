@@ -8,6 +8,7 @@ import com.tableview.storage.models.CellType;
 
 import org.ieatta.R;
 import org.ieatta.database.models.DBRestaurant;
+import org.ieatta.views.AvatarView;
 
 public class IEANearRestaurantsCell extends IEAViewHolder {
 
@@ -17,14 +18,14 @@ public class IEANearRestaurantsCell extends IEAViewHolder {
 
     private IEANearRestaurantsCell self = this;
 
-//    private AvatarView avatarView;
+    private AvatarView avatarView;
 
     private TextView titleLabel;
     private TextView subtitleLabel;
 
     public IEANearRestaurantsCell(View itemView) {
         super(itemView);
-//        self.avatarView = (AvatarView) itemView.findViewById(R.id.avatarView);
+        self.avatarView = (AvatarView) itemView.findViewById(R.id.avatarView);
         self.titleLabel = (TextView) itemView.findViewById(R.id.titleTextView);
         self.subtitleLabel = (TextView) itemView.findViewById(R.id.addressTextView);
     }
@@ -35,6 +36,6 @@ public class IEANearRestaurantsCell extends IEAViewHolder {
         self.titleLabel.setText(model.getDisplayName());
         self.subtitleLabel.setText(((DBRestaurant) value).getGoogleMapAddress());
 
-//        self.avatarView.loadNewPhotoByModel(model, R.drawable.blank_biz);
+        self.avatarView.loadNewPhotoByModel(model, R.drawable.blank_biz);
     }
 }

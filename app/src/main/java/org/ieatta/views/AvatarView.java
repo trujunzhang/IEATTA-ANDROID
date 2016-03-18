@@ -4,6 +4,8 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 
+import org.ieatta.database.models.DBRestaurant;
+
 public class AvatarView extends ImageView{
     public AvatarView(Context context) {
         super(context);
@@ -19,5 +21,9 @@ public class AvatarView extends ImageView{
 
     public AvatarView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
+    }
+
+    public void loadNewPhotoByModel(DBRestaurant model, int blank_biz) {
+
     }
 }
