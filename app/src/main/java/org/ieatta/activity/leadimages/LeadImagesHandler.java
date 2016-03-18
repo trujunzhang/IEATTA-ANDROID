@@ -18,6 +18,7 @@ import android.view.animation.AnimationUtils;
 import org.ieatta.IEAApp;
 import org.ieatta.R;
 import org.ieatta.activity.fragments.PageFragment;
+import org.ieatta.cells.model.Page;
 import org.ieatta.views.ObservableWebView;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -44,7 +45,6 @@ public class LeadImagesHandler {
     }
 
     @NonNull private final PageFragment parentFragment;
-    @NonNull private final CommunicationBridge bridge;
     @NonNull private final ObservableWebView webView;
 
     @NonNull private final ArticleHeaderView articleHeaderView;
@@ -55,20 +55,16 @@ public class LeadImagesHandler {
     private float displayDensity;
 
     public LeadImagesHandler(@NonNull final PageFragment parentFragment,
-                             @NonNull CommunicationBridge bridge,
                              @NonNull ObservableWebView webView,
                              @NonNull ArticleHeaderView articleHeaderView) {
         this.articleHeaderView = articleHeaderView;
         this.articleHeaderView.setMenuBarCallback(new MenuBarCallback());
         this.parentFragment = parentFragment;
-        this.bridge = bridge;
         this.webView = webView;
 
         image = articleHeaderView.getImage();
 
         initDisplayDimensions();
-
-        initWebView();
 
         initArticleHeaderView();
 
@@ -151,9 +147,8 @@ public class LeadImagesHandler {
 
         // set the page title text, and honor any HTML formatting in the title
         loadLeadImage();
-        articleHeaderView.setTitle(Html.fromHtml(getPage().getDisplayTitle()));
-        articleHeaderView.setLocale(getPage().getTitle().getSite().getLanguageCode());
-        articleHeaderView.setPronunciation(getPage().getTitlePronunciationUrl());
+//        articleHeaderView.setTitle(Html.fromHtml(getPage().getDisplayTitle()));
+//        articleHeaderView.setLocale(getPage().getTitle().getSite().getLanguageCode());
         // Set the subtitle, too, so text measurements are accurate.
         layoutWikiDataDescription(getTitle().getDescription());
         layoutViews(listener, sequence);
@@ -263,12 +258,14 @@ public class LeadImagesHandler {
      */
     @Nullable
     private String getLeadImageUrl() {
-        return getPage() == null ? null : getPage().getPageProperties().getLeadImageUrl();
+//        return getPage() == null ? null : getPage().getPageProperties().getLeadImageUrl();
+        return "";
     }
 
     @Nullable
     private Location getGeo() {
-        return getPage() == null ? null : getPage().getPageProperties().getGeo();
+//        return getPage() == null ? null : getPage().getPageProperties().getGeo();
+        return null;
     }
 
     private void startKenBurnsAnimation() {
@@ -288,41 +285,20 @@ public class LeadImagesHandler {
         });
     }
 
-    private void initWebView() {
-        webView.addOnScrollChangeListener(articleHeaderView);
-
-        webView.addOnClickListener(new ObservableWebView.OnClickListener() {
-            @Override
-            public boolean onClick(float x, float y) {
-                // if the click event is within the area of the lead image, then the user
-                // must have wanted to click on the lead image!
-                if (getPage() != null && isLeadImageEnabled() && y < (articleHeaderView.getHeight() - webView.getScrollY())) {
-                    String imageName = getPage().getPageProperties().getLeadImageName();
-                    if (imageName != null) {
-                        PageTitle imageTitle = new PageTitle("File:" + imageName,
-                                getTitle().getSite());
-                        GalleryActivity.showGallery(getActivity(),
-                                parentFragment.getTitleOriginal(), imageTitle,
-                                GalleryFunnel.SOURCE_LEAD_IMAGE);
-                    }
-                    return true;
-                }
-                return false;
-            }
-        });
-    }
-
     private boolean isMainPage() {
-        return getPage() != null && getPage().isMainPage();
+//        return getPage() != null && getPage().isMainPage();
+        return true;
     }
 
     private PageTitle getTitle() {
-        return parentFragment.getTitle();
+//        return parentFragment.getTitle();
+        return null;
     }
 
     @Nullable
     private Page getPage() {
-        return parentFragment.getPage();
+//        return parentFragment.getPage();
+        return null;
     }
 
     private boolean isFragmentAdded() {
@@ -344,22 +320,22 @@ public class LeadImagesHandler {
     private class MenuBarCallback extends ArticleMenuBarView.DefaultCallback {
         @Override
         public void onBookmarkClick(boolean bookmarkSaved) {
-            if (getPage() == null) {
-                return;
-            }
-
-            if (bookmarkSaved) {
-                saveBookmark();
-            } else {
-                deleteBookmark();
-            }
+//            if (getPage() == null) {
+//                return;
+//            }
+//
+//            if (bookmarkSaved) {
+//                saveBookmark();
+//            } else {
+//                deleteBookmark();
+//            }
         }
 
         @Override
         public void onShareClick() {
-            if (getPage() != null) {
-                ShareUtil.shareText(getActivity(), getPage().getTitle());
-            }
+//            if (getPage() != null) {
+//                ShareUtil.shareText(getActivity(), getPage().getTitle());
+//            }
         }
 
         @Override
