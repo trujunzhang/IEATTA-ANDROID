@@ -6,8 +6,15 @@ import android.widget.ImageView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 
+import org.ieatta.database.models.DBPhoto;
 import org.ieatta.database.models.DBRestaurant;
+import org.ieatta.database.query.LocalDatabaseQuery;
+import org.ieatta.server.cache.ThumbnailImageUtil;
+import org.wikipedia.util.log.L;
 import org.wikipedia.views.ViewUtil;
+
+import bolts.Continuation;
+import bolts.Task;
 
 public class AvatarView extends SimpleDraweeView {
     public AvatarView(Context context) {
@@ -29,20 +36,19 @@ public class AvatarView extends SimpleDraweeView {
     public void loadNewPhotoByModel(DBRestaurant model, int placeHolder) {
         this.configureAvatar(placeHolder);
 
-
-
-//        new DBPhoto().queryPhotosByModel(model)
-//                .onSuccess(new Continuation<List<ParseModelAbstract>, Void>() {
-//                    @Override
-//                    public Void then(Task<List<ParseModelAbstract>> task) throws Exception {
-//                        List<ParseModelAbstract> taskResult = task.getResult();
-//                        ParseModelAbstract first = taskResult.get(0);
-//                        if (first != null) {
-//                            self.loadNewPhotoByPhoto((Photo) first, placeHolder);
-//                        }
-//                        return null;
-//                    }
-//                });
+        LocalDatabaseQuery.getPhoto(model.getUUID()).onSuccess(new Continuation<DBPhoto, Object>() {
+            @Override
+            public Object then(Task<DBPhoto> task) throws Exception {
+                DBPhoto photo = task.getResult();
+                String expect = photo.getUsedRef();
+                String path = ThumbnailImageUtil.sharedInstance.getCacheImageUrl(photo).getAbsolutePath();
+                L.d("usedRef of the photo: " + expect);
+                L.d("cached path of the photo: " + path);
+                String url = String.format("file://%s", path);
+                ViewUtil.loadImageUrlInto(AvatarView.this, url);
+                return null;
+            }
+        });
     }
 
     private void configureAvatar(int placeHolder) {
