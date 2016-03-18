@@ -4,13 +4,22 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.h6ah4i.android.widget.advrecyclerview.draggable.DraggableItemAdapter;
+import com.h6ah4i.android.widget.advrecyclerview.draggable.DraggableItemConstants;
+import com.h6ah4i.android.widget.advrecyclerview.draggable.ItemDraggableRange;
 import com.tableview.adapter.IEAViewHolder;
 import com.tableview.adapter.ItemClickListener;
 import com.tableview.storage.DTTableViewManager;
 import com.tableview.storage.models.RowModel;
 
-public class TableViewControllerAdapter extends RecyclerView.Adapter<IEAViewHolder> {
+public class TableViewControllerAdapter
+        extends RecyclerView.Adapter<IEAViewHolder>
+        implements DraggableItemAdapter<IEAViewHolder> {
     private DTTableViewManager mProvider;
+
+    // NOTE: Make accessible with short name
+    private interface Draggable extends DraggableItemConstants {
+    }
 
     public TableViewControllerAdapter(DTTableViewManager mProvider) {
         this.mProvider = mProvider;
@@ -44,5 +53,27 @@ public class TableViewControllerAdapter extends RecyclerView.Adapter<IEAViewHold
     public int getItemViewType(int position) {
         int itemViewType = this.mProvider.memoryStorage.getItemViewType(position);
         return itemViewType;
+    }
+
+
+    @Override
+    public void onMoveItem(int fromPosition, int toPosition) {
+
+        if (fromPosition == toPosition) {
+            return;
+        }
+
+        notifyItemMoved(fromPosition, toPosition);
+    }
+
+    @Override
+    public boolean onCheckCanStartDrag(IEAViewHolder holder, int position, int x, int y) {
+        return false;
+    }
+
+    @Override
+    public ItemDraggableRange onGetItemDraggableRange(IEAViewHolder holder, int position) {
+        // no drag-sortable range specified
+        return null;
     }
 }
