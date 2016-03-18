@@ -55,6 +55,8 @@ public class TableViewControllerAdapter
     }
 
     private void setBackground(IEAViewHolder holder) {
+        holder.mContainer.setBackgroundResource(R.drawable.bg_item_normal_state);
+
         // set background resource (target view ID: container)
         final int dragState = holder.getDragStateFlags();
 
