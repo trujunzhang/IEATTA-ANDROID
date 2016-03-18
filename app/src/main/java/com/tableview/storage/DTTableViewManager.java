@@ -18,7 +18,8 @@ public class DTTableViewManager {
 
     public DTTableViewManager(TableViewConfiguration configuration) {
         this.configuration = configuration;
-        this.memoryStorage = new MemoryStorage(new TableViewControllerAdapter(this));
+        TableViewControllerAdapter adapter = new TableViewControllerAdapter(this);
+        this.memoryStorage = new MemoryStorage(adapter);
     }
 
     public RecyclerOnItemClickListener getOnItemClickListener(){
