@@ -4,6 +4,7 @@ import android.graphics.pdf.PdfDocument;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import com.tableview.utils.CollectionUtil;
 
 import org.ieatta.IEAApp;
 import org.ieatta.R;
+import org.ieatta.activity.PageActivity;
 import org.ieatta.activity.PageLoadStrategy;
 import org.ieatta.activity.editing.EditHandler;
 import org.ieatta.activity.fragments.search.SearchBarHideHandler;
@@ -171,4 +173,40 @@ public class RestaurantDetailFragment extends DetailFragment {
         this.manager.setSectionItems(CollectionUtil.createList(new IEARestaurantDetailHeader(this.task.restaurant)), RestaurantDetailSection.section_header.ordinal());
 //        this.manager.showGoogleMapAddress(RestaurantDetailSection.section_google_mapaddress.ordinal());
     }
+
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        closePageScrollFunnel();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("");
+        initPageScrollFunnel();
+    }
+
+
+    private void initPageScrollFunnel() {
+//        if (model.getPage() != null) {
+//            pageScrollFunnel = new PageScrollFunnel(app, model.getPage().getPageProperties().getPageId());
+//        }
+    }
+
+    private void closePageScrollFunnel() {
+//        if (pageScrollFunnel != null && webView.getContentHeight() > 0) {
+//            pageScrollFunnel.setViewportHeight(webView.getHeight());
+//            pageScrollFunnel.setPageHeight(webView.getContentHeight());
+//            pageScrollFunnel.logDone();
+//        }
+        pageScrollFunnel = null;
+    }
+
+    // TODO: don't assume host is PageActivity. Use Fragment callbacks pattern.
+    private PageActivity getPageActivity() {
+        return (PageActivity) getActivity();
+    }
+
 }
