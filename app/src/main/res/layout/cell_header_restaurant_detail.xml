@@ -20,7 +20,6 @@
             android:layout_height="32dp"
             android:textAppearance="@style/TitleText"
             android:text="@string/Add_Event"
-            android:textAlignment="center"
             android:layout_marginTop="4dp"
             android:gravity="center_vertical" />
 
