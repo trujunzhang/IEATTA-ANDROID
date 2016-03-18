@@ -15,24 +15,19 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
+import org.ieatta.IEAApp;
+import org.ieatta.R;
+import org.ieatta.activity.fragments.PageFragment;
+import org.ieatta.views.ObservableWebView;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.wikipedia.R;
-import org.wikipedia.WikipediaApp;
 import org.wikipedia.analytics.GalleryFunnel;
-import org.wikipedia.bridge.CommunicationBridge;
-import org.wikipedia.page.Page;
-import org.wikipedia.page.PageFragment;
 import org.wikipedia.page.PageTitle;
-import org.wikipedia.page.gallery.GalleryActivity;
-import org.wikipedia.savedpages.DeleteSavedPageTask;
-import org.wikipedia.savedpages.SavePageTask;
-import org.wikipedia.savedpages.SavedPage;
 import org.wikipedia.util.DimenUtil;
 import org.wikipedia.util.FeedbackUtil;
 import org.wikipedia.util.ShareUtil;
 import org.wikipedia.util.UriUtil;
-import org.wikipedia.views.ObservableWebView;
+
 
 import static org.wikipedia.util.DimenUtil.getContentTopOffsetPx;
 
@@ -94,7 +89,7 @@ public class LeadImagesHandler {
     }
 
     public boolean isLeadImageEnabled() {
-        return WikipediaApp.getInstance().isImageDownloadEnabled()
+        return IEAApp.getInstance().isImageDownloadEnabled()
                 && displayHeightDp >= MIN_SCREEN_HEIGHT_DP
                 && !TextUtils.isEmpty(getLeadImageUrl());
     }
@@ -208,7 +203,7 @@ public class LeadImagesHandler {
         } catch (JSONException e) {
             throw new RuntimeException(e);
         }
-        bridge.sendMessage("setPaddingTop", payload);
+//        bridge.sendMessage("setPaddingTop", payload);
     }
 
     /**
@@ -254,7 +249,7 @@ public class LeadImagesHandler {
      */
     private void loadLeadImage(@Nullable String url) {
         if (!isMainPage() && !TextUtils.isEmpty(url) && isLeadImageEnabled()) {
-            String fullUrl = WikipediaApp.getInstance().getNetworkProtocol() + ":" + url;
+            String fullUrl = IEAApp.getInstance().getNetworkProtocol() + ":" + url;
             articleHeaderView.setImageYScalar(0);
             articleHeaderView.loadImage(fullUrl);
         } else {
@@ -373,35 +368,11 @@ public class LeadImagesHandler {
         }
 
         private void saveBookmark() {
-            WikipediaApp.getInstance().getFunnelManager().getSavedPagesFunnel(getTitle().getSite()).logSaveNew();
-            FeedbackUtil.showMessage(getActivity(), R.string.snackbar_saving_page);
-            new SavePageTask(WikipediaApp.getInstance(), getTitle(), getPage()) {
-                @Override
-                public void onFinish(Boolean success) {
-                    if (parentFragment.isAdded() && getTitle() != null) {
-                        parentFragment.setPageSaved(success);
-                        FeedbackUtil.showMessage(getActivity(), getActivity().getString(success
-                                ? R.string.snackbar_saved_page_format
-                                : R.string.snackbar_saved_page_missing_images, getTitle().getDisplayText()));
-                    }
-                }
-            }.execute();
+
         }
 
         private void deleteBookmark() {
-            new DeleteSavedPageTask(getActivity(), new SavedPage(getTitle())) {
-                @Override
-                public void onFinish(Boolean success) {
-                    WikipediaApp.getInstance().getFunnelManager().getSavedPagesFunnel(getTitle().getSite()).logDelete();
-                    if (parentFragment.isAdded()) {
-                        parentFragment.setPageSaved(!success);
-                        if (success) {
-                            FeedbackUtil.showMessage(getActivity(),
-                                    R.string.snackbar_saved_page_deleted);
-                        }
-                    }
-                }
-            }.execute();
+
         }
 
         private void openGeoIntent() {

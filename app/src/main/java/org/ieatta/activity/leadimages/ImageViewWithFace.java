@@ -22,7 +22,7 @@ import com.facebook.imagepipeline.request.BasePostprocessor;
 import com.facebook.imagepipeline.request.ImageRequest;
 import com.facebook.imagepipeline.request.ImageRequestBuilder;
 
-import org.wikipedia.R;
+import org.ieatta.R;
 import org.wikipedia.util.log.L;
 
 public class ImageViewWithFace extends SimpleDraweeView {
