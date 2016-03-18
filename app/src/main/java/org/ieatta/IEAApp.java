@@ -98,7 +98,7 @@ public class IEAApp extends Application {
         super.onCreate();
 
         ParseAPI.setup(this);
-        initExceptionHandling();
+//        initExceptionHandling();
 
         Fresco.initialize(this);
         bus = new Bus();

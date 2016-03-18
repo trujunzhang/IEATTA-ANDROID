@@ -181,7 +181,7 @@ public class PageActivity extends ThemedActionBarActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         app = (IEAApp) getApplicationContext();
-        app.checkCrashes(this);
+//        app.checkCrashes(this);
 
         setContentView(R.layout.activity_page);
 
