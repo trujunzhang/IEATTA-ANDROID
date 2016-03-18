@@ -40,9 +40,7 @@ public class AvatarView extends SimpleDraweeView {
             @Override
             public Object then(Task<DBPhoto> task) throws Exception {
                 DBPhoto photo = task.getResult();
-                String expect = photo.getUsedRef();
                 String path = ThumbnailImageUtil.sharedInstance.getCacheImageUrl(photo).getAbsolutePath();
-                L.d("usedRef of the photo: " + expect);
                 L.d("cached path of the photo: " + path);
                 String url = String.format("file://%s", path);
                 ViewUtil.loadImageUrlInto(AvatarView.this, url);
