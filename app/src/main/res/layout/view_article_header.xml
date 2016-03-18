@@ -2,7 +2,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <org.wikipedia.page.leadimages.ArticleHeaderImageView
+    <org.ieatta.activity.leadimages.ArticleHeaderImageView
         android:id="@+id/view_article_header_image"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
@@ -33,7 +33,7 @@
             android:ellipsize="end"
             tools:text="Title\nSubtitle" />
 
-        <org.wikipedia.page.leadimages.ArticleMenuBarView
+        <org.ieatta.activity.leadimages.ArticleMenuBarView
             android:id="@+id/view_article_header_menu_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

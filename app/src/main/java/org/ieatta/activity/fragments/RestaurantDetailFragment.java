@@ -52,7 +52,7 @@ public class RestaurantDetailFragment extends PageFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
 
-        View view = inflater.inflate(R.layout.fragment_recycleview, container, false);
+        View view = inflater.inflate(R.layout.fragment_detail, container, false);
         mRecycleView = (ObservableWebView) view.findViewById(R.id.recycleView);
 
         return view;
