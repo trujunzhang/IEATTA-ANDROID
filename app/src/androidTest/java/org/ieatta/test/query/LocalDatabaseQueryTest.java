@@ -6,11 +6,13 @@ import android.support.test.runner.AndroidJUnit4;
 import org.ieatta.database.models.DBPhoto;
 import org.ieatta.database.models.DBRestaurant;
 import org.ieatta.database.query.LocalDatabaseQuery;
+import org.ieatta.server.cache.ThumbnailImageUtil;
 import org.ieatta.utils.LocationUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.wikipedia.util.log.L;
 
+import java.io.File;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
@@ -53,7 +55,9 @@ public class LocalDatabaseQueryTest {
             public Object then(Task<DBPhoto> task) throws Exception {
                 DBPhoto photo = task.getResult();
                 String expect = photo.getUsedRef();
+                String path = ThumbnailImageUtil.sharedInstance.getCacheImageUrl(photo).getAbsolutePath();
                 L.d("usedRef of the photo: " + expect);
+                L.d("cached path of the photo: " + path);
                 assertThat("Fetched photo's usedRef", (usedRef.equals(expect)));
                 completionLatch.countDown();
                 return null;
