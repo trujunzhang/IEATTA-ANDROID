@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/container"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/NearRestaurant_Restaurants">
+    android:layout_height="@dimen/NearRestaurant_Restaurants"
+    style="@style/cell_style">
 
     <org.ieatta.views.AvatarView
         android:id="@+id/avatarView"

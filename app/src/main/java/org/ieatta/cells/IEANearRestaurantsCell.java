@@ -12,7 +12,7 @@ import org.ieatta.database.models.DBRestaurant;
 public class IEANearRestaurantsCell extends IEAViewHolder {
 
     public static CellType getType() {
-        return new CellType(IEANearRestaurantsCell.class, R.layout.near_restaurant_cell);
+        return new CellType(IEANearRestaurantsCell.class, R.layout.cell_near_restaurant);
     }
 
     private IEANearRestaurantsCell self = this;
