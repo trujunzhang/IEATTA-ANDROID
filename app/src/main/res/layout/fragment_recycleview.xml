@@ -5,10 +5,9 @@
     android:orientation="vertical">
 
     <org.ieatta.views.ObservableWebView
-        android:id="@+id/recycleview"
+        android:id="@+id/recycleView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/statelist_item_background"
         android:paddingTop="?android:attr/actionBarSize" />
 
 </LinearLayout>

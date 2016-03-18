@@ -1,6 +1,5 @@
-package org.ieatta.cells;
+package org.ieatta.cells.model;
 
-import org.ieatta.cells.model.EditBaseCellModel;
 import org.ieatta.provide.IEAEditKey;
 
 public class SectionTitleCellModel extends EditBaseCellModel {

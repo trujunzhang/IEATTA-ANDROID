@@ -8,6 +8,7 @@ import com.tableview.adapter.enums.ViewHolderType;
 import com.tableview.storage.models.CellType;
 
 import org.ieatta.R;
+import org.ieatta.cells.model.SectionTitleCellModel;
 
 public class IEAViewForHeaderInSectionCell extends IEAViewHolder {
     public static CellType getType() {

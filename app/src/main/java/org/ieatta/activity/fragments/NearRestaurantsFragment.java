@@ -14,7 +14,7 @@ import org.ieatta.IEAApp;
 import org.ieatta.R;
 import org.ieatta.cells.IEANearRestaurantMoreCell;
 import org.ieatta.cells.IEANearRestaurantsCell;
-import org.ieatta.cells.SectionTitleCellModel;
+import org.ieatta.cells.model.SectionTitleCellModel;
 import org.ieatta.cells.model.IEANearRestaurantMore;
 import org.ieatta.provide.IEAEditKey;
 import org.ieatta.views.ObservableWebView;
@@ -35,7 +35,7 @@ public class NearRestaurantsFragment extends PageFragment {
         super.onCreateView(inflater, container, savedInstanceState);
 
         View view = inflater.inflate(R.layout.fragment_recycleview, container, false);
-        mRecycleView = (ObservableWebView) view.findViewById(R.id.recycleview);
+        mRecycleView = (ObservableWebView) view.findViewById(R.id.recycleView);
 
         return view;
     }
