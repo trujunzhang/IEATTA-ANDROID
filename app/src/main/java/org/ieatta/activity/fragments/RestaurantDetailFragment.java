@@ -24,7 +24,7 @@ import org.ieatta.views.ObservableWebView;
 import bolts.Continuation;
 import bolts.Task;
 
-public class RestaurantDetailFragment extends PageFragment {
+public class RestaurantDetailFragment extends DetailFragment {
 
     public static final RecyclerOnItemClickListener itemClickListener = new RecyclerOnItemClickListener() {
         @Override
