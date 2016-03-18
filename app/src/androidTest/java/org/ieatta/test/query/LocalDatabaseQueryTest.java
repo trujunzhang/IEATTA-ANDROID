@@ -54,7 +54,7 @@ public class LocalDatabaseQueryTest {
                 DBPhoto photo = task.getResult();
                 String expect = photo.getUsedRef();
                 L.d("usedRef of the photo: " + expect);
-                assertThat("Fetched photo's usedRef", (usedRef == expect));
+                assertThat("Fetched photo's usedRef", (usedRef.equals(expect)));
                 completionLatch.countDown();
                 return null;
             }
