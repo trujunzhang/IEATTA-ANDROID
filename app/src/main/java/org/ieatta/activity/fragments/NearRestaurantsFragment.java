@@ -28,6 +28,14 @@ import bolts.Task;
 import io.realm.RealmResults;
 
 public class NearRestaurantsFragment extends PageFragment {
+
+    public static final RecyclerOnItemClickListener itemClickListener = new RecyclerOnItemClickListener() {
+        @Override
+        public void onItemClick(View view, NSIndexPath indexPath, Object model, int position, boolean isLongClick) {
+
+        }
+    };
+
     enum NearRestaurantSection {
         section_more_items,//= 0
         section_restaurants, //= 1
@@ -69,12 +77,7 @@ public class NearRestaurantsFragment extends PageFragment {
     @Override
     public void loadPage() {
         manager.startManagingWithDelegate(mRecycleView);
-        manager.setOnItemClickListener(new RecyclerOnItemClickListener() {
-            @Override
-            public void onItemClick(View view, NSIndexPath indexPath, Object model, int position, boolean isLongClick) {
-
-            }
-        });
+        manager.setOnItemClickListener(itemClickListener);
 
         this.setupUI();
         this.manager.setSectionItems(IEANearRestaurantMore.getMoresItems(), NearRestaurantSection.section_more_items.ordinal());

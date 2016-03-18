@@ -1,6 +1,5 @@
 package org.ieatta.activity.fragments;
 
-import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -10,29 +9,25 @@ import android.view.ViewGroup;
 import com.tableview.RecycleViewManager;
 import com.tableview.adapter.NSIndexPath;
 import com.tableview.adapter.RecyclerOnItemClickListener;
-import com.tableview.utils.CollectionUtil;
 
 import org.ieatta.IEAApp;
 import org.ieatta.R;
-import org.ieatta.cells.IEANearRestaurantMoreCell;
-import org.ieatta.cells.IEANearRestaurantsCell;
 import org.ieatta.cells.IEARestaurantEventsCell;
 import org.ieatta.cells.header.IEARestaurantDetailHeaderCell;
-import org.ieatta.cells.model.IEANearRestaurantMore;
-import org.ieatta.cells.model.IEARestaurantDetailHeader;
 import org.ieatta.cells.model.SectionTitleCellModel;
-import org.ieatta.database.models.DBRestaurant;
 import org.ieatta.provide.IEAEditKey;
-import org.ieatta.tasks.NearRestaurantsTask;
 import org.ieatta.tasks.RestaurantDetailTask;
-import org.ieatta.utils.LocationUtil;
 import org.ieatta.views.ObservableWebView;
 
-import bolts.Continuation;
-import bolts.Task;
-import io.realm.RealmResults;
-
 public class RestaurantDetailFragment extends PageFragment {
+
+    public static final RecyclerOnItemClickListener itemClickListener = new RecyclerOnItemClickListener() {
+        @Override
+        public void onItemClick(View view, NSIndexPath indexPath, Object model, int position, boolean isLongClick) {
+
+        }
+    };
+
     enum RestaurantDetailSection {
         sectionHeader,//= 0
         sectionGoogleMapAddress,//= 1
@@ -79,12 +74,7 @@ public class RestaurantDetailFragment extends PageFragment {
     @Override
     public void loadPage() {
         manager.startManagingWithDelegate(mRecycleView);
-        manager.setOnItemClickListener(new RecyclerOnItemClickListener() {
-            @Override
-            public void onItemClick(View view, NSIndexPath indexPath, Object model, int position, boolean isLongClick) {
-
-            }
-        });
+        manager.setOnItemClickListener(itemClickListener);
 
         this.setupUI();
 
