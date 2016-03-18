@@ -78,6 +78,9 @@ public class RestaurantDetailFragment extends PageFragment {
 
         this.setupUI();
 
+        String uuid = "";
+        task.executeTask(uuid);
+
 //        Location location = LocationUtil.getLocation();
 //        task.executeTask(location).onSuccess(new Continuation<Void, Object>() {
 //            @Override

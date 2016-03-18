@@ -28,24 +28,6 @@ public class LocalDatabaseQueryTest {
     private static final int TASK_COMPLETION_TIMEOUT = 20000;
 
     @Test
-    public void testQueryNearRestaurants() throws InterruptedException {
-        final CountDownLatch completionLatch = new CountDownLatch(1);
-        Location location = LocationUtil.getLocation();
-        LocalDatabaseQuery.queryNearRestaurants(location).onSuccess(new Continuation<RealmResults<DBRestaurant>, Void>() {
-            @Override
-            public Void then(Task<RealmResults<DBRestaurant>> task) {
-                RealmResults<DBRestaurant> result = task.getResult();
-                int size = result.size();
-                L.d("Size of the Restaurants: " + size);
-                assertThat("Fetched restaurants length", (size == 3));
-                completionLatch.countDown();
-                return null;
-            }
-        });
-        completionLatch.await(TASK_COMPLETION_TIMEOUT, TimeUnit.MILLISECONDS);
-    }
-
-    @Test
     public void testQueryPhoto() throws InterruptedException {
         final String usedRef = "C2F23EDC-106C-4D17-A6D6-8EA04E10732A"; // for Restaurant(called "Basta Pasta").
         final CountDownLatch completionLatch = new CountDownLatch(1);
