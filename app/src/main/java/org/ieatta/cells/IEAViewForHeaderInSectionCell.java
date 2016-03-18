@@ -12,7 +12,7 @@ import org.ieatta.cells.model.SectionTitleCellModel;
 
 public class IEAViewForHeaderInSectionCell extends IEAViewHolder {
     public static CellType getType() {
-        return new CellType(IEAViewForHeaderInSectionCell.class, R.layout.view_for_header_in_section_cell);
+        return new CellType(IEAViewForHeaderInSectionCell.class, R.layout.list_section_header);
     }
 
     @Override
@@ -32,7 +32,7 @@ public class IEAViewForHeaderInSectionCell extends IEAViewHolder {
     public IEAViewForHeaderInSectionCell(View itemView) {
         super(itemView);
 
-        self.titleLabel = (TextView) itemView.findViewById(R.id.headerTextView);
+        self.titleLabel = (TextView) itemView.findViewById(android.R.id.text1);
     }
 
     @Override
