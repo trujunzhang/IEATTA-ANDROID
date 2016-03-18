@@ -17,7 +17,7 @@ import bolts.Task;
 import io.realm.RealmResults;
 
 public class NearRestaurantsTask {
-    static class SortByName implements Comparator {
+    private static class SortByName implements Comparator {
         public int compare(Object o1, Object o2) {
             DBRestaurant s1 = (DBRestaurant) o1;
             DBRestaurant s2 = (DBRestaurant) o2;
@@ -25,7 +25,7 @@ public class NearRestaurantsTask {
         }
     }
 
-    public static RealmResults<DBRestaurant> sort(RealmResults<DBRestaurant> list) {
+    private static RealmResults<DBRestaurant> sort(RealmResults<DBRestaurant> list) {
         Collections.sort(list, new SortByName());
         return list;
     }

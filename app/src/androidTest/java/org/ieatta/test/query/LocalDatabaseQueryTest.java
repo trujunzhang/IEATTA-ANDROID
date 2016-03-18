@@ -5,6 +5,7 @@ import android.support.test.runner.AndroidJUnit4;
 
 import org.ieatta.database.models.DBRestaurant;
 import org.ieatta.database.query.LocalDatabaseQuery;
+import org.ieatta.utils.LocationUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.wikipedia.util.log.L;
@@ -27,13 +28,13 @@ public class LocalDatabaseQueryTest {
     @Test
     public void testQueryNearRestaurants() throws InterruptedException {
         final CountDownLatch completionLatch = new CountDownLatch(1);
-        Location location = getLocation();
+        Location location = LocationUtil.getLocation();
         LocalDatabaseQuery.queryNearRestaurants(location).onSuccess(new Continuation<RealmResults<DBRestaurant>, Void>() {
             @Override
             public Void then(Task<RealmResults<DBRestaurant>> task) {
                 RealmResults<DBRestaurant> result = task.getResult();
                 int size = result.size();
-                L.d("Size of the Restaurants: "+ size);
+                L.d("Size of the Restaurants: " + size);
                 assertThat("Fetched restaurants length", (size == 3));
                 completionLatch.countDown();
                 return null;
@@ -42,23 +43,6 @@ public class LocalDatabaseQueryTest {
         completionLatch.await(TASK_COMPLETION_TIMEOUT, TimeUnit.MILLISECONDS);
     }
 
-    /**
-     * ['dr5ru0r0y4xj','dr5ru1nwsk1v','dr5ru22mf339','dr5ru0r24xuf','dr5ru22mf339','dr5ru0nzfv5q','wtv8r4whgz2y']
-     * @return
-     */
-    private Location getLocation() {
-        double[][] data = {
-                // 'dr5ru0r0y4xj'
-                // {40.738821,-73.994026},
-                // 'dr5ru0rb5cej' (Region test)
-                // matched: ['dr5ru0r0y4xj','dr5ru0r24xuf','dr5ru0nzfv5q']
-                {40.738687, -73.993098},
-        };
-        Location location = new Location("");
-        location.setLatitude(data[0][0]);
-        location.setLongitude(data[0][1]);
 
-        return location;
-    }
 
 }

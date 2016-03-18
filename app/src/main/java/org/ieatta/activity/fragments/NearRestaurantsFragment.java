@@ -1,5 +1,6 @@
 package org.ieatta.activity.fragments;
 
+import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -17,7 +18,12 @@ import org.ieatta.cells.IEANearRestaurantsCell;
 import org.ieatta.cells.model.SectionTitleCellModel;
 import org.ieatta.cells.model.IEANearRestaurantMore;
 import org.ieatta.provide.IEAEditKey;
+import org.ieatta.tasks.NearRestaurantsTask;
+import org.ieatta.utils.LocationUtil;
 import org.ieatta.views.ObservableWebView;
+
+import bolts.Continuation;
+import bolts.Task;
 
 public class NearRestaurantsFragment extends PageFragment {
     enum NearRestaurantSection {
@@ -28,6 +34,8 @@ public class NearRestaurantsFragment extends PageFragment {
     private IEAApp app;
     private RecycleViewManager manager;
     private ObservableWebView mRecycleView;
+
+    private NearRestaurantsTask task = new NearRestaurantsTask();
 
     @Nullable
     @Override
@@ -67,5 +75,14 @@ public class NearRestaurantsFragment extends PageFragment {
 
         this.setupUI();
         this.manager.setSectionItems(IEANearRestaurantMore.getMoresItems(), NearRestaurantSection.section_more_items.ordinal());
+
+        Location location = LocationUtil.getLocation();
+        task.executeTask(location).onSuccess(new Continuation<Void, Object>() {
+            @Override
+            public Object then(Task<Void> task) throws Exception {
+                NearRestaurantsFragment.this.manager.setSectionItems(NearRestaurantsFragment.this.task.getRestaurants(),NearRestaurantSection.section_restaurants.ordinal());
+                return null;
+            }
+        },Task.UI_THREAD_EXECUTOR);
     }
 }
