@@ -12,9 +12,12 @@ public abstract class IEAViewHolder extends AbstractDraggableItemViewHolder impl
     protected boolean shouldOnClickItem() {
         return true;
     }
-    public ViewGroup mContainer;
 
-//    android:id="@+id/container"
+    /**
+     * If the Cell have background,
+     * Must set root view's id to "android:id="@+id/container"
+     */
+    public ViewGroup mContainer;
 
     @Override
     public ViewHolderType getViewHolderType() {
