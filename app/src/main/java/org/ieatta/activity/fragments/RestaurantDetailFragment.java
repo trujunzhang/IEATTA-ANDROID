@@ -120,7 +120,6 @@ public class RestaurantDetailFragment extends DetailFragment {
         View rootView = inflater.inflate(R.layout.fragment_detail, container, false);
         webView = (ObservableWebView) rootView.findViewById(R.id.recycleView);
 
-
         tocDrawer = (WikiDrawerLayout) rootView.findViewById(R.id.page_toc_drawer);
         tocDrawer.setDragEdgeWidth(getResources().getDimensionPixelSize(R.dimen.drawer_drag_margin));
 

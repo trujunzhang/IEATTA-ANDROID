@@ -510,8 +510,8 @@ public class PageActivity extends ThemedActionBarActivity {
     }
 
     private void loadMainPageIfNoTabs() {
-        PageFragment fragment = new NearRestaurantsFragment();
-//        PageFragment fragment = new RestaurantDetailFragment();
+//        PageFragment fragment = new NearRestaurantsFragment();
+        PageFragment fragment = new RestaurantDetailFragment();
         loadPage(fragment,TabPosition.CURRENT_TAB, false, true);
     }
 
