@@ -17,6 +17,7 @@ package com.nostra13.universalimageloader.cache.disc.impl;
 
 import android.graphics.Bitmap;
 import com.nostra13.universalimageloader.cache.disc.naming.FileNameGenerator;
+import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.DefaultConfigurationFactory;
 import com.nostra13.universalimageloader.utils.IoUtils;
 
@@ -45,7 +46,7 @@ public class LimitedAgeDiskCache extends BaseDiskCache {
 	 *                 treatment (and therefore be reloaded).
 	 */
 	public LimitedAgeDiskCache(File cacheDir, long maxAge) {
-		this(cacheDir, null, DefaultConfigurationFactory.createFileNameGenerator(), maxAge);
+		this(cacheDir, null, new Md5FileNameGenerator(), maxAge);
 	}
 
 	/**
@@ -54,7 +55,7 @@ public class LimitedAgeDiskCache extends BaseDiskCache {
 	 *                 treatment (and therefore be reloaded).
 	 */
 	public LimitedAgeDiskCache(File cacheDir, File reserveCacheDir, long maxAge) {
-		this(cacheDir, reserveCacheDir, DefaultConfigurationFactory.createFileNameGenerator(), maxAge);
+		this(cacheDir, reserveCacheDir, new Md5FileNameGenerator(), maxAge);
 	}
 
 	/**
@@ -64,7 +65,7 @@ public class LimitedAgeDiskCache extends BaseDiskCache {
 	 * @param maxAge            Max file age (in seconds). If file age will exceed this value then it'll be removed on next
 	 *                          treatment (and therefore be reloaded).
 	 */
-	public LimitedAgeDiskCache(File cacheDir, File reserveCacheDir, FileNameGenerator fileNameGenerator, long maxAge) {
+	public LimitedAgeDiskCache(File cacheDir, File reserveCacheDir, Md5FileNameGenerator fileNameGenerator, long maxAge) {
 		super(cacheDir, reserveCacheDir, fileNameGenerator);
 		this.maxFileAge = maxAge * 1000; // to milliseconds
 	}

@@ -16,6 +16,7 @@
 package com.nostra13.universalimageloader.cache.disc.impl;
 
 import com.nostra13.universalimageloader.cache.disc.naming.FileNameGenerator;
+import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 
 import java.io.File;
 
@@ -46,7 +47,7 @@ public class UnlimitedDiskCache extends BaseDiskCache {
 	 * @param fileNameGenerator {@linkplain com.nostra13.universalimageloader.cache.disc.naming.FileNameGenerator
 	 *                          Name generator} for cached files
 	 */
-	public UnlimitedDiskCache(File cacheDir, File reserveCacheDir, FileNameGenerator fileNameGenerator) {
+	public UnlimitedDiskCache(File cacheDir, File reserveCacheDir, Md5FileNameGenerator fileNameGenerator) {
 		super(cacheDir, reserveCacheDir, fileNameGenerator);
 	}
 }

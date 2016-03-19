@@ -26,6 +26,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.List;
 
 /**
  * Disk cache based on "Least-Recently Used" principle. Adapter pattern, adapts
@@ -143,6 +144,11 @@ public class LruDiskCache implements DiskCache {
 	}
 
 	@Override
+	public List<File> getList(String imageDir) {
+		return null;
+	}
+
+	@Override
 	public boolean save(String imageUri, InputStream imageStream, IoUtils.CopyListener listener) throws IOException {
 		DiskLruCache.Editor editor = cache.edit(getKey(imageUri));
 		if (editor == null) {
@@ -162,6 +168,11 @@ public class LruDiskCache implements DiskCache {
 			}
 		}
 		return copied;
+	}
+
+	@Override
+	public boolean save(String imageDir, String imageUri, String dateCreatedString, InputStream imageStream, IoUtils.CopyListener listener) throws IOException {
+		return false;
 	}
 
 	@Override
