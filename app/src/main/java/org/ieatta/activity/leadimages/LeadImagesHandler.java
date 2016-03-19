@@ -52,7 +52,7 @@ public class LeadImagesHandler {
     private float faceYOffsetNormalized;
     private float displayDensity;
 
-    private RecurringTask task;
+    private RecurringTask task = new RecurringTask();
 
     public LeadImagesHandler(@NonNull final DetailFragment parentFragment,
                              @NonNull ObservableWebView webView,
@@ -151,7 +151,7 @@ public class LeadImagesHandler {
             public void everyTask() {
                 LeadImagesHandler.this.loadLeadImage();
             }
-        },0,10);
+        },0,20);
 
 
         articleHeaderView.setTitle(Html.fromHtml(getPage().getDisplayTitle()));
