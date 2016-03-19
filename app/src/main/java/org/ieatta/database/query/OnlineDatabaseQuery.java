@@ -8,6 +8,7 @@ import com.parse.ParseQuery;
 import org.ieatta.database.provide.PQueryModelType;
 import org.ieatta.parse.DBConstant;
 import org.ieatta.parse.ParseQueryUtil;
+import org.ieatta.server.cache.CacheImageUtil;
 import org.ieatta.server.cache.OriginalImageUtil;
 
 import java.io.InputStream;
@@ -34,7 +35,7 @@ public class OnlineDatabaseQuery {
         }).onSuccessTask(new Continuation<InputStream, Task<Void>>() {
             @Override
             public Task<Void> then(Task<InputStream> task) throws Exception {
-                return OriginalImageUtil.sharedInstance.saveTakenPhoto(task.getResult(),uuid);
+                return CacheImageUtil.sharedInstance.saveTakenPhoto(task.getResult(),uuid);
             }
         });
     }

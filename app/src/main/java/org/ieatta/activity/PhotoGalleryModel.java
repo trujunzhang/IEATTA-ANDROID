@@ -10,6 +10,8 @@ import com.parse.ParseFile;
 
 import org.ieatta.database.models.DBPhoto;
 import org.ieatta.database.query.LocalDatabaseQuery;
+import org.ieatta.database.query.OnlineDatabaseQuery;
+import org.ieatta.server.cache.CacheImageUtil;
 
 import bolts.Continuation;
 import bolts.Task;
@@ -31,20 +33,12 @@ public class PhotoGalleryModel {
         }
 
         public Task<String> getOnlineUrl() {
-            if (TextUtils.isEmpty(onlineUrl)) {
-
-                return LocalDatabaseQuery.getPhoto(this.photoUUID, true).onSuccessTask(new Continuation<DBPhoto, Task<String>>() {
-                    @Override
-                    public Task<String> then(Task<DBPhoto> task) throws Exception {
-                        LeadImage.this.onlineUrl = task.getResult().getOriginalUrl();
-                        return Task.forResult(LeadImage.this.onlineUrl);
-                    }
-                });
-            }
-
-//            ParseFile file  = new ParseFile();
-
-            return Task.forResult(this.onlineUrl);
+            return OnlineDatabaseQuery.downloadOriginalPhoto(this.photoUUID).onSuccessTask(new Continuation<Void, Task<String>>() {
+                @Override
+                public Task<String> then(Task<Void> task) throws Exception {
+                    return Task.forResult(CacheImageUtil.sharedInstance.getCacheImageUrl(LeadImage.this.photoUUID).getAbsolutePath());
+                }
+            });
         }
     }
 
