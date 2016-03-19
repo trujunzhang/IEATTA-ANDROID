@@ -1,5 +1,6 @@
 package org.ieatta.tasks;
 
+import org.ieatta.activity.Page;
 import org.ieatta.database.models.DBEvent;
 import org.ieatta.database.models.DBPhoto;
 import org.ieatta.database.models.DBRestaurant;
@@ -57,5 +58,9 @@ public class RestaurantDetailTask {
                 return null;
             }
         });
+    }
+
+    public Page getPage(){
+        return null;
     }
 }

@@ -64,7 +64,6 @@ public class RestaurantDetailFragment extends DetailFragment {
         section_reviews,//= 4
     }
 
-    private IEAApp app;
     private RecycleViewManager manager;
 
     private RestaurantDetailTask task = new RestaurantDetailTask();
@@ -81,8 +80,6 @@ public class RestaurantDetailFragment extends DetailFragment {
     private static final int TOC_BUTTON_HIDE_DELAY = 2000;
     private static final int REFRESH_SPINNER_ADDITIONAL_OFFSET = (int) (16 * IEAApp.getInstance().getScreenDensity());
 
-
-    private PageLoadStrategy pageLoadStrategy;
 
     @NonNull
     private TabFunnel tabFunnel = new TabFunnel();
@@ -141,9 +138,7 @@ public class RestaurantDetailFragment extends DetailFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        app = (IEAApp) getActivity().getApplicationContext();
         manager = new RecycleViewManager(this.getActivity().getApplicationContext());
-        pageLoadStrategy = new DetailPageLoadStrategy();
     }
 
     private void setupUI() {
@@ -179,6 +174,8 @@ public class RestaurantDetailFragment extends DetailFragment {
         this.manager.setSectionItems(CollectionUtil.createList(new IEARestaurantDetailHeader(this.task.restaurant)), RestaurantDetailSection.section_header.ordinal());
 //        this.manager.showGoogleMapAddress(RestaurantDetailSection.section_google_mapaddress.ordinal());
 
+        model.setPage(task.getPage());
+//        model.setTitle(task.);
         searchBarHideHandler = getPageActivity().getSearchBarHideHandler();
         searchBarHideHandler.setScrollView(webView);
         leadImagesHandler = new LeadImagesHandler(this,  webView, articleHeaderView);
