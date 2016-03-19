@@ -20,5 +20,7 @@
         android:layout_gravity="center_vertical"
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
         android:text="Medium Text"
-        android:textAppearance="@style/TitleText" />
+        android:textColor="@color/list_item_text_primary_light"
+        android:textSize="@dimen/textSize"
+        style="@style/RtlAwareTextView"/>
 </LinearLayout>
