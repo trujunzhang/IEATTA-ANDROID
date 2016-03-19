@@ -27,6 +27,7 @@ public class RestaurantDetailTaskTest {
             @Override
             public Void then(Task<Void> task) throws Exception {
                 completionLatch.countDown();
+                RestaurantDetailTask _task = RestaurantDetailTaskTest.this.task;
                 return null;
             }
         });
