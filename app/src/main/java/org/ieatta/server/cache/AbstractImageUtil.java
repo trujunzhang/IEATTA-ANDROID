@@ -96,11 +96,9 @@ public abstract class AbstractImageUtil {
         // ** Important ** (Must store to Disk).
         boolean save = false;
         try {
-            SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMddhhmm");
-            Date createdDate = model.getObjectCreatedDate();
-            String dateCreatedString = sdf.format(createdDate);
-            String usedRef = model.getUsedRef();
             String uuid = model.getUUID();
+            String usedRef = model.getUsedRef();
+            String dateCreatedString = new SimpleDateFormat("yyyyMMddhhmm").format(model.getObjectCreatedDate());
             save = this.getImageCache().save(usedRef, uuid, dateCreatedString, inputStream, null);
         } catch (IOException e) {
             return Task.forError(e);
