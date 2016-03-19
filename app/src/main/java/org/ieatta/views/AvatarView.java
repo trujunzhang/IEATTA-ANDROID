@@ -2,13 +2,10 @@ package org.ieatta.views;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.widget.ImageView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 
-import org.ieatta.database.models.DBPhoto;
 import org.ieatta.database.models.DBRestaurant;
-import org.ieatta.database.query.LocalDatabaseQuery;
 import org.ieatta.server.cache.ThumbnailImageUtil;
 import org.wikipedia.util.log.L;
 import org.wikipedia.views.ViewUtil;
@@ -39,7 +36,7 @@ public class AvatarView extends SimpleDraweeView {
     public void loadNewPhotoByModel(DBRestaurant model, int placeHolder) {
         this.configureAvatar(placeHolder);
 
-        ThumbnailImageUtil.sharedInstance.getImagesList(model.getUUID()).onSuccess(new Continuation<List<File>, Void>() {
+        ThumbnailImageUtil.sharedInstance.getImagesListTask(model.getUUID()).onSuccess(new Continuation<List<File>, Void>() {
             @Override
             public Void then(Task<List<File>> task) throws Exception {
                 List<File> files = task.getResult();
@@ -51,6 +48,10 @@ public class AvatarView extends SimpleDraweeView {
                 return null;
             }
         });
+    }
+
+    public void loadImageUrl(String url){
+        ViewUtil.loadImageUrlInto(AvatarView.this, url);
     }
 
     private void configureAvatar(int placeHolder) {

@@ -2,26 +2,16 @@ package org.ieatta.test.cache;
 
 import android.support.test.runner.AndroidJUnit4;
 
-import org.ieatta.database.models.DBNewRecord;
-import org.ieatta.database.provide.PQueryModelType;
 import org.ieatta.database.realm.DBBuilder;
 import org.ieatta.database.realm.RealmModelReader;
 import org.ieatta.server.cache.ThumbnailImageUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import android.location.Location;
-import android.support.test.runner.AndroidJUnit4;
 import android.util.Log;
 
 import org.ieatta.database.models.DBPhoto;
-import org.ieatta.database.models.DBRestaurant;
 import org.ieatta.database.query.LocalDatabaseQuery;
-import org.ieatta.server.cache.ThumbnailImageUtil;
-import org.ieatta.utils.LocationUtil;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.wikipedia.util.log.L;
 
 import java.io.File;
 import java.util.HashMap;
@@ -53,7 +43,7 @@ public class ThumbnailCacheTest {
     public void testThumbnailTotalCount() throws InterruptedException {
         final CountDownLatch completionLatch = new CountDownLatch(1);
 
-        ThumbnailImageUtil.sharedInstance.getImagesList().continueWithTask(new Continuation<List<File>, Task<RealmResults<DBPhoto>>>() {
+        ThumbnailImageUtil.sharedInstance.getImagesListTask().continueWithTask(new Continuation<List<File>, Task<RealmResults<DBPhoto>>>() {
             public Task<RealmResults<DBPhoto>> then(Task<List<File>> results) throws Exception {
                 List<File> fileList = results.getResult();
                 for (File fold : fileList) {
@@ -86,7 +76,7 @@ public class ThumbnailCacheTest {
     public void testThumbnailCache() throws InterruptedException {
         final CountDownLatch completionLatch = new CountDownLatch(1);
 
-        ThumbnailImageUtil.sharedInstance.getImagesList().continueWithTask(new Continuation<List<File>, Task<Void>>() {
+        ThumbnailImageUtil.sharedInstance.getImagesListTask().continueWithTask(new Continuation<List<File>, Task<Void>>() {
             public Task<Void> then(Task<List<File>> results) throws Exception {
                 List<File> fileList = results.getResult();
                 Log.d("ThumbnailCacheTest", "Cached folder's count: " + fileList.size());

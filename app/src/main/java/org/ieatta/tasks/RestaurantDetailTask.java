@@ -5,7 +5,6 @@ import org.ieatta.activity.PageProperties;
 import org.ieatta.activity.PageTitle;
 import org.ieatta.activity.PhotoGalleryModel;
 import org.ieatta.database.models.DBEvent;
-import org.ieatta.database.models.DBPhoto;
 import org.ieatta.database.models.DBRestaurant;
 import org.ieatta.database.models.DBReview;
 import org.ieatta.database.provide.ReviewType;
@@ -17,7 +16,6 @@ import org.ieatta.server.cache.ThumbnailImageUtil;
 
 import java.io.File;
 import java.util.List;
-import java.util.Properties;
 
 import bolts.Continuation;
 import bolts.Task;
@@ -42,7 +40,7 @@ public class RestaurantDetailTask {
             @Override
             public Task<List<File>> then(Task<DBRestaurant> task) throws Exception {
                 RestaurantDetailTask.this.restaurant = task.getResult();
-                return ThumbnailImageUtil.sharedInstance.getImagesList(restaurantUUID);
+                return ThumbnailImageUtil.sharedInstance.getImagesListTask(restaurantUUID);
             }
         }).onSuccessTask(new Continuation<List<File>, Task<RealmResults<DBEvent>>>() {
             @Override

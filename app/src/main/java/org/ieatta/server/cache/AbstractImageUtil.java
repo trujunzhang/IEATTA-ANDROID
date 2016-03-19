@@ -37,15 +37,19 @@ public abstract class AbstractImageUtil {
         return this.getImageCache().get(UUID);
     }
 
-    public Task<List<File>> getImagesList(String usedRef) {
-        List<File> list = this.getImageCache().getList(usedRef);
+    public Task<List<File>> getImagesListTask(String usedRef) {
+        List<File> list = getImageFiles(usedRef);
         if (list.size() == 0) {
             return Task.forError(new FileNotFoundException("Not found images by " + usedRef));
         }
         return Task.forResult(list);
     }
 
-    public Task<List<File>> getImagesList() {
+    public List<File> getImageFiles(String usedRef) {
+        return this.getImageCache().getList(usedRef);
+    }
+
+    public Task<List<File>> getImagesListTask() {
         List<File> list = this.getImageCache().getList();
         if (list.size() == 0) {
             return Task.forError(new FileNotFoundException("No images cached"));
