@@ -62,7 +62,6 @@ public class RestaurantDetailFragment extends DetailFragment {
 
     private IEAApp app;
     private RecycleViewManager manager;
-    private ObservableWebView mRecycleView;
 
     private RestaurantDetailTask task = new RestaurantDetailTask();
 
@@ -117,7 +116,7 @@ public class RestaurantDetailFragment extends DetailFragment {
         super.onCreateView(inflater, container, savedInstanceState);
 
         View rootView = inflater.inflate(R.layout.fragment_detail, container, false);
-        mRecycleView = (ObservableWebView) rootView.findViewById(R.id.recycleView);
+        webView = (ObservableWebView) rootView.findViewById(R.id.recycleView);
 
 
         tocDrawer = (WikiDrawerLayout) rootView.findViewById(R.id.page_toc_drawer);
@@ -141,6 +140,8 @@ public class RestaurantDetailFragment extends DetailFragment {
         app = (IEAApp) getActivity().getApplicationContext();
         manager = new RecycleViewManager(this.getActivity().getApplicationContext());
         pageLoadStrategy = new DetailPageLoadStrategy();
+
+        leadImagesHandler = new LeadImagesHandler(this,  webView, articleHeaderView);
     }
 
     private void setupUI() {
@@ -152,7 +153,7 @@ public class RestaurantDetailFragment extends DetailFragment {
 
     @Override
     public void loadPage() {
-        manager.startManagingWithDelegate(mRecycleView);
+        manager.startManagingWithDelegate(webView);
         manager.setOnItemClickListener(itemClickListener);
 
         this.setupUI();
