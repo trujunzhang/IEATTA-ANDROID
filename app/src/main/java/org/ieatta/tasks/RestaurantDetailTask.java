@@ -3,6 +3,7 @@ package org.ieatta.tasks;
 import org.ieatta.activity.Page;
 import org.ieatta.activity.PageProperties;
 import org.ieatta.activity.PageTitle;
+import org.ieatta.activity.PhotoGalleryModel;
 import org.ieatta.database.models.DBEvent;
 import org.ieatta.database.models.DBPhoto;
 import org.ieatta.database.models.DBRestaurant;
@@ -28,6 +29,8 @@ public class RestaurantDetailTask {
     public RealmResults<DBReview> reviews;
     public List<File> galleryCollection;
 
+    public PhotoGalleryModel photoGalleryModel;
+
     /**
      * Execute Task for Restaurant detail.
      *
@@ -44,7 +47,7 @@ public class RestaurantDetailTask {
         }).onSuccessTask(new Continuation<List<File>, Task<RealmResults<DBEvent>>>() {
             @Override
             public Task<RealmResults<DBEvent>> then(Task<List<File>> task) throws Exception {
-                RestaurantDetailTask.this.galleryCollection = task.getResult();
+                RestaurantDetailTask.this.photoGalleryModel = new PhotoGalleryModel(task.getResult());
                 return new RealmModelReader<DBEvent>(DBEvent.class).fetchResults(
                         new DBBuilder()
                                 .whereEqualTo(DBConstant.kPAPFieldLocalRestaurantKey, restaurantUUID), false);
