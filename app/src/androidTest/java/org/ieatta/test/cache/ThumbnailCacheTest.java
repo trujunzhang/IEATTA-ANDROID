@@ -77,12 +77,12 @@ public class ThumbnailCacheTest {
         completionLatch.await(TASK_COMPLETION_TIMEOUT, TimeUnit.MILLISECONDS);
     }
 
-    private Task<Void> checkSameLength(String uuid, int length) {
+    private Task<Void> checkSameLength(String uuid, final int length) {
         return LocalDatabaseQuery.getPhotos(uuid).onSuccess(new Continuation<RealmResults<DBPhoto>, Void>() {
             @Override
             public Void then(Task<RealmResults<DBPhoto>> task) throws Exception {
                 int expect = task.getResult().size();
-
+                assertThat("The same usedRef,The same photo's count", (length == expect));
                 return null;
             }
         });
