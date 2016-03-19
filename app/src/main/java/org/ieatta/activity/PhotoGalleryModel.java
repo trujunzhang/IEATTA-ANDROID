@@ -8,6 +8,7 @@ import android.text.TextUtils;
 
 import com.parse.ParseFile;
 
+import org.ieatta.IEAApp;
 import org.ieatta.database.models.DBPhoto;
 import org.ieatta.database.query.LocalDatabaseQuery;
 import org.ieatta.database.query.OnlineDatabaseQuery;
