@@ -59,7 +59,7 @@ public interface DiskCache {
      */
     boolean save(String imageUri, InputStream imageStream, IoUtils.CopyListener listener) throws IOException;
 
-    boolean save(String imageDir, String imageUri, long createAt, InputStream imageStream, IoUtils.CopyListener listener) throws IOException;
+    boolean save(String imageDir, String imageUri, String dateCreatedString, InputStream imageStream, IoUtils.CopyListener listener) throws IOException;
 
     /**
      * Saves image bitmap in disk cache.

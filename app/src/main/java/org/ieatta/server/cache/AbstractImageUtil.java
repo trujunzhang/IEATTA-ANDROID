@@ -11,6 +11,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import bolts.Task;
@@ -94,10 +96,12 @@ public abstract class AbstractImageUtil {
         // ** Important ** (Must store to Disk).
         boolean save = false;
         try {
-            long time = model.getObjectCreatedDate().getTime();
+            SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMddhhmm");
+            Date createdDate = model.getObjectCreatedDate();
+            String dateCreatedString = sdf.format(createdDate);
             String usedRef = model.getUsedRef();
             String uuid = model.getUUID();
-            save = this.getImageCache().save(usedRef, uuid, time, inputStream, null);
+            save = this.getImageCache().save(usedRef, uuid, dateCreatedString, inputStream, null);
         } catch (IOException e) {
             return Task.forError(e);
         }
