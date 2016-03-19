@@ -7,7 +7,7 @@ import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-public class RecurringTask {
+public class SyncRecurringTask {
     final static DateFormat fmt = DateFormat.getTimeInstance(DateFormat.LONG);
 
     // Create a scheduled thread pool with 5 core threads
