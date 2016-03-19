@@ -106,8 +106,8 @@
     <dimen name="Edit_Cell">56dip</dimen>
     <!--Near Restaurant-->
     <dimen name="NearRestaurant_More">44dip</dimen>
-    <dimen name="Left_Image_View_Width">31dp</dimen>
-    <dimen name="Left_Image_View_Height">31dp</dimen>
+    <dimen name="Left_Image_View_Width">50dp</dimen>
+    <dimen name="Left_Image_View_Height">50dp</dimen>
     <dimen name="Restaurant_More_Image_View_Width">24dp</dimen>
     <dimen name="Restaurant_More_Image_View_Height">24dp</dimen>
     <dimen name="NearRestaurant_Restaurants">58dip</dimen>

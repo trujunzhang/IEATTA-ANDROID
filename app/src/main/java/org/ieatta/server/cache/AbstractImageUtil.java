@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 import bolts.Task;
@@ -34,6 +35,11 @@ public abstract class AbstractImageUtil {
      */
     public File getCacheImageUrl(String UUID) {
         return this.getImageCache().get(UUID);
+    }
+
+    public List<File> getImagesList(String usedRef){
+        List<File> list = this.getImageCache().getList(usedRef);
+        return list;
     }
 
     public File getCacheImageUrl(DBPhoto model) {

@@ -36,6 +36,9 @@ public class AvatarView extends SimpleDraweeView {
     public void loadNewPhotoByModel(DBRestaurant model, int placeHolder) {
         this.configureAvatar(placeHolder);
 
+        String usedRef = model.getUUID();
+//        ThumbnailImageUtil.sharedInstance.getCacheImageUrl()
+
         LocalDatabaseQuery.getPhoto(model.getUUID()).onSuccess(new Continuation<DBPhoto, Object>() {
             @Override
             public Object then(Task<DBPhoto> task) throws Exception {

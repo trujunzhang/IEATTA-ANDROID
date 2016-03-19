@@ -105,7 +105,10 @@ public abstract class BaseDiskCache implements DiskCache {
 
     @Override
     public List<File> getList(String imageDir) {
-        return new LinkedList<>();
+        File imageFolder = new File(cacheDir, imageDir);
+        final File[] files = imageFolder.listFiles();
+        Arrays.sort(files, new FileComparator());
+        return new LinkedList<>(Arrays.asList(files));
     }
 
     @Override
