@@ -16,6 +16,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:actualImageScaleType="focusCrop"
-        android:contentDescription="@null" />
+        android:src="@drawable/blank_biz"
+        android:contentDescription="@null"
+        android:background="#c21e1e" />
 
 </merge>
