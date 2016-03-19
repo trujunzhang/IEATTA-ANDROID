@@ -13,6 +13,9 @@ import org.ieatta.server.cache.ThumbnailImageUtil;
 import org.wikipedia.util.log.L;
 import org.wikipedia.views.ViewUtil;
 
+import java.io.File;
+import java.util.List;
+
 import bolts.Continuation;
 import bolts.Task;
 
@@ -36,20 +39,26 @@ public class AvatarView extends SimpleDraweeView {
     public void loadNewPhotoByModel(DBRestaurant model, int placeHolder) {
         this.configureAvatar(placeHolder);
 
-        String usedRef = model.getUUID();
-//        ThumbnailImageUtil.sharedInstance.getCacheImageUrl()
+        List<File> files = ThumbnailImageUtil.sharedInstance.getImagesList(model.getUUID());
+        if (files.size() > 0) {
+            File first = files.get(0);
+            String path = first.getAbsolutePath();
+            L.d("cached path of the photo: " + path);
+            String url = String.format("file://%s", path);
+            ViewUtil.loadImageUrlInto(AvatarView.this, url);
+        }
 
-        LocalDatabaseQuery.getPhoto(model.getUUID()).onSuccess(new Continuation<DBPhoto, Object>() {
-            @Override
-            public Object then(Task<DBPhoto> task) throws Exception {
-                DBPhoto photo = task.getResult();
-                String path = ThumbnailImageUtil.sharedInstance.getCacheImageUrl(photo).getAbsolutePath();
-                L.d("cached path of the photo: " + path);
-                String url = String.format("file://%s", path);
-                ViewUtil.loadImageUrlInto(AvatarView.this, url);
-                return null;
-            }
-        });
+//        LocalDatabaseQuery.getPhoto(model.getUUID()).onSuccess(new Continuation<DBPhoto, Object>() {
+//            @Override
+//            public Object then(Task<DBPhoto> task) throws Exception {
+//                DBPhoto photo = task.getResult();
+//                String path = ThumbnailImageUtil.sharedInstance.getCacheImageUrl(photo).getAbsolutePath();
+//                L.d("cached path of the photo: " + path);
+//                String url = String.format("file://%s", path);
+//                ViewUtil.loadImageUrlInto(AvatarView.this, url);
+//                return null;
+//            }
+//        });
     }
 
     private void configureAvatar(int placeHolder) {
