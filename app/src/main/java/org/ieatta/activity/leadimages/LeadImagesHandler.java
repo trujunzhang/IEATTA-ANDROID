@@ -17,7 +17,7 @@ import android.view.animation.AnimationUtils;
 import org.ieatta.IEAApp;
 import org.ieatta.R;
 import org.ieatta.activity.fragments.DetailFragment;
-import org.ieatta.Page;
+import org.ieatta.activity.Page;
 import org.ieatta.views.ObservableWebView;
 import org.json.JSONException;
 import org.json.JSONObject;
