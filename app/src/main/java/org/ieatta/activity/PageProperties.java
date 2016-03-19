@@ -21,8 +21,13 @@ public class PageProperties {
      *         http://foo.bar.com/.
      */
     @Nullable
-    public String getLeadImageUrl() {
-        return this.photoGalleryModel.next();
+    public Task<String> getLeadImageLocalUrl() {
+        return this.photoGalleryModel.leadImageLocal();
+    }
+
+    @Nullable
+    public Task<String> getLeadImageOnlineUrl() {
+        return this.photoGalleryModel.leadImageLocal();
     }
 
     public PageProperties(PhotoGalleryModel photoGalleryModel,String displayTitleText) {

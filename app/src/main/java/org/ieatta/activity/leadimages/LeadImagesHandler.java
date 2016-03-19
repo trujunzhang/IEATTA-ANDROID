@@ -17,6 +17,7 @@ import android.view.animation.AnimationUtils;
 
 import org.ieatta.IEAApp;
 import org.ieatta.R;
+import org.ieatta.activity.PageProperties;
 import org.ieatta.activity.PageTitle;
 import org.ieatta.activity.fragments.DetailFragment;
 import org.ieatta.activity.Page;
@@ -27,6 +28,9 @@ import org.wikipedia.concurrency.RecurringTask;
 import org.wikipedia.util.DimenUtil;
 import org.wikipedia.util.UriUtil;
 
+
+import bolts.Continuation;
+import bolts.Task;
 
 import static org.wikipedia.util.DimenUtil.getContentTopOffsetPx;
 
@@ -85,9 +89,10 @@ public class LeadImagesHandler {
     }
 
     public boolean isLeadImageEnabled() {
-        return IEAApp.getInstance().isImageDownloadEnabled()
-                && displayHeightDp >= MIN_SCREEN_HEIGHT_DP
-                && !TextUtils.isEmpty(getLeadImageUrl());
+        return true;
+//        return IEAApp.getInstance().isImageDownloadEnabled()
+//                && displayHeightDp >= MIN_SCREEN_HEIGHT_DP
+//                && !TextUtils.isEmpty(getLeadImageUrl());
     }
 
     public void updateBookmark(boolean bookmarkSaved) {
@@ -149,7 +154,7 @@ public class LeadImagesHandler {
         task.periodicTask(new RecurringTask.RecurringEvent() {
             @Override
             public void everyTask() {
-                LeadImagesHandler.this.loadLeadImage();
+                LeadImagesHandler.this.recurringLeadImages();
             }
         },0,20);
 
@@ -159,6 +164,27 @@ public class LeadImagesHandler {
         // Set the subtitle, too, so text measurements are accurate.
         layoutWikiDataDescription(getTitle().getDescription());
         layoutViews(listener, sequence);
+    }
+
+    private void recurringLeadImages() {
+        if(this.getPage() == null){
+            return;
+        }
+        final PageProperties pageProperties = this.getPage().getPageProperties();
+
+        pageProperties.getLeadImageLocalUrl().onSuccessTask(new Continuation<String, Task<String>>() {
+            @Override
+            public Task<String> then(Task<String> task) throws Exception {
+                LeadImagesHandler.this.loadLeadImage(task.getResult());
+                return pageProperties.getLeadImageOnlineUrl();
+            }
+        }).onSuccess(new Continuation<String, Void>() {
+            @Override
+            public Void then(Task<String> task) throws Exception {
+                LeadImagesHandler.this.loadLeadImage(task.getResult());
+                return null;
+            }
+        });
     }
 
     /**
@@ -241,9 +267,9 @@ public class LeadImagesHandler {
         displayHeightDp = (int) (displayHeightPx / displayDensity);
     }
 
-    private void loadLeadImage() {
-        loadLeadImage(getLeadImageUrl());
-    }
+//    private void loadLeadImage(String url) {
+//        loadLeadImage(url);
+//    }
 
     /**
      * @param url Nullable URL with no scheme. For example, foo.bar.com/ instead of
@@ -258,14 +284,14 @@ public class LeadImagesHandler {
         }
     }
 
-    /**
-     * @return Nullable URL with no scheme. For example, foo.bar.com/ instead of
-     * http://foo.bar.com/.
-     */
-    @Nullable
-    private String getLeadImageUrl() {
-        return getPage() == null ? null : getPage().getPageProperties().getLeadImageUrl();
-    }
+//    /**
+//     * @return Nullable URL with no scheme. For example, foo.bar.com/ instead of
+//     * http://foo.bar.com/.
+//     */
+//    @Nullable
+//    private String getLeadImageUrl() {
+//        return getPage() == null ? null : getPage().getPageProperties().getLeadImageUrl();
+//    }
 
     @Nullable
     private Location getGeo() {

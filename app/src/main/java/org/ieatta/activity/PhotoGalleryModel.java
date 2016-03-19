@@ -3,6 +3,7 @@ package org.ieatta.activity;
 import org.ieatta.server.cache.ThumbnailImageUtil;
 
 import java.io.File;
+import java.util.EmptyStackException;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -55,13 +56,22 @@ public class PhotoGalleryModel {
         }
     }
 
-    public String next() {
+    public Task<String> leadImageLocal() {
         if (leadImages.size() == 0) {
-            return null;
+            return Task.forError(new Exception("Lead Images is empty!"));
         }
         int index = galleryIndex % leadImages.size();
         LeadImage leadImage = leadImages.get(index);
-        return leadImage.localUrl;
+        return Task.forResult(leadImage.localUrl);
+    }
+
+    public Task<String> leadImageOnline() {
+        if (leadImages.size() == 0) {
+            return Task.forError(new Exception("Lead Images is empty!"));
+        }
+        int index = galleryIndex % leadImages.size();
+        LeadImage leadImage = leadImages.get(index);
+        return  leadImage.getOnlineUrl(this.usedRef);
     }
 
 }
