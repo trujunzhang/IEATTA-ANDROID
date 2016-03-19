@@ -41,11 +41,17 @@ import java.util.List;
  * @since 1.0.0
  */
 public abstract class BaseDiskCache implements DiskCache {
-    /** {@value */
+    /**
+     * {@value
+     */
     public static final int DEFAULT_BUFFER_SIZE = 32 * 1024; // 32 Kb
-    /** {@value */
+    /**
+     * {@value
+     */
     public static final Bitmap.CompressFormat DEFAULT_COMPRESS_FORMAT = Bitmap.CompressFormat.PNG;
-    /** {@value */
+    /**
+     * {@value
+     */
     public static final int DEFAULT_COMPRESS_QUALITY = 100;
 
     private static final String ERROR_ARG_NULL = " argument must be not null";
@@ -61,7 +67,9 @@ public abstract class BaseDiskCache implements DiskCache {
     protected Bitmap.CompressFormat compressFormat = DEFAULT_COMPRESS_FORMAT;
     protected int compressQuality = DEFAULT_COMPRESS_QUALITY;
 
-    /** @param cacheDir Directory for file caching */
+    /**
+     * @param cacheDir Directory for file caching
+     */
     public BaseDiskCache(File cacheDir) {
         this(cacheDir, null);
     }
@@ -106,16 +114,26 @@ public abstract class BaseDiskCache implements DiskCache {
     @Override
     public List<File> getList(String imageDir) {
         File imageFolder = new File(cacheDir, imageDir);
-        final File[] files = imageFolder.listFiles();
-        Arrays.sort(files, new FileComparator());
-        return new LinkedList<>(Arrays.asList(files));
+        if (imageFolder.exists() == true) {
+            final File[] files = imageFolder.listFiles();
+            if (files.length > 0) {
+                Arrays.sort(files, new FileComparator());
+                return new LinkedList<>(Arrays.asList(files));
+            }
+        }
+        return new LinkedList<>();
     }
 
     @Override
     public List<File> getList() {
-        final File[] files = cacheDir.listFiles();
-        Arrays.sort(files, new FileComparator());
-        return new LinkedList<>(Arrays.asList(files));
+        if (cacheDir.exists() == true) {
+            final File[] files = cacheDir.listFiles();
+            if (files.length > 0) {
+                Arrays.sort(files, new FileComparator());
+                return new LinkedList<>(Arrays.asList(files));
+            }
+        }
+        return new LinkedList<>();
     }
 
     @Override
@@ -143,7 +161,7 @@ public abstract class BaseDiskCache implements DiskCache {
 
     @Override
     public boolean save(String imageDir, String imageUri, String dateCreatedString, InputStream imageStream, IoUtils.CopyListener listener) throws IOException {
-        File imageFile = getFile(imageDir,imageUri,dateCreatedString);
+        File imageFile = getFile(imageDir, imageUri, dateCreatedString);
         File tmpFile = new File(imageFile.getAbsolutePath() + TEMP_IMAGE_POSTFIX);
         boolean loaded = false;
         try {
@@ -213,7 +231,9 @@ public abstract class BaseDiskCache implements DiskCache {
         return new LinkedList<File>();
     }
 
-    /** Returns file object (not null) for incoming image URI. File object can reference to non-existing file. */
+    /**
+     * Returns file object (not null) for incoming image URI. File object can reference to non-existing file.
+     */
     protected File getFile(String imageUri) {
         String fileName = fileNameGenerator.generate(imageUri);
         File dir = cacheDir;
@@ -226,10 +246,9 @@ public abstract class BaseDiskCache implements DiskCache {
     }
 
     /**
-     *
-     * @param imageDir            Special UUID type's folder
-     * @param imageUri            Cached file's UUID
-     * @param dateCreatedString   Cached file's createdAt
+     * @param imageDir          Special UUID type's folder
+     * @param imageUri          Cached file's UUID
+     * @param dateCreatedString Cached file's createdAt
      * @return
      */
     protected File getFile(String imageDir, String imageUri, String dateCreatedString) {
@@ -242,7 +261,11 @@ public abstract class BaseDiskCache implements DiskCache {
         if (!imageFolder.exists() && !imageFolder.mkdirs()) {
             // Check "subFolder" exist.
         }
-        return new File(imageFolder, fileName);
+        File file = new File(imageFolder, fileName);
+        if (file.exists() == true) {
+            return null;
+        }
+        return file;
     }
 
     public void setBufferSize(int bufferSize) {
