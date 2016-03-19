@@ -149,6 +149,11 @@ public class LruDiskCache implements DiskCache {
 	}
 
 	@Override
+	public List<File> getList() {
+		return null;
+	}
+
+	@Override
 	public boolean save(String imageUri, InputStream imageStream, IoUtils.CopyListener listener) throws IOException {
 		DiskLruCache.Editor editor = cache.edit(getKey(imageUri));
 		if (editor == null) {
