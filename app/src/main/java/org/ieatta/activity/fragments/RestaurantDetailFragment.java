@@ -46,6 +46,7 @@ import java.util.LinkedList;
 
 import bolts.Continuation;
 import bolts.Task;
+
 import static butterknife.ButterKnife.findById;
 
 public class RestaurantDetailFragment extends DetailFragment {
@@ -105,7 +106,7 @@ public class RestaurantDetailFragment extends DetailFragment {
     private SearchBarHideHandler searchBarHideHandler;
     private ObservableWebView webView;
     private SwipeRefreshLayoutWithScroll refreshView;
-        private WikiDrawerLayout tocDrawer;
+    private WikiDrawerLayout tocDrawer;
 
     private EditHandler editHandler;
 
@@ -158,7 +159,8 @@ public class RestaurantDetailFragment extends DetailFragment {
 
         this.setupUI();
 
-        String uuid = "1CE562A4-A978-4B75-9B7B-2F3CF9F42A04";
+        // String uuid = "1CE562A4-A978-4B75-9B7B-2F3CF9F42A04"; // The Flying Falafel
+        String uuid = "33ED9F31-F6A5-43A4-8D11-8E511CA0BD39"; // The Spice Jar
         task.executeTask(uuid).onSuccess(new Continuation<Void, Object>() {
             @Override
             public Object then(Task<Void> task) throws Exception {
@@ -181,7 +183,7 @@ public class RestaurantDetailFragment extends DetailFragment {
 //        model.setTitle(task.);
         searchBarHideHandler = getPageActivity().getSearchBarHideHandler();
         searchBarHideHandler.setScrollView(webView);
-        leadImagesHandler = new LeadImagesHandler(this,  webView, articleHeaderView);
+        leadImagesHandler = new LeadImagesHandler(this, webView, articleHeaderView);
         pageLoadStrategy.setUp(this, refreshView, webView, searchBarHideHandler,
                 leadImagesHandler, new LinkedList<PageBackStackItem>());
         pageLoadStrategy.onLeadSectionLoaded(0);
