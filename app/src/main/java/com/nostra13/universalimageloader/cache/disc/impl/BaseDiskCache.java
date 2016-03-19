@@ -20,7 +20,6 @@ import android.graphics.Bitmap;
 import com.nostra13.universalimageloader.cache.disc.DiskCache;
 import com.nostra13.universalimageloader.cache.disc.naming.FileNameGenerator;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
-import com.nostra13.universalimageloader.core.DefaultConfigurationFactory;
 import com.nostra13.universalimageloader.utils.IoUtils;
 
 import java.io.BufferedOutputStream;
