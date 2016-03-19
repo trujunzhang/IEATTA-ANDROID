@@ -22,6 +22,7 @@ import com.nostra13.universalimageloader.utils.IoUtils;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 
 /**
  * Interface for disk cache
@@ -46,6 +47,13 @@ public interface DiskCache {
     File get(String imageUri);
 
     /**
+     *
+     * @param imageDir Special UUID type's folder
+     * @return all files list in the folder sorted by createAt.
+     */
+    public List<File> getList(String imageDir);
+
+    /**
      * Saves image stream in disk cache.
      * Incoming image stream shouldn't be closed in this method.
      *
@@ -59,6 +67,16 @@ public interface DiskCache {
      */
     boolean save(String imageUri, InputStream imageStream, IoUtils.CopyListener listener) throws IOException;
 
+    /**
+     *
+     * @param imageDir            Special UUID type's folder
+     * @param imageUri            Cached file's UUID
+     * @param dateCreatedString   Cached file's createdAt
+     * @param imageStream         Cached file's InputStream
+     * @param listener            Listener for saving progress, can be ignored if you don't use
+     * @return
+     * @throws IOException
+     */
     boolean save(String imageDir, String imageUri, String dateCreatedString, InputStream imageStream, IoUtils.CopyListener listener) throws IOException;
 
     /**

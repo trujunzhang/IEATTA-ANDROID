@@ -105,6 +105,11 @@ public abstract class BaseDiskCache implements DiskCache {
     }
 
     @Override
+    public List<File> getList(String imageDir) {
+        return new LinkedList<>();
+    }
+
+    @Override
     public boolean save(String imageUri, InputStream imageStream, IoUtils.CopyListener listener) throws IOException {
         File imageFile = getFile(imageUri);
         File tmpFile = new File(imageFile.getAbsolutePath() + TEMP_IMAGE_POSTFIX);
@@ -129,8 +134,7 @@ public abstract class BaseDiskCache implements DiskCache {
 
     @Override
     public boolean save(String imageDir, String imageUri, String dateCreatedString, InputStream imageStream, IoUtils.CopyListener listener) throws IOException {
-
-        File imageFile = getFile(imageUri);
+        File imageFile = getFile(imageDir,imageUri,dateCreatedString);
         File tmpFile = new File(imageFile.getAbsolutePath() + TEMP_IMAGE_POSTFIX);
         boolean loaded = false;
         try {
@@ -212,6 +216,13 @@ public abstract class BaseDiskCache implements DiskCache {
         return new File(dir, fileName);
     }
 
+    /**
+     *
+     * @param imageDir            Special UUID type's folder
+     * @param imageUri            Cached file's UUID
+     * @param dateCreatedString   Cached file's createdAt
+     * @return
+     */
     protected File getFile(String imageDir, String imageUri, String dateCreatedString) {
         String fileName = dateCreatedString + fileNameGenerator.generate(imageUri);
         File dir = cacheDir;
