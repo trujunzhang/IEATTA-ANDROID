@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
 import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiskCache;
+
 import org.ieatta.database.models.DBPhoto;
 
 import java.io.File;
@@ -93,12 +94,15 @@ public abstract class AbstractImageUtil {
         // ** Important ** (Must store to Disk).
         boolean save = false;
         try {
-            save = this.getImageCache().save(model.getUUID(), inputStream, null);
+            long time = model.getObjectCreatedDate().getTime();
+            String usedRef = model.getUsedRef();
+            String uuid = model.getUUID();
+            save = this.getImageCache().save(usedRef, uuid, time, inputStream, null);
         } catch (IOException e) {
             return Task.forError(e);
         }
 
-        if(save ==false){
+        if (save == false) {
             return Task.forError(new FileNotFoundException("Cache thumbnail image failed"));
         }
 

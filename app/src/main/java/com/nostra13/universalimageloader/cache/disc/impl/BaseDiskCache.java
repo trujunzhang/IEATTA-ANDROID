@@ -126,6 +126,30 @@ public abstract class BaseDiskCache implements DiskCache {
 	}
 
 	@Override
+	public boolean save(String imageDir, String imageUri, long createAt, InputStream imageStream, IoUtils.CopyListener listener) throws IOException {
+
+		File imageFile = getFile(imageUri);
+		File tmpFile = new File(imageFile.getAbsolutePath() + TEMP_IMAGE_POSTFIX);
+		boolean loaded = false;
+		try {
+			OutputStream os = new BufferedOutputStream(new FileOutputStream(tmpFile), bufferSize);
+			try {
+				loaded = IoUtils.copyStream(imageStream, os, listener, bufferSize);
+			} finally {
+				IoUtils.closeSilently(os);
+			}
+		} finally {
+			if (loaded && !tmpFile.renameTo(imageFile)) {
+				loaded = false;
+			}
+			if (!loaded) {
+				tmpFile.delete();
+			}
+		}
+		return loaded;
+	}
+
+	@Override
 	public boolean save(String imageUri, Bitmap bitmap) throws IOException {
 		File imageFile = getFile(imageUri);
 		File tmpFile = new File(imageFile.getAbsolutePath() + TEMP_IMAGE_POSTFIX);
@@ -181,6 +205,20 @@ public abstract class BaseDiskCache implements DiskCache {
 		if (!cacheDir.exists() && !cacheDir.mkdirs()) {
 			if (reserveCacheDir != null && (reserveCacheDir.exists() || reserveCacheDir.mkdirs())) {
 				dir = reserveCacheDir;
+			}
+		}
+		return new File(dir, fileName);
+	}
+
+	protected File getFile(String imageDir, String imageUri, long createAt) {
+		String fileName = fileNameGenerator.generate(imageUri);
+		File dir = cacheDir;
+		File imageFolder = new File(dir,imageDir);
+		if (!cacheDir.exists() && !cacheDir.mkdirs()) {
+			if (!imageFolder.exists() && !imageFolder.mkdirs()) {
+				if (reserveCacheDir != null && (reserveCacheDir.exists() || reserveCacheDir.mkdirs())) {
+					dir = reserveCacheDir;
+				}
 			}
 		}
 		return new File(dir, fileName);
