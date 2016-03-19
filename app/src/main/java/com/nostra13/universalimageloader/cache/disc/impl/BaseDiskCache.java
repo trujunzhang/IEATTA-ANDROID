@@ -226,7 +226,7 @@ public abstract class BaseDiskCache implements DiskCache {
      * @return
      */
     protected File getFile(String imageDir, String imageUri, String dateCreatedString) {
-        String fileName = dateCreatedString + fileNameGenerator.generate(imageUri);
+        String fileName = String.format("%s_%s", dateCreatedString, imageUri);
         File dir = cacheDir;
         File imageFolder = new File(dir, imageDir);
         if (!cacheDir.exists() && !cacheDir.mkdirs()) {
