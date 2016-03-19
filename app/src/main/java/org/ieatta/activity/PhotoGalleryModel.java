@@ -33,6 +33,10 @@ public class PhotoGalleryModel {
         }
 
         public Task<String> getOnlineUrl() {
+            File cacheImageFile = CacheImageUtil.sharedInstance.getCacheImageUrl(this.photoUUID);
+            if(cacheImageFile!= null &&cacheImageFile.exists()){
+                return Task.forResult(cacheImageFile.getAbsolutePath());
+            }
             return OnlineDatabaseQuery.downloadOriginalPhoto(this.photoUUID).onSuccessTask(new Continuation<Void, Task<String>>() {
                 @Override
                 public Task<String> then(Task<Void> task) throws Exception {
