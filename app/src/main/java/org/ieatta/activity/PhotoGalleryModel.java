@@ -32,12 +32,12 @@ public class PhotoGalleryModel {
                     @Override
                     public Task<String> then(Task<DBPhoto> task) throws Exception {
                         LeadImage.this.onlineUrl = task.getResult().getOriginalUrl();
-                        return Task.forResult(onlineUrl);
+                        return Task.forResult(LeadImage.this.onlineUrl);
                     }
                 });
             }
 
-            return Task.forResult(onlineUrl);
+            return Task.forResult(this.onlineUrl);
         }
     }
 
@@ -65,7 +65,7 @@ public class PhotoGalleryModel {
         }
         int index = galleryIndex % leadImages.size();
         LeadImage leadImage = leadImages.get(index);
-        return  leadImage.getOnlineUrl(this.usedRef);
+        return leadImage.getOnlineUrl(this.usedRef);
     }
 
 }
