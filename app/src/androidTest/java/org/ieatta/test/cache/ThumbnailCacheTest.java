@@ -45,7 +45,6 @@ public class ThumbnailCacheTest {
 
     @Test
     public void testThumbnailCache() throws InterruptedException {
-
         final CountDownLatch completionLatch = new CountDownLatch(1);
 
         ThumbnailImageUtil.sharedInstance.getImagesList().continueWithTask(new Continuation<List<File>, Task<Void>>() {
