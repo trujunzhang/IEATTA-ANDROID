@@ -33,6 +33,7 @@ public class PhotoGalleryModel {
         }
 
         public Task<String> getOnlineUrl() {
+            // Already cached in the local.
             File cacheImageFile = CacheImageUtil.sharedInstance.getCacheImageUrl(this.photoUUID);
             if(cacheImageFile!= null &&cacheImageFile.exists()){
                 return Task.forResult(cacheImageFile.getAbsolutePath());
