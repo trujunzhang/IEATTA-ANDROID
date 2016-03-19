@@ -37,12 +37,12 @@ public class PhotoGalleryModel {
             // Already cached in the local.
             File cacheImageFile = CacheImageUtil.sharedInstance.getCacheImageUrl(this.photoUUID);
             if(cacheImageFile!= null &&cacheImageFile.exists()){
-                return Task.forResult(cacheImageFile.getAbsolutePath());
+                return Task.forResult(String.format("file://%s", cacheImageFile.getAbsolutePath()));
             }
             return OnlineDatabaseQuery.downloadOriginalPhoto(this.photoUUID).onSuccessTask(new Continuation<Void, Task<String>>() {
                 @Override
                 public Task<String> then(Task<Void> task) throws Exception {
-                    return Task.forResult(CacheImageUtil.sharedInstance.getCacheImageUrl(LeadImage.this.photoUUID).getAbsolutePath());
+                    return Task.forResult(String.format("file://%s", CacheImageUtil.sharedInstance.getCacheImageUrl(LeadImage.this.photoUUID).getAbsolutePath()));
                 }
             });
         }
