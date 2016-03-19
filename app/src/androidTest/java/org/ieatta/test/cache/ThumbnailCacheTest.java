@@ -10,6 +10,7 @@ import org.junit.runner.RunWith;
 
 import android.location.Location;
 import android.support.test.runner.AndroidJUnit4;
+import android.util.Log;
 
 import org.ieatta.database.models.DBPhoto;
 import org.ieatta.database.models.DBRestaurant;
@@ -42,6 +43,7 @@ public class ThumbnailCacheTest {
     private static final int TASK_COMPLETION_TIMEOUT = 20000;
 
     private HashMap<String, Integer> photoHashmap = new LinkedHashMap<>();
+    int step = 0;
 
     @Test
     public void testThumbnailCache() throws InterruptedException {
@@ -50,6 +52,8 @@ public class ThumbnailCacheTest {
         ThumbnailImageUtil.sharedInstance.getImagesList().continueWithTask(new Continuation<List<File>, Task<Void>>() {
             public Task<Void> then(Task<List<File>> results) throws Exception {
                 List<File> fileList = results.getResult();
+                Log.d("ThumbnailCacheTest", "Cached folder's count: " + fileList.size());
+
                 // Create a trivial completed task as a base case.
                 Task<Void> task = Task.forResult(null);
                 for (final File result : fileList) {
@@ -60,7 +64,7 @@ public class ThumbnailCacheTest {
                     task = task.continueWithTask(new Continuation<Void, Task<Void>>() {
                         public Task<Void> then(Task<Void> ignored) throws Exception {
                             // Return a task that will be marked as completed when the delete is finished.
-                            return checkSameLength(name, length);
+                            return checkSameLength(name, length, step++);
                         }
                     });
                 }
@@ -77,12 +81,13 @@ public class ThumbnailCacheTest {
         completionLatch.await(TASK_COMPLETION_TIMEOUT, TimeUnit.MILLISECONDS);
     }
 
-    private Task<Void> checkSameLength(String uuid, final int length) {
+    private Task<Void> checkSameLength(String uuid, final int length, final int step) {
         return LocalDatabaseQuery.getPhotos(uuid).onSuccess(new Continuation<RealmResults<DBPhoto>, Void>() {
             @Override
             public Void then(Task<RealmResults<DBPhoto>> task) throws Exception {
                 int expect = task.getResult().size();
-                assertThat("The same usedRef,The same photo's count", (length == expect));
+                Log.d("ThumbnailCacheTest", "result(" + step + ") :" + length + "==" + expect);
+                assertThat("The same usedRef,The same photo's count", (length == (expect)));
                 return null;
             }
         });
