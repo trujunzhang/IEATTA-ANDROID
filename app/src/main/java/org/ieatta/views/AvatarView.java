@@ -47,18 +47,6 @@ public class AvatarView extends SimpleDraweeView {
             String url = String.format("file://%s", path);
             ViewUtil.loadImageUrlInto(AvatarView.this, url);
         }
-
-//        LocalDatabaseQuery.getPhoto(model.getUUID()).onSuccess(new Continuation<DBPhoto, Object>() {
-//            @Override
-//            public Object then(Task<DBPhoto> task) throws Exception {
-//                DBPhoto photo = task.getResult();
-//                String path = ThumbnailImageUtil.sharedInstance.getCacheImageUrl(photo).getAbsolutePath();
-//                L.d("cached path of the photo: " + path);
-//                String url = String.format("file://%s", path);
-//                ViewUtil.loadImageUrlInto(AvatarView.this, url);
-//                return null;
-//            }
-//        });
     }
 
     private void configureAvatar(int placeHolder) {
