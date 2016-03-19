@@ -184,7 +184,13 @@ public class LeadImagesHandler {
                 LeadImagesHandler.this.loadLeadImage(task.getResult(),true);
                 return null;
             }
-        },Task.UI_THREAD_EXECUTOR);
+        },Task.UI_THREAD_EXECUTOR).continueWith(new Continuation<Void, Void>() {
+            @Override
+            public Void then(Task<Void> task) throws Exception {
+                pageProperties.nextLeadImage();
+                return null;
+            }
+        });
     }
 
     /**

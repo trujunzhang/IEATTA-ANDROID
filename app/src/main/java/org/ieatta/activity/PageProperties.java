@@ -30,6 +30,10 @@ public class PageProperties {
         return this.photoGalleryModel.leadImageOnline();
     }
 
+    public void nextLeadImage(){
+        this.photoGalleryModel.nextLeadImage();
+    }
+
     public PageProperties(PhotoGalleryModel photoGalleryModel,String displayTitleText) {
         this.photoGalleryModel = photoGalleryModel;
         this.displayTitleText = displayTitleText;

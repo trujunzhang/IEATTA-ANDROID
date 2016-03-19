@@ -36,7 +36,7 @@ public class PhotoGalleryModel {
         public Task<String> getOnlineUrl() {
             // Already cached in the local.
             File cacheImageFile = CacheImageUtil.sharedInstance.getCacheImageUrl(this.photoUUID);
-            if(cacheImageFile!= null &&cacheImageFile.exists()){
+            if (cacheImageFile != null && cacheImageFile.exists()) {
                 return Task.forResult(String.format("file://%s", cacheImageFile.getAbsolutePath()));
             }
             return OnlineDatabaseQuery.downloadOriginalPhoto(this.photoUUID).onSuccessTask(new Continuation<Void, Task<String>>() {
@@ -61,8 +61,7 @@ public class PhotoGalleryModel {
         if (leadImages.size() == 0) {
             return Task.forError(new Exception("Lead Images is empty!"));
         }
-        int index = galleryIndex % leadImages.size();
-        LeadImage leadImage = leadImages.get(index);
+        LeadImage leadImage = leadImages.get(this.galleryIndex);
         return Task.forResult(leadImage.localUrl);
     }
 
@@ -70,9 +69,12 @@ public class PhotoGalleryModel {
         if (leadImages.size() == 0) {
             return Task.forError(new Exception("Lead Images is empty!"));
         }
-        int index = galleryIndex % leadImages.size();
-        LeadImage leadImage = leadImages.get(index);
+        LeadImage leadImage = leadImages.get(this.galleryIndex);
         return leadImage.getOnlineUrl();
+    }
+
+    public void nextLeadImage() {
+        this.galleryIndex = ((galleryIndex + 1) % leadImages.size());
     }
 
 }
