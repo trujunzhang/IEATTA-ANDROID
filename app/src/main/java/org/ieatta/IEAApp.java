@@ -107,7 +107,7 @@ public class IEAApp extends Application {
         ViewAnimations.init(resources);
         screenDensity = resources.getDisplayMetrics().density;
 
-//        new RecurringTask().prepareTimer();
+        new RecurringTask().prepareTimer();
     }
 
     public Bus getBus() {
