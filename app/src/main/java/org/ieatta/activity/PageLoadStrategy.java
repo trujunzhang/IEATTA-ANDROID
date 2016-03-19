@@ -14,6 +14,8 @@ import java.util.List;
  */
 public interface PageLoadStrategy {
 
+    void onLeadSectionLoaded(int startSequenceNum);
+
     /**
      * Indicates what type of cache strategy should the current request take.
      */

@@ -71,6 +71,11 @@ public class JsonPageLoadStrategy implements PageLoadStrategy {
     private EditHandler editHandler;
 
     @Override
+    public void onLeadSectionLoaded(int startSequenceNum) {
+
+    }
+
+    @Override
     @SuppressWarnings("checkstyle:parameternumber")
     public void setUp(@NonNull PageFragment fragment,
                         @NonNull List<PageBackStackItem> backStack) {

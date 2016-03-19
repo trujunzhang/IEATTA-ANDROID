@@ -253,7 +253,7 @@ public class DetailPageLoadStrategy implements PageLoadStrategy {
     }
 
 
-    private void onLeadSectionLoaded( int startSequenceNum) {
+    public void onLeadSectionLoaded(int startSequenceNum) {
         if (!fragment.isAdded() || !sequenceNumber.inSync(startSequenceNum)) {
             return;
         }
