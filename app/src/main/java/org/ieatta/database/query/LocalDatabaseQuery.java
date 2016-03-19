@@ -29,6 +29,13 @@ public class LocalDatabaseQuery {
         return new RealmModelReader<DBPhoto>(DBPhoto.class).fetchResults(builder, false);
     }
 
+    public static Task<RealmResults<DBPhoto>> getPhotos(String usedRef){
+        DBBuilder builder = new DBBuilder()
+                .whereEqualTo(DBConstant.kPAPFieldUsedRefKey, usedRef)
+                .orderByDescending(DBConstant.kPAPFieldObjectCreatedDateKey);
+        return new RealmModelReader<DBPhoto>(DBPhoto.class).fetchResults(builder, false);
+    }
+
     public static Task<DBPhoto> getPhoto(String usedRef){
         DBBuilder builder = new DBBuilder()
                 .whereEqualTo(DBConstant.kPAPFieldUsedRefKey, usedRef)

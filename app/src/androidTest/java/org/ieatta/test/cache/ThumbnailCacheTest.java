@@ -41,17 +41,36 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class ThumbnailCacheTest {
     private static final int TASK_COMPLETION_TIMEOUT = 20000;
 
-    private HashMap<String,Integer> photoHashmap = new LinkedHashMap<>();
+    private HashMap<String, Integer> photoHashmap = new LinkedHashMap<>();
 
     @Test
     public void testThumbnailCache() throws InterruptedException {
 
         final CountDownLatch completionLatch = new CountDownLatch(1);
 
-        ThumbnailImageUtil.sharedInstance.getImagesList().onSuccessTask(new Continuation<List<File>, Task<Void>>() {
-            @Override
-            public Task<Void> then(Task<List<File>> task) throws Exception {
-                HashMap<String, Integer> map = ThumbnailCacheTest.this.getPhotoHashmap(task.getResult());
+        ThumbnailImageUtil.sharedInstance.getImagesList().continueWithTask(new Continuation<List<File>, Task<Void>>() {
+            public Task<Void> then(Task<List<File>> results) throws Exception {
+                List<File> fileList = results.getResult();
+                // Create a trivial completed task as a base case.
+                Task<Void> task = Task.forResult(null);
+                for (final File result : fileList) {
+                    final String name = result.getName();
+                    final int length = result.listFiles().length;
+
+                    // For each item, extend the task with a function to delete the item.
+                    task = task.continueWithTask(new Continuation<Void, Task<Void>>() {
+                        public Task<Void> then(Task<Void> ignored) throws Exception {
+                            // Return a task that will be marked as completed when the delete is finished.
+                            return checkSameLength(name, length);
+                        }
+                    });
+                }
+                return task;
+            }
+        }).continueWith(new Continuation<Void, Void>() {
+            public Void then(Task<Void> ignored) throws Exception {
+                // Every task was verified.
+                completionLatch.countDown();
                 return null;
             }
         });
@@ -59,14 +78,14 @@ public class ThumbnailCacheTest {
         completionLatch.await(TASK_COMPLETION_TIMEOUT, TimeUnit.MILLISECONDS);
     }
 
-    private HashMap<String,Integer> getPhotoHashmap(List<File> list){
-        HashMap<String, Integer> map = new LinkedHashMap<>();
-        for(File fold : list){
-            String name = fold.getName();
-            int length = fold.listFiles().length;
-            map.put(name,length);
-        }
-        return  map;
-    }
+    private Task<Void> checkSameLength(String uuid, int length) {
+        return LocalDatabaseQuery.getPhotos(uuid).onSuccess(new Continuation<RealmResults<DBPhoto>, Void>() {
+            @Override
+            public Void then(Task<RealmResults<DBPhoto>> task) throws Exception {
+                int expect = task.getResult().size();
 
+                return null;
+            }
+        });
+    }
 }
