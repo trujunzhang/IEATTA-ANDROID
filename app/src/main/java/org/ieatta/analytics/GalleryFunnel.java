@@ -1,11 +1,13 @@
-package org.wikipedia.analytics;
+package org.ieatta.analytics;
 
 import android.support.annotation.NonNull;
 
+import org.ieatta.activity.PageTitle;
 import org.json.JSONObject;
-import org.wikipedia.page.PageTitle;
 import org.wikipedia.Site;
 import org.ieatta.IEAApp;
+import org.wikipedia.analytics.Funnel;
+import org.wikipedia.analytics.TimedFunnel;
 
 public class GalleryFunnel extends TimedFunnel {
     public static final int SOURCE_LEAD_IMAGE = 0;
@@ -37,7 +39,7 @@ public class GalleryFunnel extends TimedFunnel {
     private void logGalleryAction(String action, PageTitle currentPageTitle, String currentMediaTitle) {
         log(
                 "action", action,
-                "pageTitle", currentPageTitle.getDisplayText(),
+//                "pageTitle", currentPageTitle.getDisplayText(),
                 "imageTitle", currentMediaTitle
         );
     }

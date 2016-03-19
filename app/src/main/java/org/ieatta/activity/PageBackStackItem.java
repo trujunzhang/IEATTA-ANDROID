@@ -1,7 +1,6 @@
 package org.ieatta.activity;
 
 import org.ieatta.activity.history.HistoryEntry;
-import org.wikipedia.page.PageTitle;
 
 public class PageBackStackItem {
     private final PageTitle title;

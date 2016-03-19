@@ -133,7 +133,7 @@ public class JsonPageLoadStrategy implements PageLoadStrategy {
         // the backstack item.
 //        fragment.loadPage(item.getTitle(), item.getHistoryEntry(), Cache.PREFERRED, false,
 //                item.getScrollY());
-        L.d("Loaded page " + item.getTitle().getDisplayText() + " from backstack");
+//        L.d("Loaded page " + item.getTitle().getDisplayText() + " from backstack");
     }
 
     @Override

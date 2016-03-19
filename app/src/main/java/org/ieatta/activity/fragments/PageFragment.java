@@ -50,7 +50,6 @@ import org.json.JSONObject;
 import org.wikipedia.BackPressedHandler;
 import org.wikipedia.Site;
 import org.wikipedia.analytics.FindInPageFunnel;
-import org.wikipedia.analytics.GalleryFunnel;
 import org.wikipedia.analytics.LinkPreviewFunnel;
 import org.wikipedia.analytics.PageScrollFunnel;
 import org.wikipedia.analytics.SavedPagesFunnel;

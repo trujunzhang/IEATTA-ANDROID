@@ -14,7 +14,6 @@ import android.widget.Toast;
 
 import org.ieatta.BuildConfig;
 import org.ieatta.R;
-import org.wikipedia.page.PageTitle;
 import org.wikipedia.util.log.L;
 
 import java.io.ByteArrayOutputStream;
@@ -48,9 +47,9 @@ public final class ShareUtil {
         }
     }
 
-    public static void shareText(final Context context, final PageTitle title) {
-        shareText(context, title.getDisplayText(), UriUtil.getUrlWithProvenance(context, title, R.string.prov_share_link));
-    }
+//    public static void shareText(final Context context, final PageTitle title) {
+//        shareText(context, title.getDisplayText(), UriUtil.getUrlWithProvenance(context, title, R.string.prov_share_link));
+//    }
 
     /**
      * Share a bitmap image using an activity chooser, so that the user can choose the

@@ -3,12 +3,8 @@ package org.ieatta.activity;
 import android.os.Bundle;
 
 import android.os.Looper;
-import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.view.ActionMode;
-import android.text.format.DateUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -17,11 +13,9 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.squareup.otto.Bus;
-import com.squareup.otto.Subscribe;
 
 import org.ieatta.IEAApp;
 import org.ieatta.R;
-import org.ieatta.activity.fragments.NearRestaurantsFragment;
 import org.ieatta.activity.fragments.PageFragment;
 import org.ieatta.activity.fragments.RestaurantDetailFragment;
 import org.ieatta.activity.fragments.search.SearchArticlesFragment;
@@ -32,56 +26,27 @@ import org.wikipedia.activity.ThemedActionBarActivity;
 
 
 import org.wikipedia.BackPressedHandler;
-import org.wikipedia.Site;
 import org.wikipedia.activity.ActivityUtil;
-import org.wikipedia.activity.ThemedActionBarActivity;
 import org.wikipedia.ViewAnimations;
-import org.wikipedia.analytics.IntentFunnel;
-import org.wikipedia.page.PageTitle;
 import org.wikipedia.settings.Prefs;
 import org.wikipedia.util.ApiUtil;
 import org.wikipedia.util.DeviceUtil;
-import org.wikipedia.util.FeedbackUtil;
 import org.wikipedia.util.log.L;
 import org.wikipedia.views.WikiDrawerLayout;
 
 
 import android.annotation.TargetApi;
-import android.app.SearchManager;
-import android.appwidget.AppWidgetManager;
-import android.content.ComponentName;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.location.Location;
-import android.net.Uri;
 import android.os.Build;
-import android.os.Bundle;
 import android.os.Handler;
-import android.os.Looper;
-import android.preference.PreferenceManager;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.Toolbar;
-import android.support.v7.view.ActionMode;
-import android.text.Html;
-import android.text.TextUtils;
-import android.text.format.DateUtils;
-import android.view.KeyEvent;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 
 public class PageActivity extends ThemedActionBarActivity {
 

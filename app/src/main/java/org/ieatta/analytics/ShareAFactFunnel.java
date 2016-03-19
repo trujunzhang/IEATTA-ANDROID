@@ -1,10 +1,11 @@
-package org.wikipedia.analytics;
+package org.ieatta.analytics;
 
 import android.support.annotation.NonNull;
 
+import org.ieatta.activity.PageTitle;
 import org.json.JSONObject;
-import org.wikipedia.page.PageTitle;
 import org.ieatta.IEAApp;
+import org.wikipedia.analytics.Funnel;
 import org.wikipedia.settings.Prefs;
 
 // https://meta.wikimedia.org/wiki/Schema:MobileWikiAppShareAFact
@@ -18,13 +19,13 @@ public class ShareAFactFunnel extends Funnel {
      */
     private static final int MAX_LENGTH = 99;
 
-    private final String pageTitle;
+//    private final String pageTitle;
     private final int pageId;
     private final long revisionId;
 
     public ShareAFactFunnel(IEAApp app, PageTitle pageTitle, int pageId, long revisionId) {
-        super(app, SCHEMA_NAME, REV_ID, pageTitle.getSite());
-        this.pageTitle = pageTitle.getDisplayText();
+        super(app, SCHEMA_NAME, REV_ID /*pageTitle.getSite()*/);
+//        this.pageTitle = pageTitle.getDisplayText();
         this.pageId = pageId;
         this.revisionId = revisionId;
     }
@@ -48,7 +49,7 @@ public class ShareAFactFunnel extends Funnel {
         }
         log(
                 "action", action,
-                "article", pageTitle,
+//                "article", pageTitle,
                 "pageID", pageId,
                 "revID", revisionId,
                 "text", text,

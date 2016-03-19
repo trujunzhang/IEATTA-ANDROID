@@ -8,7 +8,6 @@ import android.util.SparseArray;
 import android.view.View;
 
 import org.ieatta.IEAApp;
-import org.wikipedia.page.PageTitle;
 
 import java.util.Arrays;
 import java.util.Date;
@@ -88,14 +87,6 @@ public final class L10nUtil {
         final int dir = Character.getDirectionality(c);
         return dir == Character.DIRECTIONALITY_RIGHT_TO_LEFT
                 || dir == Character.DIRECTIONALITY_RIGHT_TO_LEFT_ARABIC;
-    }
-
-    public static String getStringForArticleLanguage(PageTitle title, int resId) {
-        return getStringsForLocale(new Locale(title.getSite().getLanguageCode()), new int[]{resId}).get(resId);
-    }
-
-    public static SparseArray<String> getStringsForArticleLanguage(PageTitle title, int[] resId) {
-        return getStringsForLocale(new Locale(title.getSite().getLanguageCode()), resId);
     }
 
     /**

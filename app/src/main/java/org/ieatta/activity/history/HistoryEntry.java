@@ -3,7 +3,7 @@ package org.ieatta.activity.history;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import org.wikipedia.page.PageTitle;
+import org.ieatta.activity.PageTitle;
 
 import java.util.Date;
 
@@ -80,7 +80,7 @@ public class HistoryEntry implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeParcelable(getTitle(), flags);
+//        dest.writeParcelable(getTitle(), flags);
         dest.writeLong(getTimestamp().getTime());
         dest.writeInt(getSource());
     }

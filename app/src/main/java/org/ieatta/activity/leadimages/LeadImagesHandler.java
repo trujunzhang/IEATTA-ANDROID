@@ -16,12 +16,12 @@ import android.view.animation.AnimationUtils;
 
 import org.ieatta.IEAApp;
 import org.ieatta.R;
+import org.ieatta.activity.PageTitle;
 import org.ieatta.activity.fragments.DetailFragment;
 import org.ieatta.activity.Page;
 import org.ieatta.views.ObservableWebView;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.wikipedia.page.PageTitle;
 import org.wikipedia.util.DimenUtil;
 import org.wikipedia.util.UriUtil;
 
@@ -146,7 +146,7 @@ public class LeadImagesHandler {
 //        articleHeaderView.setTitle(Html.fromHtml(getPage().getDisplayTitle()));
 //        articleHeaderView.setLocale(getPage().getTitle().getSite().getLanguageCode());
         // Set the subtitle, too, so text measurements are accurate.
-        layoutWikiDataDescription(getTitle().getDescription());
+//        layoutWikiDataDescription(getTitle().getDescription());
         layoutViews(listener, sequence);
     }
 
@@ -349,7 +349,7 @@ public class LeadImagesHandler {
 
         private void openGeoIntent() {
             if (getGeo() != null) {
-                UriUtil.sendGeoIntent(getActivity(), getGeo(), getTitle().getDisplayText());
+//                UriUtil.sendGeoIntent(getActivity(), getGeo(), getTitle().getDisplayText());
             }
         }
     }

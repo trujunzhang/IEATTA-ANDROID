@@ -18,9 +18,11 @@ import org.ieatta.IEAApp;
 import org.ieatta.R;
 import org.ieatta.activity.DetailPageLoadStrategy;
 import org.ieatta.activity.JsonPageLoadStrategy;
+import org.ieatta.activity.Page;
 import org.ieatta.activity.PageActivity;
 import org.ieatta.activity.PageBackStackItem;
 import org.ieatta.activity.PageLoadStrategy;
+import org.ieatta.activity.PageViewModel;
 import org.ieatta.activity.editing.EditHandler;
 import org.ieatta.activity.fragments.search.SearchBarHideHandler;
 import org.ieatta.activity.leadimages.ArticleHeaderView;
@@ -79,8 +81,8 @@ public class RestaurantDetailFragment extends DetailFragment {
     private static final int TOC_BUTTON_HIDE_DELAY = 2000;
     private static final int REFRESH_SPINNER_ADDITIONAL_OFFSET = (int) (16 * IEAApp.getInstance().getScreenDensity());
 
+
     private PageLoadStrategy pageLoadStrategy;
-    @Nullable private PdfDocument.PageInfo pageInfo;
 
     @NonNull
     private TabFunnel tabFunnel = new TabFunnel();
@@ -180,7 +182,7 @@ public class RestaurantDetailFragment extends DetailFragment {
         searchBarHideHandler = getPageActivity().getSearchBarHideHandler();
         searchBarHideHandler.setScrollView(webView);
         leadImagesHandler = new LeadImagesHandler(this,  webView, articleHeaderView);
-        pageLoadStrategy.setUp( this, refreshView, webView,  searchBarHideHandler,
+        pageLoadStrategy.setUp(this, refreshView, webView, searchBarHideHandler,
                 leadImagesHandler, new LinkedList<PageBackStackItem>());
         pageLoadStrategy.onLeadSectionLoaded(0);
     }
@@ -219,5 +221,6 @@ public class RestaurantDetailFragment extends DetailFragment {
     private PageActivity getPageActivity() {
         return (PageActivity) getActivity();
     }
+
 
 }

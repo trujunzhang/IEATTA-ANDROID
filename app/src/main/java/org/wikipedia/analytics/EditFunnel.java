@@ -3,20 +3,24 @@ package org.wikipedia.analytics;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
+import org.ieatta.activity.PageTitle;
 import org.json.JSONObject;
-import org.wikipedia.page.PageTitle;
 import org.ieatta.IEAApp;
 
 public class EditFunnel extends Funnel {
     private static final String SCHEMA_NAME = "MobileWikiAppEdit";
     private static final int REV_ID = 9003125;
 
-    private final PageTitle title;
+//    private final PageTitle title;
 
-    public EditFunnel(IEAApp app, PageTitle title) {
-        super(app, SCHEMA_NAME, REV_ID, title.getSite());
-        this.title = title;
+    public EditFunnel(IEAApp app, String schemaName, int revision) {
+        super(app, schemaName, revision);
     }
+
+//    public EditFunnel(IEAApp app, PageTitle title) {
+//        super(app, SCHEMA_NAME, REV_ID, title.getSite());
+//        this.title = title;
+//    }
 
     @Nullable
     @Override
@@ -157,7 +161,7 @@ public class EditFunnel extends Funnel {
 //                preprocessData(eventData, "userID", getApp().getUserInfoStorage().getUser().getUserID());
 //            }
 //        }
-        preprocessData(eventData, "pageNS", title.getNamespace());
+//        preprocessData(eventData, "pageNS", title.getNamespace());
         return super.preprocessData(eventData);
     }
 

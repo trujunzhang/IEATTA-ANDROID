@@ -13,7 +13,6 @@ import android.util.Log;
 
 import org.ieatta.IEAApp;
 import org.ieatta.R;
-import org.wikipedia.page.PageTitle;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
@@ -109,11 +108,6 @@ public final class UriUtil {
         } catch (ActivityNotFoundException e) {
             FeedbackUtil.showMessage(activity, R.string.error_no_maps_app);
         }
-    }
-
-    public static String getUrlWithProvenance(Context context, PageTitle title, @StringRes int provId) {
-//        return title.getCanonicalUri() + "?wprov=" + context.getString(provId);
-        return "";
     }
 
     private UriUtil() {

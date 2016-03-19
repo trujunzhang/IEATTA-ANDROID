@@ -1,7 +1,5 @@
 package org.ieatta.activity;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -15,12 +13,7 @@ import android.widget.TextView;
 
 import org.ieatta.IEAApp;
 import org.ieatta.R;
-import org.ieatta.activity.fragments.PageFragment;
-import org.wikipedia.analytics.LoginFunnel;
 import org.wikipedia.analytics.NavMenuFunnel;
-import org.wikipedia.page.PageTitle;
-import org.wikipedia.util.FeedbackUtil;
-import org.wikipedia.util.UriUtil;
 
 public class NavDrawerHelper {
 
