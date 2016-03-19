@@ -23,6 +23,7 @@ import org.ieatta.activity.Page;
 import org.ieatta.views.ObservableWebView;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.wikipedia.concurrency.RecurringTask;
 import org.wikipedia.util.DimenUtil;
 import org.wikipedia.util.UriUtil;
 
@@ -50,6 +51,8 @@ public class LeadImagesHandler {
     private int displayHeightDp;
     private float faceYOffsetNormalized;
     private float displayDensity;
+
+    private RecurringTask task;
 
     public LeadImagesHandler(@NonNull final DetailFragment parentFragment,
                              @NonNull ObservableWebView webView,
@@ -143,7 +146,13 @@ public class LeadImagesHandler {
         initDisplayDimensions();
 
         // set the page title text, and honor any HTML formatting in the title
-        loadLeadImage();
+        task.periodicTask(new RecurringTask.RecurringEvent() {
+            @Override
+            public void everyTask() {
+                LeadImagesHandler.this.loadLeadImage();
+            }
+        },0,10);
+
 
         articleHeaderView.setTitle(Html.fromHtml(getPage().getDisplayTitle()));
 //        articleHeaderView.setLocale(getPage().getTitle().getSite().getLanguageCode());
