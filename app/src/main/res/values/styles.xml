@@ -6,6 +6,20 @@
         <item name="android:windowBackground">@drawable/splash_bg</item>
         <item name="android:statusBarColor" tools:ignore="NewApi">@color/status_bar_background</item>
         <item name="lead_image_drawable">@drawable/ic_close_white</item>
+        <item name="lead_disabled_text_color">@color/lead_disabled_text_light</item>
+        <item name="list_separator_color">@color/list_separator_light</item>
+        <item name="syntax_highlight_template_color">@color/syntax_highlight_template_light</item>
+        <item name="subtle_gray_color">@color/subtle_gray_light</item>
+        <item name="tab_shadow_color">@color/tab_shadow_light</item>
+        <item name="toc_button_color">@color/toc_button_light</item>
+        <item name="tool_tip_default_color">@color/tool_tip_default_light</item>
+        <item name="link_preview_toolbar_color">@color/link_preview_toolbar_light</item>
+        <item name="link_preview_background_color">@color/link_preview_background_light</item>
+        <item name="link_preview_text_color">@color/link_preview_text_light</item>
+        <item name="nav_background_color">@color/nav_background_light</item>
+        <item name="nav_item_color">@color/nav_item_selector_light</item>
+        <item name="list_item_text_primary_color">@color/list_item_text_primary_light</item>
+        <item name="list_item_text_secondary_color">@color/list_item_text_secondary_light</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />

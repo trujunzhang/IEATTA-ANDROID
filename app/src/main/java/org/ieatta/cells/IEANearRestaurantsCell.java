@@ -9,33 +9,30 @@ import com.tableview.storage.models.CellType;
 import org.ieatta.R;
 import org.ieatta.database.models.DBRestaurant;
 import org.ieatta.views.AvatarView;
+import org.wikipedia.views.GoneIfEmptyTextView;
 
 public class IEANearRestaurantsCell extends IEAViewHolder {
 
     public static CellType getType() {
         return new CellType(IEANearRestaurantsCell.class, R.layout.cell_near_restaurant);
     }
-
-    private IEANearRestaurantsCell self = this;
-
     private AvatarView avatarView;
-
     private TextView titleLabel;
-    private TextView subtitleLabel;
+    private GoneIfEmptyTextView subtitleLabel;
 
     public IEANearRestaurantsCell(View itemView) {
         super(itemView);
-        self.avatarView = (AvatarView) itemView.findViewById(R.id.avatarView);
-        self.titleLabel = (TextView) itemView.findViewById(R.id.titleTextView);
-        self.subtitleLabel = (TextView) itemView.findViewById(R.id.addressTextView);
+        this.avatarView = (AvatarView) itemView.findViewById(R.id.page_list_item_image);
+        this.titleLabel = (TextView) itemView.findViewById(R.id.page_list_item_title);
+        this.subtitleLabel = (GoneIfEmptyTextView) itemView.findViewById(R.id.page_list_item_description);
     }
 
     @Override
     public void render(Object value) {
         DBRestaurant model = (DBRestaurant) value;
-        self.titleLabel.setText(model.getDisplayName());
-        self.subtitleLabel.setText(((DBRestaurant) value).getGoogleMapAddress());
+        this.titleLabel.setText(model.getDisplayName());
+        this.subtitleLabel.setText(((DBRestaurant) value).getGoogleMapAddress());
 
-        self.avatarView.loadNewPhotoByModel(model, R.drawable.blank_biz);
+        this.avatarView.loadNewPhotoByModel(model, R.drawable.blank_biz);
     }
 }
