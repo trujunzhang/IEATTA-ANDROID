@@ -39,14 +39,18 @@ public class AvatarView extends SimpleDraweeView {
     public void loadNewPhotoByModel(DBRestaurant model, int placeHolder) {
         this.configureAvatar(placeHolder);
 
-        List<File> files = ThumbnailImageUtil.sharedInstance.getImagesList(model.getUUID());
-        if (files.size() > 0) {
-            File first = files.get(0);
-            String path = first.getAbsolutePath();
-            L.d("cached path of the photo: " + path);
-            String url = String.format("file://%s", path);
-            ViewUtil.loadImageUrlInto(AvatarView.this, url);
-        }
+        ThumbnailImageUtil.sharedInstance.getImagesList(model.getUUID()).onSuccess(new Continuation<List<File>, Void>() {
+            @Override
+            public Void then(Task<List<File>> task) throws Exception {
+                List<File> files = task.getResult();
+                File first = files.get(0);
+                String path = first.getAbsolutePath();
+                L.d("cached path of the photo: " + path);
+                String url = String.format("file://%s", path);
+                ViewUtil.loadImageUrlInto(AvatarView.this, url);
+                return null;
+            }
+        });
     }
 
     private void configureAvatar(int placeHolder) {

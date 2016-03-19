@@ -37,9 +37,12 @@ public abstract class AbstractImageUtil {
         return this.getImageCache().get(UUID);
     }
 
-    public List<File> getImagesList(String usedRef){
+    public Task<List<File>> getImagesList(String usedRef) {
         List<File> list = this.getImageCache().getList(usedRef);
-        return list;
+        if (list.size() == 0) {
+            return Task.forError(new FileNotFoundException("Not found images by " + usedRef));
+        }
+        return Task.forResult(list);
     }
 
     public File getCacheImageUrl(DBPhoto model) {
