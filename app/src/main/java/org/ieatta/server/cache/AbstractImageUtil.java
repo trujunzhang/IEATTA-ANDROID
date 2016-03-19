@@ -83,24 +83,6 @@ public abstract class AbstractImageUtil {
     }
 
     /**
-     * Save photo's image as an offline file.
-     * <p/>
-     * - parameter image:           saved image
-     * - parameter model:           photo's instance
-     */
-    public Task<Bitmap> saveTakenPhoto(Bitmap image, DBPhoto model) {
-
-        // ** Important ** (Must store to Disk).
-        try {
-            this.getImageCache().save(model.getUUID(), image);
-        } catch (IOException e) {
-            return Task.forError(e);
-        }
-
-        return Task.forResult(image);
-    }
-
-    /**
      * Save photo's InputStream as an offline file.
      * <p/>
      * - parameter image:           saved image's InputStream
