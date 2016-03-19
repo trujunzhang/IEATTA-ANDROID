@@ -156,7 +156,7 @@ public class LeadImagesHandler {
             public void everyTask() {
                 LeadImagesHandler.this.recurringLeadImages();
             }
-        },0,20);
+        },0,10);
 
 
         articleHeaderView.setTitle(Html.fromHtml(getPage().getDisplayTitle()));
