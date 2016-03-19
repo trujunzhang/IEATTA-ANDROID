@@ -4,6 +4,8 @@ import android.support.test.runner.AndroidJUnit4;
 
 import org.ieatta.database.models.DBNewRecord;
 import org.ieatta.database.provide.PQueryModelType;
+import org.ieatta.database.realm.DBBuilder;
+import org.ieatta.database.realm.RealmModelReader;
 import org.ieatta.server.cache.ThumbnailImageUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -44,6 +46,41 @@ public class ThumbnailCacheTest {
 
     private HashMap<String, Integer> photoHashmap = new LinkedHashMap<>();
     int step = 0;
+    int dbPhotoCount = 0;
+
+
+    @Test
+    public void testThumbnailTotalCount() throws InterruptedException {
+        final CountDownLatch completionLatch = new CountDownLatch(1);
+
+        ThumbnailImageUtil.sharedInstance.getImagesList().continueWithTask(new Continuation<List<File>, Task<RealmResults<DBPhoto>>>() {
+            public Task<RealmResults<DBPhoto>> then(Task<List<File>> results) throws Exception {
+                List<File> fileList = results.getResult();
+                for (File fold : fileList) {
+                    dbPhotoCount += fold.listFiles().length;
+                }
+                Log.d("ThumbnailCacheTest", "Cached file's count: " + dbPhotoCount);
+
+                return new RealmModelReader<DBPhoto>(DBPhoto.class).fetchResults(new DBBuilder(), false);
+            }
+        }).onSuccess(new Continuation<RealmResults<DBPhoto>, Void>() {
+            @Override
+            public Void then(Task<RealmResults<DBPhoto>> task) throws Exception {
+                int expect = task.getResult().size();
+                assertThat("The same photo's count between cached folder and databse.", (dbPhotoCount == (expect)));
+                return null;
+            }
+        }).continueWith(new Continuation<Void, Void>() {
+            public Void then(Task<Void> ignored) throws Exception {
+                // Every task was verified.
+                completionLatch.countDown();
+                return null;
+            }
+        });
+
+        completionLatch.await(TASK_COMPLETION_TIMEOUT, TimeUnit.MILLISECONDS);
+    }
+
 
     @Test
     public void testThumbnailCache() throws InterruptedException {
