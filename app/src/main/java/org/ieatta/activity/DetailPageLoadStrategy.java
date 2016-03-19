@@ -9,9 +9,13 @@ import android.support.annotation.VisibleForTesting;
 
 import org.ieatta.IEAApp;
 import org.ieatta.activity.editing.EditHandler;
+import org.ieatta.activity.fragments.DetailFragment;
 import org.ieatta.activity.fragments.PageFragment;
+import org.ieatta.activity.fragments.search.SearchBarHideHandler;
 import org.ieatta.activity.leadimages.LeadImagesHandler;
+import org.ieatta.views.ObservableWebView;
 import org.wikipedia.util.log.L;
+import org.wikipedia.views.SwipeRefreshLayoutWithScroll;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -65,14 +69,18 @@ public class DetailPageLoadStrategy implements PageLoadStrategy {
     private ErrorCallback networkErrorCallback;
 
     // copied fields
-    private PageFragment fragment;
+    private DetailFragment fragment;
     private PageActivity activity;
     @NonNull private final IEAApp app = IEAApp.getInstance();
     private EditHandler editHandler;
 
     @Override
     @SuppressWarnings("checkstyle:parameternumber")
-    public void setUp(@NonNull PageFragment fragment,
+    public void setUp(@NonNull DetailFragment fragment,
+                      @NonNull SwipeRefreshLayoutWithScroll refreshView,
+                      @NonNull ObservableWebView webView,
+                      @NonNull SearchBarHideHandler searchBarHideHandler,
+                      @NonNull LeadImagesHandler leadImagesHandler,
                         @NonNull List<PageBackStackItem> backStack) {
         this.fragment = fragment;
         activity = (PageActivity) fragment.getActivity();

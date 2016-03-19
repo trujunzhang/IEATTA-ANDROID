@@ -4,7 +4,12 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 
 import org.ieatta.activity.editing.EditHandler;
+import org.ieatta.activity.fragments.DetailFragment;
 import org.ieatta.activity.fragments.PageFragment;
+import org.ieatta.activity.fragments.search.SearchBarHideHandler;
+import org.ieatta.activity.leadimages.LeadImagesHandler;
+import org.ieatta.views.ObservableWebView;
+import org.wikipedia.views.SwipeRefreshLayoutWithScroll;
 
 import java.util.List;
 
@@ -37,7 +42,11 @@ public interface PageLoadStrategy {
     }
 
     @SuppressWarnings("checkstyle:parameternumber")
-    void setUp(@NonNull PageFragment fragment,
+    void setUp(@NonNull DetailFragment fragment,
+               @NonNull SwipeRefreshLayoutWithScroll refreshView,
+               @NonNull ObservableWebView webView,
+               @NonNull SearchBarHideHandler searchBarHideHandler,
+               @NonNull LeadImagesHandler leadImagesHandler,
                @NonNull List<PageBackStackItem> backStack);
 
     void load(boolean pushBackStack, @NonNull Cache cachePreference, int stagedScrollY);

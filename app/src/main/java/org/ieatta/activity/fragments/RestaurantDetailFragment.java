@@ -19,6 +19,7 @@ import org.ieatta.R;
 import org.ieatta.activity.DetailPageLoadStrategy;
 import org.ieatta.activity.JsonPageLoadStrategy;
 import org.ieatta.activity.PageActivity;
+import org.ieatta.activity.PageBackStackItem;
 import org.ieatta.activity.PageLoadStrategy;
 import org.ieatta.activity.editing.EditHandler;
 import org.ieatta.activity.fragments.search.SearchBarHideHandler;
@@ -39,6 +40,7 @@ import org.wikipedia.views.SwipeRefreshLayoutWithScroll;
 import org.wikipedia.views.WikiDrawerLayout;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 import bolts.Continuation;
 import bolts.Task;
@@ -140,8 +142,6 @@ public class RestaurantDetailFragment extends DetailFragment {
         app = (IEAApp) getActivity().getApplicationContext();
         manager = new RecycleViewManager(this.getActivity().getApplicationContext());
         pageLoadStrategy = new DetailPageLoadStrategy();
-
-        leadImagesHandler = new LeadImagesHandler(this,  webView, articleHeaderView);
     }
 
     private void setupUI() {
@@ -177,6 +177,11 @@ public class RestaurantDetailFragment extends DetailFragment {
         this.manager.setSectionItems(CollectionUtil.createList(new IEARestaurantDetailHeader(this.task.restaurant)), RestaurantDetailSection.section_header.ordinal());
 //        this.manager.showGoogleMapAddress(RestaurantDetailSection.section_google_mapaddress.ordinal());
 
+        searchBarHideHandler = getPageActivity().getSearchBarHideHandler();
+        searchBarHideHandler.setScrollView(webView);
+        leadImagesHandler = new LeadImagesHandler(this,  webView, articleHeaderView);
+        pageLoadStrategy.setUp( this, refreshView, webView,  searchBarHideHandler,
+                leadImagesHandler, new LinkedList<PageBackStackItem>());
         pageLoadStrategy.onLeadSectionLoaded(0);
     }
 
