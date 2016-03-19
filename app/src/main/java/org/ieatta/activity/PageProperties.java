@@ -17,6 +17,11 @@ public class PageProperties {
         return leadImageUrl;
     }
 
+    public PageProperties(String leadImageUrl, String displayTitleText) {
+        this.leadImageUrl = leadImageUrl;
+        this.displayTitleText = displayTitleText;
+    }
+
     public PageProperties() {
         leadImageUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/National_Emblem_of_Afghanistan_03.png/640px-National_Emblem_of_Afghanistan_03.png";
         displayTitleText = "wh";

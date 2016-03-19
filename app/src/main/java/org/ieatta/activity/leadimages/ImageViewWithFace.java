@@ -52,6 +52,10 @@ public class ImageViewWithFace extends SimpleDraweeView {
         this.listener = listener == null ? new DefaultListener() : listener;
     }
 
+    public void loadOfflineImage(String url){
+
+    }
+
     public void loadImage(String url) {
         ImageRequest request = ImageRequestBuilder.newBuilderWithSource(Uri.parse(url))
                 .setPostprocessor(facePostprocessor)

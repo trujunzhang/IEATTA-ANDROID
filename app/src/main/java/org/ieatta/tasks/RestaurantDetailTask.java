@@ -66,6 +66,7 @@ public class RestaurantDetailTask {
 
     public Page getPage(){
         PageTitle title = new PageTitle(restaurant.getDisplayName(),"");
+//        String imagePath =
         PageProperties properties = new PageProperties();
         Page page = new Page(title, properties);
         return page;
