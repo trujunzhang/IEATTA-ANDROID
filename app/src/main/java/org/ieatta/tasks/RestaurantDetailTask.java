@@ -1,6 +1,8 @@
 package org.ieatta.tasks;
 
 import org.ieatta.activity.Page;
+import org.ieatta.activity.PageProperties;
+import org.ieatta.activity.PageTitle;
 import org.ieatta.database.models.DBEvent;
 import org.ieatta.database.models.DBPhoto;
 import org.ieatta.database.models.DBRestaurant;
@@ -10,6 +12,8 @@ import org.ieatta.database.query.LocalDatabaseQuery;
 import org.ieatta.database.realm.DBBuilder;
 import org.ieatta.database.realm.RealmModelReader;
 import org.ieatta.parse.DBConstant;
+
+import java.util.Properties;
 
 import bolts.Continuation;
 import bolts.Task;
@@ -61,6 +65,9 @@ public class RestaurantDetailTask {
     }
 
     public Page getPage(){
-        return null;
+        PageTitle title = new PageTitle(restaurant.getDisplayName(),"");
+        PageProperties properties = new PageProperties();
+        Page page = new Page(title, properties);
+        return page;
     }
 }

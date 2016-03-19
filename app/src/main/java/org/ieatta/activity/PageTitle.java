@@ -19,16 +19,12 @@ import static org.wikipedia.util.UriUtil.decodeURL;
 
 public class PageTitle {
 
-    @Nullable private final String namespace;
     private final String text;
-    private final String fragment;
     @Nullable private String thumbUrl;
     private String description = null;
 
-    public PageTitle(@Nullable final String namespace, final String text, final String fragment, @Nullable final String thumbUrl) {
-        this.namespace = namespace;
+    public PageTitle(final String text, @Nullable final String thumbUrl) {
         this.text = text;
-        this.fragment = fragment;
         this.thumbUrl = thumbUrl;
     }
 }
