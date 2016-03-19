@@ -16,6 +16,8 @@ import com.tableview.utils.CollectionUtil;
 
 import org.ieatta.IEAApp;
 import org.ieatta.R;
+import org.ieatta.activity.DetailPageLoadStrategy;
+import org.ieatta.activity.JsonPageLoadStrategy;
 import org.ieatta.activity.PageActivity;
 import org.ieatta.activity.PageLoadStrategy;
 import org.ieatta.activity.editing.EditHandler;
@@ -138,6 +140,7 @@ public class RestaurantDetailFragment extends DetailFragment {
 
         app = (IEAApp) getActivity().getApplicationContext();
         manager = new RecycleViewManager(this.getActivity().getApplicationContext());
+        pageLoadStrategy = new DetailPageLoadStrategy();
     }
 
     private void setupUI() {
