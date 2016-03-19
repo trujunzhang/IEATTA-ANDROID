@@ -21,10 +21,11 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:fontFamily="serif"
-    android:paddingTop="@dimen/list_item_vertical_padding"
+    android:layout_marginTop="@dimen/list_item_vertical_padding"
     android:paddingBottom="16dp"
     android:paddingLeft="@dimen/list_item_horizontal_padding"
     android:paddingRight="@dimen/list_item_horizontal_padding"
     android:text="Section"
     android:textAppearance="?android:attr/textAppearanceLarge"
+    android:textColor="@color/list_item_text_primary_light"
     android:textSize="24sp" />
