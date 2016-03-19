@@ -227,8 +227,8 @@ public abstract class BaseDiskCache implements DiskCache {
         File dir = cacheDir;
         File imageFolder = new File(dir, imageDir);
         if (!cacheDir.exists() && !cacheDir.mkdirs()) {
-            if (!imageFolder.exists() && !imageFolder.mkdirs()) {
-            }
+        }
+        if (!imageFolder.exists() && !imageFolder.mkdirs()) {
         }
         return new File(imageFolder, fileName);
     }

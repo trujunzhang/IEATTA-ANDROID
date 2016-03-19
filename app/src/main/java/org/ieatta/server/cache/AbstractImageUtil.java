@@ -103,6 +103,7 @@ public abstract class AbstractImageUtil {
         } catch (IOException e) {
             return Task.forError(e);
         }
+        ///data/data/org.ieatta.alpha/thumbnail/828DB1D6-67AB-467D-8D98-76C1938C5306/20151123082215qebv8ze9helfca46q1su4ob
 
         if (save == false) {
             return Task.forError(new FileNotFoundException("Cache thumbnail image failed"));
