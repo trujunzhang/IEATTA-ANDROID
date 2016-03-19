@@ -9,7 +9,6 @@ import android.support.annotation.DimenRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
-import android.text.Html;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.animation.Animation;
@@ -17,16 +16,13 @@ import android.view.animation.AnimationUtils;
 
 import org.ieatta.IEAApp;
 import org.ieatta.R;
-import org.ieatta.activity.fragments.PageFragment;
-import org.ieatta.cells.model.Page;
+import org.ieatta.activity.fragments.DetailFragment;
+import org.ieatta.Page;
 import org.ieatta.views.ObservableWebView;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.wikipedia.analytics.GalleryFunnel;
 import org.wikipedia.page.PageTitle;
 import org.wikipedia.util.DimenUtil;
-import org.wikipedia.util.FeedbackUtil;
-import org.wikipedia.util.ShareUtil;
 import org.wikipedia.util.UriUtil;
 
 
@@ -44,7 +40,7 @@ public class LeadImagesHandler {
         void onLayoutComplete(int sequence);
     }
 
-    @NonNull private final PageFragment parentFragment;
+    @NonNull private final DetailFragment parentFragment;
     @NonNull private final ObservableWebView webView;
 
     @NonNull private final ArticleHeaderView articleHeaderView;
@@ -54,7 +50,7 @@ public class LeadImagesHandler {
     private float faceYOffsetNormalized;
     private float displayDensity;
 
-    public LeadImagesHandler(@NonNull final PageFragment parentFragment,
+    public LeadImagesHandler(@NonNull final DetailFragment parentFragment,
                              @NonNull ObservableWebView webView,
                              @NonNull ArticleHeaderView articleHeaderView) {
         this.articleHeaderView = articleHeaderView;
