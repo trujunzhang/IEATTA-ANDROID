@@ -112,6 +112,13 @@ public abstract class BaseDiskCache implements DiskCache {
     }
 
     @Override
+    public List<File> getList() {
+        final File[] files = cacheDir.listFiles();
+        Arrays.sort(files, new FileComparator());
+        return new LinkedList<>(Arrays.asList(files));
+    }
+
+    @Override
     public boolean save(String imageUri, InputStream imageStream, IoUtils.CopyListener listener) throws IOException {
         File imageFile = getFile(imageUri);
         File tmpFile = new File(imageFile.getAbsolutePath() + TEMP_IMAGE_POSTFIX);

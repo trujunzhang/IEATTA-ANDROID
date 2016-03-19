@@ -53,6 +53,8 @@ public interface DiskCache {
      */
     public List<File> getList(String imageDir);
 
+    public List<File> getList();
+
     /**
      * Saves image stream in disk cache.
      * Incoming image stream shouldn't be closed in this method.

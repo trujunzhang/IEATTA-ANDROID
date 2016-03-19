@@ -45,6 +45,14 @@ public abstract class AbstractImageUtil {
         return Task.forResult(list);
     }
 
+    public Task<List<File>> getImagesList() {
+        List<File> list = this.getImageCache().getList();
+        if (list.size() == 0) {
+            return Task.forError(new FileNotFoundException("No images cached"));
+        }
+        return Task.forResult(list);
+    }
+
     public File getCacheImageUrl(DBPhoto model) {
         return this.getCacheImageUrl(model.getUUID());
     }
