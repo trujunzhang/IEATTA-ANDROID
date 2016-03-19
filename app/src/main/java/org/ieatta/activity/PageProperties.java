@@ -27,7 +27,7 @@ public class PageProperties {
 
     @Nullable
     public Task<String> getLeadImageOnlineUrl() {
-        return this.photoGalleryModel.leadImageLocal();
+        return this.photoGalleryModel.leadImageOnline();
     }
 
     public PageProperties(PhotoGalleryModel photoGalleryModel,String displayTitleText) {

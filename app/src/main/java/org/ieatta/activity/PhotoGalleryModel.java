@@ -1,15 +1,9 @@
 package org.ieatta.activity;
 
-import org.ieatta.server.cache.ThumbnailImageUtil;
-
 import java.io.File;
-import java.util.EmptyStackException;
 import java.util.LinkedList;
 import java.util.List;
 
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.annotation.VisibleForTesting;
 import android.text.TextUtils;
 
 import org.ieatta.database.models.DBPhoto;
@@ -34,7 +28,7 @@ public class PhotoGalleryModel {
 
         public Task<String> getOnlineUrl(String usedRef) {
             if (TextUtils.isEmpty(onlineUrl)) {
-                return LocalDatabaseQuery.getPhoto(usedRef).onSuccessTask(new Continuation<DBPhoto, Task<String>>() {
+                return LocalDatabaseQuery.getPhoto(usedRef, true).onSuccessTask(new Continuation<DBPhoto, Task<String>>() {
                     @Override
                     public Task<String> then(Task<DBPhoto> task) throws Exception {
                         LeadImage.this.onlineUrl = task.getResult().getOriginalUrl();
