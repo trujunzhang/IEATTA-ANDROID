@@ -46,6 +46,7 @@ import java.util.LinkedList;
 
 import bolts.Continuation;
 import bolts.Task;
+import static butterknife.ButterKnife.findById;
 
 public class RestaurantDetailFragment extends DetailFragment {
 
@@ -130,6 +131,10 @@ public class RestaurantDetailFragment extends DetailFragment {
         // if we want to give it a custom color:
         //refreshView.setProgressBackgroundColor(R.color.swipe_refresh_circle);
         refreshView.setScrollableChild(webView);
+
+        // TODO: initialize View references in onCreateView().
+//        articleHeaderView = findById(getView(), R.id.page_header_view);
+        articleHeaderView = (ArticleHeaderView) rootView.findViewById(R.id.page_header_view);
 
         return rootView;
     }

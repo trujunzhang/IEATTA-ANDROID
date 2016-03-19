@@ -13,7 +13,8 @@ public class PageProperties {
      */
     @Nullable
     public String getLeadImageUrl() {
-        return leadImageUrl;
+        //return leadImageUrl;
+        return "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/National_Emblem_of_Afghanistan_03.png/640px-National_Emblem_of_Afghanistan_03.png";
     }
 
     public PageProperties() {
