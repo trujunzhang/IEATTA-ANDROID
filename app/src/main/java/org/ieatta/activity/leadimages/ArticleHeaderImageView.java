@@ -46,7 +46,7 @@ public class ArticleHeaderImageView extends FrameLayout {
             setVisibility(GONE);
         } else {
             setVisibility(VISIBLE);
-            image.loadImage(url);
+            image.loadOfflineImage(url);
         }
     }
 

@@ -24,6 +24,7 @@ import com.facebook.imagepipeline.request.ImageRequestBuilder;
 
 import org.ieatta.R;
 import org.wikipedia.util.log.L;
+import org.wikipedia.views.ViewUtil;
 
 public class ImageViewWithFace extends SimpleDraweeView {
     private static final int BITMAP_COPY_WIDTH = 200;
@@ -53,7 +54,7 @@ public class ImageViewWithFace extends SimpleDraweeView {
     }
 
     public void loadOfflineImage(String url){
-
+        ViewUtil.loadImageUrlInto(this, url);
     }
 
     public void loadImage(String url) {
