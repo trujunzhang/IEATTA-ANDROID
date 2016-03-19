@@ -16,6 +16,7 @@ import com.squareup.otto.Bus;
 
 import org.ieatta.IEAApp;
 import org.ieatta.R;
+import org.ieatta.activity.fragments.NearRestaurantsFragment;
 import org.ieatta.activity.fragments.PageFragment;
 import org.ieatta.activity.fragments.RestaurantDetailFragment;
 import org.ieatta.activity.fragments.search.SearchArticlesFragment;

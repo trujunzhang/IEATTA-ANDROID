@@ -171,7 +171,7 @@ public class RestaurantDetailFragment extends DetailFragment {
     }
 
     private void reloadPage() {
-        this.manager.setSectionItems(CollectionUtil.createList(new IEARestaurantDetailHeader(this.task.restaurant)), RestaurantDetailSection.section_header.ordinal());
+//        this.manager.setSectionItems(CollectionUtil.createList(new IEARestaurantDetailHeader(this.task.restaurant)), RestaurantDetailSection.section_header.ordinal());
 //        this.manager.showGoogleMapAddress(RestaurantDetailSection.section_google_mapaddress.ordinal());
 
         model.setPage(task.getPage());
