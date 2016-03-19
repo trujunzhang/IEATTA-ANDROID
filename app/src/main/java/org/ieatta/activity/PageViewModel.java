@@ -17,6 +17,7 @@ public class PageViewModel {
 
     public void setPage(@Nullable Page page) {
         this.page = page;
+        this.setTitle(page.getTitle());
     }
 
     public PageTitle getTitle() {

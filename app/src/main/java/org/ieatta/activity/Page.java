@@ -36,4 +36,8 @@ public class Page {
     public PageProperties getPageProperties() {
         return pageProperties;
     }
+
+    public PageTitle getTitle() {
+        return title;
+    }
 }
