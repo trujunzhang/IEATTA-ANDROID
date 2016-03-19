@@ -111,8 +111,8 @@ public class ArticleHeaderView extends FrameLayout implements ObservableWebView.
         image.setLoadListener(listener);
     }
 
-    public void loadImage(@Nullable String url) {
-        image.load(url);
+    public void loadImage(@Nullable String url,Boolean local) {
+        image.load(url,local);
         int height = url == null ? 0 : (int) (DimenUtil.getDisplayHeightPx() * getScreenHeightRatio());
         setMinimumHeight(height);
         if (url == null) {

@@ -175,13 +175,13 @@ public class LeadImagesHandler {
         pageProperties.getLeadImageLocalUrl().onSuccessTask(new Continuation<String, Task<String>>() {
             @Override
             public Task<String> then(Task<String> task) throws Exception {
-                LeadImagesHandler.this.loadLeadImage(task.getResult());
+                LeadImagesHandler.this.loadLeadImage(task.getResult(),true);
                 return pageProperties.getLeadImageOnlineUrl();
             }
         },Task.UI_THREAD_EXECUTOR).onSuccess(new Continuation<String, Void>() {
             @Override
             public Void then(Task<String> task) throws Exception {
-                LeadImagesHandler.this.loadLeadImage(task.getResult());
+                LeadImagesHandler.this.loadLeadImage(task.getResult(),false);
                 return null;
             }
         },Task.UI_THREAD_EXECUTOR);
@@ -275,12 +275,12 @@ public class LeadImagesHandler {
      * @param url Nullable URL with no scheme. For example, foo.bar.com/ instead of
      *            http://foo.bar.com/.
      */
-    private void loadLeadImage(@Nullable String url) {
+    private void loadLeadImage(@Nullable String url,Boolean local) {
         if (!isMainPage() && !TextUtils.isEmpty(url) && isLeadImageEnabled()) {
             articleHeaderView.setImageYScalar(0);
-            articleHeaderView.loadImage(url);
+            articleHeaderView.loadImage(url,local);
         } else {
-            articleHeaderView.loadImage(null);
+            articleHeaderView.loadImage(null,local);
         }
     }
 

@@ -41,12 +41,16 @@ public class ArticleHeaderImageView extends FrameLayout {
         image.setOnImageLoadListener(listener);
     }
 
-    public void load(@Nullable String url) {
+    public void load(@Nullable String url,Boolean local) {
         if (url == null) {
             setVisibility(GONE);
         } else {
             setVisibility(VISIBLE);
-            image.loadOfflineImage(url);
+            if(local == true) {
+                image.loadOfflineImage(url);
+            }else{
+                image.loadImage(url);
+            }
         }
     }
 
