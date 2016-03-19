@@ -43,7 +43,6 @@ public class DetailPageLoadStrategy implements PageLoadStrategy {
 
     private int state = STATE_NO_FETCH;
 
-    private LeadImagesHandler leadImagesHandler;
     /**
      * List of lightweight history items to serve as the backstack for this fragment.
      * Since the list consists of Parcelable objects, it can be saved and restored from the
@@ -69,9 +68,13 @@ public class DetailPageLoadStrategy implements PageLoadStrategy {
     private ErrorCallback networkErrorCallback;
 
     // copied fields
-    private DetailFragment fragment;
+    private PageFragment fragment;
     private PageActivity activity;
+    private ObservableWebView webView;
+    private SwipeRefreshLayoutWithScroll refreshView;
     @NonNull private final IEAApp app = IEAApp.getInstance();
+    private LeadImagesHandler leadImagesHandler;
+    private SearchBarHideHandler searchBarHideHandler;
     private EditHandler editHandler;
 
     @Override
@@ -84,6 +87,10 @@ public class DetailPageLoadStrategy implements PageLoadStrategy {
                         @NonNull List<PageBackStackItem> backStack) {
         this.fragment = fragment;
         activity = (PageActivity) fragment.getActivity();
+        this.refreshView = refreshView;
+        this.webView = webView;
+        this.searchBarHideHandler = searchBarHideHandler;
+        this.leadImagesHandler = leadImagesHandler;
 
         this.backStack = backStack;
 
