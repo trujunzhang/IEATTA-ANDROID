@@ -133,6 +133,24 @@ public abstract class AbstractImageUtil {
         return Task.forResult(null);
     }
 
+    public Task<Void> saveTakenPhoto(InputStream inputStream, String uuid) {
+
+        // ** Important ** (Must store to Disk).
+        boolean save = false;
+        try {
+            save = this.getImageCache().save(uuid, inputStream, null);
+        } catch (IOException e) {
+            return Task.forError(e);
+        }
+        ///data/data/org.ieatta.alpha/thumbnail/828DB1D6-67AB-467D-8D98-76C1938C5306/201511230822_FD0CA37F-7ECF-443E-B69E-5FBBB8EEB771
+
+        if (save == false) {
+            return Task.forError(new FileNotFoundException("Cache thumbnail image failed"));
+        }
+
+        return Task.forResult(null);
+    }
+
     /**
      * Generate a special type image, then save it as the offline image.
      * <p/>

@@ -6,6 +6,8 @@ import java.util.List;
 
 import android.text.TextUtils;
 
+import com.parse.ParseFile;
+
 import org.ieatta.database.models.DBPhoto;
 import org.ieatta.database.query.LocalDatabaseQuery;
 
@@ -21,14 +23,17 @@ public class PhotoGalleryModel {
     class LeadImage {
         public String localUrl;
         private String onlineUrl;
+        private String photoUUID;
 
         public LeadImage(String filePath) {
             this.localUrl = String.format("file://%s", filePath);
+            this.photoUUID = new File(filePath).getName().split("_")[1];
         }
 
-        public Task<String> getOnlineUrl(String usedRef) {
+        public Task<String> getOnlineUrl() {
             if (TextUtils.isEmpty(onlineUrl)) {
-                return LocalDatabaseQuery.getPhoto(usedRef, true).onSuccessTask(new Continuation<DBPhoto, Task<String>>() {
+
+                return LocalDatabaseQuery.getPhoto(this.photoUUID, true).onSuccessTask(new Continuation<DBPhoto, Task<String>>() {
                     @Override
                     public Task<String> then(Task<DBPhoto> task) throws Exception {
                         LeadImage.this.onlineUrl = task.getResult().getOriginalUrl();
@@ -36,6 +41,8 @@ public class PhotoGalleryModel {
                     }
                 });
             }
+
+//            ParseFile file  = new ParseFile();
 
             return Task.forResult(this.onlineUrl);
         }
@@ -65,7 +72,7 @@ public class PhotoGalleryModel {
         }
         int index = galleryIndex % leadImages.size();
         LeadImage leadImage = leadImages.get(index);
-        return leadImage.getOnlineUrl(this.usedRef);
+        return leadImage.getOnlineUrl();
     }
 
 }
