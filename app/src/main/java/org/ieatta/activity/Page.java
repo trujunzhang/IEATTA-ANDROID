@@ -20,12 +20,17 @@ public class Page {
     static final int RESTBASE_ORIGIN = 1;
 
     private final PageTitle title;
+    private final PageProperties pageProperties;
 
     /** Regular constructor */
-    public Page(@NonNull PageTitle title) {
+    public Page(@NonNull PageTitle title,
+                @NonNull PageProperties pageProperties) {
         this.title = title;
+        this.pageProperties = pageProperties;
     }
 
 
-
+    public PageProperties getPageProperties() {
+        return pageProperties;
+    }
 }

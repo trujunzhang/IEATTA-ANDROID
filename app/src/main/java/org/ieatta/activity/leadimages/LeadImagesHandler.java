@@ -254,8 +254,7 @@ public class LeadImagesHandler {
      */
     @Nullable
     private String getLeadImageUrl() {
-//        return getPage() == null ? null : getPage().getPageProperties().getLeadImageUrl();
-        return "";
+        return getPage() == null ? null : getPage().getPageProperties().getLeadImageUrl();
     }
 
     @Nullable
@@ -293,8 +292,7 @@ public class LeadImagesHandler {
 
     @Nullable
     private Page getPage() {
-//        return parentFragment.getPage();
-        return null;
+        return parentFragment.getPage();
     }
 
     private boolean isFragmentAdded() {
