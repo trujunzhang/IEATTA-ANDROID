@@ -40,7 +40,7 @@ public class ParseQueryUtil {
      * @param uuid  Model's UUID
      * @return
      */
-    public static ParseQuery<ParseObject> createQueryForPhoto(String uuid,PQueryModelType type) {
+    public static ParseQuery<ParseObject> createQueryByUUID(String uuid, PQueryModelType type) {
         ParseQuery<ParseObject> query = ParseQuery.getQuery(type.toString());
 
         query.whereEqualTo(DBConstant.kPAPFieldObjectUUIDKey, uuid);

@@ -181,7 +181,7 @@ public class LeadImagesHandler {
         },Task.UI_THREAD_EXECUTOR).onSuccess(new Continuation<String, Void>() {
             @Override
             public Void then(Task<String> task) throws Exception {
-                LeadImagesHandler.this.loadLeadImage(task.getResult(),false);
+                LeadImagesHandler.this.loadLeadImage(task.getResult(),true);
                 return null;
             }
         },Task.UI_THREAD_EXECUTOR);
