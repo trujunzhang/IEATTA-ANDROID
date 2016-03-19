@@ -64,7 +64,7 @@ public class ThumbnailCacheTest {
                     task = task.continueWithTask(new Continuation<Void, Task<Void>>() {
                         public Task<Void> then(Task<Void> ignored) throws Exception {
                             // Return a task that will be marked as completed when the delete is finished.
-                            return checkSameLength(name, length, step++);
+                            return checkSameLength(name, length, ++step);
                         }
                     });
                 }
