@@ -26,5 +26,11 @@ public class PageTitle {
     public PageTitle(final String text, @Nullable final String thumbUrl) {
         this.text = text;
         this.thumbUrl = thumbUrl;
+        this.description = "How to use page.";
+    }
+
+    @Nullable
+    public String getDescription() {
+        return description;
     }
 }

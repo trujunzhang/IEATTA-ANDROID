@@ -29,6 +29,9 @@ public class Page {
         this.pageProperties = pageProperties;
     }
 
+    public String getDisplayTitle() {
+        return pageProperties.getDisplayTitle();
+    }
 
     public PageProperties getPageProperties() {
         return pageProperties;

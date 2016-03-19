@@ -9,6 +9,7 @@ import android.support.annotation.DimenRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
+import android.text.Html;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.animation.Animation;
@@ -143,10 +144,10 @@ public class LeadImagesHandler {
 
         // set the page title text, and honor any HTML formatting in the title
         loadLeadImage();
-//        articleHeaderView.setTitle(Html.fromHtml(getPage().getDisplayTitle()));
+        articleHeaderView.setTitle(Html.fromHtml(getPage().getDisplayTitle()));
 //        articleHeaderView.setLocale(getPage().getTitle().getSite().getLanguageCode());
         // Set the subtitle, too, so text measurements are accurate.
-//        layoutWikiDataDescription(getTitle().getDescription());
+        layoutWikiDataDescription(getTitle().getDescription());
         layoutViews(listener, sequence);
     }
 
@@ -281,13 +282,11 @@ public class LeadImagesHandler {
     }
 
     private boolean isMainPage() {
-//        return getPage() != null && getPage().isMainPage();
-        return true;
+        return false;
     }
 
     private PageTitle getTitle() {
-//        return parentFragment.getTitle();
-        return null;
+        return parentFragment.getTitle();
     }
 
     @Nullable
