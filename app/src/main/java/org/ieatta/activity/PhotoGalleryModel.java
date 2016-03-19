@@ -3,6 +3,7 @@ package org.ieatta.activity;
 import org.ieatta.server.cache.ThumbnailImageUtil;
 
 import java.io.File;
+import java.util.LinkedList;
 import java.util.List;
 
 import android.support.annotation.NonNull;
@@ -18,16 +19,20 @@ import bolts.Task;
 
 public class PhotoGalleryModel {
     public int galleryIndex;
-    public List<File> galleryCollection;
+    public List<LeadImage> leadImages;
 
     private String usedRef;
 
-    class LeadImage{
+    class LeadImage {
         public String localUrl;
         private String onlineUrl;
 
-        public Task<String> getOnlineUrl(String usedRef){
-            if(TextUtils.isEmpty(onlineUrl)){
+        public LeadImage(String filePath) {
+            this.localUrl = String.format("file://%s", filePath);
+        }
+
+        public Task<String> getOnlineUrl(String usedRef) {
+            if (TextUtils.isEmpty(onlineUrl)) {
                 return LocalDatabaseQuery.getPhoto(usedRef).onSuccessTask(new Continuation<DBPhoto, Task<String>>() {
                     @Override
                     public Task<String> then(Task<DBPhoto> task) throws Exception {
@@ -41,18 +46,22 @@ public class PhotoGalleryModel {
         }
     }
 
-    public PhotoGalleryModel(List<File> galleryCollection,String usedRef) {
+    public PhotoGalleryModel(List<File> galleryCollection, String usedRef) {
         this.usedRef = usedRef;
-        this.galleryCollection = galleryCollection;
+        this.leadImages = new LinkedList<>();
+        for (File file : galleryCollection) {
+            LeadImage leadImage = new LeadImage(file.getAbsolutePath());
+            this.leadImages.add(leadImage);
+        }
     }
 
-    public String next(){
-        if(galleryCollection.size()==0){
+    public String next() {
+        if (leadImages.size() == 0) {
             return null;
         }
-        int index = galleryIndex% galleryCollection.size();
-        File file = galleryCollection.get(index);
-        return String.format("file://%s", file.getAbsolutePath());
+        int index = galleryIndex % leadImages.size();
+        LeadImage leadImage = leadImages.get(index);
+        return leadImage.localUrl;
     }
 
 }

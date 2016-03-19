@@ -69,8 +69,10 @@ public class RestaurantDetailTask {
     public Page getPage() {
         String title = restaurant.getDisplayName();
         String description = restaurant.getGoogleMapAddress();
+
         PageTitle pageTitle = new PageTitle(description);
         PageProperties properties = new PageProperties(this.photoGalleryModel,title);
+
         return new Page(pageTitle, properties);
     }
 }
