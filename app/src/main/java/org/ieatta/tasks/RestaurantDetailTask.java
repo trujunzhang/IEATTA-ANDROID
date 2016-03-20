@@ -5,6 +5,7 @@ import org.ieatta.activity.PageProperties;
 import org.ieatta.activity.PageTitle;
 import org.ieatta.activity.PhotoGalleryModel;
 import org.ieatta.database.models.DBEvent;
+import org.ieatta.database.models.DBPhoto;
 import org.ieatta.database.models.DBRestaurant;
 import org.ieatta.database.models.DBReview;
 import org.ieatta.database.provide.ReviewType;
@@ -25,7 +26,9 @@ public class RestaurantDetailTask {
     public DBRestaurant restaurant;
     public RealmResults<DBEvent> events;
     public RealmResults<DBReview> reviews;
+    public RealmResults<DBPhoto> galleryPhoto;
     private PhotoGalleryModel photoGalleryModel;
+
 
     /**
      * Execute Task for Restaurant detail.
@@ -40,13 +43,20 @@ public class RestaurantDetailTask {
                 RestaurantDetailTask.this.restaurant = task.getResult();
                 return ThumbnailImageUtil.sharedInstance.getImagesListTask(restaurantUUID);
             }
-        }).onSuccessTask(new Continuation<List<File>, Task<RealmResults<DBEvent>>>() {
+        }).onSuccessTask(new Continuation<List<File>, Task<RealmResults<DBPhoto>>>() {
             @Override
-            public Task<RealmResults<DBEvent>> then(Task<List<File>> task) throws Exception {
+            public Task<RealmResults<DBPhoto>> then(Task<List<File>> task) throws Exception {
                 RestaurantDetailTask.this.photoGalleryModel = new PhotoGalleryModel(task.getResult(),restaurantUUID);
+                return LocalDatabaseQuery.queryPhotosForRestaurant(restaurantUUID);
+            }
+        }).onSuccessTask(new Continuation<RealmResults<DBPhoto>, Task<RealmResults<DBEvent>>>() {
+            @Override
+            public Task<RealmResults<DBEvent>> then(Task<RealmResults<DBPhoto>> task) throws Exception {
+                RestaurantDetailTask.this.galleryPhoto = task.getResult();
 //                return new RealmModelReader<DBEvent>(DBEvent.class).fetchResults(
 //                        new DBBuilder()
 //                                .whereEqualTo(DBConstant.kPAPFieldLocalRestaurantKey, restaurantUUID), false);
+                LocalDatabaseQuery.queryPhotosForRestaurant(restaurantUUID);
                 return new RealmModelReader<DBEvent>(DBEvent.class).fetchResults(new DBBuilder(), false);
             }
         }).onSuccessTask(new Continuation<RealmResults<DBEvent>, Task<RealmResults<DBReview>>>() {
