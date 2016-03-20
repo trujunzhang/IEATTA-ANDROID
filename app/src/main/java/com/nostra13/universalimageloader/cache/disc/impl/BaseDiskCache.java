@@ -251,7 +251,7 @@ public abstract class BaseDiskCache implements DiskCache {
      * @param dateCreatedString Cached file's createdAt
      * @return
      */
-    protected File getFile(String imageDir, String imageUri, String dateCreatedString) {
+    public File getFile(String imageDir, String imageUri, String dateCreatedString) {
         String fileName = String.format("%s_%s", dateCreatedString, imageUri);
         File dir = cacheDir;
         File imageFolder = new File(dir, imageDir);

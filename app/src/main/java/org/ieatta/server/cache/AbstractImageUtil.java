@@ -24,6 +24,9 @@ import bolts.Task;
 ///   2.2 When pushed successfully, delete offline original image.
 ///   3.  When pulling from server, just download a thumbnail image from server.
 public abstract class AbstractImageUtil {
+
+    public static final String data_format = "yyyyMMddhhmm";
+
     protected abstract UnlimitedDiskCache getImageCache();
 
     /**
@@ -35,6 +38,14 @@ public abstract class AbstractImageUtil {
      */
     public File getCacheImageUrl(String UUID) {
         return this.getImageCache().get(UUID);
+    }
+
+    public File getCacheImageUrl( DBPhoto model) {
+        String uuid = model.getUUID();
+        String usedRef = model.getUsedRef();
+        String dateCreatedString = new SimpleDateFormat(data_format).format(model.getObjectCreatedDate());
+
+        return this.getImageCache().getFile(usedRef, uuid, dateCreatedString);
     }
 
     public Task<List<File>> getImagesListTask(String usedRef) {
@@ -57,9 +68,9 @@ public abstract class AbstractImageUtil {
         return Task.forResult(list);
     }
 
-    public File getCacheImageUrl(DBPhoto model) {
-        return this.getCacheImageUrl(model.getUUID());
-    }
+//    public File getCacheImageUrl(DBPhoto model) {
+//        return this.getCacheImageUrl(model.getUUID());
+//    }
 
     public boolean diskImageExistsWithKey(DBPhoto model) {
         File file = this.getImageCache().get(model.getUUID());
@@ -119,7 +130,7 @@ public abstract class AbstractImageUtil {
         try {
             String uuid = model.getUUID();
             String usedRef = model.getUsedRef();
-            String dateCreatedString = new SimpleDateFormat("yyyyMMddhhmm").format(model.getObjectCreatedDate());
+            String dateCreatedString = new SimpleDateFormat(data_format).format(model.getObjectCreatedDate());
             save = this.getImageCache().save(usedRef, uuid, dateCreatedString, inputStream, null);
         } catch (IOException e) {
             return Task.forError(e);

@@ -64,4 +64,14 @@ public class GalleryItem {
         this.height = 0;
     }
 
+    public GalleryItem(String name,String thumbUrl) {
+        this.json = null;
+        this.name = name;
+        this.url = null;
+        this.mimeType = "*/*";
+        this.thumbUrl = thumbUrl;
+        this.metadata = null;
+        this.width = 0;
+        this.height = 0;
+    }
 }
