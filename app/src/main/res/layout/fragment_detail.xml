@@ -35,6 +35,62 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
+                <LinearLayout
+                    android:id="@+id/bottom_content_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="-400dp"
+                    android:layout_gravity="bottom"
+                    android:orientation="vertical"
+                    android:background="#ff0000"
+                    android:visibility="gone">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingBottom="16dp"
+                        android:background="?attr/subtle_gray_color">
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="8dp"
+                            android:background="@drawable/toolbar_bottom_shadow"/>
+
+                        <TextView
+                            android:id="@+id/page_external_link"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="8dp"
+                            android:paddingLeft="@dimen/activity_horizontal_margin"
+                            android:paddingRight="@dimen/activity_horizontal_margin"
+                            style="?android:textAppearanceSmall"
+                            android:text="View page in browser"
+                            android:textColor="@color/link_light"
+                            android:gravity="center"/>
+                        <TextView
+                            android:id="@+id/page_last_updated_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:paddingTop="8dp"
+                            android:paddingLeft="@dimen/activity_horizontal_margin"
+                            android:paddingRight="@dimen/activity_horizontal_margin"
+                            style="?android:textAppearanceSmall"
+                            android:textIsSelectable="true"
+                            android:textColorLink="@color/link_light"/>
+                        <TextView
+                            android:id="@+id/page_license_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="8dp"
+                            android:paddingLeft="@dimen/activity_horizontal_margin"
+                            android:paddingRight="@dimen/activity_horizontal_margin"
+                            style="?android:textAppearanceSmall"
+                            android:textIsSelectable="true"
+                            android:textColorLink="@color/link_light"
+                            android:gravity="center"/>
+                    </LinearLayout>
+                </LinearLayout>
+
             </android.support.design.widget.CoordinatorLayout>
 
         </org.wikipedia.views.SwipeRefreshLayoutWithScroll>
