@@ -261,11 +261,7 @@ public abstract class BaseDiskCache implements DiskCache {
         if (!imageFolder.exists() && !imageFolder.mkdirs()) {
             // Check "subFolder" exist.
         }
-        File file = new File(imageFolder, fileName);
-        if (file.exists() == true) {
-            return null;
-        }
-        return file;
+        return new File(imageFolder, fileName);
     }
 
     public void setBufferSize(int bufferSize) {
