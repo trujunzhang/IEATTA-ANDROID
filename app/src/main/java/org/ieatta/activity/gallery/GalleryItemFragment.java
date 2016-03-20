@@ -36,6 +36,7 @@ import com.facebook.samples.zoomable.ZoomableDraweeView;
 import org.ieatta.IEAApp;
 import org.ieatta.R;
 
+import org.ieatta.activity.LeadImage;
 import org.ieatta.activity.LeadImagesModel;
 import org.ieatta.activity.PageTitle;
 import org.ieatta.database.models.DBPhoto;
@@ -46,6 +47,9 @@ import org.wikipedia.util.PermissionUtil;
 import org.wikipedia.util.ShareUtil;
 
 import java.util.Map;
+
+import bolts.Continuation;
+import bolts.Task;
 
 public class GalleryItemFragment extends Fragment {
     public static final String TAG = "GalleryItemFragment";
@@ -203,7 +207,16 @@ public class GalleryItemFragment extends Fragment {
      */
     private void loadGalleryItem() {
         String thumbUrl = this.imageTitle.getThumbUrl();
-//        LeadImagesModel
+        LeadImage leadImage = new LeadImage(thumbUrl);
+        this.loadImage(leadImage.localUrl);
+        leadImage.getOnlineUrl().onSuccess(new Continuation<String, Void>() {
+            @Override
+            public Void then(Task<String> task) throws Exception {
+                GalleryItemFragment.this.loadImage(task.getResult());
+                return null;
+            }
+        });
+
 //        String uuid = this.imageTitle.getUUID();
 //        String usedRef = this.pageTitle.getUUID();
 //        DBPhoto photo = new DBPhoto();
