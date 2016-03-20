@@ -366,7 +366,7 @@ public class GalleryActivity extends ThemedActionBarActivity {
      */
     private void fetchGalleryCollection() {
         String uuid = pageTitle.getUUID();
-//        PQueryModelType type = pageTitle.
+        PQueryModelType type = pageTitle.getPmType();
         LocalDatabaseQuery.queryPhotosForRestaurant(uuid).onSuccessTask(new Continuation<RealmResults<DBPhoto>, Task<Void>>() {
             @Override
             public Task<Void> then(Task<RealmResults<DBPhoto>> task) throws Exception {
