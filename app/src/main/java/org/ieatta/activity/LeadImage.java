@@ -8,9 +8,6 @@ import java.io.File;
 import bolts.Continuation;
 import bolts.Task;
 
-/**
- * Created by djzhang on 3/20/16.
- */
 public class LeadImage {
     private String localUrl;
     private String onlineUrl;
