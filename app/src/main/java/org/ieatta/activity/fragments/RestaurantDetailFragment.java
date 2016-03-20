@@ -61,6 +61,7 @@ public class RestaurantDetailFragment extends DetailFragment {
     };
 
     enum RestaurantDetailSection {
+        section_leadimage,
         section_events,//= 0
         section_photogallery,//= 1
         section_reviews,//= 2
@@ -176,7 +177,8 @@ public class RestaurantDetailFragment extends DetailFragment {
     }
 
     private void reloadPage() {
-        this.manager.setSectionItems(task.events,RestaurantDetailSection.section_events.ordinal());
+        this.manager.setSectionItems(CollectionUtil.createList(new IEARestaurantDetailHeader(this.task.restaurant)), RestaurantDetailSection.section_leadimage.ordinal());
+        this.manager.setSectionItems(task.events, RestaurantDetailSection.section_events.ordinal());
 
         model.setPage(task.getPage());
         searchBarHideHandler = getPageActivity().getSearchBarHideHandler();
