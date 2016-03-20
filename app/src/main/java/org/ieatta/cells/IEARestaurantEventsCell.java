@@ -14,8 +14,6 @@ public class IEARestaurantEventsCell extends IEAViewHolder {
         return new CellType(IEARestaurantEventsCell.class, R.layout.cell_restaurant_events);
     }
 
-    private IEARestaurantEventsCell self = this;
-
     private TextView infoLabel;
     private TextView timeInfoLabel;
     private TextView timeAgoLabelLabel;
@@ -23,23 +21,23 @@ public class IEARestaurantEventsCell extends IEAViewHolder {
     public IEARestaurantEventsCell(View itemView) {
         super(itemView);
 
-        self.infoLabel = (TextView) itemView.findViewById(R.id.titleTextView);
-        self.timeInfoLabel = (TextView) itemView.findViewById(R.id.infoTextView);
-        self.timeAgoLabelLabel = (TextView) itemView.findViewById(R.id.timeAgoTextView);
+        this.infoLabel = (TextView) itemView.findViewById(R.id.titleTextView);
+        this.timeInfoLabel = (TextView) itemView.findViewById(R.id.infoTextView);
+        this.timeAgoLabelLabel = (TextView) itemView.findViewById(R.id.timeAgoTextView);
     }
 
     @Override
     public void render(Object value) {
         DBEvent more = (DBEvent) value;
 
-        self.infoLabel.setText(more.getDisplayName());
+        this.infoLabel.setText(more.getDisplayName());
 //        if (more.waiter == null || more.waiter.equals("")) {
-//            self.timeInfoLabel.setText(R.string.No_waiters_servered_for_you);
+//            this.timeInfoLabel.setText(R.string.No_waiters_servered_for_you);
 //        } else {
-//            self.timeInfoLabel.setText(more.waiter);
+//            this.timeInfoLabel.setText(more.waiter);
 //        }
 
-//        self.timeAgoLabelLabel.setText(more.getTimeAgoString());
+//        this.timeAgoLabelLabel.setText(more.getTimeAgoString());
 
     }
 }
