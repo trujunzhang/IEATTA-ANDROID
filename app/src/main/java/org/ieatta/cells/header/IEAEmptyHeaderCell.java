@@ -1,6 +1,7 @@
 package org.ieatta.cells.header;
 
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.tableview.adapter.IEAViewHolder;
@@ -30,13 +31,16 @@ public class IEAEmptyHeaderCell extends IEAViewHolder {
         return ViewHolderType.header;
     }
 
-    private TextView titleLabel;
+    private LinearLayout emptyLinearLayout;
 
     public IEAEmptyHeaderCell(View itemView) {
         super(itemView);
+
+        this.emptyLinearLayout = (LinearLayout) itemView.findViewById(R.id.empty_linearLayout);
     }
 
     @Override
     public void render(Object value) {
+        this.emptyLinearLayout.setMinimumHeight(200);
     }
 }
