@@ -240,4 +240,12 @@ public class ObservableWebView extends RecyclerView {
     private int getContentHeight() {
         return getHeight() - getPaddingTop() - getPaddingBottom();
     }
+
+    public int getLastTop() {
+        return this.lastTop;
+    }
+
+    public void setLastTop(int lastTop) {
+        this.lastTop = lastTop;
+    }
 }

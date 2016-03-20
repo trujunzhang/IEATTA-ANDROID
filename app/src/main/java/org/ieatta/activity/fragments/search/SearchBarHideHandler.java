@@ -86,7 +86,7 @@ public class SearchBarHideHandler implements ObservableWebView.OnScrollChangeLis
         if (webview == null) {
             return;
         }
-        onScrollChanged(webview.getScrollY(), webview.getScrollY(), false);
+        onScrollChanged(webview.getLastTop(), webview.getLastTop(), false);
     }
 
     @Override
