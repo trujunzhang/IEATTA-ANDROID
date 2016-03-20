@@ -18,10 +18,6 @@ public class GalleryCollection {
         return itemList;
     }
 
-    public void setItemList(List<GalleryItem> itemList) {
-        this.itemList = itemList;
-    }
-
     public GalleryCollection(List<GalleryItem> itemList) {
         this.itemList = itemList;
     }

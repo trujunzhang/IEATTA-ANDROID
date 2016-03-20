@@ -12,15 +12,7 @@ import java.util.Iterator;
 import java.util.Map;
 
 public class GalleryItem {
-
-    private final JSONObject json;
-
-    public JSONObject toJSON() {
-        return json;
-    }
-
     private final String uuid;
-
 
     private String url;
 
@@ -59,7 +51,6 @@ public class GalleryItem {
     }
 
     public GalleryItem(String uuid) {
-        this.json = null;
         this.uuid = uuid;
         this.url = null;
         this.mimeType = "*/*";
@@ -70,7 +61,6 @@ public class GalleryItem {
     }
 
     public GalleryItem(String uuid, String thumbUrl) {
-        this.json = null;
         this.uuid = uuid;
         this.url = null;
         this.mimeType = "*/*";
