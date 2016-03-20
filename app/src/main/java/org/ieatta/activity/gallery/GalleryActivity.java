@@ -130,7 +130,7 @@ public class GalleryActivity extends ThemedActionBarActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // force the theme to dark...
-//        setTheme(Theme.LIGHT.getResourceId());
+        setTheme(Theme.DARK.getResourceId());
         app = (IEAApp) getApplicationContext();
 
         setContentView(R.layout.activity_gallery);
