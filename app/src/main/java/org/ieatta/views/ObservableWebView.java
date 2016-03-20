@@ -230,7 +230,7 @@ public class ObservableWebView extends RecyclerView {
                 listener.onContentHeightChanged(contentHeight);
             }
         }
-//        new ObservableWebViewFunnel().logOnDraw(contentHeight);
+        // new ObservableWebViewFunnel().logOnDraw(contentHeight);
     }
 
     private int getContentWidth() {
