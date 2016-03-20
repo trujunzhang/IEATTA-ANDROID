@@ -43,6 +43,7 @@ public class IEAEmptyHeaderCell extends IEAViewHolder {
     @Override
     public void render(Object value) {
         IEAEmptyHeader header = (IEAEmptyHeader) value;
-        this.emptyLinearLayout.setMinimumHeight(header.getCellHeight());
+        int cellHeight = header.getCellHeight();
+        this.emptyLinearLayout.setMinimumHeight(cellHeight);
     }
 }
