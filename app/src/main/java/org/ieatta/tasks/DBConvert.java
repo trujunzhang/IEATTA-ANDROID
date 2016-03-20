@@ -18,7 +18,7 @@ public class DBConvert {
         List<GalleryItem> list =new LinkedList<>();
         for(DBPhoto photo : photos){
             File file = ThumbnailImageUtil.sharedInstance.getCacheImageUrl(photo);
-            GalleryItem item = new GalleryItem("","file://"+file.getAbsolutePath());
+            GalleryItem item = new GalleryItem(photo.getUUID(),"file://"+file.getAbsolutePath());
             new RecycleCellFunnel().logCellInfo("toGalleryItem","photo's path: "+file.getAbsolutePath());
             list.add(item);
         }

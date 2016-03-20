@@ -321,7 +321,7 @@ public class GalleryItemFragment extends Fragment {
         if (galleryItem == null) {
             return;
         }
-        parentActivity.getFunnel().logGalleryShare(pageTitle, galleryItem.getName());
+        parentActivity.getFunnel().logGalleryShare(pageTitle, galleryItem.getUUID());
 //        new ImagePipelineBitmapGetter(getActivity(), galleryItem.getThumbUrl()){
 //            @Override
 //            public void onSuccess(@Nullable Bitmap bitmap) {
@@ -382,7 +382,7 @@ public class GalleryItemFragment extends Fragment {
         if (galleryItem == null) {
             return;
         }
-        parentActivity.getFunnel().logGallerySave(pageTitle, galleryItem.getName());
+        parentActivity.getFunnel().logGallerySave(pageTitle, galleryItem.getUUID());
 //        ((GalleryActivity) getActivity()).getDownloadReceiver().download(galleryItem);
     }
 

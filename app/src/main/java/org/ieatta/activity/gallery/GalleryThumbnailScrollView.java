@@ -42,7 +42,7 @@ public class GalleryThumbnailScrollView extends RecyclerView {
     }
 
     public interface GalleryViewListener {
-        void onGalleryItemClicked(String imageName);
+        void onGalleryItemClicked(String imageUUID);
     }
 
     public void setGalleryViewListener(@Nullable GalleryViewListener listener) {
@@ -72,7 +72,7 @@ public class GalleryThumbnailScrollView extends RecyclerView {
         @Override
         public void onClick(View v) {
             if (mListener != null) {
-                mListener.onGalleryItemClicked(mGalleryItem.getName());
+                mListener.onGalleryItemClicked(mGalleryItem.getUUID());
             }
         }
 

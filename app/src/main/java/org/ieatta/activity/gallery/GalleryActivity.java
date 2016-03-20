@@ -29,6 +29,9 @@ import org.ieatta.activity.Page;
 import org.ieatta.activity.PageActivity;
 import org.ieatta.activity.PageTitle;
 import org.ieatta.analytics.GalleryFunnel;
+import org.ieatta.database.models.DBPhoto;
+import org.ieatta.database.query.LocalDatabaseQuery;
+import org.ieatta.tasks.DBConvert;
 import org.wikipedia.Site;
 import org.wikipedia.ViewAnimations;
 import org.wikipedia.activity.ActivityUtil;
@@ -41,6 +44,10 @@ import org.wikipedia.views.ViewUtil;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import bolts.Continuation;
+import bolts.Task;
+import io.realm.RealmResults;
 
 import static org.wikipedia.util.StringUtil.trim;
 import static org.wikipedia.util.UriUtil.handleExternalLink;
@@ -233,9 +240,9 @@ public class GalleryActivity extends ThemedActionBarActivity {
             galleryAdapter.notifyFragments(position);
             if (currentPosition != -1 && getCurrentItem() != null) {
                 if (position < currentPosition) {
-                    funnel.logGallerySwipeLeft(pageTitle, getCurrentItem().getName());
+                    funnel.logGallerySwipeLeft(pageTitle, getCurrentItem().getUUID());
                 } else if (position > currentPosition) {
-                    funnel.logGallerySwipeRight(pageTitle, getCurrentItem().getName());
+                    funnel.logGallerySwipeRight(pageTitle, getCurrentItem().getUUID());
                 }
             }
             currentPosition = position;
@@ -267,7 +274,7 @@ public class GalleryActivity extends ThemedActionBarActivity {
         // log the "gallery close" event only upon explicit closing of the activity
         // (back button, or home-as-up button in the toolbar)
         if (getCurrentItem() != null) {
-            funnel.logGalleryClose(pageTitle, getCurrentItem().getName());
+            funnel.logGalleryClose(pageTitle, getCurrentItem().getUUID());
         }
         super.onBackPressed();
     }
@@ -356,34 +363,25 @@ public class GalleryActivity extends ThemedActionBarActivity {
      * scrollable gallery of media.
      */
     private void fetchGalleryCollection() {
-//        new GalleryCollectionFetchTask(app.getAPIForSite(pageTitle.getSite()),
-//                pageTitle.getSite(), pageTitle) {
-//            @Override
-//            public void onGalleryResult(GalleryCollection result) {
-//                updateProgressBar(false, true, 0);
-//                // save it to our current page, for later use
-//                if (cacheOnLoad && page != null) {
-//                    page.setGalleryCollection(result);
-//                    app.getPageCache().put(pageTitle, page, new PageCache.CachePutListener() {
-//                        @Override
-//                        public void onPutComplete() {
-//                        }
-//
-//                        @Override
-//                        public void onPutError(Throwable e) {
-//                            Log.e(TAG, "Failed to add page to cache.", e);
-//                        }
-//                    });
-//                }
-//                applyGalleryCollection(result);
-//            }
-//            @Override
-//            public void onCatch(Throwable caught) {
-//                Log.e(TAG, "Failed to fetch gallery collection.", caught);
-//                updateProgressBar(false, true, 0);
-//                FeedbackUtil.showError(GalleryActivity.this, caught);
-//            }
-//        }.execute();
+
+        LocalDatabaseQuery.queryPhotosForRestaurant(pageTitle.getNamespace()).onSuccessTask(new Continuation<RealmResults<DBPhoto>, Task<Void>>() {
+            @Override
+            public Task<Void> then(Task<RealmResults<DBPhoto>> task) throws Exception {
+                GalleryCollection result = new GalleryCollection(DBConvert.toGalleryItem(task.getResult()));
+                GalleryActivity.this.page.setGalleryCollection(result);
+                applyGalleryCollection(result);
+                return null;
+            }
+        }).continueWith(new Continuation<Void, Void>() {
+            @Override
+            public Void then(Task<Void> task) throws Exception {
+                if (task.getError() != null) {
+                    Log.e(TAG, "Failed to fetch gallery collection.", task.getError());
+                    FeedbackUtil.showError(GalleryActivity.this, task.getError());
+                }
+                return null;
+            }
+        });
     }
 
     /**
@@ -399,10 +397,10 @@ public class GalleryActivity extends ThemedActionBarActivity {
         int initialImagePos = -1;
         if (initialImageTitle != null) {
             for (GalleryItem item : collection.getItemList()) {
-//                if (item.getName().equals(initialImageTitle.getDisplayText())) {
-//                    initialImagePos = collection.getItemList().indexOf(item);
-//                    break;
-//                }
+                if (item.getUUID().equals(initialImageTitle.getDisplayText())) {
+                    initialImagePos = collection.getItemList().indexOf(item);
+                    break;
+                }
             }
             if (initialImagePos == -1) {
                 // the requested image is not present in the gallery collection, so
