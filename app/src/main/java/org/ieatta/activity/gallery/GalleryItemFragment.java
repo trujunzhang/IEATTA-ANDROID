@@ -200,6 +200,7 @@ public class GalleryItemFragment extends Fragment {
      */
     private void loadGalleryItem() {
 
+
 //        new GalleryItemFetchTask(app.getAPIForSite(pageTitle.getSite()),
 //                pageTitle.getSite(), imageTitle, FileUtil.isVideo(mimeType)) {
 //            @Override
