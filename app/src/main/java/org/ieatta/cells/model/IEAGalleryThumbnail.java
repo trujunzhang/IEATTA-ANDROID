@@ -1,6 +1,5 @@
 package org.ieatta.cells.model;
 
-
 import org.ieatta.activity.gallery.GalleryCollection;
 
 public class IEAGalleryThumbnail {
