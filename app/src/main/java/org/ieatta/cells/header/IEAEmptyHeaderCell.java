@@ -10,9 +10,9 @@ import com.tableview.storage.models.CellType;
 import org.ieatta.R;
 import org.ieatta.cells.model.SectionTitleCellModel;
 
-public class IEAViewForHeaderInSectionCell extends IEAViewHolder {
+public class IEAEmptyHeaderCell extends IEAViewHolder {
     public static CellType getType() {
-        return new CellType(IEAViewForHeaderInSectionCell.class, R.layout.cell_section_header);
+        return new CellType(IEAEmptyHeaderCell.class, R.layout.cell_empty_header);
     }
 
     @Override
@@ -32,15 +32,11 @@ public class IEAViewForHeaderInSectionCell extends IEAViewHolder {
 
     private TextView titleLabel;
 
-    public IEAViewForHeaderInSectionCell(View itemView) {
+    public IEAEmptyHeaderCell(View itemView) {
         super(itemView);
-
-        this.titleLabel = (TextView) itemView.findViewById(android.R.id.text1);
     }
 
     @Override
     public void render(Object value) {
-        SectionTitleCellModel more = (SectionTitleCellModel) value;
-        this.titleLabel.setText(more.titleResId);
     }
 }
