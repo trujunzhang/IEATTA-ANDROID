@@ -47,6 +47,8 @@
         android:paddingTop="8dp"
         android:singleLine="true"
         android:text="Medium Text"
-        android:textAppearance="@style/RelativeTimeAgoText" />
+        android:textSize="12sp"
+        android:textColor="@color/GreyMidText"
+         />
 
 </RelativeLayout>
