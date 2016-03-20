@@ -30,6 +30,7 @@ import org.ieatta.activity.PageActivity;
 import org.ieatta.activity.PageTitle;
 import org.ieatta.analytics.GalleryFunnel;
 import org.ieatta.database.models.DBPhoto;
+import org.ieatta.database.provide.PQueryModelType;
 import org.ieatta.database.query.LocalDatabaseQuery;
 import org.ieatta.tasks.DBConvert;
 import org.wikipedia.Site;
@@ -364,7 +365,9 @@ public class GalleryActivity extends ThemedActionBarActivity {
      * scrollable gallery of media.
      */
     private void fetchGalleryCollection() {
-        LocalDatabaseQuery.queryPhotosForRestaurant(pageTitle.getUUID()).onSuccessTask(new Continuation<RealmResults<DBPhoto>, Task<Void>>() {
+        String uuid = pageTitle.getUUID();
+//        PQueryModelType type = pageTitle.
+        LocalDatabaseQuery.queryPhotosForRestaurant(uuid).onSuccessTask(new Continuation<RealmResults<DBPhoto>, Task<Void>>() {
             @Override
             public Task<Void> then(Task<RealmResults<DBPhoto>> task) throws Exception {
                 GalleryCollection result = new GalleryCollection(DBConvert.toGalleryItem(task.getResult()));

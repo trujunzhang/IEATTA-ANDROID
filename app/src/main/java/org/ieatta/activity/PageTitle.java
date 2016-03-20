@@ -4,19 +4,13 @@ package org.ieatta.activity;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
-import android.text.TextUtils;
-import org.json.JSONException;
-import org.json.JSONObject;
+
+import org.ieatta.database.provide.PQueryModelType;
 import org.wikipedia.Site;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.util.Arrays;
 import java.util.Date;
 
 import static org.wikipedia.util.StringUtil.capitalizeFirstChar;
-import static org.wikipedia.util.StringUtil.md5string;
-import static org.wikipedia.util.UriUtil.decodeURL;
 
 public class PageTitle implements Parcelable{
 
@@ -27,6 +21,7 @@ public class PageTitle implements Parcelable{
     private String description = null;
     private String uuid;
     private Date createdAt;
+    private PQueryModelType pmType = PQueryModelType.unkown;
 
     public PageTitle(@Nullable final String namespace, final String text, final String fragment, @Nullable final String thumbUrl) {
         this.namespace = namespace;
@@ -71,7 +66,6 @@ public class PageTitle implements Parcelable{
     public String getNamespace() {
         return namespace;
     }
-
 
     public String getText() {
         return text.replace(" ", "_");
@@ -130,6 +124,7 @@ public class PageTitle implements Parcelable{
         thumbUrl = in.readString();
         description = in.readString();
         uuid = in.readString();
+        setPmType(PQueryModelType.getInstance(in.readInt()));
     }
 
     @Override
@@ -140,6 +135,7 @@ public class PageTitle implements Parcelable{
         parcel.writeString(thumbUrl);
         parcel.writeString(description);
         parcel.writeString(uuid);
+        parcel.writeInt(getPmType().getType());
     }
 
     @Override
@@ -171,5 +167,13 @@ public class PageTitle implements Parcelable{
 
     public void setUUID(String uuid) {
         this.uuid = uuid;
+    }
+
+    public PQueryModelType getPmType() {
+        return pmType;
+    }
+
+    public void setPmType(PQueryModelType pmType) {
+        this.pmType = pmType;
     }
 }
