@@ -120,6 +120,7 @@ public class RestaurantDetailFragment extends DetailFragment {
 
         View rootView = inflater.inflate(R.layout.fragment_detail, container, false);
         webView = (ObservableWebView) rootView.findViewById(R.id.recycleView);
+        initWebViewListeners();
 
         tocDrawer = (WikiDrawerLayout) rootView.findViewById(R.id.page_toc_drawer);
         tocDrawer.setDragEdgeWidth(getResources().getDimensionPixelSize(R.dimen.drawer_drag_margin));
@@ -221,5 +222,43 @@ public class RestaurantDetailFragment extends DetailFragment {
         return (PageActivity) getActivity();
     }
 
+
+
+    private void initWebViewListeners() {
+        webView.addOnUpOrCancelMotionEventListener(new ObservableWebView.OnUpOrCancelMotionEventListener() {
+            @Override
+            public void onUpOrCancelMotionEvent() {
+                // queue the button to be hidden when the user stops scrolling.
+//                hideToCButton(true);
+                // update our session, since it's possible for the user to remain on the page for
+                // a long time, and we wouldn't want the session to time out.
+//                app.getSessionFunnel().touchSession();
+            }
+        });
+        webView.setOnFastScrollListener(new ObservableWebView.OnFastScrollListener() {
+            @Override
+            public void onFastScroll() {
+                // show the ToC button...
+//                showToCButton();
+                // and immediately queue it to be hidden after a short delay, but only if we're
+                // not at the top of the page.
+                if (webView.getScrollY() > 0) {
+//                    hideToCButton(true);
+                }
+            }
+        });
+        webView.addOnScrollChangeListener(new ObservableWebView.OnScrollChangeListener() {
+            @Override
+            public void onScrollChanged(int oldScrollY, int scrollY, boolean isHumanScroll) {
+                if (scrollY <= 0) {
+                    // always show the ToC button when we're at the top of the page.
+//                    showToCButton();
+                }
+                if (pageScrollFunnel != null) {
+                    pageScrollFunnel.onPageScrolled(oldScrollY, scrollY, isHumanScroll);
+                }
+            }
+        });
+    }
 
 }
