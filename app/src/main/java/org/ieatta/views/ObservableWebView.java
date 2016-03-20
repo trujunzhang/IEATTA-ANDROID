@@ -194,7 +194,6 @@ public class ObservableWebView extends RecyclerView {
             }
         }
         new ObservableWebViewFunnel().logOnDraw(contentHeight);
-        IEAApp.getInstance().getBus().post(INVALIDATE_EVENT);
     }
 
     private int getContentWidth() {
