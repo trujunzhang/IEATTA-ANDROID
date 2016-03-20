@@ -53,6 +53,7 @@ public class Page {
     public GalleryCollection getGalleryCollection() {
         return galleryCollection;
     }
+
     public void setGalleryCollection(GalleryCollection collection) {
         galleryCollection = collection;
     }

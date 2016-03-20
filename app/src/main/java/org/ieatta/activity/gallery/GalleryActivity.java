@@ -363,7 +363,7 @@ public class GalleryActivity extends ThemedActionBarActivity {
      * scrollable gallery of media.
      */
     private void fetchGalleryCollection() {
-        LocalDatabaseQuery.queryPhotosForRestaurant(pageTitle.getNamespace()).onSuccessTask(new Continuation<RealmResults<DBPhoto>, Task<Void>>() {
+        LocalDatabaseQuery.queryPhotosForRestaurant(pageTitle.getUUID()).onSuccessTask(new Continuation<RealmResults<DBPhoto>, Task<Void>>() {
             @Override
             public Task<Void> then(Task<RealmResults<DBPhoto>> task) throws Exception {
                 GalleryCollection result = new GalleryCollection(DBConvert.toGalleryItem(task.getResult()));

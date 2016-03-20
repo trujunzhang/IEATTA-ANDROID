@@ -79,7 +79,7 @@ public class RestaurantDetailTask {
         String title = restaurant.getDisplayName();
         String description = restaurant.getGoogleMapAddress();
 
-        PageTitle pageTitle = new PageTitle(description,"");
+        PageTitle pageTitle = new PageTitle(this.restaurant.getUUID());
         PageProperties properties = new PageProperties(this.leadImagesModel,title);
 
         return new Page(pageTitle, properties);
