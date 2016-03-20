@@ -30,6 +30,7 @@ public class IEAGalleryThumbnailCell extends IEAViewHolder {
     public void render(Object value) {
         IEAGalleryThumbnail galleryThumbnail = (IEAGalleryThumbnail) value;
         this.setGalleryResult(galleryThumbnail.getResult());
+        this.thumbnailGallery.setGalleryViewListener(galleryThumbnail.galleryViewListener);
     }
 
     private void setGalleryResult(GalleryCollection result) {

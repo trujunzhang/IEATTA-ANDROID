@@ -266,7 +266,7 @@ public abstract class DetailFragment extends PageFragment implements BackPressed
         return DimenUtil.getScreenHeight(getActivity().getWindow());
     }
 
-    private GalleryThumbnailScrollView.GalleryViewListener galleryViewListener
+    protected GalleryThumbnailScrollView.GalleryViewListener galleryViewListener
             = new GalleryThumbnailScrollView.GalleryViewListener() {
         @Override
         public void onGalleryItemClicked(String imageName) {
