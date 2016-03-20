@@ -207,9 +207,18 @@ public class GalleryItemFragment extends Fragment {
      */
     private void loadGalleryItem() {
         String thumbUrl = this.imageTitle.getThumbUrl();
-        LeadImage leadImage = new LeadImage(thumbUrl);
-        this.loadImage(leadImage.localUrl);
-        leadImage.getOnlineUrl().onSuccess(new Continuation<String, Void>() {
+        final LeadImage leadImage = new LeadImage(thumbUrl);
+
+        leadImage.getLocalUrl().onSuccessTask(new Continuation<String, Task<String>>() {
+            @Override
+            public Task<String> then(Task<String> task) throws Exception {
+                GalleryItemFragment.this.loadImage(task.getResult());
+                if(leadImage.getIsCache() ==true){
+                    return null;
+                }
+                return leadImage.getOnlineUrl();
+            }
+        }).onSuccess(new Continuation<String, Void>() {
             @Override
             public Void then(Task<String> task) throws Exception {
                 GalleryItemFragment.this.loadImage(task.getResult());

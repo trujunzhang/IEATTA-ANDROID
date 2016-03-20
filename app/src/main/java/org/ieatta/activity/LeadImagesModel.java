@@ -26,7 +26,7 @@ public class LeadImagesModel {
             return Task.forError(new Exception("Lead Images is empty!"));
         }
         LeadImage leadImage = leadImages.get(this.galleryIndex);
-        return Task.forResult(leadImage.localUrl);
+        return leadImage.getLocalUrl();
     }
 
     public Task<String> leadImageOnline() {

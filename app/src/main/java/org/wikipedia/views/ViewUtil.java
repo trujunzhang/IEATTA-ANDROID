@@ -68,6 +68,7 @@ public final class ViewUtil {
     }
 
     public static void loadImageUrlInto(@NonNull SimpleDraweeView drawee, @Nullable String url) {
+//        drawee.setImageURI(Uri.parse(url));
         drawee.setController(Fresco.newDraweeControllerBuilder()
                 .setUri(IEAApp.getInstance().isImageDownloadEnabled()
                         && !TextUtils.isEmpty(url)
