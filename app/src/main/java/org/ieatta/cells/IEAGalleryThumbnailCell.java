@@ -10,6 +10,7 @@ import com.tableview.storage.models.CellType;
 import org.ieatta.R;
 import org.ieatta.activity.gallery.GalleryCollection;
 import org.ieatta.activity.gallery.GalleryThumbnailScrollView;
+import org.ieatta.cells.model.IEAGalleryThumbnail;
 import org.ieatta.cells.model.IEANearRestaurantMore;
 
 public class IEAGalleryThumbnailCell extends IEAViewHolder {
@@ -27,8 +28,8 @@ public class IEAGalleryThumbnailCell extends IEAViewHolder {
 
     @Override
     public void render(Object value) {
-        GalleryCollection result = new GalleryCollection(null);
-        this.setGalleryResult(result);
+        IEAGalleryThumbnail galleryThumbnail = (IEAGalleryThumbnail) value;
+        this.setGalleryResult(galleryThumbnail.getResult());
     }
 
     private void setGalleryResult(GalleryCollection result) {
