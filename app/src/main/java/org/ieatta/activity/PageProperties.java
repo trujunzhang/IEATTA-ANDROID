@@ -1,20 +1,13 @@
 package org.ieatta.activity;
 
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.annotation.VisibleForTesting;
-import android.text.TextUtils;
 
-import org.ieatta.database.models.DBPhoto;
-import org.ieatta.database.query.LocalDatabaseQuery;
-
-import bolts.Continuation;
 import bolts.Task;
 
 public class PageProperties {
 
     private final String displayTitleText;
-    public PhotoGalleryModel photoGalleryModel;
+    public LeadImagesModel leadImagesModel;
 
     /**
      * @return Nullable URL with no scheme. For example, foo.bar.com/ instead of
@@ -22,20 +15,20 @@ public class PageProperties {
      */
     @Nullable
     public Task<String> getLeadImageLocalUrl() {
-        return this.photoGalleryModel.leadImageLocal();
+        return this.leadImagesModel.leadImageLocal();
     }
 
     @Nullable
     public Task<String> getLeadImageOnlineUrl() {
-        return this.photoGalleryModel.leadImageOnline();
+        return this.leadImagesModel.leadImageOnline();
     }
 
     public void nextLeadImage(){
-        this.photoGalleryModel.nextLeadImage();
+        this.leadImagesModel.nextLeadImage();
     }
 
-    public PageProperties(PhotoGalleryModel photoGalleryModel,String displayTitleText) {
-        this.photoGalleryModel = photoGalleryModel;
+    public PageProperties(LeadImagesModel leadImagesModel,String displayTitleText) {
+        this.leadImagesModel = leadImagesModel;
         this.displayTitleText = displayTitleText;
     }
 

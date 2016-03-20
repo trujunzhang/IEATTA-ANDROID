@@ -187,6 +187,9 @@ public class GalleryActivity extends ThemedActionBarActivity {
                 setControlsShowing(controlsShowing);
             }
         });
+
+        // fetch the gallery from the network...
+        fetchGalleryCollection();
     }
 
     @Override

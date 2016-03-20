@@ -17,7 +17,7 @@ import org.ieatta.server.cache.CacheImageUtil;
 import bolts.Continuation;
 import bolts.Task;
 
-public class PhotoGalleryModel {
+public class LeadImagesModel {
     public int galleryIndex;
     public List<LeadImage> leadImages;
 
@@ -48,7 +48,7 @@ public class PhotoGalleryModel {
         }
     }
 
-    public PhotoGalleryModel(List<File> galleryCollection, String usedRef) {
+    public LeadImagesModel(List<File> galleryCollection, String usedRef) {
         this.usedRef = usedRef;
         this.leadImages = new LinkedList<>();
         for (File file : galleryCollection) {

@@ -3,7 +3,7 @@ package org.ieatta.tasks;
 import org.ieatta.activity.Page;
 import org.ieatta.activity.PageProperties;
 import org.ieatta.activity.PageTitle;
-import org.ieatta.activity.PhotoGalleryModel;
+import org.ieatta.activity.LeadImagesModel;
 import org.ieatta.activity.gallery.GalleryCollection;
 import org.ieatta.database.models.DBEvent;
 import org.ieatta.database.models.DBPhoto;
@@ -28,7 +28,7 @@ public class RestaurantDetailTask {
     public RealmResults<DBEvent> events;
     public RealmResults<DBReview> reviews;
     public GalleryCollection galleryCollection;
-    private PhotoGalleryModel photoGalleryModel;
+    private LeadImagesModel leadImagesModel;
 
     /**
      * Execute Task for Restaurant detail.
@@ -46,7 +46,7 @@ public class RestaurantDetailTask {
         }).onSuccessTask(new Continuation<List<File>, Task<RealmResults<DBPhoto>>>() {
             @Override
             public Task<RealmResults<DBPhoto>> then(Task<List<File>> task) throws Exception {
-                RestaurantDetailTask.this.photoGalleryModel = new PhotoGalleryModel(task.getResult(),restaurantUUID);
+                RestaurantDetailTask.this.leadImagesModel = new LeadImagesModel(task.getResult(),restaurantUUID);
                 return LocalDatabaseQuery.queryPhotosForRestaurant(restaurantUUID);
             }
         }).onSuccessTask(new Continuation<RealmResults<DBPhoto>, Task<RealmResults<DBEvent>>>() {
@@ -80,7 +80,7 @@ public class RestaurantDetailTask {
         String description = restaurant.getGoogleMapAddress();
 
         PageTitle pageTitle = new PageTitle(description,"");
-        PageProperties properties = new PageProperties(this.photoGalleryModel,title);
+        PageProperties properties = new PageProperties(this.leadImagesModel,title);
 
         return new Page(pageTitle, properties);
     }
