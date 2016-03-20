@@ -41,4 +41,11 @@ public class LeadImagesModel {
         this.galleryIndex = ((galleryIndex + 1) % leadImages.size());
     }
 
+    public boolean isCache() {
+        if (leadImages.size() == 0) {
+            return true;
+        }
+        LeadImage leadImage = leadImages.get(this.galleryIndex);
+        return leadImage.getIsCache();
+    }
 }
