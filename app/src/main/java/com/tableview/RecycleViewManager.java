@@ -24,11 +24,11 @@ import org.ieatta.cells.model.EditBaseCellModel;
 import java.util.List;
 
 public class RecycleViewManager {
-    public void onParse(){
+    public void onParse() {
         mRecyclerViewDragDropManager.cancelDrag();
     }
 
-    public void onDestroyView(RecyclerView mRecyclerView){
+    public void onDestroyView(RecyclerView mRecyclerView) {
         if (mRecyclerViewDragDropManager != null) {
             mRecyclerViewDragDropManager.release();
             mRecyclerViewDragDropManager = null;
@@ -53,7 +53,7 @@ public class RecycleViewManager {
     private RecyclerViewDragDropManager mRecyclerViewDragDropManager;
 
 
-    private void setupDragDropManager(Context context){
+    private void setupDragDropManager(Context context) {
         // drag & drop manager
         mRecyclerViewDragDropManager = new RecyclerViewDragDropManager();
         mRecyclerViewDragDropManager.setDraggingItemShadowDrawable(
@@ -78,12 +78,12 @@ public class RecycleViewManager {
 
         mWrappedAdapter = mRecyclerViewDragDropManager.createWrappedAdapter(myItemAdapter);      // wrap for dragging
 
-        this.manager.setConfiguration(config,myItemAdapter);
+        this.manager.setConfiguration(config, myItemAdapter);
 
         this.setRegisterHeaderClass(IEAViewForHeaderInSectionCell.getType());
     }
 
-    public void setOnItemClickListener(RecyclerOnItemClickListener listener){
+    public void setOnItemClickListener(RecyclerOnItemClickListener listener) {
         this.manager.configuration.builder.setOnItemClickListener(listener);
     }
 
@@ -117,6 +117,9 @@ public class RecycleViewManager {
         getTableManager().registerCellClassInSpecialRow(type, forSectionIndex, forRowIndex);
     }
 
+    public void updateSectionItem(Object item, int forSectionIndex, int row) {
+        getMemoryStorage().updateItem(item, forSectionIndex, row);
+    }
 
     public void setSectionItems(List items, int forSectionIndex) {
         getMemoryStorage().setItems(items, forSectionIndex);

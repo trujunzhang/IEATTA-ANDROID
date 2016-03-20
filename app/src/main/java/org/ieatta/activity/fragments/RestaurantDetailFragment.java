@@ -64,7 +64,7 @@ public class RestaurantDetailFragment extends DetailFragment {
 
     @Override
     public void onContentHeightChanged(int contentHeight) {
-        this.manager.setSectionItems(CollectionUtil.createList(new IEAEmptyHeader(contentHeight)), RestaurantDetailSection.section_leadimage.ordinal());
+        this.manager.updateSectionItem(new IEAEmptyHeader(contentHeight), RestaurantDetailSection.section_leadimage.ordinal(),0);
     }
 
     enum RestaurantDetailSection {
