@@ -30,6 +30,7 @@ import org.ieatta.activity.leadimages.LeadImagesHandler;
 import org.ieatta.cells.IEARestaurantEventsCell;
 import org.ieatta.cells.header.IEAEmptyHeaderCell;
 import org.ieatta.cells.header.IEARestaurantDetailHeaderCell;
+import org.ieatta.cells.model.IEAEmptyHeader;
 import org.ieatta.cells.model.IEARestaurantDetailHeader;
 import org.ieatta.cells.model.SectionTitleCellModel;
 import org.ieatta.database.models.DBEvent;
@@ -63,7 +64,7 @@ public class RestaurantDetailFragment extends DetailFragment {
 
     @Override
     public void onContentHeightChanged(int contentHeight) {
-
+        this.manager.setSectionItems(CollectionUtil.createList(new IEAEmptyHeader(contentHeight)), RestaurantDetailSection.section_leadimage.ordinal());
     }
 
     enum RestaurantDetailSection {
@@ -116,7 +117,7 @@ public class RestaurantDetailFragment extends DetailFragment {
 
     @Override
     protected void reloadPage() {
-        this.manager.setSectionItems(CollectionUtil.createList(new IEARestaurantDetailHeader(this.task.restaurant)), RestaurantDetailSection.section_leadimage.ordinal());
+        this.manager.setSectionItems(CollectionUtil.createList(new IEAEmptyHeader(0)), RestaurantDetailSection.section_leadimage.ordinal());
         this.manager.setSectionItems(task.events, RestaurantDetailSection.section_events.ordinal());
 
         model.setPage(task.getPage());
