@@ -27,7 +27,6 @@ public class RestaurantDetailTask {
     public DBRestaurant restaurant;
     public RealmResults<DBEvent> events;
     public RealmResults<DBReview> reviews;
-    public RealmResults<DBPhoto> galleryPhoto;
     public GalleryCollection galleryCollection;
     private PhotoGalleryModel photoGalleryModel;
 
@@ -54,7 +53,7 @@ public class RestaurantDetailTask {
         }).onSuccessTask(new Continuation<RealmResults<DBPhoto>, Task<RealmResults<DBEvent>>>() {
             @Override
             public Task<RealmResults<DBEvent>> then(Task<RealmResults<DBPhoto>> task) throws Exception {
-                RestaurantDetailTask.this.galleryPhoto = task.getResult();
+                RestaurantDetailTask.this.galleryCollection = new GalleryCollection(DBConvert.toGalleryItem(task.getResult()));
                 return new RealmModelReader<DBEvent>(DBEvent.class).fetchResults(
                         new DBBuilder().whereEqualTo(DBConstant.kPAPFieldLocalRestaurantKey, restaurantUUID), false);
 //                return new RealmModelReader<DBEvent>(DBEvent.class).fetchResults(new DBBuilder(), false);

@@ -15,13 +15,7 @@ public class IEAGalleryThumbnail {
     private GalleryCollection result;
 
     public IEAGalleryThumbnail(GalleryCollection result) {
-        Map<PageTitle, GalleryItem> galleryMap = new LinkedHashMap<>();
         this.result = result;
-    }
-
-    public IEAGalleryThumbnail(RealmResults<DBPhoto> galleryPhoto) {
-        Map<PageTitle, GalleryItem> galleryMap = new LinkedHashMap<>();
-        this.result = new GalleryCollection(galleryMap);
     }
 
     public GalleryCollection getResult() {
