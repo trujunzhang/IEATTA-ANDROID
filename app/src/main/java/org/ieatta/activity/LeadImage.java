@@ -15,23 +15,23 @@ public class LeadImage {
     private String localUrl;
     private String onlineUrl;
     private String photoUUID;
-    private boolean isCache;
+    private boolean isCached;
 
     public LeadImage(String localUrl) {
         this.localUrl = localUrl;
         this.photoUUID = new File(localUrl).getName().split("_")[1];
-        this.isCache = false;
+        this.isCached = false;
     }
 
-    public boolean getIsCache(){
-        return this.isCache;
+    public boolean isCached(){
+        return this.isCached;
     }
 
     public Task<String> getLocalUrl() {
         // Already cached in the local.
         File cacheImageFile = CacheImageUtil.sharedInstance.getCacheImageUrl(this.photoUUID);
         if (cacheImageFile != null && cacheImageFile.exists()) {
-            this.isCache = true;
+            this.isCached = true;
             return Task.forResult(String.format("file://%s", cacheImageFile.getAbsolutePath()));
         }
         // Return the local url.

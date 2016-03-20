@@ -15,19 +15,16 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
-import org.ieatta.IEAApp;
 import org.ieatta.R;
 import org.ieatta.activity.PageProperties;
 import org.ieatta.activity.PageTitle;
 import org.ieatta.activity.fragments.DetailFragment;
 import org.ieatta.activity.Page;
-import org.ieatta.analytics.GalleryFunnel;
 import org.ieatta.views.ObservableWebView;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.wikipedia.concurrency.RecurringTask;
 import org.wikipedia.util.DimenUtil;
-import org.wikipedia.util.UriUtil;
 
 
 import java.util.LinkedList;
@@ -221,7 +218,7 @@ public class LeadImagesHandler {
             @Override
             public Task<String> then(Task<String> task) throws Exception {
                 LeadImagesHandler.this.loadLeadImage(task.getResult(), true);
-                if(pageProperties.isCache() == true){
+                if(pageProperties.isCached() == true){
                     return null;
                 }
                 return pageProperties.getLeadImageOnlineUrl();

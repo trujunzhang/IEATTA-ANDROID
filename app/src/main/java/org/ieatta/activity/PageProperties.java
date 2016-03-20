@@ -23,8 +23,8 @@ public class PageProperties {
         return this.leadImagesModel.leadImageOnline();
     }
 
-    public boolean isCache(){
-        return this.leadImagesModel.isCache();
+    public boolean isCached(){
+        return this.leadImagesModel.isCached();
     }
 
     public void nextLeadImage(){

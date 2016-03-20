@@ -2,17 +2,12 @@ package org.ieatta.activity.gallery;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.Animatable;
-import android.media.MediaPlayer;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -21,7 +16,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.MediaController;
-import android.widget.ProgressBar;
 import android.widget.VideoView;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
@@ -37,16 +31,10 @@ import org.ieatta.IEAApp;
 import org.ieatta.R;
 
 import org.ieatta.activity.LeadImage;
-import org.ieatta.activity.LeadImagesModel;
 import org.ieatta.activity.PageTitle;
-import org.ieatta.database.models.DBPhoto;
-import org.ieatta.server.cache.ThumbnailImageUtil;
 import org.wikipedia.util.FeedbackUtil;
 import org.wikipedia.util.FileUtil;
 import org.wikipedia.util.PermissionUtil;
-import org.wikipedia.util.ShareUtil;
-
-import java.util.Map;
 
 import bolts.Continuation;
 import bolts.Task;
@@ -213,7 +201,7 @@ public class GalleryItemFragment extends Fragment {
             @Override
             public Task<String> then(Task<String> task) throws Exception {
                 GalleryItemFragment.this.loadImage(task.getResult());
-                if(leadImage.getIsCache() ==true){
+                if(leadImage.isCached() ==true){
                     return null;
                 }
                 return leadImage.getOnlineUrl();
