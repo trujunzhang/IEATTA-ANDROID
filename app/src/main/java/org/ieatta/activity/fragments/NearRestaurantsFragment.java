@@ -99,7 +99,6 @@ public class NearRestaurantsFragment extends PageFragment {
     }
 
     private void reloadPage(){
-        RealmResults<DBRestaurant> restaurants = NearRestaurantsFragment.this.task.getRestaurants();
-        NearRestaurantsFragment.this.manager.setSectionItems(restaurants,NearRestaurantSection.section_restaurants.ordinal());
+        this.manager.setSectionItems(this.task.getRestaurants(),NearRestaurantSection.section_restaurants.ordinal());
     }
 }

@@ -31,6 +31,7 @@ import org.ieatta.cells.IEARestaurantEventsCell;
 import org.ieatta.cells.header.IEARestaurantDetailHeaderCell;
 import org.ieatta.cells.model.IEARestaurantDetailHeader;
 import org.ieatta.cells.model.SectionTitleCellModel;
+import org.ieatta.database.models.DBEvent;
 import org.ieatta.provide.IEAEditKey;
 import org.ieatta.tasks.RestaurantDetailTask;
 import org.ieatta.views.ObservableWebView;
@@ -43,6 +44,7 @@ import org.wikipedia.views.WikiDrawerLayout;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 
 import bolts.Continuation;
 import bolts.Task;
@@ -176,11 +178,9 @@ public class RestaurantDetailFragment extends DetailFragment {
     }
 
     private void reloadPage() {
-//        this.manager.setSectionItems(CollectionUtil.createList(new IEARestaurantDetailHeader(this.task.restaurant)), RestaurantDetailSection.section_header.ordinal());
-//        this.manager.showGoogleMapAddress(RestaurantDetailSection.section_google_mapaddress.ordinal());
+        this.manager.setSectionItems(task.events,RestaurantDetailSection.section_events.ordinal());
 
         model.setPage(task.getPage());
-//        model.setTitle(task.);
         searchBarHideHandler = getPageActivity().getSearchBarHideHandler();
         searchBarHideHandler.setScrollView(webView);
         leadImagesHandler = new LeadImagesHandler(this, webView, articleHeaderView);
