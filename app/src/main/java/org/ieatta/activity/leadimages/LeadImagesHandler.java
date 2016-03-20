@@ -21,6 +21,7 @@ import org.ieatta.activity.PageProperties;
 import org.ieatta.activity.PageTitle;
 import org.ieatta.activity.fragments.DetailFragment;
 import org.ieatta.activity.Page;
+import org.ieatta.analytics.GalleryFunnel;
 import org.ieatta.views.ObservableWebView;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -70,10 +71,37 @@ public class LeadImagesHandler {
 
         initDisplayDimensions();
 
+        initWebView();
+
         initArticleHeaderView();
 
         // hide ourselves by default
         hide();
+    }
+
+
+    private void initWebView() {
+        webView.addOnScrollChangeListener(articleHeaderView);
+
+        webView.addOnClickListener(new ObservableWebView.OnClickListener() {
+            @Override
+            public boolean onClick(float x, float y) {
+                // if the click event is within the area of the lead image, then the user
+                // must have wanted to click on the lead image!
+                if (getPage() != null && isLeadImageEnabled() && y < (articleHeaderView.getHeight() - webView.getScrollY())) {
+//                    String imageName = getPage().getPageProperties().getLeadImageName();
+//                    if (imageName != null) {
+//                        PageTitle imageTitle = new PageTitle("File:" + imageName,
+//                                getTitle().getSite());
+//                        GalleryActivity.showGallery(getActivity(),
+//                                parentFragment.getTitleOriginal(), imageTitle,
+//                                GalleryFunnel.SOURCE_LEAD_IMAGE);
+//                    }
+                    return true;
+                }
+                return false;
+            }
+        });
     }
 
     /**
