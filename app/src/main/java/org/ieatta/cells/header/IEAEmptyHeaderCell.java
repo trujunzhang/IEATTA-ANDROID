@@ -9,6 +9,7 @@ import com.tableview.adapter.enums.ViewHolderType;
 import com.tableview.storage.models.CellType;
 
 import org.ieatta.R;
+import org.ieatta.cells.model.IEAEmptyHeader;
 import org.ieatta.cells.model.SectionTitleCellModel;
 
 public class IEAEmptyHeaderCell extends IEAViewHolder {
@@ -41,6 +42,7 @@ public class IEAEmptyHeaderCell extends IEAViewHolder {
 
     @Override
     public void render(Object value) {
-        this.emptyLinearLayout.setMinimumHeight(1461);
+        IEAEmptyHeader header = (IEAEmptyHeader) value;
+        this.emptyLinearLayout.setMinimumHeight(header.getCellHeight());
     }
 }
