@@ -19,8 +19,8 @@ public class GalleryFunnel extends TimedFunnel {
 
     private final int source;
 
-    public GalleryFunnel(IEAApp app, Site site, int source) {
-        super(app, SCHEMA_NAME, REV_ID, Funnel.SAMPLE_LOG_100, site);
+    public GalleryFunnel(IEAApp app,  int source) {
+        super(app, SCHEMA_NAME, REV_ID, Funnel.SAMPLE_LOG_100);
         this.source = source;
     }
 
@@ -39,7 +39,7 @@ public class GalleryFunnel extends TimedFunnel {
     private void logGalleryAction(String action, PageTitle currentPageTitle, String currentMediaTitle) {
         log(
                 "action", action,
-//                "pageTitle", currentPageTitle.getDisplayText(),
+                "pageTitle", currentPageTitle.getDisplayText(),
                 "imageTitle", currentMediaTitle
         );
     }

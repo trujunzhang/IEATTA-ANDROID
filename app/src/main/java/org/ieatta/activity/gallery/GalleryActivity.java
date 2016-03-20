@@ -60,6 +60,7 @@ public class GalleryActivity extends ThemedActionBarActivity {
     private boolean cacheOnLoad;
 
     private GalleryFunnel funnel;
+
     public GalleryFunnel getFunnel() {
         return funnel;
     }
@@ -73,6 +74,7 @@ public class GalleryActivity extends ThemedActionBarActivity {
      * our gallery collection.
      */
     private Map<PageTitle, GalleryItem> galleryCache;
+
     public Map<PageTitle, GalleryItem> getGalleryCache() {
         return galleryCache;
     }
@@ -121,8 +123,7 @@ public class GalleryActivity extends ThemedActionBarActivity {
         super.onCreate(savedInstanceState);
         // force the theme to dark...
         setTheme(Theme.DARK.getResourceId());
-        app = (IEAApp)getApplicationContext();
-//        downloadReceiver = new MediaDownloadReceiver(this);
+        app = (IEAApp) getApplicationContext();
 
         setContentView(R.layout.activity_gallery);
         final Toolbar toolbar = (Toolbar) findViewById(R.id.gallery_toolbar);
@@ -141,7 +142,6 @@ public class GalleryActivity extends ThemedActionBarActivity {
 
         descriptionText = (TextView) findViewById(R.id.gallery_description_text);
         descriptionText.setShadowLayer(2, 1, 1, getResources().getColor(R.color.lead_text_shadow));
-//        descriptionText.setMovementMethod(linkMovementMethod);
 
         licenseIcon = (ImageView) findViewById(R.id.gallery_license_icon);
         licenseIcon.setOnClickListener(licenseShortClickListener);
@@ -159,12 +159,11 @@ public class GalleryActivity extends ThemedActionBarActivity {
         galleryPager.setAdapter(galleryAdapter);
         galleryPager.setOnPageChangeListener(new GalleryPageChangeListener());
 
-//        funnel = new GalleryFunnel(app, pageTitle.getSite(),
-//                                   getIntent().getIntExtra(EXTRA_SOURCE, 0));
-
+        funnel = new GalleryFunnel(app, getIntent().getIntExtra(EXTRA_SOURCE, 0));
+//
         if (savedInstanceState == null) {
             if (initialImageTitle != null) {
-//                funnel.logGalleryOpen(pageTitle, initialImageTitle.getDisplayText());
+                funnel.logGalleryOpen(pageTitle, initialImageTitle.getDisplayText());
             }
         } else {
             controlsShowing = savedInstanceState.getBoolean("controlsShowing");
@@ -204,6 +203,7 @@ public class GalleryActivity extends ThemedActionBarActivity {
 
     /**
      * Launch the image gallery activity, and start with the provided image.
+     *
      * @param imageTitle Image with which to begin the gallery.
      */
     public static void showGallery(Activity activity, PageTitle pageTitle, PageTitle imageTitle,
@@ -218,9 +218,11 @@ public class GalleryActivity extends ThemedActionBarActivity {
 
     private class GalleryPageChangeListener implements ViewPager.OnPageChangeListener {
         private int currentPosition = -1;
+
         @Override
         public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
         }
+
         @Override
         public void onPageSelected(int position) {
             // the pager has settled on a new position
@@ -235,6 +237,7 @@ public class GalleryActivity extends ThemedActionBarActivity {
             }
             currentPosition = position;
         }
+
         @Override
         public void onPageScrollStateChanged(int state) {
             if (state == ViewPager.SCROLL_STATE_IDLE) {
@@ -272,6 +275,7 @@ public class GalleryActivity extends ThemedActionBarActivity {
 
     /**
      * Show or hide all the UI controls in this activity (slide them out or in).
+     *
      * @param showing Whether to show or hide the controls.
      */
     private void setControlsShowing(boolean showing) {
@@ -328,6 +332,7 @@ public class GalleryActivity extends ThemedActionBarActivity {
     /**
      * Close this activity, with the specified PageTitle as the activity result, to be picked up
      * by the activity that originally launched us.
+     *
      * @param resultTitle PageTitle to pass as the activity result.
      */
     public void finishWithPageResult(PageTitle resultTitle) {
@@ -380,6 +385,7 @@ public class GalleryActivity extends ThemedActionBarActivity {
 
     /**
      * Apply a complete collection of media to our scrollable gallery.
+     *
      * @param collection GalleryCollection to apply to the ViewPager.
      */
     private void applyGalleryCollection(GalleryCollection collection) {
@@ -412,7 +418,7 @@ public class GalleryActivity extends ThemedActionBarActivity {
             // if we have a target image to jump to, then do it!
             galleryPager.setCurrentItem(initialImagePos, false);
         } else if (initialImageIndex >= 0
-                   && initialImageIndex < galleryAdapter.getCount()) {
+                && initialImageIndex < galleryAdapter.getCount()) {
             // if we have a target image index to jump to, then do it!
             galleryPager.setCurrentItem(initialImageIndex, false);
         }
@@ -454,7 +460,7 @@ public class GalleryActivity extends ThemedActionBarActivity {
         }
 
         // determine which icon to display...
-        licenseIcon.setImageDrawable(getResources().getDrawable(getLicenseIcon(item)));
+//        licenseIcon.setImageDrawable(getResources().getDrawable(getLicenseIcon(item)));
         // Set the icon's content description to the UsageTerms property.
         // (if UsageTerms is not present, then default to Fair Use)
         String usageTerms = item.getMetadata().get("UsageTerms");
@@ -481,6 +487,7 @@ public class GalleryActivity extends ThemedActionBarActivity {
     /**
      * Return an icon (drawable resource id) that corresponds to the type of license
      * under which the specified Gallery item is provided.
+     *
      * @param item Gallery item for which to give a license icon.
      * @return Resource ID of the icon to display.
      */
