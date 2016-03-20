@@ -188,7 +188,7 @@ public class DetailPageLoadStrategy implements PageLoadStrategy {
             @Override
             public void onLayoutComplete(int sequence) {
                 if (fragment.isAdded()) {
-//                    searchBarHideHandler.setFadeEnabled(leadImagesHandler.isLeadImageEnabled());
+                    searchBarHideHandler.setFadeEnabled(leadImagesHandler.isLeadImageEnabled());
                 }
             }
         }, sequenceNumber.get());
