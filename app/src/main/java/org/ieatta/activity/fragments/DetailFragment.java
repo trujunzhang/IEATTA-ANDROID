@@ -16,6 +16,7 @@ import org.ieatta.activity.Page;
 import org.ieatta.activity.PageLoadStrategy;
 import org.ieatta.activity.PageTitle;
 import org.ieatta.activity.PageViewModel;
+import org.ieatta.activity.gallery.GalleryActivity;
 import org.ieatta.activity.gallery.GalleryThumbnailScrollView;
 import org.ieatta.activity.leadimages.LeadImagesHandler;
 import org.ieatta.analytics.GalleryFunnel;
@@ -265,14 +266,13 @@ public abstract class DetailFragment extends PageFragment implements BackPressed
         return DimenUtil.getScreenHeight(getActivity().getWindow());
     }
 
-
     private GalleryThumbnailScrollView.GalleryViewListener galleryViewListener
             = new GalleryThumbnailScrollView.GalleryViewListener() {
         @Override
         public void onGalleryItemClicked(String imageName) {
             PageTitle imageTitle = new PageTitle(imageName, "");
-//            GalleryActivity.showGallery(getActivity(), pageTitle, imageTitle,
-//                    GalleryFunnel.SOURCE_LINK_PREVIEW);
+            GalleryActivity.showGallery(getActivity(), model.getTitle(), imageTitle,
+                    GalleryFunnel.SOURCE_LINK_PREVIEW);
         }
     };
 }

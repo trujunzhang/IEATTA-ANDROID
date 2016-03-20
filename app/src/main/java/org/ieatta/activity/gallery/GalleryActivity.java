@@ -210,8 +210,8 @@ public class GalleryActivity extends ThemedActionBarActivity {
                                    int source) {
         Intent galleryIntent = new Intent();
         galleryIntent.setClass(activity, GalleryActivity.class);
-//        galleryIntent.putExtra(EXTRA_IMAGETITLE, imageTitle);
-//        galleryIntent.putExtra(EXTRA_PAGETITLE, pageTitle);
+        galleryIntent.putExtra(EXTRA_IMAGETITLE, imageTitle);
+        galleryIntent.putExtra(EXTRA_PAGETITLE, pageTitle);
         galleryIntent.putExtra(EXTRA_SOURCE, source);
         activity.startActivityForResult(galleryIntent, PageActivity.ACTIVITY_REQUEST_GALLERY);
     }
