@@ -9,6 +9,7 @@ import com.tableview.adapter.enums.ViewHolderType;
 import com.tableview.storage.models.CellType;
 
 import org.ieatta.R;
+import org.ieatta.analytics.RecycleCellFunnel;
 import org.ieatta.cells.model.IEAEmptyHeader;
 import org.ieatta.cells.model.SectionTitleCellModel;
 
@@ -45,5 +46,6 @@ public class IEAEmptyHeaderCell extends IEAViewHolder {
         IEAEmptyHeader header = (IEAEmptyHeader) value;
         int cellHeight = header.getCellHeight();
         this.emptyLinearLayout.setMinimumHeight(cellHeight);
+        new RecycleCellFunnel().logCellInfo("IEAEmptyHeaderCell","cellHeight: "+cellHeight);
     }
 }

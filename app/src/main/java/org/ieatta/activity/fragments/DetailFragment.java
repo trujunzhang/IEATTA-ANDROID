@@ -173,6 +173,7 @@ public abstract class DetailFragment extends PageFragment implements BackPressed
         // TODO: initialize View references in onCreateView().
         articleHeaderView = (ArticleHeaderView) rootView.findViewById(R.id.page_header_view);
 
+
         return rootView;
     }
 
@@ -180,6 +181,7 @@ public abstract class DetailFragment extends PageFragment implements BackPressed
         searchBarHideHandler = getPageActivity().getSearchBarHideHandler();
         searchBarHideHandler.setScrollView(webView);
         leadImagesHandler = new LeadImagesHandler(this, webView, articleHeaderView);
+        leadImagesHandler.addOnContentHeightChangedListener(this);
         pageLoadStrategy.setUp(this, refreshView, webView, searchBarHideHandler,
                 leadImagesHandler, new LinkedList<PageBackStackItem>());
         pageLoadStrategy.onLeadSectionLoaded(0);
