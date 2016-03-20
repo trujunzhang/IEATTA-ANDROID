@@ -30,7 +30,6 @@ public class RestaurantDetailTask {
     public GalleryCollection galleryCollection;
     private PhotoGalleryModel photoGalleryModel;
 
-
     /**
      * Execute Task for Restaurant detail.
      *
