@@ -21,13 +21,6 @@
             android:layout_width="match_parent"
             android:layout_height="80dp">
         </android.support.v7.widget.Toolbar>
-        <ProgressBar
-            android:id="@+id/gallery_progressbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="top"
-            android:layout_marginTop="-7.5dp"
-            style="?android:attr/progressBarStyleHorizontal"/>
     </FrameLayout>
 
     <LinearLayout

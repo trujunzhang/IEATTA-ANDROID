@@ -90,7 +90,6 @@ public class GalleryActivity extends ThemedActionBarActivity {
 
     private ViewGroup toolbarContainer;
     private ViewGroup infoContainer;
-    private ProgressBar progressBar;
     private TextView descriptionText;
     private ImageView licenseIcon;
     private TextView creditText;
@@ -139,8 +138,6 @@ public class GalleryActivity extends ThemedActionBarActivity {
         // give it a gradient background
         ViewUtil.setBackgroundDrawable(infoContainer, GradientUtil.getCubicGradient(
                 getResources().getColor(R.color.lead_gradient_start), Gravity.BOTTOM));
-
-        progressBar = (ProgressBar) findViewById(R.id.gallery_progressbar);
 
         descriptionText = (TextView) findViewById(R.id.gallery_description_text);
         descriptionText.setShadowLayer(2, 1, 1, getResources().getColor(R.color.lead_text_shadow));
@@ -191,32 +188,6 @@ public class GalleryActivity extends ThemedActionBarActivity {
                 setControlsShowing(controlsShowing);
             }
         });
-
-        updateProgressBar(false, true, 0);
-
-        // find our Page in the page cache...
-//        app.getPageCache().get(pageTitle, 0, new PageCache.CacheGetListener() {
-//            @Override
-//            public void onGetComplete(Page page, int sequence) {
-//                GalleryActivity.this.page = page;
-//                if (page != null && page.getGalleryCollection() != null
-//                    && page.getGalleryCollection().getItemList().size() > 0) {
-//                    applyGalleryCollection(page.getGalleryCollection());
-//                    cacheOnLoad = false;
-//                } else {
-//                    // fetch the gallery from the network...
-//                    fetchGalleryCollection();
-//                    cacheOnLoad = true;
-//                }
-//            }
-//
-//            @Override
-//            public void onGetError(Throwable e, int sequence) {
-//                Log.e(TAG, "Failed to get page from cache.", e);
-//                fetchGalleryCollection();
-//                cacheOnLoad = true;
-//            }
-//        });
     }
 
     @Override
@@ -277,14 +248,6 @@ public class GalleryActivity extends ThemedActionBarActivity {
         super.onSaveInstanceState(outState);
         outState.putBoolean("controlsShowing", controlsShowing);
         outState.putInt("pagerIndex", galleryPager.getCurrentItem());
-    }
-
-    private void updateProgressBar(boolean visible, boolean indeterminate, int value) {
-        progressBar.setIndeterminate(indeterminate);
-        if (!indeterminate) {
-            progressBar.setProgress(value);
-        }
-        progressBar.setVisibility(visible ? View.VISIBLE : View.GONE);
     }
 
     @Override
@@ -385,7 +348,6 @@ public class GalleryActivity extends ThemedActionBarActivity {
      * scrollable gallery of media.
      */
     private void fetchGalleryCollection() {
-        updateProgressBar(true, true, 0);
 //        new GalleryCollectionFetchTask(app.getAPIForSite(pageTitle.getSite()),
 //                pageTitle.getSite(), pageTitle) {
 //            @Override
