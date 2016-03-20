@@ -30,12 +30,25 @@ import org.wikipedia.util.DimenUtil;
 import org.wikipedia.util.UriUtil;
 
 
+import java.util.LinkedList;
+import java.util.List;
+
 import bolts.Continuation;
 import bolts.Task;
 
 import static org.wikipedia.util.DimenUtil.getContentTopOffsetPx;
 
 public class LeadImagesHandler {
+    public interface OnContentHeightChangedListener{
+        void onContentHeightChanged(int contentHeight);
+    }
+
+    private List<OnContentHeightChangedListener> onContentHeightChangedListeners = new LinkedList<>();
+
+    public void addOnContentHeightChangedListener(OnContentHeightChangedListener onContentHeightChangedListener) {
+        onContentHeightChangedListeners.add(onContentHeightChangedListener);
+    }
+
     /**
      * Minimum screen height for enabling lead images. If the screen is smaller than
      * this height, lead images will not be displayed, and will be substituted with just
@@ -257,6 +270,9 @@ public class LeadImagesHandler {
             padding = Math.round(getContentTopOffsetPx(getActivity()) / displayDensity);
         } else {
             int height = articleHeaderView.getHeight();
+            for (OnContentHeightChangedListener listener : onContentHeightChangedListeners) {
+                listener.onContentHeightChanged(height);
+            }
             padding = Math.round(height / displayDensity);
         }
 
@@ -270,7 +286,7 @@ public class LeadImagesHandler {
         } catch (JSONException e) {
             throw new RuntimeException(e);
         }
-//        bridge.sendMessage("setPaddingTop", payload);
+        // bridge.sendMessage("setPaddingTop", payload);
     }
 
     /**
