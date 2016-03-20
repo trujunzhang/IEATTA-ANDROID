@@ -11,7 +11,7 @@ import org.ieatta.database.models.DBEvent;
 
 public class IEARestaurantEventsCell extends IEAViewHolder {
     public static CellType getType() {
-        return new CellType(IEARestaurantEventsCell.class, R.layout.restaurant_events_cell);
+        return new CellType(IEARestaurantEventsCell.class, R.layout.cell_restaurant_events);
     }
 
     private IEARestaurantEventsCell self = this;

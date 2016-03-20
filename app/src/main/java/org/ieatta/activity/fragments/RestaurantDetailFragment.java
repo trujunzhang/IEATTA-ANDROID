@@ -61,11 +61,9 @@ public class RestaurantDetailFragment extends DetailFragment {
     };
 
     enum RestaurantDetailSection {
-        section_header,//= 0
-        section_google_mapaddress,//= 1
-        section_events,//= 2
-        section_photogallery,//= 3
-        section_reviews,//= 4
+        section_events,//= 0
+        section_photogallery,//= 1
+        section_reviews,//= 2
     }
 
     private RecycleViewManager manager;
@@ -148,7 +146,6 @@ public class RestaurantDetailFragment extends DetailFragment {
     }
 
     private void setupUI() {
-        this.manager.setRegisterCellClass(IEARestaurantDetailHeaderCell.getType(), RestaurantDetailSection.section_header.ordinal());
         this.manager.setRegisterCellClass(IEARestaurantEventsCell.getType(), RestaurantDetailSection.section_events.ordinal());
 
         this.manager.appendSectionTitleCell(new SectionTitleCellModel(IEAEditKey.Section_Title, R.string.Events_Recorded), RestaurantDetailSection.section_events.ordinal());
