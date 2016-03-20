@@ -5,6 +5,7 @@ import org.ieatta.database.models.DBPhoto;
 import org.ieatta.server.cache.ThumbnailImageUtil;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -16,6 +17,9 @@ public class DBConvert {
         List<GalleryItem> list =new LinkedList<>();
         for(DBPhoto photo : photos){
             File file = ThumbnailImageUtil.sharedInstance.getCacheImageUrl(photo);
+            if(file == null || file.exists() == false) {
+//                throw  new FileNotFoundException("Not found photo file, "+photo.getUUID());
+            }
             GalleryItem item = new GalleryItem("","file://"+file.getAbsolutePath());
             list.add(item);
         }
