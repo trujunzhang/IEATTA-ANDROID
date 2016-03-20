@@ -76,10 +76,10 @@ public class GalleryItemFragment extends Fragment {
     public static GalleryItemFragment newInstance(PageTitle pageTitle, GalleryItem galleryItemProto) {
         GalleryItemFragment f = new GalleryItemFragment();
         Bundle args = new Bundle();
-//        args.putParcelable(ARG_PAGETITLE, pageTitle);
-//        args.putParcelable(ARG_MEDIATITLE, new PageTitle(galleryItemProto.getName(), pageTitle.getSite()));
-//        args.putString(ARG_MIMETYPE, galleryItemProto.getMimeType());
-//        f.setArguments(args);
+        args.putParcelable(ARG_PAGETITLE, pageTitle);
+        args.putParcelable(ARG_MEDIATITLE, new PageTitle(galleryItemProto.getUUID()));
+        args.putString(ARG_MIMETYPE, galleryItemProto.getMimeType());
+        f.setArguments(args);
         return f;
     }
 

@@ -63,7 +63,7 @@ public class GalleryActivity extends ThemedActionBarActivity {
 
     private IEAApp app;
     private PageTitle pageTitle;
-    private Page page;
+    private Page page = new Page();
     private boolean cacheOnLoad;
 
     private GalleryFunnel funnel;
@@ -422,7 +422,7 @@ public class GalleryActivity extends ThemedActionBarActivity {
             // if we have a target image index to jump to, then do it!
             galleryPager.setCurrentItem(initialImageIndex, false);
         }
-//        galleryPager.setPageTransformer(false, new GalleryPagerTransformer());
+        galleryPager.setPageTransformer(false, new GalleryPagerTransformer());
     }
 
     private GalleryItem getCurrentItem() {

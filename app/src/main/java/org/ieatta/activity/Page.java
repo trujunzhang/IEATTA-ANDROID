@@ -38,6 +38,11 @@ public class Page {
         this.pageProperties = pageProperties;
     }
 
+    public Page() {
+        this.title = null;
+        this.pageProperties = null;
+    }
+
     public String getDisplayTitle() {
         return pageProperties.getDisplayTitle();
     }
