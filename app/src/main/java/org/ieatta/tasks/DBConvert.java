@@ -1,6 +1,7 @@
 package org.ieatta.tasks;
 
 import org.ieatta.activity.gallery.GalleryItem;
+import org.ieatta.analytics.RecycleCellFunnel;
 import org.ieatta.database.models.DBPhoto;
 import org.ieatta.server.cache.ThumbnailImageUtil;
 
@@ -18,6 +19,7 @@ public class DBConvert {
         for(DBPhoto photo : photos){
             File file = ThumbnailImageUtil.sharedInstance.getCacheImageUrl(photo);
             GalleryItem item = new GalleryItem("","file://"+file.getAbsolutePath());
+            new RecycleCellFunnel().logCellInfo("toGalleryItem","photo's path: "+file.getAbsolutePath());
             list.add(item);
         }
         return list;
