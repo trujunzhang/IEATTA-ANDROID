@@ -221,7 +221,9 @@ public class LeadImagesHandler {
             @Override
             public Task<String> then(Task<String> task) throws Exception {
                 LeadImagesHandler.this.loadLeadImage(task.getResult(), true);
-                pageProperties.getLeadImageOnlineUrl();
+                if(pageProperties.isCache() == true){
+                    return null;
+                }
                 return pageProperties.getLeadImageOnlineUrl();
             }
         }, Task.UI_THREAD_EXECUTOR).onSuccess(new Continuation<String, Void>() {
