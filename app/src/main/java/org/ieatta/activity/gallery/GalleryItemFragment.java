@@ -36,6 +36,7 @@ import com.facebook.samples.zoomable.ZoomableDraweeView;
 import org.ieatta.IEAApp;
 import org.ieatta.R;
 
+import org.ieatta.activity.LeadImagesModel;
 import org.ieatta.activity.PageTitle;
 import org.ieatta.database.models.DBPhoto;
 import org.ieatta.server.cache.ThumbnailImageUtil;
@@ -201,13 +202,15 @@ public class GalleryItemFragment extends Fragment {
      * Perform a network request to load information and metadata for our gallery item.
      */
     private void loadGalleryItem() {
-        String uuid = this.imageTitle.getUUID();
-        String usedRef = this.pageTitle.getUUID();
-        DBPhoto photo = new DBPhoto();
-        photo.setUUID(uuid);
-        photo.setUsedRef(usedRef);
-//        photo.setObjectCreatedDate(this.imageTitle.);
-        ThumbnailImageUtil.sharedInstance.getCacheImageUrl(photo);
+        String thumbUrl = this.imageTitle.getThumbUrl();
+//        LeadImagesModel
+//        String uuid = this.imageTitle.getUUID();
+//        String usedRef = this.pageTitle.getUUID();
+//        DBPhoto photo = new DBPhoto();
+//        photo.setUUID(uuid);
+//        photo.setUsedRef(usedRef);
+////        photo.setObjectCreatedDate(this.imageTitle.);
+//        ThumbnailImageUtil.sharedInstance.getCacheImageUrl(photo);
 
 //        new GalleryItemFetchTask(app.getAPIForSite(pageTitle.getSite()),
 //                pageTitle.getSite(), imageTitle, FileUtil.isVideo(mimeType)) {

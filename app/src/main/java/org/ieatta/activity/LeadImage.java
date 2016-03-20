@@ -11,14 +11,14 @@ import bolts.Task;
 /**
  * Created by djzhang on 3/20/16.
  */
-class LeadImage {
+public class LeadImage {
     public String localUrl;
     private String onlineUrl;
     private String photoUUID;
 
-    public LeadImage(String filePath) {
-        this.localUrl = String.format("file://%s", filePath);
-        this.photoUUID = new File(filePath).getName().split("_")[1];
+    public LeadImage(String localUrl) {
+        this.localUrl = localUrl;
+        this.photoUUID = new File(localUrl).getName().split("_")[1];
     }
 
     public Task<String> getOnlineUrl() {

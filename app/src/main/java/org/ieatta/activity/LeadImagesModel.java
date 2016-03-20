@@ -16,7 +16,7 @@ public class LeadImagesModel {
         this.usedRef = usedRef;
         this.leadImages = new LinkedList<>();
         for (File file : galleryCollection) {
-            LeadImage leadImage = new LeadImage(file.getAbsolutePath());
+            LeadImage leadImage = new LeadImage(String.format("file://%s", file.getAbsolutePath()));
             this.leadImages.add(leadImage);
         }
     }
