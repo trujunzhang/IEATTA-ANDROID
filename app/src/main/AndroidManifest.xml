@@ -92,6 +92,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".activity.gallery.GalleryActivity"
+            android:configChanges="orientation|screenSize"
+            android:exported="false"
+            android:theme="@style/FullScreen" />
     </application>
 
 </manifest>
