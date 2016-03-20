@@ -24,6 +24,7 @@ public class PageTitle implements Parcelable{
     private final String fragment;
     @Nullable private String thumbUrl;
     private String description = null;
+    private String uuid;
 
     public PageTitle(@Nullable final String namespace, final String text, final String fragment, @Nullable final String thumbUrl) {
         this.namespace = namespace;
@@ -114,6 +115,7 @@ public class PageTitle implements Parcelable{
         fragment = in.readString();
         thumbUrl = in.readString();
         description = in.readString();
+        uuid = in.readString();
     }
 
     @Override
@@ -123,6 +125,7 @@ public class PageTitle implements Parcelable{
         parcel.writeString(fragment);
         parcel.writeString(thumbUrl);
         parcel.writeString(description);
+        parcel.writeString(uuid);
     }
 
     @Override
@@ -146,5 +149,13 @@ public class PageTitle implements Parcelable{
     @Override
     public String toString() {
         return getPrefixedText();
+    }
+
+    public String getUUID() {
+        return uuid;
+    }
+
+    public void setUUID(String uuid) {
+        this.uuid = uuid;
     }
 }

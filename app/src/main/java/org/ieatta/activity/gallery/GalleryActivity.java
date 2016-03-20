@@ -397,7 +397,7 @@ public class GalleryActivity extends ThemedActionBarActivity {
         int initialImagePos = -1;
         if (initialImageTitle != null) {
             for (GalleryItem item : collection.getItemList()) {
-                if (item.getUUID().equals(initialImageTitle.getDisplayText())) {
+                if (item.getUUID().equals(initialImageTitle.getUUID())) {
                     initialImagePos = collection.getItemList().indexOf(item);
                     break;
                 }
@@ -408,8 +408,8 @@ public class GalleryActivity extends ThemedActionBarActivity {
                 // (this can happen if the user clicked on an SVG file, since we hide SVGs
                 // by default in the gallery)
                 initialImagePos = 0;
-//                collection.getItemList().add(initialImagePos,
-//                                             new GalleryItem(initialImageTitle.getDisplayText()));
+                collection.getItemList().add(initialImagePos,
+                                             new GalleryItem(initialImageTitle.getUUID()));
             }
         }
 
