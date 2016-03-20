@@ -20,4 +20,7 @@ public class ObservableWebViewFunnel extends Funnel {
         log("contentHeight on draw: ", contentHeight);
     }
 
+    public void logOnScrollChanged(int oldTop, int top, boolean isHumanScroll) {
+        log("oldTop: ", oldTop, "top", top, "isHumanScroll", isHumanScroll);
+    }
 }

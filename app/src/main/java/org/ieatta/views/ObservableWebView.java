@@ -134,6 +134,7 @@ public class ObservableWebView extends RecyclerView {
         for (OnScrollChangeListener listener : onScrollChangeListeners) {
             listener.onScrollChanged(oldTop, top, isHumanScroll);
         }
+        new ObservableWebViewFunnel().logOnScrollChanged(oldTop,top,isHumanScroll);
         if (!isHumanScroll) {
             return;
         }
