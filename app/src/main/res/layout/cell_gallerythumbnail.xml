@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<org.wikipedia.page.gallery.GalleryThumbnailScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<org.ieatta.activity.gallery.GalleryThumbnailScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/link_preview_thumbnail_gallery"
     android:layout_width="match_parent"
     android:layout_height="@dimen/linkPreviewImageSize"
