@@ -47,10 +47,13 @@ public class LeadImagesHandler {
         void onLayoutComplete(int sequence);
     }
 
-    @NonNull private final DetailFragment parentFragment;
-    @NonNull private final ObservableWebView webView;
+    @NonNull
+    private final DetailFragment parentFragment;
+    @NonNull
+    private final ObservableWebView webView;
 
-    @NonNull private final ArticleHeaderView articleHeaderView;
+    @NonNull
+    private final ArticleHeaderView articleHeaderView;
     private View image;
 
     private int displayHeightDp;
@@ -112,7 +115,8 @@ public class LeadImagesHandler {
         articleHeaderView.hide();
     }
 
-    @Nullable public Bitmap getLeadImageBitmap() {
+    @Nullable
+    public Bitmap getLeadImageBitmap() {
         return isLeadImageEnabled() ? articleHeaderView.copyBitmap() : null;
     }
 
@@ -184,7 +188,7 @@ public class LeadImagesHandler {
             public void everyTask() {
                 LeadImagesHandler.this.recurringLeadImages();
             }
-        },0,10);
+        }, 0, 10);
 
 
         articleHeaderView.setTitle(Html.fromHtml(getPage().getDisplayTitle()));
@@ -195,7 +199,7 @@ public class LeadImagesHandler {
     }
 
     private void recurringLeadImages() {
-        if(this.getPage() == null){
+        if (this.getPage() == null) {
             return;
         }
         final PageProperties pageProperties = this.getPage().getPageProperties();
@@ -203,16 +207,16 @@ public class LeadImagesHandler {
         pageProperties.getLeadImageLocalUrl().onSuccessTask(new Continuation<String, Task<String>>() {
             @Override
             public Task<String> then(Task<String> task) throws Exception {
-                LeadImagesHandler.this.loadLeadImage(task.getResult(),true);
+                LeadImagesHandler.this.loadLeadImage(task.getResult(), true);
                 return pageProperties.getLeadImageOnlineUrl();
             }
-        },Task.UI_THREAD_EXECUTOR).onSuccess(new Continuation<String, Void>() {
+        }, Task.UI_THREAD_EXECUTOR).onSuccess(new Continuation<String, Void>() {
             @Override
             public Void then(Task<String> task) throws Exception {
-                LeadImagesHandler.this.loadLeadImage(task.getResult(),true);
+                LeadImagesHandler.this.loadLeadImage(task.getResult(), true);
                 return null;
             }
-        },Task.UI_THREAD_EXECUTOR).continueWith(new Continuation<Void, Void>() {
+        }, Task.UI_THREAD_EXECUTOR).continueWith(new Continuation<Void, Void>() {
             @Override
             public Void then(Task<Void> task) throws Exception {
                 pageProperties.nextLeadImage();
@@ -309,12 +313,12 @@ public class LeadImagesHandler {
      * @param url Nullable URL with no scheme. For example, foo.bar.com/ instead of
      *            http://foo.bar.com/.
      */
-    private void loadLeadImage(@Nullable String url,Boolean local) {
+    private void loadLeadImage(@Nullable String url, Boolean local) {
         if (!isMainPage() && !TextUtils.isEmpty(url) && isLeadImageEnabled()) {
             articleHeaderView.setImageYScalar(0);
-            articleHeaderView.loadImage(url,local);
+            articleHeaderView.loadImage(url, local);
         } else {
-            articleHeaderView.loadImage(null,local);
+            articleHeaderView.loadImage(null, local);
         }
     }
 
