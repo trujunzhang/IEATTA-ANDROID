@@ -26,6 +26,7 @@ import android.widget.TextView;
 import org.ieatta.IEAApp;
 import org.ieatta.R;
 import org.ieatta.activity.Page;
+import org.ieatta.activity.PageActivity;
 import org.ieatta.activity.PageTitle;
 import org.ieatta.analytics.GalleryFunnel;
 import org.wikipedia.Site;
@@ -143,7 +144,7 @@ public class GalleryActivity extends ThemedActionBarActivity {
 
         descriptionText = (TextView) findViewById(R.id.gallery_description_text);
         descriptionText.setShadowLayer(2, 1, 1, getResources().getColor(R.color.lead_text_shadow));
-        descriptionText.setMovementMethod(linkMovementMethod);
+//        descriptionText.setMovementMethod(linkMovementMethod);
 
         licenseIcon = (ImageView) findViewById(R.id.gallery_license_icon);
         licenseIcon.setOnClickListener(licenseShortClickListener);
@@ -161,12 +162,12 @@ public class GalleryActivity extends ThemedActionBarActivity {
         galleryPager.setAdapter(galleryAdapter);
         galleryPager.setOnPageChangeListener(new GalleryPageChangeListener());
 
-        funnel = new GalleryFunnel(app, pageTitle.getSite(),
-                                   getIntent().getIntExtra(EXTRA_SOURCE, 0));
+//        funnel = new GalleryFunnel(app, pageTitle.getSite(),
+//                                   getIntent().getIntExtra(EXTRA_SOURCE, 0));
 
         if (savedInstanceState == null) {
             if (initialImageTitle != null) {
-                funnel.logGalleryOpen(pageTitle, initialImageTitle.getDisplayText());
+//                funnel.logGalleryOpen(pageTitle, initialImageTitle.getDisplayText());
             }
         } else {
             controlsShowing = savedInstanceState.getBoolean("controlsShowing");
@@ -194,40 +195,40 @@ public class GalleryActivity extends ThemedActionBarActivity {
         updateProgressBar(false, true, 0);
 
         // find our Page in the page cache...
-        app.getPageCache().get(pageTitle, 0, new PageCache.CacheGetListener() {
-            @Override
-            public void onGetComplete(Page page, int sequence) {
-                GalleryActivity.this.page = page;
-                if (page != null && page.getGalleryCollection() != null
-                    && page.getGalleryCollection().getItemList().size() > 0) {
-                    applyGalleryCollection(page.getGalleryCollection());
-                    cacheOnLoad = false;
-                } else {
-                    // fetch the gallery from the network...
-                    fetchGalleryCollection();
-                    cacheOnLoad = true;
-                }
-            }
-
-            @Override
-            public void onGetError(Throwable e, int sequence) {
-                Log.e(TAG, "Failed to get page from cache.", e);
-                fetchGalleryCollection();
-                cacheOnLoad = true;
-            }
-        });
+//        app.getPageCache().get(pageTitle, 0, new PageCache.CacheGetListener() {
+//            @Override
+//            public void onGetComplete(Page page, int sequence) {
+//                GalleryActivity.this.page = page;
+//                if (page != null && page.getGalleryCollection() != null
+//                    && page.getGalleryCollection().getItemList().size() > 0) {
+//                    applyGalleryCollection(page.getGalleryCollection());
+//                    cacheOnLoad = false;
+//                } else {
+//                    // fetch the gallery from the network...
+//                    fetchGalleryCollection();
+//                    cacheOnLoad = true;
+//                }
+//            }
+//
+//            @Override
+//            public void onGetError(Throwable e, int sequence) {
+//                Log.e(TAG, "Failed to get page from cache.", e);
+//                fetchGalleryCollection();
+//                cacheOnLoad = true;
+//            }
+//        });
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        registerReceiver(downloadReceiver, new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
+//        registerReceiver(downloadReceiver, new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        unregisterReceiver(downloadReceiver);
+//        unregisterReceiver(downloadReceiver);
     }
 
     /**
@@ -238,8 +239,8 @@ public class GalleryActivity extends ThemedActionBarActivity {
                                    int source) {
         Intent galleryIntent = new Intent();
         galleryIntent.setClass(activity, GalleryActivity.class);
-        galleryIntent.putExtra(EXTRA_IMAGETITLE, imageTitle);
-        galleryIntent.putExtra(EXTRA_PAGETITLE, pageTitle);
+//        galleryIntent.putExtra(EXTRA_IMAGETITLE, imageTitle);
+//        galleryIntent.putExtra(EXTRA_PAGETITLE, pageTitle);
         galleryIntent.putExtra(EXTRA_SOURCE, source);
         activity.startActivityForResult(galleryIntent, PageActivity.ACTIVITY_REQUEST_GALLERY);
     }
@@ -302,9 +303,9 @@ public class GalleryActivity extends ThemedActionBarActivity {
         super.onBackPressed();
     }
 
-    public MediaDownloadReceiver getDownloadReceiver() {
-        return downloadReceiver;
-    }
+//    public MediaDownloadReceiver getDownloadReceiver() {
+//        return downloadReceiver;
+//    }
 
     /**
      * Show or hide all the UI controls in this activity (slide them out or in).
@@ -333,33 +334,33 @@ public class GalleryActivity extends ThemedActionBarActivity {
      * text fields. For internal links, this activity will close, and pass the page title as
      * the result. For external links, they will be bounced out to the Browser.
      */
-    private LinkMovementMethodExt linkMovementMethod =
-            new LinkMovementMethodExt(new LinkMovementMethodExt.UrlHandler() {
-        @Override
-        public void onUrlClick(String url) {
-            Log.v(TAG, "Link clicked was " + url);
-            url = resolveProtocolRelativeUrl(url);
-            Site site = app.getSite();
-            if (url.startsWith("/wiki/")) {
-                PageTitle title = site.titleForInternalLink(url);
-                finishWithPageResult(title);
-            } else {
-                Uri uri = Uri.parse(url);
-                String authority = uri.getAuthority();
-                if (authority != null && Site.isSupportedSite(authority)
-                    && uri.getPath().startsWith("/wiki/")) {
-                    PageTitle title = site.titleForUri(uri);
-                    finishWithPageResult(title);
-                } else {
-                    // if it's a /w/ URI, turn it into a full URI and go external
-                    if (url.startsWith("/w/")) {
-                        url = String.format("%1$s://%2$s", IEAApp.getInstance().getNetworkProtocol(), site.getDomain()) + url;
-                    }
-                    handleExternalLink(GalleryActivity.this, Uri.parse(url));
-                }
-            }
-        }
-    });
+//    private LinkMovementMethodExt linkMovementMethod =
+//            new LinkMovementMethodExt(new LinkMovementMethodExt.UrlHandler() {
+//        @Override
+//        public void onUrlClick(String url) {
+//            Log.v(TAG, "Link clicked was " + url);
+//            url = resolveProtocolRelativeUrl(url);
+//            Site site = app.getSite();
+//            if (url.startsWith("/wiki/")) {
+//                PageTitle title = site.titleForInternalLink(url);
+//                finishWithPageResult(title);
+//            } else {
+//                Uri uri = Uri.parse(url);
+//                String authority = uri.getAuthority();
+//                if (authority != null && Site.isSupportedSite(authority)
+//                    && uri.getPath().startsWith("/wiki/")) {
+//                    PageTitle title = site.titleForUri(uri);
+//                    finishWithPageResult(title);
+//                } else {
+//                    // if it's a /w/ URI, turn it into a full URI and go external
+//                    if (url.startsWith("/w/")) {
+//                        url = String.format("%1$s://%2$s", IEAApp.getInstance().getNetworkProtocol(), site.getDomain()) + url;
+//                    }
+//                    handleExternalLink(GalleryActivity.this, Uri.parse(url));
+//                }
+//            }
+//        }
+//    });
 
     /**
      * Close this activity, with the specified PageTitle as the activity result, to be picked up
@@ -367,15 +368,15 @@ public class GalleryActivity extends ThemedActionBarActivity {
      * @param resultTitle PageTitle to pass as the activity result.
      */
     public void finishWithPageResult(PageTitle resultTitle) {
-        HistoryEntry historyEntry = new HistoryEntry(resultTitle,
-                                                     HistoryEntry.SOURCE_INTERNAL_LINK);
-        Intent intent = new Intent();
-        intent.setClass(GalleryActivity.this, PageActivity.class);
-        intent.setAction(PageActivity.ACTION_PAGE_FOR_TITLE);
-        intent.putExtra(PageActivity.EXTRA_PAGETITLE, resultTitle);
-        intent.putExtra(PageActivity.EXTRA_HISTORYENTRY, historyEntry);
-        setResult(ACTIVITY_RESULT_FILEPAGE_SELECT, intent);
-        finish();
+//        HistoryEntry historyEntry = new HistoryEntry(resultTitle,
+//                                                     HistoryEntry.SOURCE_INTERNAL_LINK);
+//        Intent intent = new Intent();
+//        intent.setClass(GalleryActivity.this, PageActivity.class);
+//        intent.setAction(PageActivity.ACTION_PAGE_FOR_TITLE);
+//        intent.putExtra(PageActivity.EXTRA_PAGETITLE, resultTitle);
+//        intent.putExtra(PageActivity.EXTRA_HISTORYENTRY, historyEntry);
+//        setResult(ACTIVITY_RESULT_FILEPAGE_SELECT, intent);
+//        finish();
     }
 
     /**
@@ -385,34 +386,34 @@ public class GalleryActivity extends ThemedActionBarActivity {
      */
     private void fetchGalleryCollection() {
         updateProgressBar(true, true, 0);
-        new GalleryCollectionFetchTask(app.getAPIForSite(pageTitle.getSite()),
-                pageTitle.getSite(), pageTitle) {
-            @Override
-            public void onGalleryResult(GalleryCollection result) {
-                updateProgressBar(false, true, 0);
-                // save it to our current page, for later use
-                if (cacheOnLoad && page != null) {
-                    page.setGalleryCollection(result);
-                    app.getPageCache().put(pageTitle, page, new PageCache.CachePutListener() {
-                        @Override
-                        public void onPutComplete() {
-                        }
-
-                        @Override
-                        public void onPutError(Throwable e) {
-                            Log.e(TAG, "Failed to add page to cache.", e);
-                        }
-                    });
-                }
-                applyGalleryCollection(result);
-            }
-            @Override
-            public void onCatch(Throwable caught) {
-                Log.e(TAG, "Failed to fetch gallery collection.", caught);
-                updateProgressBar(false, true, 0);
-                FeedbackUtil.showError(GalleryActivity.this, caught);
-            }
-        }.execute();
+//        new GalleryCollectionFetchTask(app.getAPIForSite(pageTitle.getSite()),
+//                pageTitle.getSite(), pageTitle) {
+//            @Override
+//            public void onGalleryResult(GalleryCollection result) {
+//                updateProgressBar(false, true, 0);
+//                // save it to our current page, for later use
+//                if (cacheOnLoad && page != null) {
+//                    page.setGalleryCollection(result);
+//                    app.getPageCache().put(pageTitle, page, new PageCache.CachePutListener() {
+//                        @Override
+//                        public void onPutComplete() {
+//                        }
+//
+//                        @Override
+//                        public void onPutError(Throwable e) {
+//                            Log.e(TAG, "Failed to add page to cache.", e);
+//                        }
+//                    });
+//                }
+//                applyGalleryCollection(result);
+//            }
+//            @Override
+//            public void onCatch(Throwable caught) {
+//                Log.e(TAG, "Failed to fetch gallery collection.", caught);
+//                updateProgressBar(false, true, 0);
+//                FeedbackUtil.showError(GalleryActivity.this, caught);
+//            }
+//        }.execute();
     }
 
     /**
@@ -427,10 +428,10 @@ public class GalleryActivity extends ThemedActionBarActivity {
         int initialImagePos = -1;
         if (initialImageTitle != null) {
             for (GalleryItem item : collection.getItemList()) {
-                if (item.getName().equals(initialImageTitle.getDisplayText())) {
-                    initialImagePos = collection.getItemList().indexOf(item);
-                    break;
-                }
+//                if (item.getName().equals(initialImageTitle.getDisplayText())) {
+//                    initialImagePos = collection.getItemList().indexOf(item);
+//                    break;
+//                }
             }
             if (initialImagePos == -1) {
                 // the requested image is not present in the gallery collection, so
@@ -438,8 +439,8 @@ public class GalleryActivity extends ThemedActionBarActivity {
                 // (this can happen if the user clicked on an SVG file, since we hide SVGs
                 // by default in the gallery)
                 initialImagePos = 0;
-                collection.getItemList().add(initialImagePos,
-                                             new GalleryItem(initialImageTitle.getDisplayText()));
+//                collection.getItemList().add(initialImagePos,
+//                                             new GalleryItem(initialImageTitle.getDisplayText()));
             }
         }
 
@@ -453,7 +454,7 @@ public class GalleryActivity extends ThemedActionBarActivity {
             // if we have a target image index to jump to, then do it!
             galleryPager.setCurrentItem(initialImageIndex, false);
         }
-        galleryPager.setPageTransformer(false, new GalleryPagerTransformer());
+//        galleryPager.setPageTransformer(false, new GalleryPagerTransformer());
     }
 
     private GalleryItem getCurrentItem() {
@@ -496,11 +497,11 @@ public class GalleryActivity extends ThemedActionBarActivity {
         // (if UsageTerms is not present, then default to Fair Use)
         String usageTerms = item.getMetadata().get("UsageTerms");
         if (TextUtils.isEmpty(usageTerms)) {
-            usageTerms = getString(R.string.gallery_fair_use_license);
+//            usageTerms = getString(R.string.gallery_fair_use_license);
         }
         licenseIcon.setContentDescription(usageTerms);
         // Give the license URL to the icon, to be received by the click handler (may be null).
-        licenseIcon.setTag(item.getLicenseUrl());
+//        licenseIcon.setTag(item.getLicenseUrl());
 
         String creditStr = "";
         if (item.getMetadata().containsKey("Artist")) {
@@ -508,7 +509,7 @@ public class GalleryActivity extends ThemedActionBarActivity {
         }
         // if we couldn't find a attribution string, then default to unknown
         if (TextUtils.isEmpty(creditStr)) {
-            creditStr = getString(R.string.gallery_uploader_unknown);
+//            creditStr = getString(R.string.gallery_uploader_unknown);
         }
         creditText.setText(creditStr);
 
@@ -522,7 +523,8 @@ public class GalleryActivity extends ThemedActionBarActivity {
      * @return Resource ID of the icon to display.
      */
     private static int getLicenseIcon(GalleryItem item) {
-        return item.getLicense().getLicenseIcon();
+//        return item.getLicense().getLicenseIcon();
+        return -1;
     }
 
     /**
