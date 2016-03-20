@@ -23,14 +23,12 @@ public class PageTitle implements Parcelable{
     private final String text;
     private final String fragment;
     @Nullable private String thumbUrl;
-    private final Site site;
     private String description = null;
 
-    public PageTitle(@Nullable final String namespace, final String text, final String fragment, @Nullable final String thumbUrl, final Site site) {
+    public PageTitle(@Nullable final String namespace, final String text, final String fragment, @Nullable final String thumbUrl) {
         this.namespace = namespace;
         this.text = text;
         this.fragment = fragment;
-        this.site = site;
         this.thumbUrl = thumbUrl;
     }
 
@@ -39,8 +37,8 @@ public class PageTitle implements Parcelable{
         this.description = description;
     }
 
-    public PageTitle(@Nullable final String namespace, final String text, final Site site) {
-        this(namespace, text, null, null, site);
+    public PageTitle(@Nullable final String namespace, final String text) {
+        this(namespace, text, null, null);
     }
 
     public PageTitle(String text, final Site site, @Nullable String thumbUrl) {
@@ -48,7 +46,6 @@ public class PageTitle implements Parcelable{
         this.fragment = "";
         this.text = text;
         this.thumbUrl = thumbUrl;
-        this.site = site;
     }
 
     public PageTitle(String text, final Site site) {
@@ -60,9 +57,6 @@ public class PageTitle implements Parcelable{
         return namespace;
     }
 
-    public Site getSite() {
-        return site;
-    }
 
     public String getText() {
         return text.replace(" ", "_");
@@ -118,7 +112,6 @@ public class PageTitle implements Parcelable{
         namespace = in.readString();
         text = in.readString();
         fragment = in.readString();
-        site = in.readParcelable(Site.class.getClassLoader());
         thumbUrl = in.readString();
         description = in.readString();
     }
@@ -128,7 +121,6 @@ public class PageTitle implements Parcelable{
         parcel.writeString(namespace);
         parcel.writeString(text);
         parcel.writeString(fragment);
-        parcel.writeParcelable(site, flags);
         parcel.writeString(thumbUrl);
         parcel.writeString(description);
     }
@@ -141,13 +133,13 @@ public class PageTitle implements Parcelable{
 
         PageTitle other = (PageTitle)o;
         // Not using namespace directly since that can be null
-        return other.getPrefixedText().equals(getPrefixedText()) && other.site.equals(site);
+        return other.getPrefixedText().equals(getPrefixedText());
     }
 
     @Override
     public int hashCode() {
         int result = getPrefixedText().hashCode();
-        result = 31 * result + site.hashCode();
+        result = 31 * result ;
         return result;
     }
 
