@@ -55,7 +55,7 @@ public class RestaurantDetailTask {
                 RestaurantDetailTask.this.galleryCollection = new GalleryCollection(DBConvert.toGalleryItem(task.getResult()));
                 return new RealmModelReader<DBEvent>(DBEvent.class).fetchResults(
                         new DBBuilder().whereEqualTo(DBConstant.kPAPFieldLocalRestaurantKey, restaurantUUID), false);
-//                return new RealmModelReader<DBEvent>(DBEvent.class).fetchResults(new DBBuilder(), false);
+//                return new RealmModelReader<DBEvent>(DBEvent.class).fetchResults(new DBBuilder(), false);// for test
             }
         }).onSuccessTask(new Continuation<RealmResults<DBEvent>, Task<RealmResults<DBReview>>>() {
             @Override
