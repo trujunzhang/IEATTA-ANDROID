@@ -28,6 +28,7 @@ import org.ieatta.activity.fragments.search.SearchBarHideHandler;
 import org.ieatta.activity.leadimages.ArticleHeaderView;
 import org.ieatta.activity.leadimages.LeadImagesHandler;
 import org.ieatta.cells.IEARestaurantEventsCell;
+import org.ieatta.cells.header.IEAEmptyHeaderCell;
 import org.ieatta.cells.header.IEARestaurantDetailHeaderCell;
 import org.ieatta.cells.model.IEARestaurantDetailHeader;
 import org.ieatta.cells.model.SectionTitleCellModel;
@@ -148,6 +149,7 @@ public class RestaurantDetailFragment extends DetailFragment {
     }
 
     private void setupUI() {
+        this.manager.setRegisterCellClass(IEAEmptyHeaderCell.getType(), RestaurantDetailSection.section_leadimage.ordinal());
         this.manager.setRegisterCellClass(IEARestaurantEventsCell.getType(), RestaurantDetailSection.section_events.ordinal());
 
         this.manager.appendSectionTitleCell(new SectionTitleCellModel(IEAEditKey.Section_Title, R.string.Events_Recorded), RestaurantDetailSection.section_events.ordinal());

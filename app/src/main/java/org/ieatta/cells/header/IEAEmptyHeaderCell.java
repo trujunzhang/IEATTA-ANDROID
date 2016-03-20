@@ -41,6 +41,6 @@ public class IEAEmptyHeaderCell extends IEAViewHolder {
 
     @Override
     public void render(Object value) {
-        this.emptyLinearLayout.setMinimumHeight(200);
+        this.emptyLinearLayout.setMinimumHeight(1461);
     }
 }

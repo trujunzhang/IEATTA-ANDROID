@@ -256,7 +256,8 @@ public class LeadImagesHandler {
         if (isMainPage()) {
             padding = Math.round(getContentTopOffsetPx(getActivity()) / displayDensity);
         } else {
-            padding = Math.round(articleHeaderView.getHeight() / displayDensity);
+            int height = articleHeaderView.getHeight();
+            padding = Math.round(height / displayDensity);
         }
 
         setWebViewPaddingTop(padding);
