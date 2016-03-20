@@ -29,10 +29,9 @@ public class MemoryStorage {
         // this.sections.put(new Integer(toSection), new SectionModel(items));
     }
 
-    private void reloadTableView(int forSectionIndex, int row) {
+    private void reloadTableView(int position) {
         this.tableViewUtil.generateItems(this.sections);
 
-        int position = 0;
         this.adapter.notifyItemChanged(position);
     }
 
@@ -58,7 +57,7 @@ public class MemoryStorage {
         SectionModel section = this.verifySection(forSectionIndex);
         section.items.set(row,item);
 
-        this.reloadTableView(forSectionIndex, row);
+        this.reloadTableView(this.getRowPosition(forSectionIndex,row));
     }
 
     /// Set section header model for MemoryStorage
