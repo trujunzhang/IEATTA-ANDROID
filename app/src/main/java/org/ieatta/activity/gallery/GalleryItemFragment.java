@@ -57,7 +57,6 @@ public class GalleryItemFragment extends Fragment {
     private PageTitle pageTitle;
     private PageTitle imageTitle;
     private String mimeType;
-    private ProgressBar progressBar;
 
     private ZoomableDraweeView imageView;
 
@@ -98,7 +97,6 @@ public class GalleryItemFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_gallery_item, container, false);
-        progressBar = (ProgressBar) rootView.findViewById(R.id.gallery_item_progress_bar);
         videoContainer = rootView.findViewById(R.id.gallery_video_container);
         videoView = (VideoView) rootView.findViewById(R.id.gallery_video);
         videoThumbnail = (SimpleDraweeView) rootView.findViewById(R.id.gallery_video_thumbnail);
@@ -129,14 +127,6 @@ public class GalleryItemFragment extends Fragment {
         } else {
             loadMedia();
         }
-    }
-
-    private void updateProgressBar(boolean visible, boolean indeterminate, int value) {
-        progressBar.setIndeterminate(indeterminate);
-        if (!indeterminate) {
-            progressBar.setProgress(value);
-        }
-        progressBar.setVisibility(visible ? View.VISIBLE : View.GONE);
     }
 
     @Override
@@ -209,7 +199,7 @@ public class GalleryItemFragment extends Fragment {
      * Perform a network request to load information and metadata for our gallery item.
      */
     private void loadGalleryItem() {
-        updateProgressBar(true, true, 0);
+
 //        new GalleryItemFetchTask(app.getAPIForSite(pageTitle.getSite()),
 //                pageTitle.getSite(), imageTitle, FileUtil.isVideo(mimeType)) {
 //            @Override
@@ -290,7 +280,6 @@ public class GalleryItemFragment extends Fragment {
                         if (!isAdded()) {
                             return;
                         }
-                        updateProgressBar(false, true, 0);
                         if (shouldHaveWhiteBackground(galleryItem.getMimeType())) {
                             imageView.setBackgroundColor(Color.WHITE);
                         }
@@ -302,7 +291,6 @@ public class GalleryItemFragment extends Fragment {
                         if (!isAdded()) {
                             return;
                         }
-                        updateProgressBar(false, true, 0);
                         FeedbackUtil.showMessage(getActivity(), R.string.gallery_error_draw_failed);
                     }
                 })
