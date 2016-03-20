@@ -3,6 +3,7 @@ package org.wikipedia.util;
 import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
+import android.graphics.Point;
 import android.support.annotation.DimenRes;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
@@ -134,6 +135,13 @@ public final class DimenUtil {
 
     private static boolean isStatusBarTranslucent() {
         return ApiUtil.hasKitKat();
+    }
+
+    public static int getScreenHeight(Window window){
+        Point size = new Point();
+        window.getWindowManager().getDefaultDisplay().getRealSize(size);
+        int screenHeight = size.y;
+        return screenHeight;
     }
 
     private DimenUtil() { }

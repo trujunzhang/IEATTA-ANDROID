@@ -1,5 +1,8 @@
 package org.ieatta.cells.model;
 
+import android.view.Display;
+import android.widget.LinearLayout;
+
 public class IEAEmptyHeader {
     private int cellHeight;
 

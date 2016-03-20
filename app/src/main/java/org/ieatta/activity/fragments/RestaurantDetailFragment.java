@@ -117,7 +117,7 @@ public class RestaurantDetailFragment extends DetailFragment {
 
     @Override
     protected void reloadPage() {
-        this.manager.setSectionItems(CollectionUtil.createList(new IEAEmptyHeader(0)), RestaurantDetailSection.section_leadimage.ordinal());
+        this.manager.setSectionItems(CollectionUtil.createList(new IEAEmptyHeader(this.getScreenHeight())), RestaurantDetailSection.section_leadimage.ordinal());
         this.manager.setSectionItems(task.events, RestaurantDetailSection.section_events.ordinal());
 
         model.setPage(task.getPage());
