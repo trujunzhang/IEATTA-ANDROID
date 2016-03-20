@@ -12,6 +12,7 @@ import android.webkit.WebView;
 import android.graphics.Canvas;
 
 import org.ieatta.IEAApp;
+import org.ieatta.analytics.ObservableWebViewFunnel;
 import org.ieatta.events.WebViewInvalidateEvent;
 
 import java.util.ArrayList;
@@ -185,12 +186,22 @@ public class ObservableWebView extends RecyclerView {
         if (isInEditMode()) {
             return;
         }
-//        if (contentHeight != getContentHeight()) {
-//            contentHeight = getContentHeight();
-//            for (OnContentHeightChangedListener listener : onContentHeightChangedListeners) {
-//                listener.onContentHeightChanged(contentHeight);
-//            }
-//        }
-//        IEAApp.getInstance().getBus().post(INVALIDATE_EVENT);
+
+        if (contentHeight != getContentHeight()) {
+            contentHeight = getContentHeight();
+            for (OnContentHeightChangedListener listener : onContentHeightChangedListeners) {
+                listener.onContentHeightChanged(contentHeight);
+            }
+        }
+        new ObservableWebViewFunnel().logOnDraw(contentHeight);
+        IEAApp.getInstance().getBus().post(INVALIDATE_EVENT);
+    }
+
+    private int getContentWidth() {
+        return getWidth() - getPaddingLeft() - getPaddingRight();
+    }
+
+    private int getContentHeight() {
+        return getHeight() - getPaddingTop() - getPaddingBottom();
     }
 }
