@@ -18,23 +18,13 @@ public class GalleryCollection {
         return itemList;
     }
 
-    public JSONObject toJSON() {
-        JSONObject json = new JSONObject();
-        try {
-            JSONArray itemsJSON = new JSONArray();
-            for (GalleryItem item : itemList) {
-                JSONObject itemJSON = item.toJSON();
-                if (itemJSON != null) {
-                    itemsJSON.put(itemJSON);
-                }
-            }
-            json.put("items", itemsJSON);
-            return json;
-        } catch (JSONException e) {
-            throw new RuntimeException(e);
-        }
+    public void setItemList(List<GalleryItem> itemList) {
+        this.itemList = itemList;
     }
 
+    public GalleryCollection(List<GalleryItem> itemList) {
+        this.itemList = itemList;
+    }
 
     public GalleryCollection(Map<PageTitle, GalleryItem> galleryMap) {
         itemList = new ArrayList<>();

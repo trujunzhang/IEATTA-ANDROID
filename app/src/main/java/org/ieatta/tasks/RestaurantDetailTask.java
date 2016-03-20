@@ -4,6 +4,7 @@ import org.ieatta.activity.Page;
 import org.ieatta.activity.PageProperties;
 import org.ieatta.activity.PageTitle;
 import org.ieatta.activity.PhotoGalleryModel;
+import org.ieatta.activity.gallery.GalleryCollection;
 import org.ieatta.database.models.DBEvent;
 import org.ieatta.database.models.DBPhoto;
 import org.ieatta.database.models.DBRestaurant;
@@ -27,6 +28,7 @@ public class RestaurantDetailTask {
     public RealmResults<DBEvent> events;
     public RealmResults<DBReview> reviews;
     public RealmResults<DBPhoto> galleryPhoto;
+    public GalleryCollection galleryCollection;
     private PhotoGalleryModel photoGalleryModel;
 
 
