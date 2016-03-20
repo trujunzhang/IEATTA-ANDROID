@@ -42,6 +42,14 @@ public class PageTitle implements Parcelable{
         this(namespace, text, null, null);
     }
 
+    public PageTitle(String uuid) {
+        this.uuid = uuid;
+
+        this.namespace = "";
+        this.text ="";
+        this.fragment = "";
+    }
+
     public PageTitle(String text, final Site site, @Nullable String thumbUrl) {
         this.namespace = "";
         this.fragment = "";
