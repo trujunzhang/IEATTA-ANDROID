@@ -4,6 +4,7 @@ import android.location.Location;
 
 import org.ieatta.database.models.DBPhoto;
 import org.ieatta.database.models.DBRestaurant;
+import org.ieatta.database.provide.PQueryModelType;
 import org.ieatta.database.realm.DBBuilder;
 import org.ieatta.database.realm.RealmModelReader;
 import org.ieatta.parse.DBConstant;
@@ -25,6 +26,14 @@ public class LocalDatabaseQuery {
     public static Task<RealmResults<DBPhoto>> queryPhotosForRestaurant(String UUID) {
         DBBuilder builder = new DBBuilder()
                 .whereEqualTo(DBConstant.kPAPFieldLocalRestaurantKey, UUID)
+                .orderByDescending(DBConstant.kPAPFieldObjectCreatedDateKey);
+        return new RealmModelReader<DBPhoto>(DBPhoto.class).fetchResults(builder, false);
+    }
+
+    public static Task<RealmResults<DBPhoto>> queryPhotosByModel(String usedRef,int usedType) {
+        DBBuilder builder = new DBBuilder()
+                .whereEqualTo(DBConstant.kPAPFieldUsedRefKey, usedRef)
+                .whereEqualTo(DBConstant.kPAPFieldUsedTypeKey, usedType)
                 .orderByDescending(DBConstant.kPAPFieldObjectCreatedDateKey);
         return new RealmModelReader<DBPhoto>(DBPhoto.class).fetchResults(builder, false);
     }
