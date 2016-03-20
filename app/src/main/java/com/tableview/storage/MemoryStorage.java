@@ -144,7 +144,11 @@ public class MemoryStorage {
     }
 
     public int getRowPosition(int forSectionIndex, int row){
-        return cellTypeUtil.getRowPosition(forSectionIndex,row);
+        int position = 0;
+        for (int i = 0; i < forSectionIndex; i++) {
+            position+=this.sections.get(i).numberOfItems();
+        }
+        return position + row;
     }
 
     public RowModel getItem(int position) {
