@@ -270,7 +270,7 @@ public abstract class DetailFragment extends PageFragment implements BackPressed
             = new GalleryThumbnailScrollView.GalleryViewListener() {
         @Override
         public void onGalleryItemClicked(String imageName) {
-            PageTitle imageTitle = new PageTitle(imageName, null);
+            PageTitle imageTitle = new PageTitle(imageName, "");
 //            GalleryActivity.showGallery(getActivity(), pageTitle, imageTitle,
 //                    GalleryFunnel.SOURCE_LINK_PREVIEW);
         }
