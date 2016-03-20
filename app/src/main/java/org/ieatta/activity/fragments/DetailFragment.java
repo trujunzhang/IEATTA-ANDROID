@@ -1,8 +1,10 @@
 package org.ieatta.activity.fragments;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +36,14 @@ public abstract class DetailFragment extends PageFragment implements BackPressed
         return model.getTitleOriginal();
     }
 
+
+    @NonNull
+    private final SwipeRefreshLayout.OnRefreshListener pageRefreshListener = new SwipeRefreshLayout.OnRefreshListener() {
+        @Override
+        public void onRefresh() {
+//            refreshPage();
+        }
+    };
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
