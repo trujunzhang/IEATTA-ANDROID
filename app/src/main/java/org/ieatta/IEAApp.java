@@ -13,6 +13,7 @@ import com.facebook.drawee.backends.pipeline.Fresco;
 import com.squareup.otto.Bus;
 
 import org.ieatta.parse.ParseAPI;
+import org.ieatta.server.cache.CacheImageUtil;
 import org.ieatta.server.recurring.SyncRecurringTask;
 import org.wikipedia.ViewAnimations;
 import org.wikipedia.crash.CrashReporter;
@@ -96,6 +97,9 @@ public class IEAApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        /// Clean up all cache folder contains downloaded original images.
+        CacheImageUtil.sharedInstance.clearCacheDisk();
 
         ParseAPI.setup(this);
 //        initExceptionHandling();

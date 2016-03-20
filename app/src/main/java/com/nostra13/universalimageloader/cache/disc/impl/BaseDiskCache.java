@@ -218,7 +218,14 @@ public abstract class BaseDiskCache implements DiskCache {
         File[] files = cacheDir.listFiles();
         if (files != null) {
             for (File f : files) {
-                f.delete();
+                if(f.isDirectory() ==true){
+                    File[] listFiles = f.listFiles();
+                    for(File sF: listFiles){
+                        sF.delete();
+                    }
+                }else {
+                    f.delete();
+                }
             }
         }
     }
