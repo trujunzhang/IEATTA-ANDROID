@@ -12,6 +12,7 @@ import org.wikipedia.Site;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.Arrays;
+import java.util.Date;
 
 import static org.wikipedia.util.StringUtil.capitalizeFirstChar;
 import static org.wikipedia.util.StringUtil.md5string;
@@ -25,6 +26,7 @@ public class PageTitle implements Parcelable{
     @Nullable private String thumbUrl;
     private String description = null;
     private String uuid;
+    private Date createdAt;
 
     public PageTitle(@Nullable final String namespace, final String text, final String fragment, @Nullable final String thumbUrl) {
         this.namespace = namespace;
@@ -38,10 +40,14 @@ public class PageTitle implements Parcelable{
         this.description = description;
     }
 
-    public PageTitle(@Nullable final String namespace, final String text) {
-        this(namespace, text, null, null);
-    }
+    public PageTitle(String uuid,String thumbUrl) {
+        this.uuid = uuid;
+        this.thumbUrl = thumbUrl;
 
+        this.namespace = "";
+        this.text ="";
+        this.fragment = "";
+    }
     public PageTitle(String uuid) {
         this.uuid = uuid;
 

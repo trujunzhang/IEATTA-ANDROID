@@ -37,6 +37,8 @@ import org.ieatta.IEAApp;
 import org.ieatta.R;
 
 import org.ieatta.activity.PageTitle;
+import org.ieatta.database.models.DBPhoto;
+import org.ieatta.server.cache.ThumbnailImageUtil;
 import org.wikipedia.util.FeedbackUtil;
 import org.wikipedia.util.FileUtil;
 import org.wikipedia.util.PermissionUtil;
@@ -76,7 +78,7 @@ public class GalleryItemFragment extends Fragment {
         GalleryItemFragment f = new GalleryItemFragment();
         Bundle args = new Bundle();
         args.putParcelable(ARG_PAGETITLE, pageTitle);
-        args.putParcelable(ARG_MEDIATITLE, new PageTitle(galleryItemProto.getUUID()));
+        args.putParcelable(ARG_MEDIATITLE, new PageTitle(galleryItemProto.getUUID(),galleryItemProto.getThumbUrl()));
         args.putString(ARG_MIMETYPE, galleryItemProto.getMimeType());
         f.setArguments(args);
         return f;
@@ -199,7 +201,13 @@ public class GalleryItemFragment extends Fragment {
      * Perform a network request to load information and metadata for our gallery item.
      */
     private void loadGalleryItem() {
-
+        String uuid = this.imageTitle.getUUID();
+        String usedRef = this.pageTitle.getUUID();
+        DBPhoto photo = new DBPhoto();
+        photo.setUUID(uuid);
+        photo.setUsedRef(usedRef);
+//        photo.setObjectCreatedDate(this.imageTitle.);
+        ThumbnailImageUtil.sharedInstance.getCacheImageUrl(photo);
 
 //        new GalleryItemFetchTask(app.getAPIForSite(pageTitle.getSite()),
 //                pageTitle.getSite(), imageTitle, FileUtil.isVideo(mimeType)) {

@@ -43,6 +43,7 @@ import org.wikipedia.util.GradientUtil;
 import org.wikipedia.views.ViewUtil;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import bolts.Continuation;
@@ -555,8 +556,9 @@ public class GalleryActivity extends ThemedActionBarActivity {
             }
             // instantiate a new fragment if it doesn't exist
             if (fragmentArray.get(position) == null) {
+                List<GalleryItem> itemList = galleryCollection.getItemList();
                 fragmentArray.put(position, GalleryItemFragment
-                        .newInstance(pageTitle, galleryCollection.getItemList().get(position)));
+                        .newInstance(pageTitle, itemList.get(position)));
             }
             return fragmentArray.get(position);
         }
