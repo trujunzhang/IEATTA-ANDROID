@@ -36,6 +36,8 @@ public class ObservableWebView extends RecyclerView {
     private long lastScrollTime;
     private int totalAmountScrolled;
 
+    private int lastTop;
+
     /**
      * Threshold (in pixels) of continuous scrolling, to be considered "fast" scrolling.
      */
@@ -135,11 +137,31 @@ public class ObservableWebView extends RecyclerView {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-
-                new ObservableWebViewFunnel().logOnScrollChanged(dy, dy, true);
+                int top = ObservableWebView.this.lastTop + dy;
+                ObservableWebView.this.setOnScrollChanged(0, top, 0, ObservableWebView.this.lastTop);
             }
         });
     }
+
+    private void setOnScrollChanged(int left, int top, int oldLeft, int oldTop) {
+        this.lastTop = top;
+        boolean isHumanScroll = Math.abs(top - oldTop) < MAX_HUMAN_SCROLL;
+        for (OnScrollChangeListener listener : onScrollChangeListeners) {
+            listener.onScrollChanged(oldTop, top, isHumanScroll);
+        }
+        new ObservableWebViewFunnel().logOnScrollChanged(oldTop, top, isHumanScroll);
+        if (!isHumanScroll) {
+            return;
+        }
+        totalAmountScrolled += (top - oldTop);
+        if (Math.abs(totalAmountScrolled) > FAST_SCROLL_THRESHOLD
+                && onFastScrollListener != null) {
+            onFastScrollListener.onFastScroll();
+            totalAmountScrolled = 0;
+        }
+        lastScrollTime = System.currentTimeMillis();
+    }
+
 
 //    @Override
 //    protected void onScrollChanged(int left, int top, int oldLeft, int oldTop) {
