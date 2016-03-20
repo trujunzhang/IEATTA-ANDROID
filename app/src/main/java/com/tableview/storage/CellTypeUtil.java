@@ -33,13 +33,11 @@ public class CellTypeUtil {
     public int getRowModelType(RowModel rowModel) {
         for (Integer index : this.rowTypes.keySet()) {
             Class clazz = this.rowTypes.get(index);
-            if (clazz == null) {
-                int x = 0;
-//                assert("not found class type: "+clazz.getName()+",you need to register it.");
-            }
-            if (rowModel.cellType.cellClazz.equals(clazz)) {
+            if (clazz == null)
+                throw new NullPointerException("Not found class called "+clazz.getName());
+
+            if (rowModel.cellType.cellClazz.equals(clazz))
                 return index.intValue();
-            }
         }
         return 0;
     }
@@ -47,9 +45,8 @@ public class CellTypeUtil {
     private boolean isExistRegisterType(Class aClass) {
         for (Integer index : this.rowTypes.keySet()) {
             Class clazz = this.rowTypes.get(index);
-            if (aClass.equals(clazz)) {
+            if (aClass.equals(clazz))
                 return true;
-            }
         }
         return false;
     }

@@ -32,7 +32,8 @@ public class MemoryStorage {
     private void reloadTableView(int forSectionIndex, int row) {
         this.tableViewUtil.generateItems(this.sections);
 
-        this.adapter.notifyItemChanged(0);
+        int position = 0;
+        this.adapter.notifyItemChanged(position);
     }
 
     private void reloadTableView() {
@@ -57,7 +58,7 @@ public class MemoryStorage {
         SectionModel section = this.verifySection(forSectionIndex);
         section.items.set(row,item);
 
-        this.reloadTableView(forSectionIndex,row);
+        this.reloadTableView(forSectionIndex, row);
     }
 
     /// Set section header model for MemoryStorage
@@ -139,8 +140,11 @@ public class MemoryStorage {
 
     public int getItemViewType(int position) {
         RowModel rowModel = this.getRowModelFromPosition(position);
-        int type = cellTypeUtil.getRowModelType(rowModel);
-        return type;
+        return cellTypeUtil.getRowModelType(rowModel);
+    }
+
+    public int getRowPosition(int forSectionIndex, int row){
+        return cellTypeUtil.getRowPosition(forSectionIndex,row);
     }
 
     public RowModel getItem(int position) {
