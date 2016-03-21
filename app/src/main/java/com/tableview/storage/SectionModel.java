@@ -48,6 +48,11 @@ public class SectionModel {
             }
             row--;
         }
+        if(footerModel!= null){
+            if(row == (this.numberOfItems() -1)){
+                return new RowModel(footerModel);
+            }
+        }
         if (row < this.items.size()) {
             CellType type = this.getRowType(row, this.cellType);
             return new RowModel(this.items.get(row), type, new NSIndexPath(sectionIndex, row));

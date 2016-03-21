@@ -49,6 +49,18 @@ public class TableViewUtil {
     public RowModel getItem(int position) {
         int total = 0;
 
+        if(headerViewSection != null){
+            if(position == 0){
+                return headerViewSection.getRowModel(0);
+            }
+        }
+        if(footerViewSection!= null){
+            if(position == (this.rowLength-1)){
+                return footerViewSection.getRowModel(0);
+            }
+        }
+
+
         for (Integer key : this.sectionInfo.keySet()) {
             Integer count = this.sectionInfo.get(key);
 
