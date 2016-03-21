@@ -30,6 +30,9 @@ public class CellTypeUtil {
     }
 
     public int getRowModelType(RowModel rowModel) {
+        if (rowModel == null)
+            throw new NullPointerException("Not found rowModel");
+
         for (Integer index : this.rowTypes.keySet()) {
             Class clazz = this.rowTypes.get(index);
             if (clazz == null)
@@ -37,7 +40,7 @@ public class CellTypeUtil {
 
             CellType cellType = rowModel.cellType;
             if (cellType == null)
-                throw new NullPointerException("Not found cellType called ");
+                throw new NullPointerException("Not found cellType");
 
             if (cellType.cellClazz.equals(clazz))
                 return index.intValue();
