@@ -39,11 +39,10 @@ public class IEAReviewsCell extends IEAViewHolder {
     public void render(Object value) {
         ReviewsCellModel model = (ReviewsCellModel) value;
 
-        this.titleLabel.setText(model.title);
-        this.timeAgoTextView.setText(model.timeAgoString);
-
         this.avatarView.loadNewPhotoByModel(model.userUUID);
 
+        this.titleLabel.setText(model.title);
+        this.timeAgoTextView.setText(model.timeAgoString);
         this.business_review_star_rating.setImageLevel(model.ratingValue);
         this.reviewContentLabel.setText(model.reviewContent);
     }
