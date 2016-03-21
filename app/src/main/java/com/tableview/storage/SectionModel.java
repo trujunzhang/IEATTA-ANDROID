@@ -17,12 +17,12 @@ public class SectionModel {
     /// - Warning: If you try to set new array to this property [T], the only way to do this without exception is to wrap it into items.map { $0 }. This is a workaround that exists because of Swift inability to cast [T] to [Any]. You can call `setItems` method instead of doing so.
     /// - SeeAlso: `setItems:`
     public List items = new LinkedList<>();
-    public int sectionIndex;
+    private int sectionIndex;
     public CellType cellType;
     public HashMap<Integer, CellType> specialRows = new LinkedHashMap<>();
 
-    public HeaderModel headerModel;
-    public FooterModel footerModel;
+    private HeaderModel headerModel;
+    private FooterModel footerModel;
 
     public SectionModel() {
         this.sectionIndex = -1;

@@ -48,6 +48,10 @@ public class MemoryStorage {
     }
 
     public void updateHeaderItem(Object item) {
+        if(this.headerViewSection == null)
+            throw new NullPointerException("Not found headerViewSection!");
+
+//        this.headerViewSection.headerModel
 //        this.headerViewSection.setFooterModel(item);
     }
 
