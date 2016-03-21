@@ -369,7 +369,7 @@ public class DetailPageLoadStrategy implements PageLoadStrategy {
             if (!fragment.isAdded() || !sequenceNumber.inSync(sequence)) {
                 return;
             }
-//            searchBarHideHandler.setFadeEnabled(leadImagesHandler.isLeadImageEnabled());
+            searchBarHideHandler.setFadeEnabled(leadImagesHandler.isLeadImageEnabled());
 
             if (runnable != null) {
                 // when the lead image is laid out, load the lead section and the rest
