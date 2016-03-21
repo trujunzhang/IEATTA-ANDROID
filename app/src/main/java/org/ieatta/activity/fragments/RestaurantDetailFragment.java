@@ -59,14 +59,14 @@ public class RestaurantDetailFragment extends DetailFragment {
 
     private void setupUI() {
         this.manager.setHeaderView(IEAHeaderView.getType());
-        this.manager.setFooterView(IEAFooterView.getType());
+//        this.manager.setFooterView(IEAFooterView.getType());
 
-        this.manager.setRegisterCellClass(IEARestaurantEventsCell.getType(), RestaurantDetailSection.section_events.ordinal());
-        this.manager.setRegisterCellClass(IEAGalleryThumbnailCell.getType(), RestaurantDetailSection.section_gallery_thumbnail.ordinal());
-        this.manager.setRegisterCellClass(IEAReviewsCell.getType(), RestaurantDetailSection.section_reviews.ordinal());
+//        this.manager.setRegisterCellClass(IEARestaurantEventsCell.getType(), RestaurantDetailSection.section_events.ordinal());
+//        this.manager.setRegisterCellClass(IEAGalleryThumbnailCell.getType(), RestaurantDetailSection.section_gallery_thumbnail.ordinal());
+//        this.manager.setRegisterCellClass(IEAReviewsCell.getType(), RestaurantDetailSection.section_reviews.ordinal());
 
-        this.manager.appendSectionTitleCell(new SectionTitleCellModel(IEAEditKey.Section_Title, R.string.Events_Recorded), RestaurantDetailSection.section_events.ordinal());
-        this.manager.appendSectionTitleCell(new SectionTitleCellModel(IEAEditKey.Section_Title, R.string.Reviews), RestaurantDetailSection.section_reviews.ordinal());
+//        this.manager.appendSectionTitleCell(new SectionTitleCellModel(IEAEditKey.Section_Title, R.string.Events_Recorded), RestaurantDetailSection.section_events.ordinal());
+//        this.manager.appendSectionTitleCell(new SectionTitleCellModel(IEAEditKey.Section_Title, R.string.Reviews), RestaurantDetailSection.section_reviews.ordinal());
     }
 
     @Override
@@ -95,9 +95,9 @@ public class RestaurantDetailFragment extends DetailFragment {
     @Override
     protected void reloadPage() {
         this.manager.setHeaderItem(new IEAHeaderViewModel(this.getScreenHeight()),IEAHeaderView.getType());
-        this.manager.setFooterItem(new IEAFooterViewModel(),IEAFooterView.getType());
+//        this.manager.setFooterItem(new IEAFooterViewModel(),IEAFooterView.getType());
 
-        this.manager.setSectionItems(task.events, RestaurantDetailSection.section_events.ordinal());
+//        this.manager.setSectionItems(task.events, RestaurantDetailSection.section_events.ordinal());
 
 //        this.manager.setSectionItems(CollectionUtil.createList(new IEAGalleryThumbnail(this.task.thumbnailGalleryCollection,this.galleryViewListener)), RestaurantDetailSection.section_gallery_thumbnail.ordinal());
 //        this.manager.setSectionItems(task.reviewsCellModelList, RestaurantDetailSection.section_reviews.ordinal());

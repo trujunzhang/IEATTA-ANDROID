@@ -33,9 +33,9 @@ public class TableViewUtil {
             this.rowLength += count;
             sectionCountInfo.put(integer, count);
         }
-        if (this.headerViewSection != null)
+        if (this.headerViewSection != null&&this.headerViewSection.getHeaderModel()!= null)
             this.rowLength++;
-        if (this.footerViewSection != null)
+        if (this.footerViewSection != null&& this.footerViewSection.getFooterModel()!= null)
             this.rowLength++;
     }
 
