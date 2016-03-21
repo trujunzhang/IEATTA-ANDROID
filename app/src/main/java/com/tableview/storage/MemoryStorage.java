@@ -58,16 +58,12 @@ public class MemoryStorage {
     public void setItems(List items, int forSectionIndex) {
         SectionModel section = this.verifySection(forSectionIndex);
         section.items = items;
-
-//        this.sections.put(forSectionIndex, section);
-
         this.reloadTableView();
     }
 
     public void updateItem(Object item, int forSectionIndex, int row){
         SectionModel section = this.verifySection(forSectionIndex);
         section.items.set(row,item);
-
         this.reloadTableView(this.getRowPosition(forSectionIndex,row));
     }
 
