@@ -79,4 +79,6 @@ public class DTTableViewManager {
     public void setFooterView(CellType type) {
 
     }
+
+
 }

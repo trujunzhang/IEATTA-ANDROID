@@ -113,6 +113,14 @@ public class RecycleViewManager {
         getTableManager().setFooterView(type);
     }
 
+    public void setItemForHeader(Object item) {
+        getMemoryStorage().setItemForHeader(item);
+    }
+
+    public void setItemForFooter(Object item) {
+        getMemoryStorage().setItemForFooter(item);
+    }
+
     public void setRegisterCellClass(CellType type, int forSectionIndex) {
         getTableManager().registerCellClass(type, forSectionIndex);
     }

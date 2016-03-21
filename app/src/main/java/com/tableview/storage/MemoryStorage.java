@@ -41,6 +41,14 @@ public class MemoryStorage {
         this.adapter.notifyDataSetChanged();
     }
 
+    public void setItemForHeader(Object item) {
+
+    }
+
+    public void setItemForFooter(Object item) {
+
+    }
+
     /// Set items for specific section. This will reload UI after updating.
     /// - Parameter items: items to set for section
     /// - Parameter forSectionIndex: index of section to update
