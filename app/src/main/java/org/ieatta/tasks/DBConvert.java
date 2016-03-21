@@ -50,8 +50,6 @@ public class DBConvert {
     }
 
     public static List<ReviewsCellModel> toReviewsCellModels(RealmResults<DBReview> reviews, RealmResults<DBTeam> teams) {
-
-
         List<ReviewsCellModel> list = new LinkedList<>();
         for (DBReview review : reviews) {
             ReviewsCellModel item = new ReviewsCellModel(review, DBConvert.getTeamUUID(review.getUserRef(), teams));

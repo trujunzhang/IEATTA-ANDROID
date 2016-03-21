@@ -39,7 +39,8 @@ public class ReviewQuery {
             @Override
             public Task<List<ReviewsCellModel>> then(Task<RealmResults<DBTeam>> task) throws Exception {
                 RealmResults<DBTeam> teams = task.getResult();
-                return Task.forResult(DBConvert.toReviewsCellModels(ReviewQuery.this.reviews,teams));
+                List<ReviewsCellModel> value = DBConvert.toReviewsCellModels(ReviewQuery.this.reviews, teams);
+                return Task.forResult(value);
             }
         });
     }
@@ -47,7 +48,7 @@ public class ReviewQuery {
     private List<String> getTeamsList(RealmResults<DBReview> reviews){
         List<String> list = new LinkedList<>();
         for (DBReview review:reviews) {
-            list.add(review.getReviewRef());
+            list.add(review.getUserRef());
         }
         return list;
     }
