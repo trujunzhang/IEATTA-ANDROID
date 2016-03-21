@@ -6,13 +6,13 @@ import java.util.List;
 
 import bolts.Task;
 
-public class LeadImagesModel {
+public class LeadImageCollection {
     public int galleryIndex;
     public List<LeadImage> leadImages;
 
     private String usedRef;
 
-    public LeadImagesModel(List<File> galleryCollection, String usedRef) {
+    public LeadImageCollection(List<File> galleryCollection, String usedRef) {
         this.usedRef = usedRef;
         this.leadImages = new LinkedList<>();
         for (File file : galleryCollection) {
@@ -21,12 +21,17 @@ public class LeadImagesModel {
         }
     }
 
+    public LeadImageCollection(List<LeadImage> leadImages) {
+        this.leadImages = leadImages;
+        this.usedRef = usedRef;
+    }
+
     public Task<String> leadImageLocal() {
         if (leadImages.size() == 0) {
             return Task.forError(new Exception("Lead Images is empty!"));
         }
         LeadImage leadImage = leadImages.get(this.galleryIndex);
-        return leadImage.getLocalUrl();
+        return leadImage.getLocalUrlTask();
     }
 
     public Task<String> leadImageOnline() {
@@ -34,7 +39,7 @@ public class LeadImagesModel {
             return Task.forError(new Exception("Lead Images is empty!"));
         }
         LeadImage leadImage = leadImages.get(this.galleryIndex);
-        return leadImage.getOnlineUrl();
+        return leadImage.getOnlineUrlTask();
     }
 
     public void nextLeadImage() {
@@ -47,5 +52,12 @@ public class LeadImagesModel {
         }
         LeadImage leadImage = leadImages.get(this.galleryIndex);
         return leadImage.isCached();
+    }
+
+    public LeadImage getCurrentLeadImage() {
+        if (leadImages.size() == 0) {
+            return null;
+        }
+        return leadImages.get(this.galleryIndex);
     }
 }

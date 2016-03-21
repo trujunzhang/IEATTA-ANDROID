@@ -3,21 +3,18 @@ package org.ieatta.tasks;
 import org.ieatta.activity.Page;
 import org.ieatta.activity.PageProperties;
 import org.ieatta.activity.PageTitle;
-import org.ieatta.activity.LeadImagesModel;
+import org.ieatta.activity.LeadImageCollection;
 import org.ieatta.activity.gallery.GalleryCollection;
 import org.ieatta.database.models.DBEvent;
 import org.ieatta.database.models.DBPhoto;
 import org.ieatta.database.models.DBRestaurant;
 import org.ieatta.database.models.DBReview;
+import org.ieatta.database.provide.PhotoUsedType;
 import org.ieatta.database.provide.ReviewType;
 import org.ieatta.database.query.LocalDatabaseQuery;
 import org.ieatta.database.realm.DBBuilder;
 import org.ieatta.database.realm.RealmModelReader;
 import org.ieatta.parse.DBConstant;
-import org.ieatta.server.cache.ThumbnailImageUtil;
-
-import java.io.File;
-import java.util.List;
 
 import bolts.Continuation;
 import bolts.Task;
@@ -28,7 +25,8 @@ public class RestaurantDetailTask {
     public RealmResults<DBEvent> events;
     public RealmResults<DBReview> reviews;
     public GalleryCollection thumbnailGalleryCollection;
-    private LeadImagesModel leadImagesModel;
+    public GalleryCollection leadImageGalleryCollection;
+    private LeadImageCollection leadImageCollection;
 
     /**
      * Execute Task for Restaurant detail.
@@ -37,16 +35,18 @@ public class RestaurantDetailTask {
      * @return
      */
     public Task<Void> executeTask(final String restaurantUUID) {
-        return new RealmModelReader<DBRestaurant>(DBRestaurant.class).getFirstObject(LocalDatabaseQuery.get(restaurantUUID), false).onSuccessTask(new Continuation<DBRestaurant, Task<List<File>>>() {
+        return new RealmModelReader<DBRestaurant>(DBRestaurant.class).getFirstObject(LocalDatabaseQuery.get(restaurantUUID), false).onSuccessTask(new Continuation<DBRestaurant, Task<RealmResults<DBPhoto>>>() {
             @Override
-            public Task<List<File>> then(Task<DBRestaurant> task) throws Exception {
+            public Task<RealmResults<DBPhoto>> then(Task<DBRestaurant> task) throws Exception {
                 RestaurantDetailTask.this.restaurant = task.getResult();
-                return ThumbnailImageUtil.sharedInstance.getImagesListTask(restaurantUUID);
+                return LocalDatabaseQuery.queryPhotosByModel(restaurantUUID, PhotoUsedType.PU_Restaurant.getType());
             }
-        }).onSuccessTask(new Continuation<List<File>, Task<RealmResults<DBPhoto>>>() {
+        }).onSuccessTask(new Continuation<RealmResults<DBPhoto>, Task<RealmResults<DBPhoto>>>() {
             @Override
-            public Task<RealmResults<DBPhoto>> then(Task<List<File>> task) throws Exception {
-                RestaurantDetailTask.this.leadImagesModel = new LeadImagesModel(task.getResult(),restaurantUUID);
+            public Task<RealmResults<DBPhoto>> then(Task<RealmResults<DBPhoto>> task) throws Exception {
+                RealmResults<DBPhoto> result = task.getResult();
+                RestaurantDetailTask.this.leadImageCollection = DBConvert.toLeadImageCollection(task.getResult());
+//                RestaurantDetailTask.this.leadImageCollection = new LeadImageCollection(task.getResult(),restaurantUUID);
                 return LocalDatabaseQuery.queryPhotosForRestaurant(restaurantUUID);
             }
         }).onSuccessTask(new Continuation<RealmResults<DBPhoto>, Task<RealmResults<DBEvent>>>() {
@@ -77,10 +77,8 @@ public class RestaurantDetailTask {
 
     public Page getPage() {
         String title = restaurant.getDisplayName();
-        String description = restaurant.getGoogleMapAddress();
-
         PageTitle pageTitle = new PageTitle(this.restaurant.getUUID());
-        PageProperties properties = new PageProperties(this.leadImagesModel,title);
+        PageProperties properties = new PageProperties(this.leadImageCollection, title);
 
         return new Page(pageTitle, properties);
     }

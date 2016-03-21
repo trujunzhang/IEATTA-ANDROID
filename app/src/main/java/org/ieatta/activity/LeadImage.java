@@ -20,11 +20,16 @@ public class LeadImage {
         this.isCached = false;
     }
 
+    public LeadImage(String localUrl, String onlineUrl) {
+        this.localUrl = localUrl;
+        this.onlineUrl = onlineUrl;
+    }
+
     public boolean isCached(){
         return this.isCached;
     }
 
-    public Task<String> getLocalUrl() {
+    public Task<String> getLocalUrlTask() {
         // Already cached in the local.
         File cacheImageFile = CacheImageUtil.sharedInstance.getCacheImageUrl(this.photoUUID);
         if (cacheImageFile != null && cacheImageFile.exists()) {
@@ -35,7 +40,15 @@ public class LeadImage {
         return Task.forResult(this.localUrl);
     }
 
-    public Task<String> getOnlineUrl() {
+    public String getLocalUrl(){
+        return this.localUrl;
+    }
+
+    public String getOnlineUrl(){
+        return this.onlineUrl;
+    }
+
+    public Task<String> getOnlineUrlTask() {
         return OnlineDatabaseQuery.downloadOriginalPhoto(this.photoUUID).onSuccessTask(new Continuation<Void, Task<String>>() {
             @Override
             public Task<String> then(Task<Void> task) throws Exception {

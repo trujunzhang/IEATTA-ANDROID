@@ -197,14 +197,14 @@ public class GalleryItemFragment extends Fragment {
         String thumbUrl = this.imageTitle.getThumbUrl();
         final LeadImage leadImage = new LeadImage(thumbUrl);
 
-        leadImage.getLocalUrl().onSuccessTask(new Continuation<String, Task<String>>() {
+        leadImage.getLocalUrlTask().onSuccessTask(new Continuation<String, Task<String>>() {
             @Override
             public Task<String> then(Task<String> task) throws Exception {
                 GalleryItemFragment.this.loadImage(task.getResult());
                 if(leadImage.isCached() ==true){
                     return null;
                 }
-                return leadImage.getOnlineUrl();
+                return leadImage.getOnlineUrlTask();
             }
         }).onSuccess(new Continuation<String, Void>() {
             @Override

@@ -7,7 +7,7 @@ import bolts.Task;
 public class PageProperties {
 
     private final String displayTitleText;
-    public LeadImagesModel leadImagesModel;
+    public LeadImageCollection leadImageCollection;
 
     /**
      * @return Nullable URL with no scheme. For example, foo.bar.com/ instead of
@@ -15,24 +15,28 @@ public class PageProperties {
      */
     @Nullable
     public Task<String> getLeadImageLocalUrl() {
-        return this.leadImagesModel.leadImageLocal();
+        return this.leadImageCollection.leadImageLocal();
     }
 
     @Nullable
     public Task<String> getLeadImageOnlineUrl() {
-        return this.leadImagesModel.leadImageOnline();
+        return this.leadImageCollection.leadImageOnline();
+    }
+
+    public LeadImage getCurrentLeadImage() {
+        return this.leadImageCollection.getCurrentLeadImage();
     }
 
     public boolean isCached(){
-        return this.leadImagesModel.isCached();
+        return this.leadImageCollection.isCached();
     }
 
     public void nextLeadImage(){
-        this.leadImagesModel.nextLeadImage();
+        this.leadImageCollection.nextLeadImage();
     }
 
-    public PageProperties(LeadImagesModel leadImagesModel,String displayTitleText) {
-        this.leadImagesModel = leadImagesModel;
+    public PageProperties(LeadImageCollection leadImageCollection,String displayTitleText) {
+        this.leadImageCollection = leadImageCollection;
         this.displayTitleText = displayTitleText;
     }
 
