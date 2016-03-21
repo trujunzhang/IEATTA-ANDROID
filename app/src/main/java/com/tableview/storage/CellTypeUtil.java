@@ -35,7 +35,11 @@ public class CellTypeUtil {
             if (clazz == null)
                 throw new NullPointerException("Not found class called "+clazz.getName());
 
-            if (rowModel.cellType.cellClazz.equals(clazz))
+            CellType cellType = rowModel.cellType;
+            if (cellType == null)
+                throw new NullPointerException("Not found cellType called ");
+
+            if (cellType.cellClazz.equals(clazz))
                 return index.intValue();
         }
         return 0;
