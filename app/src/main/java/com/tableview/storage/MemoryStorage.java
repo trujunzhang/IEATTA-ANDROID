@@ -31,14 +31,18 @@ public class MemoryStorage {
         // this.sections.put(new Integer(toSection), new SectionModel(items));
     }
 
-    private void reloadTableView(int position) {
+    public void updateTableSections(){
         this.tableViewUtil.generateItems(this.sections, headerViewSection, footerViewSection);
+    }
+
+    private void reloadTableView(int position) {
+        this.updateTableSections();
 
         this.adapter.notifyItemChanged(position);
     }
 
     private void reloadTableView() {
-        this.tableViewUtil.generateItems(this.sections, headerViewSection, footerViewSection);
+        this.updateTableSections();
 
         this.adapter.notifyDataSetChanged();
     }

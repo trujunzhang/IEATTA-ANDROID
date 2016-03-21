@@ -6,7 +6,9 @@ import com.tableview.RecycleViewManager;
 import com.tableview.TableViewControllerAdapter;
 import com.tableview.storage.DTTableViewManager;
 import com.tableview.storage.TableViewConfiguration;
+import com.tableview.storage.models.CellType;
 
+import org.ieatta.cells.model.IEAHeaderViewModel;
 import org.ieatta.test.adapter.cell.HeaderView;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,11 +32,14 @@ public class RecycleViewManagerTest {
     }
 
     @Test
-    public void testHeaderView() throws InterruptedException {
+    public void testHeaderView()  {
         int layoutResId = 123;
-        this.manager.setRegisterHeaderView(HeaderView.getType(layoutResId));
-        int expect = this.provider.memoryStorage.getItemViewType(0);
+        CellType headerType = HeaderView.getType(layoutResId);
 
-        assertThat("The same type.", (layoutResId == (expect)));
+        this.manager.setRegisterHeaderView(headerType);
+        this.manager.updateHeaderItem(new IEAHeaderViewModel(123));
+
+        int expect = this.provider.memoryStorage.getItemViewType(0);
+        assertThat("The same cell type.", (layoutResId == (expect)));
     }
 }

@@ -170,4 +170,8 @@ public class RecycleViewManager {
     public DTTableViewManager getTableManager() {
         return manager;
     }
+
+    public void updateTableSections(){
+        this.getMemoryStorage().updateTableSections();
+    }
 }
