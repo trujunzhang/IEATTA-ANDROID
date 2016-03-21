@@ -141,6 +141,7 @@ public abstract class DetailFragment extends PageFragment implements BackPressed
     private final SwipeRefreshLayout.OnRefreshListener pageRefreshListener = new SwipeRefreshLayout.OnRefreshListener() {
         @Override
         public void onRefresh() {
+            DetailFragment.this.refreshView.setRefreshing(false);
 //            refreshPage();
         }
     };
@@ -172,10 +173,10 @@ public abstract class DetailFragment extends PageFragment implements BackPressed
         // if we want to give it a custom color:
         //refreshView.setProgressBackgroundColor(R.color.swipe_refresh_circle);
         refreshView.setScrollableChild(webView);
+        refreshView.setOnRefreshListener(pageRefreshListener);
 
         // TODO: initialize View references in onCreateView().
         articleHeaderView = (ArticleHeaderView) rootView.findViewById(R.id.page_header_view);
-
 
         return rootView;
     }
