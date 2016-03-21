@@ -56,8 +56,8 @@ public class RecycleViewManagerTest {
 
         CellType footerType = FooterView.getType(layoutResId);
 
-        this.manager.setRegisterHeaderView(footerType);
-        this.manager.setHeaderItem(footerViewModel, footerType);
+        this.manager.setRegisterFooterClass(footerType);
+        this.manager.setFooterItem(footerViewModel, footerType);
         this.manager.updateTableSections();
 
         Object expectModel = this.mProvider.memoryStorage.getRowModel(0);
