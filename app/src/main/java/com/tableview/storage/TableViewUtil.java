@@ -28,10 +28,12 @@ public class TableViewUtil {
 
         this.rowLength = 0;
         this.sectionCountInfo = new LinkedHashMap<>();
-        for (Integer integer : indexs) {
-            Integer count = this.getItemsCountInSection(integer);
+        for (Integer index : indexs) {
+            Integer count = this.getItemsCountInSection(index);
+            if(count == 0)
+                continue;
             this.rowLength += count;
-            sectionCountInfo.put(integer, count);
+            sectionCountInfo.put(index, count);
         }
         if (this.headerViewSection.haveHeaderView())
             this.rowLength++;
@@ -48,6 +50,10 @@ public class TableViewUtil {
     }
 
     public RowModel getItem(int position) {
+        if(position == 5){ // for debug
+            int length = this.rowLength;
+            int size = this.sections.size();
+        }
         if (footerViewSection.haveFooterView()) {
             if (position == (this.rowLength - 1)) {
                 return footerViewSection.getFooterViewModel();
