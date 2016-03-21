@@ -37,7 +37,8 @@ public class RecycleViewManagerTest {
         CellType headerType = HeaderView.getType(layoutResId);
 
         this.manager.setRegisterHeaderView(headerType);
-        this.manager.updateHeaderItem(new IEAHeaderViewModel(123));
+        this.manager.setHeaderItem(new IEAHeaderViewModel(123),headerType);
+        this.manager.updateTableSections();
 
         int expect = this.provider.memoryStorage.getItemViewType(0);
         assertThat("The same cell type.", (layoutResId == (expect)));
