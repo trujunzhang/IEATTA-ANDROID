@@ -6,8 +6,8 @@
 
     <ImageView
         android:id="@+id/eventIconImageView"
-        android:layout_width="@dimen/Left_Image_View_Width"
-        android:layout_height="@dimen/Left_Image_View_Height"
+        android:layout_width="@dimen/Event_Icon_Width"
+        android:layout_height="@dimen/Event_Icon_Height"
         android:layout_centerVertical="true"
         android:layout_gravity="center_vertical"
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
