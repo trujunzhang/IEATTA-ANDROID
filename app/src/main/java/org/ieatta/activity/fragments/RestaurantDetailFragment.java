@@ -95,7 +95,6 @@ public class RestaurantDetailFragment extends DetailFragment {
     @Override
     protected void reloadPage() {
         this.manager.setHeaderItem(new IEAHeaderViewModel(this.getScreenHeight()), IEAHeaderView.getType());
-//        this.manager.setHeaderItem(new IEAHeaderViewModel(800), IEAHeaderView.getType());
         this.manager.setFooterItem(new IEAFooterViewModel(), IEAFooterView.getType());
 
         this.manager.setSectionItems(task.events, RestaurantDetailSection.section_events.ordinal());
