@@ -79,6 +79,4 @@ public class DTTableViewManager {
     public void setFooterView(CellType type) {
         this.memoryStorage.registerCellType(type);
     }
-
-
 }
