@@ -22,7 +22,7 @@
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="8dp"
         android:text="IEATTA"
-        android:textColorLink="@color/gray_highlight"
+        android:textColor="@color/gray_highlight"
         android:textIsSelectable="true"
         android:textSize="18sp"
         android:textStyle="bold" />
@@ -35,9 +35,9 @@
         android:gravity="center"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="8dp"
+        android:paddingTop="4dp"
         android:text="Eating Experience Tracker"
-        android:textColorLink="@color/gray_background"
+        android:textColor="@color/GreyMidText"
         android:textIsSelectable="true" />
 
 </LinearLayout>
