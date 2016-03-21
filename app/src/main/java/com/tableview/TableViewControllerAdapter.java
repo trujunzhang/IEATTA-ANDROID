@@ -92,7 +92,8 @@ public class TableViewControllerAdapter
 
     @Override
     public int getItemViewType(int position) {
-        return this.mProvider.memoryStorage.getItemViewType(position);
+        int itemViewType = this.mProvider.memoryStorage.getItemViewType(position);
+        return itemViewType;
     }
 
     @Override

@@ -158,6 +158,9 @@ public class MemoryStorage {
 
     public int getItemViewType(int position) {
         RowModel rowModel = this.getRowModelFromPosition(position);
+        if (rowModel == null)
+            throw new NullPointerException("Not found rowModel");
+
         return cellTypeUtil.getRowModelType(rowModel);
     }
 

@@ -49,13 +49,13 @@ public class TableViewUtil {
     }
 
     public RowModel getItem(int position) {
-        if (headerViewSection != null) {
+        if (headerViewSection != null && headerViewSection.getHeaderModel()!= null) {
             if (position == 0) {
                 return headerViewSection.getRowModel(0);
             }
             position++;
         }
-        if (footerViewSection != null) {
+        if (footerViewSection != null&& footerViewSection.getFooterModel()!=null) {
             if (position == (this.rowLength - 1)) {
                 return footerViewSection.getRowModel(0);
             }
