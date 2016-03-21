@@ -14,6 +14,7 @@ import org.ieatta.cells.IEARestaurantEventsCell;
 import org.ieatta.cells.IEAReviewsCell;
 import org.ieatta.cells.headerfooterview.IEAFooterView;
 import org.ieatta.cells.headerfooterview.IEAHeaderView;
+import org.ieatta.cells.model.IEAFooterViewModel;
 import org.ieatta.cells.model.IEAGalleryThumbnail;
 import org.ieatta.cells.model.IEAHeaderViewModel;
 import org.ieatta.cells.model.SectionTitleCellModel;
@@ -94,7 +95,7 @@ public class RestaurantDetailFragment extends DetailFragment {
     @Override
     protected void reloadPage() {
         this.manager.setItemForHeader(new IEAHeaderViewModel(this.getScreenHeight()));
-        this.manager.setItemForFooter(new IEAHeaderViewModel(this.getScreenHeight()));
+        this.manager.setItemForFooter(new IEAFooterViewModel());
 
         this.manager.setSectionItems(task.events, RestaurantDetailSection.section_events.ordinal());
         this.manager.setSectionItems(CollectionUtil.createList(new IEAGalleryThumbnail(this.task.thumbnailGalleryCollection,this.galleryViewListener)), RestaurantDetailSection.section_gallery_thumbnail.ordinal());
