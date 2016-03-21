@@ -16,6 +16,7 @@ import com.tableview.utils.DrawableUtils;
 import com.tableview.utils.ViewUtils;
 
 import org.ieatta.R;
+import org.ieatta.analytics.TableViewControllerAdapterFunnel;
 
 public class TableViewControllerAdapter
         extends RecyclerView.Adapter<IEAViewHolder>
@@ -87,7 +88,9 @@ public class TableViewControllerAdapter
 
     @Override
     public int getItemCount() {
-        return this.mProvider.getItemCount();
+        int count = this.mProvider.getItemCount();
+        new TableViewControllerAdapterFunnel().logItemCount(count);
+        return count;
     }
 
     @Override
