@@ -8,7 +8,7 @@ import com.tableview.adapter.IEAViewHolder;
 import com.tableview.storage.models.CellType;
 
 import org.ieatta.R;
-import org.ieatta.cells.model.SectionSeeReviewsCellModel;
+import org.ieatta.cells.model.ReviewsCellModel;
 import org.ieatta.views.AvatarView;
 
 public class IEAReviewsCell extends IEAViewHolder {
@@ -32,12 +32,12 @@ public class IEAReviewsCell extends IEAViewHolder {
         this.timeAgoTextView = (TextView) itemView.findViewById(R.id.timeAgoTextView);
 
         this.business_review_star_rating = (ImageView) itemView.findViewById(R.id.business_review_star_rating);
-//        this.reviewContentLabel = (TextView) itemView.findViewById(R.id.reviewContentLabel);
+        this.reviewContentLabel = (TextView) itemView.findViewById(R.id.reviewContentLabel);
     }
 
     @Override
     public void render(Object value) {
-        SectionSeeReviewsCellModel model = (SectionSeeReviewsCellModel) value;
+        ReviewsCellModel model = (ReviewsCellModel) value;
 
 //        this.titleLabel.setText(model.user.displayName);
 //        this.timeAgoTextView.setText(model.timeAgoString);
