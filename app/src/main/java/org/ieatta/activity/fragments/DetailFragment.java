@@ -46,7 +46,6 @@ public abstract class DetailFragment extends PageFragment implements BackPressed
     protected PageViewModel model;
     protected PageLoadStrategy pageLoadStrategy;
 
-
     public static final int TOC_ACTION_SHOW = 0;
     public static final int TOC_ACTION_HIDE = 1;
     public static final int TOC_ACTION_TOGGLE = 2;
