@@ -206,7 +206,7 @@ public class GalleryItemFragment extends Fragment {
                 GalleryItemFragment.this.loadImage(task.getResult());
                 return leadImage.getOnlineUrlTask();
             }
-        }).onSuccess(new Continuation<String, Void>() {
+        },Task.UI_THREAD_EXECUTOR).onSuccess(new Continuation<String, Void>() {
             @Override
             public Void then(Task<String> task) throws Exception {
                 String result = task.getResult();
@@ -215,7 +215,7 @@ public class GalleryItemFragment extends Fragment {
                 }
                 return null;
             }
-        });
+        },Task.UI_THREAD_EXECUTOR);
 
 //        String uuid = this.imageTitle.getUUID();
 //        String usedRef = this.pageTitle.getUUID();
