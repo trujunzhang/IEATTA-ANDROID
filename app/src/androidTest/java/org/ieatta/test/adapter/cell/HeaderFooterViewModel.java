@@ -1,15 +1,15 @@
 package org.ieatta.test.adapter.cell;
 
-public class HeaderViewModel {
+public class HeaderFooterViewModel {
     private String name;
 
-    public HeaderViewModel(String name) {
+    public HeaderFooterViewModel(String name) {
         this.name = name;
     }
 
     @Override
     public boolean equals(Object o) {
-        HeaderViewModel model = (HeaderViewModel) o;
+        HeaderFooterViewModel model = (HeaderFooterViewModel) o;
         return model.getName().equals(this.name);
     }
 

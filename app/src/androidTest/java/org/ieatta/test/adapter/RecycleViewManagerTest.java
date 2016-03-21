@@ -8,9 +8,9 @@ import com.tableview.storage.DTTableViewManager;
 import com.tableview.storage.TableViewConfiguration;
 import com.tableview.storage.models.CellType;
 
-import org.ieatta.cells.model.IEAHeaderViewModel;
+import org.ieatta.test.adapter.cell.FooterView;
 import org.ieatta.test.adapter.cell.HeaderView;
-import org.ieatta.test.adapter.cell.HeaderViewModel;
+import org.ieatta.test.adapter.cell.HeaderFooterViewModel;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -36,7 +36,7 @@ public class RecycleViewManagerTest {
     public void testHeaderView()  {
         int layoutResId = 123;
         String modelName = "testHeaderView";
-        HeaderViewModel headerViewModel = new HeaderViewModel(modelName);
+        HeaderFooterViewModel headerViewModel = new HeaderFooterViewModel(modelName);
 
         CellType headerType = HeaderView.getType(layoutResId);
 
@@ -46,5 +46,21 @@ public class RecycleViewManagerTest {
 
         Object expectModel = this.mProvider.memoryStorage.getRowModel(0);
         assertThat("The same cell type.", headerViewModel.equals(expectModel));
+    }
+
+    @Test
+    public void testFooterView()  {
+        int layoutResId = 123;
+        String modelName = "testFooterView";
+        HeaderFooterViewModel footerViewModel = new HeaderFooterViewModel(modelName);
+
+        CellType footerType = FooterView.getType(layoutResId);
+
+        this.manager.setRegisterHeaderView(footerType);
+        this.manager.setHeaderItem(footerViewModel, footerType);
+        this.manager.updateTableSections();
+
+        Object expectModel = this.mProvider.memoryStorage.getRowModel(0);
+        assertThat("The same cell type.", footerViewModel.equals(expectModel));
     }
 }
