@@ -55,7 +55,7 @@ public class EffectActivity extends AppCompatActivity {
 
         manager = new RecycleViewManager(this.getApplicationContext());
 
-        this.setupUI();
+        this.loadPage();
     }
 
     private void setupUI() {
@@ -97,6 +97,7 @@ public class EffectActivity extends AppCompatActivity {
         this.manager.setHeaderItem(new IEAHeaderViewModel(800), IEAHeaderView.getType());
         this.manager.setFooterItem(new IEAFooterViewModel(), IEAFooterView.getType());
 
+        this.manager.updateTableSections();
 //        this.manager.setSectionItems(task.events, RestaurantDetailSection.section_events.ordinal());
 
 //        this.manager.setSectionItems(CollectionUtil.createList(new IEAGalleryThumbnail(this.task.thumbnailGalleryCollection,this.galleryViewListener)), RestaurantDetailSection.section_gallery_thumbnail.ordinal());
