@@ -27,7 +27,7 @@ public class LocalDatabaseQuery {
         DBBuilder builder = new DBBuilder()
                 .whereEqualTo(DBConstant.kPAPFieldLocalRestaurantKey, UUID)
                 .orderByDescending(DBConstant.kPAPFieldObjectCreatedDateKey);
-        return new RealmModelReader<DBPhoto>(DBPhoto.class).fetchResults(builder, false);
+        return new RealmModelReader<DBPhoto>(DBPhoto.class).fetchResults(builder, true);
     }
 
     public static Task<RealmResults<DBPhoto>> queryPhotosByModel(String usedRef,int usedType) {

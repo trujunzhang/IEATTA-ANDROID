@@ -91,7 +91,7 @@ public class RestaurantDetailFragment extends DetailFragment {
         this.manager.setSectionItems(CollectionUtil.createList(new IEAEmptyHeader(this.getScreenHeight())), RestaurantDetailSection.section_leadimage.ordinal());
         this.manager.setSectionItems(task.events, RestaurantDetailSection.section_events.ordinal());
 
-        this.manager.setSectionItems(CollectionUtil.createList(new IEAGalleryThumbnail(this.task.galleryCollection,this.galleryViewListener)), RestaurantDetailSection.section_gallery_thumbnail.ordinal());
+        this.manager.setSectionItems(CollectionUtil.createList(new IEAGalleryThumbnail(this.task.thumbnailGalleryCollection,this.galleryViewListener)), RestaurantDetailSection.section_gallery_thumbnail.ordinal());
 
         model.setPage(task.getPage());
 
