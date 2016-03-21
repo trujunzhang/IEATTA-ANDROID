@@ -49,6 +49,9 @@ public class LeadImage {
     }
 
     public Task<String> getOnlineUrlTask() {
+        if(this.isCached == true){
+            return Task.forResult(null);
+        }
         return OnlineDatabaseQuery.downloadOriginalPhoto(this.photoUUID).onSuccessTask(new Continuation<Void, Task<String>>() {
             @Override
             public Task<String> then(Task<Void> task) throws Exception {

@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -32,9 +33,11 @@ import org.ieatta.R;
 
 import org.ieatta.activity.LeadImage;
 import org.ieatta.activity.PageTitle;
+import org.w3c.dom.Text;
 import org.wikipedia.util.FeedbackUtil;
 import org.wikipedia.util.FileUtil;
 import org.wikipedia.util.PermissionUtil;
+import org.wikipedia.views.ViewUtil;
 
 import bolts.Continuation;
 import bolts.Task;
@@ -201,15 +204,15 @@ public class GalleryItemFragment extends Fragment {
             @Override
             public Task<String> then(Task<String> task) throws Exception {
                 GalleryItemFragment.this.loadImage(task.getResult());
-                if(leadImage.isCached() ==true){
-                    return null;
-                }
                 return leadImage.getOnlineUrlTask();
             }
         }).onSuccess(new Continuation<String, Void>() {
             @Override
             public Void then(Task<String> task) throws Exception {
-                GalleryItemFragment.this.loadImage(task.getResult());
+                String result = task.getResult();
+                if(TextUtils.isEmpty(result) == false){
+                    GalleryItemFragment.this.loadImage(result);
+                }
                 return null;
             }
         });
@@ -287,6 +290,11 @@ public class GalleryItemFragment extends Fragment {
 
     private void loadVideo() {
 
+    }
+
+    private void loadImage(LeadImage leadImage){
+        imageView.setVisibility(View.VISIBLE);
+//        ViewUtil.loadMultiImageUrlInto(this.imageView, leadImage.getLocalUrl(), leadImage.getOnlineUrl());
     }
 
     private void loadImage(String url) {
