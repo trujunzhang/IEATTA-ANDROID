@@ -115,9 +115,11 @@ public class MemoryStorage {
     public void removeItemsAtIndexPaths(NSIndexPath[] indexPaths) {
 
     }
+
     public void registerCellType(CellType type) {
         cellTypeUtil.registerType(type);
     }
+
     public void registerCellClass(CellType type, int forSectionIndex) {
         // Step1: Register class type
         this.registerCellType(type);

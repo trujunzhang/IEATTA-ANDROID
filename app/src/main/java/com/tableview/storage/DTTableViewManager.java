@@ -73,11 +73,11 @@ public class DTTableViewManager {
     }
 
     public void setHeaderView(CellType type) {
-//        this.memoryStorage.registerHeaderView(type);
+        this.memoryStorage.registerCellType(type);
     }
 
     public void setFooterView(CellType type) {
-
+        this.memoryStorage.registerCellType(type);
     }
 
 

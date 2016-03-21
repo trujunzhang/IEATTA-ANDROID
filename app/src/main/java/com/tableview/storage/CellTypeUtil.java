@@ -25,8 +25,7 @@ public class CellTypeUtil {
         modelTypes.put(type.cellClazz, type.layoutResId);
 
         if (this.isExistRegisterType(type.cellClazz) == false) {
-            int size = this.rowTypes.size();
-            this.rowTypes.put(Integer.valueOf(size), type.cellClazz);
+            this.rowTypes.put(this.rowTypes.size(), type.cellClazz);
         }
     }
 
