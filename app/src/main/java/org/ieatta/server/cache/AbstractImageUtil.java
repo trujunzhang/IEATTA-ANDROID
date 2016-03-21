@@ -32,7 +32,7 @@ public abstract class AbstractImageUtil {
     /**
      * Query the disk cache's url path.
      * <p/>
-     * - parameter UUID: Photo's tUUID
+     * - parameter UUID: Photo's UUID
      * <p/>
      * - returns: Image Cache's url
      */
@@ -56,8 +56,23 @@ public abstract class AbstractImageUtil {
         return Task.forResult(list);
     }
 
+    /**
+     * Query the disk cache's url path.
+     * <p/>
+     * - parameter usedRef: Photo's usedRef's UUID
+     * <p/>
+     * - returns: Images List
+     */
     public List<File> getImageFiles(String usedRef) {
         return this.getImageCache().getList(usedRef);
+    }
+
+    public File getImageFile(String usedRef) {
+        List<File> imageFiles = this.getImageFiles(usedRef);
+        if(imageFiles.size() == 0)
+            return null;
+
+        return imageFiles.get(0);
     }
 
     public Task<List<File>> getImagesListTask() {

@@ -2,10 +2,14 @@ package org.ieatta.test.tasks;
 
 import android.support.test.runner.AndroidJUnit4;
 
+import org.ieatta.cells.model.ReviewsCellModel;
+import org.ieatta.server.cache.ThumbnailImageUtil;
 import org.ieatta.tasks.RestaurantDetailTask;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.io.File;
+import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
@@ -28,6 +32,17 @@ public class RestaurantDetailTaskTest {
             @Override
             public Void then(Task<Void> task) throws Exception {
                 RestaurantDetailTask _task = RestaurantDetailTaskTest.this.task;
+                List<ReviewsCellModel> cellModelList = _task.reviewsCellModelList;
+                if(cellModelList.size()>0) {
+                    ReviewsCellModel cellModel = cellModelList.get(0);
+                    String usedRef = cellModel.userUUID;
+                    File imageUrl = ThumbnailImageUtil.sharedInstance.getImageFile(usedRef);
+                    if(imageUrl != null && imageUrl.exists()){
+                        String path = imageUrl.getAbsolutePath();
+                    }else {
+                        String title = cellModel.title;
+                    }
+                }
                 return null;
             }
         }).continueWith(new Continuation<Void, Void>() {
