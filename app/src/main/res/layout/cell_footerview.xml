@@ -27,7 +27,8 @@
             android:paddingTop="8dp"
             android:text="IEATTA"
             android:textStyle="bold"
-            android:textColorLink="@color/link_light"
+            android:textSize="18sp"
+            android:textColorLink="@color/link_dark"
             android:textIsSelectable="true" />
 
         <TextView
@@ -40,7 +41,7 @@
             android:paddingLeft="@dimen/activity_horizontal_margin"
             android:paddingRight="@dimen/activity_horizontal_margin"
             android:paddingTop="8dp"
-            android:textColorLink="@color/link_light"
+            android:textColorLink="@color/link_dark"
             android:textIsSelectable="true" />
     </LinearLayout>
 </LinearLayout>
