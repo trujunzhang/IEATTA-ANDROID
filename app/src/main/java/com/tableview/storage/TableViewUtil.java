@@ -13,8 +13,8 @@ public class TableViewUtil {
     private int rowLength = 0;
     private HashMap<Integer, Integer> sectionCountInfo;
 
-    private SectionModel headerViewSection;
-    private SectionModel footerViewSection;
+    private SectionModel headerViewSection = new SectionModel();
+    private SectionModel footerViewSection = new SectionModel();
     private HashMap<Integer, SectionModel> sections = new LinkedHashMap<>();
 
     public void generateItems(HashMap<Integer, SectionModel> sections, SectionModel headerViewSection, SectionModel footerViewSection) {
