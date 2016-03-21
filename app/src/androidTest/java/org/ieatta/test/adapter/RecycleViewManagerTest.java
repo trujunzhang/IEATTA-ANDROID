@@ -34,11 +34,12 @@ public class RecycleViewManagerTest {
     @Test
     public void testHeaderView()  {
         HeaderFooterViewModel headerViewModel = new HeaderFooterViewModel("testHeaderView");
-
+        // when
         this.manager.setRegisterHeaderView(HeaderView.getType());
         this.manager.setHeaderItem(headerViewModel, HeaderView.getType());
+        // how
         this.manager.updateTableSections();
-
+        // then
         Object expectModel = this.mProvider.memoryStorage.getRowModel(0);
         assertThat("The same cell type.", headerViewModel.equals(expectModel));
     }
@@ -46,11 +47,12 @@ public class RecycleViewManagerTest {
     @Test
     public void testFooterView()  {
         HeaderFooterViewModel footerViewModel = new HeaderFooterViewModel("testFooterView");
-
+        // when
         this.manager.setRegisterFooterClass(FooterView.getType());
         this.manager.setFooterItem(footerViewModel, FooterView.getType());
+        // how
         this.manager.updateTableSections();
-
+        // then
         Object expectModel = this.mProvider.memoryStorage.getRowModel(0);
         assertThat("The same cell type.", footerViewModel.equals(expectModel));
     }
