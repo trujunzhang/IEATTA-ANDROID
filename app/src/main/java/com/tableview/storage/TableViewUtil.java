@@ -40,7 +40,6 @@ public class TableViewUtil {
         return rowLength;
     }
 
-
     public RowModel getItem(int position) {
         int total = 0;
 
