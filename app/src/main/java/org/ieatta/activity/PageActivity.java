@@ -16,6 +16,7 @@ import com.squareup.otto.Bus;
 
 import org.ieatta.IEAApp;
 import org.ieatta.R;
+import org.ieatta.activity.fragments.EventDetailFragment;
 import org.ieatta.activity.fragments.NearRestaurantsFragment;
 import org.ieatta.activity.fragments.PageFragment;
 import org.ieatta.activity.fragments.RestaurantDetailFragment;
@@ -511,11 +512,12 @@ public class PageActivity extends ThemedActionBarActivity {
 
     private void loadMainPageIfNoTabs() {
 //        PageFragment fragment = new NearRestaurantsFragment();
-        PageFragment fragment = new RestaurantDetailFragment();
-        loadPage(fragment,TabPosition.CURRENT_TAB, false, true);
+//        PageFragment fragment = new RestaurantDetailFragment();
+        PageFragment fragment = new EventDetailFragment();
+        loadPage(fragment, TabPosition.CURRENT_TAB, false, true);
     }
 
-    public void loadPage(PageFragment fragment,final TabPosition position,
+    public void loadPage(PageFragment fragment, final TabPosition position,
                          boolean allowStateLoss,
                          final boolean mustBeEmpty) {
         if (isDestroyed()) {
