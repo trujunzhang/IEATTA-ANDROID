@@ -161,7 +161,7 @@ public class MemoryStorage {
     }
 
     public int getItemViewType(int position) {
-        RowModel rowModel = this.getRowModelFromPosition(position);
+        RowModel rowModel = this.tableViewUtil.getItem(position);
         if (rowModel == null)
             throw new NullPointerException("Not found rowModel");
 

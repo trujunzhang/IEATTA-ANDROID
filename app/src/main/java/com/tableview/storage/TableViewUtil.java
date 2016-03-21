@@ -66,7 +66,6 @@ public class TableViewUtil {
             position++;
         }
 
-
         int total = 0;
         for (Integer key : this.sectionCountInfo.keySet()) {
             Integer count = this.sectionCountInfo.get(key);
