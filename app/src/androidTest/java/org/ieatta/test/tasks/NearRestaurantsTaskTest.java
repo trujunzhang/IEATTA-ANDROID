@@ -40,6 +40,12 @@ public class NearRestaurantsTaskTest {
                 int size = result.size();
                 L.d("Size of the Restaurants: " + size);
                 assertThat("Fetched restaurants length", (size == 3));
+                return null;
+            }
+        }).continueWith(new Continuation<Void, Void>() {
+            @Override
+            public Void then(Task<Void> task) throws Exception {
+                Exception error = task.getError();
                 completionLatch.countDown();
                 return null;
             }

@@ -28,6 +28,12 @@ public class RecipeDetailTaskTest {
         task.executeTask(restaurantUUID,eventUUID,teamUUID,recipeUUID).onSuccess(new Continuation<Void, Void>() {
             @Override
             public Void then(Task<Void> task) throws Exception {
+                return null;
+            }
+        }).continueWith(new Continuation<Void, Void>() {
+            @Override
+            public Void then(Task<Void> task) throws Exception {
+                Exception error = task.getError();
                 completionLatch.countDown();
                 return null;
             }

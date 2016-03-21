@@ -24,12 +24,17 @@ public class RestaurantDetailTaskTest {
     @Test
     public void testRestaurantDetail() throws InterruptedException {
         final CountDownLatch completionLatch = new CountDownLatch(1);
-        task.executeTask(restaurantUUID).continueWith(new Continuation<Void, Void>() {
+        task.executeTask(restaurantUUID).onSuccess(new Continuation<Void, Void>() {
+            @Override
+            public Void then(Task<Void> task) throws Exception {
+                RestaurantDetailTask _task = RestaurantDetailTaskTest.this.task;
+                return null;
+            }
+        }).continueWith(new Continuation<Void, Void>() {
             @Override
             public Void then(Task<Void> task) throws Exception {
                 Exception error = task.getError();
                 completionLatch.countDown();
-                RestaurantDetailTask _task = RestaurantDetailTaskTest.this.task;
                 return null;
             }
         });

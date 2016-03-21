@@ -27,6 +27,12 @@ public class OrderedRecipesTaskTest {
         task.executeTask(restaurantUUID,eventUUID,teamUUID).onSuccess(new Continuation<Void, Void>() {
             @Override
             public Void then(Task<Void> task) throws Exception {
+                return null;
+            }
+        }).continueWith(new Continuation<Void, Void>() {
+            @Override
+            public Void then(Task<Void> task) throws Exception {
+                Exception error = task.getError();
                 completionLatch.countDown();
                 return null;
             }
