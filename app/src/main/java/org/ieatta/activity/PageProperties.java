@@ -43,4 +43,8 @@ public class PageProperties {
     public String getDisplayTitle() {
         return displayTitleText;
     }
+
+    public int getLeadImageCount() {
+        return this.leadImageCollection.getLeadImageCount();
+    }
 }

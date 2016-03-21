@@ -37,7 +37,7 @@ import bolts.Task;
 import static org.wikipedia.util.DimenUtil.getContentTopOffsetPx;
 
 public class LeadImagesHandler {
-    public interface OnContentHeightChangedListener{
+    public interface OnContentHeightChangedListener {
         void onContentHeightChanged(int contentHeight);
     }
 
@@ -92,7 +92,6 @@ public class LeadImagesHandler {
         // hide ourselves by default
         hide();
     }
-
 
     private void initWebView() {
         webView.addOnScrollChangeListener(articleHeaderView);
@@ -193,14 +192,17 @@ public class LeadImagesHandler {
 
         initDisplayDimensions();
 
-        // set the page title text, and honor any HTML formatting in the title
-        task.periodicTask(new RecurringTask.RecurringEvent() {
-            @Override
-            public void everyTask() {
-                LeadImagesHandler.this.recurringLeadImages();
-            }
-        }, 0, 10);
-
+        if (this.getPage().getPageProperties().getLeadImageCount() < 2) {
+            LeadImagesHandler.this.recurringLeadImages();
+        } else {
+            // set the page title text, and honor any HTML formatting in the title
+            task.periodicTask(new RecurringTask.RecurringEvent() {
+                @Override
+                public void everyTask() {
+                    LeadImagesHandler.this.recurringLeadImages();
+                }
+            }, 0, 10);
+        }
 
         articleHeaderView.setTitle(Html.fromHtml(getPage().getDisplayTitle()));
 //        articleHeaderView.setLocale(getPage().getTitle().getSite().getLanguageCode());
@@ -221,7 +223,7 @@ public class LeadImagesHandler {
                 pageProperties.nextLeadImage();
                 return null;
             }
-        },Task.UI_THREAD_EXECUTOR);
+        }, Task.UI_THREAD_EXECUTOR);
     }
 
     /**
@@ -326,7 +328,7 @@ public class LeadImagesHandler {
     }
 
     private void loadLeadImage(@Nullable LeadImage leadImage) {
-        if (!isMainPage() && leadImage != null&& isLeadImageEnabled()) {
+        if (!isMainPage() && leadImage != null && isLeadImageEnabled()) {
             articleHeaderView.setImageYScalar(0);
             articleHeaderView.loadImage(leadImage);
         } else {

@@ -60,4 +60,8 @@ public class LeadImageCollection {
         }
         return leadImages.get(this.galleryIndex);
     }
+
+    public int getLeadImageCount() {
+        return this.leadImages.size();
+    }
 }
