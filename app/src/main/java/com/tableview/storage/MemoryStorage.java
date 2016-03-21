@@ -14,9 +14,11 @@ import java.util.List;
 public class MemoryStorage {
     public TableViewControllerAdapter adapter;
     private TableViewUtil tableViewUtil = new TableViewUtil();
-
-    public HashMap<Integer, SectionModel> sections = new LinkedHashMap<>();
     public CellTypeUtil cellTypeUtil = new CellTypeUtil();
+
+    private SectionModel headerViewSection;
+    private SectionModel footerViewSection;
+    private HashMap<Integer, SectionModel> sections = new LinkedHashMap<>();
 
     public MemoryStorage(TableViewControllerAdapter adapter) {
         this.adapter = adapter;
