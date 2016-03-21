@@ -6,6 +6,7 @@ import android.view.View;
 import com.tableview.RecycleViewManager;
 import com.tableview.adapter.NSIndexPath;
 import com.tableview.adapter.RecyclerOnItemClickListener;
+import com.tableview.utils.CollectionUtil;
 
 import org.ieatta.R;
 import org.ieatta.cells.IEAGalleryThumbnailCell;
@@ -14,6 +15,7 @@ import org.ieatta.cells.IEAReviewsCell;
 import org.ieatta.cells.headerfooterview.IEAFooterView;
 import org.ieatta.cells.headerfooterview.IEAHeaderView;
 import org.ieatta.cells.model.IEAFooterViewModel;
+import org.ieatta.cells.model.IEAGalleryThumbnail;
 import org.ieatta.cells.model.IEAHeaderViewModel;
 import org.ieatta.cells.model.SectionTitleCellModel;
 import org.ieatta.provide.IEAEditKey;
@@ -35,7 +37,7 @@ public class RestaurantDetailFragment extends DetailFragment {
 
     @Override
     public void onContentHeightChanged(int contentHeight) {
-//        this.manager.updateHeaderItem(new IEAHeaderViewModel(contentHeight));
+        this.manager.updateHeaderItem(new IEAHeaderViewModel(contentHeight));
     }
 
     enum RestaurantDetailSection {
@@ -64,7 +66,7 @@ public class RestaurantDetailFragment extends DetailFragment {
         this.manager.setRegisterCellClass(IEAReviewsCell.getType(), RestaurantDetailSection.section_reviews.ordinal());
 
         this.manager.appendSectionTitleCell(new SectionTitleCellModel(IEAEditKey.Section_Title, R.string.Events_Recorded), RestaurantDetailSection.section_events.ordinal());
-//        this.manager.appendSectionTitleCell(new SectionTitleCellModel(IEAEditKey.Section_Title, R.string.Reviews), RestaurantDetailSection.section_reviews.ordinal());
+        this.manager.appendSectionTitleCell(new SectionTitleCellModel(IEAEditKey.Section_Title, R.string.Reviews), RestaurantDetailSection.section_reviews.ordinal());
     }
 
     @Override
@@ -92,18 +94,18 @@ public class RestaurantDetailFragment extends DetailFragment {
 
     @Override
     protected void reloadPage() {
-//        this.manager.setHeaderItem(new IEAHeaderViewModel(this.getScreenHeight()), IEAHeaderView.getType());
-        this.manager.setHeaderItem(new IEAHeaderViewModel(800), IEAHeaderView.getType());
+        this.manager.setHeaderItem(new IEAHeaderViewModel(this.getScreenHeight()), IEAHeaderView.getType());
+//        this.manager.setHeaderItem(new IEAHeaderViewModel(800), IEAHeaderView.getType());
         this.manager.setFooterItem(new IEAFooterViewModel(), IEAFooterView.getType());
 
-//        this.manager.setSectionItems(task.events, RestaurantDetailSection.section_events.ordinal());
+        this.manager.setSectionItems(task.events, RestaurantDetailSection.section_events.ordinal());
 
-//        this.manager.setSectionItems(CollectionUtil.createList(new IEAGalleryThumbnail(this.task.thumbnailGalleryCollection,this.galleryViewListener)), RestaurantDetailSection.section_gallery_thumbnail.ordinal());
-//        this.manager.setSectionItems(task.reviewsCellModelList, RestaurantDetailSection.section_reviews.ordinal());
+        this.manager.setSectionItems(CollectionUtil.createList(new IEAGalleryThumbnail(this.task.thumbnailGalleryCollection, this.galleryViewListener)), RestaurantDetailSection.section_gallery_thumbnail.ordinal());
+        this.manager.setSectionItems(task.reviewsCellModelList, RestaurantDetailSection.section_reviews.ordinal());
 
         model.setPage(task.getPage());
 
-//        super.reloadPage();
+        super.reloadPage();
     }
 
 }
