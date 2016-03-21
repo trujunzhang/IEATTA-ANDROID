@@ -26,7 +26,7 @@ public class ReviewQuery {
         return new RealmModelReader<DBReview>(DBReview.class).fetchResults(
                 new DBBuilder()
                         .whereEqualTo(DBConstant.kPAPFieldReviewRefKey, reviewRef)
-                        .whereEqualTo(DBConstant.kPAPFieldReviewTypeKey, ReviewType.Review_Restaurant.getType()),
+                        .whereEqualTo(DBConstant.kPAPFieldReviewTypeKey, type.getType()),
                 false).onSuccessTask(new Continuation<RealmResults<DBReview>, Task<RealmResults<DBTeam>>>() {
             @Override
             public Task<RealmResults<DBTeam>> then(Task<RealmResults<DBReview>> task) throws Exception {
