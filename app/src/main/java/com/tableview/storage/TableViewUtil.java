@@ -41,43 +41,6 @@ public class TableViewUtil {
         return rowLength;
     }
 
-//    public RowModel getItem(int position) {
-//        if(position == 5){ // for debug
-//            int length = this.rowLength;
-//            int size = this.sections.size();
-//        }
-//        if (footerViewSection.haveFooterView()) {
-//            if (position == (this.rowLength - 1)) {
-//                return footerViewSection.getFooterViewModel();
-//            }
-//        }
-//        if (headerViewSection.haveHeaderView()) {
-//            if (position == 0) {
-//                return headerViewSection.getHeaderViewModel();
-//            }
-//            position++;
-//        }
-//
-//        return this.getItemInSections(position);
-//    }
-//
-//    private int getItemIndexInSections(int position){
-//        int total = 0;
-//        for (Integer key : this.sectionCountInfo.keySet()) {
-//            Integer count = this.sectionCountInfo.get(key);
-//
-//            int begin = total;
-//            int end = total + count;
-//
-//            if ((position + 1) >= begin && (position + 1) <= end) {
-//                int row = position - total;
-//                return key;
-//            }
-//            total = end;
-//        }
-//        return -1;
-//    }
-
     public RowModel getItem(int position) {
         int total = 0;
         for (Integer key : this.sectionCountInfo.keySet()) {
