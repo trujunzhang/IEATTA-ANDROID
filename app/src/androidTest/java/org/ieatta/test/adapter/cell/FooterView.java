@@ -6,8 +6,8 @@ import android.view.View;
 import com.tableview.storage.models.CellType;
 
 public class FooterView extends RecyclerView.ViewHolder{
-    public static CellType getType(int layoutResId) {
-        return new CellType(FooterView.class, layoutResId);
+    public static CellType getType() {
+        return new CellType(FooterView.class, 123);
     }
 
     public FooterView(View itemView) {

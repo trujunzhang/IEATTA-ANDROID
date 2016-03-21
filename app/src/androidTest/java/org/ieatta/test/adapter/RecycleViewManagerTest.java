@@ -6,7 +6,6 @@ import com.tableview.RecycleViewManager;
 import com.tableview.TableViewControllerAdapter;
 import com.tableview.storage.DTTableViewManager;
 import com.tableview.storage.TableViewConfiguration;
-import com.tableview.storage.models.CellType;
 
 import org.ieatta.test.adapter.cell.FooterView;
 import org.ieatta.test.adapter.cell.HeaderView;
@@ -34,11 +33,10 @@ public class RecycleViewManagerTest {
 
     @Test
     public void testHeaderView()  {
-        int layoutResId = 123;
         HeaderFooterViewModel headerViewModel = new HeaderFooterViewModel("testHeaderView");
 
-        this.manager.setRegisterHeaderView(HeaderView.getType(layoutResId));
-        this.manager.setHeaderItem(headerViewModel, HeaderView.getType(layoutResId));
+        this.manager.setRegisterHeaderView(HeaderView.getType());
+        this.manager.setHeaderItem(headerViewModel, HeaderView.getType());
         this.manager.updateTableSections();
 
         Object expectModel = this.mProvider.memoryStorage.getRowModel(0);
@@ -47,11 +45,10 @@ public class RecycleViewManagerTest {
 
     @Test
     public void testFooterView()  {
-        int layoutResId = 123;
         HeaderFooterViewModel footerViewModel = new HeaderFooterViewModel("testFooterView");
 
-        this.manager.setRegisterFooterClass(FooterView.getType(layoutResId));
-        this.manager.setFooterItem(footerViewModel, FooterView.getType(layoutResId));
+        this.manager.setRegisterFooterClass(FooterView.getType());
+        this.manager.setFooterItem(footerViewModel, FooterView.getType());
         this.manager.updateTableSections();
 
         Object expectModel = this.mProvider.memoryStorage.getRowModel(0);

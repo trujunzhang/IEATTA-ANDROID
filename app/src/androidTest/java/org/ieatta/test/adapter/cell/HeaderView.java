@@ -7,8 +7,8 @@ import android.view.View;
 import com.tableview.storage.models.CellType;
 
 public class HeaderView extends RecyclerView.ViewHolder{
-    public static CellType getType(int layoutResId) {
-        return new CellType(HeaderView.class, layoutResId);
+    public static CellType getType() {
+        return new CellType(HeaderView.class, 234);
     }
 
     public HeaderView(View itemView) {
