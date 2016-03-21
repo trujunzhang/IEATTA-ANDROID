@@ -13,7 +13,7 @@ import org.ieatta.views.AvatarView;
 
 public class IEAReviewsCell extends IEAViewHolder {
     public static CellType getType() {
-        return new CellType(IEAReviewsCell.class, R.layout.see_reviews_cell);
+        return new CellType(IEAReviewsCell.class, R.layout.cell_reviews);
     }
 
     private AvatarView avatarView;
