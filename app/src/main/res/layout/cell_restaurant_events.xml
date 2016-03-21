@@ -44,7 +44,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="8dp"
+        android:paddingTop="16dp"
         android:singleLine="true"
         android:text="Medium Text"
         android:textSize="12sp"

@@ -39,7 +39,8 @@
                 android:layout_marginRight="8dp"
                 android:layout_marginTop="4dp"
                 android:singleLine="true"
-                android:textAppearance="@style/RelativeTimeAgoText" />
+                android:textSize="12sp"
+                android:textColor="@color/GreyMidText" />
 
             <ImageView
                 android:id="@+id/business_review_star_rating"
