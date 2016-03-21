@@ -18,11 +18,9 @@
 
     <!-- For Nearby feature -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
     <uses-permission android:name="com.google.android.gms.permission.ACTIVITY_RECOGNITION" />
-
 
     <uses-feature
         android:name="android.hardware.location"
@@ -89,15 +87,16 @@
             android:windowSoftInputMode="stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".activity.gallery.GalleryActivity"
             android:configChanges="orientation|screenSize"
             android:exported="false"
             android:theme="@style/FullScreen" />
+        <activity android:name=".activity.effect.EffectActivity"></activity>
     </application>
 
 </manifest>

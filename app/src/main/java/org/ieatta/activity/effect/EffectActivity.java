@@ -1,5 +1,13 @@
-package org.ieatta.activity.fragments;
+package org.ieatta.activity.effect;
 
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+
+import com.tableview.RecycleViewManager;
+
+import org.ieatta.R;
+import org.ieatta.tasks.RestaurantDetailTask;
+import org.ieatta.views.ObservableWebView;
 import android.os.Bundle;
 import android.view.View;
 
@@ -24,19 +32,8 @@ import bolts.Task;
 
 import static butterknife.ButterKnife.findById;
 
-public class RestaurantDetailFragment extends DetailFragment {
+public class EffectActivity extends AppCompatActivity {
 
-    public static final RecyclerOnItemClickListener itemClickListener = new RecyclerOnItemClickListener() {
-        @Override
-        public void onItemClick(View view, NSIndexPath indexPath, Object model, int position, boolean isLongClick) {
-
-        }
-    };
-
-    @Override
-    public void onContentHeightChanged(int contentHeight) {
-//        this.manager.updateHeaderItem(new IEAHeaderViewModel(contentHeight));
-    }
 
     enum RestaurantDetailSection {
         section_events,//= 0
@@ -44,15 +41,21 @@ public class RestaurantDetailFragment extends DetailFragment {
         section_reviews,//= 2
     }
 
-    private RecycleViewManager manager;
+    private ObservableWebView webView;
 
+    private RecycleViewManager manager;
     private RestaurantDetailTask task = new RestaurantDetailTask();
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_effect);
 
-        manager = new RecycleViewManager(this.getActivity().getApplicationContext());
+        this.webView = (ObservableWebView) findViewById(R.id.recycleView);
+
+        manager = new RecycleViewManager(this.getApplicationContext());
+
+        this.setupUI();
     }
 
     private void setupUI() {
@@ -67,19 +70,17 @@ public class RestaurantDetailFragment extends DetailFragment {
 //        this.manager.appendSectionTitleCell(new SectionTitleCellModel(IEAEditKey.Section_Title, R.string.Reviews), RestaurantDetailSection.section_reviews.ordinal());
     }
 
-    @Override
     public void loadPage() {
         manager.startManagingWithDelegate(webView);
-        manager.setOnItemClickListener(itemClickListener);
 
         this.setupUI();
 
-         String uuid = "1CE562A4-A978-4B75-9B7B-2F3CF9F42A04"; // The Flying Falafel
+        String uuid = "1CE562A4-A978-4B75-9B7B-2F3CF9F42A04"; // The Flying Falafel
 //        String uuid = "33ED9F31-F6A5-43A4-8D11-8E511CA0BD39"; // The Spice Jar
         task.executeTask(uuid).onSuccess(new Continuation<Void, Object>() {
             @Override
             public Object then(Task<Void> task) throws Exception {
-                RestaurantDetailFragment.this.reloadPage();
+                EffectActivity.this.reloadPage();
                 return null;
             }
         }).continueWith(new Continuation<Object, Object>() {
@@ -90,7 +91,7 @@ public class RestaurantDetailFragment extends DetailFragment {
         });
     }
 
-    @Override
+
     protected void reloadPage() {
 //        this.manager.setHeaderItem(new IEAHeaderViewModel(this.getScreenHeight()), IEAHeaderView.getType());
         this.manager.setHeaderItem(new IEAHeaderViewModel(800), IEAHeaderView.getType());
@@ -100,8 +101,6 @@ public class RestaurantDetailFragment extends DetailFragment {
 
 //        this.manager.setSectionItems(CollectionUtil.createList(new IEAGalleryThumbnail(this.task.thumbnailGalleryCollection,this.galleryViewListener)), RestaurantDetailSection.section_gallery_thumbnail.ordinal());
 //        this.manager.setSectionItems(task.reviewsCellModelList, RestaurantDetailSection.section_reviews.ordinal());
-
-        model.setPage(task.getPage());
 
 //        super.reloadPage();
     }
