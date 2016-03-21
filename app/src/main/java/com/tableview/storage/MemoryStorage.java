@@ -1,5 +1,7 @@
 package com.tableview.storage;
 
+import android.content.Intent;
+
 import com.tableview.TableViewControllerAdapter;
 import com.tableview.adapter.NSIndexPath;
 import com.tableview.storage.models.CellType;
@@ -12,16 +14,18 @@ import java.util.LinkedHashMap;
 import java.util.List;
 
 public class MemoryStorage {
+    private final static int Header_View_Index = Integer.MIN_VALUE;
+    private final static int Footer_View_Index = Integer.MAX_VALUE;
     public TableViewControllerAdapter adapter;
     private TableViewUtil tableViewUtil = new TableViewUtil();
     public CellTypeUtil cellTypeUtil = new CellTypeUtil();
 
-    private SectionModel headerViewSection = new SectionModel();
-    private SectionModel footerViewSection = new SectionModel();
     private HashMap<Integer, SectionModel> sections = new LinkedHashMap<>();
 
     public MemoryStorage(TableViewControllerAdapter adapter) {
         this.adapter = adapter;
+        this.sections.put(Header_View_Index,new SectionModel());
+        this.sections.put(Footer_View_Index,new SectionModel());
     }
 
     /// Add items to section with `toSection` number.
@@ -32,7 +36,7 @@ public class MemoryStorage {
     }
 
     public void updateTableSections(){
-        this.tableViewUtil.generateItems(this.sections, headerViewSection, footerViewSection);
+        this.tableViewUtil.generateItems(this.sections);
     }
 
     private void reloadTableView(int position) {
@@ -48,20 +52,20 @@ public class MemoryStorage {
     }
 
     public void setHeaderItem(Object item, CellType type) {
-        this.headerViewSection.setHeaderModel(new HeaderModel(item, type));
+        this.sections.get(Header_View_Index).setHeaderModel(new HeaderModel(item, type));
     }
 
     public void updateHeaderItem(Object newItem) {
-        if (this.headerViewSection == null)
+        HeaderModel headerModel = this.sections.get(Header_View_Index).getHeaderModel();
+        if (headerModel == null)
             throw new NullPointerException("Not found headerViewSection!");
 
-        this.headerViewSection.getHeaderModel().item = newItem;
-
+        headerModel.item = newItem;
         this.reloadTableView(0);
     }
 
     public void setFooterItem(Object item, CellType type) {
-        this.footerViewSection.setFooterModel(new FooterModel(item, type));
+        this.sections.get(Footer_View_Index).setFooterModel(new FooterModel(item, type));
     }
 
     /// Set items for specific section. This will reload UI after updating.
