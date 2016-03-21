@@ -35,8 +35,7 @@ public class RecycleViewManagerTest {
         manager = new RecycleViewManager();
         provider = manager.getTableManager();
 
-        Context context = null;
-        TableViewConfiguration configuration = new TableViewConfiguration(new TableViewConfiguration.Builder(context));
+        TableViewConfiguration configuration = new TableViewConfiguration(new TableViewConfiguration.Builder());
         provider.setConfiguration(configuration,new TableViewControllerAdapter(this.provider));
     }
 

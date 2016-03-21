@@ -1,7 +1,9 @@
 package com.tableview.storage;
 
 import android.content.Context;
+import android.support.annotation.VisibleForTesting;
 import android.support.v7.widget.RecyclerView;
+import android.widget.ThemedSpinnerAdapter;
 
 import com.tableview.adapter.RecyclerOnItemClickListener;
 
@@ -16,6 +18,11 @@ public class TableViewConfiguration {
 
         public final Context context;
         private String debugType;
+
+        @VisibleForTesting
+        public Builder() {
+            this.context = null;
+        }
 
         public Builder(Context context) {
             this.context = context.getApplicationContext();
