@@ -43,16 +43,16 @@ public class MemoryStorage {
         this.adapter.notifyDataSetChanged();
     }
 
-    public void setHeaderItem(Object item) {
-//        this.headerViewSection.setHeaderModel(new HeaderModel(item, type));
+    public void setHeaderItem(Object item, CellType type) {
+        this.headerViewSection.setHeaderModel(new HeaderModel(item, type));
     }
 
     public void updateHeaderItem(Object item) {
 //        this.headerViewSection.setFooterModel(item);
     }
 
-    public void setFooterItem(Object item) {
-//        this.headerViewSection.setFooterModel(item);
+    public void setFooterItem(Object item, CellType type) {
+        this.footerViewSection.setFooterModel(new FooterModel(item, type));
     }
 
     /// Set items for specific section. This will reload UI after updating.
