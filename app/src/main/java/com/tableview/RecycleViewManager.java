@@ -47,7 +47,7 @@ public class RecycleViewManager {
         mAdapter = null;
     }
 
-    public DTTableViewManager manager = new DTTableViewManager();
+    private DTTableViewManager manager = new DTTableViewManager();
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.Adapter mWrappedAdapter;
     private RecyclerViewDragDropManager mRecyclerViewDragDropManager;
