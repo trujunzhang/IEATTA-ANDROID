@@ -40,8 +40,7 @@ public class TableViewUtil {
     }
 
     private Integer getItemsCountInSection(Integer integer) {
-        SectionModel sectionModel = this.sections.get(integer);
-        return sectionModel.numberOfItems();
+        return this.sections.get(integer).numberOfItems();
     }
 
     public int getItemCount() {

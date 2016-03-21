@@ -111,9 +111,9 @@ public class MemoryStorage {
 
     private SectionModel verifySection(int forSectionIndex) {
         SectionModel model = this.sections.get(Integer.valueOf(forSectionIndex));
-        if (model != null) {
+        if (model != null)
             return model;
-        }
+
         model = new SectionModel(forSectionIndex);
         this.sections.put(forSectionIndex, model);
         return model;
