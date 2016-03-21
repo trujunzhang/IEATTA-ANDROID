@@ -30,6 +30,7 @@ public class ReviewQuery {
                 false).onSuccessTask(new Continuation<RealmResults<DBReview>, Task<RealmResults<DBTeam>>>() {
             @Override
             public Task<RealmResults<DBTeam>> then(Task<RealmResults<DBReview>> task) throws Exception {
+                ReviewQuery.this.reviews = task.getResult();
                 List<String> list = getTeamsList(task.getResult());
 
                 return new RealmModelReader<DBTeam>(DBTeam.class).fetchResults(
