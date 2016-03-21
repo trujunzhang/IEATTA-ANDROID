@@ -32,7 +32,7 @@ public class MemoryStorage {
     }
 
     private void reloadTableView(int position) {
-        this.tableViewUtil.generateItems(this.sections,headerViewSection,footerViewSection);
+        this.tableViewUtil.generateItems(this.sections, headerViewSection, footerViewSection);
 
         this.adapter.notifyItemChanged(position);
     }
@@ -48,10 +48,12 @@ public class MemoryStorage {
     }
 
     public void updateHeaderItem(Object newItem) {
-        if(this.headerViewSection == null)
+        if (this.headerViewSection == null)
             throw new NullPointerException("Not found headerViewSection!");
 
         this.headerViewSection.getHeaderModel().item = newItem;
+
+        this.reloadTableView(0);
     }
 
     public void setFooterItem(Object item, CellType type) {
@@ -67,10 +69,10 @@ public class MemoryStorage {
         this.reloadTableView();
     }
 
-    public void updateItem(Object item, int forSectionIndex, int row){
+    public void updateItem(Object item, int forSectionIndex, int row) {
         SectionModel section = this.verifySection(forSectionIndex);
-        section.items.set(row,item);
-        this.reloadTableView(this.getRowPosition(forSectionIndex,row));
+        section.items.set(row, item);
+        this.reloadTableView(this.getRowPosition(forSectionIndex, row));
     }
 
     /// Set section header model for MemoryStorage
@@ -159,10 +161,10 @@ public class MemoryStorage {
         return cellTypeUtil.getRowModelType(rowModel);
     }
 
-    public int getRowPosition(int forSectionIndex, int row){
+    public int getRowPosition(int forSectionIndex, int row) {
         int position = 0;
         for (int i = 0; i < forSectionIndex; i++) {
-            position+=this.sections.get(i).numberOfItems();
+            position += this.sections.get(i).numberOfItems();
         }
         return position + row;
     }
