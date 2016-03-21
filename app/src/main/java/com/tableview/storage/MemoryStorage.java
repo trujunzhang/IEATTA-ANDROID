@@ -41,14 +41,14 @@ public class MemoryStorage {
         this.adapter.notifyDataSetChanged();
     }
 
-    public void setItemForHeader(Object item) {
+    public void setHeaderItem(Object item) {
 
     }
-    public void updateItemForHeader(Object item) {
+    public void updateHeaderItem(Object item) {
 
     }
 
-    public void setItemForFooter(Object item) {
+    public void setFooterItem(Object item) {
 
     }
 

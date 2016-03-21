@@ -8,7 +8,6 @@ import android.support.v7.widget.RecyclerView;
 
 import com.h6ah4i.android.widget.advrecyclerview.draggable.RecyclerViewDragDropManager;
 import com.h6ah4i.android.widget.advrecyclerview.utils.WrapperAdapterUtils;
-import com.tableview.TableViewControllerAdapter;
 import com.tableview.adapter.NSIndexPath;
 import com.tableview.adapter.RecyclerOnItemClickListener;
 import com.tableview.adapter.decoration.TableViewDividerDecoration;
@@ -113,16 +112,16 @@ public class RecycleViewManager {
         getTableManager().setFooterView(type);
     }
 
-    public void setItemForHeader(Object item) {
-        getMemoryStorage().setItemForHeader(item);
+    public void setHeaderItem(Object item) {
+        getMemoryStorage().setHeaderItem(item);
     }
 
-    public void updateItemForHeader(Object item) {
-        getMemoryStorage().updateItemForHeader(item);
+    public void updateHeaderItem(Object item) {
+        getMemoryStorage().updateHeaderItem(item);
     }
 
-    public void setItemForFooter(Object item) {
-        getMemoryStorage().setItemForFooter(item);
+    public void setFooterItem(Object item) {
+        getMemoryStorage().setFooterItem(item);
     }
 
     public void setRegisterCellClass(CellType type, int forSectionIndex) {
