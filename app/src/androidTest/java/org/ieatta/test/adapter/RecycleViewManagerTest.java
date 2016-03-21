@@ -2,6 +2,7 @@ package org.ieatta.test.adapter;
 
 import android.support.test.runner.AndroidJUnit4;
 
+import com.tableview.RecycleViewManager;
 import com.tableview.storage.DTTableViewManager;
 
 import org.ieatta.database.models.DBPhoto;
@@ -21,12 +22,12 @@ import bolts.Task;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 @RunWith(AndroidJUnit4.class)
-public class DTTableViewManagerTest {
-    DTTableViewManager manager;
+public class RecycleViewManagerTest {
+    RecycleViewManager manager;
 
     @Before
     public void setUp() throws Exception {
-        manager = new DTTableViewManager();
+        manager = new RecycleViewManager();
 
     }
 

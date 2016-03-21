@@ -2,6 +2,7 @@ package com.tableview;
 
 import android.content.Context;
 import android.graphics.drawable.NinePatchDrawable;
+import android.support.annotation.VisibleForTesting;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -57,6 +58,10 @@ public class RecycleViewManager {
         mRecyclerViewDragDropManager = new RecyclerViewDragDropManager();
         mRecyclerViewDragDropManager.setDraggingItemShadowDrawable(
                 (NinePatchDrawable) ContextCompat.getDrawable(context, R.drawable.material_shadow_z3));
+    }
+
+    @VisibleForTesting
+    public RecycleViewManager() {
     }
 
     public RecycleViewManager(Context context) {
