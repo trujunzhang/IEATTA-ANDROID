@@ -4,7 +4,9 @@ import org.ieatta.activity.LeadImage;
 import org.ieatta.activity.LeadImageCollection;
 import org.ieatta.activity.gallery.GalleryItem;
 import org.ieatta.analytics.DBConvertFunnel;
+import org.ieatta.cells.model.ReviewsCellModel;
 import org.ieatta.database.models.DBPhoto;
+import org.ieatta.database.models.DBReview;
 import org.ieatta.server.cache.ThumbnailImageUtil;
 
 import java.io.File;
@@ -31,9 +33,18 @@ public class DBConvert {
         for(DBPhoto photo : photos){
             File localFile = ThumbnailImageUtil.sharedInstance.getCacheImageUrl(photo);
             LeadImage item = new LeadImage("file://"+localFile.getAbsolutePath(),photo.getOriginalUrl());
-            new DBConvertFunnel().logToLeadImageCollection( item.getLocalUrl(),  item.getOnlineUrl());
+            new DBConvertFunnel().logToLeadImageCollection(item.getLocalUrl(), item.getOnlineUrl());
             leadImages.add(item);
         }
         return new LeadImageCollection(leadImages);
+    }
+
+    public static List<ReviewsCellModel> toReviewsCellModels(RealmResults<DBReview> reviews) {
+        List<ReviewsCellModel> list = new LinkedList<>();
+        for(DBReview review : reviews){
+            ReviewsCellModel item = new ReviewsCellModel(review);
+            list.add(item);
+        }
+        return list;
     }
 }

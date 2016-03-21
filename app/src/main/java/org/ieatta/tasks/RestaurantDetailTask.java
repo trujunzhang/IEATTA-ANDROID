@@ -5,6 +5,7 @@ import org.ieatta.activity.PageProperties;
 import org.ieatta.activity.PageTitle;
 import org.ieatta.activity.LeadImageCollection;
 import org.ieatta.activity.gallery.GalleryCollection;
+import org.ieatta.cells.model.ReviewsCellModel;
 import org.ieatta.database.models.DBEvent;
 import org.ieatta.database.models.DBPhoto;
 import org.ieatta.database.models.DBRestaurant;
@@ -16,6 +17,8 @@ import org.ieatta.database.realm.DBBuilder;
 import org.ieatta.database.realm.RealmModelReader;
 import org.ieatta.parse.DBConstant;
 
+import java.util.List;
+
 import bolts.Continuation;
 import bolts.Task;
 import io.realm.RealmResults;
@@ -23,7 +26,8 @@ import io.realm.RealmResults;
 public class RestaurantDetailTask {
     public DBRestaurant restaurant;
     public RealmResults<DBEvent> events;
-    public RealmResults<DBReview> reviews;
+//    public RealmResults<DBReview> reviews;
+    public List<ReviewsCellModel> reviewsCellModelList;
     public GalleryCollection thumbnailGalleryCollection;
     public GalleryCollection leadImageGalleryCollection;
     private LeadImageCollection leadImageCollection;
@@ -66,7 +70,8 @@ public class RestaurantDetailTask {
         }).onSuccess(new Continuation<RealmResults<DBReview>, Void>() {
             @Override
             public Void then(Task<RealmResults<DBReview>> task) throws Exception {
-                RestaurantDetailTask.this.reviews = task.getResult();
+                RestaurantDetailTask.this.reviewsCellModelList =DBConvert.toReviewsCellModels(task.getResult());
+//                RestaurantDetailTask.this.reviews = task.getResult();
                 return null;
             }
         });

@@ -1,6 +1,7 @@
 package org.ieatta.cells.model;
 
 import org.ieatta.database.models.DBReview;
+import org.ieatta.database.utils.DBUtil;
 import org.ieatta.provide.IEAEditKey;
 
 public class ReviewsCellModel extends EditBaseCellModel {
@@ -12,8 +13,15 @@ public class ReviewsCellModel extends EditBaseCellModel {
     public int ratingValue ;
     public String reviewContent ;
 
-    public ReviewsCellModel(IEAEditKey editKey, Object user, Object review) {
-        super(editKey);
+    public ReviewsCellModel(DBReview review) {
+        super(IEAEditKey.Unknow);
+
+        this.reviewUUID = review.getUUID();
+        this.ratingValue = review.getRate();
+        this.reviewContent = review.getContent();
+        this.timeAgoString = DBUtil.getTimeAgoString(review.getObjectCreatedDate());
+
+
 
 //        this.user = (Team) user;
 //
