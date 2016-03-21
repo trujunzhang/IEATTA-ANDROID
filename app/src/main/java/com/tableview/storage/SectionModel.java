@@ -46,17 +46,17 @@ public class SectionModel {
     }
 
     public RowModel getRowModel(int row) {
-        if (headerModel != null) {
+        if (getHeaderModel() != null) {
             if (row == 0) {
-                return new RowModel(headerModel);
+                return new RowModel(getHeaderModel());
             }
             row--;
         }
         if (row < this.items.size()) {
             CellType type = this.getRowType(row, this.cellType);
             return new RowModel(this.items.get(row), type, new NSIndexPath(sectionIndex, row));
-        } else if (footerModel != null) {
-            return new RowModel(footerModel);
+        } else if (getFooterModel() != null) {
+            return new RowModel(getFooterModel());
         }
 
         return null;
@@ -75,10 +75,10 @@ public class SectionModel {
     /// Number of items in current section
     public int numberOfItems() {
         int itemsSize = this.items.size();
-        if (headerModel != null) {
+        if (getHeaderModel() != null) {
             itemsSize++;
         }
-        if (footerModel != null) {
+        if (getFooterModel() != null) {
             itemsSize++;
         }
 
@@ -93,5 +93,13 @@ public class SectionModel {
     public SectionModel setFooterModel(FooterModel footerModel) {
         this.footerModel = footerModel;
         return this;
+    }
+
+    public HeaderModel getHeaderModel() {
+        return headerModel;
+    }
+
+    public FooterModel getFooterModel() {
+        return footerModel;
     }
 }
