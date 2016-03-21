@@ -13,6 +13,8 @@ public class TableViewUtil {
     private HashMap<Integer, Integer> sectionInfo;
     private int rowLength = 0;
 
+    public SectionModel headerViewSection;
+    public SectionModel footerViewSection;
     public HashMap<Integer, SectionModel> sections = new LinkedHashMap<>();
 
     public void generateItems(HashMap<Integer, SectionModel> sections) {
@@ -26,9 +28,13 @@ public class TableViewUtil {
         this.rowLength = 0;
         for (Integer integer : indexs) {
             Integer itemsCountInSection = this.getItemsCountInSection(integer);
-            rowLength += itemsCountInSection;
+            this.rowLength += itemsCountInSection;
             sectionInfo.put(integer, itemsCountInSection);
         }
+        if(headerViewSection != null)
+            this.rowLength++;
+        if(footerViewSection != null)
+            this.rowLength++;
     }
 
     private Integer getItemsCountInSection(Integer integer) {
