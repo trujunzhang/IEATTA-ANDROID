@@ -7,6 +7,8 @@ import org.ieatta.analytics.DBConvertFunnel;
 import org.ieatta.cells.model.ReviewsCellModel;
 import org.ieatta.database.models.DBPhoto;
 import org.ieatta.database.models.DBReview;
+import org.ieatta.database.models.DBTeam;
+import org.ieatta.parse.DBConstant;
 import org.ieatta.server.cache.ThumbnailImageUtil;
 
 import java.io.File;
@@ -17,11 +19,11 @@ import io.realm.RealmResults;
 
 public class DBConvert {
 
-    public static List<GalleryItem> toGalleryItem(RealmResults<DBPhoto> photos){
-        List<GalleryItem> list =new LinkedList<>();
-        for(DBPhoto photo : photos){
+    public static List<GalleryItem> toGalleryItem(RealmResults<DBPhoto> photos) {
+        List<GalleryItem> list = new LinkedList<>();
+        for (DBPhoto photo : photos) {
             File file = ThumbnailImageUtil.sharedInstance.getCacheImageUrl(photo);
-            GalleryItem item = new GalleryItem(photo.getUUID(),"file://"+file.getAbsolutePath());
+            GalleryItem item = new GalleryItem(photo.getUUID(), "file://" + file.getAbsolutePath());
             new DBConvertFunnel().logToGalleryItem("toGalleryItem", "photo's path: " + file.getAbsolutePath());
             list.add(item);
         }
@@ -30,19 +32,29 @@ public class DBConvert {
 
     public static LeadImageCollection toLeadImageCollection(RealmResults<DBPhoto> photos) {
         List<LeadImage> leadImages = new LinkedList<>();
-        for(DBPhoto photo : photos){
+        for (DBPhoto photo : photos) {
             File localFile = ThumbnailImageUtil.sharedInstance.getCacheImageUrl(photo);
-            LeadImage item = new LeadImage("file://"+localFile.getAbsolutePath(),photo.getOriginalUrl());
+            LeadImage item = new LeadImage("file://" + localFile.getAbsolutePath(), photo.getOriginalUrl());
             new DBConvertFunnel().logToLeadImageCollection(item.getLocalUrl(), item.getOnlineUrl());
             leadImages.add(item);
         }
         return new LeadImageCollection(leadImages);
     }
 
-    public static List<ReviewsCellModel> toReviewsCellModels(RealmResults<DBReview> reviews) {
+    private static DBTeam getTeamUUID(String userRef, RealmResults<DBTeam> teams) {
+        for (DBTeam team : teams) {
+            if (team.getUUID().equals(userRef))
+                return team;
+        }
+        return DBConstant.getAnonymousUser();
+    }
+
+    public static List<ReviewsCellModel> toReviewsCellModels(RealmResults<DBReview> reviews, RealmResults<DBTeam> teams) {
+
+
         List<ReviewsCellModel> list = new LinkedList<>();
-        for(DBReview review : reviews){
-            ReviewsCellModel item = new ReviewsCellModel(review);
+        for (DBReview review : reviews) {
+            ReviewsCellModel item = new ReviewsCellModel(review, DBConvert.getTeamUUID(review.getUserRef(), teams));
             list.add(item);
         }
         return list;

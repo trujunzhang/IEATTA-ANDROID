@@ -1,5 +1,7 @@
 package org.ieatta.parse;
 
+import org.ieatta.database.models.DBTeam;
+
 public final class DBConstant {
     public final static String kPAPFieldModelGEOHASH = "geoHash";
 
@@ -57,4 +59,12 @@ public final class DBConstant {
 
     // For Team
     public static final String kPAPFieldEmailKey = "email";
+
+        // MARK: Anonymous User
+    public static DBTeam getAnonymousUser() {
+        DBTeam team = new DBTeam();
+        team.setDisplayName("Anonymous");
+
+        return team;
+    }
 }

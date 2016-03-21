@@ -71,7 +71,7 @@ public class RestaurantDetailTask {
             @Override
             public Void then(Task<RealmResults<DBReview>> task) throws Exception {
                 RestaurantDetailTask.this.reviews = task.getResult();
-                RestaurantDetailTask.this.reviewsCellModelList =DBConvert.toReviewsCellModels(task.getResult());
+                RestaurantDetailTask.this.reviewsCellModelList =DBConvert.toReviewsCellModels(task.getResult(), teams);
                 return null;
             }
         });
