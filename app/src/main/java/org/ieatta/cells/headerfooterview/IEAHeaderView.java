@@ -9,11 +9,10 @@ import com.tableview.storage.models.CellType;
 
 import org.ieatta.R;
 import org.ieatta.analytics.RecycleCellFunnel;
-import org.ieatta.cells.model.IEAHeaderView;
 
-public class IEAEmptyHeaderCell extends IEAViewHolder {
+public class IEAHeaderView extends IEAViewHolder {
     public static CellType getType() {
-        return new CellType(IEAEmptyHeaderCell.class, R.layout.cell_headerview);
+        return new CellType(IEAHeaderView.class, R.layout.cell_headerview);
     }
 
     @Override
@@ -33,7 +32,7 @@ public class IEAEmptyHeaderCell extends IEAViewHolder {
 
     private LinearLayout emptyLinearLayout;
 
-    public IEAEmptyHeaderCell(View itemView) {
+    public IEAHeaderView(View itemView) {
         super(itemView);
 
         this.emptyLinearLayout = (LinearLayout) itemView.findViewById(R.id.empty_linearLayout);
@@ -41,10 +40,10 @@ public class IEAEmptyHeaderCell extends IEAViewHolder {
 
     @Override
     public void render(Object value) {
-        IEAHeaderView header = (IEAHeaderView) value;
+        org.ieatta.cells.model.IEAHeaderView header = (org.ieatta.cells.model.IEAHeaderView) value;
 
         int cellHeight = header.getCellHeight();
         this.emptyLinearLayout.setMinimumHeight(cellHeight);
-        new RecycleCellFunnel().logCellInfo("IEAEmptyHeaderCell","cellHeight: "+cellHeight);
+        new RecycleCellFunnel().logCellInfo("IEAHeaderView","cellHeight: "+cellHeight);
     }
 }
