@@ -178,17 +178,10 @@ public class GalleryItemFragment extends Fragment {
         }
     }
 
-    private void loadGalleryItem() {
-        String thumbUrl = this.imageTitle.getThumbUrl();
-        final LeadImage leadImage = new LeadImage(thumbUrl);
-
-        ViewUtil.loadMultiImageUrlInto(imageView, leadImage.getLocalUrl(), leadImage.getOnlineUrl());
-    }
-
     /**
      * Perform a network request to load information and metadata for our gallery item.
      */
-    private void loadGalleryItemxx() {
+    private void loadGalleryItem() {
         String thumbUrl = this.imageTitle.getThumbUrl();
         final LeadImage leadImage = new LeadImage(thumbUrl);
 
