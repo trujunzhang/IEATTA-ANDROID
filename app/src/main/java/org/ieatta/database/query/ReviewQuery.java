@@ -20,6 +20,8 @@ public class ReviewQuery {
     public RealmResults<DBReview> reviews;
     public List<ReviewsCellModel> reviewsCellModelList;
 
+    //  return new RealmModelReader<DBEvent>(DBEvent.class).fetchResults(new DBBuilder(), false);// for test
+
     public Task<List<ReviewsCellModel>> queryReview(String reviewRef,ReviewType type){
         return new RealmModelReader<DBReview>(DBReview.class).fetchResults(
                 new DBBuilder()
@@ -31,7 +33,7 @@ public class ReviewQuery {
                 List<String> list = getTeamsList(task.getResult());
 
                 return new RealmModelReader<DBTeam>(DBTeam.class).fetchResults(
-                        new DBBuilder().whereContainedIn(DBConstant.kPAPFieldObjectUUIDKey,list),false);
+                        new DBBuilder().whereContainedIn(DBConstant.kPAPFieldObjectUUIDKey, list), false);
             }
         }).onSuccessTask(new Continuation<RealmResults<DBTeam>, Task<List<ReviewsCellModel>>>() {
             @Override

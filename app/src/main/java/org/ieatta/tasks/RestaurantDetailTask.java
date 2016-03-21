@@ -13,6 +13,7 @@ import org.ieatta.database.models.DBReview;
 import org.ieatta.database.provide.PhotoUsedType;
 import org.ieatta.database.provide.ReviewType;
 import org.ieatta.database.query.LocalDatabaseQuery;
+import org.ieatta.database.query.ReviewQuery;
 import org.ieatta.database.realm.DBBuilder;
 import org.ieatta.database.realm.RealmModelReader;
 import org.ieatta.parse.DBConstant;
@@ -26,10 +27,8 @@ import io.realm.RealmResults;
 public class RestaurantDetailTask {
     public DBRestaurant restaurant;
     public RealmResults<DBEvent> events;
-    public RealmResults<DBReview> reviews;
     public List<ReviewsCellModel> reviewsCellModelList;
     public GalleryCollection thumbnailGalleryCollection;
-    public GalleryCollection leadImageGalleryCollection;
     private LeadImageCollection leadImageCollection;
 
     /**
@@ -58,26 +57,22 @@ public class RestaurantDetailTask {
                 return new RealmModelReader<DBEvent>(DBEvent.class).fetchResults(
                         new DBBuilder().whereEqualTo(DBConstant.kPAPFieldLocalRestaurantKey, restaurantUUID), false);
             }
-        }).onSuccessTask(new Continuation<RealmResults<DBEvent>, Task<RealmResults<DBReview>>>() {
+        }).onSuccessTask(new Continuation<RealmResults<DBEvent>, Task<List<ReviewsCellModel>>>() {
             @Override
-            public Task<RealmResults<DBReview>> then(Task<RealmResults<DBEvent>> task) throws Exception {
+            public Task<List<ReviewsCellModel>> then(Task<RealmResults<DBEvent>> task) throws Exception {
                 RestaurantDetailTask.this.events = task.getResult();
-                return new RealmModelReader<DBReview>(DBReview.class).fetchResults(
-                        new DBBuilder()
-                                .whereEqualTo(DBConstant.kPAPFieldReviewRefKey, restaurantUUID)
-                                .whereEqualTo(DBConstant.kPAPFieldReviewTypeKey, ReviewType.Review_Restaurant.getType()), false);
+                return new ReviewQuery().queryReview(restaurantUUID,ReviewType.Review_Restaurant);
             }
-        }).onSuccess(new Continuation<RealmResults<DBReview>, Void>() {
+        }).onSuccess(new Continuation<List<ReviewsCellModel>, Void>() {
             @Override
-            public Void then(Task<RealmResults<DBReview>> task) throws Exception {
-                RestaurantDetailTask.this.reviews = task.getResult();
-                RestaurantDetailTask.this.reviewsCellModelList =DBConvert.toReviewsCellModels(task.getResult(), teams);
+            public Void then(Task<List<ReviewsCellModel>> task) throws Exception {
+                RestaurantDetailTask.this.reviewsCellModelList = task.getResult();
                 return null;
             }
         });
     }
 
-    //  return new RealmModelReader<DBEvent>(DBEvent.class).fetchResults(new DBBuilder(), false);// for test
+
 
     public Page getPage() {
         String title = restaurant.getDisplayName();
