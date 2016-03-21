@@ -44,9 +44,7 @@ public class RestaurantDetailTask {
         }).onSuccessTask(new Continuation<RealmResults<DBPhoto>, Task<RealmResults<DBPhoto>>>() {
             @Override
             public Task<RealmResults<DBPhoto>> then(Task<RealmResults<DBPhoto>> task) throws Exception {
-                RealmResults<DBPhoto> result = task.getResult();
                 RestaurantDetailTask.this.leadImageCollection = DBConvert.toLeadImageCollection(task.getResult());
-//                RestaurantDetailTask.this.leadImageCollection = new LeadImageCollection(task.getResult(),restaurantUUID);
                 return LocalDatabaseQuery.queryPhotosForRestaurant(restaurantUUID);
             }
         }).onSuccessTask(new Continuation<RealmResults<DBPhoto>, Task<RealmResults<DBEvent>>>() {
