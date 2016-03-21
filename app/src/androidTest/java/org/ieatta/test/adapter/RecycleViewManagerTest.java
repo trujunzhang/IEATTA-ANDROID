@@ -35,13 +35,10 @@ public class RecycleViewManagerTest {
     @Test
     public void testHeaderView()  {
         int layoutResId = 123;
-        String modelName = "testHeaderView";
-        HeaderFooterViewModel headerViewModel = new HeaderFooterViewModel(modelName);
+        HeaderFooterViewModel headerViewModel = new HeaderFooterViewModel("testHeaderView");
 
-        CellType headerType = HeaderView.getType(layoutResId);
-
-        this.manager.setRegisterHeaderView(headerType);
-        this.manager.setHeaderItem(headerViewModel, headerType);
+        this.manager.setRegisterHeaderView(HeaderView.getType(layoutResId));
+        this.manager.setHeaderItem(headerViewModel, HeaderView.getType(layoutResId));
         this.manager.updateTableSections();
 
         Object expectModel = this.mProvider.memoryStorage.getRowModel(0);
@@ -51,13 +48,10 @@ public class RecycleViewManagerTest {
     @Test
     public void testFooterView()  {
         int layoutResId = 123;
-        String modelName = "testFooterView";
-        HeaderFooterViewModel footerViewModel = new HeaderFooterViewModel(modelName);
+        HeaderFooterViewModel footerViewModel = new HeaderFooterViewModel("testFooterView");
 
-        CellType footerType = FooterView.getType(layoutResId);
-
-        this.manager.setRegisterFooterClass(footerType);
-        this.manager.setFooterItem(footerViewModel, footerType);
+        this.manager.setRegisterFooterClass(FooterView.getType(layoutResId));
+        this.manager.setFooterItem(footerViewModel, FooterView.getType(layoutResId));
         this.manager.updateTableSections();
 
         Object expectModel = this.mProvider.memoryStorage.getRowModel(0);
