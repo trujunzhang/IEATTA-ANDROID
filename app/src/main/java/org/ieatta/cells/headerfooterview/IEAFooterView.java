@@ -1,19 +1,17 @@
 package org.ieatta.cells.headerfooterview;
 
 import android.view.View;
-import android.widget.LinearLayout;
 
 import com.tableview.adapter.IEAViewHolder;
 import com.tableview.adapter.enums.ViewHolderType;
 import com.tableview.storage.models.CellType;
 
 import org.ieatta.R;
-import org.ieatta.analytics.RecycleCellFunnel;
-import org.ieatta.cells.model.IEAHeaderView;
+import org.ieatta.cells.model.IEAFooterViewModel;
 
 public class IEAFooterView extends IEAViewHolder {
     public static CellType getType() {
-        return new CellType(IEAFooterView.class, R.layout.cell_headerview);
+        return new CellType(IEAFooterView.class, R.layout.cell_footerview);
     }
 
     @Override
@@ -37,5 +35,6 @@ public class IEAFooterView extends IEAViewHolder {
 
     @Override
     public void render(Object value) {
+        IEAFooterViewModel model = (IEAFooterViewModel) value;
     }
 }

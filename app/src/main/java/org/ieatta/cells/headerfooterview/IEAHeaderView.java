@@ -9,6 +9,7 @@ import com.tableview.storage.models.CellType;
 
 import org.ieatta.R;
 import org.ieatta.analytics.RecycleCellFunnel;
+import org.ieatta.cells.model.IEAHeaderViewModel;
 
 public class IEAHeaderView extends IEAViewHolder {
     public static CellType getType() {
@@ -40,7 +41,7 @@ public class IEAHeaderView extends IEAViewHolder {
 
     @Override
     public void render(Object value) {
-        org.ieatta.cells.model.IEAHeaderView header = (org.ieatta.cells.model.IEAHeaderView) value;
+        IEAHeaderViewModel header = (IEAHeaderViewModel) value;
 
         int cellHeight = header.getCellHeight();
         this.emptyLinearLayout.setMinimumHeight(cellHeight);

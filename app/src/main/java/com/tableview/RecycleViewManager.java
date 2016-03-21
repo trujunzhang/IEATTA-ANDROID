@@ -105,6 +105,14 @@ public class RecycleViewManager {
         getTableManager().registerCellClassInSpecialRow(type, forSectionIndex, forRowIndex);
     }
 
+    public void setHeaderView(CellType type) {
+        getTableManager().setHeaderView(type);
+    }
+
+    public void setFooterView(CellType type) {
+        getTableManager().setFooterView(type);
+    }
+
     public void setRegisterCellClass(CellType type, int forSectionIndex) {
         getTableManager().registerCellClass(type, forSectionIndex);
     }

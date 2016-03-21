@@ -3,10 +3,10 @@ package org.ieatta.cells.model;
 import android.view.Display;
 import android.widget.LinearLayout;
 
-public class IEAHeaderView {
+public class IEAHeaderViewModel {
     private int cellHeight;
 
-    public IEAHeaderView(int cellHeight) {
+    public IEAHeaderViewModel(int cellHeight) {
         this.cellHeight = cellHeight;
     }
 
