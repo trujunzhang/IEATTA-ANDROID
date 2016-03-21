@@ -48,17 +48,18 @@ public class TableViewUtil {
     }
 
     public RowModel getItem(int position) {
+        if (footerViewSection.haveFooterView()) {
+            if (position == (this.rowLength - 1)) {
+                return footerViewSection.getFooterViewModel();
+            }
+        }
         if (headerViewSection.haveHeaderView()) {
             if (position == 0) {
                 return headerViewSection.getHeaderViewModel();
             }
             position++;
         }
-        if (footerViewSection.haveFooterView()) {
-            if (position == (this.rowLength - 1)) {
-                return footerViewSection.getFooterViewModel();
-            }
-        }
+
 
         int total = 0;
         for (Integer key : this.sectionCountInfo.keySet()) {
