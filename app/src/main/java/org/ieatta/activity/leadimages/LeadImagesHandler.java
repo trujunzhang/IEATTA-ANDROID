@@ -218,6 +218,7 @@ public class LeadImagesHandler {
             @Override
             public Void then(Task<LeadImage> task) throws Exception {
                 LeadImagesHandler.this.loadLeadImage(task.getResult());
+                pageProperties.nextLeadImage();
                 return null;
             }
         },Task.UI_THREAD_EXECUTOR);
