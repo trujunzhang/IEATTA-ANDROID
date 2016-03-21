@@ -214,33 +214,7 @@ public class LeadImagesHandler {
             return;
         }
         final PageProperties pageProperties = this.getPage().getPageProperties();
-
-        LeadImage leadImage = pageProperties.getCurrentLeadImage();
-
-        this.loadLeadImage(leadImage);
-
-//        pageProperties.getLeadImageLocalUrl().onSuccessTask(new Continuation<String, Task<String>>() {
-//            @Override
-//            public Task<String> then(Task<String> task) throws Exception {
-//                LeadImagesHandler.this.loadLeadImage(task.getResult(), true);
-//                if(pageProperties.isCached() == true){
-//                    return null;
-//                }
-//                return pageProperties.getLeadImageOnlineUrl();
-//            }
-//        }, Task.UI_THREAD_EXECUTOR).onSuccess(new Continuation<String, Void>() {
-//            @Override
-//            public Void then(Task<String> task) throws Exception {
-//                LeadImagesHandler.this.loadLeadImage(task.getResult(), true);
-//                return null;
-//            }
-//        }, Task.UI_THREAD_EXECUTOR).continueWith(new Continuation<Void, Void>() {
-//            @Override
-//            public Void then(Task<Void> task) throws Exception {
-//                pageProperties.nextLeadImage();
-//                return null;
-//            }
-//        });
+        this.loadLeadImage(pageProperties.getCurrentLeadImage());
     }
 
     /**
