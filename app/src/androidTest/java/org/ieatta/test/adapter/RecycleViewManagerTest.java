@@ -21,6 +21,9 @@ public class RecycleViewManagerTest extends ActivityUnitTestCase {
     private RecycleViewManager manager;
     private DTTableViewManager mProvider;
 
+    private final HeaderFooterViewModel headerViewModel = new HeaderFooterViewModel("testHeaderView");
+    private final HeaderFooterViewModel footerViewModel = new HeaderFooterViewModel("testFooterView");
+
     public RecycleViewManagerTest(Class activityClass) {
         super(activityClass);
     }
@@ -37,7 +40,6 @@ public class RecycleViewManagerTest extends ActivityUnitTestCase {
 
     @Test
     public void testHeaderView()  {
-        HeaderFooterViewModel headerViewModel = new HeaderFooterViewModel("testHeaderView");
         // when
         this.manager.setRegisterHeaderView(HeaderView.getType());
         this.manager.setHeaderItem(headerViewModel, HeaderView.getType());
@@ -50,7 +52,6 @@ public class RecycleViewManagerTest extends ActivityUnitTestCase {
 
     @Test
     public void testFooterView()  {
-        HeaderFooterViewModel footerViewModel = new HeaderFooterViewModel("testFooterView");
         // when
         this.manager.setRegisterFooterClass(FooterView.getType());
         this.manager.setFooterItem(footerViewModel, FooterView.getType());
@@ -59,5 +60,21 @@ public class RecycleViewManagerTest extends ActivityUnitTestCase {
         // then
         Object expectModel = this.mProvider.memoryStorage.getRowModel(0);
         assertThat("The same cell type.", footerViewModel.equals(expectModel));
+    }
+
+    @Test
+    public void testHeaderFooterView()  {
+        // when
+        this.manager.setRegisterHeaderClass(HeaderView.getType());
+        this.manager.setRegisterFooterClass(FooterView.getType());
+        this.manager.setHeaderItem(headerViewModel, HeaderView.getType());
+        this.manager.setFooterItem(footerViewModel, FooterView.getType());
+        // how
+        this.manager.updateTableSections();
+        // then
+        Object expectHeaderModel = this.mProvider.memoryStorage.getRowModel(0);
+        Object expectFooterModel = this.mProvider.memoryStorage.getRowModel(1);
+        assertThat("The same cell type.", headerViewModel.equals(expectHeaderModel));
+        assertThat("The same cell type.", footerViewModel.equals(expectFooterModel));
     }
 }
