@@ -39,12 +39,12 @@ public class IEAReviewsCell extends IEAViewHolder {
     public void render(Object value) {
         ReviewsCellModel model = (ReviewsCellModel) value;
 
-//        this.titleLabel.setText(model.user.displayName);
-//        this.timeAgoTextView.setText(model.timeAgoString);
-//
+        this.titleLabel.setText(model.title);
+        this.timeAgoTextView.setText(model.timeAgoString);
+
 //        this.avatarView.loadNewPhotoByModel(model.user, R.drawable.blank_user_small);
-//
-//        this.business_review_star_rating.setImageLevel(model.ratingValue);
-//        this.reviewContentLabel.setText(model.reviewContent);
+
+        this.business_review_star_rating.setImageLevel(model.ratingValue);
+        this.reviewContentLabel.setText(model.reviewContent);
     }
 }

@@ -11,6 +11,7 @@ import com.tableview.utils.CollectionUtil;
 import org.ieatta.R;
 import org.ieatta.cells.IEAGalleryThumbnailCell;
 import org.ieatta.cells.IEARestaurantEventsCell;
+import org.ieatta.cells.IEAReviewsCell;
 import org.ieatta.cells.header.IEAEmptyHeaderCell;
 import org.ieatta.cells.model.IEAEmptyHeader;
 import org.ieatta.cells.model.IEAGalleryThumbnail;
@@ -59,6 +60,7 @@ public class RestaurantDetailFragment extends DetailFragment {
         this.manager.setRegisterCellClass(IEAEmptyHeaderCell.getType(), RestaurantDetailSection.section_leadimage.ordinal());
         this.manager.setRegisterCellClass(IEARestaurantEventsCell.getType(), RestaurantDetailSection.section_events.ordinal());
         this.manager.setRegisterCellClass(IEAGalleryThumbnailCell.getType(), RestaurantDetailSection.section_gallery_thumbnail.ordinal());
+        this.manager.setRegisterCellClass(IEAReviewsCell.getType(), RestaurantDetailSection.section_reviews.ordinal());
 
         this.manager.appendSectionTitleCell(new SectionTitleCellModel(IEAEditKey.Section_Title, R.string.Events_Recorded), RestaurantDetailSection.section_events.ordinal());
     }
@@ -90,8 +92,8 @@ public class RestaurantDetailFragment extends DetailFragment {
     protected void reloadPage() {
         this.manager.setSectionItems(CollectionUtil.createList(new IEAEmptyHeader(this.getScreenHeight())), RestaurantDetailSection.section_leadimage.ordinal());
         this.manager.setSectionItems(task.events, RestaurantDetailSection.section_events.ordinal());
-
         this.manager.setSectionItems(CollectionUtil.createList(new IEAGalleryThumbnail(this.task.thumbnailGalleryCollection,this.galleryViewListener)), RestaurantDetailSection.section_gallery_thumbnail.ordinal());
+        this.manager.setSectionItems(task.reviewsCellModelList, RestaurantDetailSection.section_reviews.ordinal());
 
         model.setPage(task.getPage());
 
