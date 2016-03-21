@@ -107,12 +107,12 @@ public class RecycleViewManager {
         getTableManager().registerCellClassInSpecialRow(type, forSectionIndex, forRowIndex);
     }
 
-    public void setHeaderView(CellType type) {
-        getTableManager().setHeaderView(type);
+    public void setRegisterHeaderView(CellType type) {
+        getTableManager().setRegisterHeaderView(type);
     }
 
-    public void setFooterView(CellType type) {
-        getTableManager().setFooterView(type);
+    public void setRegisterFooterView(CellType type) {
+        getTableManager().setRegisterFooterView(type);
     }
 
     public void setHeaderItem(Object item,CellType type) {

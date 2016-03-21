@@ -6,7 +6,6 @@ import android.view.View;
 import com.tableview.RecycleViewManager;
 import com.tableview.adapter.NSIndexPath;
 import com.tableview.adapter.RecyclerOnItemClickListener;
-import com.tableview.utils.CollectionUtil;
 
 import org.ieatta.R;
 import org.ieatta.cells.IEAGalleryThumbnailCell;
@@ -15,7 +14,6 @@ import org.ieatta.cells.IEAReviewsCell;
 import org.ieatta.cells.headerfooterview.IEAFooterView;
 import org.ieatta.cells.headerfooterview.IEAHeaderView;
 import org.ieatta.cells.model.IEAFooterViewModel;
-import org.ieatta.cells.model.IEAGalleryThumbnail;
 import org.ieatta.cells.model.IEAHeaderViewModel;
 import org.ieatta.cells.model.SectionTitleCellModel;
 import org.ieatta.provide.IEAEditKey;
@@ -58,8 +56,8 @@ public class RestaurantDetailFragment extends DetailFragment {
     }
 
     private void setupUI() {
-        this.manager.setHeaderView(IEAHeaderView.getType());
-        this.manager.setFooterView(IEAFooterView.getType());
+        this.manager.setRegisterHeaderView(IEAHeaderView.getType());
+        this.manager.setRegisterFooterView(IEAFooterView.getType());
 
         this.manager.setRegisterCellClass(IEARestaurantEventsCell.getType(), RestaurantDetailSection.section_events.ordinal());
         this.manager.setRegisterCellClass(IEAGalleryThumbnailCell.getType(), RestaurantDetailSection.section_gallery_thumbnail.ordinal());
@@ -94,8 +92,8 @@ public class RestaurantDetailFragment extends DetailFragment {
 
     @Override
     protected void reloadPage() {
-        this.manager.setHeaderItem(new IEAHeaderViewModel(this.getScreenHeight()),IEAHeaderView.getType());
-        this.manager.setFooterItem(new IEAFooterViewModel(),IEAFooterView.getType());
+        this.manager.setHeaderItem(new IEAHeaderViewModel(this.getScreenHeight()), IEAHeaderView.getType());
+        this.manager.setFooterItem(new IEAFooterViewModel(), IEAFooterView.getType());
 
 //        this.manager.setSectionItems(task.events, RestaurantDetailSection.section_events.ordinal());
 

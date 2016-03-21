@@ -72,11 +72,11 @@ public class DTTableViewManager {
         this.memoryStorage.registerCellClassInSpecialRow(type, forSectionIndex, forRowIndex);
     }
 
-    public void setHeaderView(CellType type) {
+    public void setRegisterHeaderView(CellType type) {
         this.memoryStorage.registerCellType(type);
     }
 
-    public void setFooterView(CellType type) {
+    public void setRegisterFooterView(CellType type) {
         this.memoryStorage.registerCellType(type);
     }
 }
