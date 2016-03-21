@@ -214,7 +214,13 @@ public class LeadImagesHandler {
             return;
         }
         final PageProperties pageProperties = this.getPage().getPageProperties();
-        this.loadLeadImage(pageProperties.getCurrentLeadImage());
+        pageProperties.getCurrentLeadImage().onSuccess(new Continuation<LeadImage, Void>() {
+            @Override
+            public Void then(Task<LeadImage> task) throws Exception {
+                LeadImagesHandler.this.loadLeadImage(task.getResult());
+                return null;
+            }
+        },Task.UI_THREAD_EXECUTOR);
     }
 
     /**

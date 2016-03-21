@@ -23,8 +23,8 @@ public class PageProperties {
         return this.leadImageCollection.leadImageOnline();
     }
 
-    public LeadImage getCurrentLeadImage() {
-        return this.leadImageCollection.getCurrentLeadImage();
+    public Task<LeadImage> getCurrentLeadImage() {
+        return Task.forResult(this.leadImageCollection.getCurrentLeadImage());
     }
 
     public boolean isCached(){
