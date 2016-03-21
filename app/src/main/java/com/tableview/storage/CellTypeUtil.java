@@ -22,7 +22,7 @@ public class CellTypeUtil {
     private HashMap<Class, Integer> modelTypes = new LinkedHashMap<>();
 
     public void registerType(CellType type) {
-        modelTypes.put(type.cellClazz, type.layoutResId);
+        this.modelTypes.put(type.cellClazz, type.layoutResId);
 
         if (this.isExistRegisterType(type.cellClazz) == false) {
             this.rowTypes.put(this.rowTypes.size(), type.cellClazz);
