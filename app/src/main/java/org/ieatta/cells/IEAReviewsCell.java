@@ -42,7 +42,7 @@ public class IEAReviewsCell extends IEAViewHolder {
         this.titleLabel.setText(model.title);
         this.timeAgoTextView.setText(model.timeAgoString);
 
-//        this.avatarView.loadNewPhotoByModel(model.user, R.drawable.blank_user_small);
+        this.avatarView.loadNewPhotoByModel(model.userUUID);
 
         this.business_review_star_rating.setImageLevel(model.ratingValue);
         this.reviewContentLabel.setText(model.reviewContent);

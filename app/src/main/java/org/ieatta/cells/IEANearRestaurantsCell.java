@@ -30,9 +30,10 @@ public class IEANearRestaurantsCell extends IEAViewHolder {
     @Override
     public void render(Object value) {
         DBRestaurant model = (DBRestaurant) value;
+
         this.titleLabel.setText(model.getDisplayName());
         this.subtitleLabel.setText(((DBRestaurant) value).getGoogleMapAddress());
 
-        this.avatarView.loadNewPhotoByModel(model, R.drawable.blank_biz);
+        this.avatarView.loadNewPhotoByModel(model.getUUID());
     }
 }

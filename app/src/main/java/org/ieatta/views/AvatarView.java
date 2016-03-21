@@ -33,10 +33,8 @@ public class AvatarView extends SimpleDraweeView {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
 
-    public void loadNewPhotoByModel(DBRestaurant model, int placeHolder) {
-        this.configureAvatar(placeHolder);
-
-        ThumbnailImageUtil.sharedInstance.getImagesListTask(model.getUUID()).onSuccess(new Continuation<List<File>, Void>() {
+    public void loadNewPhotoByModel(String uuid) {
+        ThumbnailImageUtil.sharedInstance.getImagesListTask(uuid).onSuccess(new Continuation<List<File>, Void>() {
             @Override
             public Void then(Task<List<File>> task) throws Exception {
                 List<File> files = task.getResult();
