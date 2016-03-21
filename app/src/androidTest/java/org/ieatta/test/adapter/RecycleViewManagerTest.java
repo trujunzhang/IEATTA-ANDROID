@@ -1,6 +1,7 @@
 package org.ieatta.test.adapter;
 
 import android.support.test.runner.AndroidJUnit4;
+import android.test.ActivityUnitTestCase;
 
 import com.tableview.RecycleViewManager;
 import com.tableview.TableViewControllerAdapter;
@@ -16,17 +17,20 @@ import org.junit.runner.RunWith;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 
-@RunWith(AndroidJUnit4.class)
-public class RecycleViewManagerTest {
+public class RecycleViewManagerTest extends ActivityUnitTestCase {
     private RecycleViewManager manager;
     private DTTableViewManager mProvider;
+
+    public RecycleViewManagerTest(Class activityClass) {
+        super(activityClass);
+    }
 
     @Before
     public void setUp() throws Exception {
         manager = new RecycleViewManager();
         mProvider = manager.getTableManager();
 
-        TableViewConfiguration configuration = new TableViewConfiguration(new TableViewConfiguration.Builder());
+        TableViewConfiguration configuration = new TableViewConfiguration(new TableViewConfiguration.Builder(this.getActivity().getApplicationContext()));
         TableViewControllerAdapter adapter = new TableViewControllerAdapter(this.mProvider);
         mProvider.setConfiguration(configuration, adapter);
     }

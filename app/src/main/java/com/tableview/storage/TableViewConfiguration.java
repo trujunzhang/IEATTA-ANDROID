@@ -19,10 +19,6 @@ public class TableViewConfiguration {
         public final Context context;
         private String debugType;
 
-        @VisibleForTesting
-        public Builder() {
-            this.context = null;
-        }
 
         public Builder(Context context) {
             this.context = context.getApplicationContext();
