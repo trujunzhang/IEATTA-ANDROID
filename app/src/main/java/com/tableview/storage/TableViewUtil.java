@@ -17,8 +17,10 @@ public class TableViewUtil {
     private SectionModel footerViewSection;
     private HashMap<Integer, SectionModel> sections = new LinkedHashMap<>();
 
-    public void generateItems(HashMap<Integer, SectionModel> sections) {
+    public void generateItems(HashMap<Integer, SectionModel> sections, SectionModel headerViewSection, SectionModel footerViewSection) {
         this.sections = sections;
+        this.headerViewSection = headerViewSection;
+        this.footerViewSection = footerViewSection;
 
         Set<Integer> keySet = sections.keySet();
         List<Integer> indexs = new LinkedList<>(keySet);
@@ -31,9 +33,9 @@ public class TableViewUtil {
             this.rowLength += count;
             sectionCountInfo.put(integer, count);
         }
-        if(headerViewSection != null)
+        if(this.headerViewSection != null)
             this.rowLength++;
-        if(footerViewSection != null)
+        if(this.footerViewSection != null)
             this.rowLength++;
     }
 
