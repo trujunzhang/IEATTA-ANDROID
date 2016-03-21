@@ -26,7 +26,7 @@ import io.realm.RealmResults;
 public class RestaurantDetailTask {
     public DBRestaurant restaurant;
     public RealmResults<DBEvent> events;
-//    public RealmResults<DBReview> reviews;
+    public RealmResults<DBReview> reviews;
     public List<ReviewsCellModel> reviewsCellModelList;
     public GalleryCollection thumbnailGalleryCollection;
     public GalleryCollection leadImageGalleryCollection;
@@ -70,6 +70,7 @@ public class RestaurantDetailTask {
         }).onSuccess(new Continuation<RealmResults<DBReview>, Void>() {
             @Override
             public Void then(Task<RealmResults<DBReview>> task) throws Exception {
+                RestaurantDetailTask.this.reviews = task.getResult();
                 RestaurantDetailTask.this.reviewsCellModelList =DBConvert.toReviewsCellModels(task.getResult());
                 return null;
             }
