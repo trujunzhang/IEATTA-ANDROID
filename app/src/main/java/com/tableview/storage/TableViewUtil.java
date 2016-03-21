@@ -66,6 +66,11 @@ public class TableViewUtil {
             position++;
         }
 
+        return this.getItemInSections(position);
+    }
+
+
+    public RowModel getItemInSections(int position) {
         int total = 0;
         for (Integer key : this.sectionCountInfo.keySet()) {
             Integer count = this.sectionCountInfo.get(key);
