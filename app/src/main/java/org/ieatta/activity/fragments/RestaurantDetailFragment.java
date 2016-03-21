@@ -36,7 +36,7 @@ public class RestaurantDetailFragment extends DetailFragment {
 
     @Override
     public void onContentHeightChanged(int contentHeight) {
-//        this.manager.updateSectionItem(new IEAHeaderViewModel(contentHeight), RestaurantDetailSection.section_leadimage.ordinal(),0);
+        this.manager.updateItemForHeader(new IEAHeaderViewModel(contentHeight));
     }
 
     enum RestaurantDetailSection {
@@ -93,7 +93,8 @@ public class RestaurantDetailFragment extends DetailFragment {
 
     @Override
     protected void reloadPage() {
-//        this.manager.setSectionItems(CollectionUtil.createList(new IEAHeaderViewModel(this.getScreenHeight())), RestaurantDetailSection.section_leadimage.ordinal());
+        this.manager.setItemForHeader(new IEAHeaderViewModel(this.getScreenHeight()));
+        this.manager.setItemForFooter(new IEAHeaderViewModel(this.getScreenHeight()));
 
         this.manager.setSectionItems(task.events, RestaurantDetailSection.section_events.ordinal());
         this.manager.setSectionItems(CollectionUtil.createList(new IEAGalleryThumbnail(this.task.thumbnailGalleryCollection,this.galleryViewListener)), RestaurantDetailSection.section_gallery_thumbnail.ordinal());

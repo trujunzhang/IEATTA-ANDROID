@@ -44,6 +44,9 @@ public class MemoryStorage {
     public void setItemForHeader(Object item) {
 
     }
+    public void updateItemForHeader(Object item) {
+
+    }
 
     public void setItemForFooter(Object item) {
 

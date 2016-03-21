@@ -117,6 +117,10 @@ public class RecycleViewManager {
         getMemoryStorage().setItemForHeader(item);
     }
 
+    public void updateItemForHeader(Object item) {
+        getMemoryStorage().updateItemForHeader(item);
+    }
+
     public void setItemForFooter(Object item) {
         getMemoryStorage().setItemForFooter(item);
     }
