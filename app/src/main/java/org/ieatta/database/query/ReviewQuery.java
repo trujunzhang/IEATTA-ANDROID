@@ -40,8 +40,7 @@ public class ReviewQuery {
             @Override
             public Task<List<ReviewsCellModel>> then(Task<RealmResults<DBTeam>> task) throws Exception {
                 RealmResults<DBTeam> teams = task.getResult();
-                List<ReviewsCellModel> value = DBConvert.toReviewsCellModels(ReviewQuery.this.reviews, teams);
-                return Task.forResult(value);
+                return Task.forResult(DBConvert.toReviewsCellModels(ReviewQuery.this.reviews, teams));
             }
         });
     }

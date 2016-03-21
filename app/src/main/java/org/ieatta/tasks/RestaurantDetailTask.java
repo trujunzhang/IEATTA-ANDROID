@@ -72,8 +72,6 @@ public class RestaurantDetailTask {
         });
     }
 
-
-
     public Page getPage() {
         String title = restaurant.getDisplayName();
         PageTitle pageTitle = new PageTitle(this.restaurant.getUUID());
