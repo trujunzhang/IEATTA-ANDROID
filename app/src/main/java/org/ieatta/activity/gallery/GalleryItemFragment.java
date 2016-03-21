@@ -20,6 +20,7 @@ import android.widget.MediaController;
 import android.widget.VideoView;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.drawee.controller.AbstractDraweeController;
 import com.facebook.drawee.controller.BaseControllerListener;
 import com.facebook.drawee.drawable.ScalingUtils;
 import com.facebook.drawee.generic.GenericDraweeHierarchy;
@@ -59,10 +60,7 @@ public class GalleryItemFragment extends Fragment {
     private ZoomableDraweeView imageView;
 
     private View videoContainer;
-    private VideoView videoView;
     private SimpleDraweeView videoThumbnail;
-    private View videoPlayButton;
-    private MediaController mediaController;
 
     private GalleryItem galleryItem;
 
@@ -74,7 +72,7 @@ public class GalleryItemFragment extends Fragment {
         GalleryItemFragment f = new GalleryItemFragment();
         Bundle args = new Bundle();
         args.putParcelable(ARG_PAGETITLE, pageTitle);
-        args.putParcelable(ARG_MEDIATITLE, new PageTitle(galleryItemProto.getUUID(),galleryItemProto.getThumbUrl()));
+        args.putParcelable(ARG_MEDIATITLE, new PageTitle(galleryItemProto.getUUID(), galleryItemProto.getThumbUrl()));
         args.putString(ARG_MIMETYPE, galleryItemProto.getMimeType());
         f.setArguments(args);
         return f;
@@ -95,10 +93,8 @@ public class GalleryItemFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_gallery_item, container, false);
-        videoContainer = rootView.findViewById(R.id.gallery_video_container);
-        videoView = (VideoView) rootView.findViewById(R.id.gallery_video);
-        videoThumbnail = (SimpleDraweeView) rootView.findViewById(R.id.gallery_video_thumbnail);
-        videoPlayButton = rootView.findViewById(R.id.gallery_video_play_button);
+//        videoContainer = rootView.findViewById(R.id.gallery_video_container);
+//        videoThumbnail = (SimpleDraweeView) rootView.findViewById(R.id.gallery_video_thumbnail);
         imageView = (ZoomableDraweeView) rootView.findViewById(R.id.gallery_image);
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -177,26 +173,22 @@ public class GalleryItemFragment extends Fragment {
     public void onUpdatePosition(int fragmentPosition, int pagerPosition) {
         if (fragmentPosition != pagerPosition) {
             // update stuff if our position is not "current" within the ViewPager...
-            if (mediaController != null) {
-                if (videoView.isPlaying()) {
-                    videoView.pause();
-                }
-                mediaController.hide();
-            }
         } else {
             // update stuff if our position is "current"
-            if (mediaController != null) {
-                if (!videoView.isPlaying()) {
-                    videoView.start();
-                }
-            }
         }
+    }
+
+    private void loadGalleryItem() {
+        String thumbUrl = this.imageTitle.getThumbUrl();
+        final LeadImage leadImage = new LeadImage(thumbUrl);
+
+        ViewUtil.loadMultiImageUrlInto(imageView, leadImage.getLocalUrl(), leadImage.getOnlineUrl());
     }
 
     /**
      * Perform a network request to load information and metadata for our gallery item.
      */
-    private void loadGalleryItem() {
+    private void loadGalleryItemxx() {
         String thumbUrl = this.imageTitle.getThumbUrl();
         final LeadImage leadImage = new LeadImage(thumbUrl);
 
@@ -206,16 +198,16 @@ public class GalleryItemFragment extends Fragment {
                 GalleryItemFragment.this.loadImage(task.getResult());
                 return leadImage.getOnlineUrlTask();
             }
-        },Task.UI_THREAD_EXECUTOR).onSuccess(new Continuation<String, Void>() {
+        }, Task.UI_THREAD_EXECUTOR).onSuccess(new Continuation<String, Void>() {
             @Override
             public Void then(Task<String> task) throws Exception {
-                String result = task.getResult();
-                if(TextUtils.isEmpty(result) == false){
-                    GalleryItemFragment.this.loadImage(result);
+                String onlineUrl = task.getResult();
+                if (TextUtils.isEmpty(onlineUrl) == false) {
+                    GalleryItemFragment.this.loadImage(onlineUrl);
                 }
                 return null;
             }
-        },Task.UI_THREAD_EXECUTOR);
+        }, Task.UI_THREAD_EXECUTOR);
 
 //        String uuid = this.imageTitle.getUUID();
 //        String usedRef = this.pageTitle.getUUID();
@@ -292,18 +284,19 @@ public class GalleryItemFragment extends Fragment {
 
     }
 
-    private void loadImage(LeadImage leadImage){
+    private void loadImage(LeadImage leadImage) {
         imageView.setVisibility(View.VISIBLE);
-//        ViewUtil.loadMultiImageUrlInto(this.imageView, leadImage.getLocalUrl(), leadImage.getOnlineUrl());
+        ViewUtil.loadMultiImageUrlInto(this.imageView, leadImage.getLocalUrl(), leadImage.getOnlineUrl());
     }
 
     private void loadImage(String url) {
         imageView.setVisibility(View.VISIBLE);
         Log.d(TAG, "Loading image from url: " + url);
 
-        imageView.setController(Fresco.newDraweeControllerBuilder()
+        AbstractDraweeController build = Fresco.newDraweeControllerBuilder()
                 .setUri(url)
                 .setAutoPlayAnimations(true)
+                .setOldController(imageView.getController())
                 .setControllerListener(new BaseControllerListener<ImageInfo>() {
                     @Override
                     public void onFinalImageSet(String id, ImageInfo imageInfo, Animatable animatable) {
@@ -324,7 +317,8 @@ public class GalleryItemFragment extends Fragment {
                         FeedbackUtil.showMessage(getActivity(), R.string.gallery_error_draw_failed);
                     }
                 })
-                .build());
+                .build();
+        imageView.setController(build);
     }
 
     /**

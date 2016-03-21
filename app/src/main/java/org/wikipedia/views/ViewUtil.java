@@ -17,6 +17,7 @@ import android.view.animation.Animation;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.controller.AbstractDraweeController;
 import com.facebook.drawee.interfaces.DraweeController;
+import com.facebook.drawee.view.DraweeView;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.facebook.imagepipeline.request.ImageRequest;
 
@@ -70,7 +71,7 @@ public final class ViewUtil {
         return (View) originatingView.get(mode);
     }
 
-    public static void loadMultiImageUrlInto(@NonNull SimpleDraweeView drawee, @Nullable String lowResUri,String highResUri) {
+    public static void loadMultiImageUrlInto(@NonNull DraweeView drawee, @Nullable String lowResUri,String highResUri) {
         DraweeController controller = Fresco.newDraweeControllerBuilder()
                 .setLowResImageRequest(ImageRequest.fromUri(lowResUri))
                 .setImageRequest(ImageRequest.fromUri(highResUri))
