@@ -12,8 +12,8 @@ import org.ieatta.R;
 import org.ieatta.cells.IEAGalleryThumbnailCell;
 import org.ieatta.cells.IEARestaurantEventsCell;
 import org.ieatta.cells.IEAReviewsCell;
-import org.ieatta.cells.header.IEAEmptyHeaderCell;
-import org.ieatta.cells.model.IEAEmptyHeader;
+import org.ieatta.cells.headerfooterview.IEAEmptyHeaderCell;
+import org.ieatta.cells.model.IEAHeaderView;
 import org.ieatta.cells.model.IEAGalleryThumbnail;
 import org.ieatta.cells.model.SectionTitleCellModel;
 import org.ieatta.provide.IEAEditKey;
@@ -35,7 +35,7 @@ public class RestaurantDetailFragment extends DetailFragment {
 
     @Override
     public void onContentHeightChanged(int contentHeight) {
-        this.manager.updateSectionItem(new IEAEmptyHeader(contentHeight), RestaurantDetailSection.section_leadimage.ordinal(),0);
+        this.manager.updateSectionItem(new IEAHeaderView(contentHeight), RestaurantDetailSection.section_leadimage.ordinal(),0);
     }
 
     enum RestaurantDetailSection {
@@ -91,7 +91,7 @@ public class RestaurantDetailFragment extends DetailFragment {
 
     @Override
     protected void reloadPage() {
-        this.manager.setSectionItems(CollectionUtil.createList(new IEAEmptyHeader(this.getScreenHeight())), RestaurantDetailSection.section_leadimage.ordinal());
+        this.manager.setSectionItems(CollectionUtil.createList(new IEAHeaderView(this.getScreenHeight())), RestaurantDetailSection.section_leadimage.ordinal());
         this.manager.setSectionItems(task.events, RestaurantDetailSection.section_events.ordinal());
         this.manager.setSectionItems(CollectionUtil.createList(new IEAGalleryThumbnail(this.task.thumbnailGalleryCollection,this.galleryViewListener)), RestaurantDetailSection.section_gallery_thumbnail.ordinal());
         this.manager.setSectionItems(task.reviewsCellModelList, RestaurantDetailSection.section_reviews.ordinal());

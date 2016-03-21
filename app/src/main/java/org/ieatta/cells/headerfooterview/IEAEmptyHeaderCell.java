@@ -1,8 +1,7 @@
-package org.ieatta.cells.header;
+package org.ieatta.cells.headerfooterview;
 
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.tableview.adapter.IEAViewHolder;
 import com.tableview.adapter.enums.ViewHolderType;
@@ -10,12 +9,11 @@ import com.tableview.storage.models.CellType;
 
 import org.ieatta.R;
 import org.ieatta.analytics.RecycleCellFunnel;
-import org.ieatta.cells.model.IEAEmptyHeader;
-import org.ieatta.cells.model.SectionTitleCellModel;
+import org.ieatta.cells.model.IEAHeaderView;
 
 public class IEAEmptyHeaderCell extends IEAViewHolder {
     public static CellType getType() {
-        return new CellType(IEAEmptyHeaderCell.class, R.layout.cell_empty_header);
+        return new CellType(IEAEmptyHeaderCell.class, R.layout.cell_headerview);
     }
 
     @Override
@@ -43,7 +41,8 @@ public class IEAEmptyHeaderCell extends IEAViewHolder {
 
     @Override
     public void render(Object value) {
-        IEAEmptyHeader header = (IEAEmptyHeader) value;
+        IEAHeaderView header = (IEAHeaderView) value;
+
         int cellHeight = header.getCellHeight();
         this.emptyLinearLayout.setMinimumHeight(cellHeight);
         new RecycleCellFunnel().logCellInfo("IEAEmptyHeaderCell","cellHeight: "+cellHeight);
