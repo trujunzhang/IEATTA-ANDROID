@@ -33,9 +33,9 @@ public class TableViewUtil {
             this.rowLength += count;
             sectionCountInfo.put(integer, count);
         }
-        if (this.headerViewSection != null&&this.headerViewSection.getHeaderModel()!= null)
+        if (this.headerViewSection.haveHeaderView())
             this.rowLength++;
-        if (this.footerViewSection != null&& this.footerViewSection.getFooterModel()!= null)
+        if (this.footerViewSection.haveFooterView())
             this.rowLength++;
     }
 
@@ -49,15 +49,15 @@ public class TableViewUtil {
     }
 
     public RowModel getItem(int position) {
-        if (headerViewSection != null && headerViewSection.getHeaderModel()!= null) {
+        if (headerViewSection.haveHeaderView()) {
             if (position == 0) {
-                return headerViewSection.getRowModel(0);
+                return headerViewSection.getHeaderViewModel();
             }
             position++;
         }
-        if (footerViewSection != null&& footerViewSection.getFooterModel()!=null) {
+        if (footerViewSection.haveFooterView()) {
             if (position == (this.rowLength - 1)) {
-                return footerViewSection.getRowModel(0);
+                return footerViewSection.getFooterViewModel();
             }
         }
 

@@ -102,4 +102,20 @@ public class SectionModel {
     public FooterModel getFooterModel() {
         return footerModel;
     }
+
+    public boolean haveHeaderView(){
+        return this.headerModel!= null;
+    }
+
+    public boolean haveFooterView(){
+        return  this.footerModel != null;
+    }
+
+    public RowModel getHeaderViewModel(){
+        return new RowModel(this.headerModel);
+    }
+
+    public RowModel getFooterViewModel(){
+        return new RowModel(this.footerModel);
+    }
 }
