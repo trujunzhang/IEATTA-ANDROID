@@ -24,6 +24,10 @@ public class SectionModel {
     public HeaderModel headerModel;
     public FooterModel footerModel;
 
+    public SectionModel() {
+        this.sectionIndex = -1;
+    }
+
     public SectionModel(int sectionIndex) {
         this.sectionIndex = sectionIndex;
     }

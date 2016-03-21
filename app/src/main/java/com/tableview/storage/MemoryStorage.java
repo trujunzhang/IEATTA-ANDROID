@@ -16,8 +16,8 @@ public class MemoryStorage {
     private TableViewUtil tableViewUtil = new TableViewUtil();
     public CellTypeUtil cellTypeUtil = new CellTypeUtil();
 
-    private SectionModel headerViewSection;
-    private SectionModel footerViewSection;
+    private SectionModel headerViewSection = new SectionModel();
+    private SectionModel footerViewSection = new SectionModel();
     private HashMap<Integer, SectionModel> sections = new LinkedHashMap<>();
 
     public MemoryStorage(TableViewControllerAdapter adapter) {
@@ -44,14 +44,15 @@ public class MemoryStorage {
     }
 
     public void setHeaderItem(Object item) {
-
+//        this.headerViewSection.setHeaderModel(new HeaderModel(item, type));
     }
-    public void updateHeaderItem(Object item) {
 
+    public void updateHeaderItem(Object item) {
+//        this.headerViewSection.setFooterModel(item);
     }
 
     public void setFooterItem(Object item) {
-
+//        this.headerViewSection.setFooterModel(item);
     }
 
     /// Set items for specific section. This will reload UI after updating.
@@ -75,7 +76,7 @@ public class MemoryStorage {
     /// - Parameter sectionIndex: index of section for setting header
     public void setSectionHeaderModel(Object model, int forSectionIndex, CellType type) {
         // Step1: Register cell type.
-        cellTypeUtil.registerType(type);
+        this.registerCellType(type);
 
         // Step2: Create/Add a Header Section.
         SectionModel section = this.verifySection(forSectionIndex);
@@ -90,7 +91,7 @@ public class MemoryStorage {
     /// - Parameter sectionIndex: index of section for setting footer
     public void setSectionFooterModel(Object model, int forSectionIndex, CellType type) {
         // Step1: Register cell type.
-        cellTypeUtil.registerType(type);
+        this.registerCellType(type);
 
         // Step2: Create/Add a Footer Section.
         SectionModel section = this.verifySection(forSectionIndex);
@@ -114,10 +115,12 @@ public class MemoryStorage {
     public void removeItemsAtIndexPaths(NSIndexPath[] indexPaths) {
 
     }
-
+    public void registerCellType(CellType type) {
+        cellTypeUtil.registerType(type);
+    }
     public void registerCellClass(CellType type, int forSectionIndex) {
         // Step1: Register class type
-        cellTypeUtil.registerType(type);
+        this.registerCellType(type);
 
         // Step2: Create/Modify a section.
         SectionModel section = this.verifySection(forSectionIndex);
@@ -126,7 +129,7 @@ public class MemoryStorage {
 
     public void registerCellClassInSpecialRow(CellType type, int forSectionIndex, int forRowIndex) {
         // Step1: Register class type
-        cellTypeUtil.registerType(type);
+        this.registerCellType(type);
 
         // Step2: Create/Modify a section.
         SectionModel section = this.verifySection(forSectionIndex);

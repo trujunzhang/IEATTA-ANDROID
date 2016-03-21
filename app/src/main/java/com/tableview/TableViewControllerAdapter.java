@@ -87,14 +87,12 @@ public class TableViewControllerAdapter
 
     @Override
     public int getItemCount() {
-        int itemCount = this.mProvider.getItemCount();
-        return itemCount;
+        return this.mProvider.getItemCount();
     }
 
     @Override
     public int getItemViewType(int position) {
-        int itemViewType = this.mProvider.memoryStorage.getItemViewType(position);
-        return itemViewType;
+        return this.mProvider.memoryStorage.getItemViewType(position);
     }
 
     @Override

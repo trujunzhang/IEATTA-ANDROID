@@ -112,7 +112,7 @@ public class RecycleViewManager {
         getTableManager().setFooterView(type);
     }
 
-    public void setHeaderItem(Object item) {
+    public void setHeaderItem(Object item,CellType type) {
         getMemoryStorage().setHeaderItem(item);
     }
 
@@ -120,7 +120,7 @@ public class RecycleViewManager {
         getMemoryStorage().updateHeaderItem(item);
     }
 
-    public void setFooterItem(Object item) {
+    public void setFooterItem(Object item,CellType type) {
         getMemoryStorage().setFooterItem(item);
     }
 
