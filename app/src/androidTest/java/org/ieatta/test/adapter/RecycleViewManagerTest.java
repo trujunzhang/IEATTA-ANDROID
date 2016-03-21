@@ -24,11 +24,13 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 @RunWith(AndroidJUnit4.class)
 public class RecycleViewManagerTest {
-    RecycleViewManager manager;
+    private RecycleViewManager manager;
+    private DTTableViewManager provider;
 
     @Before
     public void setUp() throws Exception {
         manager = new RecycleViewManager();
+
     }
 
     @Test

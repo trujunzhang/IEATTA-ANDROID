@@ -47,7 +47,7 @@ public class RecycleViewManager {
         mAdapter = null;
     }
 
-    public DTTableViewManager manager;
+    public DTTableViewManager manager = new DTTableViewManager();
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.Adapter mWrappedAdapter;
     private RecyclerViewDragDropManager mRecyclerViewDragDropManager;
@@ -73,8 +73,6 @@ public class RecycleViewManager {
                         .setItemDecoration(new TableViewDividerDecoration(context))
                         .setDebugInfo("Activity_Table_View")
                         .build();
-
-        this.manager = new DTTableViewManager();
 
         //adapter
         final TableViewControllerAdapter myItemAdapter = new TableViewControllerAdapter(this.manager);
