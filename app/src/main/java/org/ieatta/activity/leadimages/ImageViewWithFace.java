@@ -23,6 +23,7 @@ import com.facebook.imagepipeline.request.ImageRequest;
 import com.facebook.imagepipeline.request.ImageRequestBuilder;
 
 import org.ieatta.R;
+import org.ieatta.activity.LeadImage;
 import org.wikipedia.util.log.L;
 import org.wikipedia.views.ViewUtil;
 
@@ -55,6 +56,10 @@ public class ImageViewWithFace extends SimpleDraweeView {
 
     public void loadOfflineImage(String url){
         ViewUtil.loadImageUrlInto(this, url);
+    }
+
+    public void loadMultiImage(LeadImage leadImage){
+        ViewUtil.loadMultiImageUrlInto(this, leadImage.getLocalUrl(),leadImage.getOnlineUrl());
     }
 
     public void loadImage(String url) {

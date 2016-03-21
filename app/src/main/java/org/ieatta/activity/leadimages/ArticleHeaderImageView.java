@@ -9,12 +9,14 @@ import android.util.AttributeSet;
 import android.widget.FrameLayout;
 
 import org.ieatta.R;
+import org.ieatta.activity.LeadImage;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class ArticleHeaderImageView extends FrameLayout {
-    @Bind(R.id.view_article_header_image_image) ImageViewWithFace image;
+    @Bind(R.id.view_article_header_image_image)
+    ImageViewWithFace image;
 
     public ArticleHeaderImageView(Context context) {
         super(context);
@@ -41,14 +43,24 @@ public class ArticleHeaderImageView extends FrameLayout {
         image.setOnImageLoadListener(listener);
     }
 
-    public void load(@Nullable String url,Boolean local) {
+
+    public void load(@Nullable LeadImage leadImage) {
+        if (leadImage == null) {
+            setVisibility(GONE);
+        } else {
+            setVisibility(VISIBLE);
+            image.loadMultiImage(leadImage);
+        }
+    }
+
+    public void load(@Nullable String url, Boolean local) {
         if (url == null) {
             setVisibility(GONE);
         } else {
             setVisibility(VISIBLE);
-            if(local == true) {
+            if (local == true) {
                 image.loadOfflineImage(url);
-            }else{
+            } else {
                 image.loadImage(url);
             }
         }

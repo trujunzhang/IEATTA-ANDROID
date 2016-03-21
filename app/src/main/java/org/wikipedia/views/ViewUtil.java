@@ -15,6 +15,7 @@ import android.view.ViewManager;
 import android.view.animation.Animation;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.drawee.controller.AbstractDraweeController;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import org.ieatta.IEAApp;
@@ -67,8 +68,17 @@ public final class ViewUtil {
         return (View) originatingView.get(mode);
     }
 
+    public static void loadMultiImageUrlInto(@NonNull SimpleDraweeView drawee, @Nullable String lowUrl,String url) {
+        AbstractDraweeController controller = Fresco.newDraweeControllerBuilder()
+                .setUri(IEAApp.getInstance().isImageDownloadEnabled()
+                        && !TextUtils.isEmpty(url)
+                        ? Uri.parse(url) : null)
+                .setAutoPlayAnimations(true)
+                .build();
+        drawee.setController(controller);
+    }
+
     public static void loadImageUrlInto(@NonNull SimpleDraweeView drawee, @Nullable String url) {
-//        drawee.setImageURI(Uri.parse(url));
         drawee.setController(Fresco.newDraweeControllerBuilder()
                 .setUri(IEAApp.getInstance().isImageDownloadEnabled()
                         && !TextUtils.isEmpty(url)

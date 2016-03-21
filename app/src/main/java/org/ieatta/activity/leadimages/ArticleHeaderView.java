@@ -29,6 +29,7 @@ import android.widget.LinearLayout;
 
 import org.ieatta.IEAApp;
 import org.ieatta.R;
+import org.ieatta.activity.LeadImage;
 import org.ieatta.views.ObservableWebView;
 import org.wikipedia.richtext.LeadingSpan;
 import org.wikipedia.richtext.ParagraphSpan;
@@ -109,6 +110,15 @@ public class ArticleHeaderView extends FrameLayout implements ObservableWebView.
 
     public void setOnImageLoadListener(@Nullable ImageViewWithFace.OnImageLoadListener listener) {
         image.setLoadListener(listener);
+    }
+
+    public void loadImage(@Nullable LeadImage leadImage) {
+        image.load(leadImage);
+        int height = leadImage == null ? 0 : (int) (DimenUtil.getDisplayHeightPx() * getScreenHeightRatio());
+        setMinimumHeight(height);
+        if (leadImage == null) {
+            resetMenuBarColor();
+        }
     }
 
     public void loadImage(@Nullable String url,Boolean local) {
