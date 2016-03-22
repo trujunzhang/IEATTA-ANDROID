@@ -17,8 +17,7 @@ import bolts.Task;
 import io.realm.RealmResults;
 
 public class ReviewQuery {
-    public RealmResults<DBReview> reviews;
-    public List<ReviewsCellModel> reviewsCellModelList;
+    private RealmResults<DBReview> reviews;
 
     //  return new RealmModelReader<DBEvent>(DBEvent.class).fetchResults(new DBBuilder(), false);// for test
 
