@@ -38,5 +38,6 @@
         android:layout_toRightOf="@+id/avatarView"
         android:singleLine="true"
         android:textSize="12sp"
+        android:textColor="@color/GreyMidText"
         android:textAppearance="@style/TitleText" />
 </RelativeLayout>
