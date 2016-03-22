@@ -37,5 +37,6 @@
         android:layout_marginTop="2dp"
         android:layout_toRightOf="@+id/avatarView"
         android:singleLine="true"
-        android:textAppearance="@style/TitleText" />
+        android:textSize="12sp"
+        android:textColor="@color/GreyMidText" />
 </RelativeLayout>

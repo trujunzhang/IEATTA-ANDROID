@@ -46,8 +46,7 @@
         android:paddingTop="16dp"
         android:singleLine="true"
         android:text="Medium Text"
-        android:textSize="12sp"
         android:textColor="@color/GreyMidText"
-         />
+        android:textSize="12sp" />
 
 </RelativeLayout>
