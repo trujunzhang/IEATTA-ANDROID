@@ -37,6 +37,5 @@
         android:layout_marginTop="2dp"
         android:layout_toRightOf="@+id/avatarView"
         android:singleLine="true"
-        android:text="Medium Text"
         android:textAppearance="@style/TitleText" />
 </RelativeLayout>

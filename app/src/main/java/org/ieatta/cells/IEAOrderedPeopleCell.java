@@ -43,7 +43,7 @@ public class IEAOrderedPeopleCell extends IEAViewHolder {
         new RecipeQuery().queryOrderedRecipesCount(model.getTeamUUID(),model.getEventUUID()).onSuccess(new Continuation<Long, Void>() {
             @Override
             public Void then(Task<Long> task) throws Exception {
-                String info = String.format("%d %s", task.getResult(), IEAApp.getInstance().getResources().getString(R.string.Recipes_Ordered_Count));
+                final String info = String.format("%d %s", task.getResult(), IEAApp.getInstance().getResources().getString(R.string.Recipes_Ordered_Count));
                 IEAOrderedPeopleCell.this.recipesCountLabel.setText(info);
                 return null;
             }
