@@ -96,12 +96,10 @@ public class EventDetailFragment extends DetailFragment {
         this.manager.setHeaderItem(new IEAHeaderViewModel(this.getScreenHeight()), IEAHeaderView.getType());
         this.manager.setFooterItem(new IEAFooterViewModel(), IEAFooterView.getType());
 
-//        this.manager.setSectionItems(task.events, RestaurantDetailSection.section_events.ordinal());
+//        this.manager.setSectionItems(task.teams, EventDetailSection.section_ordered_people.ordinal());
+//        this.manager.setSectionItems(task.reviewsCellModelList, EventDetailSection.section_reviews.ordinal());
 
-//        this.manager.setSectionItems(CollectionUtil.createList(new IEAGalleryThumbnail(this.task.thumbnailGalleryCollection, this.galleryViewListener)), RestaurantDetailSection.section_gallery_thumbnail.ordinal());
-//        this.manager.setSectionItems(task.reviewsCellModelList, RestaurantDetailSection.section_reviews.ordinal());
-
-//        model.setPage(task.getPage());
+        model.setPage(task.getPage());
 
         super.reloadPage();
     }
