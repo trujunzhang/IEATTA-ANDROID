@@ -1,5 +1,9 @@
 package org.ieatta.tasks;
 
+import org.ieatta.activity.LeadImageCollection;
+import org.ieatta.activity.Page;
+import org.ieatta.activity.PageProperties;
+import org.ieatta.activity.PageTitle;
 import org.ieatta.database.models.DBEvent;
 import org.ieatta.database.models.DBPeopleInEvent;
 import org.ieatta.database.models.DBRecipe;
@@ -24,6 +28,7 @@ public class OrderedRecipesTask {
     public DBEvent event;
     public DBTeam team;
     public RealmResults<DBRecipe> recipes;
+    private LeadImageCollection leadImageCollection;
 
     /**
      * Execute Task for Restaurant detail.
@@ -63,5 +68,14 @@ public class OrderedRecipesTask {
                         return null;
                     }
                 });
+    }
+
+
+    public Page getPage() {
+        String title = restaurant.getDisplayName();
+        PageTitle pageTitle = new PageTitle(this.restaurant.getUUID());
+        PageProperties properties = new PageProperties(this.leadImageCollection, title);
+
+        return new Page(pageTitle, properties);
     }
 }

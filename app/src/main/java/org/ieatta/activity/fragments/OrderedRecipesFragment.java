@@ -8,15 +8,13 @@ import com.tableview.adapter.NSIndexPath;
 import com.tableview.adapter.RecyclerOnItemClickListener;
 
 import org.ieatta.R;
-import org.ieatta.cells.IEAOrderedPeopleCell;
-import org.ieatta.cells.IEAReviewsCell;
+import org.ieatta.cells.IEAOrderedRecipeCell;
 import org.ieatta.cells.headerfooterview.IEAFooterView;
 import org.ieatta.cells.headerfooterview.IEAHeaderView;
 import org.ieatta.cells.model.IEAFooterViewModel;
 import org.ieatta.cells.model.IEAHeaderViewModel;
 import org.ieatta.cells.model.SectionTitleCellModel;
 import org.ieatta.provide.IEAEditKey;
-import org.ieatta.tasks.EventDetailTask;
 import org.ieatta.tasks.OrderedRecipesTask;
 
 import bolts.Continuation;
@@ -37,7 +35,7 @@ public class OrderedRecipesFragment extends DetailFragment {
     }
 
     enum OrderedRecipesSection {
-        sectionRecipes,       //= 0
+        section_recipes,       //= 0
     }
 
     private RecycleViewManager manager;
@@ -55,9 +53,9 @@ public class OrderedRecipesFragment extends DetailFragment {
         this.manager.setRegisterHeaderView(IEAHeaderView.getType());
         this.manager.setRegisterFooterView(IEAFooterView.getType());
 
-        this.manager.setRegisterCellClass(IEAOrderedPeopleCell.getType(), OrderedRecipesSection.sectionRecipes.ordinal());
+        this.manager.setRegisterCellClass(IEAOrderedRecipeCell.getType(), OrderedRecipesSection.section_recipes.ordinal());
 
-        this.manager.appendSectionTitleCell(new SectionTitleCellModel(IEAEditKey.Section_Title, R.string.Ordered_Recipes), OrderedRecipesSection.sectionRecipes.ordinal());
+        this.manager.appendSectionTitleCell(new SectionTitleCellModel(IEAEditKey.Section_Title, R.string.Ordered_Recipes), OrderedRecipesSection.section_recipes.ordinal());
     }
 
     @Override
@@ -67,11 +65,12 @@ public class OrderedRecipesFragment extends DetailFragment {
 
         this.setupUI();
 
-         String restaurantUUID = "1CE562A4-A978-4B75-9B7B-2F3CF9F42A04"; // The Flying Falafel
+        String restaurantUUID = "1CE562A4-A978-4B75-9B7B-2F3CF9F42A04"; // The Flying Falafel
 //        String restaurantUUID = "33ED9F31-F6A5-43A4-8D11-8E511CA0BD39"; // The Spice Jar
         String eventUUID = "07B2D33C-F11D-404B-9D78-016D16BEE9FE";
 //        String eventUUID = "";
-        task.executeTask(restaurantUUID,eventUUID).onSuccess(new Continuation<Void, Object>() {
+        String teamUUID = "197C0BEF-B432-47B8-988B-99406643623A";// Dolores Chavez
+        task.executeTask(restaurantUUID, eventUUID, teamUUID).onSuccess(new Continuation<Void, Object>() {
             @Override
             public Object then(Task<Void> task) throws Exception {
                 OrderedRecipesFragment.this.reloadPage();
@@ -90,10 +89,9 @@ public class OrderedRecipesFragment extends DetailFragment {
         this.manager.setHeaderItem(new IEAHeaderViewModel(this.getScreenHeight()), IEAHeaderView.getType());
         this.manager.setFooterItem(new IEAFooterViewModel(), IEAFooterView.getType());
 
-        this.manager.setSectionItems(task.orderedPeopleList, EventDetailSection.section_ordered_people.ordinal());
-        this.manager.setSectionItems(task.reviewsCellModelList, EventDetailSection.section_reviews.ordinal());
+//        this.manager.setSectionItems(task.orderedPeopleList, EventDetailSection.section_ordered_people.ordinal());
 
-        model.setPage(task.getPage());
+//        model.setPage(task.getPage());
 
         super.reloadPage();
     }
