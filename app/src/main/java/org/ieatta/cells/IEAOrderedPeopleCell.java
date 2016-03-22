@@ -15,7 +15,6 @@ import org.ieatta.views.AvatarView;
 import bolts.Continuation;
 import bolts.Task;
 
-
 public class IEAOrderedPeopleCell extends IEAViewHolder {
     public static CellType getType() {
         return new CellType(IEAOrderedPeopleCell.class, R.layout.cell_ordered_people);
