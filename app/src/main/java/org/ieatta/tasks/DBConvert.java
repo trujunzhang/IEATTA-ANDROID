@@ -63,8 +63,7 @@ public class DBConvert {
     public static List<IEAOrderedPeople> toOrderedPeopleList(RealmResults<DBTeam> teams, DBEvent event) {
         List<IEAOrderedPeople> list = new LinkedList<>();
         for(DBTeam team : teams){
-            IEAOrderedPeople people = new IEAOrderedPeople(team.getUUID(),team.getDisplayName(),event.getUUID());
-
+            list.add(new IEAOrderedPeople(team.getUUID(),team.getDisplayName(),event.getUUID()));
         }
         return list;
     }
