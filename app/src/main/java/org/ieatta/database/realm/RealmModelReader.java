@@ -79,7 +79,8 @@ public class RealmModelReader<T extends RealmObject> {
     private void buildContainedListMap(DBBuilder builder, RealmQuery<T> query) {
         for (String key : builder.containedListMap.keySet()) {
             List<String> list = builder.containedListMap.get(key);
-
+            if(list.size() == 0)
+                continue;
             RealmQuery<T> beginGroup = query.beginGroup();
             for (String value : list) {
                 beginGroup.equalTo(key, value).or();
