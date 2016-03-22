@@ -22,7 +22,7 @@ public class ReviewQuery {
 
     //  return new RealmModelReader<DBEvent>(DBEvent.class).fetchResults(new DBBuilder(), false);// for test
 
-    public Task<List<ReviewsCellModel>> queryReview(String reviewRef,ReviewType type){
+    public Task<List<ReviewsCellModel>> queryReview(String reviewRef, ReviewType type) {
         return new RealmModelReader<DBReview>(DBReview.class).fetchResults(
                 new DBBuilder()
                         .whereEqualTo(DBConstant.kPAPFieldReviewRefKey, reviewRef)
@@ -30,6 +30,7 @@ public class ReviewQuery {
                 false).onSuccessTask(new Continuation<RealmResults<DBReview>, Task<RealmResults<DBTeam>>>() {
             @Override
             public Task<RealmResults<DBTeam>> then(Task<RealmResults<DBReview>> task) throws Exception {
+
                 ReviewQuery.this.reviews = task.getResult();
                 List<String> list = getTeamsList(task.getResult());
 
@@ -45,9 +46,9 @@ public class ReviewQuery {
         });
     }
 
-    private List<String> getTeamsList(RealmResults<DBReview> reviews){
+    private List<String> getTeamsList(RealmResults<DBReview> reviews) {
         List<String> list = new LinkedList<>();
-        for (DBReview review:reviews) {
+        for (DBReview review : reviews) {
             list.add(review.getUserRef());
         }
         return list;
