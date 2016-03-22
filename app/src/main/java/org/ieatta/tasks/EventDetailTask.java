@@ -70,7 +70,7 @@ public class EventDetailTask {
         }).onSuccessTask(new Continuation<RealmResults<DBTeam>, Task<List<ReviewsCellModel>>>() {
             @Override
             public Task<List<ReviewsCellModel>> then(Task<RealmResults<DBTeam>> task) throws Exception {
-                EventDetailTask.this.orderedPeopleList = DBConvert.toOrderedPeopleList(task.getResult());
+                EventDetailTask.this.orderedPeopleList = DBConvert.toOrderedPeopleList(task.getResult(), EventDetailTask.this.event);
 //                EventDetailTask.this.teams = task.getResult();
                 return new ReviewQuery().queryReview(eventUUID, ReviewType.Review_Event);
             }
