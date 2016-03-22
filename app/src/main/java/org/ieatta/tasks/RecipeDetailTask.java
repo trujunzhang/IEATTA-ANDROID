@@ -37,7 +37,7 @@ public class RecipeDetailTask {
     public GalleryCollection thumbnailGalleryCollection;
 
     /**
-     * Execute Task for Restaurant detail.
+     * Execute Task for Recipe detail.
      *
      * @param restaurantUUID restaurant's UUID
      * @param eventUUID      event's UUID

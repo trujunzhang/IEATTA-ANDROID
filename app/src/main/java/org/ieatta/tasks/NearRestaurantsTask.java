@@ -36,6 +36,11 @@ public class NearRestaurantsTask {
         return restaurants;
     }
 
+    /**
+     * Execute Task for nearby restaurants.
+     * @param location  the current location
+     * @return
+     */
     public Task<Void> executeTask(Location location){
         return LocalDatabaseQuery.queryNearRestaurants(location).onSuccess(new Continuation<RealmResults<DBRestaurant>, Void>() {
             @Override

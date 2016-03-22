@@ -35,7 +35,7 @@ public class EventDetailTask {
     private LeadImageCollection leadImageCollection;
 
     /**
-     * Execute Task for Restaurant detail.
+     * Execute Task for Event detail.
      *
      * @param restaurantUUID restaurant's UUID
      * @param eventUUID      event's UUID

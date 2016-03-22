@@ -33,7 +33,7 @@ public class OrderedRecipesTask {
     private LeadImageCollection leadImageCollection;
 
     /**
-     * Execute Task for Restaurant detail.
+     * Execute Task for ordered recipes.
      *
      * @param restaurantUUID restaurant's UUID
      * @param eventUUID      event's UUID
