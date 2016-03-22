@@ -34,5 +34,7 @@ public class IEAOrderedPeopleCell extends IEAViewHolder {
 
         this.nameLabel.setText(model.getDisplayName());
         this.avatarView.loadNewPhotoByModel(model.getTeamUUID());
+
+
     }
 }
