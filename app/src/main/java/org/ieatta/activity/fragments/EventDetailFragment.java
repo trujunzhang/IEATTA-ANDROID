@@ -10,6 +10,7 @@ import com.tableview.utils.CollectionUtil;
 
 import org.ieatta.R;
 import org.ieatta.cells.IEAGalleryThumbnailCell;
+import org.ieatta.cells.IEAOrderedPeopleCell;
 import org.ieatta.cells.IEARestaurantEventsCell;
 import org.ieatta.cells.IEAReviewsCell;
 import org.ieatta.cells.headerfooterview.IEAFooterView;
@@ -38,11 +39,9 @@ public class EventDetailFragment extends DetailFragment {
     public void onContentHeightChanged(int contentHeight) {
         this.manager.updateHeaderItem(new IEAHeaderViewModel(contentHeight));
     }
-
-    enum RestaurantDetailSection {
-        section_events,//= 0
-        section_gallery_thumbnail,//= 1
-        section_reviews,//= 2
+    enum EventDetailSection {
+        section_ordered_people, //= 0
+        section_reviews,       //= 1
     }
 
     private RecycleViewManager manager;
@@ -60,12 +59,11 @@ public class EventDetailFragment extends DetailFragment {
         this.manager.setRegisterHeaderView(IEAHeaderView.getType());
         this.manager.setRegisterFooterView(IEAFooterView.getType());
 
-        this.manager.setRegisterCellClass(IEARestaurantEventsCell.getType(), RestaurantDetailSection.section_events.ordinal());
-        this.manager.setRegisterCellClass(IEAGalleryThumbnailCell.getType(), RestaurantDetailSection.section_gallery_thumbnail.ordinal());
-        this.manager.setRegisterCellClass(IEAReviewsCell.getType(), RestaurantDetailSection.section_reviews.ordinal());
+        this.manager.setRegisterCellClass(IEAOrderedPeopleCell.getType(), EventDetailSection.section_ordered_people.ordinal());
+        this.manager.setRegisterCellClass(IEAReviewsCell.getType(), EventDetailSection.section_reviews.ordinal());
 
-        this.manager.appendSectionTitleCell(new SectionTitleCellModel(IEAEditKey.Section_Title, R.string.Events_Recorded), RestaurantDetailSection.section_events.ordinal());
-        this.manager.appendSectionTitleCell(new SectionTitleCellModel(IEAEditKey.Section_Title, R.string.Reviews), RestaurantDetailSection.section_reviews.ordinal());
+        this.manager.appendSectionTitleCell(new SectionTitleCellModel(IEAEditKey.Section_Title, R.string.People_Ordered), EventDetailSection.section_ordered_people.ordinal());
+        this.manager.appendSectionTitleCell(new SectionTitleCellModel(IEAEditKey.Section_Title, R.string.Reviews), EventDetailSection.section_reviews.ordinal());
     }
 
     @Override
@@ -77,7 +75,7 @@ public class EventDetailFragment extends DetailFragment {
 
          String restaurantUUID = "1CE562A4-A978-4B75-9B7B-2F3CF9F42A04"; // The Flying Falafel
 //        String restaurantUUID = "33ED9F31-F6A5-43A4-8D11-8E511CA0BD39"; // The Spice Jar
-        String eventUUID = "";
+        String eventUUID = "07B2D33C-F11D-404B-9D78-016D16BEE9FE";
 //        String eventUUID = "";
         task.executeTask(restaurantUUID,eventUUID).onSuccess(new Continuation<Void, Object>() {
             @Override
