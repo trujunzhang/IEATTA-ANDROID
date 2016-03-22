@@ -20,19 +20,11 @@ import io.realm.RealmResults;
 public class RecipeQuery {
     private RealmResults<DBRecipe> recipes;
 
-    public Task<Integer> queryOrderedRecipesCount(String teamUUID, String eventUUID) {
-        return new RealmModelReader<DBRecipe>(DBRecipe.class).fetchResults(
+    public Task<Long> queryOrderedRecipesCount(String teamUUID, String eventUUID) {
+        return new RealmModelReader<DBRecipe>(DBRecipe.class).getCountObjects(
                 new DBBuilder()
                         .whereEqualTo(DBConstant.kPAPFieldOrderedPeopleRefKey, teamUUID)
-                        .whereEqualTo(DBConstant.kPAPFieldEventRefKey, eventUUID),
-                false).onSuccessTask(new Continuation<RealmResults<DBRecipe>, Task<Integer>>() {
-            @Override
-            public Task<Integer> then(Task<RealmResults<DBRecipe>> task) throws Exception {
-                RealmResults<DBRecipe> recipes = task.getResult();
-
-                return Task.forResult(recipes.size());
-            }
-        });
+                        .whereEqualTo(DBConstant.kPAPFieldEventRefKey, eventUUID));
     }
 
 }

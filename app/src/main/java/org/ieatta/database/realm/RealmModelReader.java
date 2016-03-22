@@ -68,6 +68,26 @@ public class RealmModelReader<T extends RealmObject> {
         return Task.forResult(result);
     }
 
+    public Task<Long> getCountObjects(DBBuilder builder) {
+        Long result = new Long(0);
+
+        Realm realm = Realm.getInstance(IEAApp.getInstance());
+        try {
+            RealmQuery<T> query = realm.where(this.clazz);
+
+            buildAll(builder, query);
+
+            // Execute the query:
+            result = query.count();
+
+        } catch (Exception e) {
+            return Task.forError(e);
+        } finally {
+                realm.close();
+        }
+
+        return Task.forResult(result);
+    }
 
     private void buildAll(DBBuilder builder, RealmQuery<T> query) {
         buildGreaterMap(builder, query);
