@@ -19,7 +19,9 @@ import org.ieatta.database.query.ReviewQuery;
 import org.ieatta.database.realm.DBBuilder;
 import org.ieatta.database.realm.RealmModelReader;
 import org.ieatta.parse.DBConstant;
+import org.ieatta.server.cache.ThumbnailImageUtil;
 
+import java.io.File;
 import java.util.List;
 
 import bolts.Continuation;
@@ -73,10 +75,16 @@ public class RecipeDetailTask {
                         RecipeDetailTask.this.recipe = task.getResult();
                         return LocalDatabaseQuery.queryPhotosByModel(recipeUUID, PhotoUsedType.PU_Recipe.getType());
                     }
-                }).onSuccessTask(new Continuation<RealmResults<DBPhoto>, Task<List<ReviewsCellModel>>>() {
+                }).onSuccessTask(new Continuation<RealmResults<DBPhoto>, Task<List<File>>>() {
                     @Override
-                    public Task<List<ReviewsCellModel>> then(Task<RealmResults<DBPhoto>> task) throws Exception {
+                    public Task<List<File>> then(Task<RealmResults<DBPhoto>> task) throws Exception {
                         RecipeDetailTask.this.leadImageCollection = DBConvert.toLeadImageCollection(task.getResult());
+                        return ThumbnailImageUtil.sharedInstance.getImagesListTask(recipeUUID);
+                    }
+                }).onSuccessTask(new Continuation<List<File>, Task<List<ReviewsCellModel>>>() {
+                    @Override
+                    public Task<List<ReviewsCellModel>> then(Task<List<File>> task) throws Exception {
+                        RecipeDetailTask.this.thumbnailGalleryCollection = DBConvert.toLeadImageCollection(task.getResult());
                         return new ReviewQuery().queryReview(recipeUUID, ReviewType.Review_Recipe);
                     }
                 }).onSuccess(new Continuation<List<ReviewsCellModel>, Void>() {

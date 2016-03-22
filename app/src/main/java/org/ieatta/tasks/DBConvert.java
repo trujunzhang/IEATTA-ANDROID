@@ -2,6 +2,7 @@ package org.ieatta.tasks;
 
 import org.ieatta.activity.LeadImage;
 import org.ieatta.activity.LeadImageCollection;
+import org.ieatta.activity.gallery.GalleryCollection;
 import org.ieatta.activity.gallery.GalleryItem;
 import org.ieatta.analytics.DBConvertFunnel;
 import org.ieatta.cells.model.IEAOrderedPeople;
@@ -43,6 +44,18 @@ public class DBConvert {
         return new LeadImageCollection(leadImages);
     }
 
+
+    public static GalleryCollection toLeadImageCollection(List<File> files) {
+        List<GalleryItem> galleryItems = new LinkedList<>();
+        for (File photoFile : files) {
+            String uuid = photoFile.getName().split("_")[1];
+            String thumbUrl = "file://" + photoFile.getAbsolutePath();
+            GalleryItem item = new GalleryItem(uuid,thumbUrl);
+            galleryItems.add(item);
+        }
+        return new GalleryCollection(galleryItems);
+    }
+
     private static DBTeam getTeamUUID(String userRef, RealmResults<DBTeam> teams) {
         for (DBTeam team : teams) {
             if (team.getUUID().equals(userRef))
@@ -67,4 +80,5 @@ public class DBConvert {
         }
         return list;
     }
+
 }
