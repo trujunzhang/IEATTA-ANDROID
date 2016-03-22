@@ -2,10 +2,12 @@ package org.ieatta.test.tasks;
 
 import android.support.test.runner.AndroidJUnit4;
 
+import org.ieatta.cells.model.ReviewsCellModel;
 import org.ieatta.tasks.EventDetailTask;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
@@ -26,7 +28,7 @@ public class EventDetailTaskTest {
             @Override
             public Void then(Task<Void> task) throws Exception {
                 EventDetailTask _task = EventDetailTaskTest.this.task;
-//                _task.
+                List<ReviewsCellModel> reviewsCellModelList = _task.reviewsCellModelList;
                 return null;
             }
         }).continueWith(new Continuation<Void, Void>() {
