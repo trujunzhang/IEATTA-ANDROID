@@ -45,12 +45,12 @@ public class DBConvert {
     }
 
 
-    public static GalleryCollection toLeadImageCollection(List<File> files) {
+    public static GalleryCollection toGalleryCollection(List<File> files) {
         List<GalleryItem> galleryItems = new LinkedList<>();
         for (File photoFile : files) {
             String uuid = photoFile.getName().split("_")[1];
             String thumbUrl = "file://" + photoFile.getAbsolutePath();
-            GalleryItem item = new GalleryItem(uuid,thumbUrl);
+            GalleryItem item = new GalleryItem(uuid, thumbUrl);
             galleryItems.add(item);
         }
         return new GalleryCollection(galleryItems);
@@ -75,8 +75,8 @@ public class DBConvert {
 
     public static List<IEAOrderedPeople> toOrderedPeopleList(RealmResults<DBTeam> teams, DBEvent event) {
         List<IEAOrderedPeople> list = new LinkedList<>();
-        for(DBTeam team : teams){
-            list.add(new IEAOrderedPeople(team.getUUID(),team.getDisplayName(),event.getUUID()));
+        for (DBTeam team : teams) {
+            list.add(new IEAOrderedPeople(team.getUUID(), team.getDisplayName(), event.getUUID()));
         }
         return list;
     }

@@ -84,7 +84,7 @@ public class RecipeDetailTask {
                 }).onSuccessTask(new Continuation<List<File>, Task<List<ReviewsCellModel>>>() {
                     @Override
                     public Task<List<ReviewsCellModel>> then(Task<List<File>> task) throws Exception {
-                        RecipeDetailTask.this.thumbnailGalleryCollection = DBConvert.toLeadImageCollection(task.getResult());
+                        RecipeDetailTask.this.thumbnailGalleryCollection = DBConvert.toGalleryCollection(task.getResult());
                         return new ReviewQuery().queryReview(recipeUUID, ReviewType.Review_Recipe);
                     }
                 }).onSuccess(new Continuation<List<ReviewsCellModel>, Void>() {
