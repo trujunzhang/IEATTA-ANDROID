@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_height="@dimen/NearRestaurant_Restaurants">
 
     <org.ieatta.views.AvatarView
@@ -9,7 +10,13 @@
         android:layout_height="@dimen/Left_Image_View_Height"
         android:layout_centerVertical="true"
         android:layout_gravity="center_vertical"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin" />
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        app:placeholderImage="@drawable/placeholder_photo"
+        app:placeholderImageScaleType="centerCrop"
+        app:failureImage="@drawable/placeholder_photo"
+        app:failureImageScaleType="centerCrop"
+        app:actualImageScaleType="centerCrop"
+        android:background="@color/window_background_light"/>
 
     <TextView
         android:id="@+id/titleTextView"
@@ -31,7 +38,7 @@
         android:layout_marginTop="2dp"
         android:layout_toRightOf="@+id/avatarView"
         android:singleLine="true"
-        android:text="Medium Text"
+        android:textAppearance="@style/SubtitleText"
         />
 
     <org.ieatta.views.RatingImageView

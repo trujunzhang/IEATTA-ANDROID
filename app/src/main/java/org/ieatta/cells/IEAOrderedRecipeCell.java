@@ -39,6 +39,6 @@ public class IEAOrderedRecipeCell extends IEAViewHolder {
 
 //        this.ratingImageView.queryRatingInReviewsByModel(model);
 
-//        this.avatarView.loadNewPhotoByModel(model, R.drawable.placeholder_photo);
+        this.avatarView.loadNewPhotoByModel(model.getUUID());
     }
 }
