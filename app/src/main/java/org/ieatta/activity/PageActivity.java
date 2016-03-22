@@ -18,6 +18,7 @@ import org.ieatta.IEAApp;
 import org.ieatta.R;
 import org.ieatta.activity.fragments.EventDetailFragment;
 import org.ieatta.activity.fragments.NearRestaurantsFragment;
+import org.ieatta.activity.fragments.OrderedRecipesFragment;
 import org.ieatta.activity.fragments.PageFragment;
 import org.ieatta.activity.fragments.RestaurantDetailFragment;
 import org.ieatta.activity.fragments.search.SearchArticlesFragment;
@@ -513,7 +514,8 @@ public class PageActivity extends ThemedActionBarActivity {
     private void loadMainPageIfNoTabs() {
 //        PageFragment fragment = new NearRestaurantsFragment();
 //        PageFragment fragment = new RestaurantDetailFragment();
-        PageFragment fragment = new EventDetailFragment();
+//        PageFragment fragment = new EventDetailFragment();
+        PageFragment fragment = new OrderedRecipesFragment();
         loadPage(fragment, TabPosition.CURRENT_TAB, false, true);
     }
 

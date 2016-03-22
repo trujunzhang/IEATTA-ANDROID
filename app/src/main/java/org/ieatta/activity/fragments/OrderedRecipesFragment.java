@@ -67,8 +67,7 @@ public class OrderedRecipesFragment extends DetailFragment {
 
         String restaurantUUID = "1CE562A4-A978-4B75-9B7B-2F3CF9F42A04"; // The Flying Falafel
 //        String restaurantUUID = "33ED9F31-F6A5-43A4-8D11-8E511CA0BD39"; // The Spice Jar
-        String eventUUID = "07B2D33C-F11D-404B-9D78-016D16BEE9FE";
-//        String eventUUID = "";
+        String eventUUID = "07B2D33C-F11D-404B-9D78-016D16BEE9FE"; // White Truffies
         String teamUUID = "197C0BEF-B432-47B8-988B-99406643623A";// Dolores Chavez
         task.executeTask(restaurantUUID, eventUUID, teamUUID).onSuccess(new Continuation<Void, Object>() {
             @Override
@@ -89,9 +88,9 @@ public class OrderedRecipesFragment extends DetailFragment {
         this.manager.setHeaderItem(new IEAHeaderViewModel(this.getScreenHeight()), IEAHeaderView.getType());
         this.manager.setFooterItem(new IEAFooterViewModel(), IEAFooterView.getType());
 
-//        this.manager.setSectionItems(task.orderedPeopleList, EventDetailSection.section_ordered_people.ordinal());
+        this.manager.setSectionItems(task.recipes, OrderedRecipesSection.section_recipes.ordinal());
 
-//        model.setPage(task.getPage());
+        model.setPage(task.getPage());
 
         super.reloadPage();
     }
