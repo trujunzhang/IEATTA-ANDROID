@@ -13,4 +13,16 @@ public class IEAOrderedPeople {
         this.displayName = displayName;
         this.eventUUID = eventUUID;
     }
+
+    public String getTeamUUID() {
+        return teamUUID;
+    }
+
+    public String getDisplayName() {
+        return displayName;
+    }
+
+    public String getEventUUID() {
+        return eventUUID;
+    }
 }
