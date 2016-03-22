@@ -4,6 +4,7 @@ import org.ieatta.activity.LeadImageCollection;
 import org.ieatta.activity.Page;
 import org.ieatta.activity.PageProperties;
 import org.ieatta.activity.PageTitle;
+import org.ieatta.cells.model.ReviewsCellModel;
 import org.ieatta.database.models.DBEvent;
 import org.ieatta.database.models.DBPeopleInEvent;
 import org.ieatta.database.models.DBPhoto;
@@ -13,6 +14,7 @@ import org.ieatta.database.models.DBTeam;
 import org.ieatta.database.provide.PhotoUsedType;
 import org.ieatta.database.provide.ReviewType;
 import org.ieatta.database.query.LocalDatabaseQuery;
+import org.ieatta.database.query.ReviewQuery;
 import org.ieatta.database.realm.DBBuilder;
 import org.ieatta.database.realm.RealmModelReader;
 import org.ieatta.parse.DBConstant;
@@ -28,7 +30,7 @@ public class EventDetailTask {
     public DBRestaurant restaurant;
     public DBEvent event;
     public RealmResults<DBTeam> teams;
-    public RealmResults<DBReview> reviews;
+    public List<ReviewsCellModel> reviewsCellModelList;
     private LeadImageCollection leadImageCollection;
 
     /**
@@ -64,19 +66,16 @@ public class EventDetailTask {
                 List<String> peoplePoints = EventDetailTask.this.getPeoplePoints(task.getResult());
                 return new RealmModelReader<DBTeam>(DBTeam.class).fetchResults(LocalDatabaseQuery.getObjectsByUUIDs(peoplePoints), false);
             }
-        }).onSuccessTask(new Continuation<RealmResults<DBTeam>, Task<RealmResults<DBReview>>>() {
+        }).onSuccessTask(new Continuation<RealmResults<DBTeam>, Task<List<ReviewsCellModel>>>() {
             @Override
-            public Task<RealmResults<DBReview>> then(Task<RealmResults<DBTeam>> task) throws Exception {
+            public Task<List<ReviewsCellModel>> then(Task<RealmResults<DBTeam>> task) throws Exception {
                 EventDetailTask.this.teams = task.getResult();
-                return new RealmModelReader<DBReview>(DBReview.class).fetchResults(
-                        new DBBuilder()
-                                .whereEqualTo(DBConstant.kPAPFieldReviewRefKey, restaurantUUID)
-                                .whereEqualTo(DBConstant.kPAPFieldReviewTypeKey, ReviewType.Review_Restaurant.getType()), false);
+                return new ReviewQuery().queryReview(eventUUID, ReviewType.Review_Event);
             }
-        }).onSuccess(new Continuation<RealmResults<DBReview>, Void>() {
+        }).onSuccess(new Continuation<List<ReviewsCellModel>, Void>() {
             @Override
-            public Void then(Task<RealmResults<DBReview>> task) throws Exception {
-                EventDetailTask.this.reviews = task.getResult();
+            public Void then(Task<List<ReviewsCellModel>> task) throws Exception {
+                EventDetailTask.this.reviewsCellModelList = task.getResult();
                 return null;
             }
         });
