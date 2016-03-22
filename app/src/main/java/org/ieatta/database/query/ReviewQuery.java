@@ -34,6 +34,9 @@ public class ReviewQuery {
                 ReviewQuery.this.reviews = task.getResult();
                 List<String> list = getTeamsList(task.getResult());
 
+                if(list.size() == 0)
+                    return Task.forResult(null);
+
                 return new RealmModelReader<DBTeam>(DBTeam.class).fetchResults(
                         new DBBuilder().whereContainedIn(DBConstant.kPAPFieldObjectUUIDKey, list), false);
             }
