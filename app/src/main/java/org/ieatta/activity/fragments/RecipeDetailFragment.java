@@ -9,7 +9,9 @@ import com.tableview.adapter.RecyclerOnItemClickListener;
 import com.tableview.utils.CollectionUtil;
 
 import org.ieatta.R;
+import org.ieatta.cells.IEAGalleryThumbnailCell;
 import org.ieatta.cells.IEAOrderedRecipeCell;
+import org.ieatta.cells.IEAReviewsCell;
 import org.ieatta.cells.headerfooterview.IEAFooterView;
 import org.ieatta.cells.headerfooterview.IEAHeaderView;
 import org.ieatta.cells.model.IEAFooterViewModel;
@@ -56,6 +58,9 @@ public class RecipeDetailFragment extends DetailFragment {
     private void setupUI() {
         this.manager.setRegisterHeaderView(IEAHeaderView.getType());
         this.manager.setRegisterFooterView(IEAFooterView.getType());
+
+        this.manager.setRegisterCellClass(IEAGalleryThumbnailCell.getType(), RecipeDetailSection.section_gallery_thumbnail.ordinal());
+        this.manager.setRegisterCellClass(IEAReviewsCell.getType(), RecipeDetailSection.section_reviews.ordinal());
 
         this.manager.appendSectionTitleCell(new SectionTitleCellModel(IEAEditKey.Section_Title, R.string.Reviews), RecipeDetailSection.section_reviews.ordinal());
     }
