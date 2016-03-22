@@ -4,6 +4,7 @@ import org.ieatta.activity.LeadImage;
 import org.ieatta.activity.LeadImageCollection;
 import org.ieatta.activity.gallery.GalleryItem;
 import org.ieatta.analytics.DBConvertFunnel;
+import org.ieatta.cells.model.IEAOrderedPeople;
 import org.ieatta.cells.model.ReviewsCellModel;
 import org.ieatta.database.models.DBPhoto;
 import org.ieatta.database.models.DBReview;
@@ -54,6 +55,14 @@ public class DBConvert {
         for (DBReview review : reviews) {
             ReviewsCellModel item = new ReviewsCellModel(review, DBConvert.getTeamUUID(review.getUserRef(), teams));
             list.add(item);
+        }
+        return list;
+    }
+
+    public static List<IEAOrderedPeople> toOrderedPeopleList(RealmResults<DBTeam> teams) {
+        List<IEAOrderedPeople> list = new LinkedList<>();
+        for(DBTeam team : teams){
+            
         }
         return list;
     }

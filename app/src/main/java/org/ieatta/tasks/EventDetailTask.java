@@ -4,6 +4,7 @@ import org.ieatta.activity.LeadImageCollection;
 import org.ieatta.activity.Page;
 import org.ieatta.activity.PageProperties;
 import org.ieatta.activity.PageTitle;
+import org.ieatta.cells.model.IEAOrderedPeople;
 import org.ieatta.cells.model.ReviewsCellModel;
 import org.ieatta.database.models.DBEvent;
 import org.ieatta.database.models.DBPeopleInEvent;
@@ -29,7 +30,7 @@ import io.realm.RealmResults;
 public class EventDetailTask {
     public DBRestaurant restaurant;
     public DBEvent event;
-    public RealmResults<DBTeam> teams;
+    public List<IEAOrderedPeople> orderedPeopleList;
     public List<ReviewsCellModel> reviewsCellModelList;
     private LeadImageCollection leadImageCollection;
 
@@ -69,7 +70,8 @@ public class EventDetailTask {
         }).onSuccessTask(new Continuation<RealmResults<DBTeam>, Task<List<ReviewsCellModel>>>() {
             @Override
             public Task<List<ReviewsCellModel>> then(Task<RealmResults<DBTeam>> task) throws Exception {
-                EventDetailTask.this.teams = task.getResult();
+                EventDetailTask.this.orderedPeopleList = DBConvert.toOrderedPeopleList(task.getResult());
+//                EventDetailTask.this.teams = task.getResult();
                 return new ReviewQuery().queryReview(eventUUID, ReviewType.Review_Event);
             }
         }).onSuccess(new Continuation<List<ReviewsCellModel>, Void>() {
