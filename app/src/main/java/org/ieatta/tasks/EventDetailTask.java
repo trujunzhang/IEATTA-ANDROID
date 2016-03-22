@@ -94,7 +94,7 @@ public class EventDetailTask {
 
     public Page getPage() {
         String title = restaurant.getDisplayName();
-        PageTitle pageTitle = new PageTitle(this.restaurant.getUUID());
+        PageTitle pageTitle = new PageTitle(this.event.getUUID());
         PageProperties properties = new PageProperties(this.leadImageCollection, title);
 
         return new Page(pageTitle, properties);
