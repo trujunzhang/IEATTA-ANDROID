@@ -92,7 +92,7 @@ public class RealmModelReader<T extends RealmObject> {
     private void buildAll(DBBuilder builder, RealmQuery<T> query) {
         buildGreaterMap(builder, query);
         buildContainedMap(builder, query);
-//        buildContainedListMap(builder, query);
+        buildContainedListMap(builder, query);
         buildEqualMap(builder, query);
     }
 
@@ -101,9 +101,14 @@ public class RealmModelReader<T extends RealmObject> {
             List<String> list = builder.containedListMap.get(key);
             if(list.size() == 0)
                 continue;
+
             RealmQuery<T> beginGroup = query.beginGroup();
-            for (String value : list) {
-                beginGroup.equalTo(key, value).or();
+
+            for (int i = 0; i < list.size(); i++) {
+                String value = list.get(i);
+                RealmQuery<T> realmQuery = beginGroup.equalTo(key, value);
+                if(i != (list.size() -1))
+                    realmQuery.or();
             }
             query.endGroup();
         }
