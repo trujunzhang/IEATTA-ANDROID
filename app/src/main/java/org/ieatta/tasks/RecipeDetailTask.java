@@ -1,5 +1,11 @@
 package org.ieatta.tasks;
 
+import org.ieatta.activity.LeadImageCollection;
+import org.ieatta.activity.Page;
+import org.ieatta.activity.PageProperties;
+import org.ieatta.activity.PageTitle;
+import org.ieatta.activity.gallery.GalleryCollection;
+import org.ieatta.cells.model.ReviewsCellModel;
 import org.ieatta.database.models.DBEvent;
 import org.ieatta.database.models.DBPhoto;
 import org.ieatta.database.models.DBRecipe;
@@ -13,6 +19,8 @@ import org.ieatta.database.realm.DBBuilder;
 import org.ieatta.database.realm.RealmModelReader;
 import org.ieatta.parse.DBConstant;
 
+import java.util.List;
+
 import bolts.Continuation;
 import bolts.Task;
 import io.realm.RealmResults;
@@ -24,6 +32,10 @@ public class RecipeDetailTask {
     public DBRecipe recipe;
     public RealmResults<DBReview> reviews;
     public RealmResults<DBPhoto> galleryCollection;
+
+    private LeadImageCollection leadImageCollection;
+    public List<ReviewsCellModel> reviewsCellModelList;
+    public GalleryCollection thumbnailGalleryCollection;
 
     /**
      * Execute Task for Restaurant detail.
@@ -78,5 +90,13 @@ public class RecipeDetailTask {
                         return null;
                     }
                 });
+    }
+
+    public Page getPage() {
+        String title = restaurant.getDisplayName();
+        PageTitle pageTitle = new PageTitle(this.restaurant.getUUID());
+        PageProperties properties = new PageProperties(this.leadImageCollection, title);
+
+        return new Page(pageTitle, properties);
     }
 }
