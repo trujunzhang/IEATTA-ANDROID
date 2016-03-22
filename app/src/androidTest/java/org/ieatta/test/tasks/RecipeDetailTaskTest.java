@@ -18,10 +18,12 @@ import bolts.Task;
 public class RecipeDetailTaskTest {
     private static final int TASK_COMPLETION_TIMEOUT = 20000;
     private RecipeDetailTask task = new RecipeDetailTask();
-    private String restaurantUUID = "1CE562A4-A978-4B75-9B7B-2F3CF9F42A04";
-    private String eventUUID = "07B2D33C-F11D-404B-9D78-016D16BEE9FE";
-    private String teamUUID = "5C52C84D-4E0B-4727-B3FD-274C9F004580";
-    private String recipeUUID = "87BDA6B4-3928-44FA-9047-D62F666ADC9F";
+
+    String restaurantUUID = "1CE562A4-A978-4B75-9B7B-2F3CF9F42A04"; // The Flying Falafel
+    //        String restaurantUUID = "33ED9F31-F6A5-43A4-8D11-8E511CA0BD39"; // The Spice Jar
+    String eventUUID = "07B2D33C-F11D-404B-9D78-016D16BEE9FE"; // White Truffies
+    String teamUUID = "197C0BEF-B432-47B8-988B-99406643623A";// Dolores Chavez
+    String recipeUUID = "95B62D6F-87DF-47E2-8C84-EADAE131BB5D"; // Dark Gelate
 
     @Test
     public void testOrderedRecipes() throws InterruptedException {
