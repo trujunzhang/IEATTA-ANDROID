@@ -33,13 +33,13 @@ public class RestaurantDetailTaskTest {
             public Void then(Task<Void> task) throws Exception {
                 RestaurantDetailTask _task = RestaurantDetailTaskTest.this.task;
                 List<ReviewsCellModel> cellModelList = _task.reviewsCellModelList;
-                if(cellModelList.size()>0) {
+                if (cellModelList.size() > 0) {
                     ReviewsCellModel cellModel = cellModelList.get(0);
                     String usedRef = cellModel.userUUID;
                     File imageUrl = ThumbnailImageUtil.sharedInstance.getImageFile(usedRef);
-                    if(imageUrl != null && imageUrl.exists()){
+                    if (imageUrl != null && imageUrl.exists()) {
                         String path = imageUrl.getAbsolutePath();
-                    }else {
+                    } else {
                         String title = cellModel.title;
                     }
                 }
