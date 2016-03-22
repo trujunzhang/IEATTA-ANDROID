@@ -34,7 +34,7 @@ public class ReviewQuery {
                 ReviewQuery.this.reviews = task.getResult();
                 List<String> list = getTeamsList(task.getResult());
 
-                if(list.size() == 0)
+                if (list.size() == 0)
                     return Task.forResult(null);
 
                 return new RealmModelReader<DBTeam>(DBTeam.class).fetchResults(
@@ -43,6 +43,11 @@ public class ReviewQuery {
         }).onSuccessTask(new Continuation<RealmResults<DBTeam>, Task<List<ReviewsCellModel>>>() {
             @Override
             public Task<List<ReviewsCellModel>> then(Task<RealmResults<DBTeam>> task) throws Exception {
+                if(task.getResult() == null) {
+                    List<ReviewsCellModel> list = new LinkedList<>();
+                    return Task.forResult(list);
+                }
+
                 RealmResults<DBTeam> teams = task.getResult();
                 return Task.forResult(DBConvert.toReviewsCellModels(ReviewQuery.this.reviews, teams));
             }
