@@ -52,14 +52,6 @@ public class LocalDatabaseQuery {
         return new RealmModelReader<DBPhoto>(DBPhoto.class).getFirstObject(builder, needClose);
     }
 
-    public static Task<RealmResults<DBPhoto>> queryPhotos(String UUID,int photoType) {
-        DBBuilder builder = new DBBuilder()
-                .whereEqualTo(DBConstant.kPAPFieldUsedRefKey, UUID)
-                .whereEqualTo(DBConstant.kPAPFieldUsedTypeKey, photoType)
-                .orderByDescending(DBConstant.kPAPFieldObjectCreatedDateKey);
-        return new RealmModelReader<DBPhoto>(DBPhoto.class).fetchResults(builder, false);
-    }
-
     public static DBBuilder get(String UUID) {
         return new DBBuilder().whereEqualTo(DBConstant.kPAPFieldObjectUUIDKey, UUID);
     }

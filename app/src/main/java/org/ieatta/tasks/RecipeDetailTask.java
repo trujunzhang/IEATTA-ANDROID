@@ -15,6 +15,7 @@ import org.ieatta.database.models.DBTeam;
 import org.ieatta.database.provide.PhotoUsedType;
 import org.ieatta.database.provide.ReviewType;
 import org.ieatta.database.query.LocalDatabaseQuery;
+import org.ieatta.database.query.ReviewQuery;
 import org.ieatta.database.realm.DBBuilder;
 import org.ieatta.database.realm.RealmModelReader;
 import org.ieatta.parse.DBConstant;
@@ -30,8 +31,6 @@ public class RecipeDetailTask {
     public DBEvent event;
     public DBTeam team;
     public DBRecipe recipe;
-    public RealmResults<DBReview> reviews;
-    public RealmResults<DBPhoto> galleryCollection;
 
     private LeadImageCollection leadImageCollection;
     public List<ReviewsCellModel> reviewsCellModelList;
@@ -72,21 +71,18 @@ public class RecipeDetailTask {
                     @Override
                     public Task<RealmResults<DBPhoto>> then(Task<DBRecipe> task) throws Exception {
                         RecipeDetailTask.this.recipe = task.getResult();
-                        return LocalDatabaseQuery.queryPhotos(recipeUUID, PhotoUsedType.PU_Recipe.getType());
+                        return LocalDatabaseQuery.queryPhotosByModel(recipeUUID, PhotoUsedType.PU_Recipe.getType());
                     }
-                }).onSuccessTask(new Continuation<RealmResults<DBPhoto>, Task<RealmResults<DBReview>>>() {
+                }).onSuccessTask(new Continuation<RealmResults<DBPhoto>, Task<List<ReviewsCellModel>>>() {
                     @Override
-                    public Task<RealmResults<DBReview>> then(Task<RealmResults<DBPhoto>> task) throws Exception {
-                        RecipeDetailTask.this.galleryCollection = task.getResult();
-                        return new RealmModelReader<DBReview>(DBReview.class).fetchResults(
-                                new DBBuilder()
-                                        .whereEqualTo(DBConstant.kPAPFieldReviewRefKey, restaurantUUID)
-                                        .whereEqualTo(DBConstant.kPAPFieldReviewTypeKey, ReviewType.Review_Recipe.getType()), false);
+                    public Task<List<ReviewsCellModel>> then(Task<RealmResults<DBPhoto>> task) throws Exception {
+                        RecipeDetailTask.this.leadImageCollection = DBConvert.toLeadImageCollection(task.getResult());
+                        return new ReviewQuery().queryReview(recipeUUID, ReviewType.Review_Recipe);
                     }
-                }).onSuccess(new Continuation<RealmResults<DBReview>, Void>() {
+                }).onSuccess(new Continuation<List<ReviewsCellModel>, Void>() {
                     @Override
-                    public Void then(Task<RealmResults<DBReview>> task) throws Exception {
-                        RecipeDetailTask.this.reviews = task.getResult();
+                    public Void then(Task<List<ReviewsCellModel>> task) throws Exception {
+                        RecipeDetailTask.this.reviewsCellModelList = task.getResult();
                         return null;
                     }
                 });
