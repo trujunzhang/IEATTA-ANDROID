@@ -21,7 +21,6 @@
         android:layout_marginTop="8dp"
         android:layout_toLeftOf="@+id/timeAgoTextView"
         android:layout_toRightOf="@+id/eventIconImageView"
-        android:text="Medium Text"
         android:textAppearance="@style/TitleText"
         android:textSize="@dimen/abc_text_size_menu_material" />
 
