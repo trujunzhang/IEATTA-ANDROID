@@ -97,7 +97,7 @@ public class EventDetailFragment extends DetailFragment {
         this.manager.setFooterItem(new IEAFooterViewModel(), IEAFooterView.getType());
 
         this.manager.setSectionItems(task.orderedPeopleList, EventDetailSection.section_ordered_people.ordinal());
-//        this.manager.setSectionItems(task.reviewsCellModelList, EventDetailSection.section_reviews.ordinal());
+        this.manager.setSectionItems(task.reviewsCellModelList, EventDetailSection.section_reviews.ordinal());
 
         model.setPage(task.getPage());
 
