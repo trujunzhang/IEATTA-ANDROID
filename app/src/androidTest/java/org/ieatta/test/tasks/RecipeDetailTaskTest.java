@@ -2,6 +2,7 @@ package org.ieatta.test.tasks;
 
 import android.support.test.runner.AndroidJUnit4;
 
+import org.ieatta.activity.gallery.GalleryCollection;
 import org.ieatta.tasks.OrderedRecipesTask;
 import org.ieatta.tasks.RecipeDetailTask;
 import org.junit.Test;
@@ -28,6 +29,8 @@ public class RecipeDetailTaskTest {
         task.executeTask(restaurantUUID,eventUUID,teamUUID,recipeUUID).onSuccess(new Continuation<Void, Void>() {
             @Override
             public Void then(Task<Void> task) throws Exception {
+                RecipeDetailTask _task = RecipeDetailTaskTest.this.task;
+                GalleryCollection collection = _task.thumbnailGalleryCollection;
                 return null;
             }
         }).continueWith(new Continuation<Void, Void>() {
