@@ -77,12 +77,9 @@ public class RealmModelReader<T extends RealmObject> {
     }
 
     private void buildContainedListMap(DBBuilder builder, RealmQuery<T> query) {
-        HashMap<String, List<String>> containedListMap = builder.containedListMap;
-        if (containedListMap.keySet().size() == 0)
-            return;
+        for (String key : builder.containedListMap.keySet()) {
+            List<String> list = builder.containedListMap.get(key);
 
-        for (String key : containedListMap.keySet()) {
-            List<String> list = containedListMap.get(key);
             RealmQuery<T> beginGroup = query.beginGroup();
             for (String value : list) {
                 beginGroup.equalTo(key, value).or();
@@ -101,12 +98,8 @@ public class RealmModelReader<T extends RealmObject> {
     }
 
     private void buildEqualMap(DBBuilder builder, RealmQuery<T> query) {
-        HashMap<String, Object> equalMap = builder.equalMap;
-        if (equalMap.keySet().size() == 0)
-            return;
-
-        for (String key : equalMap.keySet()) {
-            Object value = equalMap.get(key);
+        for (String key : builder.equalMap.keySet()) {
+            Object value = builder.equalMap.get(key);
             if (value instanceof String) {
                 query.equalTo(key, (String) value);
             } else if (value instanceof Integer) {
@@ -117,21 +110,14 @@ public class RealmModelReader<T extends RealmObject> {
 
     private void buildContainedMap(DBBuilder builder, RealmQuery<T> query) {
         HashMap<String, String> containedMap = builder.containedMap;
-        if (containedMap.keySet().size() == 0)
-            return;
-
         for (String key : containedMap.keySet()) {
             query.contains(key, containedMap.get(key));
         }
     }
 
     private void buildGreaterMap(DBBuilder builder, RealmQuery<T> query) {
-        HashMap<String, Object> greaterMap = builder.greaterMap;
-        if (greaterMap.keySet().size() == 0)
-            return;
-
-        for (String key : greaterMap.keySet()) {
-            Object value = greaterMap.get(key);
+        for (String key : builder.greaterMap.keySet()) {
+            Object value = builder.greaterMap.get(key);
             if (value instanceof Date) {
                 query.greaterThan(key, (Date) value);
             } else if (value instanceof Integer) {
