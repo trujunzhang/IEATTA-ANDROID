@@ -2,6 +2,7 @@ package org.ieatta.test.tasks;
 
 import android.support.test.runner.AndroidJUnit4;
 
+import org.ieatta.database.models.DBRecipe;
 import org.ieatta.tasks.EventDetailTask;
 import org.ieatta.tasks.OrderedRecipesTask;
 import org.junit.Test;
@@ -12,6 +13,7 @@ import java.util.concurrent.TimeUnit;
 
 import bolts.Continuation;
 import bolts.Task;
+import io.realm.RealmResults;
 
 @RunWith(AndroidJUnit4.class)
 public class OrderedRecipesTaskTest {
@@ -27,6 +29,8 @@ public class OrderedRecipesTaskTest {
         task.executeTask(restaurantUUID,eventUUID,teamUUID).onSuccess(new Continuation<Void, Void>() {
             @Override
             public Void then(Task<Void> task) throws Exception {
+                OrderedRecipesTask _task = OrderedRecipesTaskTest.this.task;
+                RealmResults<DBRecipe> recipes = _task.recipes;
                 return null;
             }
         }).continueWith(new Continuation<Void, Void>() {

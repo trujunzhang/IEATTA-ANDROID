@@ -24,9 +24,9 @@ import bolts.Task;
 import io.realm.RealmResults;
 
 public class OrderedRecipesTask {
-    public DBRestaurant restaurant;
-    public DBEvent event;
-    public DBTeam team;
+    private DBRestaurant restaurant;
+    private DBEvent event;
+    private DBTeam team;
     public RealmResults<DBRecipe> recipes;
     private LeadImageCollection leadImageCollection;
 
