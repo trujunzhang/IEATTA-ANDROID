@@ -92,7 +92,7 @@ public class RealmModelReader<T extends RealmObject> {
     private void buildAll(DBBuilder builder, RealmQuery<T> query) {
         buildGreaterMap(builder, query);
         buildContainedMap(builder, query);
-        buildContainedListMap(builder, query);
+//        buildContainedListMap(builder, query);
         buildEqualMap(builder, query);
     }
 

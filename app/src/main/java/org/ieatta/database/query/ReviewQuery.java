@@ -36,8 +36,8 @@ public class ReviewQuery {
                 if (list.size() == 0)
                     return Task.forResult(null);
 
-                return new RealmModelReader<DBTeam>(DBTeam.class).fetchResults(
-                        new DBBuilder().whereContainedIn(DBConstant.kPAPFieldObjectUUIDKey, list), false);
+                DBBuilder builder = new DBBuilder().whereContainedIn(DBConstant.kPAPFieldObjectUUIDKey, list);
+                return new RealmModelReader<DBTeam>(DBTeam.class).fetchResults(builder, false);
             }
         }).onSuccessTask(new Continuation<RealmResults<DBTeam>, Task<List<ReviewsCellModel>>>() {
             @Override
