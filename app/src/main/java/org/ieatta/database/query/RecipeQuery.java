@@ -28,9 +28,9 @@ public class RecipeQuery {
                 false).onSuccessTask(new Continuation<RealmResults<DBRecipe>, Task<Integer>>() {
             @Override
             public Task<Integer> then(Task<RealmResults<DBRecipe>> task) throws Exception {
-                RecipeQuery.this.recipes = task.getResult();
+                RealmResults<DBRecipe> recipes = task.getResult();
 
-                return Task.forResult(0);
+                return Task.forResult(recipes.size());
             }
         });
     }
