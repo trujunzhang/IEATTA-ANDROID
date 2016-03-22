@@ -83,7 +83,7 @@ public class RealmModelReader<T extends RealmObject> {
         } catch (Exception e) {
             return Task.forError(e);
         } finally {
-                realm.close();
+            realm.close();
         }
 
         return Task.forResult(result);
@@ -99,7 +99,7 @@ public class RealmModelReader<T extends RealmObject> {
     private void buildContainedListMap(DBBuilder builder, RealmQuery<T> query) {
         for (String key : builder.containedListMap.keySet()) {
             List<String> list = builder.containedListMap.get(key);
-            if(list.size() == 0)
+            if (list.size() == 0)
                 continue;
 
             RealmQuery<T> beginGroup = query.beginGroup();
@@ -107,9 +107,10 @@ public class RealmModelReader<T extends RealmObject> {
             for (int i = 0; i < list.size(); i++) {
                 String value = list.get(i);
                 RealmQuery<T> realmQuery = beginGroup.equalTo(key, value);
-                if(i != (list.size() -1))
+                if (i != (list.size() - 1))
                     realmQuery.or();
             }
+
             query.endGroup();
         }
     }
