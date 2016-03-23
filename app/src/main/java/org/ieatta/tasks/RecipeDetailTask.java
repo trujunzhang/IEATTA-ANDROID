@@ -31,7 +31,7 @@ public class RecipeDetailTask {
     public DBTeam team;
     public DBRecipe recipe;
 
-    private LeadImageCollection leadImageCollection;
+    private LeadImageCollection leadImageCollection; // for recipes
     public List<ReviewsCellModel> reviewsCellModelList;
     public GalleryCollection thumbnailGalleryCollection;
 

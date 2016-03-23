@@ -22,7 +22,7 @@ public class OrderedRecipesTask {
     private DBEvent event;
     public DBTeam team;
     public RealmResults<DBRecipe> recipes;
-    private LeadImageCollection leadImageCollection;
+    private LeadImageCollection leadImageCollection; // for restaurants
 
     /**
      * Execute Task for ordered recipes.
