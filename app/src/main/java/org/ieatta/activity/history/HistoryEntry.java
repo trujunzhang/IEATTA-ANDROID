@@ -28,19 +28,19 @@ public class HistoryEntry implements Parcelable {
     private final Date timestamp;
     private final int source;
 
-    private String restaurantUUID;
-    private String eventUUID;
-    private String teamUUID;
-    private String recipeUUID;
+    private final String restaurantUUID;
+    private final String eventUUID;
+    private final String teamUUID;
+    private final String recipeUUID;
 
-
-    public HistoryEntry(Date timestamp, int source) {
-        this.timestamp = timestamp;
+    public HistoryEntry(int source, String restaurantUUID, String eventUUID, String teamUUID, String recipeUUID) {
         this.source = source;
-    }
+        this.restaurantUUID = restaurantUUID;
+        this.eventUUID = eventUUID;
+        this.teamUUID = teamUUID;
+        this.recipeUUID = recipeUUID;
 
-    public HistoryEntry( int source) {
-        this(new Date(), source);
+        this.timestamp = new Date();
     }
 
     public Date getTimestamp() {
@@ -86,11 +86,21 @@ public class HistoryEntry implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeLong(getTimestamp().getTime());
         dest.writeInt(getSource());
+
+        dest.writeString(this.restaurantUUID);
+        dest.writeString(this.eventUUID);
+        dest.writeString(this.teamUUID);
+        dest.writeString(this.recipeUUID);
     }
 
     private HistoryEntry(Parcel in) {
         this.timestamp = new Date(in.readLong());
         this.source = in.readInt();
+
+        this.restaurantUUID = in.readString();
+        this.eventUUID = in.readString();
+        this.teamUUID = in.readString();
+        this.recipeUUID = in.readString();
     }
 
     public static final Creator<HistoryEntry> CREATOR
