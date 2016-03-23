@@ -3,6 +3,7 @@ package org.ieatta.provide;
 
 import android.app.Fragment;
 
+import org.ieatta.activity.fragments.EventDetailFragment;
 import org.ieatta.activity.fragments.NearRestaurantsFragment;
 import org.ieatta.activity.fragments.OrderedRecipesFragment;
 import org.ieatta.activity.fragments.PageFragment;
@@ -24,8 +25,8 @@ public enum MainSegueIdentifier {
 //    readReviewsSegueIdentifier("addEditRestaurant"),
 //
 //    // Four detail pages.
-//    detailRestaurantSegueIdentifier("detailRestaurant"),
-//    detailEventSegueIdentifier("detailEvent"),
+    detailRestaurantSegueIdentifier(AppConstant.SOURCE_RESTAURANT_DETAIL,"detailRestaurant"),
+    detailEventSegueIdentifier(AppConstant.SOURCE_EVENT_DETAIL,"detailEvent"),
     detailOrderedRecipesSegueIdentifier(AppConstant.SOURCE_ORDERED_RECIPES,"detailOrderedRecipes"),
     detailRecipeSegueIdentifier(AppConstant.SOURCE_RECIPE_DETAIL,"detailRecipe"),
 //
@@ -64,6 +65,8 @@ public enum MainSegueIdentifier {
         switch (source){
             case AppConstant.SOURCE_NEARBY_RESTAURANTS:
                 return new NearRestaurantsFragment();
+            case AppConstant.SOURCE_EVENT_DETAIL:
+                return new EventDetailFragment();
             case AppConstant.SOURCE_ORDERED_RECIPES:
                 return new OrderedRecipesFragment();
             case AppConstant.SOURCE_RECIPE_DETAIL:

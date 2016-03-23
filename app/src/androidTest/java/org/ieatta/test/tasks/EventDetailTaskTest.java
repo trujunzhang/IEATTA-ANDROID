@@ -24,7 +24,7 @@ public class EventDetailTaskTest {
     @Test
     public void testEventDetail() throws InterruptedException {
         final CountDownLatch completionLatch = new CountDownLatch(1);
-        task.executeTask(restaurantUUID,eventUUID).onSuccess(new Continuation<Void, Void>() {
+        task.executeTask(eventUUID).onSuccess(new Continuation<Void, Void>() {
             @Override
             public Void then(Task<Void> task) throws Exception {
                 EventDetailTask _task = EventDetailTaskTest.this.task;
