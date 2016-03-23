@@ -65,10 +65,10 @@ public class NearRestaurantsFragment extends PageFragment {
     }
 
     private void setupUI() {
-        this.manager.setRegisterCellClassWhenSelected(IEANearRestaurantMoreCell.getType(), NearRestaurantSection.section_more_items.ordinal());
+//        this.manager.setRegisterCellClassWhenSelected(IEANearRestaurantMoreCell.getType(), NearRestaurantSection.section_more_items.ordinal());
         this.manager.setRegisterCellClassWhenSelected(IEANearRestaurantsCell.getType(), NearRestaurantSection.section_restaurants.ordinal());
 
-        this.manager.appendSectionTitleCell(new SectionTitleCellModel(IEAEditKey.Section_Title, R.string.More), NearRestaurantSection.section_more_items.ordinal());
+//        this.manager.appendSectionTitleCell(new SectionTitleCellModel(IEAEditKey.Section_Title, R.string.More), NearRestaurantSection.section_more_items.ordinal());
         this.manager.appendSectionTitleCell(new SectionTitleCellModel(IEAEditKey.Section_Title, R.string.Nearby_Restaurants), NearRestaurantSection.section_restaurants.ordinal());
     }
 
@@ -78,7 +78,6 @@ public class NearRestaurantsFragment extends PageFragment {
         manager.setOnItemClickListener(itemClickListener);
 
         this.setupUI();
-        this.manager.setSectionItems(IEANearRestaurantMore.getMoresItems(), NearRestaurantSection.section_more_items.ordinal());
 
         Location location = LocationUtil.getLocation();
         task.executeTask(location).onSuccess(new Continuation<Void, Object>() {
@@ -98,6 +97,7 @@ public class NearRestaurantsFragment extends PageFragment {
 
     @Override
     public void postLoadPage(){
+        // this.manager.setSectionItems(IEANearRestaurantMore.getMoresItems(), NearRestaurantSection.section_more_items.ordinal());
         this.manager.setSectionItems(this.task.getRestaurants(),NearRestaurantSection.section_restaurants.ordinal());
     }
 }
