@@ -10,7 +10,6 @@ import com.tableview.utils.CollectionUtil;
 
 import org.ieatta.R;
 import org.ieatta.cells.IEAGalleryThumbnailCell;
-import org.ieatta.cells.IEAOrderedRecipeCell;
 import org.ieatta.cells.IEAReviewsCell;
 import org.ieatta.cells.headerfooterview.IEAFooterView;
 import org.ieatta.cells.headerfooterview.IEAHeaderView;
@@ -19,7 +18,6 @@ import org.ieatta.cells.model.IEAGalleryThumbnail;
 import org.ieatta.cells.model.IEAHeaderViewModel;
 import org.ieatta.cells.model.SectionTitleCellModel;
 import org.ieatta.provide.IEAEditKey;
-import org.ieatta.tasks.OrderedRecipesTask;
 import org.ieatta.tasks.RecipeDetailTask;
 
 import bolts.Continuation;
@@ -81,7 +79,7 @@ public class RecipeDetailFragment extends DetailFragment {
         task.executeTask(restaurantUUID, eventUUID, teamUUID,recipeUUID).onSuccess(new Continuation<Void, Object>() {
             @Override
             public Object then(Task<Void> task) throws Exception {
-                RecipeDetailFragment.this.reloadPage();
+                RecipeDetailFragment.this.postLoadPage();
                 return null;
             }
         }).continueWith(new Continuation<Object, Object>() {
@@ -93,7 +91,7 @@ public class RecipeDetailFragment extends DetailFragment {
     }
 
     @Override
-    public void reloadPage() {
+    public void postLoadPage() {
         this.manager.setHeaderItem(new IEAHeaderViewModel(this.getScreenHeight()), IEAHeaderView.getType());
         this.manager.setFooterItem(new IEAFooterViewModel(), IEAFooterView.getType());
 
@@ -102,7 +100,7 @@ public class RecipeDetailFragment extends DetailFragment {
 
         model.setPage(task.getPage());
 
-        super.reloadPage();
+        super.postLoadPage();
     }
 
 }

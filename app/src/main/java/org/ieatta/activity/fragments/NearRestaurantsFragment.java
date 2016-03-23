@@ -84,7 +84,7 @@ public class NearRestaurantsFragment extends PageFragment {
         task.executeTask(location).onSuccess(new Continuation<Void, Object>() {
             @Override
             public Object then(Task<Void> task) throws Exception {
-               NearRestaurantsFragment.this.reloadPage();
+               NearRestaurantsFragment.this.postLoadPage();
                 return null;
             }
         },Task.UI_THREAD_EXECUTOR).continueWith(new Continuation<Object, Object>() {
@@ -97,7 +97,7 @@ public class NearRestaurantsFragment extends PageFragment {
     }
 
     @Override
-    public void reloadPage(){
+    public void postLoadPage(){
         this.manager.setSectionItems(this.task.getRestaurants(),NearRestaurantSection.section_restaurants.ordinal());
     }
 }

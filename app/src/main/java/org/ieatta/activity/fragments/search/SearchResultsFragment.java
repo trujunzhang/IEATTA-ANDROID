@@ -9,7 +9,7 @@ public class SearchResultsFragment extends PageFragment {
     }
 
     @Override
-    public void reloadPage() {
+    public void postLoadPage() {
 
     }
 }

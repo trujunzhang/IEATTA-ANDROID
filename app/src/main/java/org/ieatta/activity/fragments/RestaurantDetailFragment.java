@@ -81,7 +81,7 @@ public class RestaurantDetailFragment extends DetailFragment {
         task.executeTask(restaurantUUID).onSuccess(new Continuation<Void, Object>() {
             @Override
             public Object then(Task<Void> task) throws Exception {
-                RestaurantDetailFragment.this.reloadPage();
+                RestaurantDetailFragment.this.postLoadPage();
                 return null;
             }
         }).continueWith(new Continuation<Object, Object>() {
@@ -94,7 +94,7 @@ public class RestaurantDetailFragment extends DetailFragment {
     }
 
     @Override
-    public void reloadPage() {
+    public void postLoadPage() {
         this.manager.setHeaderItem(new IEAHeaderViewModel(this.getScreenHeight()), IEAHeaderView.getType());
         this.manager.setFooterItem(new IEAFooterViewModel(), IEAFooterView.getType());
 
@@ -105,7 +105,7 @@ public class RestaurantDetailFragment extends DetailFragment {
 
         model.setPage(task.getPage());
 
-        super.reloadPage();
+        super.postLoadPage();
     }
 
 }

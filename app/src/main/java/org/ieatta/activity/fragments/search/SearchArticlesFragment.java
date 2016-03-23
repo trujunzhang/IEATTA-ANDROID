@@ -14,7 +14,7 @@ public class SearchArticlesFragment extends PageFragment {
     }
 
     @Override
-    public void reloadPage() {
+    public void postLoadPage() {
 
     }
 }

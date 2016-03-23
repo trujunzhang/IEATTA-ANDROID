@@ -72,7 +72,7 @@ public class OrderedRecipesFragment extends DetailFragment {
         task.executeTask(restaurantUUID, eventUUID, teamUUID).onSuccess(new Continuation<Void, Object>() {
             @Override
             public Object then(Task<Void> task) throws Exception {
-                OrderedRecipesFragment.this.reloadPage();
+                OrderedRecipesFragment.this.postLoadPage();
                 return null;
             }
         }).continueWith(new Continuation<Object, Object>() {
@@ -84,7 +84,7 @@ public class OrderedRecipesFragment extends DetailFragment {
     }
 
     @Override
-    public void reloadPage() {
+    public void postLoadPage() {
         this.manager.setHeaderItem(new IEAHeaderViewModel(this.getScreenHeight()), IEAHeaderView.getType());
         this.manager.setFooterItem(new IEAFooterViewModel(), IEAFooterView.getType());
 
@@ -92,7 +92,7 @@ public class OrderedRecipesFragment extends DetailFragment {
 
         model.setPage(task.getPage());
 
-        super.reloadPage();
+        super.postLoadPage();
     }
 
 }

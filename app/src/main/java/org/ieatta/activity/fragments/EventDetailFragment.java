@@ -6,22 +6,17 @@ import android.view.View;
 import com.tableview.RecycleViewManager;
 import com.tableview.adapter.NSIndexPath;
 import com.tableview.adapter.RecyclerOnItemClickListener;
-import com.tableview.utils.CollectionUtil;
 
 import org.ieatta.R;
-import org.ieatta.cells.IEAGalleryThumbnailCell;
 import org.ieatta.cells.IEAOrderedPeopleCell;
-import org.ieatta.cells.IEARestaurantEventsCell;
 import org.ieatta.cells.IEAReviewsCell;
 import org.ieatta.cells.headerfooterview.IEAFooterView;
 import org.ieatta.cells.headerfooterview.IEAHeaderView;
 import org.ieatta.cells.model.IEAFooterViewModel;
-import org.ieatta.cells.model.IEAGalleryThumbnail;
 import org.ieatta.cells.model.IEAHeaderViewModel;
 import org.ieatta.cells.model.SectionTitleCellModel;
 import org.ieatta.provide.IEAEditKey;
 import org.ieatta.tasks.EventDetailTask;
-import org.ieatta.tasks.RestaurantDetailTask;
 
 import bolts.Continuation;
 import bolts.Task;
@@ -80,7 +75,7 @@ public class EventDetailFragment extends DetailFragment {
         task.executeTask(restaurantUUID,eventUUID).onSuccess(new Continuation<Void, Object>() {
             @Override
             public Object then(Task<Void> task) throws Exception {
-                EventDetailFragment.this.reloadPage();
+                EventDetailFragment.this.postLoadPage();
                 return null;
             }
         }).continueWith(new Continuation<Object, Object>() {
@@ -92,7 +87,7 @@ public class EventDetailFragment extends DetailFragment {
     }
 
     @Override
-    public void reloadPage() {
+    public void postLoadPage() {
         this.manager.setHeaderItem(new IEAHeaderViewModel(this.getScreenHeight()), IEAHeaderView.getType());
         this.manager.setFooterItem(new IEAFooterViewModel(), IEAFooterView.getType());
 
@@ -101,7 +96,7 @@ public class EventDetailFragment extends DetailFragment {
 
         model.setPage(task.getPage());
 
-        super.reloadPage();
+        super.postLoadPage();
     }
 
 }
