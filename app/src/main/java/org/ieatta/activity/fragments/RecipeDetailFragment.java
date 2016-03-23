@@ -76,7 +76,7 @@ public class RecipeDetailFragment extends DetailFragment {
         String teamUUID = "197C0BEF-B432-47B8-988B-99406643623A";// Dolores Chavez
         String recipeUUID = "95B62D6F-87DF-47E2-8C84-EADAE131BB5D"; // Dark Gelate
 
-        task.executeTask(restaurantUUID, eventUUID, teamUUID,recipeUUID).onSuccess(new Continuation<Void, Object>() {
+        task.executeTask(recipeUUID).onSuccess(new Continuation<Void, Object>() {
             @Override
             public Object then(Task<Void> task) throws Exception {
                 RecipeDetailFragment.this.postLoadPage();

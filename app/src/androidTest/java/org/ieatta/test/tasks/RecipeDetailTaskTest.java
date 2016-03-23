@@ -27,7 +27,7 @@ public class RecipeDetailTaskTest {
     @Test
     public void testOrderedRecipes() throws InterruptedException {
         final CountDownLatch completionLatch = new CountDownLatch(1);
-        task.executeTask(restaurantUUID, eventUUID, teamUUID, recipeUUID).onSuccess(new Continuation<Void, Void>() {
+        task.executeTask(recipeUUID).onSuccess(new Continuation<Void, Void>() {
             @Override
             public Void then(Task<Void> task) throws Exception {
                 RecipeDetailTask _task = RecipeDetailTaskTest.this.task;
