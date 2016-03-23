@@ -49,6 +49,17 @@ public class EffectActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//        initWithRecycleView();
+
+        initWithRatioLayout();
+    }
+
+    private void initWithRatioLayout() {
+        setContentView(R.layout.activity_ratio);
+
+    }
+
+    private void initWithRecycleView() {
         setContentView(R.layout.activity_effect);
 
         this.webView = (ObservableWebView) findViewById(R.id.recycleView);

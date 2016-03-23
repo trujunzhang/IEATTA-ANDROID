@@ -518,11 +518,11 @@ public class PageActivity extends ThemedActionBarActivity {
 //        PageFragment fragment = new EventDetailFragment();
 //        PageFragment fragment = new OrderedRecipesFragment();
 
+//        HistoryEntry entry =new HistoryEntry(MainSegueIdentifier.nearbyRestaurants);
         HistoryEntry entry =new HistoryEntry(MainSegueIdentifier.detailRestaurantSegueIdentifier);
 //        HistoryEntry entry =new HistoryEntry(MainSegueIdentifier.detailEventSegueIdentifier);
 //        HistoryEntry entry =new HistoryEntry(MainSegueIdentifier.detailOrderedRecipesSegueIdentifier);
 //        HistoryEntry entry =new HistoryEntry(MainSegueIdentifier.detailRecipeSegueIdentifier);
-//        HistoryEntry entry =new HistoryEntry(MainSegueIdentifier.nearbyRestaurants);
         loadPage(entry, TabPosition.CURRENT_TAB, false, true);
     }
 

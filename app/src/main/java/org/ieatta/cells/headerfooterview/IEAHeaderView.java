@@ -1,6 +1,7 @@
 package org.ieatta.cells.headerfooterview;
 
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.tableview.adapter.IEAViewHolder;
@@ -22,7 +23,7 @@ public class IEAHeaderView extends IEAViewHolder {
     }
 
     @Override
-    public boolean haveBackground(){
+    public boolean haveBackground() {
         return false;
     }
 
@@ -43,8 +44,10 @@ public class IEAHeaderView extends IEAViewHolder {
     public void render(Object value) {
         IEAHeaderViewModel header = (IEAHeaderViewModel) value;
 
-        int cellHeight = header.getCellHeight();
-        this.emptyLinearLayout.setMinimumHeight(cellHeight);
-        new RecycleCellFunnel().logCellInfo("IEAHeaderView","cellHeight: "+cellHeight);
+        ViewGroup.LayoutParams params = emptyLinearLayout.getLayoutParams();
+        params.height = header.getCellHeight();
+        emptyLinearLayout.setLayoutParams(params);
+
+        new RecycleCellFunnel().logCellInfo("IEAHeaderView", "cellHeight: " + header.getCellHeight());
     }
 }

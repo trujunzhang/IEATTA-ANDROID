@@ -192,17 +192,17 @@ public class LeadImagesHandler {
 
         initDisplayDimensions();
 
-        if (this.getPage().getPageProperties().getLeadImageCount() < 2) {
-            LeadImagesHandler.this.recurringLeadImages();
-        } else {
-            // set the page title text, and honor any HTML formatting in the title
-            task.periodicTask(new RecurringTask.RecurringEvent() {
-                @Override
-                public void everyTask() {
-                    LeadImagesHandler.this.recurringLeadImages();
-                }
-            }, 0, 10);
-        }
+//        if (this.getPage().getPageProperties().getLeadImageCount() < 2) {
+//            LeadImagesHandler.this.recurringLeadImages();
+//        } else {
+//            // set the page title text, and honor any HTML formatting in the title
+//            task.periodicTask(new RecurringTask.RecurringEvent() {
+//                @Override
+//                public void everyTask() {
+//                    LeadImagesHandler.this.recurringLeadImages();
+//                }
+//            }, 0, 10);
+//        }
 
         articleHeaderView.setTitle(Html.fromHtml(getPage().getDisplayTitle()));
 //        articleHeaderView.setLocale(getPage().getTitle().getSite().getLanguageCode());
@@ -238,15 +238,17 @@ public class LeadImagesHandler {
             return;
         }
 
-        if (isMainPage()) {
-            articleHeaderView.hide();
-        } else {
-            if (!isLeadImageEnabled()) {
-                articleHeaderView.showText();
-            } else {
-                articleHeaderView.showTextImage();
-            }
-        }
+//        if (isMainPage()) {
+//            articleHeaderView.hide();
+//        } else {
+//            if (!isLeadImageEnabled()) {
+//                articleHeaderView.showText();
+//            } else {
+//                articleHeaderView.showTextImage();
+//            }
+//        }
+
+        articleHeaderView.showTextImage();
 
         // tell our listener that it's ok to start loading the rest of the WebView content
         listener.onLayoutComplete(sequence);

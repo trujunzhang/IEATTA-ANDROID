@@ -114,15 +114,20 @@ public class ArticleHeaderView extends FrameLayout implements ObservableWebView.
 
     public void loadImage(@Nullable LeadImage leadImage) {
         image.load(leadImage);
-        int height = leadImage == null ? 0 : (int) (DimenUtil.getDisplayHeightPx() * getScreenHeightRatio());
-        setMinimumHeight(height);
+        setImageViewMinimumHeight();
         if (leadImage == null) {
             resetMenuBarColor();
         }
     }
 
+    private void setImageViewMinimumHeight() {
+        int minumHeight = (int) (DimenUtil.getDisplayHeightPx() * getScreenHeightRatio());
+        setMinimumHeight(minumHeight);
+        this.setHeaderViewHeight(2000);
+    }
+
     public void loadImage(@Nullable String url,Boolean local) {
-        image.load(url,local);
+        image.load(url, local);
         int height = url == null ? 0 : (int) (DimenUtil.getDisplayHeightPx() * getScreenHeightRatio());
         setMinimumHeight(height);
         if (url == null) {
@@ -285,6 +290,12 @@ public class ArticleHeaderView extends FrameLayout implements ObservableWebView.
         image.setLayoutParams(params);
     }
 
+    private void setHeaderViewHeight(int height) {
+        ViewGroup.LayoutParams params = this.getLayoutParams();
+        params.height = height;
+        this.setLayoutParams(params);
+    }
+
     private void setTextHeightConstrained() {
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0, 1f);
         text.setLayoutParams(params);
@@ -299,7 +310,9 @@ public class ArticleHeaderView extends FrameLayout implements ObservableWebView.
         inflate();
         bind();
         initText();
-        hide();
+        //  hide();
+
+        setImageViewMinimumHeight();
     }
 
     private void inflate() {
