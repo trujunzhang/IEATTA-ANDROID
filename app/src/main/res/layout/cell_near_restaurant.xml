@@ -1,32 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/page_list_item_container"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingTop="@dimen/list_item_vertical_padding"
-    android:paddingRight="@dimen/list_item_horizontal_padding"
+    android:gravity="top"
+    android:orientation="vertical"
     android:paddingBottom="@dimen/list_item_vertical_padding"
     android:paddingLeft="@dimen/list_item_horizontal_padding"
-    android:gravity="top">
-
-    <!-- TODO: this probably shouldn't be part of an item cell since it has to do with a collection
-               of cells and nothing to do with an individual. This manifests visually when the cell
-               is interacted with and the additional spacing is exposed. -->
-    <TextView
-        android:id="@+id/page_list_header_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:gravity="center_vertical"
-        android:visibility="gone"
-        tools:visibility="visible"
-        tools:text="Header text"
-        />
+    android:paddingRight="@dimen/list_item_horizontal_padding"
+    style="@style/cell_style"
+    android:paddingTop="@dimen/list_item_vertical_padding">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -38,13 +24,13 @@
             android:layout_width="@dimen/defaultListItemSize"
             android:layout_height="@dimen/defaultListItemSize"
             android:layout_gravity="center_vertical"
+            android:background="@color/window_background_light"
             android:contentDescription="@null"
-            app:placeholderImage="@drawable/blank_biz"
-            app:placeholderImageScaleType="centerCrop"
+            app:actualImageScaleType="centerCrop"
             app:failureImage="@drawable/blank_biz"
             app:failureImageScaleType="centerCrop"
-            app:actualImageScaleType="centerCrop"
-            android:background="@color/window_background_light"/>
+            app:placeholderImage="@drawable/blank_biz"
+            app:placeholderImageScaleType="centerCrop" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -56,27 +42,26 @@
 
             <TextView
                 android:id="@+id/page_list_item_title"
+                style="@style/RtlAwareTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                style="@style/RtlAwareTextView"
-                android:textSize="@dimen/textSize"
                 android:ellipsize="end"
                 android:maxLines="2"
                 android:textColor="@color/list_item_text_primary_light"
+                android:textSize="@dimen/textSize"
                 tools:text="Sample title" />
 
             <org.wikipedia.views.GoneIfEmptyTextView
                 android:id="@+id/page_list_item_description"
+                style="@style/RtlAwareTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                style="@style/RtlAwareTextView"
-                android:textAppearance="?android:attr/textAppearanceSmall"
                 android:ellipsize="end"
                 android:maxLines="2"
+                android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textColor="@color/list_item_text_secondary_light"
                 android:visibility="gone"
-                tools:text="Sample description"
-                />
+                tools:text="Sample description" />
 
         </LinearLayout>
     </LinearLayout>
