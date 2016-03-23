@@ -69,7 +69,7 @@ public class OrderedRecipesFragment extends DetailFragment {
 //        String restaurantUUID = "33ED9F31-F6A5-43A4-8D11-8E511CA0BD39"; // The Spice Jar
         String eventUUID = "07B2D33C-F11D-404B-9D78-016D16BEE9FE"; // White Truffies
         String teamUUID = "197C0BEF-B432-47B8-988B-99406643623A";// Dolores Chavez
-        task.executeTask(restaurantUUID, eventUUID, teamUUID).onSuccess(new Continuation<Void, Object>() {
+        task.executeTask( eventUUID, teamUUID).onSuccess(new Continuation<Void, Object>() {
             @Override
             public Object then(Task<Void> task) throws Exception {
                 OrderedRecipesFragment.this.postLoadPage();
