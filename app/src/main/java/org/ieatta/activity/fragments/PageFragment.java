@@ -83,6 +83,7 @@ public abstract class PageFragment extends Fragment implements BackPressedHandle
         return false;
     }
 
+    // TODO: don't assume host is PageActivity. Use Fragment callbacks pattern.
     protected PageActivity getPageActivity() {
         return (PageActivity) getActivity();
     }

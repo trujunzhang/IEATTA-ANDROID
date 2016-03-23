@@ -224,10 +224,6 @@ public abstract class DetailFragment extends PageFragment implements BackPressed
         pageScrollFunnel = null;
     }
 
-    // TODO: don't assume host is PageActivity. Use Fragment callbacks pattern.
-    private PageActivity getPageActivity() {
-        return (PageActivity) getActivity();
-    }
 
     protected int getScreenHeight(){
         return DimenUtil.getScreenHeight(getActivity().getWindow());

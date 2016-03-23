@@ -1,61 +1,48 @@
 package org.ieatta.provide;
 
 
-import android.app.Activity;
-
 public enum MainSegueIdentifier {
 
-    Unspecified("", null),
+    Unspecified(""),
 
     // Four menus in the near restaurant page.
-//    editRestaurantSegueIdentifier("addEditRestaurant", IEAEditRestaurantViewController.class),
-//    searchRestaurantSegueIdentifier("searchRestaurant", IEASearchRestaurantViewController.class),
-//    managerPeopleSegueIdentifier("managerPeople", IEAManagerPeopleViewController.class),
-//    readReviewsSegueIdentifier("addEditRestaurant", IEAReadReviewsViewController.class),
+    editRestaurantSegueIdentifier("addEditRestaurant"),
+    searchRestaurantSegueIdentifier("searchRestaurant"),
+    managerPeopleSegueIdentifier("managerPeople"),
+    readReviewsSegueIdentifier("addEditRestaurant"),
 
-    editRestaurantSegueIdentifier("addEditRestaurant", Activity.class),
-    searchRestaurantSegueIdentifier("searchRestaurant", Activity.class),
-    managerPeopleSegueIdentifier("managerPeople", Activity.class),
-    readReviewsSegueIdentifier("addEditRestaurant", Activity.class),
+    // Four detail pages.
+    detailRestaurantSegueIdentifier("detailRestaurant"),
+    detailEventSegueIdentifier("detailEvent"),
+    detailOrderedRecipesSegueIdentifier("detailOrderedRecipes"),
+    detailRecipeSegueIdentifier("detailRecipe"),
 
+    // Show all posted reviews for restaurant,recipe.
+    detailSeeReviewSegueIdentifier("seeReviewsInDetail"),
 
-//    // Four detail pages.
-//    detailRestaurantSegueIdentifier("detailRestaurant", IEARestaurantDetailViewController.class),
-//    detailEventSegueIdentifier("detailEvent", IEAEventDetailViewController.class),
-//    detailOrderedRecipesSegueIdentifier("detailOrderedRecipes", IEAOrderedRecipesViewController.class),
-//    detailRecipeSegueIdentifier("detailRecipe", IEARecipeDetailViewController.class),
-//
-//    // Show all posted reviews for restaurant,recipe.
-//    detailSeeReviewSegueIdentifier("seeReviewsInDetail", IEASeeReviewsInDetailViewController.class),
-//
-//    // Show detail review from review list.
-//    detailReviewSegueIdentifier("detailReview", IEAReviewDetailViewController.class),
-//
-//    // Four new/edit model pages.(the following three, and restaurant)
-//    editEventSegueIdentifier("addEditEvent", IEAEditEventViewController.class),
-//    editPeopleSegueIdentifier("addEditPeople", IEAEditPeopleViewController.class),
-//    editRecipeSegueIdentifier("addEditRecipe", IEAEditRecipeViewController.class),
-//    // Choice Person in the event page.
-//    choicePeopleSegueIdentifier("choicePeople", IEAChoicePeopleViewController.class),
-//
-//    // Show detail review from review list.
-//    postReviewSegueIdentifier("postReview", IEAWriteReviewViewController.class),
-//
-//    photoPagesControllerSegueIdentifier("photoPagesController", PhotoGalleryPagerActivity.class);
+    // Show detail review from review list.
+    detailReviewSegueIdentifier("detailReview"),
 
-    photoPagesControllerSegueIdentifier("photoPagesController", Activity.class);
+    // Four new/edit model pages.(the following three, and restaurant)
+    editEventSegueIdentifier("addEditEvent"),
+    editPeopleSegueIdentifier("addEditPeople"),
+    editRecipeSegueIdentifier("addEditRecipe"),
+    // Choice Person in the event page.
+    choicePeopleSegueIdentifier("choicePeople"),
+
+    // Show detail review from review list.
+    postReviewSegueIdentifier("postReview"),
+
+    photoPagesControllerSegueIdentifier("photoPagesController");
 
 
     private String name;
-    private Class<?> activity;
 
-    MainSegueIdentifier(String name, Class<?> activity) {
+    MainSegueIdentifier(String name) {
         this.name = name;
-        this.activity = activity;
     }
 
-    public Class<?> getActivity() {
-        return this.activity;
-    }
+
+
 
 }
