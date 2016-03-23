@@ -17,6 +17,7 @@ import org.ieatta.cells.IEANearRestaurantMoreCell;
 import org.ieatta.cells.IEANearRestaurantsCell;
 import org.ieatta.cells.model.SectionTitleCellModel;
 import org.ieatta.cells.model.IEANearRestaurantMore;
+import org.ieatta.database.models.DBRestaurant;
 import org.ieatta.provide.IEAEditKey;
 import org.ieatta.tasks.NearRestaurantsTask;
 import org.ieatta.utils.LocationUtil;
@@ -30,7 +31,9 @@ public class NearRestaurantsFragment extends PageFragment {
     public static final RecyclerOnItemClickListener itemClickListener = new RecyclerOnItemClickListener() {
         @Override
         public void onItemClick(View view, NSIndexPath indexPath, Object model, int position, boolean isLongClick) {
-
+            if(model instanceof DBRestaurant){
+                DBRestaurant item = (DBRestaurant) model;
+            }
         }
     };
 
