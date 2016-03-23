@@ -1,4 +1,7 @@
-<merge
+<FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/article_header_layout"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
@@ -46,4 +49,4 @@
 
     </LinearLayout>
 
-</merge>
+</FrameLayout>

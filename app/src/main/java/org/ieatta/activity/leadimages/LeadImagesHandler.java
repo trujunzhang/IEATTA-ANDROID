@@ -192,17 +192,17 @@ public class LeadImagesHandler {
 
         initDisplayDimensions();
 
-//        if (this.getPage().getPageProperties().getLeadImageCount() < 2) {
-//            LeadImagesHandler.this.recurringLeadImages();
-//        } else {
-//            // set the page title text, and honor any HTML formatting in the title
-//            task.periodicTask(new RecurringTask.RecurringEvent() {
-//                @Override
-//                public void everyTask() {
-//                    LeadImagesHandler.this.recurringLeadImages();
-//                }
-//            }, 0, 10);
-//        }
+        if (this.getPage().getPageProperties().getLeadImageCount() < 2) {
+            LeadImagesHandler.this.recurringLeadImages();
+        } else {
+            // set the page title text, and honor any HTML formatting in the title
+            task.periodicTask(new RecurringTask.RecurringEvent() {
+                @Override
+                public void everyTask() {
+                    LeadImagesHandler.this.recurringLeadImages();
+                }
+            }, 0, 10);
+        }
 
         articleHeaderView.setTitle(Html.fromHtml(getPage().getDisplayTitle()));
 //        articleHeaderView.setLocale(getPage().getTitle().getSite().getLanguageCode());

@@ -51,6 +51,9 @@ public class ArticleHeaderView extends FrameLayout implements ObservableWebView.
     AppTextView text;
     @Bind(R.id.view_article_header_menu_bar) ArticleMenuBarView menuBar;
 
+    @Bind(R.id.article_header_layout)
+    FrameLayout article_header_layout;
+
     @NonNull private CharSequence title = "";
     @NonNull private CharSequence subtitle = "";
 
@@ -123,7 +126,6 @@ public class ArticleHeaderView extends FrameLayout implements ObservableWebView.
     private void setImageViewMinimumHeight() {
         int minumHeight = (int) (DimenUtil.getDisplayHeightPx() * getScreenHeightRatio());
         setMinimumHeight(minumHeight);
-        this.setHeaderViewHeight(2000);
     }
 
     public void loadImage(@Nullable String url,Boolean local) {
@@ -290,10 +292,11 @@ public class ArticleHeaderView extends FrameLayout implements ObservableWebView.
         image.setLayoutParams(params);
     }
 
-    private void setHeaderViewHeight(int height) {
-        ViewGroup.LayoutParams params = this.getLayoutParams();
+    private void setArticleHeaderViewHeight() {
+        int height = (int) (DimenUtil.getDisplayHeightPx() * getScreenHeightRatio());
+        ViewGroup.LayoutParams params = this.article_header_layout.getLayoutParams();
         params.height = height;
-        this.setLayoutParams(params);
+        this.article_header_layout.setLayoutParams(params);
     }
 
     private void setTextHeightConstrained() {
@@ -312,7 +315,8 @@ public class ArticleHeaderView extends FrameLayout implements ObservableWebView.
         initText();
         //  hide();
 
-        setImageViewMinimumHeight();
+        setArticleHeaderViewHeight();
+//        setImageViewMinimumHeight();
     }
 
     private void inflate() {
