@@ -313,10 +313,8 @@ public class ArticleHeaderView extends FrameLayout implements ObservableWebView.
         inflate();
         bind();
         initText();
-        //  hide();
 
         setArticleHeaderViewHeight();
-//        setImageViewMinimumHeight();
     }
 
     private void inflate() {
