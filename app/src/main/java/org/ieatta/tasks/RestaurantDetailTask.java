@@ -28,7 +28,7 @@ public class RestaurantDetailTask {
     public RealmResults<DBEvent> events;
     public List<ReviewsCellModel> reviewsCellModelList;
     public GalleryCollection thumbnailGalleryCollection;
-    private LeadImageCollection leadImageCollection;
+    private LeadImageCollection leadImageCollection; // for restaurants
 
     /**
      * Execute Task for Restaurant detail.

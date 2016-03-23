@@ -8,6 +8,7 @@ import org.ieatta.activity.fragments.NearRestaurantsFragment;
 import org.ieatta.activity.fragments.OrderedRecipesFragment;
 import org.ieatta.activity.fragments.PageFragment;
 import org.ieatta.activity.fragments.RecipeDetailFragment;
+import org.ieatta.activity.fragments.RestaurantDetailFragment;
 import org.ieatta.parse.AppConstant;
 
 
@@ -65,6 +66,8 @@ public enum MainSegueIdentifier {
         switch (source){
             case AppConstant.SOURCE_NEARBY_RESTAURANTS:
                 return new NearRestaurantsFragment();
+            case AppConstant.SOURCE_RESTAURANT_DETAIL:
+                return new RestaurantDetailFragment();
             case AppConstant.SOURCE_EVENT_DETAIL:
                 return new EventDetailFragment();
             case AppConstant.SOURCE_ORDERED_RECIPES:
