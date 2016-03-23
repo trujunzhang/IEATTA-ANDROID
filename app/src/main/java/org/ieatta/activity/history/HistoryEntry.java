@@ -43,6 +43,14 @@ public class HistoryEntry implements Parcelable {
         this.timestamp = new Date();
     }
 
+    public HistoryEntry(int source) {
+        this(source, "", "", "", "");
+    }
+
+    public HistoryEntry(int source, String restaurantUUID) {
+        this(source, restaurantUUID, "", "", "");
+    }
+
     public Date getTimestamp() {
         return timestamp;
     }
