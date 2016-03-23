@@ -6,7 +6,7 @@ import org.ieatta.database.models.DBTeam;
 import org.ieatta.database.provide.ReviewType;
 import org.ieatta.database.realm.DBBuilder;
 import org.ieatta.database.realm.RealmModelReader;
-import org.ieatta.parse.DBConstant;
+import org.ieatta.parse.AppConstant;
 import org.ieatta.tasks.DBConvert;
 
 import java.util.LinkedList;
@@ -24,8 +24,8 @@ public class ReviewQuery {
     public Task<List<ReviewsCellModel>> queryReview(String reviewRef, ReviewType type) {
         return new RealmModelReader<DBReview>(DBReview.class).fetchResults(
                 new DBBuilder()
-                        .whereEqualTo(DBConstant.kPAPFieldReviewRefKey, reviewRef)
-                        .whereEqualTo(DBConstant.kPAPFieldReviewTypeKey, type.getType()),
+                        .whereEqualTo(AppConstant.kPAPFieldReviewRefKey, reviewRef)
+                        .whereEqualTo(AppConstant.kPAPFieldReviewTypeKey, type.getType()),
                 false).onSuccessTask(new Continuation<RealmResults<DBReview>, Task<RealmResults<DBTeam>>>() {
             @Override
             public Task<RealmResults<DBTeam>> then(Task<RealmResults<DBReview>> task) throws Exception {
@@ -36,7 +36,7 @@ public class ReviewQuery {
                 if (list.size() == 0)
                     return Task.forResult(null);
 
-                DBBuilder builder = new DBBuilder().whereContainedIn(DBConstant.kPAPFieldObjectUUIDKey, list);
+                DBBuilder builder = new DBBuilder().whereContainedIn(AppConstant.kPAPFieldObjectUUIDKey, list);
                 return new RealmModelReader<DBTeam>(DBTeam.class).fetchResults(builder, false);
             }
         }).onSuccessTask(new Continuation<RealmResults<DBTeam>, Task<List<ReviewsCellModel>>>() {

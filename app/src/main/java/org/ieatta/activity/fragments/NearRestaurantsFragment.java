@@ -20,6 +20,7 @@ import org.ieatta.cells.model.SectionTitleCellModel;
 import org.ieatta.cells.model.IEANearRestaurantMore;
 import org.ieatta.database.models.DBRestaurant;
 import org.ieatta.provide.IEAEditKey;
+import org.ieatta.provide.MainSegueIdentifier;
 import org.ieatta.tasks.NearRestaurantsTask;
 import org.ieatta.utils.LocationUtil;
 import org.ieatta.views.ObservableWebView;
@@ -34,6 +35,7 @@ public class NearRestaurantsFragment extends PageFragment {
         public void onItemClick(View view, NSIndexPath indexPath, Object model, int position, boolean isLongClick) {
             if (model instanceof DBRestaurant) {
                 DBRestaurant item = (DBRestaurant) model;
+                MainSegueIdentifier identifier = MainSegueIdentifier.nearbyRestaurants;
                 HistoryEntry newEntry = new HistoryEntry(HistoryEntry.SOURCE_NEARBY_RESTAURANTS);
 //                NearRestaurantsFragment.this.getPageActivity().loadPage(title, newEntry);
             }

@@ -11,7 +11,7 @@ import org.ieatta.database.models.DBEvent;
 import org.ieatta.database.models.DBPhoto;
 import org.ieatta.database.models.DBReview;
 import org.ieatta.database.models.DBTeam;
-import org.ieatta.parse.DBConstant;
+import org.ieatta.parse.AppConstant;
 import org.ieatta.server.cache.ThumbnailImageUtil;
 
 import java.io.File;
@@ -61,7 +61,7 @@ public class DBConvert {
             if (team.getUUID().equals(userRef))
                 return team;
         }
-        return DBConstant.getAnonymousUser();
+        return AppConstant.getAnonymousUser();
     }
 
     public static List<ReviewsCellModel> toReviewsCellModels(RealmResults<DBReview> reviews, RealmResults<DBTeam> teams) {

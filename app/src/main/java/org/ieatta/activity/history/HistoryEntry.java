@@ -4,6 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import org.ieatta.activity.PageTitle;
+import org.ieatta.provide.MainSegueIdentifier;
 
 import java.util.Date;
 
@@ -19,12 +20,6 @@ public class HistoryEntry implements Parcelable {
     public static final int SOURCE_NEARBY = 9;
     public static final int SOURCE_DISAMBIG = 10;
 
-    public static final int SOURCE_NEARBY_RESTAURANTS = 11;
-    public static final int SOURCE_RESTAURANT_DETAIL = 12;
-    public static final int SOURCE_EVENT_DETAIL = 13;
-    public static final int SOURCE_ORDERED_RECIPES = 14;
-    public static final int SOURCE_RECIPE_DETAIL = 15;
-
     private final Date timestamp;
     private final int source;
 
@@ -33,8 +28,8 @@ public class HistoryEntry implements Parcelable {
     private final String teamUUID;
     private final String recipeUUID;
 
-    public HistoryEntry(int source, String restaurantUUID, String eventUUID, String teamUUID, String recipeUUID) {
-        this.source = source;
+    public HistoryEntry(MainSegueIdentifier identifier, String restaurantUUID, String eventUUID, String teamUUID, String recipeUUID) {
+        this.source = identifier.getType();
         this.restaurantUUID = restaurantUUID;
         this.eventUUID = eventUUID;
         this.teamUUID = teamUUID;
@@ -43,12 +38,12 @@ public class HistoryEntry implements Parcelable {
         this.timestamp = new Date();
     }
 
-    public HistoryEntry(int source) {
-        this(source, "", "", "", "");
+    public HistoryEntry(MainSegueIdentifier identifier) {
+        this(identifier, "", "", "", "");
     }
 
-    public HistoryEntry(int source, String restaurantUUID) {
-        this(source, restaurantUUID, "", "", "");
+    public HistoryEntry(MainSegueIdentifier identifier, String restaurantUUID) {
+        this(identifier, restaurantUUID, "", "", "");
     }
 
     public Date getTimestamp() {

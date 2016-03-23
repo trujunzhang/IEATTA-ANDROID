@@ -52,15 +52,15 @@ public class ParseObjectReader {
     }
 
     public Task<RealmObject> reader(ParseObject object, DBEvent model) {
-        String uuid = object.getString(DBConstant.kPAPFieldObjectUUIDKey);
-        Date objectCreatedDate = object.getDate(DBConstant.kPAPFieldObjectCreatedDateKey);
-        String displayName = object.getString(DBConstant.kPAPFieldDisplayNameKey);
-        Date startDate = object.getDate(DBConstant.kPAPFieldStartDateKey);
-        Date endDate = object.getDate(DBConstant.kPAPFieldEndDateKey);
-        String whatToEat = object.getString(DBConstant.kPAPFieldWhatToEatKey);
-        String remarks = object.getString(DBConstant.kPAPFieldRemarksKey);
-        String waiter = object.getString(DBConstant.kPAPFieldWaiterKey);
-        String restaurantRef = object.getString(DBConstant.kPAPFieldLocalRestaurantKey);
+        String uuid = object.getString(AppConstant.kPAPFieldObjectUUIDKey);
+        Date objectCreatedDate = object.getDate(AppConstant.kPAPFieldObjectCreatedDateKey);
+        String displayName = object.getString(AppConstant.kPAPFieldDisplayNameKey);
+        Date startDate = object.getDate(AppConstant.kPAPFieldStartDateKey);
+        Date endDate = object.getDate(AppConstant.kPAPFieldEndDateKey);
+        String whatToEat = object.getString(AppConstant.kPAPFieldWhatToEatKey);
+        String remarks = object.getString(AppConstant.kPAPFieldRemarksKey);
+        String waiter = object.getString(AppConstant.kPAPFieldWaiterKey);
+        String restaurantRef = object.getString(AppConstant.kPAPFieldLocalRestaurantKey);
 
         model.setUUID(uuid);
         model.setObjectCreatedDate(objectCreatedDate);
@@ -77,10 +77,10 @@ public class ParseObjectReader {
     }
 
     public DBNewRecord reader(ParseObject object, DBNewRecord model) {
-        String uuid = object.getString(DBConstant.kPAPFieldObjectUUIDKey);
-        Date objectCreatedDate = object.getDate(DBConstant.kPAPFieldObjectCreatedDateKey);
-        int type = object.getInt(DBConstant.kPAPFieldModelTypeKey);
-        String modelPoint = object.getString(DBConstant.kPAPFieldModelPointKey);
+        String uuid = object.getString(AppConstant.kPAPFieldObjectUUIDKey);
+        Date objectCreatedDate = object.getDate(AppConstant.kPAPFieldObjectCreatedDateKey);
+        int type = object.getInt(AppConstant.kPAPFieldModelTypeKey);
+        String modelPoint = object.getString(AppConstant.kPAPFieldModelPointKey);
 
         model.setUUID(uuid);
         model.setObjectCreatedDate(objectCreatedDate);
@@ -92,10 +92,10 @@ public class ParseObjectReader {
     }
 
     public Task<RealmObject> reader(ParseObject object, DBPeopleInEvent model) {
-        String uuid = object.getString(DBConstant.kPAPFieldObjectUUIDKey);
-        Date objectCreatedDate = object.getDate(DBConstant.kPAPFieldObjectCreatedDateKey);
-        String userRef = object.getString(DBConstant.kPAPFieldUserKey);
-        String eventRef = object.getString(DBConstant.kPAPFieldEventKey);
+        String uuid = object.getString(AppConstant.kPAPFieldObjectUUIDKey);
+        Date objectCreatedDate = object.getDate(AppConstant.kPAPFieldObjectCreatedDateKey);
+        String userRef = object.getString(AppConstant.kPAPFieldUserKey);
+        String eventRef = object.getString(AppConstant.kPAPFieldEventKey);
 
         model.setUUID(uuid);
         model.setObjectCreatedDate(objectCreatedDate);
@@ -107,17 +107,17 @@ public class ParseObjectReader {
     }
 
     public Task<RealmObject> reader(ParseObject object, final DBPhoto model) {
-        final String uuid = object.getString(DBConstant.kPAPFieldObjectUUIDKey);
-        Date objectCreatedDate = object.getDate(DBConstant.kPAPFieldObjectCreatedDateKey);
+        final String uuid = object.getString(AppConstant.kPAPFieldObjectUUIDKey);
+        Date objectCreatedDate = object.getDate(AppConstant.kPAPFieldObjectCreatedDateKey);
 
-        ParseFile originalFile = object.getParseFile(DBConstant.kPAPFieldOriginalImageKey);
-        ParseFile thumbnailFile = object.getParseFile(DBConstant.kPAPFieldThumbnailImageKey);
+        ParseFile originalFile = object.getParseFile(AppConstant.kPAPFieldOriginalImageKey);
+        ParseFile thumbnailFile = object.getParseFile(AppConstant.kPAPFieldThumbnailImageKey);
         String originalUrl = originalFile.getUrl();
         final String thumbnailUrl = thumbnailFile.getUrl();
 
-        String usedRef = object.getString(DBConstant.kPAPFieldUsedRefKey);
-        int usedType = object.getInt(DBConstant.kPAPFieldUsedTypeKey);
-        String restaurantRef = object.getString(DBConstant.kPAPFieldLocalRestaurantKey);
+        String usedRef = object.getString(AppConstant.kPAPFieldUsedRefKey);
+        int usedType = object.getInt(AppConstant.kPAPFieldUsedTypeKey);
+        String restaurantRef = object.getString(AppConstant.kPAPFieldLocalRestaurantKey);
 
         model.setUUID(uuid);
         model.setObjectCreatedDate(objectCreatedDate);
@@ -145,12 +145,12 @@ public class ParseObjectReader {
     }
 
     public Task<RealmObject> reader(ParseObject object, DBRecipe model) {
-        String uuid = object.getString(DBConstant.kPAPFieldObjectUUIDKey);
-        Date objectCreatedDate = object.getDate(DBConstant.kPAPFieldObjectCreatedDateKey);
-        String displayName = object.getString(DBConstant.kPAPFieldDisplayNameKey);
-        String orderedPeopleRef = object.getString(DBConstant.kPAPFieldOrderedPeopleRefKey);
-        String price = object.getString(DBConstant.kPAPFieldPriceKey);
-        String eventRef = object.getString(DBConstant.kPAPFieldEventRefKey);
+        String uuid = object.getString(AppConstant.kPAPFieldObjectUUIDKey);
+        Date objectCreatedDate = object.getDate(AppConstant.kPAPFieldObjectCreatedDateKey);
+        String displayName = object.getString(AppConstant.kPAPFieldDisplayNameKey);
+        String orderedPeopleRef = object.getString(AppConstant.kPAPFieldOrderedPeopleRefKey);
+        String price = object.getString(AppConstant.kPAPFieldPriceKey);
+        String eventRef = object.getString(AppConstant.kPAPFieldEventRefKey);
 
         model.setUUID(uuid);
         model.setObjectCreatedDate(objectCreatedDate);
@@ -171,11 +171,11 @@ public class ParseObjectReader {
      * @return
      */
     public Task<RealmObject> reader(ParseObject object, DBRestaurant model) {
-        String uuid = object.getString(DBConstant.kPAPFieldObjectUUIDKey);
-        Date objectCreatedDate = object.getDate(DBConstant.kPAPFieldObjectCreatedDateKey);
-        String displayName = object.getString(DBConstant.kPAPFieldDisplayNameKey);
-        String googleMapAddress = object.getString(DBConstant.kPAPFieldAddressKey);
-        ParseGeoPoint geoPoint = object.getParseGeoPoint(DBConstant.kPAPFieldLocationKey);
+        String uuid = object.getString(AppConstant.kPAPFieldObjectUUIDKey);
+        Date objectCreatedDate = object.getDate(AppConstant.kPAPFieldObjectCreatedDateKey);
+        String displayName = object.getString(AppConstant.kPAPFieldDisplayNameKey);
+        String googleMapAddress = object.getString(AppConstant.kPAPFieldAddressKey);
+        ParseGeoPoint geoPoint = object.getParseGeoPoint(AppConstant.kPAPFieldLocationKey);
 
         model.setUUID(uuid);
         model.setObjectCreatedDate(objectCreatedDate);
@@ -192,13 +192,13 @@ public class ParseObjectReader {
     }
 
     public Task<RealmObject> reader(ParseObject object, DBReview model) {
-        String uuid = object.getString(DBConstant.kPAPFieldObjectUUIDKey);
-        Date objectCreatedDate = object.getDate(DBConstant.kPAPFieldObjectCreatedDateKey);
-        int rate = object.getInt(DBConstant.kPAPFieldRateKey);
-        int reviewType = object.getInt(DBConstant.kPAPFieldReviewTypeKey);
-        String reviewRef = object.getString(DBConstant.kPAPFieldReviewRefKey);
-        String userRef = object.getString(DBConstant.kPAPFieldUserRefKey);
-        String content = object.getString(DBConstant.kPAPFieldContentKey);
+        String uuid = object.getString(AppConstant.kPAPFieldObjectUUIDKey);
+        Date objectCreatedDate = object.getDate(AppConstant.kPAPFieldObjectCreatedDateKey);
+        int rate = object.getInt(AppConstant.kPAPFieldRateKey);
+        int reviewType = object.getInt(AppConstant.kPAPFieldReviewTypeKey);
+        String reviewRef = object.getString(AppConstant.kPAPFieldReviewRefKey);
+        String userRef = object.getString(AppConstant.kPAPFieldUserRefKey);
+        String content = object.getString(AppConstant.kPAPFieldContentKey);
 
         model.setUUID(uuid);
         model.setObjectCreatedDate(objectCreatedDate);
@@ -213,11 +213,11 @@ public class ParseObjectReader {
     }
 
     public Task<RealmObject> reader(ParseObject object, DBTeam model) {
-        String uuid = object.getString(DBConstant.kPAPFieldObjectUUIDKey);
-        Date objectCreatedDate = object.getDate(DBConstant.kPAPFieldObjectCreatedDateKey);
-        String displayName = object.getString(DBConstant.kPAPFieldDisplayNameKey);
-        String email = object.getString(DBConstant.kPAPFieldEmailKey);
-        String address = object.getString(DBConstant.kPAPFieldAddressKey);
+        String uuid = object.getString(AppConstant.kPAPFieldObjectUUIDKey);
+        Date objectCreatedDate = object.getDate(AppConstant.kPAPFieldObjectCreatedDateKey);
+        String displayName = object.getString(AppConstant.kPAPFieldDisplayNameKey);
+        String email = object.getString(AppConstant.kPAPFieldEmailKey);
+        String address = object.getString(AppConstant.kPAPFieldAddressKey);
 
         model.setUUID(uuid);
         model.setObjectCreatedDate(objectCreatedDate);

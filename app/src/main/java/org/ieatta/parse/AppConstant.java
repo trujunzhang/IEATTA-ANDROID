@@ -2,7 +2,7 @@ package org.ieatta.parse;
 
 import org.ieatta.database.models.DBTeam;
 
-public final class DBConstant {
+public final class AppConstant {
     public final static String kPAPFieldModelGEOHASH = "geoHash";
 
     public final static String kPAPFieldModelOnlineCreatedAtKey = "createdAt";
@@ -67,4 +67,10 @@ public final class DBConstant {
 
         return team;
     }
+
+    public static final int SOURCE_NEARBY_RESTAURANTS = 11;
+    public static final int SOURCE_RESTAURANT_DETAIL = 12;
+    public static final int SOURCE_EVENT_DETAIL = 13;
+    public static final int SOURCE_ORDERED_RECIPES = 14;
+    public static final int SOURCE_RECIPE_DETAIL = 15;
 }

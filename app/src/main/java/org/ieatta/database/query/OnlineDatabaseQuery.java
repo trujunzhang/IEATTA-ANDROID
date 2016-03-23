@@ -6,7 +6,7 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
 import org.ieatta.database.provide.PQueryModelType;
-import org.ieatta.parse.DBConstant;
+import org.ieatta.parse.AppConstant;
 import org.ieatta.parse.ParseQueryUtil;
 import org.ieatta.server.cache.CacheImageUtil;
 
@@ -28,7 +28,7 @@ public class OnlineDatabaseQuery {
         return query.getFirstInBackground().onSuccessTask(new Continuation<ParseObject, Task<InputStream>>() {
             @Override
             public Task<InputStream> then(Task<ParseObject> task) throws Exception {
-                final ParseFile originalFile = task.getResult().getParseFile(DBConstant.kPAPFieldOriginalImageKey);
+                final ParseFile originalFile = task.getResult().getParseFile(AppConstant.kPAPFieldOriginalImageKey);
                 return originalFile.getDataStreamInBackground();
             }
         }).onSuccessTask(new Continuation<InputStream, Task<Void>>() {
