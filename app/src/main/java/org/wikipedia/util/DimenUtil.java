@@ -72,6 +72,14 @@ public final class DimenUtil {
         return getDisplayMetrics().heightPixels;
     }
 
+    /**
+     * Gets the screen width in pixels.
+     * @return screen width in pixels
+     */
+    public static int getDisplayWidthPx() {
+        return getDisplayMetrics().widthPixels;
+    }
+
     public static int getContentTopOffsetPx(Context context) {
         return roundedDpToPx(getContentTopOffset(context));
     }

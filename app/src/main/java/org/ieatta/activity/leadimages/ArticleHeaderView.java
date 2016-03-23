@@ -293,7 +293,7 @@ public class ArticleHeaderView extends FrameLayout implements ObservableWebView.
     }
 
     private void setArticleHeaderViewHeight() {
-        int height = (int) (DimenUtil.getDisplayHeightPx() * getScreenHeightRatio());
+        int height = (int) (DimenUtil.getDisplayWidthPx());
         ViewGroup.LayoutParams params = this.article_header_layout.getLayoutParams();
         params.height = height;
         this.article_header_layout.setLayoutParams(params);
