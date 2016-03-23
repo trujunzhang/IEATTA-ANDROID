@@ -225,8 +225,8 @@ public abstract class DetailFragment extends PageFragment implements BackPressed
     }
 
 
-    protected int getScreenHeight(){
-        return DimenUtil.getScreenHeight(getActivity().getWindow());
+    protected int getEmptyHeaderViewHeight(){
+        return DimenUtil.getDisplayWidthPx();
     }
 
     protected GalleryThumbnailScrollView.GalleryViewListener galleryViewListener

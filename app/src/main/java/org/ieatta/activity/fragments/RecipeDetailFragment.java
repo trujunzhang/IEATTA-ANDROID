@@ -92,7 +92,7 @@ public class RecipeDetailFragment extends DetailFragment {
 
     @Override
     public void postLoadPage() {
-        this.manager.setHeaderItem(new IEAHeaderViewModel(this.getScreenHeight()), IEAHeaderView.getType());
+        this.manager.setHeaderItem(new IEAHeaderViewModel(this.getEmptyHeaderViewHeight()), IEAHeaderView.getType());
         this.manager.setFooterItem(new IEAFooterViewModel(), IEAFooterView.getType());
 
         this.manager.setSectionItems(CollectionUtil.createList(new IEAGalleryThumbnail(this.task.thumbnailGalleryCollection, this.galleryViewListener)), RecipeDetailSection.section_gallery_thumbnail.ordinal());

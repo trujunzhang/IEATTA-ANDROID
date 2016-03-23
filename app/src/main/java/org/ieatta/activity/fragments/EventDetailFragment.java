@@ -88,7 +88,7 @@ public class EventDetailFragment extends DetailFragment {
 
     @Override
     public void postLoadPage() {
-        this.manager.setHeaderItem(new IEAHeaderViewModel(this.getScreenHeight()), IEAHeaderView.getType());
+        this.manager.setHeaderItem(new IEAHeaderViewModel(this.getEmptyHeaderViewHeight()), IEAHeaderView.getType());
         this.manager.setFooterItem(new IEAFooterViewModel(), IEAFooterView.getType());
 
         this.manager.setSectionItems(task.orderedPeopleList, EventDetailSection.section_ordered_people.ordinal());

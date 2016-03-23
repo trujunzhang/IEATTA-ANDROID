@@ -103,7 +103,7 @@ public class EffectActivity extends AppCompatActivity {
     }
 
     protected void reloadPage() {
-//        this.manager.setHeaderItem(new IEAHeaderViewModel(this.getScreenHeight()), IEAHeaderView.getType());
+//        this.manager.setHeaderItem(new IEAHeaderViewModel(this.getEmptyHeaderViewHeight()), IEAHeaderView.getType());
         this.manager.setHeaderItem(new IEAHeaderViewModel(800), IEAHeaderView.getType());
         this.manager.setFooterItem(new IEAFooterViewModel(), IEAFooterView.getType());
 
