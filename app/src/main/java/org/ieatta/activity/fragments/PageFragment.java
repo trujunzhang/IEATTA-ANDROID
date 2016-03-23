@@ -72,7 +72,6 @@ import static org.wikipedia.util.ResourceUtil.getThemedAttributeId;
 import static org.wikipedia.util.UriUtil.decodeURL;
 import static org.wikipedia.util.UriUtil.visitInExternalBrowser;
 
-
 public abstract class PageFragment extends Fragment implements BackPressedHandler {
     public abstract void loadPage();
 

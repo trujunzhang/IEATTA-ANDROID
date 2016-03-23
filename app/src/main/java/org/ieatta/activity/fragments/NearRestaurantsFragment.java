@@ -17,7 +17,6 @@ import org.ieatta.cells.IEANearRestaurantMoreCell;
 import org.ieatta.cells.IEANearRestaurantsCell;
 import org.ieatta.cells.model.SectionTitleCellModel;
 import org.ieatta.cells.model.IEANearRestaurantMore;
-import org.ieatta.database.models.DBRestaurant;
 import org.ieatta.provide.IEAEditKey;
 import org.ieatta.tasks.NearRestaurantsTask;
 import org.ieatta.utils.LocationUtil;
@@ -25,7 +24,6 @@ import org.ieatta.views.ObservableWebView;
 
 import bolts.Continuation;
 import bolts.Task;
-import io.realm.RealmResults;
 
 public class NearRestaurantsFragment extends PageFragment {
 
@@ -43,7 +41,7 @@ public class NearRestaurantsFragment extends PageFragment {
 
     private IEAApp app;
     private RecycleViewManager manager;
-    private ObservableWebView mRecycleView;
+    private ObservableWebView webView;
 
     private NearRestaurantsTask task = new NearRestaurantsTask();
 
@@ -53,7 +51,7 @@ public class NearRestaurantsFragment extends PageFragment {
         super.onCreateView(inflater, container, savedInstanceState);
 
         View view = inflater.inflate(R.layout.fragment_recycleview, container, false);
-        mRecycleView = (ObservableWebView) view.findViewById(R.id.recycleView);
+        webView = (ObservableWebView) view.findViewById(R.id.recycleView);
 
         return view;
     }
@@ -76,7 +74,7 @@ public class NearRestaurantsFragment extends PageFragment {
 
     @Override
     public void loadPage() {
-        manager.startManagingWithDelegate(mRecycleView);
+        manager.startManagingWithDelegate(webView);
         manager.setOnItemClickListener(itemClickListener);
 
         this.setupUI();
