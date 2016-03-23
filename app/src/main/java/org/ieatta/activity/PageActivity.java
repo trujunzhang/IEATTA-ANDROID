@@ -26,6 +26,7 @@ import org.ieatta.activity.fragments.search.SearchArticlesFragment;
 import org.ieatta.activity.fragments.search.SearchBarHideHandler;
 import org.ieatta.activity.history.HistoryEntry;
 import org.ieatta.activity.settings.SettingsActivity;
+import org.ieatta.provide.MainSegueIdentifier;
 import org.wikipedia.activity.ThemedActionBarActivity;
 
 
@@ -473,11 +474,10 @@ public class PageActivity extends ThemedActionBarActivity {
     /**
      * Load a new page, and put it on top of the backstack.
      *
-     * @param title Title of the page to load.
      * @param entry HistoryEntry associated with this page.
      */
-    public void loadPage(PageTitle title, HistoryEntry entry) {
-//        loadPage(title, entry, TabPosition.CURRENT_TAB, false);
+    public void loadPage(HistoryEntry entry) {
+        loadPage(entry, TabPosition.CURRENT_TAB, false,false);
     }
 
     // Note: back button first handled in {@link #onOptionsItemSelected()};
@@ -513,15 +513,17 @@ public class PageActivity extends ThemedActionBarActivity {
     }
 
     private void loadMainPageIfNoTabs() {
-        PageFragment fragment = new NearRestaurantsFragment();
+//        PageFragment fragment = new NearRestaurantsFragment();
 //        PageFragment fragment = new RestaurantDetailFragment();
 //        PageFragment fragment = new EventDetailFragment();
 //        PageFragment fragment = new OrderedRecipesFragment();
-//        PageFragment fragment = new RecipeDetailFragment();
-        loadPage(fragment, TabPosition.CURRENT_TAB, false, true);
+        HistoryEntry entry =new HistoryEntry(MainSegueIdentifier.detailReviewSegueIdentifier);
+//        HistoryEntry entry =new HistoryEntry(MainSegueIdentifier.nearbyRestaurants);
+        loadPage(entry, TabPosition.CURRENT_TAB, false, true);
     }
 
-    public void loadPage(PageFragment fragment, final TabPosition position,
+    public void loadPage(final HistoryEntry entry,
+                         final TabPosition position,
                          boolean allowStateLoss,
                          final boolean mustBeEmpty) {
         if (isDestroyed()) {
@@ -535,7 +537,7 @@ public class PageActivity extends ThemedActionBarActivity {
             closeNavDrawer();
         }
 
-        pushFragment(fragment, allowStateLoss);
+        pushFragment(MainSegueIdentifier.getFragment(entry.getSource()), allowStateLoss);
 
         fragmentContainerView.post(new Runnable() {
             @Override
