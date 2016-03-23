@@ -96,7 +96,8 @@ public class NearRestaurantsFragment extends PageFragment {
         });
     }
 
-    private void reloadPage(){
+    @Override
+    public void reloadPage(){
         this.manager.setSectionItems(this.task.getRestaurants(),NearRestaurantSection.section_restaurants.ordinal());
     }
 }

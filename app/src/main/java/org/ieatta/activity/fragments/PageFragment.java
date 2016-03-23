@@ -75,6 +75,8 @@ import static org.wikipedia.util.UriUtil.visitInExternalBrowser;
 public abstract class PageFragment extends Fragment implements BackPressedHandler {
     public abstract void loadPage();
 
+    public abstract void reloadPage();
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

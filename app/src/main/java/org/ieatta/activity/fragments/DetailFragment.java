@@ -146,7 +146,8 @@ public abstract class DetailFragment extends PageFragment implements BackPressed
         return rootView;
     }
 
-    protected void reloadPage() {
+    @Override
+    public void reloadPage() {
         searchBarHideHandler = getPageActivity().getSearchBarHideHandler();
         searchBarHideHandler.setScrollView(webView);
         leadImagesHandler = new LeadImagesHandler(this, webView, articleHeaderView);

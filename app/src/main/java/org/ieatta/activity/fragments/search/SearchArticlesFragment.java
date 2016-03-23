@@ -12,4 +12,9 @@ public class SearchArticlesFragment extends PageFragment {
     public void loadPage() {
 
     }
+
+    @Override
+    public void reloadPage() {
+
+    }
 }
