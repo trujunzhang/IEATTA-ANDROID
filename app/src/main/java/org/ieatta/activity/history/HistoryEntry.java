@@ -19,22 +19,22 @@ public class HistoryEntry implements Parcelable {
     public static final int SOURCE_NEARBY = 9;
     public static final int SOURCE_DISAMBIG = 10;
 
-    private final PageTitle title;
     private final Date timestamp;
     private final int source;
 
-    public HistoryEntry(PageTitle title, Date timestamp, int source) {
-        this.title = title;
+    private String restaurantUUID;
+    private String eventUUID;
+    private String teamUUID;
+    private String recipeUUID;
+
+
+    public HistoryEntry(Date timestamp, int source) {
         this.timestamp = timestamp;
         this.source = source;
     }
 
-    public HistoryEntry(PageTitle title, int source) {
-        this(title, new Date(), source);
-    }
-
-    public PageTitle getTitle() {
-        return title;
+    public HistoryEntry( int source) {
+        this(new Date(), source);
     }
 
     public Date getTimestamp() {
@@ -51,14 +51,13 @@ public class HistoryEntry implements Parcelable {
             return false;
         }
         HistoryEntry other = (HistoryEntry) o;
-        return title.equals(other.title)
-                && timestamp.equals(other.timestamp)
+        return timestamp.equals(other.timestamp)
                 && source == other.source;
     }
 
     @Override
     public int hashCode() {
-        int result = title.hashCode();
+        int result = 123;
         result = 31 * result + source;
         result = 31 * result + timestamp.hashCode();
         return result;
@@ -67,8 +66,7 @@ public class HistoryEntry implements Parcelable {
     @Override
     public String toString() {
         return "HistoryEntry{"
-                + "title=" + title
-                + ", source=" + source
+                + "source=" + source
                 + ", timestamp=" + timestamp.getTime()
                 + '}';
     }
@@ -80,13 +78,11 @@ public class HistoryEntry implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-//        dest.writeParcelable(getTitle(), flags);
         dest.writeLong(getTimestamp().getTime());
         dest.writeInt(getSource());
     }
 
     private HistoryEntry(Parcel in) {
-        this.title = in.readParcelable(PageTitle.class.getClassLoader());
         this.timestamp = new Date(in.readLong());
         this.source = in.readInt();
     }

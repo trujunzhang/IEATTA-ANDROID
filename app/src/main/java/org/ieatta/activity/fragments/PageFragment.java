@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import org.ieatta.R;
+import org.ieatta.activity.PageActivity;
 import org.wikipedia.BackPressedHandler;
 
 import android.content.Intent;
@@ -80,5 +81,9 @@ public abstract class PageFragment extends Fragment implements BackPressedHandle
     @Override
     public boolean onBackPressed() {
         return false;
+    }
+
+    protected PageActivity getPageActivity() {
+        return (PageActivity) getActivity();
     }
 }

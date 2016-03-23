@@ -13,6 +13,7 @@ import com.tableview.RecycleViewManager;
 
 import org.ieatta.IEAApp;
 import org.ieatta.R;
+import org.ieatta.activity.history.HistoryEntry;
 import org.ieatta.cells.IEANearRestaurantMoreCell;
 import org.ieatta.cells.IEANearRestaurantsCell;
 import org.ieatta.cells.model.SectionTitleCellModel;
@@ -28,11 +29,13 @@ import bolts.Task;
 
 public class NearRestaurantsFragment extends PageFragment {
 
-    public static final RecyclerOnItemClickListener itemClickListener = new RecyclerOnItemClickListener() {
+    public final RecyclerOnItemClickListener itemClickListener = new RecyclerOnItemClickListener() {
         @Override
         public void onItemClick(View view, NSIndexPath indexPath, Object model, int position, boolean isLongClick) {
-            if(model instanceof DBRestaurant){
+            if (model instanceof DBRestaurant) {
                 DBRestaurant item = (DBRestaurant) model;
+                HistoryEntry newEntry = new HistoryEntry(title, entrySource);
+//                NearRestaurantsFragment.this.getPageActivity().loadPage(title, newEntry);
             }
         }
     };
@@ -86,10 +89,10 @@ public class NearRestaurantsFragment extends PageFragment {
         task.executeTask(location).onSuccess(new Continuation<Void, Object>() {
             @Override
             public Object then(Task<Void> task) throws Exception {
-               NearRestaurantsFragment.this.postLoadPage();
+                NearRestaurantsFragment.this.postLoadPage();
                 return null;
             }
-        },Task.UI_THREAD_EXECUTOR).continueWith(new Continuation<Object, Object>() {
+        }, Task.UI_THREAD_EXECUTOR).continueWith(new Continuation<Object, Object>() {
             @Override
             public Object then(Task<Object> task) throws Exception {
                 Exception error = task.getError();
@@ -99,8 +102,8 @@ public class NearRestaurantsFragment extends PageFragment {
     }
 
     @Override
-    public void postLoadPage(){
+    public void postLoadPage() {
         // this.manager.setSectionItems(IEANearRestaurantMore.getMoresItems(), NearRestaurantSection.section_more_items.ordinal());
-        this.manager.setSectionItems(this.task.getRestaurants(),NearRestaurantSection.section_restaurants.ordinal());
+        this.manager.setSectionItems(this.task.getRestaurants(), NearRestaurantSection.section_restaurants.ordinal());
     }
 }

@@ -477,7 +477,7 @@ public class PageActivity extends ThemedActionBarActivity {
      * @param entry HistoryEntry associated with this page.
      */
     public void loadPage(PageTitle title, HistoryEntry entry) {
-//        loadPage(title, entry, TabPosition.CURRENT_TAB, false);
+        loadPage(title, entry, TabPosition.CURRENT_TAB, false);
     }
 
     // Note: back button first handled in {@link #onOptionsItemSelected()};
