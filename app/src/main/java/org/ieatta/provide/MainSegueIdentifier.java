@@ -4,6 +4,7 @@ package org.ieatta.provide;
 import android.app.Fragment;
 
 import org.ieatta.activity.fragments.NearRestaurantsFragment;
+import org.ieatta.activity.fragments.OrderedRecipesFragment;
 import org.ieatta.activity.fragments.PageFragment;
 import org.ieatta.activity.fragments.RecipeDetailFragment;
 import org.ieatta.parse.AppConstant;
@@ -25,14 +26,14 @@ public enum MainSegueIdentifier {
 //    // Four detail pages.
 //    detailRestaurantSegueIdentifier("detailRestaurant"),
 //    detailEventSegueIdentifier("detailEvent"),
-//    detailOrderedRecipesSegueIdentifier("detailOrderedRecipes"),
-//    detailRecipeSegueIdentifier("detailRecipe"),
+    detailOrderedRecipesSegueIdentifier(AppConstant.SOURCE_ORDERED_RECIPES,"detailOrderedRecipes"),
+    detailRecipeSegueIdentifier(AppConstant.SOURCE_RECIPE_DETAIL,"detailRecipe"),
 //
 //    // Show all posted reviews for restaurant,recipe.
 //    detailSeeReviewSegueIdentifier("seeReviewsInDetail"),
 
     // Show detail review from review list.
-detailReviewSegueIdentifier(AppConstant.SOURCE_RECIPE_DETAIL,"detailReview"),
+
 
 //    // Four new/edit model pages.(the following three, and restaurant)
 //    editEventSegueIdentifier("addEditEvent"),
@@ -63,6 +64,8 @@ detailReviewSegueIdentifier(AppConstant.SOURCE_RECIPE_DETAIL,"detailReview"),
         switch (source){
             case AppConstant.SOURCE_NEARBY_RESTAURANTS:
                 return new NearRestaurantsFragment();
+            case AppConstant.SOURCE_ORDERED_RECIPES:
+                return new OrderedRecipesFragment();
             case AppConstant.SOURCE_RECIPE_DETAIL:
                 return new RecipeDetailFragment();
         }
