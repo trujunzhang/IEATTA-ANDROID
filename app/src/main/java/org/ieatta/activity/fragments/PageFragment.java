@@ -77,16 +77,6 @@ public abstract class PageFragment extends Fragment implements BackPressedHandle
 
     public abstract void postLoadPage();
 
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        super.onCreateView(inflater, container, savedInstanceState);
-
-        View view = inflater.inflate(R.layout.fragment_recycleview, container, false);
-
-        return view;
-    }
-
     @Override
     public boolean onBackPressed() {
         return false;
