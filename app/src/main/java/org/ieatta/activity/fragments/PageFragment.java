@@ -88,7 +88,7 @@ public abstract class PageFragment extends Fragment implements BackPressedHandle
     private boolean pushBackStack;
     private int stagedScrollY;
 
-    public abstract void loadPage(HistoryEntry entry) ;
+    public abstract void loadPage(HistoryEntry entry);
 
     public void loadPage(HistoryEntry entry, boolean pushBackStack, int stagedScrollY) {
         this.entry = entry;
@@ -98,7 +98,7 @@ public abstract class PageFragment extends Fragment implements BackPressedHandle
         this.loadPage(entry);
     }
 
-    public  void postLoadPage(){
+    public void postLoadPage() {
         pageLoadStrategy.load(pushBackStack, stagedScrollY);
     }
 

@@ -100,5 +100,7 @@ public class NearRestaurantsFragment extends PageFragment {
     public void postLoadPage() {
         // this.manager.setSectionItems(IEANearRestaurantMore.getMoresItems(), NearRestaurantSection.section_more_items.ordinal());
         this.manager.setSectionItems(this.task.getRestaurants(), NearRestaurantSection.section_restaurants.ordinal());
+
+        super.postLoadPage();
     }
 }
