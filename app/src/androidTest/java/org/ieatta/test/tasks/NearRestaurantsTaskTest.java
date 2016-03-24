@@ -36,7 +36,7 @@ public class NearRestaurantsTaskTest {
     public void setUp() throws Exception {
         Location location = LocationUtil.getLocation();
         HistoryEntry entry = new HistoryEntry(MainSegueIdentifier.nearbyRestaurants,location);
-        this.task = new NearRestaurantsTask(entry,null,null);
+        this.task = new NearRestaurantsTask(entry);
     }
 
     @Test

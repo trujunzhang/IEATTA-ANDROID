@@ -31,7 +31,7 @@ public class RestaurantDetailTaskTest {
     @Before
     public void setUp() throws Exception {
         HistoryEntry entry = new HistoryEntry(MainSegueIdentifier.detailRestaurantSegueIdentifier,restaurantUUID);
-        this.task = new RestaurantDetailTask(entry,null,null);
+        this.task = new RestaurantDetailTask(entry);
     }
 
     @Test
