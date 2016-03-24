@@ -15,8 +15,9 @@ import org.ieatta.activity.history.HistoryEntry;
 import static org.wikipedia.util.DeviceUtil.hideSoftKeyboard;
 
 public class SearchResultsFragment extends PageFragment {
+
     @Override
-    public void loadPage(HistoryEntry entry) {
+    public void loadPage(HistoryEntry entry, boolean pushBackStack, int stagedScrollY) {
 
     }
 

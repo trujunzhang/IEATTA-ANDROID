@@ -20,10 +20,7 @@ public class SearchArticlesFragment extends PageFragment {
         return false;
     }
 
-    @Override
-    public void loadPage(HistoryEntry entry) {
 
-    }
 
     @Nullable
     @Override
@@ -33,6 +30,11 @@ public class SearchArticlesFragment extends PageFragment {
         View view = inflater.inflate(R.layout.fragment_recycleview, container, false);
 
         return view;
+    }
+
+    @Override
+    public void loadPage(HistoryEntry entry, boolean pushBackStack, int stagedScrollY) {
+
     }
 
     @Override
