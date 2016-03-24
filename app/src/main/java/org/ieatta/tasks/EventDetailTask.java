@@ -4,6 +4,7 @@ import org.ieatta.activity.LeadImageCollection;
 import org.ieatta.activity.Page;
 import org.ieatta.activity.PageProperties;
 import org.ieatta.activity.PageTitle;
+import org.ieatta.activity.PageViewModel;
 import org.ieatta.activity.history.HistoryEntry;
 import org.ieatta.cells.model.IEAOrderedPeople;
 import org.ieatta.cells.model.ReviewsCellModel;
@@ -25,7 +26,40 @@ import bolts.Continuation;
 import bolts.Task;
 import io.realm.RealmResults;
 
+import android.content.Context;
+import android.os.Bundle;
+import android.view.View;
+
+import com.tableview.RecycleViewManager;
+import com.tableview.adapter.NSIndexPath;
+import com.tableview.adapter.RecyclerOnItemClickListener;
+
+import org.ieatta.R;
+import org.ieatta.activity.history.HistoryEntry;
+import org.ieatta.cells.IEAOrderedPeopleCell;
+import org.ieatta.cells.IEAReviewsCell;
+import org.ieatta.cells.headerfooterview.IEAFooterView;
+import org.ieatta.cells.headerfooterview.IEAHeaderView;
+import org.ieatta.cells.model.IEAFooterViewModel;
+import org.ieatta.cells.model.IEAHeaderViewModel;
+import org.ieatta.cells.model.SectionTitleCellModel;
+import org.ieatta.provide.IEAEditKey;
+import org.ieatta.tasks.EventDetailTask;
+import org.wikipedia.util.DimenUtil;
+
+import bolts.Continuation;
+import bolts.Task;
+
 public class EventDetailTask extends FragmentTask{
+
+    public EventDetailTask(HistoryEntry entry, Context context, PageViewModel model) {
+        super(entry, context, model);
+    }
+
+    enum EventDetailSection {
+        section_ordered_people, //= 0
+        section_reviews,       //= 1
+    }
     public DBRestaurant restaurant;
     public DBEvent event;
     public List<IEAOrderedPeople> orderedPeopleList;
@@ -37,15 +71,12 @@ public class EventDetailTask extends FragmentTask{
     private String teamUUID;
     private String recipeUUID;
 
-    public EventDetailTask(HistoryEntry entry) {
-        super(entry);
-    }
-
     /**
      * Execute Task for Event detail.
      *
      * @return
      */
+    @Override
     public Task<Void> executeTask() {
         final String eventUUID = this.entry.getHPara();
 
@@ -99,5 +130,28 @@ public class EventDetailTask extends FragmentTask{
         PageProperties properties = new PageProperties(this.leadImageCollection, title);
 
         return new Page(pageTitle, properties);
+    }
+
+    @Override
+    public void prepareUI() {
+        this.manager.setRegisterHeaderView(IEAHeaderView.getType());
+        this.manager.setRegisterFooterView(IEAFooterView.getType());
+
+        this.manager.setRegisterCellClass(IEAOrderedPeopleCell.getType(), EventDetailSection.section_ordered_people.ordinal());
+        this.manager.setRegisterCellClass(IEAReviewsCell.getType(), EventDetailSection.section_reviews.ordinal());
+
+        this.manager.appendSectionTitleCell(new SectionTitleCellModel(IEAEditKey.Section_Title, R.string.People_Ordered), EventDetailSection.section_ordered_people.ordinal());
+        this.manager.appendSectionTitleCell(new SectionTitleCellModel(IEAEditKey.Section_Title, R.string.Reviews), EventDetailSection.section_reviews.ordinal());
+    }
+
+    @Override
+    public void postUI(){
+        this.manager.setHeaderItem(new IEAHeaderViewModel(DimenUtil.getDisplayWidthPx()), IEAHeaderView.getType());
+        this.manager.setFooterItem(new IEAFooterViewModel(), IEAFooterView.getType());
+
+        this.manager.setSectionItems(this.orderedPeopleList, EventDetailSection.section_ordered_people.ordinal());
+        this.manager.setSectionItems(this.reviewsCellModelList, EventDetailSection.section_reviews.ordinal());
+
+        model.setPage(this.getPage());
     }
 }
