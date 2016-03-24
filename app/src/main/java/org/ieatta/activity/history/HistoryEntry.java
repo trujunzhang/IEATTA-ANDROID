@@ -8,6 +8,8 @@ import org.ieatta.provide.MainSegueIdentifier;
 import java.util.Date;
 
 public class HistoryEntry implements Parcelable {
+    public static final HistoryEntryDatabaseTable DATABASE_TABLE = new HistoryEntryDatabaseTable();
+
     public static final int SOURCE_SEARCH = 1;
     public static final int SOURCE_INTERNAL_LINK = 2;
     public static final int SOURCE_EXTERNAL_LINK = 3;

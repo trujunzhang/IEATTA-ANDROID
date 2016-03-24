@@ -179,7 +179,7 @@ public class PageActivity extends ThemedActionBarActivity {
         searchHintText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                searchFragment.openSearch();
+                searchFragment.openSearch();
             }
         });
 
