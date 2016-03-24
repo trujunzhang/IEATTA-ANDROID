@@ -216,6 +216,8 @@ public class PageFragment extends Fragment implements BackPressedHandler {
     }
 
     public void postLoadPage() {
+        task.postUI();
+
         searchBarHideHandler = getPageActivity().getSearchBarHideHandler();
         searchBarHideHandler.setScrollView(webView);
         leadImagesHandler = new LeadImagesHandler(this, webView, articleHeaderView);
@@ -293,6 +295,4 @@ public class PageFragment extends Fragment implements BackPressedHandler {
 //        }
         pageScrollFunnel = null;
     }
-
-
 }
