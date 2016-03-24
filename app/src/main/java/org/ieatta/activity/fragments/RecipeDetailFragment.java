@@ -23,10 +23,6 @@ public class RecipeDetailFragment extends DetailFragment {
         }
     };
 
-    @Override
-    public void onContentHeightChanged(int contentHeight) {
-        this.manager.updateHeaderItem(new IEAHeaderViewModel(contentHeight));
-    }
 
     private RecycleViewManager manager;
 

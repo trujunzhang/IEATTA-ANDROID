@@ -32,7 +32,7 @@ import org.wikipedia.views.WikiDrawerLayout;
 
 import java.util.LinkedList;
 
-public abstract class DetailFragment extends PageFragment implements BackPressedHandler, LeadImagesHandler.OnContentHeightChangedListener {
+public abstract class DetailFragment extends PageFragment implements BackPressedHandler {
     public static final int TOC_ACTION_SHOW = 0;
     public static final int TOC_ACTION_HIDE = 1;
     public static final int TOC_ACTION_TOGGLE = 2;
@@ -130,7 +130,7 @@ public abstract class DetailFragment extends PageFragment implements BackPressed
         searchBarHideHandler = getPageActivity().getSearchBarHideHandler();
         searchBarHideHandler.setScrollView(webView);
         leadImagesHandler = new LeadImagesHandler(this, webView, articleHeaderView);
-        leadImagesHandler.addOnContentHeightChangedListener(this);
+//        leadImagesHandler.addOnContentHeightChangedListener(this);
         pageLoadStrategy.setUp(model,this, refreshView, webView, searchBarHideHandler,
                 leadImagesHandler, new LinkedList<PageBackStackItem>());
         pageLoadStrategy.onLeadSectionLoaded(0);

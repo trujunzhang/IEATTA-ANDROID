@@ -8,12 +8,14 @@ import com.tableview.adapter.RecyclerOnItemClickListener;
 
 import org.ieatta.activity.PageViewModel;
 import org.ieatta.activity.history.HistoryEntry;
+import org.ieatta.activity.leadimages.LeadImagesHandler;
+import org.ieatta.cells.model.IEAHeaderViewModel;
 import org.ieatta.views.ObservableWebView;
 import org.wikipedia.util.DimenUtil;
 
 import bolts.Task;
 
-public abstract class FragmentTask implements RecyclerOnItemClickListener {
+public abstract class FragmentTask implements RecyclerOnItemClickListener,LeadImagesHandler.OnContentHeightChangedListener {
 
     protected RecycleViewManager manager;
     protected PageViewModel model;
@@ -47,5 +49,10 @@ public abstract class FragmentTask implements RecyclerOnItemClickListener {
         this.webView = webView;
         manager.startManagingWithDelegate(webView);
         manager.setOnItemClickListener(this);
+    }
+
+    @Override
+    public void onContentHeightChanged(int contentHeight) {
+        this.manager.updateHeaderItem(new IEAHeaderViewModel(contentHeight));
     }
 }

@@ -57,6 +57,8 @@ public class EventDetailTask extends FragmentTask {
 
     }
 
+
+
     enum EventDetailSection {
         section_ordered_people, //= 0
         section_reviews,       //= 1
