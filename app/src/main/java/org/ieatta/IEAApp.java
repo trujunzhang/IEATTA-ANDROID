@@ -12,6 +12,8 @@ import android.support.annotation.NonNull;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.squareup.otto.Bus;
 
+import org.ieatta.activity.fragments.search.RecentSearch;
+import org.ieatta.activity.history.HistoryEntry;
 import org.ieatta.parse.ParseAPI;
 import org.ieatta.server.cache.CacheImageUtil;
 import org.ieatta.server.recurring.SyncRecurringTask;
@@ -19,6 +21,7 @@ import org.wikipedia.ViewAnimations;
 import org.wikipedia.crash.CrashReporter;
 import org.wikipedia.crash.hockeyapp.HockeyAppCrashReporter;
 import org.wikipedia.database.Database;
+import org.wikipedia.database.DatabaseClient;
 import org.wikipedia.drawable.DrawableUtil;
 import org.wikipedia.settings.Prefs;
 import org.wikipedia.theme.Theme;
@@ -26,7 +29,10 @@ import org.wikipedia.util.ReleaseUtil;
 import org.wikipedia.util.log.L;
 
 import java.text.SimpleDateFormat;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Random;
 import java.util.TimeZone;
 import java.util.UUID;
@@ -35,6 +41,7 @@ public class IEAApp extends Application {
     private static final String HTTPS_PROTOCOL = "https";
     private static final int EVENT_LOG_TESTING_ID = new Random().nextInt(Integer.MAX_VALUE);
 
+    private final Map<Class<?>, DatabaseClient<?>> databaseClients = Collections.synchronizedMap(new HashMap<Class<?>, DatabaseClient<?>>());
     private Database database;
 
     private float screenDensity;
@@ -259,6 +266,23 @@ public class IEAApp extends Application {
                 return Prefs.isCrashReportAutoUploadEnabled();
             }
         };
+    }
+
+
+    public <T> DatabaseClient<T> getDatabaseClient(Class<T> cls) {
+        if (!databaseClients.containsKey(cls)) {
+            DatabaseClient client;
+            if (cls.equals(HistoryEntry.class)) {
+                client = new DatabaseClient<>(this, HistoryEntry.DATABASE_TABLE);
+            } else if (cls.equals(RecentSearch.class)) {
+                client = new DatabaseClient<>(this, RecentSearch.DATABASE_TABLE);
+            }  else {
+                throw new RuntimeException("No persister found for class " + cls.getCanonicalName());
+            }
+            databaseClients.put(cls, client);
+        }
+        //noinspection unchecked
+        return (DatabaseClient<T>) databaseClients.get(cls);
     }
 
 
