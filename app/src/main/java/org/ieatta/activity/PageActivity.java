@@ -540,9 +540,9 @@ public class PageActivity extends ThemedActionBarActivity {
             return;
         }
 
-        app.putCrashReportProperty("api", entry.getSource()+"");
-        app.putCrashReportProperty("hPara", entry.getHPara());
-        app.putCrashReportProperty("vPara", entry.getVPara());
+//        app.putCrashReportProperty("api", entry.getSource()+"");
+//        app.putCrashReportProperty("hPara", entry.getHPara());
+//        app.putCrashReportProperty("vPara", entry.getVPara());
 
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             closeNavDrawer();
