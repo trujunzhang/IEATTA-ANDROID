@@ -101,7 +101,7 @@ public class JsonPageLoadStrategy implements PageLoadStrategy {
     }
 
     @Override
-    public void load(boolean pushBackStack, @NonNull Cache cachePreference, int stagedScrollY) {
+    public void load(boolean pushBackStack,  int stagedScrollY) {
         if (pushBackStack) {
             // update the topmost entry in the backstack, before we start overwriting things.
             updateCurrentBackStackItem();

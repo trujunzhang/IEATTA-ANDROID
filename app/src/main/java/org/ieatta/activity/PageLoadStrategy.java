@@ -50,7 +50,7 @@ public interface PageLoadStrategy {
                @NonNull LeadImagesHandler leadImagesHandler,
                @NonNull List<PageBackStackItem> backStack);
 
-    void load(boolean pushBackStack, @NonNull Cache cachePreference, int stagedScrollY);
+    void load(boolean pushBackStack,  int stagedScrollY);
 
     void loadFromBackStack();
 

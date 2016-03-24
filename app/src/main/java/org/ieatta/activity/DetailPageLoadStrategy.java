@@ -42,9 +42,11 @@ public class DetailPageLoadStrategy implements PageLoadStrategy {
      * Since the list consists of Parcelable objects, it can be saved and restored from the
      * savedInstanceState of the fragment.
      */
-    @NonNull private List<PageBackStackItem> backStack = new ArrayList<>();
+    @NonNull
+    private List<PageBackStackItem> backStack = new ArrayList<>();
 
-    @NonNull private final SequenceNumber sequenceNumber = new SequenceNumber();
+    @NonNull
+    private final SequenceNumber sequenceNumber = new SequenceNumber();
 
     /**
      * The y-offset position to which the page will be scrolled once it's fully loaded
@@ -67,7 +69,8 @@ public class DetailPageLoadStrategy implements PageLoadStrategy {
     private PageActivity activity;
     private ObservableWebView webView;
     private SwipeRefreshLayoutWithScroll refreshView;
-    @NonNull private final IEAApp app = IEAApp.getInstance();
+    @NonNull
+    private final IEAApp app = IEAApp.getInstance();
     private LeadImagesHandler leadImagesHandler;
     private SearchBarHideHandler searchBarHideHandler;
     private EditHandler editHandler;
@@ -75,12 +78,12 @@ public class DetailPageLoadStrategy implements PageLoadStrategy {
     @Override
     @SuppressWarnings("checkstyle:parameternumber")
     public void setUp(@NonNull PageViewModel model,
-            @NonNull DetailFragment fragment,
+                      @NonNull DetailFragment fragment,
                       @NonNull SwipeRefreshLayoutWithScroll refreshView,
                       @NonNull ObservableWebView webView,
                       @NonNull SearchBarHideHandler searchBarHideHandler,
                       @NonNull LeadImagesHandler leadImagesHandler,
-                        @NonNull List<PageBackStackItem> backStack) {
+                      @NonNull List<PageBackStackItem> backStack) {
         this.model = model;
         this.fragment = fragment;
         activity = (PageActivity) fragment.getActivity();
@@ -98,7 +101,7 @@ public class DetailPageLoadStrategy implements PageLoadStrategy {
     }
 
     @Override
-    public void load(boolean pushBackStack, @NonNull Cache cachePreference, int stagedScrollY) {
+    public void load(boolean pushBackStack, int stagedScrollY) {
         if (pushBackStack) {
             // update the topmost entry in the backstack, before we start overwriting things.
             updateCurrentBackStackItem();
@@ -109,24 +112,9 @@ public class DetailPageLoadStrategy implements PageLoadStrategy {
         // will invalidate themselves upon completion.
         sequenceNumber.increase();
 
-        if (cachePreference == Cache.NONE) {
-            // If this is a refresh, don't clear the webview contents
-            this.stagedScrollY = stagedScrollY;
+        // If this is a refresh, don't clear the webview contents
+        this.stagedScrollY = stagedScrollY;
 //            loadOnWebViewReady(cachePreference);
-        } else {
-//            fragment.updatePageInfo(null);
-//            fragment.setPageSaved(false);
-            leadImagesHandler.updateNavigate(null);
-
-            // kick off an event to the WebView that will cause it to clear its contents,
-            // and then report back to us when the clearing is complete, so that we can synchronize
-            // the transitions of our native components to the new page content.
-            // The callback event from the WebView will then call the loadOnWebViewReady()
-            // function, which will continue the loading process.
-//            leadImagesHandler.hide();
-//            bottomContentHandler.hide();
-            activity.getSearchBarHideHandler().setFadeEnabled(false);
-        }
     }
 
     @Override
@@ -137,7 +125,7 @@ public class DetailPageLoadStrategy implements PageLoadStrategy {
         PageBackStackItem item = backStack.get(backStack.size() - 1);
         // display the page based on the backstack item, stage the scrollY position based on
         // the backstack item.
-        fragment.loadPage(item.getHistoryEntry(), false,item.getScrollY());
+        fragment.loadPage(item.getHistoryEntry(), false, item.getScrollY());
 
         L.d("Loaded page " + item.getHistoryEntry().getSource() + " from backstack");
     }
@@ -211,7 +199,7 @@ public class DetailPageLoadStrategy implements PageLoadStrategy {
 //    }
 
     private boolean isFirstPage() {
-        return backStack.size() <= 1 ;
+        return backStack.size() <= 1;
 //                && !webView.canGoBack();
     }
 
@@ -219,7 +207,7 @@ public class DetailPageLoadStrategy implements PageLoadStrategy {
      * Push the current page title onto the backstack.
      */
     private void pushBackStack() {
-        PageBackStackItem item = new PageBackStackItem( model.getCurEntry());
+        PageBackStackItem item = new PageBackStackItem(model.getCurEntry());
         backStack.add(item);
     }
 
@@ -290,7 +278,8 @@ public class DetailPageLoadStrategy implements PageLoadStrategy {
     }
 
     private class LeadImageLayoutListener implements LeadImagesHandler.OnLeadImageLayoutListener {
-        @Nullable private final Runnable runnable;
+        @Nullable
+        private final Runnable runnable;
 
         LeadImageLayoutListener(@Nullable Runnable runnable) {
             this.runnable = runnable;
