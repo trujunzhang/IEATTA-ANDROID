@@ -23,6 +23,7 @@ public class HistoryEntry implements Parcelable {
     public static final int SOURCE_DISAMBIG = 10;
 
     private final Date timestamp;
+    public MainSegueIdentifier identifier;
     private final int source;
 
     private final String hPara;
@@ -37,6 +38,7 @@ public class HistoryEntry implements Parcelable {
     }
 
     public HistoryEntry(MainSegueIdentifier identifier, String hPara, String vPara) {
+        this.identifier = identifier;
         this.source = identifier.getType();
         this.hPara = hPara;
         this.vPara = vPara;

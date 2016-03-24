@@ -70,7 +70,7 @@ public class JsonPageLoadStrategy implements PageLoadStrategy {
     private ErrorCallback networkErrorCallback;
 
     // copied fields
-    private DetailFragment fragment;
+    private PageFragment fragment;
     private PageActivity activity;
     @NonNull private final IEAApp app = IEAApp.getInstance();
     private EditHandler editHandler;
@@ -83,7 +83,7 @@ public class JsonPageLoadStrategy implements PageLoadStrategy {
     @Override
     @SuppressWarnings("checkstyle:parameternumber")
     public void setUp(@NonNull PageViewModel model,
-            @NonNull DetailFragment fragment,
+            @NonNull PageFragment fragment,
                       @NonNull SwipeRefreshLayoutWithScroll refreshView,
                       @NonNull ObservableWebView webView,
                       @NonNull SearchBarHideHandler searchBarHideHandler,

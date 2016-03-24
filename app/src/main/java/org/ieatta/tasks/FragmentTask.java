@@ -63,6 +63,12 @@ public abstract class FragmentTask implements RecyclerOnItemClickListener,LeadIm
         this.manager.updateHeaderItem(new IEAHeaderViewModel(contentHeight));
     }
 
+
+    public int getWebViewScrollY(ObservableWebView webView) {
+        return webView.getLastTop();
+    }
+
+
     protected GalleryThumbnailScrollView.GalleryViewListener galleryViewListener
             = new GalleryThumbnailScrollView.GalleryViewListener() {
         @Override

@@ -21,6 +21,7 @@ import org.ieatta.activity.PageProperties;
 import org.ieatta.activity.PageTitle;
 import org.ieatta.activity.fragments.DetailFragment;
 import org.ieatta.activity.Page;
+import org.ieatta.activity.fragments.PageFragment;
 import org.ieatta.views.ObservableWebView;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -59,7 +60,7 @@ public class LeadImagesHandler {
     }
 
     @NonNull
-    private final DetailFragment parentFragment;
+    private final PageFragment parentFragment;
     @NonNull
     private final ObservableWebView webView;
 
@@ -73,7 +74,7 @@ public class LeadImagesHandler {
 
     private RecurringTask task = new RecurringTask();
 
-    public LeadImagesHandler(@NonNull final DetailFragment parentFragment,
+    public LeadImagesHandler(@NonNull final PageFragment parentFragment,
                              @NonNull ObservableWebView webView,
                              @NonNull ArticleHeaderView articleHeaderView) {
         this.articleHeaderView = articleHeaderView;

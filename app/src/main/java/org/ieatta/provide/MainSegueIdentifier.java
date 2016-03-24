@@ -1,15 +1,24 @@
 package org.ieatta.provide;
 
 
+import android.app.Activity;
 import android.app.Fragment;
 
+import org.ieatta.activity.PageViewModel;
 import org.ieatta.activity.fragments.EventDetailFragment;
 import org.ieatta.activity.fragments.NearRestaurantsFragment;
 import org.ieatta.activity.fragments.OrderedRecipesFragment;
 import org.ieatta.activity.fragments.PageFragment;
 import org.ieatta.activity.fragments.RecipeDetailFragment;
 import org.ieatta.activity.fragments.RestaurantDetailFragment;
+import org.ieatta.activity.history.HistoryEntry;
 import org.ieatta.parse.AppConstant;
+import org.ieatta.tasks.EventDetailTask;
+import org.ieatta.tasks.FragmentTask;
+import org.ieatta.tasks.NearRestaurantsTask;
+import org.ieatta.tasks.OrderedRecipesTask;
+import org.ieatta.tasks.RecipeDetailTask;
+import org.ieatta.tasks.RestaurantDetailTask;
 
 
 public enum MainSegueIdentifier {
@@ -62,18 +71,18 @@ public enum MainSegueIdentifier {
         return type;
     }
 
-    public static PageFragment getFragment(int source){
-        switch (source){
+    public static FragmentTask getFragment(HistoryEntry entry, Activity activity, PageViewModel model){
+        switch (entry.getSource()){
             case AppConstant.SOURCE_NEARBY_RESTAURANTS:
-                return new NearRestaurantsFragment();
+                return new NearRestaurantsTask(entry, activity,model);
             case AppConstant.SOURCE_RESTAURANT_DETAIL:
-                return new RestaurantDetailFragment();
+                return new RestaurantDetailTask(entry, activity,model);
             case AppConstant.SOURCE_EVENT_DETAIL:
-                return new EventDetailFragment();
+                return new EventDetailTask(entry, activity,model);
             case AppConstant.SOURCE_ORDERED_RECIPES:
-                return new OrderedRecipesFragment();
+                return new OrderedRecipesTask(entry, activity,model);
             case AppConstant.SOURCE_RECIPE_DETAIL:
-                return new RecipeDetailFragment();
+                return new RecipeDetailTask(entry, activity,model);
         }
 
         return null;
