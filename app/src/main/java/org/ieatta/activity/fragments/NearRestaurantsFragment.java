@@ -38,15 +38,12 @@ public class NearRestaurantsFragment extends PageFragment {
         }
     };
 
-    enum NearRestaurantSection {
-        section_more_items,//= 0
-        section_restaurants, //= 1
-    }
+
 
     private RecycleViewManager manager;
     private ObservableWebView webView;
 
-    private NearRestaurantsTask task = new NearRestaurantsTask();
+    private NearRestaurantsTask task ;
 
     @Nullable
     @Override
@@ -66,22 +63,17 @@ public class NearRestaurantsFragment extends PageFragment {
         manager = new RecycleViewManager(this.getActivity().getApplicationContext());
     }
 
-    private void setupUI() {
-//        this.manager.setRegisterCellClassWhenSelected(IEANearRestaurantMoreCell.getType(), NearRestaurantSection.section_more_items.ordinal());
-        this.manager.setRegisterCellClassWhenSelected(IEANearRestaurantsCell.getType(), NearRestaurantSection.section_restaurants.ordinal());
-
-//        this.manager.appendSectionTitleCell(new SectionTitleCellModel(IEAEditKey.Section_Title, R.string.More), NearRestaurantSection.section_more_items.ordinal());
-        this.manager.appendSectionTitleCell(new SectionTitleCellModel(IEAEditKey.Section_Title, R.string.Nearby_Restaurants), NearRestaurantSection.section_restaurants.ordinal());
-    }
 
     @Override
     public void loadPage(HistoryEntry entry) {
+        this.task = new NearRestaurantsTask(entry,this.getContext(),this.model);
+
         manager.startManagingWithDelegate(webView);
         manager.setOnItemClickListener(itemClickListener);
 
-        this.setupUI();
+        this.task.prepareUI();
 
-        task.executeTask(LocationUtil.getLocation()).onSuccess(new Continuation<Void, Object>() {
+        task.executeTask().onSuccess(new Continuation<Void, Object>() {
             @Override
             public Object then(Task<Void> task) throws Exception {
                 NearRestaurantsFragment.this.postLoadPage();
@@ -98,8 +90,7 @@ public class NearRestaurantsFragment extends PageFragment {
 
     @Override
     public void postLoadPage() {
-        // this.manager.setSectionItems(IEANearRestaurantMore.getMoresItems(), NearRestaurantSection.section_more_items.ordinal());
-        this.manager.setSectionItems(this.task.getRestaurants(), NearRestaurantSection.section_restaurants.ordinal());
+      this.task.postUI();
 
         super.postLoadPage();
     }
