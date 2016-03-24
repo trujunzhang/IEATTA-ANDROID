@@ -19,7 +19,6 @@ import org.ieatta.R;
 import org.ieatta.activity.LeadImage;
 import org.ieatta.activity.PageProperties;
 import org.ieatta.activity.PageTitle;
-import org.ieatta.activity.fragments.DetailFragment;
 import org.ieatta.activity.Page;
 import org.ieatta.activity.fragments.PageFragment;
 import org.ieatta.views.ObservableWebView;

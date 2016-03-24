@@ -8,7 +8,6 @@ import android.support.annotation.Nullable;
 
 import org.ieatta.IEAApp;
 import org.ieatta.activity.editing.EditHandler;
-import org.ieatta.activity.fragments.DetailFragment;
 import org.ieatta.activity.fragments.PageFragment;
 import org.ieatta.activity.fragments.search.SearchBarHideHandler;
 import org.ieatta.activity.leadimages.LeadImagesHandler;

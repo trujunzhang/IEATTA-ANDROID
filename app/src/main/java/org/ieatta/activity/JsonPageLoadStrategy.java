@@ -9,13 +9,11 @@ import android.support.annotation.VisibleForTesting;
 
 import org.ieatta.IEAApp;
 import org.ieatta.activity.editing.EditHandler;
-import org.ieatta.activity.fragments.DetailFragment;
 import org.ieatta.activity.fragments.PageFragment;
 
 import org.ieatta.activity.fragments.search.SearchBarHideHandler;
 import org.ieatta.activity.leadimages.LeadImagesHandler;
 import org.ieatta.views.ObservableWebView;
-import org.wikipedia.util.log.L;
 import org.wikipedia.views.SwipeRefreshLayoutWithScroll;
 
 

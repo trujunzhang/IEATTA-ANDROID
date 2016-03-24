@@ -2,15 +2,8 @@ package org.ieatta.provide;
 
 
 import android.app.Activity;
-import android.app.Fragment;
 
 import org.ieatta.activity.PageViewModel;
-import org.ieatta.activity.fragments.EventDetailFragment;
-import org.ieatta.activity.fragments.NearRestaurantsFragment;
-import org.ieatta.activity.fragments.OrderedRecipesFragment;
-import org.ieatta.activity.fragments.PageFragment;
-import org.ieatta.activity.fragments.RecipeDetailFragment;
-import org.ieatta.activity.fragments.RestaurantDetailFragment;
 import org.ieatta.activity.history.HistoryEntry;
 import org.ieatta.parse.AppConstant;
 import org.ieatta.tasks.EventDetailTask;
