@@ -35,6 +35,7 @@ public abstract class FragmentTask implements RecyclerOnItemClickListener,LeadIm
 
     public FragmentTask(HistoryEntry entry, Activity activity, PageViewModel model) {
         this.entry = entry;
+        this.activity = activity;
         this.model = model;
         this.manager = new RecycleViewManager(activity.getApplicationContext());
     }
