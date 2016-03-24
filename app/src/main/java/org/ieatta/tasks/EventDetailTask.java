@@ -51,10 +51,10 @@ import org.wikipedia.util.DimenUtil;
 import bolts.Continuation;
 import bolts.Task;
 
-public class EventDetailTask extends FragmentTask{
+public class EventDetailTask extends FragmentTask {
 
     @VisibleForTesting
-    public EventDetailTask(HistoryEntry entry){
+    public EventDetailTask(HistoryEntry entry) {
         super(entry);
     }
 
@@ -66,6 +66,7 @@ public class EventDetailTask extends FragmentTask{
         section_ordered_people, //= 0
         section_reviews,       //= 1
     }
+
     public DBRestaurant restaurant;
     public DBEvent event;
     public List<IEAOrderedPeople> orderedPeopleList;
@@ -151,7 +152,7 @@ public class EventDetailTask extends FragmentTask{
     }
 
     @Override
-    public void postUI(){
+    public void postUI() {
         this.manager.setHeaderItem(new IEAHeaderViewModel(DimenUtil.getDisplayWidthPx()), IEAHeaderView.getType());
         this.manager.setFooterItem(new IEAFooterViewModel(), IEAFooterView.getType());
 

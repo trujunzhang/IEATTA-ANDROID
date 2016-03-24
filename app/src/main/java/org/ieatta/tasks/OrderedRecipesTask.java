@@ -39,11 +39,13 @@ import org.ieatta.database.provide.PhotoUsedType;
 import org.ieatta.database.query.LocalDatabaseQuery;
 import org.ieatta.database.realm.RealmModelReader;
 
+import android.support.annotation.VisibleForTesting;
+
 import bolts.Continuation;
 import bolts.Task;
 import io.realm.RealmResults;
 
-public class OrderedRecipesTask extends FragmentTask{
+public class OrderedRecipesTask extends FragmentTask {
     private DBRestaurant restaurant;
     private DBEvent event;
     public DBTeam team;
@@ -59,9 +61,11 @@ public class OrderedRecipesTask extends FragmentTask{
         section_recipes,       //= 0
     }
 
-    public OrderedRecipesTask(HistoryEntry entry){
+    @VisibleForTesting
+    public OrderedRecipesTask(HistoryEntry entry) {
         super(entry);
     }
+
     public OrderedRecipesTask(HistoryEntry entry, Context context, PageViewModel model) {
         super(entry, context, model);
     }
@@ -113,7 +117,7 @@ public class OrderedRecipesTask extends FragmentTask{
         this.manager.setRegisterCellClass(IEAOrderedRecipeCell.getType(), OrderedRecipesSection.section_recipes.ordinal());
 
         this.manager.appendSectionTitleCell(new SectionTitleCellModel(IEAEditKey.Section_Title, R.string.Ordered_Recipes), OrderedRecipesSection.section_recipes.ordinal());
-}
+    }
 
     @Override
     public void postUI() {

@@ -53,7 +53,9 @@ import org.ieatta.tasks.RecipeDetailTask;
 import bolts.Continuation;
 import bolts.Task;
 
-public class RecipeDetailTask extends FragmentTask{
+import android.support.annotation.VisibleForTesting;
+
+public class RecipeDetailTask extends FragmentTask {
     public DBRestaurant restaurant;
     public DBEvent event;
     public DBTeam team;
@@ -68,7 +70,8 @@ public class RecipeDetailTask extends FragmentTask{
     private String teamUUID;
     private String recipeUUID;
 
-    public RecipeDetailTask(HistoryEntry entry){
+    @VisibleForTesting
+    public RecipeDetailTask(HistoryEntry entry) {
         super(entry);
     }
 

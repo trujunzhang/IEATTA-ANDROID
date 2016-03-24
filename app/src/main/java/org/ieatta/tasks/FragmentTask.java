@@ -18,11 +18,11 @@ public abstract class FragmentTask {
     public HistoryEntry entry;
 
     @VisibleForTesting
-    public FragmentTask(HistoryEntry entry){
+    public FragmentTask(HistoryEntry entry) {
         this.entry = entry;
     }
 
-    public FragmentTask(HistoryEntry entry,Context context,PageViewModel model) {
+    public FragmentTask(HistoryEntry entry, Context context, PageViewModel model) {
         this.entry = entry;
         this.model = model;
         this.manager = new RecycleViewManager(context);
@@ -35,7 +35,7 @@ public abstract class FragmentTask {
     public abstract void postUI();
 
 
-    protected int getEmptyHeaderViewHeight(){
+    protected int getEmptyHeaderViewHeight() {
         return DimenUtil.getDisplayWidthPx();
     }
 

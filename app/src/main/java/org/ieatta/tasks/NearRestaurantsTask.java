@@ -40,14 +40,18 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import android.support.annotation.VisibleForTesting;
+
 import bolts.Continuation;
 import bolts.Task;
 import io.realm.RealmResults;
 
-public class NearRestaurantsTask extends FragmentTask{
-    public NearRestaurantsTask(HistoryEntry entry){
+public class NearRestaurantsTask extends FragmentTask {
+    @VisibleForTesting
+    public NearRestaurantsTask(HistoryEntry entry) {
         super(entry);
     }
+
     public NearRestaurantsTask(HistoryEntry entry, Context context, PageViewModel model) {
         super(entry, context, model);
     }
@@ -61,9 +65,10 @@ public class NearRestaurantsTask extends FragmentTask{
 
     /**
      * Execute Task for nearby restaurants.
+     *
      * @return
      */
-    public Task<Void> executeTask(){
+    public Task<Void> executeTask() {
         final Location location = this.entry.getLocation();
 
         return LocalDatabaseQuery.queryNearRestaurants(location).onSuccess(new Continuation<RealmResults<DBRestaurant>, Void>() {

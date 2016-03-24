@@ -26,6 +26,7 @@ import java.util.List;
 import bolts.Continuation;
 import bolts.Task;
 import io.realm.RealmResults;
+
 import android.os.Bundle;
 import android.view.View;
 
@@ -53,6 +54,8 @@ import bolts.Task;
 
 import static butterknife.ButterKnife.findById;
 
+import android.support.annotation.VisibleForTesting;
+
 public class RestaurantDetailTask extends FragmentTask {
 
     public DBRestaurant restaurant;
@@ -61,9 +64,11 @@ public class RestaurantDetailTask extends FragmentTask {
     public GalleryCollection thumbnailGalleryCollection;
     private LeadImageCollection leadImageCollection; // for restaurants
 
-    public RestaurantDetailTask(HistoryEntry entry){
+    @VisibleForTesting
+    public RestaurantDetailTask(HistoryEntry entry) {
         super(entry);
     }
+
     public RestaurantDetailTask(HistoryEntry entry, Context context, PageViewModel model) {
         super(entry, context, model);
     }
@@ -105,7 +110,7 @@ public class RestaurantDetailTask extends FragmentTask {
             @Override
             public Task<List<ReviewsCellModel>> then(Task<RealmResults<DBEvent>> task) throws Exception {
                 RestaurantDetailTask.this.events = task.getResult();
-                return new ReviewQuery().queryReview(restaurantUUID,ReviewType.Review_Restaurant);
+                return new ReviewQuery().queryReview(restaurantUUID, ReviewType.Review_Restaurant);
             }
         }).onSuccess(new Continuation<List<ReviewsCellModel>, Void>() {
             @Override
