@@ -123,7 +123,7 @@ public class DetailPageLoadStrategy implements PageLoadStrategy {
         PageBackStackItem item = backStack.get(backStack.size() - 1);
         // display the page based on the backstack item, stage the scrollY position based on
         // the backstack item.
-        fragment.loadPage(item.getHistoryEntry());
+        fragment.loadPage(item.getHistoryEntry(), false, item.getScrollY());
 
         L.d("Loaded page " + item.getHistoryEntry().getSource() + " from backstack");
     }
