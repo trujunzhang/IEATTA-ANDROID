@@ -22,6 +22,7 @@ import org.ieatta.activity.fragments.search.SearchBarHideHandler;
 import org.ieatta.activity.history.HistoryEntry;
 import org.ieatta.activity.settings.SettingsActivity;
 import org.ieatta.provide.MainSegueIdentifier;
+import org.ieatta.utils.LocationUtil;
 import org.wikipedia.activity.ThemedActionBarActivity;
 
 
@@ -519,7 +520,7 @@ public class PageActivity extends ThemedActionBarActivity {
 //        PageFragment fragment = new EventDetailFragment();
 //        PageFragment fragment = new OrderedRecipesFragment();
 
-        HistoryEntry entry = new HistoryEntry(MainSegueIdentifier.nearbyRestaurants);
+        HistoryEntry entry = new HistoryEntry(MainSegueIdentifier.nearbyRestaurants, LocationUtil.getLocation());
 //        HistoryEntry entry =new HistoryEntry(MainSegueIdentifier.detailRestaurantSegueIdentifier);
 //        HistoryEntry entry =new HistoryEntry(MainSegueIdentifier.detailEventSegueIdentifier);
 //        HistoryEntry entry =new HistoryEntry(MainSegueIdentifier.detailOrderedRecipesSegueIdentifier);

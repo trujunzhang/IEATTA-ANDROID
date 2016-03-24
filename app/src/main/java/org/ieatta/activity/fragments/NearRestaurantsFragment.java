@@ -22,13 +22,6 @@ import bolts.Task;
 
 public class NearRestaurantsFragment extends PageFragment {
 
-    public final RecyclerOnItemClickListener itemClickListener = new RecyclerOnItemClickListener() {
-        @Override
-        public void onItemClick(View view, NSIndexPath indexPath, Object model, int position, boolean isLongClick) {
-
-        }
-    };
-
     private ObservableWebView webView;
 
     private NearRestaurantsTask task ;
