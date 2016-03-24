@@ -120,11 +120,6 @@ public class JsonPageLoadStrategy implements PageLoadStrategy {
     }
 
     @Override
-    public boolean isLoading() {
-        return state != STATE_COMPLETE_FETCH;
-    }
-
-    @Override
     public void loadFromBackStack() {
         if (backStack.isEmpty()) {
             return;

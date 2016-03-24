@@ -52,8 +52,6 @@ public interface PageLoadStrategy {
 
     void load(boolean pushBackStack, @NonNull Cache cachePreference, int stagedScrollY);
 
-    boolean isLoading();
-
     void loadFromBackStack();
 
     /**

@@ -37,12 +37,6 @@ public class DetailPageLoadStrategy implements PageLoadStrategy {
 
     private static final String BRIDGE_PAYLOAD_SAVED_PAGE = "savedPage";
 
-    private static final int STATE_NO_FETCH = 1;
-    private static final int STATE_INITIAL_FETCH = 2;
-    private static final int STATE_COMPLETE_FETCH = 3;
-
-    private int state = STATE_NO_FETCH;
-
     /**
      * List of lightweight history items to serve as the backstack for this fragment.
      * Since the list consists of Parcelable objects, it can be saved and restored from the
@@ -111,8 +105,6 @@ public class DetailPageLoadStrategy implements PageLoadStrategy {
             pushBackStack();
         }
 
-        state = STATE_NO_FETCH;
-
         // increment our sequence number, so that any async tasks that depend on the sequence
         // will invalidate themselves upon completion.
         sequenceNumber.increase();
@@ -120,11 +112,6 @@ public class DetailPageLoadStrategy implements PageLoadStrategy {
 //            fragment.updatePageInfo(null);
 //            fragment.setPageSaved(false);
 //            leadImagesHandler.updateNavigate(null);
-    }
-
-    @Override
-    public boolean isLoading() {
-        return state != STATE_COMPLETE_FETCH;
     }
 
     @Override
@@ -201,20 +188,6 @@ public class DetailPageLoadStrategy implements PageLoadStrategy {
         leadImagesHandler.beginLayout(new LeadImageLayoutListener(runnable), sequenceNumber.get());
     }
 
-    @VisibleForTesting
-    protected void commonSectionFetchOnCatch(Throwable caught, int startSequenceNum) {
-        ErrorCallback callback = networkErrorCallback;
-        networkErrorCallback = null;
-        cacheOnComplete = false;
-        state = STATE_COMPLETE_FETCH;
-        activity.supportInvalidateOptionsMenu();
-        if (!sequenceNumber.inSync(startSequenceNum)) {
-            return;
-        }
-        if (callback != null) {
-            callback.call(caught);
-        }
-    }
 
 //    private void updateThumbnail(String thumbUrl) {
 //        model.getTitle().setThumbUrl(thumbUrl);
@@ -279,8 +252,6 @@ public class DetailPageLoadStrategy implements PageLoadStrategy {
         layoutLeadImage(new Runnable() {
             @Override
             public void run() {
-                setState(STATE_INITIAL_FETCH);
-                performActionForState(state);
             }
         });
 
@@ -302,63 +273,6 @@ public class DetailPageLoadStrategy implements PageLoadStrategy {
 //            }
 //        }).execute();
     }
-
-
-    private void setState(int state) {
-        if (!fragment.isAdded()) {
-            return;
-        }
-        this.state = state;
-        activity.supportInvalidateOptionsMenu();
-
-        // FIXME: Move this out into a PageComplete event of sorts
-        if (state == STATE_COMPLETE_FETCH) {
-//            fragment.setupToC(model, isFirstPage());
-//
-//            //add the page to cache!
-//            if (cacheOnComplete) {
-//                app.getPageCache().put(model.getTitleOriginal(), model.getPage(),
-//                        new PageCache.CachePutListener() {
-//                            @Override
-//                            public void onPutComplete() {
-//                            }
-//
-//                            @Override
-//                            public void onPutError(Throwable e) {
-//                                L.e("Failed to add page to cache.", e);
-//                            }
-//                        });
-//            }
-        }
-    }
-
-
-    private void performActionForState(int forState) {
-        if (!fragment.isAdded()) {
-            return;
-        }
-        switch (forState) {
-            case STATE_NO_FETCH:
-//                activity.updateProgressBar(true, true, 0);
-//                loadLeadSection(sequenceNumber.get());
-                break;
-            case STATE_INITIAL_FETCH:
-//                loadRemainingSections(sequenceNumber.get());
-                break;
-            case STATE_COMPLETE_FETCH:
-//                editHandler.setPage(model.getPage());
-//                layoutLeadImage(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        displayNonLeadSectionForUnsavedPage(1);
-//                    }
-//                });
-                break;
-            default:
-                throw new RuntimeException("Unknown state encountered " + state);
-        }
-    }
-
 
     private class LeadImageLayoutListener implements LeadImagesHandler.OnLeadImageLayoutListener {
         @Nullable private final Runnable runnable;
@@ -382,7 +296,6 @@ public class DetailPageLoadStrategy implements PageLoadStrategy {
             }
         }
     }
-
 
     private void displayLeadSection() {
 //        Page page = model.getPage();
