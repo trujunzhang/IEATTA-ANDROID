@@ -104,61 +104,51 @@ public class SearchResultsFragment extends Fragment {
 
         // find out whether full-text search has been disabled remotely, and
         // hide the title/full switcher buttons accordingly.
-//        fullSearchDisabled = app.getRemoteConfig().getConfig().optBoolean("disableFullTextSearch", false);
+        fullSearchDisabled = false;//app.getRemoteConfig().getConfig().optBoolean("disableFullTextSearch", false);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_search_results, container, false);
-//        searchResultsDisplay = rootView.findViewById(R.id.search_results_display);
-//        searchFragment = (SearchArticlesFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.search_fragment);
-//
-//        searchResultsContainer = rootView.findViewById(R.id.search_results_container);
-//        searchResultsList = (ListView) rootView.findViewById(R.id.search_results_list);
-//
-//        if (savedInstanceState != null) {
-//            ParcelableLruCache<List<PageTitle>> mySearchResultsCache = savedInstanceState.getParcelable(ARG_RESULTS_CACHE);
-//            if (mySearchResultsCache != null) {
-//                searchResultsCache = mySearchResultsCache;
-//            }
-//        }
-//
-//        searchResultsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                PageTitle item = (PageTitle) getAdapter().getItem(position);
-//                searchFragment.navigateToTitle(item, false);
-//            }
-//        });
-//
-//        SearchResultAdapter adapter = new SearchResultAdapter(inflater);
-//        searchResultsList.setAdapter(adapter);
-//
-//        searchSuggestion = (TextView) rootView.findViewById(R.id.search_suggestion);
-//        searchSuggestion.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                String suggestion = (String) searchSuggestion.getTag();
-//                if (suggestion != null) {
-//                    searchFragment.getFunnel().searchDidYouMean();
-//                    searchFragment.setSearchText(suggestion);
-//                    startSearch(suggestion, true);
-//                }
-//            }
-//        });
-//
-//        searchNoResults = rootView.findViewById(R.id.search_results_empty);
-//
-//        searchErrorView = (WikiErrorView) rootView.findViewById(R.id.search_error_view);
-//        searchErrorView.setRetryClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                searchErrorView.setVisibility(View.GONE);
-//                startSearch(currentSearchTerm, true);
-//            }
-//        });
-//
-//        searchHandler = new Handler(new SearchHandlerCallback());
+        searchResultsDisplay = rootView.findViewById(R.id.search_results_display);
+        searchFragment = (SearchArticlesFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.search_fragment);
+
+        searchResultsContainer = rootView.findViewById(R.id.search_results_container);
+        searchResultsList = (ListView) rootView.findViewById(R.id.search_results_list);
+
+        if (savedInstanceState != null) {
+            ParcelableLruCache<List<PageTitle>> mySearchResultsCache = savedInstanceState.getParcelable(ARG_RESULTS_CACHE);
+            if (mySearchResultsCache != null) {
+                searchResultsCache = mySearchResultsCache;
+            }
+        }
+
+        searchResultsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                PageTitle item = (PageTitle) getAdapter().getItem(position);
+                searchFragment.navigateToTitle(item, false);
+            }
+        });
+
+        SearchResultAdapter adapter = new SearchResultAdapter(inflater);
+        searchResultsList.setAdapter(adapter);
+
+        searchSuggestion = (TextView) rootView.findViewById(R.id.search_suggestion);
+        searchSuggestion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String suggestion = (String) searchSuggestion.getTag();
+                if (suggestion != null) {
+                    searchFragment.getFunnel().searchDidYouMean();
+                    searchFragment.setSearchText(suggestion);
+                    startSearch(suggestion, true);
+                }
+            }
+        });
+
+        searchNoResults = rootView.findViewById(R.id.search_results_empty);
+        searchHandler = new Handler(new SearchHandlerCallback());
 
         return rootView;
     }
@@ -412,12 +402,11 @@ public class SearchResultsFragment extends Fragment {
     private void clearResults(boolean clearSuggestion) {
         searchResultsContainer.setVisibility(View.GONE);
         searchNoResults.setVisibility(View.GONE);
-//        searchErrorView.setVisibility(View.GONE);
-//        if (clearSuggestion) {
-//            searchSuggestion.setVisibility(View.GONE);
-//        }
-//
-//        lastFullTextResults = null;
+        if (clearSuggestion) {
+            searchSuggestion.setVisibility(View.GONE);
+        }
+
+        lastFullTextResults = null;
 
         totalResults.clear();
 
@@ -456,7 +445,7 @@ public class SearchResultsFragment extends Fragment {
 
         getAdapter().notifyDataSetChanged();
     }
-
+//
 //    private class LongPressHandler extends PageActivityLongPressHandler
 //            implements PageLongPressHandler.ListViewContextMenuListener {
 //        LongPressHandler(@NonNull PageActivity activity) {
