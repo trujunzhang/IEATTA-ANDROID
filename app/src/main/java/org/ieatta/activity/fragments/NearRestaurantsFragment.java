@@ -33,7 +33,7 @@ public class NearRestaurantsFragment extends PageFragment {
                 DBRestaurant item = (DBRestaurant) model;
                 HistoryEntry newEntry =new HistoryEntry(MainSegueIdentifier.detailRestaurantSegueIdentifier,item.getUUID());
 
-                NearRestaurantsFragment.this.getPageActivity().loadPage(newEntry);
+                NearRestaurantsFragment.this.loadPage(newEntry,false,getWebViewScrollY(webView));
             }
         }
     };
