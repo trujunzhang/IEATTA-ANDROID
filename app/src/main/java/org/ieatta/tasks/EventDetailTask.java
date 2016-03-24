@@ -28,6 +28,7 @@ import io.realm.RealmResults;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.test.espresso.core.deps.guava.annotations.VisibleForTesting;
 import android.view.View;
 
 import com.tableview.RecycleViewManager;
@@ -51,6 +52,11 @@ import bolts.Continuation;
 import bolts.Task;
 
 public class EventDetailTask extends FragmentTask{
+
+    @VisibleForTesting
+    public EventDetailTask(HistoryEntry entry){
+        super(entry);
+    }
 
     public EventDetailTask(HistoryEntry entry, Context context, PageViewModel model) {
         super(entry, context, model);

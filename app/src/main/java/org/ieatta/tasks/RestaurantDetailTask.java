@@ -61,6 +61,9 @@ public class RestaurantDetailTask extends FragmentTask {
     public GalleryCollection thumbnailGalleryCollection;
     private LeadImageCollection leadImageCollection; // for restaurants
 
+    public RestaurantDetailTask(HistoryEntry entry){
+        super(entry);
+    }
     public RestaurantDetailTask(HistoryEntry entry, Context context, PageViewModel model) {
         super(entry, context, model);
     }

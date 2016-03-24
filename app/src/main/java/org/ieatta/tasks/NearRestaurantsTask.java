@@ -45,6 +45,9 @@ import bolts.Task;
 import io.realm.RealmResults;
 
 public class NearRestaurantsTask extends FragmentTask{
+    public NearRestaurantsTask(HistoryEntry entry){
+        super(entry);
+    }
     public NearRestaurantsTask(HistoryEntry entry, Context context, PageViewModel model) {
         super(entry, context, model);
     }

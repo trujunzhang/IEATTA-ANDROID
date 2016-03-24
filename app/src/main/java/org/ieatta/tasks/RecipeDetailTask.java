@@ -68,6 +68,10 @@ public class RecipeDetailTask extends FragmentTask{
     private String teamUUID;
     private String recipeUUID;
 
+    public RecipeDetailTask(HistoryEntry entry){
+        super(entry);
+    }
+
     public RecipeDetailTask(HistoryEntry entry, Context context, PageViewModel model) {
         super(entry, context, model);
     }

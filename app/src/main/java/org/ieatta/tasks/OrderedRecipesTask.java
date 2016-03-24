@@ -59,6 +59,9 @@ public class OrderedRecipesTask extends FragmentTask{
         section_recipes,       //= 0
     }
 
+    public OrderedRecipesTask(HistoryEntry entry){
+        super(entry);
+    }
     public OrderedRecipesTask(HistoryEntry entry, Context context, PageViewModel model) {
         super(entry, context, model);
     }

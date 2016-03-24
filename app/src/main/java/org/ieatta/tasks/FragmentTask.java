@@ -1,6 +1,7 @@
 package org.ieatta.tasks;
 
 import android.content.Context;
+import android.support.annotation.VisibleForTesting;
 
 import com.tableview.RecycleViewManager;
 
@@ -15,6 +16,11 @@ public abstract class FragmentTask {
     protected RecycleViewManager manager;
     protected PageViewModel model;
     public HistoryEntry entry;
+
+    @VisibleForTesting
+    public FragmentTask(HistoryEntry entry){
+        this.entry = entry;
+    }
 
     public FragmentTask(HistoryEntry entry,Context context,PageViewModel model) {
         this.entry = entry;
