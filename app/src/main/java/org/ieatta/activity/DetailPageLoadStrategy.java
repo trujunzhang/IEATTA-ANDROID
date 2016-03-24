@@ -109,9 +109,24 @@ public class DetailPageLoadStrategy implements PageLoadStrategy {
         // will invalidate themselves upon completion.
         sequenceNumber.increase();
 
+        if (cachePreference == Cache.NONE) {
+            // If this is a refresh, don't clear the webview contents
+            this.stagedScrollY = stagedScrollY;
+//            loadOnWebViewReady(cachePreference);
+        } else {
 //            fragment.updatePageInfo(null);
 //            fragment.setPageSaved(false);
-//            leadImagesHandler.updateNavigate(null);
+            leadImagesHandler.updateNavigate(null);
+
+            // kick off an event to the WebView that will cause it to clear its contents,
+            // and then report back to us when the clearing is complete, so that we can synchronize
+            // the transitions of our native components to the new page content.
+            // The callback event from the WebView will then call the loadOnWebViewReady()
+            // function, which will continue the loading process.
+//            leadImagesHandler.hide();
+//            bottomContentHandler.hide();
+            activity.getSearchBarHideHandler().setFadeEnabled(false);
+        }
     }
 
     @Override
