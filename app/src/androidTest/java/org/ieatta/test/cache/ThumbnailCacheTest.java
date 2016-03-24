@@ -1,17 +1,15 @@
 package org.ieatta.test.cache;
 
 import android.support.test.runner.AndroidJUnit4;
+import android.util.Log;
 
+import org.ieatta.database.models.DBPhoto;
+import org.ieatta.database.query.LocalDatabaseQuery;
 import org.ieatta.database.realm.DBBuilder;
 import org.ieatta.database.realm.RealmModelReader;
 import org.ieatta.server.cache.ThumbnailImageUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
-import android.util.Log;
-
-import org.ieatta.database.models.DBPhoto;
-import org.ieatta.database.query.LocalDatabaseQuery;
 
 import java.io.File;
 import java.util.HashMap;
@@ -23,9 +21,6 @@ import java.util.concurrent.TimeUnit;
 import bolts.Continuation;
 import bolts.Task;
 import io.realm.RealmResults;
-
-import static org.hamcrest.MatcherAssert.assertThat;
-
 
 import static org.hamcrest.MatcherAssert.assertThat;
 

@@ -4,11 +4,8 @@ import android.location.Location;
 import android.support.test.runner.AndroidJUnit4;
 
 import org.ieatta.activity.history.HistoryEntry;
-import org.ieatta.database.models.DBPhoto;
 import org.ieatta.database.models.DBRestaurant;
-import org.ieatta.database.query.LocalDatabaseQuery;
 import org.ieatta.provide.MainSegueIdentifier;
-import org.ieatta.server.cache.ThumbnailImageUtil;
 import org.ieatta.tasks.NearRestaurantsTask;
 import org.ieatta.utils.LocationUtil;
 import org.junit.Before;
@@ -16,8 +13,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.wikipedia.util.log.L;
 
-import java.io.File;
-import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 

@@ -1,36 +1,5 @@
 package org.ieatta.activity.fragments.search;
 
-import org.ieatta.IEAApp;
-import org.ieatta.activity.PageActivity;
-import org.ieatta.activity.PageTitle;
-import org.ieatta.activity.fragments.PageFragment;
-
-
-import android.graphics.Color;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.text.TextUtils;
-import android.util.TypedValue;
-import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.FrameLayout;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-
-import org.ieatta.R;
-import org.ieatta.activity.history.HistoryEntry;
-import org.ieatta.activity.history.HistoryEntryDatabaseTable;
-import org.wikipedia.analytics.SearchFunnel;
-
-import static org.wikipedia.util.DeviceUtil.hideSoftKeyboard;
-
-import org.wikipedia.BackPressedHandler;
-import org.wikipedia.concurrency.SaneAsyncTask;
-import com.squareup.otto.Subscribe;
-
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -49,8 +18,17 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import static org.wikipedia.util.DimenUtil.getContentTopOffsetPx;
+import org.ieatta.IEAApp;
+import org.ieatta.R;
+import org.ieatta.activity.PageActivity;
+import org.ieatta.activity.PageTitle;
+import org.ieatta.activity.history.HistoryEntryDatabaseTable;
+import org.wikipedia.BackPressedHandler;
+import org.wikipedia.analytics.SearchFunnel;
+import org.wikipedia.concurrency.SaneAsyncTask;
+
 import static org.wikipedia.util.DeviceUtil.hideSoftKeyboard;
+import static org.wikipedia.util.DimenUtil.getContentTopOffsetPx;
 
 public class SearchArticlesFragment extends Fragment implements BackPressedHandler  {
     private static final String ARG_LAST_SEARCHED_TEXT = "lastSearchedText";

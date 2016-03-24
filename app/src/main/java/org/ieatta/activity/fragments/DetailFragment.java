@@ -4,31 +4,25 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import org.ieatta.IEAApp;
 import org.ieatta.R;
-import org.ieatta.activity.DetailPageLoadStrategy;
 import org.ieatta.activity.Page;
-import org.ieatta.activity.PageLoadStrategy;
-import org.ieatta.activity.PageTitle;
-import org.ieatta.activity.PageViewModel;
-import org.ieatta.activity.gallery.GalleryActivity;
-import org.ieatta.activity.gallery.GalleryThumbnailScrollView;
-import org.ieatta.activity.leadimages.LeadImagesHandler;
-import org.ieatta.analytics.GalleryFunnel;
-import org.wikipedia.BackPressedHandler;
-
-import android.support.v7.app.AppCompatActivity;
-
-import org.ieatta.activity.PageActivity;
 import org.ieatta.activity.PageBackStackItem;
+import org.ieatta.activity.PageTitle;
 import org.ieatta.activity.editing.EditHandler;
 import org.ieatta.activity.fragments.search.SearchBarHideHandler;
+import org.ieatta.activity.gallery.GalleryActivity;
+import org.ieatta.activity.gallery.GalleryThumbnailScrollView;
 import org.ieatta.activity.leadimages.ArticleHeaderView;
+import org.ieatta.activity.leadimages.LeadImagesHandler;
+import org.ieatta.analytics.GalleryFunnel;
 import org.ieatta.views.ObservableWebView;
+import org.wikipedia.BackPressedHandler;
 import org.wikipedia.analytics.PageScrollFunnel;
 import org.wikipedia.analytics.SavedPagesFunnel;
 import org.wikipedia.analytics.TabFunnel;
@@ -37,8 +31,6 @@ import org.wikipedia.views.SwipeRefreshLayoutWithScroll;
 import org.wikipedia.views.WikiDrawerLayout;
 
 import java.util.LinkedList;
-
-import static butterknife.ButterKnife.findById;
 
 public abstract class DetailFragment extends PageFragment implements BackPressedHandler, LeadImagesHandler.OnContentHeightChangedListener {
     public static final int TOC_ACTION_SHOW = 0;

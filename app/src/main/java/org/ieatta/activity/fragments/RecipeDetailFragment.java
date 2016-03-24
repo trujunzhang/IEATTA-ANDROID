@@ -6,19 +6,9 @@ import android.view.View;
 import com.tableview.RecycleViewManager;
 import com.tableview.adapter.NSIndexPath;
 import com.tableview.adapter.RecyclerOnItemClickListener;
-import com.tableview.utils.CollectionUtil;
 
-import org.ieatta.R;
 import org.ieatta.activity.history.HistoryEntry;
-import org.ieatta.cells.IEAGalleryThumbnailCell;
-import org.ieatta.cells.IEAReviewsCell;
-import org.ieatta.cells.headerfooterview.IEAFooterView;
-import org.ieatta.cells.headerfooterview.IEAHeaderView;
-import org.ieatta.cells.model.IEAFooterViewModel;
-import org.ieatta.cells.model.IEAGalleryThumbnail;
 import org.ieatta.cells.model.IEAHeaderViewModel;
-import org.ieatta.cells.model.SectionTitleCellModel;
-import org.ieatta.provide.IEAEditKey;
 import org.ieatta.tasks.RecipeDetailTask;
 
 import bolts.Continuation;

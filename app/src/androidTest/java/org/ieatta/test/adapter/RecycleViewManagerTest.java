@@ -1,6 +1,5 @@
 package org.ieatta.test.adapter;
 
-import android.support.test.runner.AndroidJUnit4;
 import android.test.ActivityUnitTestCase;
 
 import com.tableview.RecycleViewManager;
@@ -9,11 +8,10 @@ import com.tableview.storage.DTTableViewManager;
 import com.tableview.storage.TableViewConfiguration;
 
 import org.ieatta.test.adapter.cell.FooterView;
-import org.ieatta.test.adapter.cell.HeaderView;
 import org.ieatta.test.adapter.cell.HeaderFooterViewModel;
+import org.ieatta.test.adapter.cell.HeaderView;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 

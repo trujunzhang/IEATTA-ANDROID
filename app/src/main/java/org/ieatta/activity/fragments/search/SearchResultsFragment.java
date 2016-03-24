@@ -1,63 +1,29 @@
 package org.ieatta.activity.fragments.search;
 
-import org.ieatta.IEAApp;
-import org.ieatta.activity.PageActivity;
-import org.ieatta.activity.PageTitle;
-import org.ieatta.activity.fragments.PageFragment;
-
-
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.BaseAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
 
+import com.facebook.drawee.view.SimpleDraweeView;
+
+import org.ieatta.IEAApp;
 import org.ieatta.R;
-import org.ieatta.activity.history.HistoryEntry;
+import org.ieatta.activity.PageActivity;
+import org.ieatta.activity.PageTitle;
 import org.wikipedia.ParcelableLruCache;
 import org.wikipedia.views.GoneIfEmptyTextView;
 import org.wikipedia.views.ViewUtil;
-
-import static org.wikipedia.util.DeviceUtil.hideSoftKeyboard;
-
-
-import com.facebook.drawee.view.SimpleDraweeView;
-
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.text.Html;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.BaseAdapter;
-import android.widget.ListView;
-import android.widget.TextView;
-
-import java.text.Collator;
-import java.util.ArrayList;
-import java.util.List;
-
-import com.facebook.drawee.view.SimpleDraweeView;
-
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.text.Html;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.BaseAdapter;
-import android.widget.ListView;
-import android.widget.TextView;
 
 import java.text.Collator;
 import java.util.ArrayList;

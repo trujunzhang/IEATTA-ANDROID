@@ -1,5 +1,17 @@
 package org.ieatta.test.utils;
 
+import com.facebook.common.internal.Sets;
+import com.github.davidmoten.geo.Coverage;
+import com.github.davidmoten.geo.Direction;
+import com.github.davidmoten.geo.GeoHash;
+import com.github.davidmoten.geo.LatLong;
+
+import org.junit.Test;
+
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
+
 import static com.github.davidmoten.geo.GeoHash.adjacentHash;
 import static com.github.davidmoten.geo.GeoHash.bottom;
 import static com.github.davidmoten.geo.GeoHash.coverBoundingBox;
@@ -18,20 +30,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
-
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
-
-import org.junit.Test;
-
-import com.facebook.common.internal.Sets;
-import com.github.davidmoten.geo.Coverage;
-import com.github.davidmoten.geo.Direction;
-import com.github.davidmoten.geo.GeoHash;
-import com.github.davidmoten.geo.LatLong;
 
 /**
  * Unit tests for {@link GeoHash}.

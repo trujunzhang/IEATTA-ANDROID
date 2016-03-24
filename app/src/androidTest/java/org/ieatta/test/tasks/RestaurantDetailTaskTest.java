@@ -19,8 +19,6 @@ import java.util.concurrent.TimeUnit;
 import bolts.Continuation;
 import bolts.Task;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-
 @RunWith(AndroidJUnit4.class)
 public class RestaurantDetailTaskTest {
     private static final int TASK_COMPLETION_TIMEOUT = 20000;

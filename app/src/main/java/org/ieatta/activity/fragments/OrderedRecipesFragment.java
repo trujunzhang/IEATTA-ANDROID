@@ -7,15 +7,8 @@ import com.tableview.RecycleViewManager;
 import com.tableview.adapter.NSIndexPath;
 import com.tableview.adapter.RecyclerOnItemClickListener;
 
-import org.ieatta.R;
 import org.ieatta.activity.history.HistoryEntry;
-import org.ieatta.cells.IEAOrderedRecipeCell;
-import org.ieatta.cells.headerfooterview.IEAFooterView;
-import org.ieatta.cells.headerfooterview.IEAHeaderView;
-import org.ieatta.cells.model.IEAFooterViewModel;
 import org.ieatta.cells.model.IEAHeaderViewModel;
-import org.ieatta.cells.model.SectionTitleCellModel;
-import org.ieatta.provide.IEAEditKey;
 import org.ieatta.tasks.OrderedRecipesTask;
 
 import bolts.Continuation;

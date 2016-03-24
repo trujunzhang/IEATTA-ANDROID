@@ -5,7 +5,6 @@ import android.support.test.runner.AndroidJUnit4;
 import org.ieatta.server.recurring.SyncInfo;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.wikipedia.settings.Prefs;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

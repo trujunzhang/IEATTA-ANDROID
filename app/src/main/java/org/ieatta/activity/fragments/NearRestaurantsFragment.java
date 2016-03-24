@@ -6,19 +6,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.tableview.RecycleViewManager;
 import com.tableview.adapter.NSIndexPath;
 import com.tableview.adapter.RecyclerOnItemClickListener;
-import com.tableview.RecycleViewManager;
 
 import org.ieatta.R;
 import org.ieatta.activity.history.HistoryEntry;
-import org.ieatta.cells.IEANearRestaurantsCell;
-import org.ieatta.cells.model.SectionTitleCellModel;
 import org.ieatta.database.models.DBRestaurant;
-import org.ieatta.provide.IEAEditKey;
 import org.ieatta.provide.MainSegueIdentifier;
 import org.ieatta.tasks.NearRestaurantsTask;
-import org.ieatta.utils.LocationUtil;
 import org.ieatta.views.ObservableWebView;
 
 import bolts.Continuation;

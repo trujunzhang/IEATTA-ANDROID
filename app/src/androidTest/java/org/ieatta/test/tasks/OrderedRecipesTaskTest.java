@@ -5,7 +5,6 @@ import android.support.test.runner.AndroidJUnit4;
 import org.ieatta.activity.history.HistoryEntry;
 import org.ieatta.database.models.DBRecipe;
 import org.ieatta.provide.MainSegueIdentifier;
-import org.ieatta.tasks.EventDetailTask;
 import org.ieatta.tasks.OrderedRecipesTask;
 import org.junit.Before;
 import org.junit.Test;
