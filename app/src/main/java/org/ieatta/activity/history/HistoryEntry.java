@@ -23,27 +23,24 @@ public class HistoryEntry implements Parcelable {
     private final Date timestamp;
     private final int source;
 
-    private final String restaurantUUID;
-    private final String eventUUID;
-    private final String teamUUID;
-    private final String recipeUUID;
+    private final String hPara;
+    private final String vPara;
 
-    public HistoryEntry(MainSegueIdentifier identifier, String restaurantUUID, String eventUUID, String teamUUID, String recipeUUID) {
+
+    public HistoryEntry(MainSegueIdentifier identifier, String hPara, String vPara) {
         this.source = identifier.getType();
-        this.restaurantUUID = restaurantUUID;
-        this.eventUUID = eventUUID;
-        this.teamUUID = teamUUID;
-        this.recipeUUID = recipeUUID;
+        this.hPara = hPara;
+        this.vPara = vPara;
 
         this.timestamp = new Date();
     }
 
     public HistoryEntry(MainSegueIdentifier identifier) {
-        this(identifier, "", "", "", "");
+        this(identifier, "", "");
     }
 
     public HistoryEntry(MainSegueIdentifier identifier, String restaurantUUID) {
-        this(identifier, restaurantUUID, "", "", "");
+        this(identifier, restaurantUUID, "");
     }
 
     public Date getTimestamp() {
@@ -90,20 +87,16 @@ public class HistoryEntry implements Parcelable {
         dest.writeLong(getTimestamp().getTime());
         dest.writeInt(getSource());
 
-        dest.writeString(this.restaurantUUID);
-        dest.writeString(this.eventUUID);
-        dest.writeString(this.teamUUID);
-        dest.writeString(this.recipeUUID);
+        dest.writeString(this.hPara);
+        dest.writeString(this.vPara);
     }
 
     private HistoryEntry(Parcel in) {
         this.timestamp = new Date(in.readLong());
         this.source = in.readInt();
 
-        this.restaurantUUID = in.readString();
-        this.eventUUID = in.readString();
-        this.teamUUID = in.readString();
-        this.recipeUUID = in.readString();
+        this.hPara = in.readString();
+        this.vPara = in.readString();
     }
 
     public static final Creator<HistoryEntry> CREATOR

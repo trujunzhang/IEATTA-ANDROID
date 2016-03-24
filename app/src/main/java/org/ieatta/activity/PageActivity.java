@@ -482,6 +482,7 @@ public class PageActivity extends ThemedActionBarActivity {
      * @param entry HistoryEntry associated with this page.
      */
     public void loadPage(HistoryEntry entry) {
+        this.pages.add(entry);
         loadPage(entry, TabPosition.CURRENT_TAB, false,false);
     }
 
@@ -539,8 +540,8 @@ public class PageActivity extends ThemedActionBarActivity {
             return;
         }
 
-//        app.putCrashReportProperty("api", title.getSite().getDomain());
-//        app.putCrashReportProperty("title", title.toString());
+        app.putCrashReportProperty("api", entry.getSource()+"");
+        app.putCrashReportProperty("title", title.toString());
 
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             closeNavDrawer();
