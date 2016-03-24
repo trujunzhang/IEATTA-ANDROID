@@ -38,14 +38,9 @@ public class RecipeDetailFragment extends DetailFragment {
         this.manager.updateHeaderItem(new IEAHeaderViewModel(contentHeight));
     }
 
-    enum RecipeDetailSection {
-        section_gallery_thumbnail,//= 0
-        section_reviews,//= 1
-    }
-
     private RecycleViewManager manager;
 
-    private RecipeDetailTask task = new RecipeDetailTask();
+    private RecipeDetailTask task;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -54,22 +49,14 @@ public class RecipeDetailFragment extends DetailFragment {
         manager = new RecycleViewManager(this.getActivity().getApplicationContext());
     }
 
-    private void setupUI() {
-        this.manager.setRegisterHeaderView(IEAHeaderView.getType());
-        this.manager.setRegisterFooterView(IEAFooterView.getType());
-
-        this.manager.setRegisterCellClass(IEAGalleryThumbnailCell.getType(), RecipeDetailSection.section_gallery_thumbnail.ordinal());
-        this.manager.setRegisterCellClass(IEAReviewsCell.getType(), RecipeDetailSection.section_reviews.ordinal());
-
-        this.manager.appendSectionTitleCell(new SectionTitleCellModel(IEAEditKey.Section_Title, R.string.Reviews), RecipeDetailSection.section_reviews.ordinal());
-    }
 
     @Override
     public void loadPage(HistoryEntry entry) {
+        this.task = new RecipeDetailTask(entry,this.getContext(),this.model);
         manager.startManagingWithDelegate(webView);
         manager.setOnItemClickListener(itemClickListener);
 
-        this.setupUI();
+        this.task.prepareUI();
 
         String restaurantUUID = "1CE562A4-A978-4B75-9B7B-2F3CF9F42A04"; // The Flying Falafel
 //        String restaurantUUID = "33ED9F31-F6A5-43A4-8D11-8E511CA0BD39"; // The Spice Jar
@@ -77,7 +64,7 @@ public class RecipeDetailFragment extends DetailFragment {
         String teamUUID = "197C0BEF-B432-47B8-988B-99406643623A";// Dolores Chavez
         String recipeUUID = "95B62D6F-87DF-47E2-8C84-EADAE131BB5D"; // Dark Gelate
 
-        task.executeTask(recipeUUID).onSuccess(new Continuation<Void, Object>() {
+        task.executeTask().onSuccess(new Continuation<Void, Object>() {
             @Override
             public Object then(Task<Void> task) throws Exception {
                 RecipeDetailFragment.this.postLoadPage();
@@ -93,13 +80,7 @@ public class RecipeDetailFragment extends DetailFragment {
 
     @Override
     public void postLoadPage() {
-        this.manager.setHeaderItem(new IEAHeaderViewModel(this.getEmptyHeaderViewHeight()), IEAHeaderView.getType());
-        this.manager.setFooterItem(new IEAFooterViewModel(), IEAFooterView.getType());
-
-        this.manager.setSectionItems(CollectionUtil.createList(new IEAGalleryThumbnail(this.task.thumbnailGalleryCollection, this.galleryViewListener)), RecipeDetailSection.section_gallery_thumbnail.ordinal());
-        this.manager.setSectionItems(task.reviewsCellModelList, RecipeDetailSection.section_reviews.ordinal());
-
-        model.setPage(task.getPage());
+        this.task.postUI();
 
         super.postLoadPage();
     }
