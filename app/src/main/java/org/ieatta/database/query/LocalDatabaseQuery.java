@@ -18,7 +18,8 @@ public class LocalDatabaseQuery {
 
     public static Task<RealmResults<DBRestaurant>> queryNearRestaurants(Location location) {
         String containedEncodeHash = GeoHashUtil.getEncodeHash(location);
-        DBBuilder builder = new DBBuilder().whereContainedIn(AppConstant.kPAPFieldModelGEOHASH, containedEncodeHash);
+//        DBBuilder builder = new DBBuilder().whereContainedIn(AppConstant.kPAPFieldModelGEOHASH, containedEncodeHash);
+        DBBuilder builder = new DBBuilder();
         return new RealmModelReader<DBRestaurant>(DBRestaurant.class).fetchResults(builder, false);
     }
 

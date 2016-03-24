@@ -45,7 +45,6 @@ public class NearRestaurantsFragment extends PageFragment {
         section_restaurants, //= 1
     }
 
-    private IEAApp app;
     private RecycleViewManager manager;
     private ObservableWebView webView;
 
@@ -66,7 +65,6 @@ public class NearRestaurantsFragment extends PageFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        app = (IEAApp) getActivity().getApplicationContext();
         manager = new RecycleViewManager(this.getActivity().getApplicationContext());
     }
 
