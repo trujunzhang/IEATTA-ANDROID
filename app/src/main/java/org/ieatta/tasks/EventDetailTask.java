@@ -1,8 +1,7 @@
 package org.ieatta.tasks;
 
 import android.content.Context;
-import android.support.test.espresso.core.deps.guava.annotations.VisibleForTesting;
-
+import android.support.annotation.VisibleForTesting;
 import org.ieatta.R;
 import org.ieatta.activity.LeadImageCollection;
 import org.ieatta.activity.Page;
