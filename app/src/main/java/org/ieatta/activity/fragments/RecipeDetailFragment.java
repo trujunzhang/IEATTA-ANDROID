@@ -21,9 +21,7 @@ public class RecipeDetailFragment extends DetailFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
-
 
     @Override
     public void loadPage(HistoryEntry entry) {
