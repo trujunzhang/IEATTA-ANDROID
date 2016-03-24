@@ -53,6 +53,9 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 
+import java.util.LinkedList;
+import java.util.List;
+
 public class PageActivity extends ThemedActionBarActivity {
 
     public enum TabPosition {
@@ -108,6 +111,8 @@ public class PageActivity extends ThemedActionBarActivity {
     public Menu getNavMenu() {
         return navMenu;
     }
+
+    public List<HistoryEntry> pages = new LinkedList<>();
 
     /**
      * Get the Fragment that is currently at the top of the Activity's backstack.
@@ -518,8 +523,8 @@ public class PageActivity extends ThemedActionBarActivity {
 //        PageFragment fragment = new EventDetailFragment();
 //        PageFragment fragment = new OrderedRecipesFragment();
 
-//        HistoryEntry entry =new HistoryEntry(MainSegueIdentifier.nearbyRestaurants);
-        HistoryEntry entry =new HistoryEntry(MainSegueIdentifier.detailRestaurantSegueIdentifier);
+        HistoryEntry entry =new HistoryEntry(MainSegueIdentifier.nearbyRestaurants);
+//        HistoryEntry entry =new HistoryEntry(MainSegueIdentifier.detailRestaurantSegueIdentifier);
 //        HistoryEntry entry =new HistoryEntry(MainSegueIdentifier.detailEventSegueIdentifier);
 //        HistoryEntry entry =new HistoryEntry(MainSegueIdentifier.detailOrderedRecipesSegueIdentifier);
 //        HistoryEntry entry =new HistoryEntry(MainSegueIdentifier.detailRecipeSegueIdentifier);
