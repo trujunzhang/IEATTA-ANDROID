@@ -35,8 +35,9 @@ public class NearRestaurantsFragment extends PageFragment {
         public void onItemClick(View view, NSIndexPath indexPath, Object model, int position, boolean isLongClick) {
             if (model instanceof DBRestaurant) {
                 DBRestaurant item = (DBRestaurant) model;
-                HistoryEntry newEntry = new HistoryEntry(MainSegueIdentifier.nearbyRestaurants);
-                NearRestaurantsFragment.this.getPageActivity().loadPage( newEntry);
+                HistoryEntry newEntry =new HistoryEntry(MainSegueIdentifier.detailRestaurantSegueIdentifier);
+
+                NearRestaurantsFragment.this.getPageActivity().loadPage(newEntry);
             }
         }
     };
