@@ -8,6 +8,7 @@ import com.tableview.adapter.NSIndexPath;
 import com.tableview.adapter.RecyclerOnItemClickListener;
 
 import org.ieatta.R;
+import org.ieatta.activity.history.HistoryEntry;
 import org.ieatta.cells.IEAOrderedRecipeCell;
 import org.ieatta.cells.headerfooterview.IEAFooterView;
 import org.ieatta.cells.headerfooterview.IEAHeaderView;
@@ -59,7 +60,7 @@ public class OrderedRecipesFragment extends DetailFragment {
     }
 
     @Override
-    public void loadPage() {
+    public void loadPage(HistoryEntry entry) {
         manager.startManagingWithDelegate(webView);
         manager.setOnItemClickListener(itemClickListener);
 

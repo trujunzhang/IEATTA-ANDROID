@@ -9,6 +9,7 @@ import com.tableview.adapter.RecyclerOnItemClickListener;
 import com.tableview.utils.CollectionUtil;
 
 import org.ieatta.R;
+import org.ieatta.activity.history.HistoryEntry;
 import org.ieatta.cells.IEAGalleryThumbnailCell;
 import org.ieatta.cells.IEARestaurantEventsCell;
 import org.ieatta.cells.IEAReviewsCell;
@@ -70,14 +71,15 @@ public class RestaurantDetailFragment extends DetailFragment {
     }
 
     @Override
-    public void loadPage() {
+    public void loadPage(HistoryEntry entry) {
         manager.startManagingWithDelegate(webView);
         manager.setOnItemClickListener(itemClickListener);
 
         this.setupUI();
 
-         String restaurantUUID = "1CE562A4-A978-4B75-9B7B-2F3CF9F42A04"; // The Flying Falafel
+//        String restaurantUUID = "1CE562A4-A978-4B75-9B7B-2F3CF9F42A04"; // The Flying Falafel
 //        String restaurantUUID = "33ED9F31-F6A5-43A4-8D11-8E511CA0BD39"; // The Spice Jar
+        String restaurantUUID = entry.getHPara();
         task.executeTask(restaurantUUID).onSuccess(new Continuation<Void, Object>() {
             @Override
             public Object then(Task<Void> task) throws Exception {

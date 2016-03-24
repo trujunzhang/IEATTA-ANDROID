@@ -9,6 +9,7 @@ import com.tableview.adapter.RecyclerOnItemClickListener;
 import com.tableview.utils.CollectionUtil;
 
 import org.ieatta.R;
+import org.ieatta.activity.history.HistoryEntry;
 import org.ieatta.cells.IEAGalleryThumbnailCell;
 import org.ieatta.cells.IEAReviewsCell;
 import org.ieatta.cells.headerfooterview.IEAFooterView;
@@ -64,7 +65,7 @@ public class RecipeDetailFragment extends DetailFragment {
     }
 
     @Override
-    public void loadPage() {
+    public void loadPage(HistoryEntry entry) {
         manager.startManagingWithDelegate(webView);
         manager.setOnItemClickListener(itemClickListener);
 

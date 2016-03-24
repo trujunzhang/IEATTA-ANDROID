@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 
 import org.ieatta.R;
 import org.ieatta.activity.PageActivity;
+import org.ieatta.activity.history.HistoryEntry;
 import org.wikipedia.BackPressedHandler;
 
 import android.content.Intent;
@@ -74,7 +75,7 @@ import static org.wikipedia.util.UriUtil.decodeURL;
 import static org.wikipedia.util.UriUtil.visitInExternalBrowser;
 
 public abstract class PageFragment extends Fragment implements BackPressedHandler {
-    public abstract void loadPage();
+    public abstract void loadPage(HistoryEntry entry);
 
     public abstract void postLoadPage();
 

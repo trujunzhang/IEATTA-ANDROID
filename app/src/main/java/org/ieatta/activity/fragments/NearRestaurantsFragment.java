@@ -14,10 +14,8 @@ import com.tableview.RecycleViewManager;
 import org.ieatta.IEAApp;
 import org.ieatta.R;
 import org.ieatta.activity.history.HistoryEntry;
-import org.ieatta.cells.IEANearRestaurantMoreCell;
 import org.ieatta.cells.IEANearRestaurantsCell;
 import org.ieatta.cells.model.SectionTitleCellModel;
-import org.ieatta.cells.model.IEANearRestaurantMore;
 import org.ieatta.database.models.DBRestaurant;
 import org.ieatta.provide.IEAEditKey;
 import org.ieatta.provide.MainSegueIdentifier;
@@ -81,7 +79,7 @@ public class NearRestaurantsFragment extends PageFragment {
     }
 
     @Override
-    public void loadPage() {
+    public void loadPage(HistoryEntry entry) {
         manager.startManagingWithDelegate(webView);
         manager.setOnItemClickListener(itemClickListener);
 
