@@ -48,7 +48,7 @@ public class RecentSearchDatabaseTable extends DatabaseTable<RecentSearch> {
     public Column[] getColumnsAdded(int version) {
         switch (version) {
             case DB_VER_INTRODUCED:
-                return new Column[] {
+                return new Column[]{
                         new Column("_id", "integer primary key"),
                         new Column(COL_TEXT, "string"),
                         new Column(COL_TIMESTAMP, "integer"),
@@ -65,7 +65,7 @@ public class RecentSearchDatabaseTable extends DatabaseTable<RecentSearch> {
 
     @Override
     protected String[] getUnfilteredPrimaryKeySelectionArgs(@NonNull RecentSearch obj) {
-        return new String[] {
+        return new String[]{
                 obj.getText(),
         };
     }

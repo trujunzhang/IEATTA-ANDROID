@@ -5,7 +5,9 @@ import android.content.Context;
 import org.ieatta.IEAApp;
 import org.wikipedia.concurrency.SaneAsyncTask;
 
-/** AsyncTask to clear out recent search entries. */
+/**
+ * AsyncTask to clear out recent search entries.
+ */
 public class DeleteAllRecentSearchesTask extends SaneAsyncTask<Void> {
     private final IEAApp app;
 

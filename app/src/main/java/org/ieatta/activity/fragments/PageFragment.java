@@ -72,7 +72,7 @@ public abstract class PageFragment extends Fragment implements BackPressedHandle
         pageLoadStrategy = new DetailPageLoadStrategy();
     }
 
-    public int getWebViewScrollY(ObservableWebView webView){
+    public int getWebViewScrollY(ObservableWebView webView) {
         return webView.getLastTop();
     }
 }

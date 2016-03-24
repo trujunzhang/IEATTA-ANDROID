@@ -20,17 +20,22 @@ public class SearchBarHideHandler implements ObservableWebView.OnScrollChangeLis
         ObservableWebView.OnUpOrCancelMotionEventListener,
         ObservableWebView.OnDownMotionEventListener {
     private static final int FULL_OPACITY = 255;
-    @NonNull private final View quickReturnView;
+    @NonNull
+    private final View quickReturnView;
     private final float displayDensity;
 
-    @NonNull private final Context context;
+    @NonNull
+    private final Context context;
     private ObservableWebView webview;
     private boolean fadeEnabled;
     private boolean forceNoFade;
-    @NonNull private final Drawable toolbarBackground;
+    @NonNull
+    private final Drawable toolbarBackground;
     private Drawable toolbarGradient;
-    @NonNull private final Drawable toolbarShadow;
-    @NonNull private final Drawable statusBar;
+    @NonNull
+    private final Drawable toolbarShadow;
+    @NonNull
+    private final Drawable statusBar;
 
     public SearchBarHideHandler(@NonNull Activity activity, @NonNull View quickReturnView) {
         context = activity;
@@ -48,6 +53,7 @@ public class SearchBarHideHandler implements ObservableWebView.OnScrollChangeLis
 
     /**
      * Update the WebView based on whose scroll position the search bar will hide itself.
+     *
      * @param webView The WebView against which scrolling will be tracked.
      */
     public void setScrollView(ObservableWebView webView) {
@@ -59,6 +65,7 @@ public class SearchBarHideHandler implements ObservableWebView.OnScrollChangeLis
 
     /**
      * Whether to enable fading in/out of the search bar when near the top of the article.
+     *
      * @param enabled True to enable fading, false otherwise.
      */
     public void setFadeEnabled(boolean enabled) {
@@ -70,6 +77,7 @@ public class SearchBarHideHandler implements ObservableWebView.OnScrollChangeLis
      * Whether to temporarily disable fading of the search bar, even if fading is enabled otherwise.
      * May be used when displaying a temporary UI element that requires the search bar to be shown
      * fully, e.g. when the ToC is pulled out.
+     *
      * @param force True to temporarily disable fading, false otherwise.
      */
     public void setForceNoFade(boolean force) {
@@ -150,7 +158,9 @@ public class SearchBarHideHandler implements ObservableWebView.OnScrollChangeLis
         toolbarBackgroundLayers.setDrawableByLayerId(R.id.toolbar_background_gradient, toolbarGradient);
     }
 
-    /** @return Alpha value between 0 and 0xff. */
+    /**
+     * @return Alpha value between 0 and 0xff.
+     */
     private int calculateScrollOpacity(int scrollY) {
         final int fadeHeight = 256;
         int opacity = FULL_OPACITY;
@@ -162,11 +172,13 @@ public class SearchBarHideHandler implements ObservableWebView.OnScrollChangeLis
         return opacity;
     }
 
-    @ColorInt private int getColor(@ColorRes int id) {
+    @ColorInt
+    private int getColor(@ColorRes int id) {
         return getResources().getColor(id);
     }
 
-    @NonNull private Resources getResources() {
+    @NonNull
+    private Resources getResources() {
         return context.getResources();
     }
 }

@@ -17,7 +17,7 @@ import bolts.Task;
 public class EventDetailFragment extends DetailFragment {
     private RecycleViewManager manager;
 
-    private EventDetailTask task ;
+    private EventDetailTask task;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -26,7 +26,7 @@ public class EventDetailFragment extends DetailFragment {
 
     @Override
     public void loadPage(HistoryEntry entry) {
-        task = new EventDetailTask(entry,this.getActivity(),this.model);
+        task = new EventDetailTask(entry, this.getActivity(), this.model);
 
         task.setupWebView(webView);
         task.prepareUI();

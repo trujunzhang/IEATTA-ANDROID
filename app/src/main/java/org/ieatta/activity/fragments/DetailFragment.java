@@ -131,7 +131,7 @@ public abstract class DetailFragment extends PageFragment implements BackPressed
         searchBarHideHandler.setScrollView(webView);
         leadImagesHandler = new LeadImagesHandler(this, webView, articleHeaderView);
 //        leadImagesHandler.addOnContentHeightChangedListener(this);
-        pageLoadStrategy.setUp(model,this, refreshView, webView, searchBarHideHandler,
+        pageLoadStrategy.setUp(model, this, refreshView, webView, searchBarHideHandler,
                 leadImagesHandler, new LinkedList<PageBackStackItem>());
         pageLoadStrategy.onLeadSectionLoaded(0);
 

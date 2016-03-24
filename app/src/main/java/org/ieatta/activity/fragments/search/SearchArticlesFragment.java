@@ -30,7 +30,7 @@ import org.wikipedia.concurrency.SaneAsyncTask;
 import static org.wikipedia.util.DeviceUtil.hideSoftKeyboard;
 import static org.wikipedia.util.DimenUtil.getContentTopOffsetPx;
 
-public class SearchArticlesFragment extends Fragment implements BackPressedHandler  {
+public class SearchArticlesFragment extends Fragment implements BackPressedHandler {
     private static final String ARG_LAST_SEARCHED_TEXT = "lastSearchedText";
     private static final String ARG_SEARCH_CURRENT_PANEL = "searchCurrentPanel";
 
@@ -48,9 +48,11 @@ public class SearchArticlesFragment extends Fragment implements BackPressedHandl
     }
 
     private boolean launchedFromWidget = false;
+
     public void setLaunchedFromWidget(boolean fromWidget) {
         launchedFromWidget = fromWidget;
     }
+
     public boolean isLaunchedFromWidget() {
         return launchedFromWidget;
     }
@@ -124,9 +126,9 @@ public class SearchArticlesFragment extends Fragment implements BackPressedHandl
             }
         });
 
-        recentSearchesFragment = (RecentSearchesFragment)getChildFragmentManager().findFragmentById(R.id.search_panel_recent);
+        recentSearchesFragment = (RecentSearchesFragment) getChildFragmentManager().findFragmentById(R.id.search_panel_recent);
 
-        searchResultsFragment = (SearchResultsFragment)getChildFragmentManager().findFragmentById(R.id.fragment_search_results);
+        searchResultsFragment = (SearchResultsFragment) getChildFragmentManager().findFragmentById(R.id.fragment_search_results);
 
         // make sure we're hidden by default
         searchContainerView.setVisibility(View.GONE);
@@ -158,6 +160,7 @@ public class SearchArticlesFragment extends Fragment implements BackPressedHandl
 
     /**
      * Changes the search text box to contain a different string.
+     *
      * @param text The text you want to make the search box display.
      */
     public void setSearchText(CharSequence text) {
@@ -169,6 +172,7 @@ public class SearchArticlesFragment extends Fragment implements BackPressedHandl
      * - PANEL_RECENT_SEARCHES
      * - PANEL_SEARCH_RESULTS
      * Automatically hides the previous panel.
+     *
      * @param panel Which panel to show.
      */
     private void showPanel(int panel) {
@@ -204,7 +208,8 @@ public class SearchArticlesFragment extends Fragment implements BackPressedHandl
      * Kick off a search, based on a given search term. Will automatically pass the search to
      * Title search or Full search, based on which one is currently displayed.
      * If the search term is empty, the "recent searches" view will be shown.
-     * @param term Phrase to search for.
+     *
+     * @param term  Phrase to search for.
      * @param force Whether to "force" starting this search. If the search is not forced, the
      *              search may be delayed by a small time, so that network requests are not sent
      *              too often.  If the search is forced, the network request is sent immediately.
@@ -237,7 +242,7 @@ public class SearchArticlesFragment extends Fragment implements BackPressedHandl
         // invalidate our activity's ActionBar, so that all action items are removed, and
         // we can fill up the whole width of the ActionBar with our SearchView.
         getActivity().supportInvalidateOptionsMenu();
-        ((PageActivity)getActivity()).getSearchBarHideHandler().setForceNoFade(true);
+        ((PageActivity) getActivity()).getSearchBarHideHandler().setForceNoFade(true);
         setSearchViewEnabled(true);
         ((PageActivity) getActivity()).getDrawerToggle().setDrawerIndicatorEnabled(false);
         // show ourselves
@@ -255,7 +260,7 @@ public class SearchArticlesFragment extends Fragment implements BackPressedHandl
         isSearchActive = false;
         // invalidate our activity's ActionBar, so that the original action items are restored.
         getActivity().supportInvalidateOptionsMenu();
-        ((PageActivity)getActivity()).getSearchBarHideHandler().setForceNoFade(false);
+        ((PageActivity) getActivity()).getSearchBarHideHandler().setForceNoFade(false);
         setSearchViewEnabled(false);
         ((PageActivity) getActivity()).getDrawerToggle().setDrawerIndicatorEnabled(true);
         // hide ourselves
@@ -266,6 +271,7 @@ public class SearchArticlesFragment extends Fragment implements BackPressedHandl
 
     /**
      * Determine whether the Search fragment is currently active.
+     *
      * @return Whether the Search fragment is active.
      */
     public boolean isSearchActive() {
@@ -300,7 +306,7 @@ public class SearchArticlesFragment extends Fragment implements BackPressedHandl
 
             // set up the SearchView
             if (searchView == null) {
-                searchView = (SearchView)getActivity().findViewById(R.id.main_search_view);
+                searchView = (SearchView) getActivity().findViewById(R.id.main_search_view);
                 searchView.setOnQueryTextListener(searchQueryListener);
                 searchView.setOnCloseListener(searchCloseListener);
 
@@ -417,6 +423,7 @@ public class SearchArticlesFragment extends Fragment implements BackPressedHandl
 
     private final class SaveRecentSearchTask extends SaneAsyncTask<Void> {
         private final RecentSearch entry;
+
         SaveRecentSearchTask(RecentSearch entry) {
             this.entry = entry;
         }

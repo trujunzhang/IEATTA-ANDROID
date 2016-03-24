@@ -25,9 +25,10 @@ public class SearchResults {
 
     /**
      * Constructor for when we get results.
-     * @param pageTitles the actual results
+     *
+     * @param pageTitles     the actual results
      * @param continueOffset for search continuation
-     * @param suggestion a search suggestion to show to the user: "Did you mean ...?"
+     * @param suggestion     a search suggestion to show to the user: "Did you mean ...?"
      */
     public SearchResults(List<PageTitle> pageTitles,
                          ContinueOffset continueOffset,

@@ -20,7 +20,9 @@ import android.widget.TextView;
 import org.ieatta.R;
 
 
-/** Displays a list of recent searches */
+/**
+ * Displays a list of recent searches
+ */
 public class RecentSearchesFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
     // make sure this number is unique among other fragments that use a loader
     private static final int LOADER_ID = 102;
@@ -34,7 +36,7 @@ public class RecentSearchesFragment extends Fragment implements LoaderManager.Lo
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_search_recent, container, false);
-        searchFragment = (SearchArticlesFragment)getActivity().getSupportFragmentManager().findFragmentById(R.id.search_fragment);
+        searchFragment = (SearchArticlesFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.search_fragment);
         this.container = rootView.findViewById(R.id.recent_searches_container);
         recentSearchesList = (ListView) rootView.findViewById(R.id.recent_searches_list);
         deleteButton = (ImageView) rootView.findViewById(R.id.recent_searches_delete_button);

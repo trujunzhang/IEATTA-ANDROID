@@ -16,7 +16,7 @@ import bolts.Task;
 
 public class OrderedRecipesFragment extends DetailFragment {
 
-    private OrderedRecipesTask task ;
+    private OrderedRecipesTask task;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -26,7 +26,7 @@ public class OrderedRecipesFragment extends DetailFragment {
 
     @Override
     public void loadPage(HistoryEntry entry) {
-        this.task = new OrderedRecipesTask(entry,this.getActivity(),this.model);
+        this.task = new OrderedRecipesTask(entry, this.getActivity(), this.model);
 
         task.setupWebView(webView);
         task.prepareUI();

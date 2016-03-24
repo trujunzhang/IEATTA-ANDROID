@@ -25,7 +25,7 @@ public class RecipeDetailFragment extends DetailFragment {
 
     @Override
     public void loadPage(HistoryEntry entry) {
-        this.task = new RecipeDetailTask(entry,this.getActivity(),this.model);
+        this.task = new RecipeDetailTask(entry, this.getActivity(), this.model);
 
         task.setupWebView(webView);
         this.task.prepareUI();

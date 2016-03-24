@@ -44,18 +44,21 @@ public class SearchResultsFragment extends Fragment {
     private View searchResultsDisplay;
     private View searchResultsContainer;
     private ListView searchResultsList;
-//    private WikiErrorView searchErrorView;
+    //    private WikiErrorView searchErrorView;
     private View searchNoResults;
     private TextView searchSuggestion;
 
     private IEAApp app;
-    @NonNull private ParcelableLruCache<List<PageTitle>> searchResultsCache
+    @NonNull
+    private ParcelableLruCache<List<PageTitle>> searchResultsCache
             = new ParcelableLruCache<>(MAX_CACHE_SIZE_SEARCH_RESULTS, List.class);
     private Handler searchHandler;
-//    private TitleSearchTask curSearchTask;
+    //    private TitleSearchTask curSearchTask;
     private String currentSearchTerm = "";
-    @Nullable private SearchResults lastFullTextResults;
-    @NonNull private final List<PageTitle> totalResults = new ArrayList<>();
+    @Nullable
+    private SearchResults lastFullTextResults;
+    @NonNull
+    private final List<PageTitle> totalResults = new ArrayList<>();
 
     /**
      * Whether full-text search has been disabled via remote kill-switch.
@@ -147,7 +150,8 @@ public class SearchResultsFragment extends Fragment {
 
     /**
      * Kick off a search, based on a given search term.
-     * @param term Phrase to search for.
+     *
+     * @param term  Phrase to search for.
      * @param force Whether to "force" starting this search. If the search is not forced, the
      *              search may be delayed by a small time, so that network requests are not sent
      *              too often.  If the search is forced, the network request is sent immediately.

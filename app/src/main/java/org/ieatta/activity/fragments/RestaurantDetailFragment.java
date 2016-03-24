@@ -16,7 +16,7 @@ import bolts.Task;
 
 public class RestaurantDetailFragment extends DetailFragment {
 
-    private RestaurantDetailTask task ;
+    private RestaurantDetailTask task;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -25,7 +25,7 @@ public class RestaurantDetailFragment extends DetailFragment {
 
     @Override
     public void loadPage(HistoryEntry entry) {
-        this.task = new RestaurantDetailTask(entry,this.getActivity(),this.model);
+        this.task = new RestaurantDetailTask(entry, this.getActivity(), this.model);
 
         this.task.setupWebView(webView);
         this.task.prepareUI();
