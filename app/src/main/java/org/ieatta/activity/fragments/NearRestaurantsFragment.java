@@ -1,6 +1,5 @@
 package org.ieatta.activity.fragments;
 
-import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -11,7 +10,6 @@ import com.tableview.adapter.NSIndexPath;
 import com.tableview.adapter.RecyclerOnItemClickListener;
 import com.tableview.RecycleViewManager;
 
-import org.ieatta.IEAApp;
 import org.ieatta.R;
 import org.ieatta.activity.history.HistoryEntry;
 import org.ieatta.cells.IEANearRestaurantsCell;
@@ -77,7 +75,7 @@ public class NearRestaurantsFragment extends PageFragment {
     }
 
     @Override
-    public void loadPage(HistoryEntry entry, boolean pushBackStack, int stagedScrollY) {
+    public void loadPage(HistoryEntry entry) {
         manager.startManagingWithDelegate(webView);
         manager.setOnItemClickListener(itemClickListener);
 

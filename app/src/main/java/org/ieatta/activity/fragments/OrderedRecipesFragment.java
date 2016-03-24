@@ -60,7 +60,7 @@ public class OrderedRecipesFragment extends DetailFragment {
     }
 
     @Override
-    public void loadPage(HistoryEntry entry, boolean pushBackStack, int stagedScrollY) {
+    public void loadPage(HistoryEntry entry) {
         manager.startManagingWithDelegate(webView);
         manager.setOnItemClickListener(itemClickListener);
 

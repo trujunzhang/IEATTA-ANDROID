@@ -5,7 +5,6 @@ import android.content.res.Resources;
 import android.support.annotation.DimenRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.annotation.VisibleForTesting;
 
 import org.ieatta.IEAApp;
 import org.ieatta.activity.editing.EditHandler;
@@ -124,7 +123,7 @@ public class DetailPageLoadStrategy implements PageLoadStrategy {
         PageBackStackItem item = backStack.get(backStack.size() - 1);
         // display the page based on the backstack item, stage the scrollY position based on
         // the backstack item.
-        fragment.loadPage(item.getHistoryEntry(), false, item.getScrollY());
+        fragment.loadPage(item.getHistoryEntry());
 
         L.d("Loaded page " + item.getHistoryEntry().getSource() + " from backstack");
     }

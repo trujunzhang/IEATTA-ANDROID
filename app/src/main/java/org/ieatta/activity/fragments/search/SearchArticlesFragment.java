@@ -33,7 +33,7 @@ public class SearchArticlesFragment extends PageFragment {
     }
 
     @Override
-    public void loadPage(HistoryEntry entry, boolean pushBackStack, int stagedScrollY) {
+    public void loadPage(HistoryEntry entry) {
 
     }
 

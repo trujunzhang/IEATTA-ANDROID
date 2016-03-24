@@ -88,10 +88,14 @@ public abstract class PageFragment extends Fragment implements BackPressedHandle
     private boolean pushBackStack;
     private int stagedScrollY;
 
+    public abstract void loadPage(HistoryEntry entry) ;
+
     public void loadPage(HistoryEntry entry, boolean pushBackStack, int stagedScrollY) {
         this.entry = entry;
         this.pushBackStack = pushBackStack;
         this.stagedScrollY = stagedScrollY;
+
+        this.loadPage(entry);
     }
 
     public  void postLoadPage(){
