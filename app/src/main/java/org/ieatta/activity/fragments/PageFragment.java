@@ -84,11 +84,19 @@ public abstract class PageFragment extends Fragment implements BackPressedHandle
     protected PageLoadStrategy pageLoadStrategy;
     protected PageViewModel model;
 
-    public  void loadPage(HistoryEntry entry, boolean pushBackStack, int stagedScrollY){
-        pageLoadStrategy.load(pushBackStack,  stagedScrollY);
+    private HistoryEntry entry;
+    private boolean pushBackStack;
+    private int stagedScrollY;
+
+    public void loadPage(HistoryEntry entry, boolean pushBackStack, int stagedScrollY) {
+        this.entry = entry;
+        this.pushBackStack = pushBackStack;
+        this.stagedScrollY = stagedScrollY;
     }
 
-    public abstract void postLoadPage();
+    public  void postLoadPage(){
+        pageLoadStrategy.load(pushBackStack, stagedScrollY);
+    }
 
     // TODO: don't assume host is PageActivity. Use Fragment callbacks pattern.
     protected PageActivity getPageActivity() {

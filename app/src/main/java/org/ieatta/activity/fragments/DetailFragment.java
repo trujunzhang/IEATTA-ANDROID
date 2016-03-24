@@ -142,6 +142,8 @@ public abstract class DetailFragment extends PageFragment implements BackPressed
         pageLoadStrategy.setUp(model,this, refreshView, webView, searchBarHideHandler,
                 leadImagesHandler, new LinkedList<PageBackStackItem>());
         pageLoadStrategy.onLeadSectionLoaded(0);
+
+        super.postLoadPage();
     }
 
     private void initWebViewListeners() {

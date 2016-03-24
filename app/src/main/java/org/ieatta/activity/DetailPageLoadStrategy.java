@@ -114,7 +114,6 @@ public class DetailPageLoadStrategy implements PageLoadStrategy {
 
         // If this is a refresh, don't clear the webview contents
         this.stagedScrollY = stagedScrollY;
-//            loadOnWebViewReady(cachePreference);
     }
 
     @Override
