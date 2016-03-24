@@ -1,9 +1,34 @@
 package org.ieatta.tasks;
 
+
+import android.os.Bundle;
+import android.view.View;
+
+import com.tableview.RecycleViewManager;
+import com.tableview.adapter.NSIndexPath;
+import com.tableview.adapter.RecyclerOnItemClickListener;
+
+import org.ieatta.R;
+import org.ieatta.activity.history.HistoryEntry;
+import org.ieatta.cells.IEAOrderedRecipeCell;
+import org.ieatta.cells.headerfooterview.IEAFooterView;
+import org.ieatta.cells.headerfooterview.IEAHeaderView;
+import org.ieatta.cells.model.IEAFooterViewModel;
+import org.ieatta.cells.model.IEAHeaderViewModel;
+import org.ieatta.cells.model.SectionTitleCellModel;
+import org.ieatta.provide.IEAEditKey;
+import org.ieatta.tasks.OrderedRecipesTask;
+
+import bolts.Continuation;
+import bolts.Task;
+
+import android.content.Context;
+
 import org.ieatta.activity.LeadImageCollection;
 import org.ieatta.activity.Page;
 import org.ieatta.activity.PageProperties;
 import org.ieatta.activity.PageTitle;
+import org.ieatta.activity.PageViewModel;
 import org.ieatta.activity.history.HistoryEntry;
 import org.ieatta.database.models.DBEvent;
 import org.ieatta.database.models.DBPhoto;
@@ -30,8 +55,12 @@ public class OrderedRecipesTask extends FragmentTask{
     private String teamUUID;
     private String recipeUUID;
 
-    public OrderedRecipesTask(HistoryEntry entry) {
-        super(entry);
+    enum OrderedRecipesSection {
+        section_recipes,       //= 0
+    }
+
+    public OrderedRecipesTask(HistoryEntry entry, Context context, PageViewModel model) {
+        super(entry, context, model);
     }
 
     /**
@@ -71,6 +100,27 @@ public class OrderedRecipesTask extends FragmentTask{
                 return null;
             }
         });
+    }
+
+    @Override
+    public void prepareUI() {
+        this.manager.setRegisterHeaderView(IEAHeaderView.getType());
+        this.manager.setRegisterFooterView(IEAFooterView.getType());
+
+        this.manager.setRegisterCellClass(IEAOrderedRecipeCell.getType(), OrderedRecipesSection.section_recipes.ordinal());
+
+        this.manager.appendSectionTitleCell(new SectionTitleCellModel(IEAEditKey.Section_Title, R.string.Ordered_Recipes), OrderedRecipesSection.section_recipes.ordinal());
+}
+
+    @Override
+    public void postUI() {
+        this.manager.setHeaderItem(new IEAHeaderViewModel(this.getEmptyHeaderViewHeight()), IEAHeaderView.getType());
+        this.manager.setFooterItem(new IEAFooterViewModel(), IEAFooterView.getType());
+
+        this.manager.setSectionItems(this.recipes, OrderedRecipesSection.section_recipes.ordinal());
+
+        model.setPage(this.getPage());
+
     }
 
     public Page getPage() {

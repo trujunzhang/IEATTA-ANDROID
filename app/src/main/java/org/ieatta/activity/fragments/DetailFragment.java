@@ -214,10 +214,6 @@ public abstract class DetailFragment extends PageFragment implements BackPressed
     }
 
 
-    protected int getEmptyHeaderViewHeight(){
-        return DimenUtil.getDisplayWidthPx();
-    }
-
     protected GalleryThumbnailScrollView.GalleryViewListener galleryViewListener
             = new GalleryThumbnailScrollView.GalleryViewListener() {
         @Override
