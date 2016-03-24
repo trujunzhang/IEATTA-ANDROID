@@ -8,6 +8,7 @@ import org.ieatta.analytics.DBConvertFunnel;
 import org.ieatta.cells.model.IEAOrderedPeople;
 import org.ieatta.cells.model.ReviewsCellModel;
 import org.ieatta.database.models.DBEvent;
+import org.ieatta.database.models.DBPeopleInEvent;
 import org.ieatta.database.models.DBPhoto;
 import org.ieatta.database.models.DBReview;
 import org.ieatta.database.models.DBTeam;
@@ -81,4 +82,14 @@ public class DBConvert {
         return list;
     }
 
+
+    public static List<String> getPeoplePoints(List<DBPeopleInEvent> peopleInEvent) {
+        List<String> peoplePoints = new LinkedList<>();
+
+        for (DBPeopleInEvent model : peopleInEvent) {
+            peoplePoints.add(model.getUserRef());
+        }
+
+        return peoplePoints;
+    }
 }

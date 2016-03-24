@@ -1,5 +1,6 @@
 package org.ieatta.activity.history;
 
+import android.location.Location;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -27,6 +28,13 @@ public class HistoryEntry implements Parcelable {
     private final String hPara;
     private final String vPara;
 
+    private Location location;
+
+
+    public HistoryEntry(MainSegueIdentifier identifier,Location location) {
+        this(identifier, "", "");
+        this.location = location;
+    }
 
     public HistoryEntry(MainSegueIdentifier identifier, String hPara, String vPara) {
         this.source = identifier.getType();
@@ -117,5 +125,13 @@ public class HistoryEntry implements Parcelable {
 
     public String getVPara() {
         return vPara;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
     }
 }

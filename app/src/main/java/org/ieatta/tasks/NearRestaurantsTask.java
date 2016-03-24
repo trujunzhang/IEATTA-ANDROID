@@ -5,6 +5,7 @@ import android.location.Location;
 
 import com.parse.ParseGeoPoint;
 
+import org.ieatta.activity.history.HistoryEntry;
 import org.ieatta.database.models.DBRestaurant;
 import org.ieatta.database.query.LocalDatabaseQuery;
 
@@ -16,32 +17,20 @@ import bolts.Continuation;
 import bolts.Task;
 import io.realm.RealmResults;
 
-public class NearRestaurantsTask {
-    private static class SortByName implements Comparator {
-        public int compare(Object o1, Object o2) {
-            DBRestaurant s1 = (DBRestaurant) o1;
-            DBRestaurant s2 = (DBRestaurant) o2;
-            return s1.getDisplayName().toLowerCase().compareTo(s2.getDisplayName().toLowerCase());
-        }
+public class NearRestaurantsTask extends FragmentTask{
+    public NearRestaurantsTask(HistoryEntry entry) {
+        super(entry);
     }
 
-    private static RealmResults<DBRestaurant> sort(RealmResults<DBRestaurant> list) {
-        Collections.sort(list, new SortByName());
-        return list;
-    }
-
-    private RealmResults<DBRestaurant> restaurants;
-
-    public RealmResults<DBRestaurant> getRestaurants() {
-        return restaurants;
-    }
+    public RealmResults<DBRestaurant> restaurants;
 
     /**
      * Execute Task for nearby restaurants.
-     * @param location  the current location
      * @return
      */
-    public Task<Void> executeTask(Location location){
+    public Task<Void> executeTask(){
+        final Location location = this.entry.getLocation();
+
         return LocalDatabaseQuery.queryNearRestaurants(location).onSuccess(new Continuation<RealmResults<DBRestaurant>, Void>() {
             @Override
             public Void then(Task<RealmResults<DBRestaurant>> task) throws Exception {
