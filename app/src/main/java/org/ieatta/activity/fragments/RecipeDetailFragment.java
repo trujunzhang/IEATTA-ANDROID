@@ -16,23 +16,12 @@ import bolts.Task;
 
 public class RecipeDetailFragment extends DetailFragment {
 
-    public static final RecyclerOnItemClickListener itemClickListener = new RecyclerOnItemClickListener() {
-        @Override
-        public void onItemClick(View view, NSIndexPath indexPath, Object model, int position, boolean isLongClick) {
-
-        }
-    };
-
-
-    private RecycleViewManager manager;
-
     private RecipeDetailTask task;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        manager = new RecycleViewManager(this.getActivity().getApplicationContext());
     }
 
 
@@ -40,16 +29,14 @@ public class RecipeDetailFragment extends DetailFragment {
     public void loadPage(HistoryEntry entry) {
         this.task = new RecipeDetailTask(entry,this.getContext(),this.model);
 
-        manager.startManagingWithDelegate(webView);
-        manager.setOnItemClickListener(itemClickListener);
-
+        task.setupWebView(webView);
         this.task.prepareUI();
 
-        String restaurantUUID = "1CE562A4-A978-4B75-9B7B-2F3CF9F42A04"; // The Flying Falafel
-//        String restaurantUUID = "33ED9F31-F6A5-43A4-8D11-8E511CA0BD39"; // The Spice Jar
-        String eventUUID = "07B2D33C-F11D-404B-9D78-016D16BEE9FE"; // White Truffies
-        String teamUUID = "197C0BEF-B432-47B8-988B-99406643623A";// Dolores Chavez
-        String recipeUUID = "95B62D6F-87DF-47E2-8C84-EADAE131BB5D"; // Dark Gelate
+//        String restaurantUUID = "1CE562A4-A978-4B75-9B7B-2F3CF9F42A04"; // The Flying Falafel
+////        String restaurantUUID = "33ED9F31-F6A5-43A4-8D11-8E511CA0BD39"; // The Spice Jar
+//        String eventUUID = "07B2D33C-F11D-404B-9D78-016D16BEE9FE"; // White Truffies
+//        String teamUUID = "197C0BEF-B432-47B8-988B-99406643623A";// Dolores Chavez
+//        String recipeUUID = "95B62D6F-87DF-47E2-8C84-EADAE131BB5D"; // Dark Gelate
 
         task.executeTask().onSuccess(new Continuation<Void, Object>() {
             @Override
