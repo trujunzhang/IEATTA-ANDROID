@@ -1,5 +1,6 @@
 package org.ieatta.tasks;
 
+import android.app.Activity;
 import android.content.Context;
 import android.support.annotation.VisibleForTesting;
 import android.view.View;
@@ -48,8 +49,8 @@ public class EventDetailTask extends FragmentTask {
         super(entry);
     }
 
-    public EventDetailTask(HistoryEntry entry, Context context, PageViewModel model) {
-        super(entry, context, model);
+    public EventDetailTask(HistoryEntry entry, Activity activity, PageViewModel model) {
+        super(entry, activity, model);
     }
 
     @Override

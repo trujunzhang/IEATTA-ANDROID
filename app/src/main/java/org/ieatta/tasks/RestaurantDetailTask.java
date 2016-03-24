@@ -1,10 +1,12 @@
 package org.ieatta.tasks;
 
+import android.app.Activity;
 import android.content.Context;
 import android.support.annotation.VisibleForTesting;
 import android.view.View;
 
 import com.tableview.adapter.NSIndexPath;
+import com.tableview.utils.CollectionUtil;
 
 import org.ieatta.R;
 import org.ieatta.activity.LeadImageCollection;
@@ -20,6 +22,7 @@ import org.ieatta.cells.IEAReviewsCell;
 import org.ieatta.cells.headerfooterview.IEAFooterView;
 import org.ieatta.cells.headerfooterview.IEAHeaderView;
 import org.ieatta.cells.model.IEAFooterViewModel;
+import org.ieatta.cells.model.IEAGalleryThumbnail;
 import org.ieatta.cells.model.IEAHeaderViewModel;
 import org.ieatta.cells.model.ReviewsCellModel;
 import org.ieatta.cells.model.SectionTitleCellModel;
@@ -54,8 +57,8 @@ public class RestaurantDetailTask extends FragmentTask {
         super(entry);
     }
 
-    public RestaurantDetailTask(HistoryEntry entry, Context context, PageViewModel model) {
-        super(entry, context, model);
+    public RestaurantDetailTask(HistoryEntry entry, Activity activity, PageViewModel model) {
+        super(entry, activity, model);
     }
 
     @Override
@@ -131,7 +134,7 @@ public class RestaurantDetailTask extends FragmentTask {
 
         this.manager.setSectionItems(this.events, RestaurantDetailSection.section_events.ordinal());
 
-//        this.manager.setSectionItems(CollectionUtil.createList(new IEAGalleryThumbnail(this.this.thumbnailGalleryCollection, this.galleryViewListener)), RestaurantDetailSection.section_gallery_thumbnail.ordinal());
+        this.manager.setSectionItems(CollectionUtil.createList(new IEAGalleryThumbnail(this.thumbnailGalleryCollection, this.galleryViewListener)), RestaurantDetailSection.section_gallery_thumbnail.ordinal());
         this.manager.setSectionItems(this.reviewsCellModelList, RestaurantDetailSection.section_reviews.ordinal());
 
         model.setPage(this.getPage());

@@ -1,14 +1,19 @@
 package org.ieatta.tasks;
 
+import android.app.Activity;
 import android.content.Context;
 import android.support.annotation.VisibleForTesting;
 
 import com.tableview.RecycleViewManager;
 import com.tableview.adapter.RecyclerOnItemClickListener;
 
+import org.ieatta.activity.PageTitle;
 import org.ieatta.activity.PageViewModel;
+import org.ieatta.activity.gallery.GalleryActivity;
+import org.ieatta.activity.gallery.GalleryThumbnailScrollView;
 import org.ieatta.activity.history.HistoryEntry;
 import org.ieatta.activity.leadimages.LeadImagesHandler;
+import org.ieatta.analytics.GalleryFunnel;
 import org.ieatta.cells.model.IEAHeaderViewModel;
 import org.ieatta.views.ObservableWebView;
 import org.wikipedia.util.DimenUtil;
@@ -20,6 +25,7 @@ public abstract class FragmentTask implements RecyclerOnItemClickListener,LeadIm
     protected RecycleViewManager manager;
     protected PageViewModel model;
     public HistoryEntry entry;
+    private Activity activity;
     private ObservableWebView webView;
 
     @VisibleForTesting
@@ -27,10 +33,10 @@ public abstract class FragmentTask implements RecyclerOnItemClickListener,LeadIm
         this.entry = entry;
     }
 
-    public FragmentTask(HistoryEntry entry, Context context, PageViewModel model) {
+    public FragmentTask(HistoryEntry entry, Activity activity, PageViewModel model) {
         this.entry = entry;
         this.model = model;
-        this.manager = new RecycleViewManager(context);
+        this.manager = new RecycleViewManager(activity.getApplicationContext());
     }
 
     public abstract Task<Void> executeTask();
@@ -55,4 +61,14 @@ public abstract class FragmentTask implements RecyclerOnItemClickListener,LeadIm
     public void onContentHeightChanged(int contentHeight) {
         this.manager.updateHeaderItem(new IEAHeaderViewModel(contentHeight));
     }
+
+    protected GalleryThumbnailScrollView.GalleryViewListener galleryViewListener
+            = new GalleryThumbnailScrollView.GalleryViewListener() {
+        @Override
+        public void onGalleryItemClicked(String imageUUID) {
+            PageTitle imageTitle = new PageTitle(imageUUID);
+            GalleryActivity.showGallery(activity, model.getTitle(), imageTitle,
+                    GalleryFunnel.SOURCE_LINK_PREVIEW);
+        }
+    };
 }

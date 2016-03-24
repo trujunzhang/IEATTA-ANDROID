@@ -1,6 +1,7 @@
 package org.ieatta.tasks;
 
 
+import android.app.Activity;
 import android.content.Context;
 import android.location.Location;
 import android.support.annotation.VisibleForTesting;
@@ -29,8 +30,8 @@ public class NearRestaurantsTask extends FragmentTask {
         super(entry);
     }
 
-    public NearRestaurantsTask(HistoryEntry entry, Context context, PageViewModel model) {
-        super(entry, context, model);
+    public NearRestaurantsTask(HistoryEntry entry, Activity activity, PageViewModel model) {
+        super(entry, activity, model);
     }
 
     public RealmResults<DBRestaurant> restaurants;

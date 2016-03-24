@@ -1,10 +1,12 @@
 package org.ieatta.tasks;
 
+import android.app.Activity;
 import android.content.Context;
 import android.support.annotation.VisibleForTesting;
 import android.view.View;
 
 import com.tableview.adapter.NSIndexPath;
+import com.tableview.utils.CollectionUtil;
 
 import org.ieatta.R;
 import org.ieatta.activity.LeadImageCollection;
@@ -19,6 +21,7 @@ import org.ieatta.cells.IEAReviewsCell;
 import org.ieatta.cells.headerfooterview.IEAFooterView;
 import org.ieatta.cells.headerfooterview.IEAHeaderView;
 import org.ieatta.cells.model.IEAFooterViewModel;
+import org.ieatta.cells.model.IEAGalleryThumbnail;
 import org.ieatta.cells.model.IEAHeaderViewModel;
 import org.ieatta.cells.model.ReviewsCellModel;
 import org.ieatta.cells.model.SectionTitleCellModel;
@@ -62,8 +65,8 @@ public class RecipeDetailTask extends FragmentTask {
         super(entry);
     }
 
-    public RecipeDetailTask(HistoryEntry entry, Context context, PageViewModel model) {
-        super(entry, context, model);
+    public RecipeDetailTask(HistoryEntry entry, Activity activity, PageViewModel model) {
+        super(entry, activity, model);
     }
 
     @Override
@@ -153,7 +156,7 @@ public class RecipeDetailTask extends FragmentTask {
         this.manager.setHeaderItem(new IEAHeaderViewModel(this.getEmptyHeaderViewHeight()), IEAHeaderView.getType());
         this.manager.setFooterItem(new IEAFooterViewModel(), IEAFooterView.getType());
 
-//        this.manager.setSectionItems(CollectionUtil.createList(new IEAGalleryThumbnail(this.thumbnailGalleryCollection, this.galleryViewListener)), RecipeDetailSection.section_gallery_thumbnail.ordinal());
+        this.manager.setSectionItems(CollectionUtil.createList(new IEAGalleryThumbnail(this.thumbnailGalleryCollection, this.galleryViewListener)), RecipeDetailSection.section_gallery_thumbnail.ordinal());
         this.manager.setSectionItems(this.reviewsCellModelList, RecipeDetailSection.section_reviews.ordinal());
 
         model.setPage(this.getPage());

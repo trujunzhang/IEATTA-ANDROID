@@ -1,6 +1,7 @@
 package org.ieatta.tasks;
 
 
+import android.app.Activity;
 import android.content.Context;
 import android.support.annotation.VisibleForTesting;
 import android.view.View;
@@ -60,8 +61,8 @@ public class OrderedRecipesTask extends FragmentTask {
         super(entry);
     }
 
-    public OrderedRecipesTask(HistoryEntry entry, Context context, PageViewModel model) {
-        super(entry, context, model);
+    public OrderedRecipesTask(HistoryEntry entry, Activity activity, PageViewModel model) {
+        super(entry, activity, model);
     }
 
     /**
