@@ -46,7 +46,7 @@ public class NearRestaurantsTaskTest {
         task.executeTask().onSuccess(new Continuation<Void, Void>() {
             @Override
             public Void then(Task<Void> task) throws Exception {
-                RealmResults<DBRestaurant> result = NearRestaurantsTaskTest.this.task.restaurants);
+                RealmResults<DBRestaurant> result = NearRestaurantsTaskTest.this.task.restaurants;
                 int size = result.size();
                 L.d("Size of the Restaurants: " + size);
                 assertThat("Fetched restaurants length", (size == 3));
