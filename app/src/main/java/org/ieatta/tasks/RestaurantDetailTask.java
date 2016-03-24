@@ -5,6 +5,7 @@ import org.ieatta.activity.PageProperties;
 import org.ieatta.activity.PageTitle;
 import org.ieatta.activity.LeadImageCollection;
 import org.ieatta.activity.gallery.GalleryCollection;
+import org.ieatta.activity.history.HistoryEntry;
 import org.ieatta.cells.model.ReviewsCellModel;
 import org.ieatta.database.models.DBEvent;
 import org.ieatta.database.models.DBPhoto;
@@ -23,20 +24,26 @@ import bolts.Continuation;
 import bolts.Task;
 import io.realm.RealmResults;
 
-public class RestaurantDetailTask {
+public class RestaurantDetailTask extends FragmentTask {
+
     public DBRestaurant restaurant;
     public RealmResults<DBEvent> events;
     public List<ReviewsCellModel> reviewsCellModelList;
     public GalleryCollection thumbnailGalleryCollection;
     private LeadImageCollection leadImageCollection; // for restaurants
 
+    public RestaurantDetailTask(HistoryEntry entry) {
+        super(entry);
+    }
+
     /**
      * Execute Task for Restaurant detail.
      *
-     * @param restaurantUUID restaurant's UUID
      * @return
      */
-    public Task<Void> executeTask(final String restaurantUUID) {
+    public Task<Void> executeTask() {
+        final String restaurantUUID = this.entry.getHPara();
+
         return new RealmModelReader<DBRestaurant>(DBRestaurant.class).getFirstObject(LocalDatabaseQuery.get(restaurantUUID), false).onSuccessTask(new Continuation<DBRestaurant, Task<RealmResults<DBPhoto>>>() {
             @Override
             public Task<RealmResults<DBPhoto>> then(Task<DBRestaurant> task) throws Exception {
