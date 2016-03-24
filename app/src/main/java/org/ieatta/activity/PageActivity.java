@@ -483,7 +483,7 @@ public class PageActivity extends ThemedActionBarActivity {
      */
     public void loadPage(HistoryEntry entry) {
         this.pages.add(entry);
-        loadPage(entry, TabPosition.CURRENT_TAB, false,false);
+        loadPage(entry, TabPosition.CURRENT_TAB, false, false);
     }
 
     // Note: back button first handled in {@link #onOptionsItemSelected()};
@@ -541,7 +541,8 @@ public class PageActivity extends ThemedActionBarActivity {
         }
 
         app.putCrashReportProperty("api", entry.getSource()+"");
-        app.putCrashReportProperty("title", title.toString());
+        app.putCrashReportProperty("hPara", entry.getHPara());
+        app.putCrashReportProperty("vPara", entry.getVPara());
 
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             closeNavDrawer();

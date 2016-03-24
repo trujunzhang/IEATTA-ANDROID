@@ -3,7 +3,6 @@ package org.ieatta.activity.history;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import org.ieatta.activity.PageTitle;
 import org.ieatta.provide.MainSegueIdentifier;
 
 import java.util.Date;
@@ -109,4 +108,12 @@ public class HistoryEntry implements Parcelable {
             return new HistoryEntry[size];
         }
     };
+
+    public String getHPara() {
+        return hPara;
+    }
+
+    public String getVPara() {
+        return vPara;
+    }
 }
