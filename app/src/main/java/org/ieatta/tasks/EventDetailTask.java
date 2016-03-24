@@ -1,13 +1,24 @@
 package org.ieatta.tasks;
 
+import android.content.Context;
+import android.support.test.espresso.core.deps.guava.annotations.VisibleForTesting;
+
+import org.ieatta.R;
 import org.ieatta.activity.LeadImageCollection;
 import org.ieatta.activity.Page;
 import org.ieatta.activity.PageProperties;
 import org.ieatta.activity.PageTitle;
 import org.ieatta.activity.PageViewModel;
 import org.ieatta.activity.history.HistoryEntry;
+import org.ieatta.cells.IEAOrderedPeopleCell;
+import org.ieatta.cells.IEAReviewsCell;
+import org.ieatta.cells.headerfooterview.IEAFooterView;
+import org.ieatta.cells.headerfooterview.IEAHeaderView;
+import org.ieatta.cells.model.IEAFooterViewModel;
+import org.ieatta.cells.model.IEAHeaderViewModel;
 import org.ieatta.cells.model.IEAOrderedPeople;
 import org.ieatta.cells.model.ReviewsCellModel;
+import org.ieatta.cells.model.SectionTitleCellModel;
 import org.ieatta.database.models.DBEvent;
 import org.ieatta.database.models.DBPeopleInEvent;
 import org.ieatta.database.models.DBPhoto;
@@ -18,38 +29,14 @@ import org.ieatta.database.provide.ReviewType;
 import org.ieatta.database.query.LocalDatabaseQuery;
 import org.ieatta.database.query.ReviewQuery;
 import org.ieatta.database.realm.RealmModelReader;
+import org.ieatta.provide.IEAEditKey;
+import org.wikipedia.util.DimenUtil;
 
-import java.util.LinkedList;
 import java.util.List;
 
 import bolts.Continuation;
 import bolts.Task;
 import io.realm.RealmResults;
-
-import android.content.Context;
-import android.os.Bundle;
-import android.support.test.espresso.core.deps.guava.annotations.VisibleForTesting;
-import android.view.View;
-
-import com.tableview.RecycleViewManager;
-import com.tableview.adapter.NSIndexPath;
-import com.tableview.adapter.RecyclerOnItemClickListener;
-
-import org.ieatta.R;
-import org.ieatta.activity.history.HistoryEntry;
-import org.ieatta.cells.IEAOrderedPeopleCell;
-import org.ieatta.cells.IEAReviewsCell;
-import org.ieatta.cells.headerfooterview.IEAFooterView;
-import org.ieatta.cells.headerfooterview.IEAHeaderView;
-import org.ieatta.cells.model.IEAFooterViewModel;
-import org.ieatta.cells.model.IEAHeaderViewModel;
-import org.ieatta.cells.model.SectionTitleCellModel;
-import org.ieatta.provide.IEAEditKey;
-import org.ieatta.tasks.EventDetailTask;
-import org.wikipedia.util.DimenUtil;
-
-import bolts.Continuation;
-import bolts.Task;
 
 public class EventDetailTask extends FragmentTask {
 

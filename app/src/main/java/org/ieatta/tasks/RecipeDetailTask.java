@@ -1,7 +1,9 @@
 package org.ieatta.tasks;
 
 import android.content.Context;
+import android.support.annotation.VisibleForTesting;
 
+import org.ieatta.R;
 import org.ieatta.activity.LeadImageCollection;
 import org.ieatta.activity.Page;
 import org.ieatta.activity.PageProperties;
@@ -9,7 +11,14 @@ import org.ieatta.activity.PageTitle;
 import org.ieatta.activity.PageViewModel;
 import org.ieatta.activity.gallery.GalleryCollection;
 import org.ieatta.activity.history.HistoryEntry;
+import org.ieatta.cells.IEAGalleryThumbnailCell;
+import org.ieatta.cells.IEAReviewsCell;
+import org.ieatta.cells.headerfooterview.IEAFooterView;
+import org.ieatta.cells.headerfooterview.IEAHeaderView;
+import org.ieatta.cells.model.IEAFooterViewModel;
+import org.ieatta.cells.model.IEAHeaderViewModel;
 import org.ieatta.cells.model.ReviewsCellModel;
+import org.ieatta.cells.model.SectionTitleCellModel;
 import org.ieatta.database.models.DBEvent;
 import org.ieatta.database.models.DBPhoto;
 import org.ieatta.database.models.DBRecipe;
@@ -20,6 +29,7 @@ import org.ieatta.database.provide.ReviewType;
 import org.ieatta.database.query.LocalDatabaseQuery;
 import org.ieatta.database.query.ReviewQuery;
 import org.ieatta.database.realm.RealmModelReader;
+import org.ieatta.provide.IEAEditKey;
 import org.ieatta.server.cache.ThumbnailImageUtil;
 
 import java.io.File;
@@ -28,32 +38,6 @@ import java.util.List;
 import bolts.Continuation;
 import bolts.Task;
 import io.realm.RealmResults;
-
-import android.os.Bundle;
-import android.view.View;
-
-import com.tableview.RecycleViewManager;
-import com.tableview.adapter.NSIndexPath;
-import com.tableview.adapter.RecyclerOnItemClickListener;
-import com.tableview.utils.CollectionUtil;
-
-import org.ieatta.R;
-import org.ieatta.activity.history.HistoryEntry;
-import org.ieatta.cells.IEAGalleryThumbnailCell;
-import org.ieatta.cells.IEAReviewsCell;
-import org.ieatta.cells.headerfooterview.IEAFooterView;
-import org.ieatta.cells.headerfooterview.IEAHeaderView;
-import org.ieatta.cells.model.IEAFooterViewModel;
-import org.ieatta.cells.model.IEAGalleryThumbnail;
-import org.ieatta.cells.model.IEAHeaderViewModel;
-import org.ieatta.cells.model.SectionTitleCellModel;
-import org.ieatta.provide.IEAEditKey;
-import org.ieatta.tasks.RecipeDetailTask;
-
-import bolts.Continuation;
-import bolts.Task;
-
-import android.support.annotation.VisibleForTesting;
 
 public class RecipeDetailTask extends FragmentTask {
     public DBRestaurant restaurant;

@@ -1,14 +1,15 @@
 package org.ieatta.tasks;
 
 
-import android.os.Bundle;
-import android.view.View;
-
-import com.tableview.RecycleViewManager;
-import com.tableview.adapter.NSIndexPath;
-import com.tableview.adapter.RecyclerOnItemClickListener;
+import android.content.Context;
+import android.support.annotation.VisibleForTesting;
 
 import org.ieatta.R;
+import org.ieatta.activity.LeadImageCollection;
+import org.ieatta.activity.Page;
+import org.ieatta.activity.PageProperties;
+import org.ieatta.activity.PageTitle;
+import org.ieatta.activity.PageViewModel;
 import org.ieatta.activity.history.HistoryEntry;
 import org.ieatta.cells.IEAOrderedRecipeCell;
 import org.ieatta.cells.headerfooterview.IEAFooterView;
@@ -16,20 +17,6 @@ import org.ieatta.cells.headerfooterview.IEAHeaderView;
 import org.ieatta.cells.model.IEAFooterViewModel;
 import org.ieatta.cells.model.IEAHeaderViewModel;
 import org.ieatta.cells.model.SectionTitleCellModel;
-import org.ieatta.provide.IEAEditKey;
-import org.ieatta.tasks.OrderedRecipesTask;
-
-import bolts.Continuation;
-import bolts.Task;
-
-import android.content.Context;
-
-import org.ieatta.activity.LeadImageCollection;
-import org.ieatta.activity.Page;
-import org.ieatta.activity.PageProperties;
-import org.ieatta.activity.PageTitle;
-import org.ieatta.activity.PageViewModel;
-import org.ieatta.activity.history.HistoryEntry;
 import org.ieatta.database.models.DBEvent;
 import org.ieatta.database.models.DBPhoto;
 import org.ieatta.database.models.DBRecipe;
@@ -38,8 +25,7 @@ import org.ieatta.database.models.DBTeam;
 import org.ieatta.database.provide.PhotoUsedType;
 import org.ieatta.database.query.LocalDatabaseQuery;
 import org.ieatta.database.realm.RealmModelReader;
-
-import android.support.annotation.VisibleForTesting;
+import org.ieatta.provide.IEAEditKey;
 
 import bolts.Continuation;
 import bolts.Task;

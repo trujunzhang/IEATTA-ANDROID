@@ -1,46 +1,18 @@
 package org.ieatta.tasks;
 
 
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
-import com.tableview.adapter.NSIndexPath;
-import com.tableview.adapter.RecyclerOnItemClickListener;
-import com.tableview.RecycleViewManager;
+import android.content.Context;
+import android.location.Location;
+import android.support.annotation.VisibleForTesting;
 
 import org.ieatta.R;
+import org.ieatta.activity.PageViewModel;
 import org.ieatta.activity.history.HistoryEntry;
 import org.ieatta.cells.IEANearRestaurantsCell;
 import org.ieatta.cells.model.SectionTitleCellModel;
 import org.ieatta.database.models.DBRestaurant;
-import org.ieatta.provide.IEAEditKey;
-import org.ieatta.provide.MainSegueIdentifier;
-import org.ieatta.tasks.NearRestaurantsTask;
-import org.ieatta.utils.LocationUtil;
-import org.ieatta.views.ObservableWebView;
-
-import bolts.Continuation;
-import bolts.Task;
-
-import android.content.Context;
-import android.location.Location;
-
-import com.parse.ParseGeoPoint;
-
-import org.ieatta.activity.PageViewModel;
-import org.ieatta.activity.history.HistoryEntry;
-import org.ieatta.cells.IEANearRestaurantsCell;
-import org.ieatta.database.models.DBRestaurant;
 import org.ieatta.database.query.LocalDatabaseQuery;
-
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-
-import android.support.annotation.VisibleForTesting;
+import org.ieatta.provide.IEAEditKey;
 
 import bolts.Continuation;
 import bolts.Task;
