@@ -26,7 +26,7 @@ public class EventDetailFragment extends DetailFragment {
 
     @Override
     public void loadPage(HistoryEntry entry) {
-        task = new EventDetailTask(entry,this.getContext(),this.model);
+        task = new EventDetailTask(entry,this.getActivity(),this.model);
 
         task.setupWebView(webView);
         task.prepareUI();

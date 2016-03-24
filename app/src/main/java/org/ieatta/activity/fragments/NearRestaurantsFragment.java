@@ -45,7 +45,7 @@ public class NearRestaurantsFragment extends PageFragment {
 
     @Override
     public void loadPage(HistoryEntry entry) {
-        this.task = new NearRestaurantsTask(entry,this.getContext(),this.model);
+        this.task = new NearRestaurantsTask(entry,this.getActivity(),this.model);
 
         this.task.setupWebView(webView);
         this.task.prepareUI();
