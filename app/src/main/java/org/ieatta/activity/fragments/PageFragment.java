@@ -49,7 +49,8 @@ import org.wikipedia.views.SwipeRefreshLayoutWithScroll;
 import org.wikipedia.views.WikiDrawerLayout;
 
 import java.util.LinkedList;
-public abstract class PageFragment extends Fragment implements BackPressedHandler {
+
+public class PageFragment extends Fragment implements BackPressedHandler {
     private IEAApp app;
 
     protected PageLoadStrategy pageLoadStrategy;
@@ -110,7 +111,7 @@ public abstract class PageFragment extends Fragment implements BackPressedHandle
         this.pushBackStack = pushBackStack;
         this.stagedScrollY = stagedScrollY;
 
-        task = MainSegueIdentifier.getFragment(entry,this.getActivity(),this.model);
+        task = MainSegueIdentifier.getFragment(entry, this.getActivity(), this.model);
 
         task.setupWebView(webView);
         task.prepareUI();
