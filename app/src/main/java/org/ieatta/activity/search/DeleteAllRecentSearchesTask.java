@@ -1,4 +1,4 @@
-package org.ieatta.activity.fragments.search;
+package org.ieatta.activity.search;
 
 import android.content.Context;
 

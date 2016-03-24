@@ -1,4 +1,4 @@
-package org.ieatta.activity.fragments.search;
+package org.ieatta.activity.search;
 
 import android.os.Bundle;
 import android.os.Handler;

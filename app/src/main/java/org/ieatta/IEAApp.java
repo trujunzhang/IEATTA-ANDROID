@@ -12,7 +12,7 @@ import android.support.annotation.NonNull;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.squareup.otto.Bus;
 
-import org.ieatta.activity.fragments.search.RecentSearch;
+import org.ieatta.activity.search.RecentSearch;
 import org.ieatta.activity.history.HistoryEntry;
 import org.ieatta.parse.ParseAPI;
 import org.ieatta.server.cache.CacheImageUtil;

@@ -4,8 +4,7 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 
 import org.ieatta.activity.editing.EditHandler;
-import org.ieatta.activity.fragments.PageFragment;
-import org.ieatta.activity.fragments.search.SearchBarHideHandler;
+import org.ieatta.activity.search.SearchBarHideHandler;
 import org.ieatta.activity.leadimages.LeadImagesHandler;
 import org.ieatta.views.ObservableWebView;
 import org.wikipedia.views.SwipeRefreshLayoutWithScroll;

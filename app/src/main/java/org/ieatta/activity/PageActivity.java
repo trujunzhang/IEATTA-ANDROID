@@ -16,13 +16,11 @@ import com.squareup.otto.Bus;
 
 import org.ieatta.IEAApp;
 import org.ieatta.R;
-import org.ieatta.activity.fragments.PageFragment;
-import org.ieatta.activity.fragments.search.SearchArticlesFragment;
-import org.ieatta.activity.fragments.search.SearchBarHideHandler;
+import org.ieatta.activity.search.SearchArticlesFragment;
+import org.ieatta.activity.search.SearchBarHideHandler;
 import org.ieatta.activity.history.HistoryEntry;
 import org.ieatta.activity.settings.SettingsActivity;
 import org.ieatta.provide.MainSegueIdentifier;
-import org.ieatta.utils.LocationUtil;
 import org.wikipedia.activity.ThemedActionBarActivity;
 
 

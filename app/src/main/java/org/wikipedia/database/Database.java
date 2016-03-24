@@ -4,7 +4,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import org.ieatta.activity.fragments.search.RecentSearch;
+import org.ieatta.activity.search.RecentSearch;
 import org.ieatta.activity.history.HistoryEntry;
 
 public class Database extends SQLiteOpenHelper {
