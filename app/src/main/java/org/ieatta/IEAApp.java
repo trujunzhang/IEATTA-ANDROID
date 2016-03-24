@@ -18,6 +18,7 @@ import org.ieatta.server.recurring.SyncRecurringTask;
 import org.wikipedia.ViewAnimations;
 import org.wikipedia.crash.CrashReporter;
 import org.wikipedia.crash.hockeyapp.HockeyAppCrashReporter;
+import org.wikipedia.database.Database;
 import org.wikipedia.drawable.DrawableUtil;
 import org.wikipedia.settings.Prefs;
 import org.wikipedia.theme.Theme;
@@ -33,6 +34,8 @@ import java.util.UUID;
 public class IEAApp extends Application {
     private static final String HTTPS_PROTOCOL = "https";
     private static final int EVENT_LOG_TESTING_ID = new Random().nextInt(Integer.MAX_VALUE);
+
+    private Database database;
 
     private float screenDensity;
     public float getScreenDensity() {
@@ -111,11 +114,18 @@ public class IEAApp extends Application {
         ViewAnimations.init(resources);
         screenDensity = resources.getDisplayMetrics().density;
 
+        database = new Database(this);
+
         new SyncRecurringTask().prepareTimer();
     }
 
     public Bus getBus() {
         return bus;
+    }
+
+
+    public Database getDatabase() {
+        return database;
     }
 
     /**

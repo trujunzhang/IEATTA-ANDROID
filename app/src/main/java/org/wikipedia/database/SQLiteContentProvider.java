@@ -12,8 +12,9 @@ import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import org.wikipedia.BuildConfig;
-import org.wikipedia.WikipediaApp;
+import org.ieatta.BuildConfig;
+import org.ieatta.IEAApp;
+
 
 public abstract class SQLiteContentProvider extends ContentProvider {
     private final DatabaseTable<?> databaseTable;
@@ -23,7 +24,7 @@ public abstract class SQLiteContentProvider extends ContentProvider {
     }
 
     protected Database getDatabase() {
-        return WikipediaApp.getInstance().getDatabase();
+        return IEAApp.getInstance().getDatabase();
     }
 
     private final UriMatcher uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
