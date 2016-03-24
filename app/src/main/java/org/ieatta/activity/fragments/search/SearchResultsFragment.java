@@ -42,6 +42,27 @@ import java.text.Collator;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.facebook.drawee.view.SimpleDraweeView;
+
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.text.Html;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.BaseAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
+
+import java.text.Collator;
+import java.util.ArrayList;
+import java.util.List;
+
 public class SearchResultsFragment extends Fragment {
     private static final int BATCH_SIZE = 20;
     private static final int DELAY_MILLIS = 300;

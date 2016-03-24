@@ -201,7 +201,7 @@ public class PageActivity extends ThemedActionBarActivity {
         if (savedInstanceState != null) {
             isZeroEnabled = savedInstanceState.getBoolean("pausedZeroEnabledState");
             if (savedInstanceState.getBoolean("isSearching")) {
-//                searchFragment.openSearch();
+                searchFragment.openSearch();
             }
             String language = savedInstanceState.getString(LANGUAGE_CODE_BUNDLE_KEY);
 
@@ -250,7 +250,7 @@ public class PageActivity extends ThemedActionBarActivity {
             //getSupportActionBar().setTitle("");
             // If we're in the search state, then get out of it.
             if (isSearching()) {
-//                searchFragment.closeSearch();
+                searchFragment.closeSearch();
             }
             // also make sure we're not inside an action mode
 //            if (isCabOpen()) {
@@ -322,7 +322,7 @@ public class PageActivity extends ThemedActionBarActivity {
     @Override
     public boolean onSearchRequested() {
         showToolbar();
-//        searchFragment.openSearch();
+        searchFragment.openSearch();
         return true;
     }
 
