@@ -29,7 +29,7 @@ public class OrderedRecipesTaskTest {
     @Before
     public void setUp() throws Exception {
         HistoryEntry entry = new HistoryEntry(MainSegueIdentifier.detailOrderedRecipesSegueIdentifier,eventUUID,teamUUID);
-        this.task = new OrderedRecipesTask(entry,null,null);
+        this.task = new OrderedRecipesTask(entry);
     }
 
     @Test

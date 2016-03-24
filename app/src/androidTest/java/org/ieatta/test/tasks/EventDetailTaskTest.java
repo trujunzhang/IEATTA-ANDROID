@@ -27,7 +27,7 @@ public class EventDetailTaskTest {
     @Before
     public void setUp() throws Exception {
         HistoryEntry entry = new HistoryEntry(MainSegueIdentifier.detailEventSegueIdentifier,eventUUID);
-        this.task = new EventDetailTask(entry,null,null);
+        this.task = new EventDetailTask(entry);
     }
 
     @Test

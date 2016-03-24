@@ -30,7 +30,7 @@ public class RecipeDetailTaskTest {
     @Before
     public void setUp() throws Exception {
         HistoryEntry entry = new HistoryEntry(MainSegueIdentifier.detailRecipeSegueIdentifier,recipeUUID);
-        this.task = new RecipeDetailTask(entry,null,null);
+        this.task = new RecipeDetailTask(entry);
     }
 
     @Test
