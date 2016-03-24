@@ -77,7 +77,7 @@ public class DetailPageLoadStrategy implements PageLoadStrategy {
     @Override
     @SuppressWarnings("checkstyle:parameternumber")
     public void setUp(@NonNull PageViewModel model,
-                      @NonNull DetailFragment fragment,
+                      @NonNull PageFragment fragment,
                       @NonNull SwipeRefreshLayoutWithScroll refreshView,
                       @NonNull ObservableWebView webView,
                       @NonNull SearchBarHideHandler searchBarHideHandler,
