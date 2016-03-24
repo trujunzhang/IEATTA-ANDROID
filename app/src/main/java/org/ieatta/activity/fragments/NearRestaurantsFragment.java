@@ -83,8 +83,7 @@ public class NearRestaurantsFragment extends PageFragment {
 
         this.setupUI();
 
-        Location location = LocationUtil.getLocation();
-        task.executeTask(location).onSuccess(new Continuation<Void, Object>() {
+        task.executeTask(LocationUtil.getLocation()).onSuccess(new Continuation<Void, Object>() {
             @Override
             public Object then(Task<Void> task) throws Exception {
                 NearRestaurantsFragment.this.postLoadPage();
