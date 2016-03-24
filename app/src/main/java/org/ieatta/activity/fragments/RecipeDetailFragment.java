@@ -53,6 +53,7 @@ public class RecipeDetailFragment extends DetailFragment {
     @Override
     public void loadPage(HistoryEntry entry) {
         this.task = new RecipeDetailTask(entry,this.getContext(),this.model);
+
         manager.startManagingWithDelegate(webView);
         manager.setOnItemClickListener(itemClickListener);
 

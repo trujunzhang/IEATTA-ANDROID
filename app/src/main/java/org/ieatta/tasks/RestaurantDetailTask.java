@@ -1,9 +1,12 @@
 package org.ieatta.tasks;
 
+import android.content.Context;
+
 import org.ieatta.activity.Page;
 import org.ieatta.activity.PageProperties;
 import org.ieatta.activity.PageTitle;
 import org.ieatta.activity.LeadImageCollection;
+import org.ieatta.activity.PageViewModel;
 import org.ieatta.activity.gallery.GalleryCollection;
 import org.ieatta.activity.history.HistoryEntry;
 import org.ieatta.cells.model.ReviewsCellModel;
@@ -23,6 +26,32 @@ import java.util.List;
 import bolts.Continuation;
 import bolts.Task;
 import io.realm.RealmResults;
+import android.os.Bundle;
+import android.view.View;
+
+import com.tableview.RecycleViewManager;
+import com.tableview.adapter.NSIndexPath;
+import com.tableview.adapter.RecyclerOnItemClickListener;
+import com.tableview.utils.CollectionUtil;
+
+import org.ieatta.R;
+import org.ieatta.activity.history.HistoryEntry;
+import org.ieatta.cells.IEAGalleryThumbnailCell;
+import org.ieatta.cells.IEARestaurantEventsCell;
+import org.ieatta.cells.IEAReviewsCell;
+import org.ieatta.cells.headerfooterview.IEAFooterView;
+import org.ieatta.cells.headerfooterview.IEAHeaderView;
+import org.ieatta.cells.model.IEAFooterViewModel;
+import org.ieatta.cells.model.IEAGalleryThumbnail;
+import org.ieatta.cells.model.IEAHeaderViewModel;
+import org.ieatta.cells.model.SectionTitleCellModel;
+import org.ieatta.provide.IEAEditKey;
+import org.ieatta.tasks.RestaurantDetailTask;
+
+import bolts.Continuation;
+import bolts.Task;
+
+import static butterknife.ButterKnife.findById;
 
 public class RestaurantDetailTask extends FragmentTask {
 
@@ -32,8 +61,14 @@ public class RestaurantDetailTask extends FragmentTask {
     public GalleryCollection thumbnailGalleryCollection;
     private LeadImageCollection leadImageCollection; // for restaurants
 
-    public RestaurantDetailTask(HistoryEntry entry) {
-        super(entry);
+    public RestaurantDetailTask(HistoryEntry entry, Context context, PageViewModel model) {
+        super(entry, context, model);
+    }
+
+    enum RestaurantDetailSection {
+        section_events,//= 0
+        section_gallery_thumbnail,//= 1
+        section_reviews,//= 2
     }
 
     /**
@@ -76,6 +111,32 @@ public class RestaurantDetailTask extends FragmentTask {
                 return null;
             }
         });
+    }
+
+    @Override
+    public void prepareUI() {
+        this.manager.setRegisterHeaderView(IEAHeaderView.getType());
+        this.manager.setRegisterFooterView(IEAFooterView.getType());
+
+        this.manager.setRegisterCellClass(IEARestaurantEventsCell.getType(), RestaurantDetailSection.section_events.ordinal());
+        this.manager.setRegisterCellClass(IEAGalleryThumbnailCell.getType(), RestaurantDetailSection.section_gallery_thumbnail.ordinal());
+        this.manager.setRegisterCellClass(IEAReviewsCell.getType(), RestaurantDetailSection.section_reviews.ordinal());
+
+        this.manager.appendSectionTitleCell(new SectionTitleCellModel(IEAEditKey.Section_Title, R.string.Events_Recorded), RestaurantDetailSection.section_events.ordinal());
+        this.manager.appendSectionTitleCell(new SectionTitleCellModel(IEAEditKey.Section_Title, R.string.Reviews), RestaurantDetailSection.section_reviews.ordinal());
+    }
+
+    @Override
+    public void postUI() {
+        this.manager.setHeaderItem(new IEAHeaderViewModel(this.getEmptyHeaderViewHeight()), IEAHeaderView.getType());
+        this.manager.setFooterItem(new IEAFooterViewModel(), IEAFooterView.getType());
+
+        this.manager.setSectionItems(this.events, RestaurantDetailSection.section_events.ordinal());
+
+//        this.manager.setSectionItems(CollectionUtil.createList(new IEAGalleryThumbnail(this.this.thumbnailGalleryCollection, this.galleryViewListener)), RestaurantDetailSection.section_gallery_thumbnail.ordinal());
+        this.manager.setSectionItems(this.reviewsCellModelList, RestaurantDetailSection.section_reviews.ordinal());
+
+        model.setPage(this.getPage());
     }
 
     public Page getPage() {
