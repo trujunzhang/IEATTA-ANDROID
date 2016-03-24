@@ -68,6 +68,7 @@ public class DetailPageLoadStrategy implements PageLoadStrategy {
     private ErrorCallback networkErrorCallback;
 
     // copied fields
+    private PageViewModel model;
     private PageFragment fragment;
     private PageActivity activity;
     private ObservableWebView webView;
@@ -79,12 +80,14 @@ public class DetailPageLoadStrategy implements PageLoadStrategy {
 
     @Override
     @SuppressWarnings("checkstyle:parameternumber")
-    public void setUp(@NonNull DetailFragment fragment,
+    public void setUp(@NonNull PageViewModel model,
+            @NonNull DetailFragment fragment,
                       @NonNull SwipeRefreshLayoutWithScroll refreshView,
                       @NonNull ObservableWebView webView,
                       @NonNull SearchBarHideHandler searchBarHideHandler,
                       @NonNull LeadImagesHandler leadImagesHandler,
                         @NonNull List<PageBackStackItem> backStack) {
+        this.model = model;
         this.fragment = fragment;
         activity = (PageActivity) fragment.getActivity();
         this.refreshView = refreshView;
@@ -143,7 +146,7 @@ public class DetailPageLoadStrategy implements PageLoadStrategy {
             return;
         }
         PageBackStackItem item = backStack.get(backStack.size() - 1);
-//        item.setScrollY(webView.getScrollY());
+        item.setScrollY(webView.getScrollY());
     }
 
     @Override
@@ -228,8 +231,8 @@ public class DetailPageLoadStrategy implements PageLoadStrategy {
      * Push the current page title onto the backstack.
      */
     private void pushBackStack() {
-//        PageBackStackItem item = new PageBackStackItem(model.getTitleOriginal(), model.getCurEntry());
-//        backStack.add(item);
+        PageBackStackItem item = new PageBackStackItem( model.getCurEntry());
+        backStack.add(item);
     }
 
 //    private boolean isPageEditable(Page page) {

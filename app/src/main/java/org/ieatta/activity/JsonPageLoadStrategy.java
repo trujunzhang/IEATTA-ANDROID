@@ -82,7 +82,8 @@ public class JsonPageLoadStrategy implements PageLoadStrategy {
 
     @Override
     @SuppressWarnings("checkstyle:parameternumber")
-    public void setUp(@NonNull DetailFragment fragment,
+    public void setUp(@NonNull PageViewModel model,
+            @NonNull DetailFragment fragment,
                       @NonNull SwipeRefreshLayoutWithScroll refreshView,
                       @NonNull ObservableWebView webView,
                       @NonNull SearchBarHideHandler searchBarHideHandler,

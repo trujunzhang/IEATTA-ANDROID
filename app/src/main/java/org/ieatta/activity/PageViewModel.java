@@ -2,6 +2,8 @@ package org.ieatta.activity;
 
 import android.support.annotation.Nullable;
 
+import org.ieatta.activity.history.HistoryEntry;
+
 /**
  * Shared data between PageFragment and PageLoadStrategy
  */
@@ -9,6 +11,7 @@ public class PageViewModel {
     @Nullable private Page page;
     private PageTitle title;
     private PageTitle titleOriginal;
+    private HistoryEntry curEntry;
 
     @Nullable
     public Page getPage() {
@@ -34,5 +37,14 @@ public class PageViewModel {
 
     public void setTitleOriginal(PageTitle titleOriginal) {
         this.titleOriginal = titleOriginal;
+    }
+
+
+    public HistoryEntry getCurEntry() {
+        return curEntry;
+    }
+
+    public void setCurEntry(HistoryEntry curEntry) {
+        this.curEntry = curEntry;
     }
 }

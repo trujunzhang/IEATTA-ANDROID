@@ -42,9 +42,6 @@ import static butterknife.ButterKnife.findById;
 
 public abstract class DetailFragment extends PageFragment implements BackPressedHandler, LeadImagesHandler.OnContentHeightChangedListener {
 
-    private IEAApp app;
-    protected PageViewModel model;
-    protected PageLoadStrategy pageLoadStrategy;
 
     public static final int TOC_ACTION_SHOW = 0;
     public static final int TOC_ACTION_HIDE = 1;
@@ -111,14 +108,6 @@ public abstract class DetailFragment extends PageFragment implements BackPressed
         }
     };
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        app = (IEAApp) getActivity().getApplicationContext();
-        model = new PageViewModel();
-        pageLoadStrategy = new DetailPageLoadStrategy();
-    }
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -152,7 +141,7 @@ public abstract class DetailFragment extends PageFragment implements BackPressed
         searchBarHideHandler.setScrollView(webView);
         leadImagesHandler = new LeadImagesHandler(this, webView, articleHeaderView);
         leadImagesHandler.addOnContentHeightChangedListener(this);
-        pageLoadStrategy.setUp(this, refreshView, webView, searchBarHideHandler,
+        pageLoadStrategy.setUp(model,this, refreshView, webView, searchBarHideHandler,
                 leadImagesHandler, new LinkedList<PageBackStackItem>());
         pageLoadStrategy.onLeadSectionLoaded(0);
     }
@@ -238,4 +227,5 @@ public abstract class DetailFragment extends PageFragment implements BackPressed
                     GalleryFunnel.SOURCE_LINK_PREVIEW);
         }
     };
+
 }

@@ -3,10 +3,6 @@ package org.ieatta.activity;
 import org.ieatta.activity.history.HistoryEntry;
 
 public class PageBackStackItem {
-    private final PageTitle title;
-    public PageTitle getTitle() {
-        return title;
-    }
 
     private final HistoryEntry historyEntry;
     public HistoryEntry getHistoryEntry() {
@@ -21,8 +17,7 @@ public class PageBackStackItem {
         this.scrollY = scrollY;
     }
 
-    public PageBackStackItem(PageTitle title, HistoryEntry historyEntry) {
-        this.title = title;
+    public PageBackStackItem( HistoryEntry historyEntry) {
         this.historyEntry = historyEntry;
     }
 }
