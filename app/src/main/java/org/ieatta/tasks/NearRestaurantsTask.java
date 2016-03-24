@@ -4,15 +4,20 @@ package org.ieatta.tasks;
 import android.content.Context;
 import android.location.Location;
 import android.support.annotation.VisibleForTesting;
+import android.view.View;
+
+import com.tableview.adapter.NSIndexPath;
 
 import org.ieatta.R;
 import org.ieatta.activity.PageViewModel;
+import org.ieatta.activity.fragments.NearRestaurantsFragment;
 import org.ieatta.activity.history.HistoryEntry;
 import org.ieatta.cells.IEANearRestaurantsCell;
 import org.ieatta.cells.model.SectionTitleCellModel;
 import org.ieatta.database.models.DBRestaurant;
 import org.ieatta.database.query.LocalDatabaseQuery;
 import org.ieatta.provide.IEAEditKey;
+import org.ieatta.provide.MainSegueIdentifier;
 
 import bolts.Continuation;
 import bolts.Task;
@@ -29,6 +34,16 @@ public class NearRestaurantsTask extends FragmentTask {
     }
 
     public RealmResults<DBRestaurant> restaurants;
+
+    @Override
+    public void onItemClick(View view, NSIndexPath indexPath, Object model, int position, boolean isLongClick) {
+        if (model instanceof DBRestaurant) {
+            DBRestaurant item = (DBRestaurant) model;
+            HistoryEntry newEntry =new HistoryEntry(MainSegueIdentifier.detailRestaurantSegueIdentifier,item.getUUID());
+
+//            NearRestaurantsFragment.this.loadPage(newEntry,false,getWebViewScrollY(webView));
+        }
+    }
 
     enum NearRestaurantSection {
         section_more_items,//= 0

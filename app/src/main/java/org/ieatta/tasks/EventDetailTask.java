@@ -2,6 +2,10 @@ package org.ieatta.tasks;
 
 import android.content.Context;
 import android.support.annotation.VisibleForTesting;
+import android.view.View;
+
+import com.tableview.adapter.NSIndexPath;
+
 import org.ieatta.R;
 import org.ieatta.activity.LeadImageCollection;
 import org.ieatta.activity.Page;
@@ -46,6 +50,11 @@ public class EventDetailTask extends FragmentTask {
 
     public EventDetailTask(HistoryEntry entry, Context context, PageViewModel model) {
         super(entry, context, model);
+    }
+
+    @Override
+    public void onItemClick(View view, NSIndexPath indexPath, Object model, int position, boolean isLongClick) {
+
     }
 
     enum EventDetailSection {

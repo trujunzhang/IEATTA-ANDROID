@@ -2,6 +2,9 @@ package org.ieatta.tasks;
 
 import android.content.Context;
 import android.support.annotation.VisibleForTesting;
+import android.view.View;
+
+import com.tableview.adapter.NSIndexPath;
 
 import org.ieatta.R;
 import org.ieatta.activity.LeadImageCollection;
@@ -61,6 +64,11 @@ public class RecipeDetailTask extends FragmentTask {
 
     public RecipeDetailTask(HistoryEntry entry, Context context, PageViewModel model) {
         super(entry, context, model);
+    }
+
+    @Override
+    public void onItemClick(View view, NSIndexPath indexPath, Object model, int position, boolean isLongClick) {
+
     }
 
     enum RecipeDetailSection {

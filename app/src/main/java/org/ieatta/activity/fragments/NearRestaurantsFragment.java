@@ -25,18 +25,10 @@ public class NearRestaurantsFragment extends PageFragment {
     public final RecyclerOnItemClickListener itemClickListener = new RecyclerOnItemClickListener() {
         @Override
         public void onItemClick(View view, NSIndexPath indexPath, Object model, int position, boolean isLongClick) {
-            if (model instanceof DBRestaurant) {
-                DBRestaurant item = (DBRestaurant) model;
-                HistoryEntry newEntry =new HistoryEntry(MainSegueIdentifier.detailRestaurantSegueIdentifier,item.getUUID());
 
-                NearRestaurantsFragment.this.loadPage(newEntry,false,getWebViewScrollY(webView));
-            }
         }
     };
 
-
-
-    private RecycleViewManager manager;
     private ObservableWebView webView;
 
     private NearRestaurantsTask task ;
@@ -55,8 +47,6 @@ public class NearRestaurantsFragment extends PageFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        manager = new RecycleViewManager(this.getActivity().getApplicationContext());
     }
 
 
@@ -64,9 +54,7 @@ public class NearRestaurantsFragment extends PageFragment {
     public void loadPage(HistoryEntry entry) {
         this.task = new NearRestaurantsTask(entry,this.getContext(),this.model);
 
-        manager.startManagingWithDelegate(webView);
-        manager.setOnItemClickListener(itemClickListener);
-
+        this.task.setupWebView(webView);
         this.task.prepareUI();
 
         task.executeTask().onSuccess(new Continuation<Void, Object>() {

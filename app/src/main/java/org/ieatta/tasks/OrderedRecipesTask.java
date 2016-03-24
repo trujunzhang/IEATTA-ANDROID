@@ -3,6 +3,9 @@ package org.ieatta.tasks;
 
 import android.content.Context;
 import android.support.annotation.VisibleForTesting;
+import android.view.View;
+
+import com.tableview.adapter.NSIndexPath;
 
 import org.ieatta.R;
 import org.ieatta.activity.LeadImageCollection;
@@ -42,6 +45,11 @@ public class OrderedRecipesTask extends FragmentTask {
     private String eventUUID;
     private String teamUUID;
     private String recipeUUID;
+
+    @Override
+    public void onItemClick(View view, NSIndexPath indexPath, Object model, int position, boolean isLongClick) {
+
+    }
 
     enum OrderedRecipesSection {
         section_recipes,       //= 0
