@@ -524,9 +524,9 @@ public class PageActivity extends ThemedActionBarActivity {
 
 //        HistoryEntry entry = new HistoryEntry(MainSegueIdentifier.nearbyRestaurants, LocationUtil.getLocation());
 //        HistoryEntry entry =new HistoryEntry(MainSegueIdentifier.detailRestaurantSegueIdentifier,restaurantUUID);
-        HistoryEntry entry =new HistoryEntry(MainSegueIdentifier.detailEventSegueIdentifier,eventUUID);
-//        HistoryEntry entry =new HistoryEntry(MainSegueIdentifier.detailOrderedRecipesSegueIdentifier);
-//        HistoryEntry entry =new HistoryEntry(MainSegueIdentifier.detailRecipeSegueIdentifier);
+//        HistoryEntry entry =new HistoryEntry(MainSegueIdentifier.detailEventSegueIdentifier,eventUUID);
+//        HistoryEntry entry =new HistoryEntry(MainSegueIdentifier.detailOrderedRecipesSegueIdentifier,eventUUID,teamUUID);
+        HistoryEntry entry =new HistoryEntry(MainSegueIdentifier.detailRecipeSegueIdentifier,restaurantUUID);
         loadPage(entry, TabPosition.CURRENT_TAB, false, true);
     }
 
