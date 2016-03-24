@@ -84,8 +84,7 @@ public abstract class PageFragment extends Fragment implements BackPressedHandle
     protected PageLoadStrategy pageLoadStrategy;
     protected PageViewModel model;
 
-
-    public abstract void loadPage(HistoryEntry entry);
+    public abstract void loadPage(HistoryEntry entry, boolean pushBackStack, int stagedScrollY);
 
     public abstract void postLoadPage();
 

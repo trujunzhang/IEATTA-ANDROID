@@ -41,8 +41,6 @@ import java.util.LinkedList;
 import static butterknife.ButterKnife.findById;
 
 public abstract class DetailFragment extends PageFragment implements BackPressedHandler, LeadImagesHandler.OnContentHeightChangedListener {
-
-
     public static final int TOC_ACTION_SHOW = 0;
     public static final int TOC_ACTION_HIDE = 1;
     public static final int TOC_ACTION_TOGGLE = 2;

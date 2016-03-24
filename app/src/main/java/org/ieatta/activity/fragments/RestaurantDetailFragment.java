@@ -71,7 +71,7 @@ public class RestaurantDetailFragment extends DetailFragment {
     }
 
     @Override
-    public void loadPage(HistoryEntry entry) {
+    public void loadPage(HistoryEntry entry, boolean pushBackStack, int stagedScrollY) {
         manager.startManagingWithDelegate(webView);
         manager.setOnItemClickListener(itemClickListener);
 

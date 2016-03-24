@@ -524,7 +524,7 @@ public class PageActivity extends ThemedActionBarActivity {
 //        PageFragment fragment = new EventDetailFragment();
 //        PageFragment fragment = new OrderedRecipesFragment();
 
-        HistoryEntry entry =new HistoryEntry(MainSegueIdentifier.nearbyRestaurants);
+        HistoryEntry entry = new HistoryEntry(MainSegueIdentifier.nearbyRestaurants);
 //        HistoryEntry entry =new HistoryEntry(MainSegueIdentifier.detailRestaurantSegueIdentifier);
 //        HistoryEntry entry =new HistoryEntry(MainSegueIdentifier.detailEventSegueIdentifier);
 //        HistoryEntry entry =new HistoryEntry(MainSegueIdentifier.detailOrderedRecipesSegueIdentifier);
@@ -558,8 +558,8 @@ public class PageActivity extends ThemedActionBarActivity {
                     return;
                 }
                 if (position == TabPosition.CURRENT_TAB) {
-                    frag.loadPage(entry);
-//                    frag.loadPage(title, entry, PageLoadStrategy.Cache.FALLBACK, true);
+//                    frag.loadPage(entry);
+                    frag.loadPage(entry, true, 0);
                 } else if (position == TabPosition.NEW_TAB_BACKGROUND) {
 //                    frag.openInNewBackgroundTabFromMenu(title, entry);
                 } else {
