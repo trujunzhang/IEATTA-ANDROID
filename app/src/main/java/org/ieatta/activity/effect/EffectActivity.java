@@ -44,7 +44,7 @@ public class EffectActivity extends AppCompatActivity {
     private ObservableWebView webView;
 
     private RecycleViewManager manager;
-    private RestaurantDetailTask task = new RestaurantDetailTask();
+    private RestaurantDetailTask task ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,7 +88,7 @@ public class EffectActivity extends AppCompatActivity {
 
         String restaurantUUID = "1CE562A4-A978-4B75-9B7B-2F3CF9F42A04"; // The Flying Falafel
 //        String restaurantUUID = "33ED9F31-F6A5-43A4-8D11-8E511CA0BD39"; // The Spice Jar
-        task.executeTask(restaurantUUID).onSuccess(new Continuation<Void, Object>() {
+        task.executeTask().onSuccess(new Continuation<Void, Object>() {
             @Override
             public Object then(Task<Void> task) throws Exception {
                 EffectActivity.this.reloadPage();
