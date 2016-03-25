@@ -35,6 +35,8 @@ import org.wikipedia.views.WikiDrawerLayout;
 
 import java.util.LinkedList;
 
+import static butterknife.ButterKnife.findById;
+
 public class PageFragment extends Fragment implements BackPressedHandler {
     private IEAApp app;
 
@@ -67,6 +69,12 @@ public class PageFragment extends Fragment implements BackPressedHandler {
 
     @Nullable
     private PageScrollFunnel pageScrollFunnel;
+
+    private Tab currentTab = new Tab();
+
+    public Tab getCurrentTab() {
+        return this.currentTab;
+    }
 
     /**
      * Whether to save the full page content as soon as it's loaded.
@@ -170,25 +178,11 @@ public class PageFragment extends Fragment implements BackPressedHandler {
         refreshView.setScrollableChild(webView);
         refreshView.setOnRefreshListener(pageRefreshListener);
 
-        // TODO: initialize View references in onCreateView().
-        articleHeaderView = (ArticleHeaderView) rootView.findViewById(R.id.page_header_view);
+
 
         return rootView;
     }
 
-    public void postLoadPage() {
-        task.postUI();
-
-        searchBarHideHandler = getPageActivity().getSearchBarHideHandler();
-        searchBarHideHandler.setScrollView(webView);
-        leadImagesHandler = new LeadImagesHandler(this, webView, articleHeaderView);
-//        leadImagesHandler.addOnContentHeightChangedListener(this);
-        pageLoadStrategy.setUp(model, this, refreshView, webView, searchBarHideHandler,
-                leadImagesHandler, new LinkedList<PageBackStackItem>());
-        pageLoadStrategy.onLeadSectionLoaded(0);
-
-        pageLoadStrategy.load(pushBackStack, stagedScrollY);
-    }
 
     private void initWebViewListeners() {
         webView.addOnUpOrCancelMotionEventListener(new ObservableWebView.OnUpOrCancelMotionEventListener() {
@@ -302,7 +296,7 @@ public class PageFragment extends Fragment implements BackPressedHandler {
     }
 
     public void loadPage(HistoryEntry entry, boolean pushBackStack) {
-        this.loadPage(entry,pushBackStack,0);
+        this.loadPage(entry, pushBackStack, 0);
     }
 
     public void loadPage(HistoryEntry entry, boolean pushBackStack, int stagedScrollY) {
@@ -329,6 +323,40 @@ public class PageFragment extends Fragment implements BackPressedHandler {
                 return null;
             }
         });
+    }
+
+
+    public void postLoadPage() {
+        task.postUI();
+
+//        searchBarHideHandler = getPageActivity().getSearchBarHideHandler();
+//        searchBarHideHandler.setScrollView(webView);
+//        leadImagesHandler = new LeadImagesHandler(this, webView, articleHeaderView);
+////        leadImagesHandler.addOnContentHeightChangedListener(this);
+//        pageLoadStrategy.setUp(model, this, refreshView, webView, searchBarHideHandler,
+//                leadImagesHandler, new LinkedList<PageBackStackItem>());
+
+        pageLoadStrategy.onLeadSectionLoaded(0);
+
+        pageLoadStrategy.load(pushBackStack, stagedScrollY);
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        setHasOptionsMenu(true);
+
+        editHandler = new EditHandler();
+        pageLoadStrategy.setEditHandler(editHandler);
+
+        // TODO: initialize View references in onCreateView().
+        articleHeaderView = findById(getView(), R.id.page_header_view);
+        leadImagesHandler = new LeadImagesHandler(this, webView, articleHeaderView);
+        searchBarHideHandler = getPageActivity().getSearchBarHideHandler();
+        searchBarHideHandler.setScrollView(webView);
+
+        pageLoadStrategy.setUp(model, this, refreshView, webView,  searchBarHideHandler,
+                leadImagesHandler, getCurrentTab().getBackStack());
     }
 
 }
