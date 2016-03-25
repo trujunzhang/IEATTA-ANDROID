@@ -244,7 +244,11 @@ public class DetailPageLoadStrategy implements PageLoadStrategy {
 
 
     public void onLeadSectionLoaded(int startSequenceNum) {
-        if (!fragment.isAdded() || !sequenceNumber.inSync(startSequenceNum)) {
+//        if (!fragment.isAdded() || !sequenceNumber.inSync(startSequenceNum)) {
+//            return;
+//        }
+
+        if (!fragment.isAdded() ) {
             return;
         }
 
@@ -253,24 +257,6 @@ public class DetailPageLoadStrategy implements PageLoadStrategy {
             public void run() {
             }
         });
-
-        // Fetch larger thumbnail URL from the network, and save it to our DB.
-//        (new PageImagesTask(app.getAPIForSite(model.getTitle().getSite()), model.getTitle().getSite(),
-//                Arrays.asList(new PageTitle[]{model.getTitle()}), WikipediaApp.PREFERRED_THUMB_SIZE) {
-//            @Override
-//            public void onFinish(Map<PageTitle, String> result) {
-//                if (result.containsKey(model.getTitle())) {
-//                    PageImage pi = new PageImage(model.getTitle(), result.get(model.getTitle()));
-//                    app.getDatabaseClient(PageImage.class).upsert(pi, PageImageDatabaseTable.SELECTION_KEYS);
-//                    updateThumbnail(result.get(model.getTitle()));
-//                }
-//            }
-//
-//            @Override
-//            public void onCatch(Throwable caught) {
-//                L.w(caught);
-//            }
-//        }).execute();
     }
 
     private class LeadImageLayoutListener implements LeadImagesHandler.OnLeadImageLayoutListener {
