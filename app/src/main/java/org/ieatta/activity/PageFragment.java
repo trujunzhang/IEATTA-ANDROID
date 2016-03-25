@@ -251,50 +251,6 @@ public class PageFragment extends Fragment implements BackPressedHandler {
         pageScrollFunnel = null;
     }
 
-
-    public void loadPage(PageTitle title, HistoryEntry entry, PageLoadStrategy.Cache cachePreference,
-                         boolean pushBackStack) {
-        loadPage(title, entry, cachePreference, pushBackStack, 0);
-    }
-
-    public void loadPage(PageTitle title, HistoryEntry entry, PageLoadStrategy.Cache cachePreference,
-                         boolean pushBackStack, int stagedScrollY) {
-        loadPage(title, entry, cachePreference, pushBackStack, stagedScrollY, false);
-    }
-
-    public void loadPage(PageTitle title, HistoryEntry entry, PageLoadStrategy.Cache cachePreference,
-                         boolean pushBackStack, boolean pageRefreshed) {
-        loadPage(title, entry, cachePreference, pushBackStack, 0, pageRefreshed);
-    }
-
-    /**
-     * Load a new page into the WebView in this fragment.
-     * This shall be the single point of entry for loading content into the WebView, whether it's
-     * loading an entirely new page, refreshing the current page, retrying a failed network
-     * request, etc.
-     * @param title Title of the new page to load.
-     * @param entry HistoryEntry associated with the new page.
-     * @param cachePreference Whether to try loading the page from cache or from network.
-     * @param pushBackStack Whether to push the new page onto the backstack.
-     */
-    public void loadPage(PageTitle title, HistoryEntry entry, PageLoadStrategy.Cache cachePreference,
-                         boolean pushBackStack, int stagedScrollY, boolean pageRefreshed) {
-
-        errorState = false;
-
-        model.setTitle(title);
-        model.setTitleOriginal(title);
-        model.setCurEntry(entry);
-
-        this.pageRefreshed = pageRefreshed;
-        if (!pageRefreshed) {
-            savedPageCheckComplete = false;
-        }
-
-        closePageScrollFunnel();
-        pageLoadStrategy.load(pushBackStack, stagedScrollY);
-    }
-
     public void loadPage(HistoryEntry entry, boolean pushBackStack) {
         this.loadPage(entry, pushBackStack, 0);
     }
