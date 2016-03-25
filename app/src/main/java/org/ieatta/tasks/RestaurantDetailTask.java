@@ -47,10 +47,10 @@ import io.realm.RealmResults;
 
 public class RestaurantDetailTask extends FragmentTask {
 
-    public DBRestaurant restaurant;
-    public RealmResults<DBEvent> events;
-    public List<IEAReviewsCellModel> reviewsCellModelList;
-    public GalleryCollection thumbnailGalleryCollection;
+    private DBRestaurant restaurant;
+    private RealmResults<DBEvent> events;
+    private List<IEAReviewsCellModel> reviewsCellModelList;
+    private GalleryCollection thumbnailGalleryCollection;
     private LeadImageCollection leadImageCollection; // for restaurants
 
     @VisibleForTesting
