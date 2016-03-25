@@ -16,6 +16,11 @@ public class IEAReviewsCell extends IEAViewHolder {
         return new CellType(IEAReviewsCell.class, R.layout.cell_reviews);
     }
 
+    @Override
+    protected boolean shouldOnClickItem() {
+        return false;
+    }
+
     private AvatarView avatarView;
 
     private TextView titleLabel;

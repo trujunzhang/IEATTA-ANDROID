@@ -42,7 +42,6 @@ public class NearRestaurantsTask extends FragmentTask {
             HistoryEntry newEntry =new HistoryEntry(MainSegueIdentifier.detailRestaurantSegueIdentifier,item.getUUID());
 
             ((PageActivity)NearRestaurantsTask.this.activity).loadPage(newEntry);
-//            NearRestaurantsFragment.this.loadPage(newEntry,false,getWebViewScrollY(webView));
         }
     }
 
