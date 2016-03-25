@@ -287,12 +287,6 @@ public class DetailPageLoadStrategy implements PageLoadStrategy {
     private void displayLeadSection() {
         Page page = model.getPage();
 
-//        sendMarginPayload();
-//
-//        sendLeadSectionPayload(page);
-//
-//        sendMiscPayload(page);
-//
         if (webView.getVisibility() != View.VISIBLE) {
             webView.setVisibility(View.VISIBLE);
         }
