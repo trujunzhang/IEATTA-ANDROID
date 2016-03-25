@@ -8,6 +8,7 @@ import android.util.AttributeSet;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.ViewConfiguration;
+import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.graphics.Canvas;
 
@@ -226,5 +227,14 @@ public class ObservableWebView extends RecyclerView {
 
     public void setLastTop(int lastTop) {
         this.lastTop = lastTop;
+    }
+
+    public void scrollToLastTop(int lastTop){
+        this.lastTop = lastTop;
+
+//        LayoutManager layoutManager = this.getLayoutManager();
+//        layoutManager.scrollToPosition(lastTop);
+
+        this.smoothScrollBy(0,lastTop);
     }
 }
