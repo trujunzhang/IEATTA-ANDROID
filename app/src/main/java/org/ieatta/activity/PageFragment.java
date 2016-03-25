@@ -300,9 +300,9 @@ public class PageFragment extends Fragment implements BackPressedHandler {
     }
 
     public void loadPage(HistoryEntry entry, boolean pushBackStack, int stagedScrollY) {
+        model.setPushBackStack(pushBackStack);
+        model.setStagedScrollY(stagedScrollY);
         model.setCurEntry(entry);
-
-        pageLoadStrategy.load(pushBackStack, stagedScrollY);
 
         task = MainSegueIdentifier.getFragment(entry, this.getActivity(), this.model);
 
@@ -329,7 +329,7 @@ public class PageFragment extends Fragment implements BackPressedHandler {
         task.manager.reloadTableView();
 
         pageLoadStrategy.onLeadSectionLoaded(0);
-//        pageLoadStrategy.load(pushBackStack, stagedScrollY);
+        pageLoadStrategy.load(model.isPushBackStack(), model.getStagedScrollY());
     }
 
     @Override

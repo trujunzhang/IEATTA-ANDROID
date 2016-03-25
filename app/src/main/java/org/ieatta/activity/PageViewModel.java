@@ -13,6 +13,9 @@ public class PageViewModel {
     private PageTitle titleOriginal;
     private HistoryEntry curEntry;
 
+    private boolean pushBackStack;
+    private int stagedScrollY;
+
     @Nullable
     public Page getPage() {
         return page;
@@ -46,5 +49,21 @@ public class PageViewModel {
 
     public void setCurEntry(HistoryEntry curEntry) {
         this.curEntry = curEntry;
+    }
+
+    public boolean isPushBackStack() {
+        return pushBackStack;
+    }
+
+    public void setPushBackStack(boolean pushBackStack) {
+        this.pushBackStack = pushBackStack;
+    }
+
+    public int getStagedScrollY() {
+        return stagedScrollY;
+    }
+
+    public void setStagedScrollY(int stagedScrollY) {
+        this.stagedScrollY = stagedScrollY;
     }
 }
