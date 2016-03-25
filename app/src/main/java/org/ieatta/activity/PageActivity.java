@@ -394,16 +394,16 @@ public class PageActivity extends ThemedActionBarActivity {
     }
 
     private void openSearch(@Nullable final CharSequence query) {
-//        fragmentContainerView.post(new Runnable() {
-//            @Override
-//            public void run() {
-//                searchFragment.setLaunchedFromWidget(true);
-//                searchFragment.openSearch();
-//                if (query != null) {
-//                    searchFragment.setSearchText(query);
-//                }
-//            }
-//        });
+        fragmentContainerView.post(new Runnable() {
+            @Override
+            public void run() {
+                searchFragment.setLaunchedFromWidget(true);
+                searchFragment.openSearch();
+                if (query != null) {
+                    searchFragment.setSearchText(query);
+                }
+            }
+        });
     }
 
     /**
