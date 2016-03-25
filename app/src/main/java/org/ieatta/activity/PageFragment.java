@@ -337,7 +337,6 @@ public class PageFragment extends Fragment implements BackPressedHandler {
 //                leadImagesHandler, new LinkedList<PageBackStackItem>());
 
         pageLoadStrategy.onLeadSectionLoaded(0);
-
         pageLoadStrategy.load(pushBackStack, stagedScrollY);
     }
 
