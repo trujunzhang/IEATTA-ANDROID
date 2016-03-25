@@ -50,9 +50,7 @@ public class PageFragment extends Fragment implements BackPressedHandler {
     protected ObservableWebView webView;
     private FragmentTask task;
 
-    private static final int TOC_BUTTON_HIDE_DELAY = 2000;
     private static final int REFRESH_SPINNER_ADDITIONAL_OFFSET = (int) (16 * IEAApp.getInstance().getScreenDensity());
-
 
     @NonNull
     private TabFunnel tabFunnel = new TabFunnel();
