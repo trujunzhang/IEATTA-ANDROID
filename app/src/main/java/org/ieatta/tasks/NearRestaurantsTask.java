@@ -39,9 +39,9 @@ public class NearRestaurantsTask extends FragmentTask {
     public void onItemClick(View view, NSIndexPath indexPath, Object model, int position, boolean isLongClick) {
         if (model instanceof DBRestaurant) {
             DBRestaurant item = (DBRestaurant) model;
-            HistoryEntry newEntry =new HistoryEntry(MainSegueIdentifier.detailRestaurantSegueIdentifier,item.getUUID());
 
-            ((PageActivity)NearRestaurantsTask.this.activity).loadPage(newEntry);
+            ((PageActivity)NearRestaurantsTask.this.activity).loadPage(
+                    new HistoryEntry(MainSegueIdentifier.detailRestaurantSegueIdentifier,item.getUUID()));
         }
     }
 

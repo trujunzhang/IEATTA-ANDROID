@@ -11,6 +11,7 @@ import com.tableview.utils.CollectionUtil;
 import org.ieatta.R;
 import org.ieatta.activity.LeadImageCollection;
 import org.ieatta.activity.Page;
+import org.ieatta.activity.PageActivity;
 import org.ieatta.activity.PageProperties;
 import org.ieatta.activity.PageTitle;
 import org.ieatta.activity.PageViewModel;
@@ -37,6 +38,7 @@ import org.ieatta.database.realm.DBBuilder;
 import org.ieatta.database.realm.RealmModelReader;
 import org.ieatta.parse.AppConstant;
 import org.ieatta.provide.IEAEditKey;
+import org.ieatta.provide.MainSegueIdentifier;
 
 import java.util.List;
 
@@ -63,7 +65,12 @@ public class RestaurantDetailTask extends FragmentTask {
 
     @Override
     public void onItemClick(View view, NSIndexPath indexPath, Object model, int position, boolean isLongClick) {
+        if (model instanceof DBEvent) {
+            DBEvent item = (DBEvent) model;
 
+            ((PageActivity)RestaurantDetailTask.this.activity).loadPage(
+                    new HistoryEntry(MainSegueIdentifier.detailEventSegueIdentifier,item.getUUID()));
+        }
     }
 
     enum RestaurantDetailSection {
