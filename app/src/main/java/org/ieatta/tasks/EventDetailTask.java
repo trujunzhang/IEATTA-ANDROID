@@ -57,11 +57,11 @@ public class EventDetailTask extends FragmentTask {
 
     @Override
     public void onItemClick(View view, NSIndexPath indexPath, Object model, int position, boolean isLongClick) {
-        if (model instanceof DBTeam) {
-            DBTeam item = (DBTeam) model;
+        if (model instanceof IEAOrderedPeople) {
+            IEAOrderedPeople item = (IEAOrderedPeople) model;
 
             ((PageActivity)EventDetailTask.this.activity).loadPage(
-                    new HistoryEntry(MainSegueIdentifier.detailOrderedRecipesSegueIdentifier,EventDetailTask.this.event.getUUID(),item.getUUID()));
+                    new HistoryEntry(MainSegueIdentifier.detailOrderedRecipesSegueIdentifier,item.getEventUUID(),item.getTeamUUID()));
         }
     }
 
