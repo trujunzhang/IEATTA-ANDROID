@@ -43,9 +43,9 @@ public class PageFragment extends Fragment implements BackPressedHandler {
     protected PageLoadStrategy pageLoadStrategy;
     protected PageViewModel model;
 
-    private HistoryEntry entry;
-    private boolean pushBackStack;
-    private int stagedScrollY;
+//    private HistoryEntry entry;
+//    private boolean pushBackStack;
+//    private int stagedScrollY;
 
     protected ObservableWebView webView;
     private FragmentTask task;
@@ -300,9 +300,7 @@ public class PageFragment extends Fragment implements BackPressedHandler {
     }
 
     public void loadPage(HistoryEntry entry, boolean pushBackStack, int stagedScrollY) {
-        this.entry = entry;
-        this.pushBackStack = pushBackStack;
-        this.stagedScrollY = stagedScrollY;
+        model.setCurEntry(entry);
 
         pageLoadStrategy.load(pushBackStack, stagedScrollY);
 
@@ -331,7 +329,7 @@ public class PageFragment extends Fragment implements BackPressedHandler {
         task.manager.reloadTableView();
 
         pageLoadStrategy.onLeadSectionLoaded(0);
-        pageLoadStrategy.load(pushBackStack, stagedScrollY);
+//        pageLoadStrategy.load(pushBackStack, stagedScrollY);
     }
 
     @Override

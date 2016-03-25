@@ -112,6 +112,8 @@ public class DetailPageLoadStrategy implements PageLoadStrategy {
 
         // If this is a refresh, don't clear the webview contents
         this.stagedScrollY = stagedScrollY;
+
+        this.webView.setLastTop(stagedScrollY);
     }
 
     @Override
@@ -133,7 +135,7 @@ public class DetailPageLoadStrategy implements PageLoadStrategy {
             return;
         }
         PageBackStackItem item = backStack.get(backStack.size() - 1);
-        item.setScrollY(webView.getScrollY());
+        item.setScrollY(webView.getLastTop());
     }
 
     @Override
