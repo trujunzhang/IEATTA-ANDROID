@@ -9,6 +9,7 @@ import android.view.View;
 import com.tableview.adapter.NSIndexPath;
 
 import org.ieatta.R;
+import org.ieatta.activity.PageActivity;
 import org.ieatta.activity.PageViewModel;
 import org.ieatta.activity.history.HistoryEntry;
 import org.ieatta.cells.IEANearRestaurantsCell;
@@ -40,6 +41,7 @@ public class NearRestaurantsTask extends FragmentTask {
             DBRestaurant item = (DBRestaurant) model;
             HistoryEntry newEntry =new HistoryEntry(MainSegueIdentifier.detailRestaurantSegueIdentifier,item.getUUID());
 
+            ((PageActivity)NearRestaurantsTask.this.activity).loadPage(newEntry);
 //            NearRestaurantsFragment.this.loadPage(newEntry,false,getWebViewScrollY(webView));
         }
     }

@@ -554,7 +554,7 @@ public class PageActivity extends ThemedActionBarActivity {
                     return;
                 }
                 if (position == TabPosition.CURRENT_TAB) {
-                    frag.loadPage(entry, false, 0);
+                    frag.loadPage(entry, true);
                 } else if (position == TabPosition.NEW_TAB_BACKGROUND) {
 //                    frag.openInNewBackgroundTabFromMenu(title, entry);
                 } else {

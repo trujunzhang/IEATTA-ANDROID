@@ -25,7 +25,7 @@ public abstract class FragmentTask implements RecyclerOnItemClickListener,LeadIm
     protected RecycleViewManager manager;
     protected PageViewModel model;
     public HistoryEntry entry;
-    private Activity activity;
+    protected Activity activity;
     private ObservableWebView webView;
 
     @VisibleForTesting
