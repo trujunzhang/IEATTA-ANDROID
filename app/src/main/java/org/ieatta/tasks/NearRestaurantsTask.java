@@ -8,6 +8,7 @@ import android.view.View;
 
 import com.tableview.adapter.NSIndexPath;
 
+import org.ieatta.IEAApp;
 import org.ieatta.R;
 import org.ieatta.activity.PageActivity;
 import org.ieatta.activity.PageViewModel;
@@ -82,7 +83,8 @@ public class NearRestaurantsTask extends FragmentTask {
 
     @Override
     public void postUI() {
-        this.manager.setHeaderItem(new IEAHeaderViewModel(this.getEmptyHeaderViewHeight()), IEAHeaderView.getType());
+        int actionBarHeight = IEAApp.getInstance().getActionBarHeight();
+        this.manager.setHeaderItem(new IEAHeaderViewModel(actionBarHeight), IEAHeaderView.getType());
         this.manager.setAndRegisterSectionItems(IEANearRestaurantsCell.getType(), this.restaurants, NearRestaurantSection.section_restaurants.ordinal());
     }
 
