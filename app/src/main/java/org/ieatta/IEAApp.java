@@ -284,17 +284,4 @@ public class IEAApp extends Application {
         //noinspection unchecked
         return (DatabaseClient<T>) databaseClients.get(cls);
     }
-
-    public int getActionBarHeight(){
-        // Calculate ActionBar height
-        TypedValue tv = new TypedValue();
-        if (getTheme().resolveAttribute(android.R.attr.actionBarSize, tv, true))
-        {
-            int actionBarHeight = TypedValue.complexToDimensionPixelSize(tv.data, getResources().getDisplayMetrics());
-            return actionBarHeight;
-        }
-
-        return  -1;
-    }
-
 }

@@ -181,4 +181,8 @@ public class SearchBarHideHandler implements ObservableWebView.OnScrollChangeLis
     private Resources getResources() {
         return context.getResources();
     }
+
+    public int getActionBarHeight(){
+        return quickReturnView.getHeight();
+    }
 }

@@ -83,7 +83,7 @@ public class NearRestaurantsTask extends FragmentTask {
 
     @Override
     public void postUI() {
-        int actionBarHeight = IEAApp.getInstance().getActionBarHeight();
+        int actionBarHeight = 200;
         this.manager.setHeaderItem(new IEAHeaderViewModel(actionBarHeight), IEAHeaderView.getType());
         this.manager.setAndRegisterSectionItems(IEANearRestaurantsCell.getType(), this.restaurants, NearRestaurantSection.section_restaurants.ordinal());
     }
