@@ -5,7 +5,7 @@ import org.ieatta.database.models.DBTeam;
 import org.ieatta.database.utils.DBUtil;
 import org.ieatta.provide.IEAEditKey;
 
-public class ReviewsCellModel extends EditBaseCellModel {
+public class IEAReviewsCellModel extends EditBaseCellModel {
     public String reviewUUID;
     public String userUUID;
     public String title;
@@ -14,7 +14,7 @@ public class ReviewsCellModel extends EditBaseCellModel {
     public int ratingValue ;
     public String reviewContent ;
 
-    public ReviewsCellModel(DBReview review, DBTeam team) {
+    public IEAReviewsCellModel(DBReview review, DBTeam team) {
         super(IEAEditKey.Unknow);
 
         this.reviewUUID = review.getUUID();

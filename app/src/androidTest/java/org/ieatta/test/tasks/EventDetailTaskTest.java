@@ -3,7 +3,7 @@ package org.ieatta.test.tasks;
 import android.support.test.runner.AndroidJUnit4;
 
 import org.ieatta.activity.history.HistoryEntry;
-import org.ieatta.cells.model.ReviewsCellModel;
+import org.ieatta.cells.model.IEAReviewsCellModel;
 import org.ieatta.provide.MainSegueIdentifier;
 import org.ieatta.tasks.EventDetailTask;
 import org.junit.Before;
@@ -37,7 +37,7 @@ public class EventDetailTaskTest {
             @Override
             public Void then(Task<Void> task) throws Exception {
                 EventDetailTask _task = EventDetailTaskTest.this.task;
-                List<ReviewsCellModel> reviewsCellModelList = _task.reviewsCellModelList;
+                List<IEAReviewsCellModel> reviewsCellModelList = _task.reviewsCellModelList;
                 return null;
             }
         }).continueWith(new Continuation<Void, Void>() {

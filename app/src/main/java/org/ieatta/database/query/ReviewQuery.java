@@ -1,6 +1,6 @@
 package org.ieatta.database.query;
 
-import org.ieatta.cells.model.ReviewsCellModel;
+import org.ieatta.cells.model.IEAReviewsCellModel;
 import org.ieatta.database.models.DBReview;
 import org.ieatta.database.models.DBTeam;
 import org.ieatta.database.provide.ReviewType;
@@ -21,7 +21,7 @@ public class ReviewQuery {
 
     //  return new RealmModelReader<DBEvent>(DBEvent.class).fetchResults(new DBBuilder(), false);// for test
 
-    public Task<List<ReviewsCellModel>> queryReview(String reviewRef, ReviewType type) {
+    public Task<List<IEAReviewsCellModel>> queryReview(String reviewRef, ReviewType type) {
         return new RealmModelReader<DBReview>(DBReview.class).fetchResults(
                 new DBBuilder()
                         .whereEqualTo(AppConstant.kPAPFieldReviewRefKey, reviewRef)
@@ -39,11 +39,11 @@ public class ReviewQuery {
                 DBBuilder builder = new DBBuilder().whereContainedIn(AppConstant.kPAPFieldObjectUUIDKey, list);
                 return new RealmModelReader<DBTeam>(DBTeam.class).fetchResults(builder, false);
             }
-        }).onSuccessTask(new Continuation<RealmResults<DBTeam>, Task<List<ReviewsCellModel>>>() {
+        }).onSuccessTask(new Continuation<RealmResults<DBTeam>, Task<List<IEAReviewsCellModel>>>() {
             @Override
-            public Task<List<ReviewsCellModel>> then(Task<RealmResults<DBTeam>> task) throws Exception {
+            public Task<List<IEAReviewsCellModel>> then(Task<RealmResults<DBTeam>> task) throws Exception {
                 if(task.getResult() == null) {
-                    List<ReviewsCellModel> list = new LinkedList<>();
+                    List<IEAReviewsCellModel> list = new LinkedList<>();
                     return Task.forResult(list);
                 }
 

@@ -6,7 +6,7 @@ import org.ieatta.activity.gallery.GalleryCollection;
 import org.ieatta.activity.gallery.GalleryItem;
 import org.ieatta.analytics.DBConvertFunnel;
 import org.ieatta.cells.model.IEAOrderedPeople;
-import org.ieatta.cells.model.ReviewsCellModel;
+import org.ieatta.cells.model.IEAReviewsCellModel;
 import org.ieatta.database.models.DBEvent;
 import org.ieatta.database.models.DBPeopleInEvent;
 import org.ieatta.database.models.DBPhoto;
@@ -65,10 +65,10 @@ public class DBConvert {
         return AppConstant.getAnonymousUser();
     }
 
-    public static List<ReviewsCellModel> toReviewsCellModels(RealmResults<DBReview> reviews, RealmResults<DBTeam> teams) {
-        List<ReviewsCellModel> list = new LinkedList<>();
+    public static List<IEAReviewsCellModel> toReviewsCellModels(RealmResults<DBReview> reviews, RealmResults<DBTeam> teams) {
+        List<IEAReviewsCellModel> list = new LinkedList<>();
         for (DBReview review : reviews) {
-            ReviewsCellModel item = new ReviewsCellModel(review, DBConvert.getTeamUUID(review.getUserRef(), teams));
+            IEAReviewsCellModel item = new IEAReviewsCellModel(review, DBConvert.getTeamUUID(review.getUserRef(), teams));
             list.add(item);
         }
         return list;

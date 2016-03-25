@@ -1,7 +1,6 @@
 package org.ieatta.tasks;
 
 import android.app.Activity;
-import android.content.Context;
 import android.support.annotation.VisibleForTesting;
 import android.view.View;
 
@@ -22,7 +21,7 @@ import org.ieatta.cells.headerfooterview.IEAHeaderView;
 import org.ieatta.cells.model.IEAFooterViewModel;
 import org.ieatta.cells.model.IEAHeaderViewModel;
 import org.ieatta.cells.model.IEAOrderedPeople;
-import org.ieatta.cells.model.ReviewsCellModel;
+import org.ieatta.cells.model.IEAReviewsCellModel;
 import org.ieatta.cells.model.SectionTitleCellModel;
 import org.ieatta.database.models.DBEvent;
 import org.ieatta.database.models.DBPeopleInEvent;
@@ -73,7 +72,7 @@ public class EventDetailTask extends FragmentTask {
     public DBRestaurant restaurant;
     public DBEvent event;
     public List<IEAOrderedPeople> orderedPeopleList;
-    public List<ReviewsCellModel> reviewsCellModelList;
+    public List<IEAReviewsCellModel> reviewsCellModelList;
     private LeadImageCollection leadImageCollection; // for restaurants
 
     private String restaurantUUID;
@@ -118,15 +117,15 @@ public class EventDetailTask extends FragmentTask {
                 List<String> peoplePoints = DBConvert.getPeoplePoints(task.getResult());
                 return new RealmModelReader<DBTeam>(DBTeam.class).fetchResults(LocalDatabaseQuery.getObjectsByUUIDs(peoplePoints), false);
             }
-        }).onSuccessTask(new Continuation<RealmResults<DBTeam>, Task<List<ReviewsCellModel>>>() {
+        }).onSuccessTask(new Continuation<RealmResults<DBTeam>, Task<List<IEAReviewsCellModel>>>() {
             @Override
-            public Task<List<ReviewsCellModel>> then(Task<RealmResults<DBTeam>> task) throws Exception {
+            public Task<List<IEAReviewsCellModel>> then(Task<RealmResults<DBTeam>> task) throws Exception {
                 EventDetailTask.this.orderedPeopleList = DBConvert.toOrderedPeopleList(task.getResult(), EventDetailTask.this.event);
                 return new ReviewQuery().queryReview(eventUUID, ReviewType.Review_Event);
             }
-        }).onSuccess(new Continuation<List<ReviewsCellModel>, Void>() {
+        }).onSuccess(new Continuation<List<IEAReviewsCellModel>, Void>() {
             @Override
-            public Void then(Task<List<ReviewsCellModel>> task) throws Exception {
+            public Void then(Task<List<IEAReviewsCellModel>> task) throws Exception {
                 EventDetailTask.this.reviewsCellModelList = task.getResult();
                 return null;
             }

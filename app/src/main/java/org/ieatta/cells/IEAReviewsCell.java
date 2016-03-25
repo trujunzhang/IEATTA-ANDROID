@@ -8,7 +8,7 @@ import com.tableview.adapter.IEAViewHolder;
 import com.tableview.storage.models.CellType;
 
 import org.ieatta.R;
-import org.ieatta.cells.model.ReviewsCellModel;
+import org.ieatta.cells.model.IEAReviewsCellModel;
 import org.ieatta.views.AvatarView;
 
 public class IEAReviewsCell extends IEAViewHolder {
@@ -42,7 +42,7 @@ public class IEAReviewsCell extends IEAViewHolder {
 
     @Override
     public void render(Object value) {
-        ReviewsCellModel model = (ReviewsCellModel) value;
+        IEAReviewsCellModel model = (IEAReviewsCellModel) value;
 
         this.avatarView.loadNewPhotoByModel(model.userUUID);
 

@@ -3,7 +3,7 @@ package org.ieatta.test.tasks;
 import android.support.test.runner.AndroidJUnit4;
 
 import org.ieatta.activity.history.HistoryEntry;
-import org.ieatta.cells.model.ReviewsCellModel;
+import org.ieatta.cells.model.IEAReviewsCellModel;
 import org.ieatta.database.models.DBEvent;
 import org.ieatta.provide.MainSegueIdentifier;
 import org.ieatta.server.cache.ThumbnailImageUtil;
@@ -43,9 +43,9 @@ public class RestaurantDetailTaskTest {
             public Void then(Task<Void> task) throws Exception {
                 RestaurantDetailTask _task = RestaurantDetailTaskTest.this.task;
                 RealmResults<DBEvent> events = _task.events;
-                List<ReviewsCellModel> cellModelList = _task.reviewsCellModelList;
+                List<IEAReviewsCellModel> cellModelList = _task.reviewsCellModelList;
                 if (cellModelList.size() > 0) {
-                    ReviewsCellModel cellModel = cellModelList.get(0);
+                    IEAReviewsCellModel cellModel = cellModelList.get(0);
                     String usedRef = cellModel.userUUID;
                     File imageUrl = ThumbnailImageUtil.sharedInstance.getImageFile(usedRef);
                     if (imageUrl != null && imageUrl.exists()) {

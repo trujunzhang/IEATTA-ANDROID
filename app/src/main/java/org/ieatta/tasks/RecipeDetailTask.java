@@ -1,7 +1,6 @@
 package org.ieatta.tasks;
 
 import android.app.Activity;
-import android.content.Context;
 import android.support.annotation.VisibleForTesting;
 import android.view.View;
 
@@ -23,7 +22,7 @@ import org.ieatta.cells.headerfooterview.IEAHeaderView;
 import org.ieatta.cells.model.IEAFooterViewModel;
 import org.ieatta.cells.model.IEAGalleryThumbnail;
 import org.ieatta.cells.model.IEAHeaderViewModel;
-import org.ieatta.cells.model.ReviewsCellModel;
+import org.ieatta.cells.model.IEAReviewsCellModel;
 import org.ieatta.cells.model.SectionTitleCellModel;
 import org.ieatta.database.models.DBEvent;
 import org.ieatta.database.models.DBPhoto;
@@ -52,7 +51,7 @@ public class RecipeDetailTask extends FragmentTask {
     public DBRecipe recipe;
 
     private LeadImageCollection leadImageCollection; // for recipes
-    public List<ReviewsCellModel> reviewsCellModelList;
+    public List<IEAReviewsCellModel> reviewsCellModelList;
     public GalleryCollection thumbnailGalleryCollection;
 
     private String restaurantUUID;
@@ -125,15 +124,15 @@ public class RecipeDetailTask extends FragmentTask {
                 RecipeDetailTask.this.leadImageCollection = DBConvert.toLeadImageCollection(task.getResult());
                 return ThumbnailImageUtil.sharedInstance.getImagesListTask(recipeUUID);
             }
-        }).onSuccessTask(new Continuation<List<File>, Task<List<ReviewsCellModel>>>() {
+        }).onSuccessTask(new Continuation<List<File>, Task<List<IEAReviewsCellModel>>>() {
             @Override
-            public Task<List<ReviewsCellModel>> then(Task<List<File>> task) throws Exception {
+            public Task<List<IEAReviewsCellModel>> then(Task<List<File>> task) throws Exception {
                 RecipeDetailTask.this.thumbnailGalleryCollection = DBConvert.toGalleryCollection(task.getResult());
                 return new ReviewQuery().queryReview(recipeUUID, ReviewType.Review_Recipe);
             }
-        }).onSuccess(new Continuation<List<ReviewsCellModel>, Void>() {
+        }).onSuccess(new Continuation<List<IEAReviewsCellModel>, Void>() {
             @Override
-            public Void then(Task<List<ReviewsCellModel>> task) throws Exception {
+            public Void then(Task<List<IEAReviewsCellModel>> task) throws Exception {
                 RecipeDetailTask.this.reviewsCellModelList = task.getResult();
                 return null;
             }
