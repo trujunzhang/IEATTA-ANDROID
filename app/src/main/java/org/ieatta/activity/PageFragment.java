@@ -128,6 +128,11 @@ public class PageFragment extends Fragment implements BackPressedHandler {
         return model.getPage();
     }
 
+    @Nullable
+    public FragmentTask getTask() {
+        return this.task;
+    }
+
     public PageTitle getTitle() {
         return model.getTitle();
     }

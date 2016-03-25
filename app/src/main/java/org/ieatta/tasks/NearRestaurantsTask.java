@@ -35,6 +35,11 @@ public class NearRestaurantsTask extends FragmentTask {
         super(entry, activity, model);
     }
 
+    @Override
+    public boolean isMainPage() {
+        return true;
+    }
+
     public RealmResults<DBRestaurant> restaurants;
 
     @Override

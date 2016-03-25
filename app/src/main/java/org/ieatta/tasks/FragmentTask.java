@@ -80,4 +80,8 @@ public abstract class FragmentTask implements RecyclerOnItemClickListener,LeadIm
                     GalleryFunnel.SOURCE_LINK_PREVIEW);
         }
     };
+
+    public boolean isMainPage() {
+        return false;
+    }
 }

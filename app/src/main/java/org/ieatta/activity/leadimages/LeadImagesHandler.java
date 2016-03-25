@@ -21,6 +21,7 @@ import org.ieatta.activity.PageProperties;
 import org.ieatta.activity.PageTitle;
 import org.ieatta.activity.Page;
 import org.ieatta.activity.PageFragment;
+import org.ieatta.tasks.FragmentTask;
 import org.ieatta.views.ObservableWebView;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -238,17 +239,15 @@ public class LeadImagesHandler {
             return;
         }
 
-//        if (isMainPage()) {
-//            articleHeaderView.hide();
-//        } else {
-//            if (!isLeadImageEnabled()) {
-//                articleHeaderView.showText();
-//            } else {
-//                articleHeaderView.showTextImage();
-//            }
-//        }
-
-        articleHeaderView.showTextImage();
+        if (isMainPage()) {
+            articleHeaderView.hide();
+        } else {
+            if (!isLeadImageEnabled()) {
+                articleHeaderView.showText();
+            } else {
+                articleHeaderView.showTextImage();
+            }
+        }
 
         // tell our listener that it's ok to start loading the rest of the WebView content
         listener.onLayoutComplete(sequence);
@@ -268,6 +267,7 @@ public class LeadImagesHandler {
 
         setWebViewPaddingTop(padding);
     }
+
 
     private void setWebViewPaddingTop(int padding) {
         JSONObject payload = new JSONObject();
@@ -371,7 +371,8 @@ public class LeadImagesHandler {
     }
 
     private boolean isMainPage() {
-        return false;
+        FragmentTask task = parentFragment.getTask();
+        return task != null && task.isMainPage();
     }
 
     private PageTitle getTitle() {
