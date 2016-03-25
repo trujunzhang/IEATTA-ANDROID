@@ -70,15 +70,13 @@ public class NearRestaurantsTask extends FragmentTask {
     @Override
     public void prepareUI() {
         super.prepareUI();
-
-        this.manager.setRegisterCellClassWhenSelected(IEANearRestaurantsCell.getType(), NearRestaurantSection.section_restaurants.ordinal());
         this.manager.appendSectionTitleCell(new SectionTitleCellModel(IEAEditKey.Section_Title, R.string.Nearby_Restaurants), NearRestaurantSection.section_restaurants.ordinal());
     }
 
     @Override
     public void postUI() {
 
-        this.manager.setSectionItems(this.restaurants, NearRestaurantSection.section_restaurants.ordinal());
+        this.manager.setAndRegisterSectionItems(IEANearRestaurantsCell.getType(), this.restaurants, NearRestaurantSection.section_restaurants.ordinal());
     }
 
 }

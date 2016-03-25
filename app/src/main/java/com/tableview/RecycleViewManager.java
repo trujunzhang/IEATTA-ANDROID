@@ -143,6 +143,11 @@ public class RecycleViewManager {
         getMemoryStorage().updateItem(item, forSectionIndex, row);
     }
 
+    public void setAndRegisterSectionItems(CellType type,List items, int forSectionIndex) {
+        this.setRegisterCellClass(type,forSectionIndex);
+        getMemoryStorage().setItems(items, forSectionIndex);
+    }
+
     public void setSectionItems(List items, int forSectionIndex) {
         getMemoryStorage().setItems(items, forSectionIndex);
     }
@@ -153,6 +158,11 @@ public class RecycleViewManager {
 
     public void removeSectionItemsAtIndexPaths(NSIndexPath[] indexPaths) {
         getMemoryStorage().removeItemsAtIndexPaths(indexPaths);
+    }
+
+    public void appendAndRegisterSectionTitleCell(CellType type,EditBaseCellModel cell, int forSectionIndex) {
+        this.setRegisterCellClass(type,forSectionIndex);
+        this.appendSectionTitleCell(cell, forSectionIndex, IEAViewForHeaderInSectionCell.getType());
     }
 
     public void appendSectionTitleCell(EditBaseCellModel cell, int forSectionIndex) {
