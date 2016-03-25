@@ -22,7 +22,7 @@ import bolts.Task;
 
 public abstract class FragmentTask implements RecyclerOnItemClickListener,LeadImagesHandler.OnContentHeightChangedListener {
 
-    protected RecycleViewManager manager;
+    public RecycleViewManager manager;
     protected PageViewModel model;
     public HistoryEntry entry;
     protected Activity activity;
@@ -46,11 +46,9 @@ public abstract class FragmentTask implements RecyclerOnItemClickListener,LeadIm
 
     public abstract void postUI();
 
-
     protected int getEmptyHeaderViewHeight() {
         return DimenUtil.getDisplayWidthPx();
     }
-
 
     public void setupWebView(ObservableWebView webView) {
         this.webView = webView;

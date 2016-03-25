@@ -116,7 +116,7 @@ public class RecycleViewManager {
     }
 
     public void setHeaderItem(Object item,CellType type) {
-        getMemoryStorage().setHeaderItem(item,type);
+        getMemoryStorage().setHeaderItem(item, type);
     }
 
     public void updateHeaderItem(Object item) {
@@ -124,7 +124,7 @@ public class RecycleViewManager {
     }
 
     public void setFooterItem(Object item,CellType type) {
-        getMemoryStorage().setFooterItem(item,type);
+        getMemoryStorage().setFooterItem(item, type);
     }
 
     public void setRegisterCellClass(CellType type, int forSectionIndex) {
@@ -173,5 +173,9 @@ public class RecycleViewManager {
 
     public void updateTableSections(){
         this.getMemoryStorage().updateTableSections();
+    }
+
+    public void reloadTableView(){
+        this.getMemoryStorage().reloadTableView();
     }
 }

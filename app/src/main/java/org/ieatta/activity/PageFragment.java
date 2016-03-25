@@ -328,6 +328,7 @@ public class PageFragment extends Fragment implements BackPressedHandler {
 
     public void postLoadPage() {
         task.postUI();
+        task.manager.reloadTableView();
 
         pageLoadStrategy.onLeadSectionLoaded(0);
         pageLoadStrategy.load(pushBackStack, stagedScrollY);

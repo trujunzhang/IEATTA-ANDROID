@@ -45,7 +45,7 @@ public class MemoryStorage {
         this.adapter.notifyItemChanged(position);
     }
 
-    private void reloadTableView() {
+    public void reloadTableView() {
         this.updateTableSections();
 
         this.adapter.notifyDataSetChanged();
@@ -74,7 +74,6 @@ public class MemoryStorage {
     public void setItems(List items, int forSectionIndex) {
         SectionModel section = this.verifySection(forSectionIndex);
         section.items = items;
-        this.reloadTableView();
     }
 
     public void updateItem(Object item, int forSectionIndex, int row) {
@@ -94,8 +93,6 @@ public class MemoryStorage {
         // Step2: Create/Add a Header Section.
         SectionModel section = this.verifySection(forSectionIndex);
         section.setHeaderModel(new HeaderModel(model, type));
-
-        // this.reloadTableView();
     }
 
     /// Set section footer model for MemoryStorage
@@ -109,8 +106,6 @@ public class MemoryStorage {
         // Step2: Create/Add a Footer Section.
         SectionModel section = this.verifySection(forSectionIndex);
         section.setFooterModel(new FooterModel(model, type));
-
-        this.reloadTableView();
     }
 
     private SectionModel verifySection(int forSectionIndex) {
