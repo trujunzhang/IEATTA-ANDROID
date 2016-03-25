@@ -10,6 +10,7 @@ import com.tableview.adapter.NSIndexPath;
 import org.ieatta.R;
 import org.ieatta.activity.LeadImageCollection;
 import org.ieatta.activity.Page;
+import org.ieatta.activity.PageActivity;
 import org.ieatta.activity.PageProperties;
 import org.ieatta.activity.PageTitle;
 import org.ieatta.activity.PageViewModel;
@@ -34,6 +35,7 @@ import org.ieatta.database.query.LocalDatabaseQuery;
 import org.ieatta.database.query.ReviewQuery;
 import org.ieatta.database.realm.RealmModelReader;
 import org.ieatta.provide.IEAEditKey;
+import org.ieatta.provide.MainSegueIdentifier;
 import org.wikipedia.util.DimenUtil;
 
 import java.util.List;
@@ -55,10 +57,13 @@ public class EventDetailTask extends FragmentTask {
 
     @Override
     public void onItemClick(View view, NSIndexPath indexPath, Object model, int position, boolean isLongClick) {
+        if (model instanceof DBTeam) {
+            DBTeam item = (DBTeam) model;
 
+            ((PageActivity)EventDetailTask.this.activity).loadPage(
+                    new HistoryEntry(MainSegueIdentifier.detailOrderedRecipesSegueIdentifier,EventDetailTask.this.event.getUUID(),item.getUUID()));
+        }
     }
-
-
 
     enum EventDetailSection {
         section_ordered_people, //= 0

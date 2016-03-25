@@ -1,6 +1,5 @@
 package org.ieatta.tasks;
 
-
 import android.app.Activity;
 import android.content.Context;
 import android.support.annotation.VisibleForTesting;
@@ -51,11 +50,11 @@ public class OrderedRecipesTask extends FragmentTask {
 
     @Override
     public void onItemClick(View view, NSIndexPath indexPath, Object model, int position, boolean isLongClick) {
-        if (model instanceof DBTeam) {
-            DBTeam item = (DBTeam) model;
+        if (model instanceof DBRecipe) {
+            DBRecipe item = (DBRecipe) model;
 
             ((PageActivity)OrderedRecipesTask.this.activity).loadPage(
-                    new HistoryEntry(MainSegueIdentifier.detailOrderedRecipesSegueIdentifier,item.getUUID()));
+                    new HistoryEntry(MainSegueIdentifier.detailRecipeSegueIdentifier,item.getUUID()));
         }
     }
 
@@ -129,7 +128,6 @@ public class OrderedRecipesTask extends FragmentTask {
         this.manager.setSectionItems(this.recipes, OrderedRecipesSection.section_recipes.ordinal());
 
         model.setPage(this.getPage());
-
     }
 
     public Page getPage() {
