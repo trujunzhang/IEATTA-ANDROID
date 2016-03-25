@@ -29,12 +29,13 @@ public class IEAGalleryThumbnailCell extends IEAViewHolder {
     @Override
     public void render(Object value) {
         IEAGalleryThumbnail galleryThumbnail = (IEAGalleryThumbnail) value;
+
         this.setGalleryResult(galleryThumbnail.getResult());
         this.thumbnailGallery.setGalleryViewListener(galleryThumbnail.galleryViewListener);
     }
 
     private void setGalleryResult(GalleryCollection result) {
-        if (result.getItemList().size() > 2) {
+//        if (result.getItemList().size() > 2) {
             thumbnailGallery.setGalleryCollection(result);
 
             // When the visibility is immediately changed, the images flicker. Add a short delay.
@@ -45,6 +46,6 @@ public class IEAGalleryThumbnailCell extends IEAViewHolder {
                     thumbnailGallery.setVisibility(View.VISIBLE);
                 }
             }, animationDelayMillis);
-        }
+//        }
     }
 }
