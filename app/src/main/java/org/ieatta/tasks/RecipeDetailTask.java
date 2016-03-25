@@ -54,11 +54,6 @@ public class RecipeDetailTask extends FragmentTask {
     public List<IEAReviewsCellModel> reviewsCellModelList;
     public GalleryCollection thumbnailGalleryCollection;
 
-    private String restaurantUUID;
-    private String eventUUID;
-    private String teamUUID;
-    private String recipeUUID;
-
     @VisibleForTesting
     public RecipeDetailTask(HistoryEntry entry) {
         super(entry);

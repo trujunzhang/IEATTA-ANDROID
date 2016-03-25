@@ -75,10 +75,6 @@ public class EventDetailTask extends FragmentTask {
     public List<IEAReviewsCellModel> reviewsCellModelList;
     private LeadImageCollection leadImageCollection; // for restaurants
 
-    private String restaurantUUID;
-    private String eventUUID;
-    private String teamUUID;
-    private String recipeUUID;
 
     /**
      * Execute Task for Event detail.

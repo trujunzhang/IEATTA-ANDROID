@@ -43,11 +43,6 @@ public class OrderedRecipesTask extends FragmentTask {
     public RealmResults<DBRecipe> recipes;
     private LeadImageCollection leadImageCollection; // for restaurants
 
-    private String restaurantUUID;
-    private String eventUUID;
-    private String teamUUID;
-    private String recipeUUID;
-
     @Override
     public void onItemClick(View view, NSIndexPath indexPath, Object model, int position, boolean isLongClick) {
         if (model instanceof DBRecipe) {

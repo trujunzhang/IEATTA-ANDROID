@@ -22,6 +22,12 @@ import bolts.Task;
 
 public abstract class FragmentTask implements RecyclerOnItemClickListener,LeadImagesHandler.OnContentHeightChangedListener {
 
+    protected String restaurantUUID;
+    protected String eventUUID;
+    protected String teamUUID;
+    protected String recipeUUID;
+
+
     public RecycleViewManager manager;
     protected PageViewModel model;
     public HistoryEntry entry;
