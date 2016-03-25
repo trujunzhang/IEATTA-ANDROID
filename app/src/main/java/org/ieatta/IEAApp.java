@@ -8,6 +8,7 @@ import android.graphics.drawable.Drawable;
 import android.support.annotation.ColorInt;
 import android.support.annotation.IntRange;
 import android.support.annotation.NonNull;
+import android.util.TypedValue;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.squareup.otto.Bus;
@@ -268,7 +269,6 @@ public class IEAApp extends Application {
         };
     }
 
-
     public <T> DatabaseClient<T> getDatabaseClient(Class<T> cls) {
         if (!databaseClients.containsKey(cls)) {
             DatabaseClient client;
@@ -285,5 +285,16 @@ public class IEAApp extends Application {
         return (DatabaseClient<T>) databaseClients.get(cls);
     }
 
+    public int getActionBarHeight(){
+        // Calculate ActionBar height
+        TypedValue tv = new TypedValue();
+        if (getTheme().resolveAttribute(android.R.attr.actionBarSize, tv, true))
+        {
+            int actionBarHeight = TypedValue.complexToDimensionPixelSize(tv.data, getResources().getDisplayMetrics());
+            return actionBarHeight;
+        }
+
+        return  -1;
+    }
 
 }
