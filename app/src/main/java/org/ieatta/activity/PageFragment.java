@@ -50,16 +50,6 @@ public class PageFragment extends Fragment implements BackPressedHandler {
     protected ObservableWebView webView;
     private FragmentTask task;
 
-
-    public static final int TOC_ACTION_SHOW = 0;
-    public static final int TOC_ACTION_HIDE = 1;
-    public static final int TOC_ACTION_TOGGLE = 2;
-
-    private boolean pageSaved;
-    private boolean pageRefreshed;
-    private boolean savedPageCheckComplete;
-    private boolean errorState = false;
-
     private static final int TOC_BUTTON_HIDE_DELAY = 2000;
     private static final int REFRESH_SPINNER_ADDITIONAL_OFFSET = (int) (16 * IEAApp.getInstance().getScreenDensity());
 
