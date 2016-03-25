@@ -23,11 +23,6 @@ import org.wikipedia.util.DimenUtil;
 import bolts.Task;
 
 public abstract class FragmentTask implements RecyclerOnItemClickListener,LeadImagesHandler.OnContentHeightChangedListener {
-
-    public boolean haveFooterView(){
-        return true;
-    }
-
     protected String restaurantUUID;
     protected String eventUUID;
     protected String teamUUID;
@@ -56,8 +51,7 @@ public abstract class FragmentTask implements RecyclerOnItemClickListener,LeadIm
 
     public void prepareUI(){
         this.manager.setRegisterHeaderView(IEAHeaderView.getType());
-        if(this.haveFooterView() == true)
-            this.manager.setRegisterFooterView(IEAFooterView.getType());
+        this.manager.setRegisterFooterView(IEAFooterView.getType());
     }
 
     public abstract void postUI();
