@@ -16,6 +16,8 @@ public class PageViewModel {
     private boolean pushBackStack;
     private int stagedScrollY;
 
+    private int actionbarHeight;
+
     @Nullable
     public Page getPage() {
         return page;
@@ -42,7 +44,6 @@ public class PageViewModel {
         this.titleOriginal = titleOriginal;
     }
 
-
     public HistoryEntry getCurEntry() {
         return curEntry;
     }
@@ -65,5 +66,13 @@ public class PageViewModel {
 
     public void setStagedScrollY(int stagedScrollY) {
         this.stagedScrollY = stagedScrollY;
+    }
+
+    public int getActionbarHeight() {
+        return actionbarHeight;
+    }
+
+    public void setActionbarHeight(int actionbarHeight) {
+        this.actionbarHeight = actionbarHeight;
     }
 }

@@ -28,7 +28,6 @@ public abstract class FragmentTask implements RecyclerOnItemClickListener,LeadIm
     protected String teamUUID;
     protected String recipeUUID;
 
-
     public RecycleViewManager manager;
     protected PageViewModel model;
     public HistoryEntry entry;

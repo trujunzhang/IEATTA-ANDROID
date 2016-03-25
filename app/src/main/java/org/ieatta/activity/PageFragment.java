@@ -33,8 +33,6 @@ import org.wikipedia.util.DimenUtil;
 import org.wikipedia.views.SwipeRefreshLayoutWithScroll;
 import org.wikipedia.views.WikiDrawerLayout;
 
-import java.util.LinkedList;
-
 import static butterknife.ButterKnife.findById;
 
 public class PageFragment extends Fragment implements BackPressedHandler {
@@ -254,6 +252,7 @@ public class PageFragment extends Fragment implements BackPressedHandler {
         model.setPushBackStack(pushBackStack);
         model.setStagedScrollY(stagedScrollY);
         model.setCurEntry(entry);
+        model.setActionbarHeight(this.getActionBarHeight());
 
         task = MainSegueIdentifier.getFragment(entry, this.getActivity(), this.model);
 
@@ -298,8 +297,12 @@ public class PageFragment extends Fragment implements BackPressedHandler {
         searchBarHideHandler = getPageActivity().getSearchBarHideHandler();
         searchBarHideHandler.setScrollView(webView);
 
-        pageLoadStrategy.setUp(model, this, refreshView, webView,  searchBarHideHandler,
+        pageLoadStrategy.setUp(model, this, refreshView, webView, searchBarHideHandler,
                 leadImagesHandler, getCurrentTab().getBackStack());
+    }
+
+    public int getActionBarHeight(){
+        return searchBarHideHandler.getActionBarHeight();
     }
 
 }
