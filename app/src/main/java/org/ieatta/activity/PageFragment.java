@@ -256,6 +256,8 @@ public class PageFragment extends Fragment implements BackPressedHandler {
     }
 
     public void loadPage(HistoryEntry entry, boolean pushBackStack, int stagedScrollY) {
+        webView.setVisibility(View.GONE);
+
         model.setPushBackStack(pushBackStack);
         model.setStagedScrollY(stagedScrollY);
         model.setCurEntry(entry);
@@ -282,6 +284,7 @@ public class PageFragment extends Fragment implements BackPressedHandler {
 
     public void postLoadPage() {
         task.postUI();
+        webView.setVisibility(View.VISIBLE);
         task.manager.reloadTableView();
 
         pageLoadStrategy.onLeadSectionLoaded(0);
