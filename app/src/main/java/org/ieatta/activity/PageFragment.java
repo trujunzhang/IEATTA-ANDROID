@@ -329,13 +329,6 @@ public class PageFragment extends Fragment implements BackPressedHandler {
     public void postLoadPage() {
         task.postUI();
 
-//        searchBarHideHandler = getPageActivity().getSearchBarHideHandler();
-//        searchBarHideHandler.setScrollView(webView);
-//        leadImagesHandler = new LeadImagesHandler(this, webView, articleHeaderView);
-////        leadImagesHandler.addOnContentHeightChangedListener(this);
-//        pageLoadStrategy.setUp(model, this, refreshView, webView, searchBarHideHandler,
-//                leadImagesHandler, new LinkedList<PageBackStackItem>());
-
         pageLoadStrategy.onLeadSectionLoaded(0);
         pageLoadStrategy.load(pushBackStack, stagedScrollY);
     }
