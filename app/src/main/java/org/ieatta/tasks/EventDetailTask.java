@@ -139,9 +139,6 @@ public class EventDetailTask extends FragmentTask {
 
     @Override
     public void prepareUI() {
-        this.manager.setRegisterHeaderView(IEAHeaderView.getType());
-        this.manager.setRegisterFooterView(IEAFooterView.getType());
-
         this.manager.setRegisterCellClass(IEAOrderedPeopleCell.getType(), EventDetailSection.section_ordered_people.ordinal());
         this.manager.setRegisterCellClass(IEAReviewsCell.getType(), EventDetailSection.section_reviews.ordinal());
 

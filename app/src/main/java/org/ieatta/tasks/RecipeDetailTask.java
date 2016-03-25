@@ -136,9 +136,6 @@ public class RecipeDetailTask extends FragmentTask {
 
     @Override
     public void prepareUI() {
-        this.manager.setRegisterHeaderView(IEAHeaderView.getType());
-        this.manager.setRegisterFooterView(IEAFooterView.getType());
-
         this.manager.setRegisterCellClass(IEAGalleryThumbnailCell.getType(), RecipeDetailSection.section_gallery_thumbnail.ordinal());
         this.manager.setRegisterCellClass(IEAReviewsCell.getType(), RecipeDetailSection.section_reviews.ordinal());
 

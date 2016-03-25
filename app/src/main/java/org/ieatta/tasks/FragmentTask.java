@@ -14,6 +14,8 @@ import org.ieatta.activity.gallery.GalleryThumbnailScrollView;
 import org.ieatta.activity.history.HistoryEntry;
 import org.ieatta.activity.leadimages.LeadImagesHandler;
 import org.ieatta.analytics.GalleryFunnel;
+import org.ieatta.cells.headerfooterview.IEAFooterView;
+import org.ieatta.cells.headerfooterview.IEAHeaderView;
 import org.ieatta.cells.model.IEAHeaderViewModel;
 import org.ieatta.views.ObservableWebView;
 import org.wikipedia.util.DimenUtil;
@@ -21,6 +23,10 @@ import org.wikipedia.util.DimenUtil;
 import bolts.Task;
 
 public abstract class FragmentTask implements RecyclerOnItemClickListener,LeadImagesHandler.OnContentHeightChangedListener {
+
+    public boolean haveFooterView(){
+        return true;
+    }
 
     protected String restaurantUUID;
     protected String eventUUID;
@@ -48,7 +54,11 @@ public abstract class FragmentTask implements RecyclerOnItemClickListener,LeadIm
 
     public abstract Task<Void> executeTask();
 
-    public abstract void prepareUI();
+    public void prepareUI(){
+        this.manager.setRegisterHeaderView(IEAHeaderView.getType());
+        if(this.haveFooterView() == true)
+            this.manager.setRegisterFooterView(IEAFooterView.getType());
+    }
 
     public abstract void postUI();
 

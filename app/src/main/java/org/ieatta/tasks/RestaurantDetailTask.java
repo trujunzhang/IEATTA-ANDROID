@@ -122,9 +122,6 @@ public class RestaurantDetailTask extends FragmentTask {
 
     @Override
     public void prepareUI() {
-        this.manager.setRegisterHeaderView(IEAHeaderView.getType());
-        this.manager.setRegisterFooterView(IEAFooterView.getType());
-
         this.manager.setRegisterCellClass(IEARestaurantEventsCell.getType(), RestaurantDetailSection.section_events.ordinal());
         this.manager.setRegisterCellClass(IEAGalleryThumbnailCell.getType(), RestaurantDetailSection.section_gallery_thumbnail.ordinal());
         this.manager.setRegisterCellClass(IEAReviewsCell.getType(), RestaurantDetailSection.section_reviews.ordinal());

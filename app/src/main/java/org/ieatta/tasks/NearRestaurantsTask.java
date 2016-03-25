@@ -24,6 +24,11 @@ import bolts.Task;
 import io.realm.RealmResults;
 
 public class NearRestaurantsTask extends FragmentTask {
+    @Override
+    public boolean haveFooterView(){
+        return false;
+    }
+
     @VisibleForTesting
     public NearRestaurantsTask(HistoryEntry entry) {
         super(entry);
