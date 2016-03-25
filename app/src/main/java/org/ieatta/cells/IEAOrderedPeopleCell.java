@@ -46,7 +46,7 @@ public class IEAOrderedPeopleCell extends IEAViewHolder {
                 IEAOrderedPeopleCell.this.recipesCountLabel.setText(info);
                 return null;
             }
-        });
+        },Task.UI_THREAD_EXECUTOR);
 
     }
 }
