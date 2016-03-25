@@ -162,27 +162,6 @@ public class ObservableWebView extends RecyclerView {
         lastScrollTime = System.currentTimeMillis();
     }
 
-
-//    @Override
-//    protected void onScrollChanged(int left, int top, int oldLeft, int oldTop) {
-//        super.onScrollChanged(left, top, oldLeft, oldTop);
-//        boolean isHumanScroll = Math.abs(top - oldTop) < MAX_HUMAN_SCROLL;
-//        for (OnScrollChangeListener listener : onScrollChangeListeners) {
-//            listener.onScrollChanged(oldTop, top, isHumanScroll);
-//        }
-////        new ObservableWebViewFunnel().logOnScrollChanged(oldTop, top, isHumanScroll);
-//        if (!isHumanScroll) {
-//            return;
-//        }
-//        totalAmountScrolled += (top - oldTop);
-//        if (Math.abs(totalAmountScrolled) > FAST_SCROLL_THRESHOLD
-//                && onFastScrollListener != null) {
-//            onFastScrollListener.onFastScroll();
-//            totalAmountScrolled = 0;
-//        }
-//        lastScrollTime = System.currentTimeMillis();
-//    }
-
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         switch (event.getActionMasked()) {
