@@ -136,6 +136,8 @@ public class RecipeDetailTask extends FragmentTask {
 
     @Override
     public void prepareUI() {
+        super.prepareUI();
+
         this.manager.setRegisterCellClass(IEAGalleryThumbnailCell.getType(), RecipeDetailSection.section_gallery_thumbnail.ordinal());
         this.manager.setRegisterCellClass(IEAReviewsCell.getType(), RecipeDetailSection.section_reviews.ordinal());
 

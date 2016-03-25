@@ -69,6 +69,8 @@ public class NearRestaurantsTask extends FragmentTask {
 
     @Override
     public void prepareUI() {
+        super.prepareUI();
+
 //        this.manager.setRegisterCellClassWhenSelected(IEANearRestaurantMoreCell.getType(), NearRestaurantSection.section_more_items.ordinal());
         this.manager.setRegisterCellClassWhenSelected(IEANearRestaurantsCell.getType(), NearRestaurantSection.section_restaurants.ordinal());
 

@@ -107,6 +107,8 @@ public class OrderedRecipesTask extends FragmentTask {
 
     @Override
     public void prepareUI() {
+        super.prepareUI();
+
         this.manager.setRegisterCellClass(IEAOrderedRecipeCell.getType(), OrderedRecipesSection.section_recipes.ordinal());
 
         this.manager.appendSectionTitleCell(new SectionTitleCellModel(IEAEditKey.Section_Title, R.string.Ordered_Recipes), OrderedRecipesSection.section_recipes.ordinal());
