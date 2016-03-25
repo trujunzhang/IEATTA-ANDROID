@@ -273,7 +273,6 @@ public class PageFragment extends Fragment implements BackPressedHandler {
         });
     }
 
-
     public void postLoadPage() {
         task.postUI();
         webView.setVisibility(View.VISIBLE);
