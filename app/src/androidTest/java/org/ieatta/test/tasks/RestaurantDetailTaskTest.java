@@ -4,6 +4,7 @@ import android.support.test.runner.AndroidJUnit4;
 
 import org.ieatta.activity.history.HistoryEntry;
 import org.ieatta.cells.model.ReviewsCellModel;
+import org.ieatta.database.models.DBEvent;
 import org.ieatta.provide.MainSegueIdentifier;
 import org.ieatta.server.cache.ThumbnailImageUtil;
 import org.ieatta.tasks.RestaurantDetailTask;
@@ -18,6 +19,7 @@ import java.util.concurrent.TimeUnit;
 
 import bolts.Continuation;
 import bolts.Task;
+import io.realm.RealmResults;
 
 @RunWith(AndroidJUnit4.class)
 public class RestaurantDetailTaskTest {
@@ -40,6 +42,7 @@ public class RestaurantDetailTaskTest {
             @Override
             public Void then(Task<Void> task) throws Exception {
                 RestaurantDetailTask _task = RestaurantDetailTaskTest.this.task;
+                RealmResults<DBEvent> events = _task.events;
                 List<ReviewsCellModel> cellModelList = _task.reviewsCellModelList;
                 if (cellModelList.size() > 0) {
                     ReviewsCellModel cellModel = cellModelList.get(0);
