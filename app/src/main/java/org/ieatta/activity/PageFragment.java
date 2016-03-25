@@ -317,7 +317,7 @@ public class PageFragment extends Fragment implements BackPressedHandler {
                 PageFragment.this.postLoadPage();
                 return null;
             }
-        }).continueWith(new Continuation<Object, Object>() {
+        },Task.UI_THREAD_EXECUTOR).continueWith(new Continuation<Object, Object>() {
             @Override
             public Object then(Task<Object> task) throws Exception {
                 return null;

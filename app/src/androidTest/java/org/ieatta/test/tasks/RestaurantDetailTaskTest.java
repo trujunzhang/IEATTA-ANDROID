@@ -23,12 +23,13 @@ import bolts.Task;
 public class RestaurantDetailTaskTest {
     private static final int TASK_COMPLETION_TIMEOUT = 20000;
     private RestaurantDetailTask task;
-    private String restaurantUUID = "1CE562A4-A978-4B75-9B7B-2F3CF9F42A04"; // The Flying Falafel
+    //    private String restaurantUUID = "1CE562A4-A978-4B75-9B7B-2F3CF9F42A04"; // The Flying Falafel
 //    private String restaurantUUID = "33ED9F31-F6A5-43A4-8D11-8E511CA0BD39"; // The Spice Jar
+    private String restaurantUUID = "68E21E0C-76E4-40D1-8EE5-3824C8230FD4";// Francisco's Centro Vasco
 
     @Before
     public void setUp() throws Exception {
-        HistoryEntry entry = new HistoryEntry(MainSegueIdentifier.detailRestaurantSegueIdentifier,restaurantUUID);
+        HistoryEntry entry = new HistoryEntry(MainSegueIdentifier.detailRestaurantSegueIdentifier, restaurantUUID);
         this.task = new RestaurantDetailTask(entry);
     }
 
