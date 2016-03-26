@@ -143,7 +143,6 @@ public class EventDetailTask extends FragmentTask {
         this.manager.setRegisterCellClass(IEAReviewsCell.getType(), EventDetailSection.section_reviews.ordinal());
 
         this.manager.appendSectionTitleCell(new SectionTitleCellModel(IEAEditKey.Section_Title, R.string.People_Ordered), EventDetailSection.section_ordered_people.ordinal());
-        this.manager.appendSectionTitleCell(new SectionTitleCellModel(IEAEditKey.Section_Title, R.string.Reviews), EventDetailSection.section_reviews.ordinal());
     }
 
     @Override
@@ -152,7 +151,8 @@ public class EventDetailTask extends FragmentTask {
         this.manager.setFooterItem(new IEAFooterViewModel(), IEAFooterView.getType());
 
         this.manager.setSectionItems(this.orderedPeopleList, EventDetailSection.section_ordered_people.ordinal());
-        this.manager.setSectionItems(this.reviewsCellModelList, EventDetailSection.section_reviews.ordinal());
+
+        postReviews(EventDetailSection.section_reviews.ordinal());
 
         model.setPage(this.getPage());
     }
