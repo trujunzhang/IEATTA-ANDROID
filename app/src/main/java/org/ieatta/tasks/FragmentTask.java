@@ -41,7 +41,7 @@ public abstract class FragmentTask implements RecyclerOnItemClickListener, LeadI
     private ObservableWebView webView;
 
     // For showing photo's thumbnail gallery.
-    protected GalleryCollection thumbnailGalleryCollection;
+    public GalleryCollection thumbnailGalleryCollection;
 
     // For showing review's list.
     public List<IEAReviewsCellModel> reviewsCellModelList;
