@@ -337,16 +337,6 @@ public class DetailPageLoadStrategy implements PageLoadStrategy {
             @Override
             public Task<Void> then(Task<Void> task) throws Exception {
                 DetailPageLoadStrategy.this.postLoadPage();
-                return fragmentTask.executePhotosGalleryTask();
-            }
-        }, Task.UI_THREAD_EXECUTOR).onSuccessTask(new Continuation<Void, Task<Void>>() {
-            @Override
-            public Task<Void> then(Task<Void> task) throws Exception {
-                return fragmentTask.executeReviewsTask();
-            }
-        }, Task.UI_THREAD_EXECUTOR).continueWith(new Continuation<Void, Void>() {
-            @Override
-            public Void then(Task<Void> task) throws Exception {
                 return null;
             }
         }, Task.UI_THREAD_EXECUTOR);
