@@ -16,6 +16,7 @@ import org.ieatta.analytics.GalleryFunnel;
 import org.ieatta.cells.headerfooterview.IEAFooterView;
 import org.ieatta.cells.headerfooterview.IEAHeaderView;
 import org.ieatta.cells.model.IEAHeaderViewModel;
+import org.ieatta.database.query.LocalDatabaseQuery;
 import org.ieatta.views.ObservableWebView;
 import org.wikipedia.util.DimenUtil;
 
@@ -42,6 +43,7 @@ public abstract class FragmentTask implements RecyclerOnItemClickListener, LeadI
     @VisibleForTesting
     public FragmentTask(HistoryEntry entry) {
         this.entry = entry;
+        realmList = LocalDatabaseQuery.closeRealmList(realmList);
     }
 
     public FragmentTask(HistoryEntry entry, Activity activity, PageViewModel model) {

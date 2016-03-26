@@ -9,6 +9,7 @@ import org.ieatta.database.realm.RealmModelReader;
 import org.ieatta.parse.AppConstant;
 import org.ieatta.utils.GeoHashUtil;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import bolts.Task;
@@ -77,10 +78,11 @@ public class LocalDatabaseQuery {
     }
 
 
-    public static void closeRealmList(List<Realm> realmList) {
+    public static List<Realm> closeRealmList(List<Realm> realmList) {
         for(Realm realm : realmList) {
             if (realm.isClosed() == false)
                 realm.close();
         }
+        return new LinkedList<>();
     }
 }
