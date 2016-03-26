@@ -44,11 +44,13 @@ import org.wikipedia.util.GradientUtil;
 import org.wikipedia.views.ViewUtil;
 
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
 import bolts.Continuation;
 import bolts.Task;
+import io.realm.Realm;
 import io.realm.RealmResults;
 
 import static org.wikipedia.util.StringUtil.trim;
@@ -366,11 +368,12 @@ public class GalleryActivity extends ThemedActionBarActivity {
      */
     private void fetchGalleryCollection() {
         String uuid = pageTitle.getUUID();
-        PQueryModelType type = pageTitle.getPmType();
-        LocalDatabaseQuery.queryPhotosForRestaurant(uuid).onSuccessTask(new Continuation<RealmResults<DBPhoto>, Task<Void>>() {
+        final List<Realm> realmList = new LinkedList<>();
+        LocalDatabaseQuery.queryPhotosForRestaurant(uuid,realmList).onSuccessTask(new Continuation<RealmResults<DBPhoto>, Task<Void>>() {
             @Override
             public Task<Void> then(Task<RealmResults<DBPhoto>> task) throws Exception {
                 GalleryCollection result = new GalleryCollection(DBConvert.toGalleryItem(task.getResult()));
+                LocalDatabaseQuery.closeRealmList(realmList);
                 GalleryActivity.this.page.setGalleryCollection(result);
                 applyGalleryCollection(result);
                 return null;

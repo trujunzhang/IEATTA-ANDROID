@@ -50,7 +50,7 @@ public class LocalDatabaseQuery {
         DBBuilder builder = new DBBuilder()
                 .whereEqualTo(AppConstant.kPAPFieldUsedRefKey, usedRef)
                 .orderByDescending(AppConstant.kPAPFieldObjectCreatedDateKey);
-        return new RealmModelReader<DBPhoto>(DBPhoto.class).getFirstObject(builder, needClose,realmList);
+        return new RealmModelReader<DBPhoto>(DBPhoto.class).getFirstObject(builder, needClose, realmList);
     }
 
     public static DBBuilder get(String UUID) {
@@ -77,4 +77,10 @@ public class LocalDatabaseQuery {
     }
 
 
+    public static void closeRealmList(List<Realm> realmList) {
+        for(Realm realm : realmList) {
+            if (realm.isClosed() == false)
+                realm.close();
+        }
+    }
 }

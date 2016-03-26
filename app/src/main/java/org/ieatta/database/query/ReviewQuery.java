@@ -14,6 +14,7 @@ import java.util.List;
 
 import bolts.Continuation;
 import bolts.Task;
+import io.realm.Realm;
 import io.realm.RealmResults;
 
 public class ReviewQuery {
@@ -21,12 +22,14 @@ public class ReviewQuery {
 
     //  return new RealmModelReader<DBEvent>(DBEvent.class).fetchResults(new DBBuilder(), false);// for test
 
+    final List<Realm> realmList = new LinkedList<>();
+
     public Task<List<IEAReviewsCellModel>> queryReview(String reviewRef, ReviewType type) {
         return new RealmModelReader<DBReview>(DBReview.class).fetchResults(
                 new DBBuilder()
                         .whereEqualTo(AppConstant.kPAPFieldReviewRefKey, reviewRef)
                         .whereEqualTo(AppConstant.kPAPFieldReviewTypeKey, type.getType()),
-                false).onSuccessTask(new Continuation<RealmResults<DBReview>, Task<RealmResults<DBTeam>>>() {
+                false, realmList).onSuccessTask(new Continuation<RealmResults<DBReview>, Task<RealmResults<DBTeam>>>() {
             @Override
             public Task<RealmResults<DBTeam>> then(Task<RealmResults<DBReview>> task) throws Exception {
 
@@ -37,18 +40,19 @@ public class ReviewQuery {
                     return Task.forResult(null);
 
                 DBBuilder builder = new DBBuilder().whereContainedIn(AppConstant.kPAPFieldObjectUUIDKey, list);
-                return new RealmModelReader<DBTeam>(DBTeam.class).fetchResults(builder, false);
+                return new RealmModelReader<DBTeam>(DBTeam.class).fetchResults(builder, false, realmList);
             }
         }).onSuccessTask(new Continuation<RealmResults<DBTeam>, Task<List<IEAReviewsCellModel>>>() {
             @Override
             public Task<List<IEAReviewsCellModel>> then(Task<RealmResults<DBTeam>> task) throws Exception {
-                if(task.getResult() == null) {
-                    List<IEAReviewsCellModel> list = new LinkedList<>();
+                List<IEAReviewsCellModel> list = new LinkedList<>();
+                if (task.getResult() == null) {
                     return Task.forResult(list);
                 }
 
-                RealmResults<DBTeam> teams = task.getResult();
-                return Task.forResult(DBConvert.toReviewsCellModels(ReviewQuery.this.reviews, teams));
+                list = DBConvert.toReviewsCellModels(ReviewQuery.this.reviews, task.getResult());
+                LocalDatabaseQuery.closeRealmList(realmList);
+                return Task.forResult(list);
             }
         });
     }

@@ -19,6 +19,7 @@ import org.ieatta.cells.model.IEAHeaderViewModel;
 import org.ieatta.views.ObservableWebView;
 import org.wikipedia.util.DimenUtil;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import bolts.Task;
@@ -36,7 +37,7 @@ public abstract class FragmentTask implements RecyclerOnItemClickListener, LeadI
     protected Activity activity;
     private ObservableWebView webView;
 
-    protected List<Realm> realmList;
+    protected static List<Realm> realmList = new LinkedList<>();
 
     @VisibleForTesting
     public FragmentTask(HistoryEntry entry) {
