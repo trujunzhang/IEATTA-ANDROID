@@ -134,8 +134,8 @@ public class DetailPageLoadStrategy implements PageLoadStrategy {
 //        bottomContentHandler.hide();
         activity.getSearchBarHideHandler().setFadeEnabled(false);
 
-        PageBackStackItem item = backStack.get(backStack.size() - 1);
-        this.setupCurrentTask(item.getHistoryEntry());
+        // Setup new page.
+        this.setupCurrentTask(backStack.get(backStack.size() - 1).getHistoryEntry());
     }
 
     private void restoreLastScrollY(int stagedScrollY) {
