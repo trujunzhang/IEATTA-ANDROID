@@ -10,6 +10,7 @@ public class PageBackStackItem {
     }
 
     private int scrollY;
+    private int parallaxScrollY;
     public int getScrollY() {
         return scrollY;
     }
@@ -19,5 +20,13 @@ public class PageBackStackItem {
 
     public PageBackStackItem( HistoryEntry historyEntry) {
         this.historyEntry = historyEntry;
+    }
+
+    public int getParallaxScrollY() {
+        return parallaxScrollY;
+    }
+
+    public void setParallaxScrollY(int parallaxScrollY) {
+        this.parallaxScrollY = parallaxScrollY;
     }
 }

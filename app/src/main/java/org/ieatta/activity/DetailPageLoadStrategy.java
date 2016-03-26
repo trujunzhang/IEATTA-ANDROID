@@ -162,6 +162,7 @@ public class DetailPageLoadStrategy implements PageLoadStrategy {
         }
         PageBackStackItem item = backStack.get(backStack.size() - 1);
         item.setScrollY(webView.getLastTop());
+        item.setParallaxScrollY(leadImagesHandler.getParallaxScrollY());
     }
 
     @Override

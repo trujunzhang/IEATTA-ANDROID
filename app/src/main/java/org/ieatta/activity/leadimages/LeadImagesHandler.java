@@ -477,4 +477,8 @@ public class LeadImagesHandler {
             return scalar;
         }
     }
+
+    public int getParallaxScrollY(){
+        return this.articleHeaderView.parallaxScrollY;
+    }
 }

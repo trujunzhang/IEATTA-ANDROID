@@ -58,6 +58,8 @@ public class ArticleHeaderView extends FrameLayout implements ObservableWebView.
     @NonNull private CharSequence title = "";
     @NonNull private CharSequence subtitle = "";
 
+    public int parallaxScrollY;
+
     public ArticleHeaderView(Context context) {
         super(context);
         init();
@@ -239,6 +241,7 @@ public class ArticleHeaderView extends FrameLayout implements ObservableWebView.
     }
 
     private void updateParallaxScroll(int scrollY) {
+        this.parallaxScrollY = scrollY;
         int offset = Math.min(getHeight(), scrollY);
         setTranslationY(-offset);
         image.setTranslationY(offset / 2);
