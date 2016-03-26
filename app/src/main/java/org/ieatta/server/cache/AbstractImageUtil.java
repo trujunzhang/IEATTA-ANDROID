@@ -49,11 +49,7 @@ public abstract class AbstractImageUtil {
     }
 
     public Task<List<File>> getImagesListTask(String usedRef) {
-        List<File> list = getImageFiles(usedRef);
-        if (list.size() == 0) {
-            return Task.forError(new FileNotFoundException("Not found images by " + usedRef));
-        }
-        return Task.forResult(list);
+        return Task.forResult(getImageFiles(usedRef));
     }
 
     /**
