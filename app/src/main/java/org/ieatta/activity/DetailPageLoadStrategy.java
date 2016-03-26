@@ -333,18 +333,23 @@ public class DetailPageLoadStrategy implements PageLoadStrategy {
         fragmentTask.setupWebView(webView);
         fragmentTask.prepareUI();
 
-        fragmentTask.executeTask().onSuccess(new Continuation<Void, Object>() {
+        fragmentTask.executeTask().onSuccessTask(new Continuation<Void, Task<Void>>() {
             @Override
-            public Object then(Task<Void> task) throws Exception {
+            public Task<Void> then(Task<Void> task) throws Exception {
                 DetailPageLoadStrategy.this.postLoadPage();
-                return null;
+                return fragmentTask.executePhotosGalleryTask();
             }
-        }, Task.UI_THREAD_EXECUTOR).continueWith(new Continuation<Object, Object>() {
+        }, Task.UI_THREAD_EXECUTOR).onSuccessTask(new Continuation<Void, Task<Void>>() {
             @Override
-            public Object then(Task<Object> task) throws Exception {
+            public Task<Void> then(Task<Void> task) throws Exception {
+                return fragmentTask.executeReviewsTask();
+            }
+        }, Task.UI_THREAD_EXECUTOR).continueWith(new Continuation<Void, Void>() {
+            @Override
+            public Void then(Task<Void> task) throws Exception {
                 return null;
             }
-        });
+        }, Task.UI_THREAD_EXECUTOR);
     }
 
     public void postLoadPage() {
