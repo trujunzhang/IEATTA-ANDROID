@@ -320,15 +320,6 @@ public class LeadImagesHandler {
      * @param url Nullable URL with no scheme. For example, foo.bar.com/ instead of
      *            http://foo.bar.com/.
      */
-    private void loadLeadImage(@Nullable String url, Boolean local) {
-        if (!isMainPage() && !TextUtils.isEmpty(url) && isLeadImageEnabled()) {
-            articleHeaderView.setImageYScalar(0);
-            articleHeaderView.loadImage(url, local);
-        } else {
-            articleHeaderView.loadImage(null, local);
-        }
-    }
-
     private void loadLeadImage(@Nullable LeadImage leadImage) {
         if (!isMainPage() && leadImage != null && isLeadImageEnabled()) {
             articleHeaderView.setImageYScalar(0);
