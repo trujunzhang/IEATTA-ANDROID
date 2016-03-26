@@ -49,8 +49,6 @@ public class RestaurantDetailTask extends FragmentTask {
 
     public DBRestaurant restaurant;
     public RealmResults<DBEvent> events;
-    public List<IEAReviewsCellModel> reviewsCellModelList;
-    private GalleryCollection thumbnailGalleryCollection;
     private LeadImageCollection leadImageCollection; // for restaurants
 
     @VisibleForTesting

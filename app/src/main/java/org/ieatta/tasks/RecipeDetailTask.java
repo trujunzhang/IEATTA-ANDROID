@@ -51,8 +51,6 @@ public class RecipeDetailTask extends FragmentTask {
     public DBRecipe recipe;
 
     private LeadImageCollection leadImageCollection; // for recipes
-    public List<IEAReviewsCellModel> reviewsCellModelList;
-    public GalleryCollection thumbnailGalleryCollection;
 
     @VisibleForTesting
     public RecipeDetailTask(HistoryEntry entry) {

@@ -72,9 +72,7 @@ public class EventDetailTask extends FragmentTask {
     public DBRestaurant restaurant;
     public DBEvent event;
     public List<IEAOrderedPeople> orderedPeopleList;
-    public List<IEAReviewsCellModel> reviewsCellModelList;
     private LeadImageCollection leadImageCollection; // for restaurants
-
 
     /**
      * Execute Task for Event detail.

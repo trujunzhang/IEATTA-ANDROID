@@ -9,6 +9,7 @@ import com.tableview.adapter.RecyclerOnItemClickListener;
 import org.ieatta.activity.PageTitle;
 import org.ieatta.activity.PageViewModel;
 import org.ieatta.activity.gallery.GalleryActivity;
+import org.ieatta.activity.gallery.GalleryCollection;
 import org.ieatta.activity.gallery.GalleryThumbnailScrollView;
 import org.ieatta.activity.history.HistoryEntry;
 import org.ieatta.activity.leadimages.LeadImagesHandler;
@@ -16,6 +17,7 @@ import org.ieatta.analytics.GalleryFunnel;
 import org.ieatta.cells.headerfooterview.IEAFooterView;
 import org.ieatta.cells.headerfooterview.IEAHeaderView;
 import org.ieatta.cells.model.IEAHeaderViewModel;
+import org.ieatta.cells.model.IEAReviewsCellModel;
 import org.ieatta.database.query.LocalDatabaseQuery;
 import org.ieatta.views.ObservableWebView;
 import org.wikipedia.util.DimenUtil;
@@ -37,6 +39,12 @@ public abstract class FragmentTask implements RecyclerOnItemClickListener, LeadI
     public HistoryEntry entry;
     protected Activity activity;
     private ObservableWebView webView;
+
+    // For showing photo's thumbnail gallery.
+    protected GalleryCollection thumbnailGalleryCollection;
+
+    // For showing review's list.
+    public List<IEAReviewsCellModel> reviewsCellModelList;
 
     protected static List<Realm> realmList = new LinkedList<>();
 
@@ -69,6 +77,14 @@ public abstract class FragmentTask implements RecyclerOnItemClickListener, LeadI
     }
 
     public abstract void postUI();
+
+    public void postPhotosGallery(){
+
+    }
+
+    public  void postReviews(){
+
+    }
 
     protected int getEmptyHeaderViewHeight() {
         return DimenUtil.getDisplayWidthPx();
