@@ -60,6 +60,8 @@ public class ArticleHeaderView extends FrameLayout implements ObservableWebView.
 
     public int parallaxScrollY;
 
+    public int lastParallaxScrollY;
+
     public ArticleHeaderView(Context context) {
         super(context);
         init();
