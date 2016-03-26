@@ -55,6 +55,14 @@ public abstract class FragmentTask implements RecyclerOnItemClickListener, LeadI
 
     public abstract Task<Void> executeTask();
 
+    public Task<Void> executePhotosGalleryTask(){
+        return Task.forResult(null);
+    }
+
+    public Task<Void> executeReviewsTask(){
+        return Task.forResult(null);
+    }
+
     public void prepareUI() {
         this.manager.setRegisterHeaderView(IEAHeaderView.getType());
         this.manager.setRegisterFooterView(IEAFooterView.getType());

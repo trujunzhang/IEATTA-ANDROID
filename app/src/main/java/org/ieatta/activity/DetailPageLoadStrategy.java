@@ -35,7 +35,7 @@ import bolts.Task;
  * - and many handlers.
  */
 public class DetailPageLoadStrategy implements PageLoadStrategy {
-    protected FragmentTask task;
+    protected FragmentTask fragmentTask;
 
     private interface ErrorCallback {
         void call(@Nullable Throwable error);
@@ -275,7 +275,7 @@ public class DetailPageLoadStrategy implements PageLoadStrategy {
 
     @Override
     public FragmentTask getTask() {
-        return this.task;
+        return this.fragmentTask;
     }
 
     public void onLeadSectionLoaded(int startSequenceNum) {
@@ -327,14 +327,13 @@ public class DetailPageLoadStrategy implements PageLoadStrategy {
 //        leadImagesHandler.updateNavigate(page.getPageProperties().getGeo());
     }
 
-
     private void setupCurrentTask(HistoryEntry entry) {
-        task = MainSegueIdentifier.getFragment(entry, this.fragment.getActivity(), this.model);
+        fragmentTask = MainSegueIdentifier.getFragment(entry, this.fragment.getActivity(), this.model);
 
-        task.setupWebView(webView);
-        task.prepareUI();
+        fragmentTask.setupWebView(webView);
+        fragmentTask.prepareUI();
 
-        task.executeTask().onSuccess(new Continuation<Void, Object>() {
+        fragmentTask.executeTask().onSuccess(new Continuation<Void, Object>() {
             @Override
             public Object then(Task<Void> task) throws Exception {
                 DetailPageLoadStrategy.this.postLoadPage();
@@ -349,10 +348,10 @@ public class DetailPageLoadStrategy implements PageLoadStrategy {
     }
 
     public void postLoadPage() {
-        task.postUI();
+        fragmentTask.postUI();
 
         webView.setVisibility(View.VISIBLE);
-        task.manager.reloadTableView();
+        fragmentTask.manager.reloadTableView();
 
         this.restoreLastScrollY(model.getStagedScrollY());
         this.onLeadSectionLoaded(0);
