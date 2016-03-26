@@ -14,12 +14,14 @@ import org.junit.runner.RunWith;
 import java.io.File;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
 import bolts.Continuation;
 import bolts.Task;
+import io.realm.Realm;
 import io.realm.RealmResults;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -37,6 +39,7 @@ public class ThumbnailCacheTest {
     @Test
     public void testThumbnailTotalCount() throws InterruptedException {
         final CountDownLatch completionLatch = new CountDownLatch(1);
+        final List<Realm> realmList = new LinkedList<>();
 
         ThumbnailImageUtil.sharedInstance.getImagesListTask().continueWithTask(new Continuation<List<File>, Task<RealmResults<DBPhoto>>>() {
             public Task<RealmResults<DBPhoto>> then(Task<List<File>> results) throws Exception {
@@ -46,7 +49,7 @@ public class ThumbnailCacheTest {
                 }
                 Log.d("ThumbnailCacheTest", "Cached file's count: " + dbPhotoCount);
 
-                return new RealmModelReader<DBPhoto>(DBPhoto.class).fetchResults(new DBBuilder(), false);
+                return new RealmModelReader<DBPhoto>(DBPhoto.class).fetchResults(new DBBuilder(), false, realmList);
             }
         }).onSuccess(new Continuation<RealmResults<DBPhoto>, Void>() {
             @Override
@@ -57,6 +60,7 @@ public class ThumbnailCacheTest {
             }
         }).continueWith(new Continuation<Void, Void>() {
             public Void then(Task<Void> ignored) throws Exception {
+                LocalDatabaseQuery.closeRealmList(realmList);
                 // Every task was verified.
                 completionLatch.countDown();
                 return null;
@@ -104,10 +108,12 @@ public class ThumbnailCacheTest {
     }
 
     private Task<Void> checkSameLength(String uuid, final int length, final int step) {
-        return LocalDatabaseQuery.getPhotos(uuid).onSuccess(new Continuation<RealmResults<DBPhoto>, Void>() {
+        final List<Realm> realmList = new LinkedList<>();
+        return LocalDatabaseQuery.getPhotos(uuid,realmList).onSuccess(new Continuation<RealmResults<DBPhoto>, Void>() {
             @Override
             public Void then(Task<RealmResults<DBPhoto>> task) throws Exception {
                 int expect = task.getResult().size();
+                LocalDatabaseQuery.closeRealmList(realmList);
                 Log.d("ThumbnailCacheTest", "result(" + step + ") :" + length + "==" + expect);
                 assertThat("The same usedRef,The same photo's count", (length == (expect)));
                 return null;
