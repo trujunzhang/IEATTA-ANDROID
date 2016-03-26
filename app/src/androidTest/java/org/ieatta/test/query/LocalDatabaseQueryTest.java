@@ -27,6 +27,7 @@ public class LocalDatabaseQueryTest {
     @Test
     public void testQueryPhoto() throws InterruptedException {
         final String usedRef = "C2F23EDC-106C-4D17-A6D6-8EA04E10732A"; // for Restaurant(called "Basta Pasta").
+
         final CountDownLatch completionLatch = new CountDownLatch(1);
         final List<Realm> realmList = new LinkedList<>();
         LocalDatabaseQuery.getPhoto(usedRef, false,realmList).onSuccess(new Continuation<DBPhoto, Object>() {
