@@ -5,7 +5,9 @@ import android.support.annotation.VisibleForTesting;
 
 import com.tableview.RecycleViewManager;
 import com.tableview.adapter.RecyclerOnItemClickListener;
+import com.tableview.utils.CollectionUtil;
 
+import org.ieatta.R;
 import org.ieatta.activity.PageTitle;
 import org.ieatta.activity.PageViewModel;
 import org.ieatta.activity.gallery.GalleryActivity;
@@ -16,9 +18,12 @@ import org.ieatta.activity.leadimages.LeadImagesHandler;
 import org.ieatta.analytics.GalleryFunnel;
 import org.ieatta.cells.headerfooterview.IEAFooterView;
 import org.ieatta.cells.headerfooterview.IEAHeaderView;
+import org.ieatta.cells.model.IEAGalleryThumbnail;
 import org.ieatta.cells.model.IEAHeaderViewModel;
 import org.ieatta.cells.model.IEAReviewsCellModel;
+import org.ieatta.cells.model.SectionTitleCellModel;
 import org.ieatta.database.query.LocalDatabaseQuery;
+import org.ieatta.provide.IEAEditKey;
 import org.ieatta.views.ObservableWebView;
 import org.wikipedia.util.DimenUtil;
 
@@ -78,11 +83,13 @@ public abstract class FragmentTask implements RecyclerOnItemClickListener, LeadI
     public abstract void postUI();
 
     public void postPhotosGallery(int forSectionIndex) {
-
+        this.manager.appendSectionTitleCell(new SectionTitleCellModel(IEAEditKey.Section_Title, R.string.PhotosGallery), forSectionIndex);
+        this.manager.setSectionItems(CollectionUtil.createList(new IEAGalleryThumbnail(this.thumbnailGalleryCollection, this.galleryViewListener)), forSectionIndex);
     }
 
     public void postReviews(int forSectionIndex) {
-
+        this.manager.appendSectionTitleCell(new SectionTitleCellModel(IEAEditKey.Section_Title, R.string.Reviews), forSectionIndex);
+        this.manager.setSectionItems(this.reviewsCellModelList, forSectionIndex);
     }
 
     protected int getEmptyHeaderViewHeight() {

@@ -126,8 +126,7 @@ public class RestaurantDetailTask extends FragmentTask {
         this.manager.setRegisterCellClass(IEAReviewsCell.getType(), RestaurantDetailSection.section_reviews.ordinal());
 
         this.manager.appendSectionTitleCell(new SectionTitleCellModel(IEAEditKey.Section_Title, R.string.Events_Recorded), RestaurantDetailSection.section_events.ordinal());
-        this.manager.appendSectionTitleCell(new SectionTitleCellModel(IEAEditKey.Section_Title, R.string.PhotosGallery), RestaurantDetailSection.section_gallery_thumbnail.ordinal());
-        this.manager.appendSectionTitleCell(new SectionTitleCellModel(IEAEditKey.Section_Title, R.string.Reviews), RestaurantDetailSection.section_reviews.ordinal());
+
     }
 
     @Override
@@ -136,9 +135,6 @@ public class RestaurantDetailTask extends FragmentTask {
         this.manager.setFooterItem(new IEAFooterViewModel(), IEAFooterView.getType());
 
         this.manager.setSectionItems(this.events, RestaurantDetailSection.section_events.ordinal());
-
-        this.manager.setSectionItems(CollectionUtil.createList(new IEAGalleryThumbnail(this.thumbnailGalleryCollection, this.galleryViewListener)), RestaurantDetailSection.section_gallery_thumbnail.ordinal());
-        this.manager.setSectionItems(this.reviewsCellModelList, RestaurantDetailSection.section_reviews.ordinal());
 
         model.setPage(this.getPage());
     }
