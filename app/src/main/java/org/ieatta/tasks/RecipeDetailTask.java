@@ -138,9 +138,6 @@ public class RecipeDetailTask extends FragmentTask {
 
         this.manager.setRegisterCellClass(IEAGalleryThumbnailCell.getType(), RecipeDetailSection.section_gallery_thumbnail.ordinal());
         this.manager.setRegisterCellClass(IEAReviewsCell.getType(), RecipeDetailSection.section_reviews.ordinal());
-
-        this.manager.appendSectionTitleCell(new SectionTitleCellModel(IEAEditKey.Section_Title, R.string.PhotosGallery), RecipeDetailSection.section_gallery_thumbnail.ordinal());
-        this.manager.appendSectionTitleCell(new SectionTitleCellModel(IEAEditKey.Section_Title, R.string.Reviews), RecipeDetailSection.section_reviews.ordinal());
     }
 
     @Override
@@ -148,8 +145,8 @@ public class RecipeDetailTask extends FragmentTask {
         this.manager.setHeaderItem(new IEAHeaderViewModel(this.getEmptyHeaderViewHeight()), IEAHeaderView.getType());
         this.manager.setFooterItem(new IEAFooterViewModel(), IEAFooterView.getType());
 
-        this.manager.setSectionItems(CollectionUtil.createList(new IEAGalleryThumbnail(this.thumbnailGalleryCollection, this.galleryViewListener)), RecipeDetailSection.section_gallery_thumbnail.ordinal());
-        this.manager.setSectionItems(this.reviewsCellModelList, RecipeDetailSection.section_reviews.ordinal());
+        postPhotosGallery(RecipeDetailSection.section_gallery_thumbnail.ordinal());
+        postReviews(RecipeDetailSection.section_reviews.ordinal());
 
         model.setPage(this.getPage());
 
