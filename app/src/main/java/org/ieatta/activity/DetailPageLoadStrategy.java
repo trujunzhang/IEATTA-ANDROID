@@ -9,14 +9,20 @@ import android.view.View;
 
 import org.ieatta.IEAApp;
 import org.ieatta.activity.editing.EditHandler;
+import org.ieatta.activity.history.HistoryEntry;
 import org.ieatta.activity.search.SearchBarHideHandler;
 import org.ieatta.activity.leadimages.LeadImagesHandler;
+import org.ieatta.provide.MainSegueIdentifier;
+import org.ieatta.tasks.FragmentTask;
 import org.ieatta.views.ObservableWebView;
 import org.wikipedia.util.log.L;
 import org.wikipedia.views.SwipeRefreshLayoutWithScroll;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import bolts.Continuation;
+import bolts.Task;
 
 /**
  * Our old page load strategy, which uses the JSON MW API directly and loads a page in multiple steps:
@@ -29,6 +35,8 @@ import java.util.List;
  * - and many handlers.
  */
 public class DetailPageLoadStrategy implements PageLoadStrategy {
+    protected FragmentTask task;
+
     private interface ErrorCallback {
         void call(@Nullable Throwable error);
     }
@@ -113,6 +121,24 @@ public class DetailPageLoadStrategy implements PageLoadStrategy {
         // If this is a refresh, don't clear the webview contents
         this.stagedScrollY = stagedScrollY;
 
+//        fragment.updatePageInfo(null);
+//        fragment.setPageSaved(false);
+        leadImagesHandler.updateNavigate(null);
+
+        // kick off an event to the WebView that will cause it to clear its contents,
+        // and then report back to us when the clearing is complete, so that we can synchronize
+        // the transitions of our native components to the new page content.
+        // The callback event from the WebView will then call the loadOnWebViewReady()
+        // function, which will continue the loading process.
+        leadImagesHandler.hide();
+//        bottomContentHandler.hide();
+        activity.getSearchBarHideHandler().setFadeEnabled(false);
+
+        PageBackStackItem item = backStack.get(backStack.size() - 1);
+        this.setupCurrentTask(item.getHistoryEntry());
+    }
+
+    private void restoreLastScrollY(int stagedScrollY) {
         this.webView.scrollToLastTop(stagedScrollY);
     }
 
@@ -246,6 +272,11 @@ public class DetailPageLoadStrategy implements PageLoadStrategy {
     }
 
 
+    @Override
+    public FragmentTask getTask() {
+        return this.task;
+    }
+
     public void onLeadSectionLoaded(int startSequenceNum) {
 //        if (!fragment.isAdded() || !sequenceNumber.inSync(startSequenceNum)) {
 //            return;
@@ -298,4 +329,37 @@ public class DetailPageLoadStrategy implements PageLoadStrategy {
 
 //        leadImagesHandler.updateNavigate(page.getPageProperties().getGeo());
     }
+
+
+    private void setupCurrentTask(HistoryEntry entry) {
+        task = MainSegueIdentifier.getFragment(entry, this.fragment.getActivity(), this.model);
+
+        task.setupWebView(webView);
+        task.prepareUI();
+
+        task.executeTask().onSuccess(new Continuation<Void, Object>() {
+            @Override
+            public Object then(Task<Void> task) throws Exception {
+                DetailPageLoadStrategy.this.postLoadPage();
+                return null;
+            }
+        },Task.UI_THREAD_EXECUTOR).continueWith(new Continuation<Object, Object>() {
+            @Override
+            public Object then(Task<Object> task) throws Exception {
+                return null;
+            }
+        });
+    }
+
+    public void postLoadPage() {
+        task.postUI();
+        webView.setVisibility(View.VISIBLE);
+        task.manager.reloadTableView();
+
+        this.onLeadSectionLoaded(0);
+//        this.load(model.isPushBackStack(), model.getStagedScrollY());
+
+        this.restoreLastScrollY(model.getStagedScrollY());
+    }
+
 }

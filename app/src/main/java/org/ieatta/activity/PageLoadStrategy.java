@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import org.ieatta.activity.editing.EditHandler;
 import org.ieatta.activity.search.SearchBarHideHandler;
 import org.ieatta.activity.leadimages.LeadImagesHandler;
+import org.ieatta.tasks.FragmentTask;
 import org.ieatta.views.ObservableWebView;
 import org.wikipedia.views.SwipeRefreshLayoutWithScroll;
 
@@ -16,6 +17,8 @@ import java.util.List;
  * for viewing.
  */
 public interface PageLoadStrategy {
+
+    FragmentTask getTask();
 
     void onLeadSectionLoaded(int startSequenceNum);
 

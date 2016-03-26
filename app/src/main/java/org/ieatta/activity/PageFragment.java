@@ -46,7 +46,6 @@ public class PageFragment extends Fragment implements BackPressedHandler {
 //    private int stagedScrollY;
 
     protected ObservableWebView webView;
-    private FragmentTask task;
 
     private static final int REFRESH_SPINNER_ADDITIONAL_OFFSET = (int) (16 * IEAApp.getInstance().getScreenDensity());
 
@@ -128,7 +127,7 @@ public class PageFragment extends Fragment implements BackPressedHandler {
 
     @Nullable
     public FragmentTask getTask() {
-        return this.task;
+        return this.pageLoadStrategy.getTask();
     }
 
     public PageTitle getTitle() {
@@ -168,8 +167,6 @@ public class PageFragment extends Fragment implements BackPressedHandler {
         //refreshView.setProgressBackgroundColor(R.color.swipe_refresh_circle);
         refreshView.setScrollableChild(webView);
         refreshView.setOnRefreshListener(pageRefreshListener);
-
-
 
         return rootView;
     }
@@ -229,7 +226,7 @@ public class PageFragment extends Fragment implements BackPressedHandler {
 
     private void initPageScrollFunnel() {
         if (model.getPage() != null) {
-            pageScrollFunnel = new PageScrollFunnel(app, this.task.entry.getSource());
+            pageScrollFunnel = new PageScrollFunnel(app, this.getTask().entry.getSource());
         }
     }
 
@@ -252,32 +249,15 @@ public class PageFragment extends Fragment implements BackPressedHandler {
         model.setCurEntry(entry);
         model.setActionbarHeight(this.getActionBarHeight());
 
-        task = MainSegueIdentifier.getFragment(entry, this.getActivity(), this.model);
 
-        task.setupWebView(webView);
-        task.prepareUI();
+//        this.pageRefreshed = pageRefreshed;
+//        if (!pageRefreshed) {
+//            savedPageCheckComplete = false;
+//            checkIfPageIsSaved();
+//        }
 
-        task.executeTask().onSuccess(new Continuation<Void, Object>() {
-            @Override
-            public Object then(Task<Void> task) throws Exception {
-                PageFragment.this.postLoadPage();
-                return null;
-            }
-        },Task.UI_THREAD_EXECUTOR).continueWith(new Continuation<Object, Object>() {
-            @Override
-            public Object then(Task<Object> task) throws Exception {
-                return null;
-            }
-        });
-    }
-
-    public void postLoadPage() {
-        task.postUI();
-        webView.setVisibility(View.VISIBLE);
-        task.manager.reloadTableView();
-
-        pageLoadStrategy.onLeadSectionLoaded(0);
-        pageLoadStrategy.load(model.isPushBackStack(), model.getStagedScrollY());
+        closePageScrollFunnel();
+        pageLoadStrategy.load(pushBackStack, stagedScrollY);
     }
 
     @Override
@@ -298,7 +278,7 @@ public class PageFragment extends Fragment implements BackPressedHandler {
                 leadImagesHandler, getCurrentTab().getBackStack());
     }
 
-    public int getActionBarHeight(){
+    public int getActionBarHeight() {
         return searchBarHideHandler.getActionBarHeight();
     }
 
