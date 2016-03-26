@@ -239,10 +239,10 @@ public class ArticleHeaderView extends FrameLayout implements ObservableWebView.
     }
 
     private void updateParallaxScroll(int scrollY) {
-        new PageFragmentFunnel().logArticleHeaderViewScrollY(scrollY);
         int offset = Math.min(getHeight(), scrollY);
         setTranslationY(-offset);
         image.setTranslationY(offset / 2);
+        new PageFragmentFunnel().logArticleHeaderViewScrollY(scrollY,offset);
     }
 
     private void updateText() {

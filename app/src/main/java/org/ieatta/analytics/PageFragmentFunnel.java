@@ -14,11 +14,8 @@ public class PageFragmentFunnel extends Funnel {
         super(IEAApp.getInstance(), SCHEMA_NAME, REV_ID, SAMPLE_LOG_1K);
     }
 
-    public void logArticleHeaderViewScrollY(int scrollY) {
-        log("scrollY in the ArticleHeaderView", scrollY);
+    public void logArticleHeaderViewScrollY(int scrollY, int offset) {
+        log("scrollY in the ArticleHeaderView", scrollY, "offset", offset);
     }
 
-    public void logCacheThumbnail(File thumbnailFile) {
-        log("Cached thumbnail path", thumbnailFile.getAbsolutePath());
-    }
 }
