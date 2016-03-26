@@ -146,6 +146,9 @@ public class RestaurantDetailTask extends FragmentTask {
 
         this.manager.setSectionItems(this.events, RestaurantDetailSection.section_events.ordinal());
 
+        postPhotosGallery(RestaurantDetailSection.section_gallery_thumbnail.ordinal());
+        postReviews(RestaurantDetailSection.section_reviews.ordinal());
+
         model.setPage(this.getPage());
     }
 
