@@ -242,12 +242,10 @@ public class PageFragment extends Fragment implements BackPressedHandler {
         pageScrollFunnel = null;
     }
 
-    public void loadPage(HistoryEntry entry, boolean pushBackStack) {
-        this.loadPage(entry, pushBackStack, 0);
-    }
-
     public void loadPage(HistoryEntry entry, boolean pushBackStack, int stagedScrollY) {
         webView.setVisibility(View.GONE);
+        searchBarHideHandler.setForceNoFade(false);
+        searchBarHideHandler.setFadeEnabled(false);
 
         model.setPushBackStack(pushBackStack);
         model.setStagedScrollY(stagedScrollY);
