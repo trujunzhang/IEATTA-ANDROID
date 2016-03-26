@@ -279,10 +279,6 @@ public class DetailPageLoadStrategy implements PageLoadStrategy {
     }
 
     public void onLeadSectionLoaded(int startSequenceNum) {
-//        if (!fragment.isAdded() || !sequenceNumber.inSync(startSequenceNum)) {
-//            return;
-//        }
-
         if (!fragment.isAdded()) {
             return;
         }
@@ -354,6 +350,7 @@ public class DetailPageLoadStrategy implements PageLoadStrategy {
 
     public void postLoadPage() {
         task.postUI();
+
         webView.setVisibility(View.VISIBLE);
         task.manager.reloadTableView();
 
