@@ -357,9 +357,8 @@ public class DetailPageLoadStrategy implements PageLoadStrategy {
         webView.setVisibility(View.VISIBLE);
         task.manager.reloadTableView();
 
-        this.onLeadSectionLoaded(0);
-
         this.restoreLastScrollY(model.getStagedScrollY());
+        this.onLeadSectionLoaded(0);
     }
 
 }
