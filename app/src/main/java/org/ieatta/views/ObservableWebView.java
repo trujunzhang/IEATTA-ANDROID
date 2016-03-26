@@ -213,11 +213,11 @@ public class ObservableWebView extends RecyclerView {
         // new ObservableWebViewFunnel().logOnDraw(contentHeight);
     }
 
-    private int getContentWidth() {
+    public int getContentWidth() {
         return getWidth() - getPaddingLeft() - getPaddingRight();
     }
 
-    private int getContentHeight() {
+    public int getContentHeight() {
         return getHeight() - getPaddingTop() - getPaddingBottom();
     }
 

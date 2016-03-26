@@ -228,17 +228,17 @@ public class PageFragment extends Fragment implements BackPressedHandler {
 
 
     private void initPageScrollFunnel() {
-//        if (model.getPage() != null) {
-//            pageScrollFunnel = new PageScrollFunnel(app, model.getPage().getPageProperties().getPageId());
-//        }
+        if (model.getPage() != null) {
+            pageScrollFunnel = new PageScrollFunnel(app, this.task.entry.getSource());
+        }
     }
 
     private void closePageScrollFunnel() {
-//        if (pageScrollFunnel != null && webView.getContentHeight() > 0) {
-//            pageScrollFunnel.setViewportHeight(webView.getHeight());
-//            pageScrollFunnel.setPageHeight(webView.getContentHeight());
-//            pageScrollFunnel.logDone();
-//        }
+        if (pageScrollFunnel != null && webView.getContentHeight() > 0) {
+            pageScrollFunnel.setViewportHeight(webView.getHeight());
+            pageScrollFunnel.setPageHeight(webView.getContentHeight());
+            pageScrollFunnel.logDone();
+        }
         pageScrollFunnel = null;
     }
 
