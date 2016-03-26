@@ -317,7 +317,7 @@ public class LeadImagesHandler {
 //    }
 
     /**
-     * @param url Nullable URL with no scheme. For example, foo.bar.com/ instead of
+     * @param leadImage Nullable URL with no scheme. For example, foo.bar.com/ instead of
      *            http://foo.bar.com/.
      */
     private void loadLeadImage(@Nullable LeadImage leadImage) {

@@ -231,10 +231,6 @@ public class ObservableWebView extends RecyclerView {
 
     public void scrollToLastTop(int lastTop){
         this.lastTop = lastTop;
-
-//        LayoutManager layoutManager = this.getLayoutManager();
-//        layoutManager.scrollToPosition(lastTop);
-
         this.smoothScrollBy(0,lastTop);
     }
 }
