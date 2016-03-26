@@ -44,14 +44,14 @@ public interface PageLoadStrategy {
 
     @SuppressWarnings("checkstyle:parameternumber")
     void setUp(@NonNull PageViewModel model,
-            @NonNull PageFragment fragment,
+               @NonNull PageFragment fragment,
                @NonNull SwipeRefreshLayoutWithScroll refreshView,
                @NonNull ObservableWebView webView,
                @NonNull SearchBarHideHandler searchBarHideHandler,
                @NonNull LeadImagesHandler leadImagesHandler,
                @NonNull List<PageBackStackItem> backStack);
 
-    void load(boolean pushBackStack,  int stagedScrollY);
+    void load(boolean pushBackStack, int stagedScrollY, int parallaxScrollY);
 
     void loadFromBackStack();
 
@@ -66,7 +66,9 @@ public interface PageLoadStrategy {
 
     boolean popBackStack();
 
-    /** Convenience method for hiding all the content of a page. */
+    /**
+     * Convenience method for hiding all the content of a page.
+     */
     void onHidePageContent();
 
     void setEditHandler(EditHandler editHandler);

@@ -239,7 +239,7 @@ public class PageFragment extends Fragment implements BackPressedHandler {
         pageScrollFunnel = null;
     }
 
-    public void loadPage(HistoryEntry entry, boolean pushBackStack, int stagedScrollY) {
+    public void loadPage(HistoryEntry entry, boolean pushBackStack, int stagedScrollY, int parallaxScrollY) {
         webView.setVisibility(View.GONE);
         searchBarHideHandler.setForceNoFade(false);
         searchBarHideHandler.setFadeEnabled(false);
@@ -257,7 +257,7 @@ public class PageFragment extends Fragment implements BackPressedHandler {
 //        }
 
         closePageScrollFunnel();
-        pageLoadStrategy.load(pushBackStack, stagedScrollY);
+        pageLoadStrategy.load(pushBackStack, stagedScrollY, parallaxScrollY);
     }
 
     @Override

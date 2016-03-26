@@ -107,7 +107,7 @@ public class DetailPageLoadStrategy implements PageLoadStrategy {
     }
 
     @Override
-    public void load(boolean pushBackStack, int stagedScrollY) {
+    public void load(boolean pushBackStack, int stagedScrollY, int parallaxScrollY) {
         if (pushBackStack) {
             // update the topmost entry in the backstack, before we start overwriting things.
             updateCurrentBackStackItem();
@@ -150,7 +150,7 @@ public class DetailPageLoadStrategy implements PageLoadStrategy {
         PageBackStackItem item = backStack.get(backStack.size() - 1);
         // display the page based on the backstack item, stage the scrollY position based on
         // the backstack item.
-        fragment.loadPage(item.getHistoryEntry(), false, item.getScrollY());
+        fragment.loadPage(item.getHistoryEntry(), false, item.getScrollY(), item.getParallaxScrollY());
 
         L.d("Loaded page " + item.getHistoryEntry().getSource() + " from backstack");
     }
@@ -283,7 +283,7 @@ public class DetailPageLoadStrategy implements PageLoadStrategy {
 //            return;
 //        }
 
-        if (!fragment.isAdded() ) {
+        if (!fragment.isAdded()) {
             return;
         }
 
@@ -344,7 +344,7 @@ public class DetailPageLoadStrategy implements PageLoadStrategy {
                 DetailPageLoadStrategy.this.postLoadPage();
                 return null;
             }
-        },Task.UI_THREAD_EXECUTOR).continueWith(new Continuation<Object, Object>() {
+        }, Task.UI_THREAD_EXECUTOR).continueWith(new Continuation<Object, Object>() {
             @Override
             public Object then(Task<Object> task) throws Exception {
                 return null;
