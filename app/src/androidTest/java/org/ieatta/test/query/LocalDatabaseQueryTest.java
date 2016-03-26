@@ -9,11 +9,14 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.wikipedia.util.log.L;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
 import bolts.Continuation;
 import bolts.Task;
+import io.realm.Realm;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -25,8 +28,8 @@ public class LocalDatabaseQueryTest {
     public void testQueryPhoto() throws InterruptedException {
         final String usedRef = "C2F23EDC-106C-4D17-A6D6-8EA04E10732A"; // for Restaurant(called "Basta Pasta").
         final CountDownLatch completionLatch = new CountDownLatch(1);
-
-        LocalDatabaseQuery.getPhoto(usedRef, false).onSuccess(new Continuation<DBPhoto, Object>() {
+        final List<Realm> realmList = new LinkedList<>();
+        LocalDatabaseQuery.getPhoto(usedRef, false,realmList).onSuccess(new Continuation<DBPhoto, Object>() {
             @Override
             public Object then(Task<DBPhoto> task) throws Exception {
                 DBPhoto photo = task.getResult();
@@ -42,6 +45,7 @@ public class LocalDatabaseQueryTest {
             @Override
             public Object then(Task<Object> task) throws Exception {
                 assertThat("Fetched photo must not be null", (task.getError() == null));
+                LocalDatabaseQuery.closeRealmList(realmList);
                 completionLatch.countDown();
                 return null;
             }
