@@ -30,6 +30,7 @@ import android.widget.LinearLayout;
 import org.ieatta.IEAApp;
 import org.ieatta.R;
 import org.ieatta.activity.LeadImage;
+import org.ieatta.analytics.PageFragmentFunnel;
 import org.ieatta.views.ObservableWebView;
 import org.wikipedia.richtext.LeadingSpan;
 import org.wikipedia.richtext.ParagraphSpan;
@@ -238,6 +239,7 @@ public class ArticleHeaderView extends FrameLayout implements ObservableWebView.
     }
 
     private void updateParallaxScroll(int scrollY) {
+        new PageFragmentFunnel().logArticleHeaderViewScrollY(scrollY);
         int offset = Math.min(getHeight(), scrollY);
         setTranslationY(-offset);
         image.setTranslationY(offset / 2);
