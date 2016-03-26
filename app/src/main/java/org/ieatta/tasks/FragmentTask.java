@@ -38,7 +38,6 @@ public abstract class FragmentTask implements RecyclerOnItemClickListener, LeadI
     protected PageViewModel model;
     public HistoryEntry entry;
     protected Activity activity;
-    private ObservableWebView webView;
 
     // For showing photo's thumbnail gallery.
     public GalleryCollection thumbnailGalleryCollection;
@@ -63,11 +62,11 @@ public abstract class FragmentTask implements RecyclerOnItemClickListener, LeadI
 
     public abstract Task<Void> executeTask();
 
-    public Task<Void> executePhotosGalleryTask(){
+    public Task<Void> executePhotosGalleryTask() {
         return Task.forResult(null);
     }
 
-    public Task<Void> executeReviewsTask(){
+    public Task<Void> executeReviewsTask() {
         return Task.forResult(null);
     }
 
@@ -78,11 +77,11 @@ public abstract class FragmentTask implements RecyclerOnItemClickListener, LeadI
 
     public abstract void postUI();
 
-    public void postPhotosGallery(){
+    public void postPhotosGallery(int forSectionIndex) {
 
     }
 
-    public  void postReviews(){
+    public void postReviews(int forSectionIndex) {
 
     }
 
@@ -91,7 +90,6 @@ public abstract class FragmentTask implements RecyclerOnItemClickListener, LeadI
     }
 
     public void setupWebView(ObservableWebView webView) {
-        this.webView = webView;
         manager.startManagingWithDelegate(webView);
         manager.setOnItemClickListener(this);
     }
