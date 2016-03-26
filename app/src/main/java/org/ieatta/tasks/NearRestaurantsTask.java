@@ -8,7 +8,6 @@ import android.view.View;
 
 import com.tableview.adapter.NSIndexPath;
 
-import org.ieatta.IEAApp;
 import org.ieatta.R;
 import org.ieatta.activity.PageActivity;
 import org.ieatta.activity.PageViewModel;
@@ -48,8 +47,8 @@ public class NearRestaurantsTask extends FragmentTask {
         if (model instanceof DBRestaurant) {
             DBRestaurant item = (DBRestaurant) model;
 
-            ((PageActivity)NearRestaurantsTask.this.activity).loadPage(
-                    new HistoryEntry(MainSegueIdentifier.detailRestaurantSegueIdentifier,item.getUUID()));
+            ((PageActivity) NearRestaurantsTask.this.activity).loadPage(
+                    new HistoryEntry(MainSegueIdentifier.detailRestaurantSegueIdentifier, item.getUUID()));
         }
     }
 
@@ -66,7 +65,7 @@ public class NearRestaurantsTask extends FragmentTask {
     public Task<Void> executeTask() {
         final Location location = this.entry.getLocation();
 
-        return LocalDatabaseQuery.queryNearRestaurants(location).onSuccess(new Continuation<RealmResults<DBRestaurant>, Void>() {
+        return LocalDatabaseQuery.queryNearRestaurants(location, this.realmList).onSuccess(new Continuation<RealmResults<DBRestaurant>, Void>() {
             @Override
             public Void then(Task<RealmResults<DBRestaurant>> task) throws Exception {
                 NearRestaurantsTask.this.restaurants = task.getResult();

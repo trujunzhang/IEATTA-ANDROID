@@ -59,8 +59,8 @@ public class EventDetailTask extends FragmentTask {
         if (model instanceof IEAOrderedPeople) {
             IEAOrderedPeople item = (IEAOrderedPeople) model;
 
-            ((PageActivity)EventDetailTask.this.activity).loadPage(
-                    new HistoryEntry(MainSegueIdentifier.detailOrderedRecipesSegueIdentifier,item.getEventUUID(),item.getTeamUUID()));
+            ((PageActivity) EventDetailTask.this.activity).loadPage(
+                    new HistoryEntry(MainSegueIdentifier.detailOrderedRecipesSegueIdentifier, item.getEventUUID(), item.getTeamUUID()));
         }
     }
 
@@ -85,33 +85,33 @@ public class EventDetailTask extends FragmentTask {
     public Task<Void> executeTask() {
         final String eventUUID = this.entry.getHPara();
 
-        return new RealmModelReader<DBEvent>(DBEvent.class).getFirstObject(LocalDatabaseQuery.get(eventUUID), false).onSuccessTask(new Continuation<DBEvent, Task<DBRestaurant>>() {
+        return new RealmModelReader<DBEvent>(DBEvent.class).getFirstObject(LocalDatabaseQuery.get(eventUUID), false, this.realmList).onSuccessTask(new Continuation<DBEvent, Task<DBRestaurant>>() {
             @Override
             public Task<DBRestaurant> then(Task<DBEvent> task) throws Exception {
                 DBEvent event = task.getResult();
                 EventDetailTask.this.event = event;
                 EventDetailTask.this.restaurantUUID = event.getRestaurantRef();
-                return new RealmModelReader<DBRestaurant>(DBRestaurant.class).getFirstObject(LocalDatabaseQuery.get(restaurantUUID), false);
+                return new RealmModelReader<DBRestaurant>(DBRestaurant.class).getFirstObject(LocalDatabaseQuery.get(restaurantUUID), false, realmList);
             }
         }).onSuccessTask(new Continuation<DBRestaurant, Task<RealmResults<DBPhoto>>>() {
             @Override
             public Task<RealmResults<DBPhoto>> then(Task<DBRestaurant> task) throws Exception {
                 DBRestaurant restaurant = task.getResult();
                 EventDetailTask.this.restaurant = restaurant;
-                return LocalDatabaseQuery.queryPhotosByModel(restaurantUUID, PhotoUsedType.PU_Restaurant.getType());
+                return LocalDatabaseQuery.queryPhotosByModel(restaurantUUID, PhotoUsedType.PU_Restaurant.getType(), realmList);
             }
         }).onSuccessTask(new Continuation<RealmResults<DBPhoto>, Task<RealmResults<DBPeopleInEvent>>>() {
             @Override
             public Task<RealmResults<DBPeopleInEvent>> then(Task<RealmResults<DBPhoto>> task) throws Exception {
                 EventDetailTask.this.leadImageCollection = DBConvert.toLeadImageCollection(task.getResult());
                 return new RealmModelReader<DBPeopleInEvent>(DBPeopleInEvent.class).fetchResults(
-                        LocalDatabaseQuery.getQueryOrderedPeople(eventUUID), false);
+                        LocalDatabaseQuery.getQueryOrderedPeople(eventUUID), false, realmList);
             }
         }).onSuccessTask(new Continuation<RealmResults<DBPeopleInEvent>, Task<RealmResults<DBTeam>>>() {
             @Override
             public Task<RealmResults<DBTeam>> then(Task<RealmResults<DBPeopleInEvent>> task) throws Exception {
                 List<String> peoplePoints = DBConvert.getPeoplePoints(task.getResult());
-                return new RealmModelReader<DBTeam>(DBTeam.class).fetchResults(LocalDatabaseQuery.getObjectsByUUIDs(peoplePoints), false);
+                return new RealmModelReader<DBTeam>(DBTeam.class).fetchResults(LocalDatabaseQuery.getObjectsByUUIDs(peoplePoints), false, realmList);
             }
         }).onSuccessTask(new Continuation<RealmResults<DBTeam>, Task<List<IEAReviewsCellModel>>>() {
             @Override

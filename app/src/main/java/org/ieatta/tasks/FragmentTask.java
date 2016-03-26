@@ -1,7 +1,6 @@
 package org.ieatta.tasks;
 
 import android.app.Activity;
-import android.content.Context;
 import android.support.annotation.VisibleForTesting;
 
 import com.tableview.RecycleViewManager;
@@ -20,9 +19,12 @@ import org.ieatta.cells.model.IEAHeaderViewModel;
 import org.ieatta.views.ObservableWebView;
 import org.wikipedia.util.DimenUtil;
 
-import bolts.Task;
+import java.util.List;
 
-public abstract class FragmentTask implements RecyclerOnItemClickListener,LeadImagesHandler.OnContentHeightChangedListener {
+import bolts.Task;
+import io.realm.Realm;
+
+public abstract class FragmentTask implements RecyclerOnItemClickListener, LeadImagesHandler.OnContentHeightChangedListener {
     protected String restaurantUUID;
     protected String eventUUID;
     protected String teamUUID;
@@ -33,6 +35,8 @@ public abstract class FragmentTask implements RecyclerOnItemClickListener,LeadIm
     public HistoryEntry entry;
     protected Activity activity;
     private ObservableWebView webView;
+
+    protected List<Realm> realmList;
 
     @VisibleForTesting
     public FragmentTask(HistoryEntry entry) {
@@ -48,7 +52,7 @@ public abstract class FragmentTask implements RecyclerOnItemClickListener,LeadIm
 
     public abstract Task<Void> executeTask();
 
-    public void prepareUI(){
+    public void prepareUI() {
         this.manager.setRegisterHeaderView(IEAHeaderView.getType());
         this.manager.setRegisterFooterView(IEAFooterView.getType());
     }

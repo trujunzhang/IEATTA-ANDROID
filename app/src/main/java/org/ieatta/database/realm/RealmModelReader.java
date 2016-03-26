@@ -20,7 +20,7 @@ public class RealmModelReader<T extends RealmObject> {
         this.clazz = clazz;
     }
 
-    public Task<RealmResults<T>> fetchResults(DBBuilder builder, boolean needClose) {
+    public Task<RealmResults<T>> fetchResults(DBBuilder builder, boolean needClose, List<Realm> realmList) {
         RealmResults<T> result = null;
 
         Realm realm = Realm.getInstance(IEAApp.getInstance());
@@ -39,13 +39,15 @@ public class RealmModelReader<T extends RealmObject> {
         } finally {
             if (needClose) {
                 realm.close();
+            } else {
+                realmList.add(realm);
             }
         }
 
         return Task.forResult(result);
     }
 
-    public Task<T> getFirstObject(DBBuilder builder, boolean needClose) {
+    public Task<T> getFirstObject(DBBuilder builder, boolean needClose, List<Realm> realmList) {
         T result = null;
 
         Realm realm = Realm.getInstance(IEAApp.getInstance());
@@ -62,6 +64,8 @@ public class RealmModelReader<T extends RealmObject> {
         } finally {
             if (needClose) {
                 realm.close();
+            } else {
+                realmList.add(realm);
             }
         }
 

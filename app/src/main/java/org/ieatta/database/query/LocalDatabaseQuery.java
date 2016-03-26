@@ -12,44 +12,45 @@ import org.ieatta.utils.GeoHashUtil;
 import java.util.List;
 
 import bolts.Task;
+import io.realm.Realm;
 import io.realm.RealmResults;
 
 public class LocalDatabaseQuery {
 
-    public static Task<RealmResults<DBRestaurant>> queryNearRestaurants(Location location) {
+    public static Task<RealmResults<DBRestaurant>> queryNearRestaurants(Location location, List<Realm> realmList) {
         String containedEncodeHash = GeoHashUtil.getEncodeHash(location);
 //        DBBuilder builder = new DBBuilder().whereContainedIn(AppConstant.kPAPFieldModelGEOHASH, containedEncodeHash);
         DBBuilder builder = new DBBuilder();
-        return new RealmModelReader<DBRestaurant>(DBRestaurant.class).fetchResults(builder, false);
+        return new RealmModelReader<DBRestaurant>(DBRestaurant.class).fetchResults(builder, false,realmList);
     }
 
-    public static Task<RealmResults<DBPhoto>> queryPhotosForRestaurant(String UUID) {
+    public static Task<RealmResults<DBPhoto>> queryPhotosForRestaurant(String UUID, List<Realm> realmList) {
         DBBuilder builder = new DBBuilder()
                 .whereEqualTo(AppConstant.kPAPFieldLocalRestaurantKey, UUID)
                 .orderByDescending(AppConstant.kPAPFieldObjectCreatedDateKey);
-        return new RealmModelReader<DBPhoto>(DBPhoto.class).fetchResults(builder, true);
+        return new RealmModelReader<DBPhoto>(DBPhoto.class).fetchResults(builder, true,realmList);
     }
 
-    public static Task<RealmResults<DBPhoto>> queryPhotosByModel(String usedRef,int usedType) {
+    public static Task<RealmResults<DBPhoto>> queryPhotosByModel(String usedRef,int usedType, List<Realm> realmList) {
         DBBuilder builder = new DBBuilder()
                 .whereEqualTo(AppConstant.kPAPFieldUsedRefKey, usedRef)
                 .whereEqualTo(AppConstant.kPAPFieldUsedTypeKey, usedType)
                 .orderByDescending(AppConstant.kPAPFieldObjectCreatedDateKey);
-        return new RealmModelReader<DBPhoto>(DBPhoto.class).fetchResults(builder, false);
+        return new RealmModelReader<DBPhoto>(DBPhoto.class).fetchResults(builder, false,realmList);
     }
 
-    public static Task<RealmResults<DBPhoto>> getPhotos(String usedRef){
+    public static Task<RealmResults<DBPhoto>> getPhotos(String usedRef, List<Realm> realmList){
         DBBuilder builder = new DBBuilder()
                 .whereEqualTo(AppConstant.kPAPFieldUsedRefKey, usedRef)
                 .orderByDescending(AppConstant.kPAPFieldObjectCreatedDateKey);
-        return new RealmModelReader<DBPhoto>(DBPhoto.class).fetchResults(builder, false);
+        return new RealmModelReader<DBPhoto>(DBPhoto.class).fetchResults(builder, false,realmList);
     }
 
-    public static Task<DBPhoto> getPhoto(String usedRef, boolean needClose){
+    public static Task<DBPhoto> getPhoto(String usedRef, boolean needClose, List<Realm> realmList){
         DBBuilder builder = new DBBuilder()
                 .whereEqualTo(AppConstant.kPAPFieldUsedRefKey, usedRef)
                 .orderByDescending(AppConstant.kPAPFieldObjectCreatedDateKey);
-        return new RealmModelReader<DBPhoto>(DBPhoto.class).getFirstObject(builder, needClose);
+        return new RealmModelReader<DBPhoto>(DBPhoto.class).getFirstObject(builder, needClose,realmList);
     }
 
     public static DBBuilder get(String UUID) {
