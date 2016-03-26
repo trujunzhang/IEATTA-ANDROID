@@ -230,6 +230,7 @@ public class ObservableWebView extends RecyclerView {
     }
 
     public void scrollToLastTop(int lastTop){
+        // Here, we must reset lastTop to zero.
         this.lastTop = 0;
         this.smoothScrollBy(0,lastTop);
     }
