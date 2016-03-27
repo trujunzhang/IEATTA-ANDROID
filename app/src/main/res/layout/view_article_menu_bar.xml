@@ -5,10 +5,8 @@
         android:id="@+id/view_article_menu_bar_bookmark"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_share_dark"
+        android:src="@drawable/bookmark"
         android:contentDescription="@string/article_menu_bar_bookmark" />
-
-    <!--android:src="@drawable/bookmark"-->
 
     <ImageButton
         style="@style/ArticleMenuBarViewButton"
