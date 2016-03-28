@@ -132,4 +132,16 @@
     <dimen name="Read_Reviews_Header">50dip</dimen>
     <dimen name="Read_Reviews">40dip</dimen>
 
+
+
+    <!--the following is my customize dimens-->
+    <dimen name="smallGapSize">5.0dip</dimen>
+    <dimen name="baseGapSize">10.0dip</dimen>
+    <dimen name="largeGapSize">15.0dip</dimen>
+    <dimen name="imageGapSize">8.0dip</dimen>
+    <dimen name="smallImageGapSize">5.0dip</dimen>
+    <dimen name="leftGapSize">10.0dip</dimen>
+    <dimen name="rightGapSize">10.0dip</dimen>
+    <dimen name="topGapSize">15.0dip</dimen>
+    <dimen name="bottomGapSize">15.0dip</dimen>
 </resources>

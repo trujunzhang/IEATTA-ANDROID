@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingLeft="@dimen/smallGapSize"
+    android:paddingRight="@dimen/smallGapSize"
+    android:paddingTop="@dimen/smallGapSize"
+    android:paddingBottom="@dimen/smallGapSize">
+
+    <View
+        android:id="@+id/footer_line"
+        android:layout_width="0.0dip"
+        android:layout_height="1.0px"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="1.0"
+        android:background="@color/gray_mid_light" />
+
+    <Button
+        android:id="@+id/footer_small_button"
+        android:layout_width="100.0dip"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="@dimen/baseGapSize"
+        android:includeFontPadding="false"
+        android:paddingBottom="@dimen/baseGapSize"
+        android:paddingTop="@dimen/baseGapSize"
+         />
+
+    <Button
+        android:id="@+id/footer_large_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="@dimen/smallGapSize"
+        android:layout_marginRight="@dimen/smallGapSize"
+        android:layout_weight="1.0"
+        android:drawablePadding="@dimen/baseGapSize"
+        android:drawableRight="@drawable/arrow_graphic"
+        android:includeFontPadding="false"
+        android:maxWidth="200.0dip"
+        android:minWidth="175.0dip"
+        android:text="See More" />
+</LinearLayout>

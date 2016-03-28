@@ -129,4 +129,39 @@
 
     <color name="black_yoni">#ff222222</color>
 
+    <color name="gray_badge_border">#ffd8d8d8</color>
+    <color name="gray_bubble_border">#ffb1b1b1</color>
+    <color name="gray_businesspage_button_inactive_gradient_end">#fffafaf8</color>
+    <color name="gray_castle_rock">#ff241e1e</color>
+    <color name="gray_cell">#ffebebe6</color>
+    <color name="gray_cool_magma">#ff362e2d</color>
+    <color name="gray_dark">#ff333333</color>
+    <color name="gray_dark_stroke">#ff81827f</color>
+    <color name="gray_deep_cavern">#ff645c5c</color>
+    <color name="gray_earl">#ff5b5b5b</color>
+    <color name="gray_espresso_bean">#ff2d2625</color>
+    <color name="gray_faint">#ff999999</color>
+    <color name="gray_forged_iron">#ff5e5857</color>
+    <color name="gray_jacobean_ebony">#ff3f3f3f</color>
+    <color name="gray_light">#ffeeeeee</color>
+    <color name="gray_light_silver_divider">#ffe6e6e6</color>
+    <color name="gray_light_stroke">#ffcbcbca</color>
+    <color name="gray_list_divider">#ff9a9a85</color>
+    <color name="gray_mid">#ff888888</color>
+    <color name="gray_mid_light">#ffcccccc</color>
+    <color name="gray_on_black">@color/gray_faint</color>
+    <color name="gray_outer_frame_photo_upload">#ffbbbbbb</color>
+    <color name="gray_refresh_four">#ffd6d6d3</color>
+    <color name="gray_refresh_one">#ff878785</color>
+    <color name="gray_refresh_three">#ffc4c4c1</color>
+    <color name="gray_refresh_two">#ffafafac</color>
+    <color name="gray_selected_accent">#ff717160</color>
+    <color name="gray_silver_alert_border">#ffe0e0e0</color>
+    <color name="gray_silver_divider">#ffd4d4d4</color>
+    <color name="gray_slate_stone">#ff6e6e6e</color>
+    <color name="gray_stroke">#ffbdbdbd</color>
+    <color name="gray_stroke_depressed">#ff989898</color>
+    <color name="gray_yoni">#ffb3b3b3</color>
+    <color name="gray_yoni_light_text">#ff666662</color>
+
 </resources>

@@ -5,7 +5,7 @@
         android:id="@+id/view_article_menu_bar_bookmark"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/bookmark"
+        android:src="@drawable/restaurants_icon"
         android:contentDescription="@string/article_menu_bar_bookmark" />
 
     <ImageButton
