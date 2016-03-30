@@ -15,6 +15,9 @@ import org.ieatta.activity.PageViewModel;
 import org.ieatta.activity.history.HistoryEntry;
 import org.ieatta.cells.IEAOrderedPeopleCell;
 import org.ieatta.cells.IEAReviewsCell;
+import org.ieatta.cells.edit.IEADatePickerCell;
+import org.ieatta.cells.edit.IEAEditTextFieldCell;
+import org.ieatta.cells.edit.IEAEditWaiterTextFieldCell;
 import org.ieatta.cells.headerfooterview.IEAFooterView;
 import org.ieatta.cells.headerfooterview.IEAHeaderView;
 import org.ieatta.cells.model.IEAFooterViewModel;
@@ -129,7 +132,7 @@ public class EventEditTask extends FragmentTask {
         super.prepareUI();
 
         this.manager.setRegisterCellClass(IEAEditTextFieldCell.getType(), EditEventSection.sectionInformation.ordinal());
-        this.manager.setRegisterCellClassInSpecialRow(IEAEditWaiterTextFieldCell.getType(), EditEventSection.sectionInformation.ordinal(), EditEventRows.RowWaiter.getRow());
+//        this.manager.setRegisterCellClassInSpecialRow(IEAEditWaiterTextFieldCell.getType(), EditEventSection.sectionInformation.ordinal(), EditEventRows.RowWaiter.getRow());
 
         this.manager.setRegisterCellClass(IEADatePickerCell.getType(), EditEventSection.sectionDurationDate.ordinal());
 

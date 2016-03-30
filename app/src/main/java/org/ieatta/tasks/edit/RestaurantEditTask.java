@@ -16,6 +16,7 @@ import org.ieatta.activity.PageViewModel;
 import org.ieatta.activity.history.HistoryEntry;
 import org.ieatta.cells.IEAOrderedPeopleCell;
 import org.ieatta.cells.IEAReviewsCell;
+import org.ieatta.cells.edit.IEAEditTextFieldCell;
 import org.ieatta.cells.headerfooterview.IEAFooterView;
 import org.ieatta.cells.headerfooterview.IEAHeaderView;
 import org.ieatta.cells.model.IEAFooterViewModel;
@@ -133,9 +134,9 @@ public class RestaurantEditTask extends FragmentTask {
 
         this.manager.setRegisterCellClass(IEAEditTextFieldCell.getType(), EditRestaurantSection.sectionInformation.ordinal());
 
-        if (this.newModel == false) {
-            this.manager.showGoogleMapAddress(EditRestaurantSection.sectionGoogleMapAddress.ordinal());
-        }
+//        if (this.newModel == false) {
+//            this.manager.showGoogleMapAddress(EditRestaurantSection.sectionGoogleMapAddress.ordinal());
+//        }
     }
 
     @Override
