@@ -6,9 +6,12 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.tableview.adapter.IEAViewHolder;
+import com.tableview.adapter.enums.ViewHolderType;
 import com.tableview.storage.models.CellType;
 
 import org.ieatta.R;
+import org.ieatta.cells.model.EditCellModel;
+import org.ieatta.provide.IEAEditKey;
 
 public class IEAEditTextFieldCell extends IEAViewHolder {
     public static CellType getType() {
@@ -28,8 +31,8 @@ public class IEAEditTextFieldCell extends IEAViewHolder {
     public IEAEditTextFieldCell(View itemView) {
         super(itemView);
 
-        self.editText = (EditText) itemView.findViewById(R.id.editText);
-        self.editText.addTextChangedListener(new TextWatcher() {
+      this.editText = (EditText) itemView.findViewById(R.id.editText);
+      this.editText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -37,7 +40,7 @@ public class IEAEditTextFieldCell extends IEAViewHolder {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                self.model.editValue = s.toString();
+              this.model.editValue = s.toString();
             }
 
             @Override
@@ -49,9 +52,9 @@ public class IEAEditTextFieldCell extends IEAViewHolder {
 
     @Override
     public void render(Object value) {
-        self.model = (EditCellModel) value;
-        self.editText.setText(self.model.editValue);
-        self.editText.setHint(self.model.editPlaceHolderResId);
+      this.model = (EditCellModel) value;
+      this.editText.setText(self.model.editValue);
+      this.editText.setHint(self.model.editPlaceHolderResId);
 
         if (self.model.editKey == IEAEditKey.recipe_price) {
             EditTextLocker decimalEditTextLocker = new EditTextLocker(self.editText);

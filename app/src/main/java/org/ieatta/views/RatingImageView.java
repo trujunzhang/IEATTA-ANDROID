@@ -29,13 +29,13 @@ public class RatingImageView extends ImageView {
 
 
 //    public void queryRatingInReviewsByModel(ParseModelAbstract model) {
-//        self.queryRatingInReviewsByReview(new Review(model));
+//      this.queryRatingInReviewsByReview(new Review(model));
 //    }
 
 //    public void queryRatingInReviewsByReview(final Review review) {
 //        Integer integer = IEACache.sharedInstance.avarageRating(review);
 //        if (integer != null) {
-//            self.setImageLevel(integer.intValue());
+//          this.setImageLevel(integer.intValue());
 //        } else {
 //            review.queryRatingInReviews().onSuccess(new Continuation<Integer, Object>() {
 //                @Override
@@ -43,7 +43,7 @@ public class RatingImageView extends ImageView {
 //
 //                    final int count = task.getResult();
 //                    IEACache.sharedInstance.setAvarageRating(count, review);
-//                    self.setImageLevel(count);
+//                  this.setImageLevel(count);
 //
 //                    return null;
 //                }

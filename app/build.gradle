@@ -165,6 +165,8 @@ dependencies {
     // use http://gradleplease.appspot.com/ or http://search.maven.org/.
     // Debug with ./gradlew -q app:dependencies --configuration compile
 
+    compile project(':slideDateTimePicker')
+
     String okHttpVersion = '2.7.2'
     String supportVersion = '23.1.1'
     String espressoVersion = '2.2.1'

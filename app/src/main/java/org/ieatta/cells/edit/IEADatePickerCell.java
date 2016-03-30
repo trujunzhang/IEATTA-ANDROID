@@ -4,11 +4,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.github.jjobes.slidedatetimepicker.SlideDateTimeListener;
+import com.github.jjobes.slidedatetimepicker.SlideDateTimePicker;
 import com.tableview.adapter.IEAViewHolder;
 import com.tableview.adapter.enums.ViewHolderType;
 import com.tableview.storage.models.CellType;
 
-import org.ieatta.R;
+import org.ieatta.cells.model.DatePickerCellModel;
+import org.ieatta.provide.IEAEditKey;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -22,8 +25,6 @@ public class IEADatePickerCell extends IEAViewHolder {
     public ViewHolderType getViewHolderType() {
         return ViewHolderType.None;
     }
-
-    private IEADatePickerCell self = this;
 
     private SimpleDateFormat dateFormatter = new SimpleDateFormat("MM/dd/yy, HH:mm aa");
     private boolean isDialog = false;
@@ -51,7 +52,7 @@ public class IEADatePickerCell extends IEAViewHolder {
                     return;
                 }
 
-                new SlideDateTimePicker.Builder(EnvironmentUtils.sharedInstance.getCurrentFragmentManager())
+                new SlideDateTimePicker.Builder(null)
                         .setListener(listener)
                         .setInitialDate(editedDate)
                                 //.setMinDate(minDate)
@@ -67,15 +68,15 @@ public class IEADatePickerCell extends IEAViewHolder {
 
     @Override
     public void render(Object value) {
-        self.model = (DatePickerCellModel) value;
+      this.model = (DatePickerCellModel) value;
 
-        if (self.model.editKey == IEAEditKey.event_starttime) {
-            self.titleTextView.setText(R.string.Start_Time);
+        if (this.model.editKey == IEAEditKey.event_starttime) {
+          this.titleTextView.setText(R.string.Start_Time);
         } else {
-            self.titleTextView.setText(R.string.End_Time);
+          this.titleTextView.setText(R.string.End_Time);
         }
 
-        self.reloadTableRow(self.model.date);
+      this.reloadTableRow(this.model.date);
     }
 
     private SlideDateTimeListener listener = new SlideDateTimeListener() {
@@ -92,9 +93,9 @@ public class IEADatePickerCell extends IEAViewHolder {
     };
 
     private void reloadTableRow(Date date) {
-        self.editedDate = date;
+      this.editedDate = date;
         // Cache for EditModel.
-        self.model.date = date;
+      this.model.date = date;
 
         this.editText.setText(dateFormatter.format(editedDate));
         isDialog = false;

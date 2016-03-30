@@ -29,14 +29,14 @@ public class IEAEditWaiterTextFieldCell extends IEAViewHolder {
     public IEAEditWaiterTextFieldCell(View itemView) {
         super(itemView);
 
-        self.editText = (EditText) itemView.findViewById(R.id.editText);
+      this.editText = (EditText) itemView.findViewById(R.id.editText);
         itemView.findViewById(R.id.imageView).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                self.model.viewController.takeAPhotoButtonTapped();
+              this.model.viewController.takeAPhotoButtonTapped();
             }
         });
-        self.editText.addTextChangedListener(new TextWatcher() {
+      this.editText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -44,7 +44,7 @@ public class IEAEditWaiterTextFieldCell extends IEAViewHolder {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                self.model.editValue = s.toString();
+              this.model.editValue = s.toString();
             }
 
             @Override
@@ -56,9 +56,9 @@ public class IEAEditWaiterTextFieldCell extends IEAViewHolder {
 
     @Override
     public void render(Object value) {
-        self.model = (EditWaiterCellModel) value;
+      this.model = (EditWaiterCellModel) value;
 
-        self.editText.setText(self.model.editValue);
-        self.editText.setHint(self.model.editPlaceHolderResId);
+      this.editText.setText(self.model.editValue);
+      this.editText.setHint(self.model.editPlaceHolderResId);
     }
 }
