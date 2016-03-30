@@ -8,8 +8,8 @@ import android.widget.EditText;
 import com.tableview.adapter.IEAViewHolder;
 import com.tableview.adapter.enums.ViewHolderType;
 import com.tableview.storage.models.CellType;
-
 import org.ieatta.R;
+import org.ieatta.cells.model.EditWaiterCellModel;
 
 public class IEAEditWaiterTextFieldCell extends IEAViewHolder {
     public static CellType getType() {
