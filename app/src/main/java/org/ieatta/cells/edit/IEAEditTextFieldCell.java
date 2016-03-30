@@ -40,7 +40,7 @@ public class IEAEditTextFieldCell extends IEAViewHolder {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-              this.model.editValue = s.toString();
+              model.editValue = s.toString();
             }
 
             @Override

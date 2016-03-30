@@ -33,7 +33,7 @@ public class IEAEditWaiterTextFieldCell extends IEAViewHolder {
         itemView.findViewById(R.id.imageView).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              this.model.viewController.takeAPhotoButtonTapped();
+//              model.viewController.takeAPhotoButtonTapped();
             }
         });
       this.editText.addTextChangedListener(new TextWatcher() {
@@ -44,7 +44,7 @@ public class IEAEditWaiterTextFieldCell extends IEAViewHolder {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-              this.model.editValue = s.toString();
+              model.editValue = s.toString();
             }
 
             @Override
