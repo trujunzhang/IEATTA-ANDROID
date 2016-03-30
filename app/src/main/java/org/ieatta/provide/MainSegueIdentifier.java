@@ -12,6 +12,7 @@ import org.ieatta.tasks.NearRestaurantsTask;
 import org.ieatta.tasks.OrderedRecipesTask;
 import org.ieatta.tasks.RecipeDetailTask;
 import org.ieatta.tasks.RestaurantDetailTask;
+import org.ieatta.tasks.edit.RestaurantEditTask;
 
 
 public enum MainSegueIdentifier {
@@ -79,8 +80,8 @@ public enum MainSegueIdentifier {
             case AppConstant.SOURCE_RECIPE_DETAIL:
                 return new RecipeDetailTask(entry, activity, model);
             // Four new/edit model pages.(the following three, and restaurant)
-//            case AppConstant.SOURCE_RESTAURANT_EDIT:
-//                return new XXX(entry, activity, model);
+            case AppConstant.SOURCE_RESTAURANT_EDIT:
+                return new RestaurantEditTask(entry, activity, model);
 //            case AppConstant.SOURCE_EVENT_EDIT:
 //                return new XXX(entry, activity, model);
 //            case AppConstant.SOURCE_PEOPLE_EDIT:
