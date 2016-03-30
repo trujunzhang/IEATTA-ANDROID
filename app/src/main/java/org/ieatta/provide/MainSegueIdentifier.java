@@ -22,27 +22,28 @@ public enum MainSegueIdentifier {
     nearbyRestaurants(AppConstant.SOURCE_NEARBY_RESTAURANTS,"nearbyRestaurant"),
 
 //    // Four menus in the near restaurant page.
-//    editRestaurantSegueIdentifier("addEditRestaurant"),
 //    searchRestaurantSegueIdentifier("searchRestaurant"),
 //    managerPeopleSegueIdentifier("managerPeople"),
 //    readReviewsSegueIdentifier("addEditRestaurant"),
-//
-//    // Four detail pages.
+
+    // Four detail pages.
     detailRestaurantSegueIdentifier(AppConstant.SOURCE_RESTAURANT_DETAIL,"detailRestaurant"),
     detailEventSegueIdentifier(AppConstant.SOURCE_EVENT_DETAIL,"detailEvent"),
     detailOrderedRecipesSegueIdentifier(AppConstant.SOURCE_ORDERED_RECIPES,"detailOrderedRecipes"),
     detailRecipeSegueIdentifier(AppConstant.SOURCE_RECIPE_DETAIL,"detailRecipe"),
-//
-//    // Show all posted reviews for restaurant,recipe.
+
+    // Show all posted reviews for restaurant,recipe.
 //    detailSeeReviewSegueIdentifier("seeReviewsInDetail"),
 
     // Show detail review from review list.
 
 
 //    // Four new/edit model pages.(the following three, and restaurant)
-//    editEventSegueIdentifier("addEditEvent"),
-//    editPeopleSegueIdentifier("addEditPeople"),
-//    editRecipeSegueIdentifier("addEditRecipe"),
+    editRestaurantSegueIdentifier(AppConstant.SOURCE_RESTAURANT_EDIT,"addEditRestaurant"),
+    editEventSegueIdentifier(AppConstant.SOURCE_EVENT_EDIT,"addEditEvent"),
+    editPeopleSegueIdentifier(AppConstant.SOURCE_PEOPLE_EDIT,"addEditPeople"),
+    editRecipeSegueIdentifier(AppConstant.SOURCE_RECIPE_EDIT,"addEditRecipe"),
+
 //    // Choice Person in the event page.
 //    choicePeopleSegueIdentifier("choicePeople"),
 //

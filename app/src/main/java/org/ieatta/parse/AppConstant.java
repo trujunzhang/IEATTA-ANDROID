@@ -73,4 +73,10 @@ public final class AppConstant {
     public static final int SOURCE_EVENT_DETAIL = 13;
     public static final int SOURCE_ORDERED_RECIPES = 14;
     public static final int SOURCE_RECIPE_DETAIL = 15;
+
+    public static final int SOURCE_RESTAURANT_EDIT = 16;
+    public static final int SOURCE_EVENT_EDIT = 17;
+    public static final int SOURCE_RECIPE_EDIT = 18;
+    public static final int SOURCE_PEOPLE_EDIT = 19;
+
 }
