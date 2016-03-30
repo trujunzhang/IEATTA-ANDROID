@@ -10,6 +10,8 @@ import com.tableview.adapter.enums.ViewHolderType;
 import com.tableview.storage.models.CellType;
 
 import org.ieatta.R;
+import org.ieatta.cells.model.EditCellModel;
+import org.ieatta.provide.IEAEditKey;
 
 public class IEAEditTextRecipeFieldCell extends IEAViewHolder {
     public static CellType getType() {
@@ -38,7 +40,7 @@ public class IEAEditTextRecipeFieldCell extends IEAViewHolder {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-              this.model.editValue = s.toString();
+//              this.model.editValue = s.toString();
             }
 
             @Override

@@ -10,6 +10,7 @@ import com.tableview.adapter.IEAViewHolder;
 import com.tableview.adapter.enums.ViewHolderType;
 import com.tableview.storage.models.CellType;
 
+import org.ieatta.R;
 import org.ieatta.cells.model.DatePickerCellModel;
 import org.ieatta.provide.IEAEditKey;
 
