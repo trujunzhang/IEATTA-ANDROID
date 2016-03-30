@@ -59,9 +59,9 @@ public class RecipeEditTask extends FragmentTask {
 
     }
 
-    enum EventDetailSection {
-        section_ordered_people, //= 0
-        section_reviews,       //= 1
+    enum EditRecipeSection {
+        sectionInformation,//= 0
+        sectionPhotos,//= 1
     }
 
     public DBRestaurant restaurant;
@@ -122,33 +122,19 @@ public class RecipeEditTask extends FragmentTask {
     }
 
 
-    public Page getPage() {
-        String title = restaurant.getDisplayName();
-        PageTitle pageTitle = new PageTitle(this.event.getUUID());
-        PageProperties properties = new PageProperties(this.leadImageCollection, title);
-
-        return new Page(pageTitle, properties);
-    }
-
     @Override
     public void prepareUI() {
         super.prepareUI();
 
-        this.manager.setRegisterCellClass(IEAOrderedPeopleCell.getType(), EventDetailSection.section_ordered_people.ordinal());
-        this.manager.setRegisterCellClass(IEAReviewsCell.getType(), EventDetailSection.section_reviews.ordinal());
-
-        this.manager.appendSectionTitleCell(new SectionTitleCellModel(IEAEditKey.Section_Title, R.string.People_Ordered), EventDetailSection.section_ordered_people.ordinal());
+        // Add rows for sections.
+        this.manager.appendSectionTitleCell(new SectionTitleCellModel(IEAEditKey.Section_Title, R.string.Recipe_Information), EditRecipeSection.sectionInformation.ordinal());
+        this.manager.setRegisterCellClass(IEAEditTextFieldCell.getType(), EditRecipeSection.sectionInformation.ordinal());
+        // **** Important (just for android)****
+        this.manager.setRegisterCellClassInSpecialRow(IEAEditTextRecipeFieldCell.getType(), EditRecipeSection.sectionInformation.ordinal(), 1);
     }
 
     @Override
     public void postUI() {
-        this.manager.setHeaderItem(new IEAHeaderViewModel(DimenUtil.getDisplayWidthPx()), IEAHeaderView.getType());
-        this.manager.setFooterItem(new IEAFooterViewModel(), IEAFooterView.getType());
 
-        this.manager.setSectionItems(this.orderedPeopleList, EventDetailSection.section_ordered_people.ordinal());
-
-        postReviews(EventDetailSection.section_reviews.ordinal());
-
-        model.setPage(this.getPage());
     }
 }

@@ -59,9 +59,10 @@ public class EventEditTask extends FragmentTask {
 
     }
 
-    enum EventDetailSection {
-        section_ordered_people, //= 0
-        section_reviews,       //= 1
+    enum EditEventSection {
+        sectionInformation,//= 0
+        sectionPhotos,//= 1
+        sectionDurationDate,//= 2
     }
 
     public DBRestaurant restaurant;
@@ -122,33 +123,23 @@ public class EventEditTask extends FragmentTask {
     }
 
 
-    public Page getPage() {
-        String title = restaurant.getDisplayName();
-        PageTitle pageTitle = new PageTitle(this.event.getUUID());
-        PageProperties properties = new PageProperties(this.leadImageCollection, title);
-
-        return new Page(pageTitle, properties);
-    }
 
     @Override
     public void prepareUI() {
         super.prepareUI();
 
-        this.manager.setRegisterCellClass(IEAOrderedPeopleCell.getType(), EventDetailSection.section_ordered_people.ordinal());
-        this.manager.setRegisterCellClass(IEAReviewsCell.getType(), EventDetailSection.section_reviews.ordinal());
+        this.manager.setRegisterCellClass(IEAEditTextFieldCell.getType(), EditEventSection.sectionInformation.ordinal());
+        this.manager.setRegisterCellClassInSpecialRow(IEAEditWaiterTextFieldCell.getType(), EditEventSection.sectionInformation.ordinal(), EditEventRows.RowWaiter.getRow());
 
-        this.manager.appendSectionTitleCell(new SectionTitleCellModel(IEAEditKey.Section_Title, R.string.People_Ordered), EventDetailSection.section_ordered_people.ordinal());
+        this.manager.setRegisterCellClass(IEADatePickerCell.getType(), EditEventSection.sectionDurationDate.ordinal());
+
+        // Add rows for sections.
+        this.manager.appendSectionTitleCell(new SectionTitleCellModel(IEAEditKey.Section_Title, R.string.Event_Information), EditEventSection.sectionInformation.ordinal());
+        this.manager.appendSectionTitleCell(new SectionTitleCellModel(IEAEditKey.Section_Title, R.string.Date_of_Event), EditEventSection.sectionDurationDate.ordinal());
     }
 
     @Override
     public void postUI() {
-        this.manager.setHeaderItem(new IEAHeaderViewModel(DimenUtil.getDisplayWidthPx()), IEAHeaderView.getType());
-        this.manager.setFooterItem(new IEAFooterViewModel(), IEAFooterView.getType());
 
-        this.manager.setSectionItems(this.orderedPeopleList, EventDetailSection.section_ordered_people.ordinal());
-
-        postReviews(EventDetailSection.section_reviews.ordinal());
-
-        model.setPage(this.getPage());
     }
 }
