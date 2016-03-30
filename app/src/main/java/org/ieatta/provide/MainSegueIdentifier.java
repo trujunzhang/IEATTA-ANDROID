@@ -38,13 +38,13 @@ public enum MainSegueIdentifier {
     // Show detail review from review list.
 
 
-//    // Four new/edit model pages.(the following three, and restaurant)
+    // Four new/edit model pages.(the following three, and restaurant)
     editRestaurantSegueIdentifier(AppConstant.SOURCE_RESTAURANT_EDIT,"addEditRestaurant"),
     editEventSegueIdentifier(AppConstant.SOURCE_EVENT_EDIT,"addEditEvent"),
     editPeopleSegueIdentifier(AppConstant.SOURCE_PEOPLE_EDIT,"addEditPeople"),
     editRecipeSegueIdentifier(AppConstant.SOURCE_RECIPE_EDIT,"addEditRecipe"),
 
-//    // Choice Person in the event page.
+    // Choice Person in the event page.
 //    choicePeopleSegueIdentifier("choicePeople"),
 //
 //    // Show detail review from review list.
