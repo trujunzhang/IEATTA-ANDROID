@@ -70,8 +70,7 @@ public class DBConvert {
 
         for (int i = 0; i < teams.size(); i++) {
             DBReview review = reviews.get(i);
-            IEAReviewsCellModel item = new IEAReviewsCellModel(review, DBConvert.getTeam(review.getUserRef(), teams));
-            list.add(item);
+            list.add(new IEAReviewsCellModel(review, DBConvert.getTeam(review.getUserRef(), teams)));
         }
         return list;
     }
