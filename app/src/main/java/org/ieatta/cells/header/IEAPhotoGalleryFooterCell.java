@@ -11,10 +11,13 @@ import com.tableview.adapter.enums.ViewHolderType;
 import com.tableview.storage.models.CellType;
 
 import org.ieatta.R;
+import org.ieatta.cells.model.SectionPhotoGalleryFooterCellModel;
 import org.ieatta.cells.model.SectionTitleCellModel;
 
 
 public class IEAPhotoGalleryFooterCell extends IEAViewHolder {
+    private SectionPhotoGalleryFooterCellModel model;
+
     public static CellType getType() {
         return new CellType(IEAPhotoGalleryFooterCell.class, R.layout.businesspage_section_footer);
     }
@@ -39,7 +42,7 @@ public class IEAPhotoGalleryFooterCell extends IEAViewHolder {
 
     @Override
     public void render(Object value) {
-//        this.model = (SectionPhotoGalleryFooterCellModel) value;
+        this.model = (SectionPhotoGalleryFooterCellModel) value;
 
         // update UI
 //        int photosCount = this.model.photosCount;
