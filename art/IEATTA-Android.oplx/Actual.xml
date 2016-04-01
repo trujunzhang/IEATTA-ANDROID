@@ -68,6 +68,8 @@
     <child-task idref="t7"/>
     <child-task idref="t5"/>
     <child-task idref="t6"/>
+    <child-task idref="t8"/>
+    <child-task idref="t9"/>
     <start-no-earlier-than>2016-04-01T00:00:00.000Z</start-no-earlier-than>
   </task>
   <task id="t3">
@@ -96,6 +98,18 @@
   </task>
   <task id="t7">
     <title>Add footview for thumbnail gallery and review section.</title>
+    <effort>28800</effort>
+    <start-constraint-date>2016-04-01T00:00:00.000Z</start-constraint-date>
+    <start-no-earlier-than>2016-04-01T00:00:00.000Z</start-no-earlier-than>
+  </task>
+  <task id="t8">
+    <title>Add “Camera icon” in the thumbnail gallery cell.</title>
+    <effort>28800</effort>
+    <start-constraint-date>2016-04-01T00:00:00.000Z</start-constraint-date>
+    <start-no-earlier-than>2016-04-01T00:00:00.000Z</start-no-earlier-than>
+  </task>
+  <task id="t9">
+    <title>Add item’s icons on the toolbar menu.</title>
     <effort>28800</effort>
     <start-constraint-date>2016-04-01T00:00:00.000Z</start-constraint-date>
     <start-no-earlier-than>2016-04-01T00:00:00.000Z</start-no-earlier-than>

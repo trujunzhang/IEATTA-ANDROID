@@ -41,6 +41,16 @@
   <task-change-set user="djzhang" date="2016-04-01T12:40:02.420Z" timestamp="2016-04-01T12:40:02.420Z">
     <change idref="t4" attribute="internalEffortDone" type="real" from="0" to="28800" resolved="yes"/>
   </task-change-set>
+  <task-change-set user="djzhang" date="2016-04-01T13:14:17.892Z" timestamp="2016-04-01T13:14:17.892Z">
+    <change idref="t8" to="t2" to-position="5" resolved="yes">
+      <change idref="t8" attribute="noEarlierThanConstraintDate" type="date" to="2016-04-01T00:00:00.000Z"/>
+      <change idref="t8" attribute="title" type="string" to="Add “Camera icon” in the thumbnail gallery cell."/>
+    </change>
+    <change idref="t9" to="t2" to-position="6" resolved="yes">
+      <change idref="t9" attribute="noEarlierThanConstraintDate" type="date" to="2016-04-01T00:00:00.000Z"/>
+      <change idref="t9" attribute="title" type="string" to="Add item’s icons on the toolbar menu."/>
+    </change>
+  </task-change-set>
   <metadata-change-set user="djzhang" date="2016-03-31T02:46:29.496Z" timestamp="2016-03-31T02:46:29.496Z">
     <change idref="m1" attribute="fixedDate" type="date" from="2007-01-01T20:00:00.000Z" to="2016-03-31T00:00:00.000Z" resolved="yes"/>
   </metadata-change-set>
