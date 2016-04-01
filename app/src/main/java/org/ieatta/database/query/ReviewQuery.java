@@ -53,11 +53,7 @@ public class ReviewQuery {
         }).onSuccessTask(new Continuation<RealmResults<DBTeam>, Task<List<IEAReviewsCellModel>>>() {
             @Override
             public Task<List<IEAReviewsCellModel>> then(Task<RealmResults<DBTeam>> task) throws Exception {
-                List<IEAReviewsCellModel> list = new LinkedList<>();
-                if (task.getResult() == null)
-                    return Task.forResult(list);
-
-                list = DBConvert.toReviewsCellModels(ReviewQuery.this.reviews, task.getResult());
+                List<IEAReviewsCellModel> list = DBConvert.toReviewsCellModels(ReviewQuery.this.reviews, task.getResult());
                 LocalDatabaseQuery.closeRealmList(realmList);
                 return Task.forResult(list);
             }
