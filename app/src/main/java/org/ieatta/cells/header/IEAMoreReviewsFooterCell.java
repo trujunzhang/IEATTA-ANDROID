@@ -11,6 +11,7 @@ import com.tableview.adapter.IEAViewHolder;
 import com.tableview.adapter.enums.ViewHolderType;
 import com.tableview.storage.models.CellType;
 
+import org.ieatta.IEAApp;
 import org.ieatta.R;
 import org.ieatta.cells.model.SectionMoreReviewsFooterCellModel;
 import org.ieatta.cells.model.SectionTitleCellModel;
@@ -51,20 +52,21 @@ public class IEAMoreReviewsFooterCell extends IEAViewHolder {
     public void render(Object value) {
         this.model = (SectionMoreReviewsFooterCellModel) value;
 
-
+        configureButton(this.model.otherReviewCount);
     }
 
     private void configureButton(int reviewsCount) {
-//        String buttonTitle = EnvironmentUtils.sharedInstance.getGlobalContext().getResources().getString(R.string.No_More_Reviews);
-//        this.footerLargeButton.setEnabled(true);
-//        if (reviewsCount > 0) {
-//            String moreReviews = EnvironmentUtils.sharedInstance.getGlobalContext().getResources().getString(R.string.See_More_Reviews);
-//            buttonTitle = reviewsCount + " " + moreReviews;
-//        } else {
-//            this.footerLargeButton.setEnabled(false);
-//        }
-//
-//        this.footerLargeButton.setText(buttonTitle);
+        String buttonTitle =IEAApp.getInstance().getApplicationContext().getResources().getString(R.string.No_More_Reviews);
+        String moreReviews = IEAApp.getInstance().getApplicationContext().getResources().getString(R.string.See_More_Reviews);
+
+        this.footerLargeButton.setEnabled(true);
+        if (reviewsCount > 0) {
+            buttonTitle = String.format("%d %s", reviewsCount, moreReviews);
+        } else {
+            this.footerLargeButton.setEnabled(false);
+        }
+
+        this.footerLargeButton.setText(buttonTitle);
     }
 
 }
