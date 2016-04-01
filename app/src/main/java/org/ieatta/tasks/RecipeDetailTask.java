@@ -116,7 +116,7 @@ public class RecipeDetailTask extends FragmentTask {
             @Override
             public Task<List<IEAReviewsCellModel>> then(Task<List<File>> task) throws Exception {
                 RecipeDetailTask.this.thumbnailGalleryCollection = DBConvert.toGalleryCollection(task.getResult());
-                return new ReviewQuery().queryReview(recipeUUID, ReviewType.Review_Recipe, AppConstant.limit_reviews);
+                return reviewQuery.queryReview(recipeUUID, ReviewType.Review_Recipe, AppConstant.limit_reviews);
             }
         }).onSuccess(new Continuation<List<IEAReviewsCellModel>, Void>() {
             @Override

@@ -116,7 +116,7 @@ public class EventDetailTask extends FragmentTask {
             @Override
             public Task<List<IEAReviewsCellModel>> then(Task<RealmResults<DBTeam>> task) throws Exception {
                 EventDetailTask.this.orderedPeopleList = DBConvert.toOrderedPeopleList(task.getResult(), EventDetailTask.this.event);
-                return new ReviewQuery().queryReview(eventUUID, ReviewType.Review_Event, AppConstant.limit_reviews);
+                return reviewQuery.queryReview(eventUUID, ReviewType.Review_Event, AppConstant.limit_reviews);
             }
         }).onSuccess(new Continuation<List<IEAReviewsCellModel>, Void>() {
             @Override
