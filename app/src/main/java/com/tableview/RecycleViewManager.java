@@ -92,7 +92,8 @@ public class RecycleViewManager {
     public void startManagingWithDelegate(RecyclerView recyclerView) {
         recyclerView.setAdapter(this.manager.getAdapter());
         recyclerView.setLayoutManager(this.manager.configuration.builder.manager);
-        recyclerView.addItemDecoration(this.manager.configuration.builder.decoration);
+        if(this.manager.configuration.builder.decoration != null)
+            recyclerView.addItemDecoration(this.manager.configuration.builder.decoration);
     }
 
     public void setRegisterHeaderClass(CellType type) {
