@@ -20,11 +20,18 @@ import io.realm.RealmResults;
 public class ReviewQuery {
     private RealmResults<DBReview> reviews;
 
+    public void setReviews(RealmResults<DBReview> reviews){
+        this.reviews = reviews;
+        this.reviewsCount = reviews.size();
+    }
+
     //  return new RealmModelReader<DBEvent>(DBEvent.class).fetchResults(new DBBuilder(), false);// for test
 
     final List<Realm> realmList = new LinkedList<>();
 
-    public Task<List<IEAReviewsCellModel>> queryReview(String reviewRef, ReviewType type, int limit) {
+    public int reviewsCount = 0;
+
+    public Task<List<IEAReviewsCellModel>> queryReview(String reviewRef, ReviewType type, final int limit) {
         DBBuilder reviewBuilder = new DBBuilder()
                 .whereEqualTo(AppConstant.kPAPFieldReviewRefKey, reviewRef)
                 .whereEqualTo(AppConstant.kPAPFieldReviewTypeKey, type.getType());
@@ -35,13 +42,12 @@ public class ReviewQuery {
         return new RealmModelReader<DBReview>(DBReview.class).fetchResults(reviewBuilder, false, realmList).onSuccessTask(new Continuation<RealmResults<DBReview>, Task<RealmResults<DBTeam>>>() {
             @Override
             public Task<RealmResults<DBTeam>> then(Task<RealmResults<DBReview>> task) throws Exception {
-                ReviewQuery.this.reviews = task.getResult();
-                List<String> list = getTeamsList(task.getResult());
+                ReviewQuery.this.setReviews(task.getResult());
 
-                if (list.size() == 0)
+                if (ReviewQuery.this.reviewsCount == 0)
                     return Task.forResult(null);
 
-                DBBuilder builder = new DBBuilder().whereContainedIn(AppConstant.kPAPFieldObjectUUIDKey, list);
+                DBBuilder builder = new DBBuilder().whereContainedIn(AppConstant.kPAPFieldObjectUUIDKey, getTeamsList(task.getResult(),limit));
                 return new RealmModelReader<DBTeam>(DBTeam.class).fetchResults(builder, false, realmList);
             }
         }).onSuccessTask(new Continuation<RealmResults<DBTeam>, Task<List<IEAReviewsCellModel>>>() {
@@ -58,7 +64,7 @@ public class ReviewQuery {
         });
     }
 
-    private List<String> getTeamsList(RealmResults<DBReview> reviews) {
+    private List<String> getTeamsList(RealmResults<DBReview> reviews, int limit) {
         List<String> list = new LinkedList<>();
         for (DBReview review : reviews) {
             list.add(review.getUserRef());

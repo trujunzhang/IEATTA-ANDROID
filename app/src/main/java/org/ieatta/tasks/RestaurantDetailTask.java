@@ -106,7 +106,7 @@ public class RestaurantDetailTask extends FragmentTask {
             @Override
             public Task<List<IEAReviewsCellModel>> then(Task<RealmResults<DBEvent>> task) throws Exception {
                 RestaurantDetailTask.this.events = task.getResult();
-                return new ReviewQuery().queryReview(restaurantUUID, ReviewType.Review_Restaurant, AppConstant.limit_reviews);
+                return reviewQuery.queryReview(restaurantUUID, ReviewType.Review_Restaurant, AppConstant.limit_reviews);
             }
         }).onSuccess(new Continuation<List<IEAReviewsCellModel>, Void>() {
             @Override

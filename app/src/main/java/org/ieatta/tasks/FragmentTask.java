@@ -28,6 +28,7 @@ import org.ieatta.cells.model.SectionPhotoGalleryFooterCellModel;
 import org.ieatta.cells.model.SectionTitleCellModel;
 import org.ieatta.database.provide.ReviewType;
 import org.ieatta.database.query.LocalDatabaseQuery;
+import org.ieatta.database.query.ReviewQuery;
 import org.ieatta.provide.IEAEditKey;
 import org.ieatta.views.ObservableWebView;
 import org.wikipedia.util.DimenUtil;
@@ -56,6 +57,8 @@ public abstract class FragmentTask implements RecyclerOnItemClickListener, LeadI
     public List<IEAReviewsCellModel> reviewsCellModelList;
 
     protected static List<Realm> realmList = new LinkedList<>();
+
+    protected ReviewQuery reviewQuery = new ReviewQuery();
 
     @VisibleForTesting
     public FragmentTask(HistoryEntry entry) {
