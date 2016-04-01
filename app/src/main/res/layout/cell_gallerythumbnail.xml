@@ -2,6 +2,6 @@
 
 <org.ieatta.activity.gallery.GalleryThumbnailScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/link_preview_thumbnail_gallery"
-    style="@style/cell_style"
+    android:background="@color/background_white"
     android:layout_width="match_parent"
     android:layout_height="@dimen/linkPreviewGalleryHeight" />
