@@ -43,7 +43,7 @@
     <!-- Default width of swipeable bottom dialogs. -->
     <dimen name="swipeableDialogMaxWidth">480dp</dimen>
     <!-- Default size of images in Link Preview thumbnail gallery -->
-    <dimen name="linkPreviewGalleryHeight">114dp</dimen>
+    <dimen name="linkPreviewGalleryHeight">112dp</dimen>
     <dimen name="linkPreviewImageSize">112dp</dimen>
     <!-- Default height with which the Link Preview peeks out from the bottom -->
     <dimen name="linkPreviewPeekHeight">320dp</dimen>

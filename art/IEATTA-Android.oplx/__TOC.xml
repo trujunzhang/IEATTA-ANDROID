@@ -7,7 +7,7 @@
     <status-display>basic</status-display>
     <task-view>
       <split-view-divider-position>306</split-view-divider-position>
-      <outline x="0" y="0" w="306" h="556">
+      <outline x="0" y="0" w="306" h="571">
         <column name="Violations" width="20"/>
         <column name="Notes" width="20"/>
         <column name="Title" width="191"/>
@@ -15,7 +15,7 @@
         <expanded-items idrefs="t2"/>
         <selected-items-at-filter-time idrefs="t4 t7 t6 t2 t5"/>
       </outline>
-      <gantt-view x="0" y="0" w="614" h="556">
+      <gantt-view x="0" y="0" w="644" h="571">
         <view-mode>actual</view-mode>
         <dependency-lines/>
         <constraints/>
