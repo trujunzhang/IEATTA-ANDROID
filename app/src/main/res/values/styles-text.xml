@@ -1,5 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <style name="LargeText" parent="@android:style/TextAppearance">
+        <item name="android:textSize">14.0sp</item>
+        <item name="android:textColor">@color/black_yoni</item>
+    </style>
+
+    <style name="LargeDarkText" parent="@style/LargeText">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Widget">
+        <item name="android:textAppearance">?attr/android:textAppearance</item>
+    </style>
+
+    <style name="Widget.Button" parent="@style/Widget">
+        <!--<item name="android:textAppearance">?attr/android:textAppearanceSmallInverse</item>-->
+        <item name="android:textColor">@android:color/primary_text_light</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/button_flat_design</item>
+        <!--<item name="android:paddingTop">@dimen/baseGapSize</item>-->
+        <!--<item name="android:paddingBottom">@dimen/baseGapSize</item>-->
+        <item name="android:focusable">true</item>
+        <item name="android:clickable">true</item>
+    </style>
+
+    <style name="Widget.Button.BusinessPage" parent="@style/Widget.Button">
+        <item name="android:textAppearance">@style/LargeDarkText</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingLeft">@dimen/largeGapSize</item>
+        <item name="android:paddingTop">@dimen/topGapSize</item>
+        <item name="android:paddingRight">@dimen/largeGapSize</item>
+        <item name="android:paddingBottom">@dimen/bottomGapSize</item>
+        <item name="android:focusable">false</item>
+        <item name="android:clickable">false</item>
+    </style>
+
     <style name="SectionText" parent="@style/TextAppearance.AppCompat.Medium">
         <item name="android:textSize">12.0sp</item>
         <item name="android:textColor">@color/BlackText</item>

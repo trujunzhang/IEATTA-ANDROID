@@ -145,4 +145,14 @@
     <dimen name="rightGapSize">10.0dip</dimen>
     <dimen name="topGapSize">15.0dip</dimen>
     <dimen name="bottomGapSize">15.0dip</dimen>
+
+    <dimen name="border">1.0dp</dimen>
+    <dimen name="left_button_bottom_left_radius_corner">0.0dip</dimen>
+    <item name="left_button_bottom_right_radius_corner" type="dimen">@dimen/corner_radius</item>
+    <item name="right_button_bottom_left_radius_corner" type="dimen">@dimen/corner_radius</item>
+    <dimen name="right_button_bottom_right_radius_corner">0.0dip</dimen>
+
+    <integer name="gradient_start_bottom">90</integer>
+    <integer name="gradient_start_top">270</integer>
+
 </resources>
