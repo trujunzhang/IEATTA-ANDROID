@@ -16,12 +16,17 @@ import org.ieatta.activity.gallery.GalleryThumbnailScrollView;
 import org.ieatta.activity.history.HistoryEntry;
 import org.ieatta.activity.leadimages.LeadImagesHandler;
 import org.ieatta.analytics.GalleryFunnel;
+import org.ieatta.cells.header.IEAMoreReviewsFooterCell;
+import org.ieatta.cells.header.IEAPhotoGalleryFooterCell;
 import org.ieatta.cells.headerfooterview.IEAFooterView;
 import org.ieatta.cells.headerfooterview.IEAHeaderView;
 import org.ieatta.cells.model.IEAGalleryThumbnail;
 import org.ieatta.cells.model.IEAHeaderViewModel;
 import org.ieatta.cells.model.IEAReviewsCellModel;
+import org.ieatta.cells.model.SectionMoreReviewsFooterCellModel;
+import org.ieatta.cells.model.SectionPhotoGalleryFooterCellModel;
 import org.ieatta.cells.model.SectionTitleCellModel;
+import org.ieatta.database.provide.ReviewType;
 import org.ieatta.database.query.LocalDatabaseQuery;
 import org.ieatta.provide.IEAEditKey;
 import org.ieatta.views.ObservableWebView;
@@ -85,11 +90,13 @@ public abstract class FragmentTask implements RecyclerOnItemClickListener, LeadI
     public void postPhotosGallery(int forSectionIndex) {
         this.manager.appendSectionTitleCell(new SectionTitleCellModel(IEAEditKey.Section_Title, R.string.PhotosGallery), forSectionIndex);
         this.manager.setSectionItems(CollectionUtil.createList(new IEAGalleryThumbnail(this.thumbnailGalleryCollection, this.galleryViewListener)), forSectionIndex);
+        this.manager.setFooterModelInSection(new SectionPhotoGalleryFooterCellModel(restaurantUUID, ReviewType.Review_Restaurant), forSectionIndex, IEAPhotoGalleryFooterCell.getType());
     }
 
-    public void postReviews(int forSectionIndex) {
+    public void postReviews(int forSectionIndex,String reviewRef, ReviewType type) {
         this.manager.appendSectionTitleCell(new SectionTitleCellModel(IEAEditKey.Section_Title, R.string.Reviews), forSectionIndex);
         this.manager.setSectionItems(this.reviewsCellModelList, forSectionIndex);
+        this.manager.setFooterModelInSection(new SectionMoreReviewsFooterCellModel(reviewRef, type), forSectionIndex, IEAMoreReviewsFooterCell.getType());
     }
 
     protected int getEmptyHeaderViewHeight() {

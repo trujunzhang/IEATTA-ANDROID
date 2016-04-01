@@ -152,10 +152,7 @@ public class RestaurantDetailTask extends FragmentTask {
         this.manager.setSectionItems(this.events, RestaurantDetailSection.section_events.ordinal());
 
         postPhotosGallery(RestaurantDetailSection.section_gallery_thumbnail.ordinal());
-        this.manager.setFooterModelInSection(new SectionPhotoGalleryFooterCellModel(restaurantUUID, ReviewType.Review_Restaurant), RestaurantDetailSection.section_gallery_thumbnail.ordinal(), IEAPhotoGalleryFooterCell.getType());
-
-        postReviews(RestaurantDetailSection.section_reviews.ordinal());
-        this.manager.setFooterModelInSection(new SectionMoreReviewsFooterCellModel(restaurantUUID, ReviewType.Review_Restaurant), RestaurantDetailSection.section_reviews.ordinal(), IEAMoreReviewsFooterCell.getType());
+        postReviews(RestaurantDetailSection.section_reviews.ordinal(), restaurantUUID, ReviewType.Review_Restaurant);
 
         model.setPage(this.getPage());
     }
