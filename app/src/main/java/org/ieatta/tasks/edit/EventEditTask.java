@@ -8,20 +8,10 @@ import com.tableview.adapter.NSIndexPath;
 
 import org.ieatta.R;
 import org.ieatta.activity.LeadImageCollection;
-import org.ieatta.activity.Page;
-import org.ieatta.activity.PageProperties;
-import org.ieatta.activity.PageTitle;
 import org.ieatta.activity.PageViewModel;
 import org.ieatta.activity.history.HistoryEntry;
-import org.ieatta.cells.IEAOrderedPeopleCell;
-import org.ieatta.cells.IEAReviewsCell;
 import org.ieatta.cells.edit.IEADatePickerCell;
 import org.ieatta.cells.edit.IEAEditTextFieldCell;
-import org.ieatta.cells.edit.IEAEditWaiterTextFieldCell;
-import org.ieatta.cells.headerfooterview.IEAFooterView;
-import org.ieatta.cells.headerfooterview.IEAHeaderView;
-import org.ieatta.cells.model.IEAFooterViewModel;
-import org.ieatta.cells.model.IEAHeaderViewModel;
 import org.ieatta.cells.model.IEAOrderedPeople;
 import org.ieatta.cells.model.IEAReviewsCellModel;
 import org.ieatta.cells.model.SectionTitleCellModel;
@@ -35,10 +25,10 @@ import org.ieatta.database.provide.ReviewType;
 import org.ieatta.database.query.LocalDatabaseQuery;
 import org.ieatta.database.query.ReviewQuery;
 import org.ieatta.database.realm.RealmModelReader;
+import org.ieatta.parse.AppConstant;
 import org.ieatta.provide.IEAEditKey;
 import org.ieatta.tasks.DBConvert;
 import org.ieatta.tasks.FragmentTask;
-import org.wikipedia.util.DimenUtil;
 
 import java.util.List;
 
@@ -114,7 +104,7 @@ public class EventEditTask extends FragmentTask {
             @Override
             public Task<List<IEAReviewsCellModel>> then(Task<RealmResults<DBTeam>> task) throws Exception {
                 EventEditTask.this.orderedPeopleList = DBConvert.toOrderedPeopleList(task.getResult(), EventEditTask.this.event);
-                return new ReviewQuery().queryReview(eventUUID, ReviewType.Review_Event);
+                return new ReviewQuery().queryReview(eventUUID, ReviewType.Review_Event, AppConstant.limit_reviews);
             }
         }).onSuccess(new Continuation<List<IEAReviewsCellModel>, Void>() {
             @Override

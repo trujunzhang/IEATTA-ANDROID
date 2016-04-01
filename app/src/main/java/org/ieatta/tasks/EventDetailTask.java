@@ -33,6 +33,7 @@ import org.ieatta.database.provide.ReviewType;
 import org.ieatta.database.query.LocalDatabaseQuery;
 import org.ieatta.database.query.ReviewQuery;
 import org.ieatta.database.realm.RealmModelReader;
+import org.ieatta.parse.AppConstant;
 import org.ieatta.provide.IEAEditKey;
 import org.ieatta.provide.MainSegueIdentifier;
 import org.wikipedia.util.DimenUtil;
@@ -115,7 +116,7 @@ public class EventDetailTask extends FragmentTask {
             @Override
             public Task<List<IEAReviewsCellModel>> then(Task<RealmResults<DBTeam>> task) throws Exception {
                 EventDetailTask.this.orderedPeopleList = DBConvert.toOrderedPeopleList(task.getResult(), EventDetailTask.this.event);
-                return new ReviewQuery().queryReview(eventUUID, ReviewType.Review_Event);
+                return new ReviewQuery().queryReview(eventUUID, ReviewType.Review_Event, AppConstant.limit_reviews);
             }
         }).onSuccess(new Continuation<List<IEAReviewsCellModel>, Void>() {
             @Override

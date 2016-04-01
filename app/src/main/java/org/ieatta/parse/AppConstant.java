@@ -1,5 +1,7 @@
 package org.ieatta.parse;
 
+import android.content.Intent;
+
 import org.ieatta.database.models.DBTeam;
 
 public final class AppConstant {
@@ -79,4 +81,6 @@ public final class AppConstant {
     public static final int SOURCE_RECIPE_EDIT = 18;
     public static final int SOURCE_PEOPLE_EDIT = 19;
 
+    public static final int limit_reviews = 4;
+    public static final int limit_reviews_no = Integer.MAX_VALUE;
 }

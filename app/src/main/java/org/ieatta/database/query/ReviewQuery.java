@@ -24,15 +24,17 @@ public class ReviewQuery {
 
     final List<Realm> realmList = new LinkedList<>();
 
-    public Task<List<IEAReviewsCellModel>> queryReview(String reviewRef, ReviewType type) {
-        return new RealmModelReader<DBReview>(DBReview.class).fetchResults(
-                new DBBuilder()
-                        .whereEqualTo(AppConstant.kPAPFieldReviewRefKey, reviewRef)
-                        .whereEqualTo(AppConstant.kPAPFieldReviewTypeKey, type.getType()),
-                false, realmList).onSuccessTask(new Continuation<RealmResults<DBReview>, Task<RealmResults<DBTeam>>>() {
+    public Task<List<IEAReviewsCellModel>> queryReview(String reviewRef, ReviewType type, int limit) {
+        DBBuilder reviewBuilder = new DBBuilder()
+                .whereEqualTo(AppConstant.kPAPFieldReviewRefKey, reviewRef)
+                .whereEqualTo(AppConstant.kPAPFieldReviewTypeKey, type.getType());
+
+        if(limit != AppConstant.limit_reviews_no)
+            reviewBuilder = reviewBuilder.setLimit(limit);
+
+        return new RealmModelReader<DBReview>(DBReview.class).fetchResults(reviewBuilder, false, realmList).onSuccessTask(new Continuation<RealmResults<DBReview>, Task<RealmResults<DBTeam>>>() {
             @Override
             public Task<RealmResults<DBTeam>> then(Task<RealmResults<DBReview>> task) throws Exception {
-
                 ReviewQuery.this.reviews = task.getResult();
                 List<String> list = getTeamsList(task.getResult());
 
