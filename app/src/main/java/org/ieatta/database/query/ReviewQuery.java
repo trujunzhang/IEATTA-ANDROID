@@ -56,7 +56,7 @@ public class ReviewQuery {
 
                 List<IEAReviewsCellModel> list = new LinkedList<IEAReviewsCellModel>();
                 // If when reviews count is zero, task's result return null.
-                // We return a empty list.
+                // We return an empty list.
                 if (task.getResult() == null)
                     return Task.forResult(list);
 
