@@ -152,7 +152,7 @@ public class EventDetailTask extends FragmentTask {
 
         this.manager.setSectionItems(this.orderedPeopleList, EventDetailSection.section_ordered_people.ordinal());
 
-        postReviews(EventDetailSection.section_reviews.ordinal());
+        postReviews(EventDetailSection.section_reviews.ordinal(),eventUUID, ReviewType.Review_Event);
 
         model.setPage(this.getPage());
     }

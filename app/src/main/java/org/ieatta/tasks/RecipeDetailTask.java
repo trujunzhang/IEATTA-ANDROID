@@ -146,7 +146,7 @@ public class RecipeDetailTask extends FragmentTask {
         this.manager.setFooterItem(new IEAFooterViewModel(), IEAFooterView.getType());
 
         postPhotosGallery(RecipeDetailSection.section_gallery_thumbnail.ordinal());
-        postReviews(RecipeDetailSection.section_reviews.ordinal());
+        postReviews(RecipeDetailSection.section_reviews.ordinal(),recipeUUID, ReviewType.Review_Recipe);
 
         model.setPage(this.getPage());
 
