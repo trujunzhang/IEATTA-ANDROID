@@ -20,7 +20,7 @@ import io.realm.RealmResults;
 public class ReviewQuery {
     private RealmResults<DBReview> reviews;
 
-    public void setReviews(RealmResults<DBReview> reviews){
+    public void setReviews(RealmResults<DBReview> reviews) {
         this.reviews = reviews;
         this.reviewsCount = reviews.size();
     }
@@ -36,7 +36,7 @@ public class ReviewQuery {
                 .whereEqualTo(AppConstant.kPAPFieldReviewRefKey, reviewRef)
                 .whereEqualTo(AppConstant.kPAPFieldReviewTypeKey, type.getType());
 
-        if(limit != AppConstant.limit_reviews_no)
+        if (limit != AppConstant.limit_reviews_no)
             reviewBuilder = reviewBuilder.setLimit(limit);
 
         return new RealmModelReader<DBReview>(DBReview.class).fetchResults(reviewBuilder, false, realmList).onSuccessTask(new Continuation<RealmResults<DBReview>, Task<RealmResults<DBTeam>>>() {
@@ -47,7 +47,7 @@ public class ReviewQuery {
                 if (ReviewQuery.this.reviewsCount == 0)
                     return Task.forResult(null);
 
-                DBBuilder builder = new DBBuilder().whereContainedIn(AppConstant.kPAPFieldObjectUUIDKey, getTeamsList(task.getResult(),limit));
+                DBBuilder builder = new DBBuilder().whereContainedIn(AppConstant.kPAPFieldObjectUUIDKey, getTeamsList(task.getResult(), limit));
                 return new RealmModelReader<DBTeam>(DBTeam.class).fetchResults(builder, false, realmList);
             }
         }).onSuccessTask(new Continuation<RealmResults<DBTeam>, Task<List<IEAReviewsCellModel>>>() {
@@ -65,9 +65,13 @@ public class ReviewQuery {
     }
 
     private List<String> getTeamsList(RealmResults<DBReview> reviews, int limit) {
+        int step = 0;
         List<String> list = new LinkedList<>();
         for (DBReview review : reviews) {
+            if (limit != AppConstant.limit_reviews_no && step >= limit)
+                break;
             list.add(review.getUserRef());
+            step++;
         }
         return list;
     }
