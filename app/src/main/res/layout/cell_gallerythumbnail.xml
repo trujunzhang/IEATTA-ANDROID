@@ -2,7 +2,6 @@
 
 <org.ieatta.activity.gallery.GalleryThumbnailScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/link_preview_thumbnail_gallery"
+    style="@style/cell_style"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/linkPreviewImageSize"
-    android:layout_marginBottom="12dp"
-    android:layout_marginTop="12dp" />
+    android:layout_height="@dimen/linkPreviewImageSize" />
