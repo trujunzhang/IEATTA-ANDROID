@@ -90,10 +90,10 @@ public abstract class FragmentTask implements RecyclerOnItemClickListener, LeadI
     public void postPhotosGallery(int forSectionIndex) {
         this.manager.appendSectionTitleCell(new SectionTitleCellModel(IEAEditKey.Section_Title, R.string.PhotosGallery), forSectionIndex);
         this.manager.setSectionItems(CollectionUtil.createList(new IEAGalleryThumbnail(this.thumbnailGalleryCollection, this.galleryViewListener)), forSectionIndex);
-        this.manager.setFooterModelInSection(new SectionPhotoGalleryFooterCellModel(restaurantUUID, ReviewType.Review_Restaurant), forSectionIndex, IEAPhotoGalleryFooterCell.getType());
+        // this.manager.setFooterModelInSection(new SectionPhotoGalleryFooterCellModel(restaurantUUID, ReviewType.Review_Restaurant), forSectionIndex, IEAPhotoGalleryFooterCell.getType());
     }
 
-    public void postReviews(int forSectionIndex,String reviewRef, ReviewType type) {
+    public void postReviews(int forSectionIndex, String reviewRef, ReviewType type, int limit) {
         this.manager.appendSectionTitleCell(new SectionTitleCellModel(IEAEditKey.Section_Title, R.string.Reviews), forSectionIndex);
         this.manager.setSectionItems(this.reviewsCellModelList, forSectionIndex);
         this.manager.setFooterModelInSection(new SectionMoreReviewsFooterCellModel(reviewRef, type), forSectionIndex, IEAMoreReviewsFooterCell.getType());
