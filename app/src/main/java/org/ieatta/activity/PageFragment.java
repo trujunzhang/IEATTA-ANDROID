@@ -6,13 +6,9 @@ import android.support.v7.app.AppCompatActivity;
 
 import org.ieatta.IEAApp;
 import org.ieatta.activity.history.HistoryEntry;
-import org.ieatta.provide.MainSegueIdentifier;
 import org.ieatta.tasks.FragmentTask;
 import org.ieatta.views.ObservableWebView;
 import org.wikipedia.BackPressedHandler;
-
-import bolts.Continuation;
-import bolts.Task;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -152,7 +148,7 @@ public class PageFragment extends Fragment implements BackPressedHandler {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
 
-        View rootView = inflater.inflate(R.layout.fragment_detail, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_page, container, false);
         webView = (ObservableWebView) rootView.findViewById(R.id.recycleView);
         initWebViewListeners();
 
