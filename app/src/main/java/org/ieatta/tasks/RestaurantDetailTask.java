@@ -19,12 +19,14 @@ import org.ieatta.activity.history.HistoryEntry;
 import org.ieatta.cells.IEAGalleryThumbnailCell;
 import org.ieatta.cells.IEARestaurantEventsCell;
 import org.ieatta.cells.IEAReviewsCell;
+import org.ieatta.cells.header.IEAMoreReviewsFooterCell;
 import org.ieatta.cells.headerfooterview.IEAFooterView;
 import org.ieatta.cells.headerfooterview.IEAHeaderView;
 import org.ieatta.cells.model.IEAFooterViewModel;
 import org.ieatta.cells.model.IEAGalleryThumbnail;
 import org.ieatta.cells.model.IEAHeaderViewModel;
 import org.ieatta.cells.model.IEAReviewsCellModel;
+import org.ieatta.cells.model.SectionMoreReviewsFooterCellModel;
 import org.ieatta.cells.model.SectionTitleCellModel;
 import org.ieatta.database.models.DBEvent;
 import org.ieatta.database.models.DBPhoto;
@@ -149,6 +151,8 @@ public class RestaurantDetailTask extends FragmentTask {
 
         postPhotosGallery(RestaurantDetailSection.section_gallery_thumbnail.ordinal());
         postReviews(RestaurantDetailSection.section_reviews.ordinal());
+
+        this.manager.setFooterModelInSection(new SectionMoreReviewsFooterCellModel(restaurantUUID, ReviewType.Review_Restaurant), RestaurantDetailSection.section_reviews.ordinal(), IEAMoreReviewsFooterCell.getType());
 
         model.setPage(this.getPage());
     }

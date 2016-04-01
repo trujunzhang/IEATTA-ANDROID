@@ -153,6 +153,7 @@ public class RecycleViewManager {
     }
 
     public void setFooterModelInSection(Object model, int forSectionIndex, CellType type) {
+        getTableManager().registerFooterClass(type);
         getMemoryStorage().setSectionFooterModel(model, forSectionIndex, type);
     }
 
