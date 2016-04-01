@@ -70,7 +70,7 @@ public class RecycleViewManager {
         TableViewConfiguration config =
                 new TableViewConfiguration.Builder(context)
                         .setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false))
-                        .setItemDecoration(new TableViewDividerDecoration(context))
+                        //.setItemDecoration(new TableViewDividerDecoration(context))
                         .setDebugInfo("Activity_Table_View")
                         .build();
 
