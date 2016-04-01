@@ -14,7 +14,9 @@ public class DBBuilder {
     public HashMap<String, List<String>> containedListMap = new LinkedHashMap<>();
     public List<String> orderedByDescendingList = new LinkedList<>();
     public List<String> orderedByAscendingList = new LinkedList<>();
-    public int limit = -1; // negative limits mean, do not send a limit
+
+    public static final int NO_LIMIT = Integer.MIN_VALUE;
+    public int limit = NO_LIMIT; // negative limits mean, do not send a limit
 
     public DBBuilder whereEqualTo(String key, Object value) {
         this.equalMap.put(key, value);

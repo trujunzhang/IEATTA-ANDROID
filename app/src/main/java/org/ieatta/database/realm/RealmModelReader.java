@@ -98,6 +98,9 @@ public class RealmModelReader<T extends RealmObject> {
         buildContainedMap(builder, query);
         buildContainedListMap(builder, query);
         buildEqualMap(builder, query);
+
+//        if(builder.limit != DBBuilder.NO_LIMIT)
+
     }
 
     private void buildContainedListMap(DBBuilder builder, RealmQuery<T> query) {
