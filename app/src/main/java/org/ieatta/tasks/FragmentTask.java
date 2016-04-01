@@ -16,6 +16,7 @@ import org.ieatta.activity.gallery.GalleryThumbnailScrollView;
 import org.ieatta.activity.history.HistoryEntry;
 import org.ieatta.activity.leadimages.LeadImagesHandler;
 import org.ieatta.analytics.GalleryFunnel;
+import org.ieatta.analytics.RecycleCellFunnel;
 import org.ieatta.cells.header.IEAMoreReviewsFooterCell;
 import org.ieatta.cells.header.IEAPhotoGalleryFooterCell;
 import org.ieatta.cells.headerfooterview.IEAFooterView;
@@ -99,7 +100,12 @@ public abstract class FragmentTask implements RecyclerOnItemClickListener, LeadI
     public void postReviews(int forSectionIndex, String reviewRef, ReviewType type, int limit) {
         this.manager.appendSectionTitleCell(new SectionTitleCellModel(IEAEditKey.Section_Title, R.string.Reviews), forSectionIndex);
         this.manager.setSectionItems(this.reviewsCellModelList, forSectionIndex);
-        this.manager.setFooterModelInSection(new SectionMoreReviewsFooterCellModel(reviewRef, type), forSectionIndex, IEAMoreReviewsFooterCell.getType());
+
+        int otherCount = (this.reviewQuery.reviewsCount - limit);
+        if(this.reviewQuery.reviewsCount == 0)
+            otherCount = 0;
+        new RecycleCellFunnel().logOtherReviewsCount(otherCount);
+        this.manager.setFooterModelInSection(new SectionMoreReviewsFooterCellModel(otherCount), forSectionIndex, IEAMoreReviewsFooterCell.getType());
     }
 
     protected int getEmptyHeaderViewHeight() {

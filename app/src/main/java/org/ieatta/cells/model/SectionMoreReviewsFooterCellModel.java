@@ -4,13 +4,11 @@ import org.ieatta.database.provide.ReviewType;
 import org.ieatta.provide.IEAEditKey;
 
 public class SectionMoreReviewsFooterCellModel extends EditBaseCellModel {
-    public String reviewRef;
-    public ReviewType type;
+    public int otherReviewCount;
 
-    public SectionMoreReviewsFooterCellModel(String reviewRef, ReviewType type) {
+    public SectionMoreReviewsFooterCellModel(int otherReviewCount) {
         super(IEAEditKey.Section_Title);
-        this.reviewRef = reviewRef;
-        this.type = type;
+        this.otherReviewCount = otherReviewCount;
     }
 
 }

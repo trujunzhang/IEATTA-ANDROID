@@ -17,6 +17,10 @@ public class RecycleCellFunnel extends Funnel {
     }
 
     public void logCellInfo(String cellName,String info) {
-        log(cellName,info);
+        log(cellName, info);
+    }
+
+    public void logOtherReviewsCount(int otherCount) {
+        log("other review count", otherCount);
     }
 }
