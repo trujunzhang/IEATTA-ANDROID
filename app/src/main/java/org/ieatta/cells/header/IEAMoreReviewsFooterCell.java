@@ -12,6 +12,7 @@ import com.tableview.adapter.enums.ViewHolderType;
 import com.tableview.storage.models.CellType;
 
 import org.ieatta.R;
+import org.ieatta.cells.model.SectionMoreReviewsFooterCellModel;
 import org.ieatta.cells.model.SectionTitleCellModel;
 
 import com.tableview.adapter.IEAViewHolder;
@@ -20,6 +21,8 @@ import bolts.Continuation;
 import bolts.Task;
 
 public class IEAMoreReviewsFooterCell extends IEAViewHolder {
+    private SectionMoreReviewsFooterCellModel model;
+
     public static CellType getType() {
         return new CellType(IEAMoreReviewsFooterCell.class, R.layout.businesspage_section_footer);
     }
@@ -46,7 +49,8 @@ public class IEAMoreReviewsFooterCell extends IEAViewHolder {
 
     @Override
     public void render(Object value) {
-//        this.model = (SectionMoreReviewsFooterCellModel) value;
+        this.model = (SectionMoreReviewsFooterCellModel) value;
+
 
     }
 
