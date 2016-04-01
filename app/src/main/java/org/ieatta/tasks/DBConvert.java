@@ -57,7 +57,7 @@ public class DBConvert {
         return new GalleryCollection(galleryItems);
     }
 
-    private static DBTeam getTeamUUID(String userRef, RealmResults<DBTeam> teams) {
+    private static DBTeam getTeam(String userRef, RealmResults<DBTeam> teams) {
         for (DBTeam team : teams) {
             if (team.getUUID().equals(userRef))
                 return team;
@@ -67,8 +67,10 @@ public class DBConvert {
 
     public static List<IEAReviewsCellModel> toReviewsCellModels(RealmResults<DBReview> reviews, RealmResults<DBTeam> teams) {
         List<IEAReviewsCellModel> list = new LinkedList<>();
-        for (DBReview review : reviews) {
-            IEAReviewsCellModel item = new IEAReviewsCellModel(review, DBConvert.getTeamUUID(review.getUserRef(), teams));
+
+        for (int i = 0; i < teams.size(); i++) {
+            DBReview review = reviews.get(i);
+            IEAReviewsCellModel item = new IEAReviewsCellModel(review, DBConvert.getTeam(review.getUserRef(), teams));
             list.add(item);
         }
         return list;
