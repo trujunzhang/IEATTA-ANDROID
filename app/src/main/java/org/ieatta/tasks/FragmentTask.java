@@ -101,9 +101,7 @@ public abstract class FragmentTask implements RecyclerOnItemClickListener, LeadI
         this.manager.appendSectionTitleCell(new SectionTitleCellModel(IEAEditKey.Section_Title, R.string.Reviews), forSectionIndex);
         this.manager.setSectionItems(this.reviewsCellModelList, forSectionIndex);
 
-        int otherCount = (this.reviewQuery.reviewsCount - limit);
-        if(this.reviewQuery.reviewsCount <= 0)
-            otherCount = 0;
+        int otherCount =this.reviewQuery.reviewsCount <= 0? 0: (this.reviewQuery.reviewsCount - limit);
         new RecycleCellFunnel().logOtherReviewsCount(otherCount);
         this.manager.setFooterModelInSection(new SectionMoreReviewsFooterCellModel(otherCount), forSectionIndex, IEAMoreReviewsFooterCell.getType());
     }
