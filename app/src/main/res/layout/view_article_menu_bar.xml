@@ -18,6 +18,14 @@
 
     <ImageButton
         style="@style/ArticleMenuBarViewButton"
+        android:id="@+id/view_article_menu_bar_navigate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_navigate"
+        android:contentDescription="@string/article_menu_bar_navigate" />
+
+    <ImageButton
+        style="@style/ArticleMenuBarViewButton"
         android:id="@+id/view_article_menu_bar_write_review"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -34,7 +42,7 @@
 
     <ImageButton
         style="@style/ArticleMenuBarViewButton"
-        android:id="@+id/view_article_menu_bar_navigate"
+        android:id="@+id/view_article_menu_bar_edit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="visible"

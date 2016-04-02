@@ -38,7 +38,9 @@ public class ArticleMenuBarView extends LinearLayout {
     }
 
     @Bind(R.id.view_article_menu_bar_bookmark) ImageView bookmark;
+    @Bind(R.id.view_article_menu_bar_share) ImageView share;
     @Bind(R.id.view_article_menu_bar_navigate) ImageView navigate;
+
 
     @NonNull private Callback callback = new DefaultCallback();
 
