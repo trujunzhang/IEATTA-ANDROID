@@ -76,6 +76,7 @@
   <task id="t3">
     <title>Limit thumbnail gallery sort by restaurant type.</title>
     <effort>28800</effort>
+    <effort-done>28800</effort-done>
   </task>
   <task id="t4">
     <title>Limit reviews sort by createdAt.</title>
@@ -108,12 +109,14 @@
   <task id="t8">
     <title>Add “Camera icon” in the thumbnail gallery cell.</title>
     <effort>28800</effort>
+    <effort-done>28800</effort-done>
     <start-constraint-date>2016-04-01T00:00:00.000Z</start-constraint-date>
     <start-no-earlier-than>2016-04-01T00:00:00.000Z</start-no-earlier-than>
   </task>
   <task id="t9">
     <title>Add item’s icons on the toolbar menu.</title>
     <effort>28800</effort>
+    <effort-done>28800</effort-done>
     <start-constraint-date>2016-04-01T00:00:00.000Z</start-constraint-date>
     <start-no-earlier-than>2016-04-01T00:00:00.000Z</start-no-earlier-than>
   </task>

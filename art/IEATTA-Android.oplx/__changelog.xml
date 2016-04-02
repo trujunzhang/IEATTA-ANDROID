@@ -70,4 +70,9 @@
     <change idref="t6" attribute="internalEffortDone" type="real" from="0" to="28800" resolved="yes"/>
     <change idref="t7" attribute="internalEffortDone" type="real" from="0" to="28800" resolved="yes"/>
   </task-change-set>
+  <task-change-set user="djzhang" date="2016-04-02T11:15:34.518Z" timestamp="2016-04-02T11:15:34.518Z">
+    <change idref="t3" attribute="internalEffortDone" type="real" from="0" to="28800" resolved="yes"/>
+    <change idref="t8" attribute="internalEffortDone" type="real" from="0" to="28800" resolved="yes"/>
+    <change idref="t9" attribute="internalEffortDone" type="real" from="0" to="28800" resolved="yes"/>
+  </task-change-set>
 </changelog>
