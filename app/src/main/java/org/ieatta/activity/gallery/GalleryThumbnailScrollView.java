@@ -53,6 +53,13 @@ public class GalleryThumbnailScrollView extends RecyclerView {
         setAdapter(new GalleryViewAdapter(collection));
     }
 
+    private class AddPhotoHolder extends ViewHolder{
+
+        public AddPhotoHolder(View itemView) {
+            super(itemView);
+        }
+    }
+
     private class GalleryItemHolder extends ViewHolder implements OnClickListener, OnTouchListener {
         private final SimpleDraweeView mImageView;
         private GalleryItem mGalleryItem;
@@ -93,7 +100,7 @@ public class GalleryThumbnailScrollView extends RecyclerView {
         }
     }
 
-    private final class GalleryViewAdapter extends RecyclerView.Adapter<GalleryItemHolder> {
+    private final class GalleryViewAdapter extends RecyclerView.Adapter<ViewHolder> {
         @NonNull private final GalleryCollection mCollection;
 
         GalleryViewAdapter(@NonNull GalleryCollection collection) {
@@ -102,19 +109,25 @@ public class GalleryThumbnailScrollView extends RecyclerView {
 
         @Override
         public int getItemCount() {
-            return mCollection.getItemList().size();
+            return mCollection.getItemList().size() + 1;
         }
 
         @Override
-        public GalleryItemHolder onCreateViewHolder(ViewGroup parent, int pos) {
+        public ViewHolder onCreateViewHolder(ViewGroup parent, int pos) {
+            if(pos== 0){
+                View view = LayoutInflater.from(mContext)
+                        .inflate(R.layout.add_photo_cell, parent, false);
+                return new AddPhotoHolder(view);
+            }
             View view = LayoutInflater.from(mContext)
                     .inflate(R.layout.item_gallery_thumbnail, parent, false);
             return new GalleryItemHolder(view);
         }
 
         @Override
-        public void onBindViewHolder(GalleryItemHolder holder, int pos) {
-            holder.bindItem(mCollection.getItemList().get(pos));
+        public void onBindViewHolder(ViewHolder holder, int pos) {
+            if(holder instanceof GalleryItemHolder)
+                ((GalleryItemHolder)holder).bindItem(mCollection.getItemList().get(pos));
         }
     }
 }
