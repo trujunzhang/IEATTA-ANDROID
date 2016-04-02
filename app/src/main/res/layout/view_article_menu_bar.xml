@@ -58,7 +58,6 @@
         android:src="@drawable/ic_add_event"
         android:contentDescription="@string/article_menu_bar_add_event" />
 
-
     <ImageButton
         style="@style/ArticleMenuBarViewButton"
         android:id="@+id/view_article_menu_bar_select_person"
