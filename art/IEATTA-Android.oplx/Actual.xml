@@ -94,12 +94,14 @@
   <task id="t6">
     <title>Add round in the ImageViews.</title>
     <effort>28800</effort>
+    <effort-done>28800</effort-done>
     <start-constraint-date>2016-04-01T00:00:00.000Z</start-constraint-date>
     <start-no-earlier-than>2016-04-01T00:00:00.000Z</start-no-earlier-than>
   </task>
   <task id="t7">
     <title>Add footview for thumbnail gallery and review section.</title>
     <effort>28800</effort>
+    <effort-done>28800</effort-done>
     <start-constraint-date>2016-04-01T00:00:00.000Z</start-constraint-date>
     <start-no-earlier-than>2016-04-01T00:00:00.000Z</start-no-earlier-than>
   </task>

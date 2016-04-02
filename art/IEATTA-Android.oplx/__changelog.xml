@@ -66,4 +66,8 @@
   <task-change-set user="djzhang" date="2016-04-02T06:16:20.412Z" timestamp="2016-04-02T06:16:20.412Z">
     <change idref="t11" attribute="noEarlierThanConstraintDate" type="date" from="2016-04-01T16:00:00.000Z" to="2016-04-02T00:00:00.000Z" resolved="yes"/>
   </task-change-set>
+  <task-change-set user="djzhang" date="2016-04-02T08:33:09.469Z" timestamp="2016-04-02T08:33:09.469Z">
+    <change idref="t6" attribute="internalEffortDone" type="real" from="0" to="28800" resolved="yes"/>
+    <change idref="t7" attribute="internalEffortDone" type="real" from="0" to="28800" resolved="yes"/>
+  </task-change-set>
 </changelog>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/add_media_cell_button"
+    android:layout_width="@dimen/Gallery_Cell_Collection_Width"
+    android:layout_height="@dimen/Gallery_Cell_Collection_Height">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/button_add_media_cell"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="4dp"
+        android:layout_marginTop="8dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:drawablePadding="@dimen/baseGapSize"
+            android:drawableTop="@drawable/camera_big_gray"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:text="@string/add"
+            android:textAppearance="@style/LargeBoldLightText" />
+    </RelativeLayout>
+</RelativeLayout>
