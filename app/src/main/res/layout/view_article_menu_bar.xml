@@ -5,16 +5,16 @@
         android:id="@+id/view_article_menu_bar_bookmark"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_select_people"
-        android:contentDescription="@string/article_menu_bar_bookmark" />
+        android:src="@drawable/ic_write_review"
+        android:contentDescription="@string/article_menu_bar_write_review" />
 
     <ImageButton
         style="@style/ArticleMenuBarViewButton"
         android:id="@+id/view_article_menu_bar_share"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_add_event"
-        android:contentDescription="@string/article_menu_bar_share" />
+        android:src="@drawable/ic_see_reviews"
+        android:contentDescription="@string/article_menu_bar_see_reviews" />
 
     <ImageButton
         style="@style/ArticleMenuBarViewButton"
