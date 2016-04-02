@@ -81,7 +81,7 @@ public class ArticleMenuBarView extends LinearLayout {
     }
 
     public void updateNavigate(boolean geolocated) {
-        navigate.setVisibility(geolocated ? VISIBLE : GONE);
+//        navigate.setVisibility(geolocated ? VISIBLE : GONE);
     }
 
     public void resetMenuBarColor() {
