@@ -18,8 +18,6 @@ public class IEAEditTextFieldCell extends IEAViewHolder {
         return new CellType(IEAEditTextFieldCell.class, R.layout.edit_text_field_cell);
     }
 
-    private IEAEditTextFieldCell self = this;
-
     @Override
     public ViewHolderType getViewHolderType() {
         return ViewHolderType.None;
@@ -31,8 +29,8 @@ public class IEAEditTextFieldCell extends IEAViewHolder {
     public IEAEditTextFieldCell(View itemView) {
         super(itemView);
 
-      this.editText = (EditText) itemView.findViewById(R.id.editText);
-      this.editText.addTextChangedListener(new TextWatcher() {
+        this.editText = (EditText) itemView.findViewById(R.id.editText);
+        this.editText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -40,7 +38,7 @@ public class IEAEditTextFieldCell extends IEAViewHolder {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-              model.editValue = s.toString();
+                model.editValue = s.toString();
             }
 
             @Override
@@ -52,12 +50,13 @@ public class IEAEditTextFieldCell extends IEAViewHolder {
 
     @Override
     public void render(Object value) {
-      this.model = (EditCellModel) value;
-      this.editText.setText(self.model.editValue);
-      this.editText.setHint(self.model.editPlaceHolderResId);
+        this.model = (EditCellModel) value;
 
-        if (self.model.editKey == IEAEditKey.recipe_price) {
-            EditTextLocker decimalEditTextLocker = new EditTextLocker(self.editText);
+        this.editText.setText(this.model.editValue);
+        this.editText.setHint(this.model.editPlaceHolderResId);
+
+        if (this.model.editKey == IEAEditKey.recipe_price) {
+            EditTextLocker decimalEditTextLocker = new EditTextLocker(this.editText);
             decimalEditTextLocker.limitFractionDigitsinDecimal(2);
         }
     }

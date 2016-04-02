@@ -2,14 +2,15 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="@dimen/Edit_Cell">
+    <com.wrapp.floatlabelededittext.FloatLabeledEditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <EditText
-        android:id="@+id/editText"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_toLeftOf="@+id/activity_config_yelp_host_clear"
-        android:layout_toRightOf="@+id/activity_config_host_label"
-        android:hint="@string/Search_Hint_Event"
-        android:textColor="@color/black_yoni" />
+        <EditText
+            android:id="@+id/editText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/Search_Hint_Team" />
+    </com.wrapp.floatlabelededittext.FloatLabeledEditText>
 
 </FrameLayout>
