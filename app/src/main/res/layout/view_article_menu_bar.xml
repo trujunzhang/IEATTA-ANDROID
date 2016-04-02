@@ -22,7 +22,35 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="visible"
-        android:src="@drawable/ic_navigate"
-        android:contentDescription="@string/article_menu_bar_navigate" />
+        android:src="@drawable/ic_edit"
+        android:contentDescription="@string/article_menu_bar_edit" />
+
+    <ImageButton
+        style="@style/ArticleMenuBarViewButton"
+        android:id="@+id/view_article_menu_bar_add_event"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        android:src="@drawable/ic_add_event"
+        android:contentDescription="@string/article_menu_bar_add_event" />
+
+
+    <ImageButton
+        style="@style/ArticleMenuBarViewButton"
+        android:id="@+id/view_article_menu_bar_select_person"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        android:src="@drawable/ic_select_people"
+        android:contentDescription="@string/article_menu_bar_select_people" />
+
+    <ImageButton
+        style="@style/ArticleMenuBarViewButton"
+        android:id="@+id/view_article_menu_bar_add_food"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        android:src="@drawable/ic_add_food"
+        android:contentDescription="@string/article_menu_bar_add_food" />
 
 </merge>
