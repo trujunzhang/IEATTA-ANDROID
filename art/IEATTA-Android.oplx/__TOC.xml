@@ -13,7 +13,7 @@
         <column name="Title" width="191"/>
         <column name="Effort" width="70"/>
         <expanded-items idrefs="t10 t2"/>
-        <selected-items-at-filter-time idrefs="t9 t4 t10 t7 t2 t5 t8 t6 t11"/>
+        <selected-items-at-filter-time idrefs="t9 t4 t10 t7 t2 t5 t8 t11 t6"/>
       </outline>
       <gantt-view x="0" y="0" w="614" h="556">
         <view-mode>actual</view-mode>
@@ -62,13 +62,13 @@
     </task-view>
     <resource-view>
       <split-view-divider-position>306</split-view-divider-position>
-      <outline x="0" y="0" w="306" h="608">
+      <outline x="0" y="0" w="291" h="556">
         <column name="Notes" width="20"/>
         <column name="Type" width="49"/>
         <column name="Resource" width="135"/>
         <column name="#" width="75"/>
       </outline>
-      <timeline x="-20" y="0" w="573" h="608">
+      <timeline x="-243" y="0" w="586" h="556">
         <offtime-display>none</offtime-display>
         <show-project-end/>
         <task-bar-label task-type="group" position="left">
@@ -98,47 +98,52 @@
         <task-bar-label task-type="task" position="right">
           <key/>
         </task-bar-label>
-        <scale scale-name="Automatic" full-day-width="100">
+        <scale scale-name="Automatic" full-day-width="300">
           <selected/>
         </scale>
-        <scale scale-name="Day" full-day-width="405"/>
-        <scale scale-name="Hour" full-day-width="21960"/>
-        <scale scale-name="Minute" full-day-width="21600"/>
-        <scale scale-name="Month" full-day-width="11.5"/>
-        <scale scale-name="Quarter" full-day-width="3.2"/>
-        <scale scale-name="Week" full-day-width="54"/>
-        <scale scale-name="Year" full-day-width="0.7875"/>
-        <scale scale-name="legacy-day-widths" full-day-width="1"/>
+        <scale scale-name="Day" full-day-width="1215"/>
+        <scale scale-name="Hour" full-day-width="65880"/>
+        <scale scale-name="Minute" full-day-width="64800"/>
+        <scale scale-name="Month" full-day-width="34.5"/>
+        <scale scale-name="Quarter" full-day-width="9.6"/>
+        <scale scale-name="Week" full-day-width="162"/>
+        <scale scale-name="Year" full-day-width="2.3625"/>
       </timeline>
     </resource-view>
     <calendar>
       <split-view-divider-position>290</split-view-divider-position>
-      <outline x="0" y="0" w="290" h="573">
+      <outline x="0" y="0" w="275" h="532">
         <column name="Notes" width="20"/>
         <column name="Type" width="49"/>
-        <column name="Resource" width="139"/>
+        <column name="Resource" width="160"/>
         <column name="Custom Work Week" width="20"/>
         <column name="Schedule Exception" width="20"/>
       </outline>
     </calendar>
     <network-view>
       <network-view>
-        <task-table-style/>
-        <milestone-table-style/>
-        <group-table-style/>
+        <task-table-style>Title
+Start:
+End:
+Effort:</task-table-style>
+        <milestone-table-style>Title
+End</milestone-table-style>
+        <group-table-style>Title
+Start:
+End:</group-table-style>
       </network-view>
     </network-view>
   </window>
   <project>
-    <next-task-id>12</next-task-id>
+    <next-task-id>17</next-task-id>
     <next-resource-id>2</next-resource-id>
     <scenario id="abW09KtqiWx" name="Actual" filename="Actual.xml"/>
     <date-display dates="true" times="true" seconds="false"/>
     <numbering-style>wbs</numbering-style>
     <critical-path-slack>0</critical-path-slack>
     <currency-format>CN¥1,234.56</currency-format>
-    <duration-format hours-per-day="8" hours-per-week="40" hours-per-month="160" hours-per-year="1920" hours="true" days="true" weeks="true"/>
-    <effort-format hours-per-day="8" hours-per-week="40" hours-per-month="160" hours-per-year="1920" hours="true" days="true" weeks="true"/>
+    <duration-format hours-per-day="8" hours-per-week="100" hours-per-month="160" hours-per-year="1920" hours="true" days="true" weeks="true"/>
+    <effort-format hours-per-day="8" hours-per-week="100" hours-per-month="160" hours-per-year="1920" hours="true" days="true" weeks="true"/>
     <base-style>
       <style/>
     </base-style>

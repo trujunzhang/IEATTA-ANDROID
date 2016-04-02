@@ -63,7 +63,7 @@
       <change idref="t11" attribute="title" type="string" to="Task 1"/>
     </change>
   </task-change-set>
-  <metadata-change-set user="djzhang" date="2016-03-31T02:46:29.496Z" timestamp="2016-03-31T02:46:29.496Z">
-    <change idref="m1" attribute="fixedDate" type="date" from="2007-01-01T20:00:00.000Z" to="2016-03-31T00:00:00.000Z" resolved="yes"/>
-  </metadata-change-set>
+  <task-change-set user="djzhang" date="2016-04-02T06:16:20.412Z" timestamp="2016-04-02T06:16:20.412Z">
+    <change idref="t11" attribute="noEarlierThanConstraintDate" type="date" from="2016-04-01T16:00:00.000Z" to="2016-04-02T00:00:00.000Z" resolved="yes"/>
+  </task-change-set>
 </changelog>
