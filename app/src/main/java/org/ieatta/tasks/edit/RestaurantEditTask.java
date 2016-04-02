@@ -5,12 +5,18 @@ import android.support.annotation.VisibleForTesting;
 import android.view.View;
 
 import com.tableview.adapter.NSIndexPath;
+import com.tableview.utils.CollectionUtil;
 
 import org.ieatta.R;
 import org.ieatta.activity.LeadImageCollection;
 import org.ieatta.activity.PageViewModel;
 import org.ieatta.activity.history.HistoryEntry;
 import org.ieatta.cells.edit.IEAEditTextFieldCell;
+import org.ieatta.cells.headerfooterview.IEAFooterView;
+import org.ieatta.cells.headerfooterview.IEAHeaderView;
+import org.ieatta.cells.model.EditCellModel;
+import org.ieatta.cells.model.IEAFooterViewModel;
+import org.ieatta.cells.model.IEAHeaderViewModel;
 import org.ieatta.cells.model.IEAOrderedPeople;
 import org.ieatta.cells.model.IEAReviewsCellModel;
 import org.ieatta.cells.model.SectionTitleCellModel;
@@ -94,6 +100,12 @@ public class RestaurantEditTask extends FragmentTask {
 
     @Override
     public void postUI() {
+        this.manager.setHeaderItem(new IEAHeaderViewModel(this.model.getActionbarHeight()), IEAHeaderView.getType());
+        this.manager.setFooterItem(new IEAFooterViewModel(), IEAFooterView.getType());
+
+        EditCellModel cellModel = new EditCellModel(IEAEditKey.rest_name, "wh", R.string.Restaurant_Name_info);
+        this.manager.setSectionItems(CollectionUtil.createList(cellModel), EditRestaurantSection.sectionInformation.ordinal());
+
         postPhotosGallery(EditRestaurantSection.section_gallery_thumbnail.ordinal());
     }
 }
