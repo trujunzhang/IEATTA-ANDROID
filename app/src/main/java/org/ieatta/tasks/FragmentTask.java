@@ -2,8 +2,10 @@ package org.ieatta.tasks;
 
 import android.app.Activity;
 import android.support.annotation.VisibleForTesting;
+import android.view.View;
 
 import com.tableview.RecycleViewManager;
+import com.tableview.adapter.NSIndexPath;
 import com.tableview.adapter.RecyclerOnItemClickListener;
 import com.tableview.utils.CollectionUtil;
 
@@ -60,6 +62,10 @@ public abstract class FragmentTask implements RecyclerOnItemClickListener, LeadI
     protected static List<Realm> realmList = new LinkedList<>();
 
     protected ReviewQuery reviewQuery = new ReviewQuery();
+
+    public void onItemClick(View view, NSIndexPath indexPath, Object model, int position, boolean isLongClick) {
+
+    }
 
     @VisibleForTesting
     public FragmentTask(HistoryEntry entry) {

@@ -31,6 +31,12 @@ public class HistoryEntry implements Parcelable {
 
     private Location location;
 
+    private boolean isNewModel;
+
+    public HistoryEntry(MainSegueIdentifier identifier,boolean isNewModel) {
+        this(identifier, "", "");
+        this.isNewModel = isNewModel;
+    }
 
     public HistoryEntry(MainSegueIdentifier identifier,Location location) {
         this(identifier, "", "");
@@ -135,5 +141,13 @@ public class HistoryEntry implements Parcelable {
 
     public void setLocation(Location location) {
         this.location = location;
+    }
+
+    public boolean isNewModel() {
+        return isNewModel;
+    }
+
+    public void setIsNewModel(boolean isNewModel) {
+        this.isNewModel = isNewModel;
     }
 }

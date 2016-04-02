@@ -46,11 +46,6 @@ public class RestaurantEditTask extends FragmentTask {
         super(entry, activity, model);
     }
 
-    @Override
-    public void onItemClick(View view, NSIndexPath indexPath, Object model, int position, boolean isLongClick) {
-
-    }
-
     enum EditRestaurantSection {
         sectionInformation,//= 0
         sectionPhotos,//= 1

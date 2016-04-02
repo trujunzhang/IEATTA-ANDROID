@@ -521,11 +521,13 @@ public class PageActivity extends ThemedActionBarActivity {
         String recipeUUID = "95B62D6F-87DF-47E2-8C84-EADAE131BB5D"; // Dark Gelate
 
 
-        HistoryEntry entry = new HistoryEntry(MainSegueIdentifier.nearbyRestaurants, LocationUtil.getLocation());
+//        HistoryEntry entry = new HistoryEntry(MainSegueIdentifier.nearbyRestaurants, LocationUtil.getLocation());
 //        HistoryEntry entry =new HistoryEntry(MainSegueIdentifier.detailRestaurantSegueIdentifier,restaurantUUID);
 //        HistoryEntry entry =new HistoryEntry(MainSegueIdentifier.detailEventSegueIdentifier,eventUUID);
 //        HistoryEntry entry =new HistoryEntry(MainSegueIdentifier.detailOrderedRecipesSegueIdentifier,eventUUID,teamUUID);
 //        HistoryEntry entry =new HistoryEntry(MainSegueIdentifier.detailRecipeSegueIdentifier,recipeUUID);
+        // Edit
+        HistoryEntry entry = new HistoryEntry(MainSegueIdentifier.editRestaurantSegueIdentifier, true);
         loadPage(entry, TabPosition.CURRENT_TAB, false, true);
     }
 
