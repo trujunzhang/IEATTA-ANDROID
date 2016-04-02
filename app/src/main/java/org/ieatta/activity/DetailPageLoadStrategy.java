@@ -114,6 +114,8 @@ public class DetailPageLoadStrategy implements PageLoadStrategy {
             pushBackStack();
         }
 
+        HistoryEntry historyEntry = backStack.get(backStack.size() - 1).getHistoryEntry();
+
         // increment our sequence number, so that any async tasks that depend on the sequence
         // will invalidate themselves upon completion.
         sequenceNumber.increase();
@@ -123,6 +125,7 @@ public class DetailPageLoadStrategy implements PageLoadStrategy {
 
 //        fragment.updatePageInfo(null);
 //        fragment.setPageSaved(false);
+        leadImagesHandler.updateMenuItemsVisibilities(historyEntry.getSource());
         leadImagesHandler.updateNavigate(null);
 
         // kick off an event to the WebView that will cause it to clear its contents,
@@ -135,7 +138,7 @@ public class DetailPageLoadStrategy implements PageLoadStrategy {
         activity.getSearchBarHideHandler().setFadeEnabled(false);
 
         // Setup new page.
-        this.setupCurrentTask(backStack.get(backStack.size() - 1).getHistoryEntry());
+        this.setupCurrentTask(historyEntry);
     }
 
     private void restoreLastScrollY(int stagedScrollY) {
