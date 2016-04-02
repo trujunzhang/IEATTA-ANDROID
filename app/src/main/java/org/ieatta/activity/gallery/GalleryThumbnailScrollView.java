@@ -19,10 +19,14 @@ import org.ieatta.R;
 import org.wikipedia.views.ViewUtil;
 
 public class GalleryThumbnailScrollView extends RecyclerView {
-    @NonNull private final Context mContext;
-    @NonNull private final Animation mPressAnimation;
-    @NonNull private final Animation mReleaseAnimation;
-    @Nullable private GalleryViewListener mListener;
+    @NonNull
+    private final Context mContext;
+    @NonNull
+    private final Animation mPressAnimation;
+    @NonNull
+    private final Animation mReleaseAnimation;
+    @Nullable
+    private GalleryViewListener mListener;
 
     public GalleryThumbnailScrollView(Context context) {
         this(context, null);
@@ -53,7 +57,7 @@ public class GalleryThumbnailScrollView extends RecyclerView {
         setAdapter(new GalleryViewAdapter(collection));
     }
 
-    private class AddPhotoHolder extends ViewHolder{
+    private class AddPhotoHolder extends ViewHolder {
 
         public AddPhotoHolder(View itemView) {
             super(itemView);
@@ -101,7 +105,8 @@ public class GalleryThumbnailScrollView extends RecyclerView {
     }
 
     private final class GalleryViewAdapter extends RecyclerView.Adapter<ViewHolder> {
-        @NonNull private final GalleryCollection mCollection;
+        @NonNull
+        private final GalleryCollection mCollection;
 
         GalleryViewAdapter(@NonNull GalleryCollection collection) {
             mCollection = collection;
@@ -114,7 +119,7 @@ public class GalleryThumbnailScrollView extends RecyclerView {
 
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup parent, int pos) {
-            if(pos== 0){
+            if (pos == 0) {
                 View view = LayoutInflater.from(mContext)
                         .inflate(R.layout.add_photo_cell, parent, false);
                 return new AddPhotoHolder(view);
@@ -126,8 +131,15 @@ public class GalleryThumbnailScrollView extends RecyclerView {
 
         @Override
         public void onBindViewHolder(ViewHolder holder, int pos) {
-            if(holder instanceof GalleryItemHolder)
-                ((GalleryItemHolder)holder).bindItem(mCollection.getItemList().get(pos));
+            if (holder instanceof GalleryItemHolder)
+                ((GalleryItemHolder) holder).bindItem(mCollection.getItemList().get(pos-1));
+        }
+
+        @Override
+        public int getItemViewType(int position) {
+            if(position == 0)
+                return 0;
+            return 1;
         }
     }
 }
