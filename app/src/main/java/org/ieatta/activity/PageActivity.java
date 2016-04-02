@@ -21,7 +21,6 @@ import org.ieatta.activity.search.SearchBarHideHandler;
 import org.ieatta.activity.history.HistoryEntry;
 import org.ieatta.activity.settings.SettingsActivity;
 import org.ieatta.provide.MainSegueIdentifier;
-import org.ieatta.utils.LocationUtil;
 import org.wikipedia.activity.ThemedActionBarActivity;
 
 
@@ -527,7 +526,7 @@ public class PageActivity extends ThemedActionBarActivity {
 //        HistoryEntry entry =new HistoryEntry(MainSegueIdentifier.detailOrderedRecipesSegueIdentifier,eventUUID,teamUUID);
 //        HistoryEntry entry =new HistoryEntry(MainSegueIdentifier.detailRecipeSegueIdentifier,recipeUUID);
         // Edit
-        HistoryEntry entry = new HistoryEntry(MainSegueIdentifier.editRestaurantSegueIdentifier, true);
+        HistoryEntry entry = new HistoryEntry(MainSegueIdentifier.editRestaurantSegueIdentifier, restaurantUUID, true);
         loadPage(entry, TabPosition.CURRENT_TAB, false, true);
     }
 

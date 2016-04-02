@@ -5,6 +5,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import org.ieatta.provide.MainSegueIdentifier;
+import org.wikipedia.util.StringUtil;
 
 import java.util.Date;
 
@@ -33,8 +34,8 @@ public class HistoryEntry implements Parcelable {
 
     private boolean isNewModel;
 
-    public HistoryEntry(MainSegueIdentifier identifier,boolean isNewModel) {
-        this(identifier, "", "");
+    public HistoryEntry(MainSegueIdentifier identifier, String hPara, boolean isNewModel) {
+        this(identifier, hPara, "");
         this.isNewModel = isNewModel;
     }
 
