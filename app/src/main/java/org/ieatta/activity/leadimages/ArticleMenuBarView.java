@@ -154,16 +154,16 @@ public class ArticleMenuBarView extends LinearLayout {
         HashMap<Integer, Boolean> map = MenuBarItemVisibilities.menuBarItemsVisibility(source);
 
         bookmark.setVisibility(map.get(MenuBarItemVisibilities.type_menu_bar_bookmark) ? VISIBLE : GONE);
-        share.setVisibility(map.get(MenuBarItemVisibilities.type_menu_bar_bookmark) ? VISIBLE : GONE);
-        navigate.setVisibility(map.get(MenuBarItemVisibilities.type_menu_bar_bookmark) ? VISIBLE : GONE);
+        share.setVisibility(map.get(MenuBarItemVisibilities.type_menu_bar_share) ? VISIBLE : GONE);
+        navigate.setVisibility(map.get(MenuBarItemVisibilities.type_menu_bar_navigate) ? VISIBLE : GONE);
 
-        write_review.setVisibility(map.get(MenuBarItemVisibilities.type_menu_bar_bookmark) ? VISIBLE : GONE);
-        see_reviews.setVisibility(map.get(MenuBarItemVisibilities.type_menu_bar_bookmark) ? VISIBLE : GONE);
-        edit.setVisibility(map.get(MenuBarItemVisibilities.type_menu_bar_bookmark) ? VISIBLE : GONE);
+        write_review.setVisibility(map.get(MenuBarItemVisibilities.type_menu_bar_write_review) ? VISIBLE : GONE);
+        see_reviews.setVisibility(map.get(MenuBarItemVisibilities.type_menu_bar_see_reviews) ? VISIBLE : GONE);
+        edit.setVisibility(map.get(MenuBarItemVisibilities.type_menu_bar_edit) ? VISIBLE : GONE);
 
-        add_event.setVisibility(map.get(MenuBarItemVisibilities.type_menu_bar_bookmark) ? VISIBLE : GONE);
-        select_people.setVisibility(map.get(MenuBarItemVisibilities.type_menu_bar_bookmark) ? VISIBLE : GONE);
-        add_food.setVisibility(map.get(MenuBarItemVisibilities.type_menu_bar_bookmark) ? VISIBLE : GONE);
+        add_event.setVisibility(map.get(MenuBarItemVisibilities.type_menu_bar_add_event) ? VISIBLE : GONE);
+        select_people.setVisibility(map.get(MenuBarItemVisibilities.type_menu_bar_select_person) ? VISIBLE : GONE);
+        add_food.setVisibility(map.get(MenuBarItemVisibilities.type_menu_bar_add_food) ? VISIBLE : GONE);
     }
 
     public void resetMenuBarColor() {
