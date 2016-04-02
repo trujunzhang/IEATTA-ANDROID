@@ -63,6 +63,7 @@ public class GalleryThumbnailScrollView extends RecyclerView {
 
         public AddPhotoHolder(View itemView) {
             super(itemView);
+            itemView.setOnClickListener(this);
         }
 
         @Override
