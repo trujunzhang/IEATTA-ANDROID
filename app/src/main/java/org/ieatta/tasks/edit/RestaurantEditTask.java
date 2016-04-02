@@ -26,9 +26,12 @@ import org.ieatta.database.query.ReviewQuery;
 import org.ieatta.database.realm.RealmModelReader;
 import org.ieatta.parse.AppConstant;
 import org.ieatta.provide.IEAEditKey;
+import org.ieatta.server.cache.ThumbnailImageUtil;
 import org.ieatta.tasks.DBConvert;
 import org.ieatta.tasks.FragmentTask;
+import org.ieatta.tasks.RecipeDetailTask;
 
+import java.io.File;
 import java.util.List;
 
 import bolts.Continuation;
@@ -64,46 +67,12 @@ public class RestaurantEditTask extends FragmentTask {
      */
     @Override
     public Task<Void> executeTask() {
-        final String eventUUID = this.entry.getHPara();
+        final String restaurantUUID = this.entry.getHPara();
 
-        return new RealmModelReader<DBEvent>(DBEvent.class).getFirstObject(LocalDatabaseQuery.get(eventUUID), false, this.realmList).onSuccessTask(new Continuation<DBEvent, Task<DBRestaurant>>() {
+        return ThumbnailImageUtil.sharedInstance.getImagesListTask(restaurantUUID).onSuccessTask(new Continuation<List<File>, Task<Void>>() {
             @Override
-            public Task<DBRestaurant> then(Task<DBEvent> task) throws Exception {
-                DBEvent event = task.getResult();
-                RestaurantEditTask.this.event = event;
-                RestaurantEditTask.this.restaurantUUID = event.getRestaurantRef();
-                return new RealmModelReader<DBRestaurant>(DBRestaurant.class).getFirstObject(LocalDatabaseQuery.get(restaurantUUID), false, realmList);
-            }
-        }).onSuccessTask(new Continuation<DBRestaurant, Task<RealmResults<DBPhoto>>>() {
-            @Override
-            public Task<RealmResults<DBPhoto>> then(Task<DBRestaurant> task) throws Exception {
-                DBRestaurant restaurant = task.getResult();
-                RestaurantEditTask.this.restaurant = restaurant;
-                return LocalDatabaseQuery.queryPhotosByModel(restaurantUUID, PhotoUsedType.PU_Restaurant.getType(), realmList);
-            }
-        }).onSuccessTask(new Continuation<RealmResults<DBPhoto>, Task<RealmResults<DBPeopleInEvent>>>() {
-            @Override
-            public Task<RealmResults<DBPeopleInEvent>> then(Task<RealmResults<DBPhoto>> task) throws Exception {
-                RestaurantEditTask.this.leadImageCollection = DBConvert.toLeadImageCollection(task.getResult());
-                return new RealmModelReader<DBPeopleInEvent>(DBPeopleInEvent.class).fetchResults(
-                        LocalDatabaseQuery.getQueryOrderedPeople(eventUUID), false, realmList);
-            }
-        }).onSuccessTask(new Continuation<RealmResults<DBPeopleInEvent>, Task<RealmResults<DBTeam>>>() {
-            @Override
-            public Task<RealmResults<DBTeam>> then(Task<RealmResults<DBPeopleInEvent>> task) throws Exception {
-                List<String> peoplePoints = DBConvert.getPeoplePoints(task.getResult());
-                return new RealmModelReader<DBTeam>(DBTeam.class).fetchResults(LocalDatabaseQuery.getObjectsByUUIDs(peoplePoints), false, realmList);
-            }
-        }).onSuccessTask(new Continuation<RealmResults<DBTeam>, Task<List<IEAReviewsCellModel>>>() {
-            @Override
-            public Task<List<IEAReviewsCellModel>> then(Task<RealmResults<DBTeam>> task) throws Exception {
-                RestaurantEditTask.this.orderedPeopleList = DBConvert.toOrderedPeopleList(task.getResult(), RestaurantEditTask.this.event);
-                return new ReviewQuery().queryReview(eventUUID, ReviewType.Review_Event, AppConstant.limit_reviews);
-            }
-        }).onSuccess(new Continuation<List<IEAReviewsCellModel>, Void>() {
-            @Override
-            public Void then(Task<List<IEAReviewsCellModel>> task) throws Exception {
-                RestaurantEditTask.this.reviewsCellModelList = task.getResult();
+            public Task<Void> then(Task<List<File>> task) throws Exception {
+                RestaurantEditTask.this.thumbnailGalleryCollection = DBConvert.toGalleryCollection(task.getResult());
                 return null;
             }
         });
