@@ -63,7 +63,8 @@ public class RecurringTask {
     }
 
     public void closeTask(){
-
+        if(sch.isShutdown() ==false)
+            sch.shutdown();
     }
 
     public void prepareTimer() {

@@ -72,7 +72,7 @@ public class LeadImagesHandler {
     private float faceYOffsetNormalized;
     private float displayDensity;
 
-    private RecurringTask task = new RecurringTask();
+    private RecurringTask task;
 
     public LeadImagesHandler(@NonNull final PageFragment parentFragment,
                              @NonNull ObservableWebView webView,
@@ -200,6 +200,11 @@ public class LeadImagesHandler {
         if (this.getPage().getPageProperties().getLeadImageCount() < 2) {
             LeadImagesHandler.this.recurringLeadImages();
         } else {
+            if (task != null) {
+                task.closeTask();
+                task = null;
+            }
+            task = new RecurringTask();
             // set the page title text, and honor any HTML formatting in the title
             task.periodicTask(new RecurringTask.RecurringEvent() {
                 @Override
@@ -322,7 +327,7 @@ public class LeadImagesHandler {
 
     /**
      * @param leadImage Nullable URL with no scheme. For example, foo.bar.com/ instead of
-     *            http://foo.bar.com/.
+     *                  http://foo.bar.com/.
      */
     private void loadLeadImage(@Nullable LeadImage leadImage) {
         if (!isMainPage() && leadImage != null && isLeadImageEnabled()) {
@@ -482,7 +487,7 @@ public class LeadImagesHandler {
         }
     }
 
-    public int getParallaxScrollY(){
+    public int getParallaxScrollY() {
         return this.articleHeaderView.parallaxScrollY;
     }
 }
