@@ -42,6 +42,8 @@
     <!-- /Crash reporter -->
 
     <!-- Article menu bar -->
+    <string name="article_menu_bar_write_review">Write a review</string>
+    <string name="article_menu_bar_add_event">Add an event</string>
     <string name="article_menu_bar_bookmark">Save the article for offline reading later</string>
     <string name="article_menu_bar_share">Share the article link</string>
     <string name="article_menu_bar_navigate">Navigate to the location of the article</string>
