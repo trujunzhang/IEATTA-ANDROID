@@ -82,7 +82,20 @@ public final class MenuBarItemVisibilities {
                     put(type_menu_bar_add_food, View.GONE);
                 }};
         }
-        return null;
+
+        return new LinkedHashMap<Integer,Integer>() {{
+            put(type_menu_bar_bookmark, View.GONE);
+            put(type_menu_bar_share, View.GONE);
+            put(type_menu_bar_navigate, View.GONE);
+
+            put(type_menu_bar_write_review, View.GONE);
+            put(type_menu_bar_see_reviews, View.GONE);
+            put(type_menu_bar_edit, View.GONE);
+
+            put(type_menu_bar_add_event, View.GONE);
+            put(type_menu_bar_select_person, View.GONE);
+            put(type_menu_bar_add_food, View.GONE);
+        }};
     }
 
 
