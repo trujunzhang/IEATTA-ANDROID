@@ -51,7 +51,7 @@ public class RestaurantEditTask extends FragmentTask {
 
     enum EditRestaurantSection {
         sectionInformation,//= 0
-        sectionPhotos,//= 1
+        section_gallery_thumbnail,//= 1
         sectionGoogleMapAddress,//= 2
     }
 
@@ -94,6 +94,6 @@ public class RestaurantEditTask extends FragmentTask {
 
     @Override
     public void postUI() {
-
+        postPhotosGallery(EditRestaurantSection.section_gallery_thumbnail.ordinal());
     }
 }

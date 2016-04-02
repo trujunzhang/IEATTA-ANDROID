@@ -19,6 +19,7 @@ import org.ieatta.activity.history.HistoryEntry;
 import org.ieatta.activity.leadimages.LeadImagesHandler;
 import org.ieatta.analytics.GalleryFunnel;
 import org.ieatta.analytics.RecycleCellFunnel;
+import org.ieatta.cells.IEAGalleryThumbnailCell;
 import org.ieatta.cells.header.IEAMoreReviewsFooterCell;
 import org.ieatta.cells.header.IEAPhotoGalleryFooterCell;
 import org.ieatta.cells.headerfooterview.IEAFooterView;
@@ -98,6 +99,7 @@ public abstract class FragmentTask implements RecyclerOnItemClickListener, LeadI
     public abstract void postUI();
 
     public void postPhotosGallery(int forSectionIndex) {
+        this.manager.setRegisterCellClass(IEAGalleryThumbnailCell.getType(), forSectionIndex);
         this.manager.appendSectionTitleCell(new SectionTitleCellModel(IEAEditKey.Section_Title, R.string.PhotosGallery), forSectionIndex);
         this.manager.setSectionItems(CollectionUtil.createList(new IEAGalleryThumbnail(this.thumbnailGalleryCollection, this.galleryViewListener)), forSectionIndex);
         // this.manager.setFooterModelInSection(new SectionPhotoGalleryFooterCellModel(restaurantUUID, ReviewType.Review_Restaurant), forSectionIndex, IEAPhotoGalleryFooterCell.getType());
