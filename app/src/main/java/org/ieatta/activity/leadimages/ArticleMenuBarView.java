@@ -27,29 +27,91 @@ import butterknife.OnLongClick;
 public class ArticleMenuBarView extends LinearLayout {
     public interface Callback {
         void onBookmarkClick(boolean bookmarkSaved);
+
         void onShareClick();
+
         void onNavigateClick();
+
+        void onWriteReviewClick();
+
+        void onSeeReviewsClick();
+
+        void onEditClick();
+
+        void onAddEventClick();
+
+        void onSelectPersonClick();
+
+        void onAddFoodClick();
     }
 
     public static class DefaultCallback implements Callback {
-        @Override public void onBookmarkClick(boolean bookmarkSaved) { }
-        @Override public void onShareClick() { }
-        @Override public void onNavigateClick() { }
+        @Override
+        public void onBookmarkClick(boolean bookmarkSaved) {
+        }
+
+        @Override
+        public void onShareClick() {
+        }
+
+        @Override
+        public void onNavigateClick() {
+        }
+
+        @Override
+        public void onWriteReviewClick() {
+
+        }
+
+        @Override
+        public void onSeeReviewsClick() {
+
+        }
+
+        @Override
+        public void onEditClick() {
+
+        }
+
+        @Override
+        public void onAddEventClick() {
+
+        }
+
+        @Override
+        public void onSelectPersonClick() {
+
+        }
+
+        @Override
+        public void onAddFoodClick() {
+
+        }
     }
 
-    @Bind(R.id.view_article_menu_bar_bookmark) ImageView bookmark;
-    @Bind(R.id.view_article_menu_bar_share) ImageView share;
-    @Bind(R.id.view_article_menu_bar_navigate) ImageView navigate;
+    @Bind(R.id.view_article_menu_bar_bookmark)
+    ImageView bookmark;
+    @Bind(R.id.view_article_menu_bar_share)
+    ImageView share;
+    @Bind(R.id.view_article_menu_bar_navigate)
+    ImageView navigate;
 
-    @Bind(R.id.view_article_menu_bar_write_review) ImageView write_review;
-    @Bind(R.id.view_article_menu_bar_see_reviews) ImageView see_reviews;
-    @Bind(R.id.view_article_menu_bar_edit) ImageView edit;
+    @Bind(R.id.view_article_menu_bar_write_review)
+    ImageView write_review;
+    @Bind(R.id.view_article_menu_bar_see_reviews)
+    ImageView see_reviews;
+    @Bind(R.id.view_article_menu_bar_edit)
+    ImageView edit;
 
-    @Bind(R.id.view_article_menu_bar_add_event) ImageView add_event;
-    @Bind(R.id.view_article_menu_bar_select_person) ImageView select_people;
-    @Bind(R.id.view_article_menu_bar_add_food) ImageView add_food;
+    @Bind(R.id.view_article_menu_bar_add_event)
+    ImageView add_event;
+    @Bind(R.id.view_article_menu_bar_select_person)
+    ImageView select_people;
+    @Bind(R.id.view_article_menu_bar_add_food)
+    ImageView add_food;
 
-    @NonNull private Callback callback = new DefaultCallback();
+    @NonNull
+    private Callback callback = new DefaultCallback();
 
     public ArticleMenuBarView(Context context) {
         super(context);
@@ -97,10 +159,19 @@ public class ArticleMenuBarView extends LinearLayout {
     }
 
     @OnClick({R.id.view_article_menu_bar_bookmark,
-              R.id.view_article_menu_bar_share,
-              R.id.view_article_menu_bar_navigate})
+            R.id.view_article_menu_bar_share,
+            R.id.view_article_menu_bar_navigate,
+
+            R.id.view_article_menu_bar_write_review,
+            R.id.view_article_menu_bar_see_reviews,
+            R.id.view_article_menu_bar_edit,
+
+            R.id.view_article_menu_bar_add_event,
+            R.id.view_article_menu_bar_select_person,
+            R.id.view_article_menu_bar_add_food,
+    })
     public void onClick(View view) {
-        switch(view.getId()) {
+        switch (view.getId()) {
             case R.id.view_article_menu_bar_bookmark:
                 view.setActivated(!view.isActivated());
                 callback.onBookmarkClick(view.isActivated());
@@ -111,6 +182,27 @@ public class ArticleMenuBarView extends LinearLayout {
             case R.id.view_article_menu_bar_navigate:
                 callback.onNavigateClick();
                 break;
+
+            case R.id.view_article_menu_bar_write_review:
+                callback.onWriteReviewClick();
+                break;
+            case R.id.view_article_menu_bar_see_reviews:
+                callback.onSeeReviewsClick();
+                break;
+            case R.id.view_article_menu_bar_edit:
+                callback.onEditClick();
+                break;
+
+            case R.id.view_article_menu_bar_add_event:
+                callback.onAddEventClick();
+                break;
+            case R.id.view_article_menu_bar_select_person:
+                callback.onSelectPersonClick();
+                break;
+            case R.id.view_article_menu_bar_add_food:
+                callback.onAddFoodClick();
+                break;
+
             default:
                 L.w("Unknown id=" + StringUtil.intToHexStr(view.getId()));
                 break;
@@ -119,7 +211,17 @@ public class ArticleMenuBarView extends LinearLayout {
 
     @OnLongClick({R.id.view_article_menu_bar_bookmark,
             R.id.view_article_menu_bar_share,
-            R.id.view_article_menu_bar_navigate})
+            R.id.view_article_menu_bar_navigate,
+
+            R.id.view_article_menu_bar_write_review,
+            R.id.view_article_menu_bar_see_reviews,
+            R.id.view_article_menu_bar_edit,
+
+            R.id.view_article_menu_bar_add_event,
+            R.id.view_article_menu_bar_select_person,
+            R.id.view_article_menu_bar_add_food,
+
+    })
     public boolean onLongClick(View view) {
         if (!TextUtils.isEmpty(view.getContentDescription())) {
             FeedbackUtil.showToolbarButtonToast(view);
