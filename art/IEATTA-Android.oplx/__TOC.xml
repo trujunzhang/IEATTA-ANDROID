@@ -7,15 +7,15 @@
     <status-display>basic</status-display>
     <task-view>
       <split-view-divider-position>306</split-view-divider-position>
-      <outline x="0" y="0" w="306" h="571">
+      <outline x="0" y="0" w="306" h="556">
         <column name="Violations" width="20"/>
         <column name="Notes" width="20"/>
         <column name="Title" width="191"/>
         <column name="Effort" width="70"/>
-        <expanded-items idrefs="t2"/>
-        <selected-items-at-filter-time idrefs="t9 t4 t7 t2 t5 t8 t6"/>
+        <expanded-items idrefs="t10 t2"/>
+        <selected-items-at-filter-time idrefs="t9 t4 t10 t7 t2 t5 t8 t6 t11"/>
       </outline>
-      <gantt-view x="0" y="0" w="644" h="571">
+      <gantt-view x="0" y="0" w="614" h="556">
         <view-mode>actual</view-mode>
         <dependency-lines/>
         <constraints/>
@@ -47,7 +47,7 @@
         <task-bar-label task-type="task" position="right">
           <key>Assigned</key>
         </task-bar-label>
-        <scale scale-name="Automatic" full-day-width="300">
+        <scale scale-name="Automatic" full-day-width="315.363">
           <selected/>
         </scale>
         <scale scale-name="Day" full-day-width="1215"/>
@@ -130,7 +130,7 @@
     </network-view>
   </window>
   <project>
-    <next-task-id>10</next-task-id>
+    <next-task-id>12</next-task-id>
     <next-resource-id>2</next-resource-id>
     <scenario id="abW09KtqiWx" name="Actual" filename="Actual.xml"/>
     <date-display dates="true" times="true" seconds="false"/>
