@@ -19,12 +19,16 @@ import org.wikipedia.util.FeedbackUtil;
 import org.wikipedia.util.StringUtil;
 import org.wikipedia.util.log.L;
 
+import java.util.HashMap;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnLongClick;
 
 public class ArticleMenuBarView extends LinearLayout {
+
+
     public interface Callback {
         void onBookmarkClick(boolean bookmarkSaved);
 
@@ -144,6 +148,22 @@ public class ArticleMenuBarView extends LinearLayout {
 
     public void updateNavigate(boolean geolocated) {
         navigate.setVisibility(geolocated ? VISIBLE : GONE);
+    }
+
+    public void updateMenuItemsVisibilities(int source) {
+        HashMap<Integer, Boolean> map = MenuBarItemVisibilities.menuBarItemsVisibility(source);
+
+        bookmark.setVisibility(map.get(MenuBarItemVisibilities.type_menu_bar_bookmark) ? VISIBLE : GONE);
+        share.setVisibility(map.get(MenuBarItemVisibilities.type_menu_bar_bookmark) ? VISIBLE : GONE);
+        navigate.setVisibility(map.get(MenuBarItemVisibilities.type_menu_bar_bookmark) ? VISIBLE : GONE);
+
+        write_review.setVisibility(map.get(MenuBarItemVisibilities.type_menu_bar_bookmark) ? VISIBLE : GONE);
+        see_reviews.setVisibility(map.get(MenuBarItemVisibilities.type_menu_bar_bookmark) ? VISIBLE : GONE);
+        edit.setVisibility(map.get(MenuBarItemVisibilities.type_menu_bar_bookmark) ? VISIBLE : GONE);
+
+        add_event.setVisibility(map.get(MenuBarItemVisibilities.type_menu_bar_bookmark) ? VISIBLE : GONE);
+        select_people.setVisibility(map.get(MenuBarItemVisibilities.type_menu_bar_bookmark) ? VISIBLE : GONE);
+        add_food.setVisibility(map.get(MenuBarItemVisibilities.type_menu_bar_bookmark) ? VISIBLE : GONE);
     }
 
     public void resetMenuBarColor() {

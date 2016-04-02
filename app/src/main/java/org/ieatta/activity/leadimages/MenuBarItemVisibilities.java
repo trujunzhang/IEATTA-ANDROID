@@ -23,78 +23,78 @@ public final class MenuBarItemVisibilities {
     public static final int type_menu_bar_select_person = 7;
     public static final int type_menu_bar_add_food = 8;
 
-    public static HashMap<Integer, Integer> menuBarItemsVisibility(int source) {
+    public static HashMap<Integer, Boolean> menuBarItemsVisibility(int source) {
         switch (source) {
             case AppConstant.SOURCE_RESTAURANT_DETAIL:
-                return new LinkedHashMap<Integer,Integer>() {{
-                    put(type_menu_bar_bookmark, View.GONE);
-                    put(type_menu_bar_share, View.GONE);
-                    put(type_menu_bar_navigate, View.GONE);
+                return new LinkedHashMap<Integer,Boolean>() {{
+                    put(type_menu_bar_bookmark, false);
+                    put(type_menu_bar_share, false);
+                    put(type_menu_bar_navigate, false);
 
-                    put(type_menu_bar_write_review, View.GONE);
-                    put(type_menu_bar_see_reviews, View.GONE);
-                    put(type_menu_bar_edit, View.GONE);
+                    put(type_menu_bar_write_review, false);
+                    put(type_menu_bar_see_reviews, false);
+                    put(type_menu_bar_edit, false);
 
-                    put(type_menu_bar_add_event, View.GONE);
-                    put(type_menu_bar_select_person, View.GONE);
-                    put(type_menu_bar_add_food, View.GONE);
+                    put(type_menu_bar_add_event, false);
+                    put(type_menu_bar_select_person, false);
+                    put(type_menu_bar_add_food, false);
                 }};
             case AppConstant.SOURCE_EVENT_DETAIL:
-                return new LinkedHashMap<Integer,Integer>() {{
-                    put(type_menu_bar_bookmark, View.GONE);
-                    put(type_menu_bar_share, View.GONE);
-                    put(type_menu_bar_navigate, View.GONE);
+                return new LinkedHashMap<Integer,Boolean>() {{
+                    put(type_menu_bar_bookmark, false);
+                    put(type_menu_bar_share, false);
+                    put(type_menu_bar_navigate, false);
 
-                    put(type_menu_bar_write_review, View.GONE);
-                    put(type_menu_bar_see_reviews, View.GONE);
-                    put(type_menu_bar_edit, View.GONE);
+                    put(type_menu_bar_write_review, false);
+                    put(type_menu_bar_see_reviews, false);
+                    put(type_menu_bar_edit, false);
 
-                    put(type_menu_bar_add_event, View.GONE);
-                    put(type_menu_bar_select_person, View.GONE);
-                    put(type_menu_bar_add_food, View.GONE);
+                    put(type_menu_bar_add_event, false);
+                    put(type_menu_bar_select_person, false);
+                    put(type_menu_bar_add_food, false);
                 }};
             case AppConstant.SOURCE_ORDERED_RECIPES:
-                return new LinkedHashMap<Integer,Integer>() {{
-                    put(type_menu_bar_bookmark, View.GONE);
-                    put(type_menu_bar_share, View.GONE);
-                    put(type_menu_bar_navigate, View.GONE);
+                return new LinkedHashMap<Integer,Boolean>() {{
+                    put(type_menu_bar_bookmark, false);
+                    put(type_menu_bar_share, false);
+                    put(type_menu_bar_navigate, false);
 
-                    put(type_menu_bar_write_review, View.GONE);
-                    put(type_menu_bar_see_reviews, View.GONE);
-                    put(type_menu_bar_edit, View.GONE);
+                    put(type_menu_bar_write_review, false);
+                    put(type_menu_bar_see_reviews, false);
+                    put(type_menu_bar_edit, false);
 
-                    put(type_menu_bar_add_event, View.GONE);
-                    put(type_menu_bar_select_person, View.GONE);
-                    put(type_menu_bar_add_food, View.GONE);
+                    put(type_menu_bar_add_event, false);
+                    put(type_menu_bar_select_person, false);
+                    put(type_menu_bar_add_food, false);
                 }};
             case AppConstant.SOURCE_RECIPE_DETAIL:
-                return new LinkedHashMap<Integer,Integer>() {{
-                    put(type_menu_bar_bookmark, View.GONE);
-                    put(type_menu_bar_share, View.GONE);
-                    put(type_menu_bar_navigate, View.GONE);
+                return new LinkedHashMap<Integer,Boolean>() {{
+                    put(type_menu_bar_bookmark, false);
+                    put(type_menu_bar_share, false);
+                    put(type_menu_bar_navigate, false);
 
-                    put(type_menu_bar_write_review, View.GONE);
-                    put(type_menu_bar_see_reviews, View.GONE);
-                    put(type_menu_bar_edit, View.GONE);
+                    put(type_menu_bar_write_review, false);
+                    put(type_menu_bar_see_reviews, false);
+                    put(type_menu_bar_edit, false);
 
-                    put(type_menu_bar_add_event, View.GONE);
-                    put(type_menu_bar_select_person, View.GONE);
-                    put(type_menu_bar_add_food, View.GONE);
+                    put(type_menu_bar_add_event, false);
+                    put(type_menu_bar_select_person, false);
+                    put(type_menu_bar_add_food, false);
                 }};
         }
 
-        return new LinkedHashMap<Integer,Integer>() {{
-            put(type_menu_bar_bookmark, View.GONE);
-            put(type_menu_bar_share, View.GONE);
-            put(type_menu_bar_navigate, View.GONE);
+        return new LinkedHashMap<Integer,Boolean>() {{
+            put(type_menu_bar_bookmark, false);
+            put(type_menu_bar_share, false);
+            put(type_menu_bar_navigate, false);
 
-            put(type_menu_bar_write_review, View.GONE);
-            put(type_menu_bar_see_reviews, View.GONE);
-            put(type_menu_bar_edit, View.GONE);
+            put(type_menu_bar_write_review, false);
+            put(type_menu_bar_see_reviews, false);
+            put(type_menu_bar_edit, false);
 
-            put(type_menu_bar_add_event, View.GONE);
-            put(type_menu_bar_select_person, View.GONE);
-            put(type_menu_bar_add_food, View.GONE);
+            put(type_menu_bar_add_event, false);
+            put(type_menu_bar_select_person, false);
+            put(type_menu_bar_add_food, false);
         }};
     }
 

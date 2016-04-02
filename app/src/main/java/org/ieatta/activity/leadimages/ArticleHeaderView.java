@@ -205,6 +205,10 @@ public class ArticleHeaderView extends FrameLayout implements ObservableWebView.
         menuBar.updateNavigate(geoLocated);
     }
 
+    public void updateMenuItemsVisibilities(int source) {
+        menuBar.updateMenuItemsVisibilities(source);
+    }
+
     public void resetMenuBarColor() {
         menuBar.resetMenuBarColor();
     }
@@ -247,7 +251,7 @@ public class ArticleHeaderView extends FrameLayout implements ObservableWebView.
         int offset = Math.min(getHeight(), scrollY);
         setTranslationY(-offset);
         image.setTranslationY(offset / 2);
-        new PageFragmentFunnel().logArticleHeaderViewScrollY(scrollY,offset);
+        new PageFragmentFunnel().logArticleHeaderViewScrollY(scrollY, offset);
     }
 
     private void updateText() {
@@ -355,4 +359,6 @@ public class ArticleHeaderView extends FrameLayout implements ObservableWebView.
     private int getDimensionPixelSize(@DimenRes int id) {
         return getResources().getDimensionPixelSize(id);
     }
+
+
 }

@@ -146,6 +146,10 @@ public class LeadImagesHandler {
         articleHeaderView.updateNavigate(geo != null);
     }
 
+    public void updateMenuItemsVisibilities(int source) {
+        articleHeaderView.updateMenuItemsVisibilities(source);
+    }
+
     public void setAnimationPaused(boolean paused) {
         articleHeaderView.setAnimationPaused(paused);
     }
