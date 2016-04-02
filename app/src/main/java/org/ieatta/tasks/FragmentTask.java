@@ -128,6 +128,11 @@ public abstract class FragmentTask implements RecyclerOnItemClickListener, LeadI
             GalleryActivity.showGallery(activity, model.getTitle(), imageTitle,
                     GalleryFunnel.SOURCE_LINK_PREVIEW);
         }
+
+        @Override
+        public void onGalleryAddPhotoItemClicked() {
+
+        }
     };
 
     public boolean isMainPage() {

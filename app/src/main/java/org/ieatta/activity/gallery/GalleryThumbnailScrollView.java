@@ -47,6 +47,8 @@ public class GalleryThumbnailScrollView extends RecyclerView {
 
     public interface GalleryViewListener {
         void onGalleryItemClicked(String imageUUID);
+
+        void onGalleryAddPhotoItemClicked();
     }
 
     public void setGalleryViewListener(@Nullable GalleryViewListener listener) {
@@ -57,10 +59,17 @@ public class GalleryThumbnailScrollView extends RecyclerView {
         setAdapter(new GalleryViewAdapter(collection));
     }
 
-    private class AddPhotoHolder extends ViewHolder {
+    private class AddPhotoHolder extends ViewHolder implements OnClickListener {
 
         public AddPhotoHolder(View itemView) {
             super(itemView);
+        }
+
+        @Override
+        public void onClick(View v) {
+            if (mListener != null) {
+                mListener.onGalleryAddPhotoItemClicked();
+            }
         }
     }
 
