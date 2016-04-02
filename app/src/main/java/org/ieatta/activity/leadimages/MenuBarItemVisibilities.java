@@ -27,30 +27,30 @@ public final class MenuBarItemVisibilities {
         switch (source) {
             case AppConstant.SOURCE_RESTAURANT_DETAIL:
                 return new LinkedHashMap<Integer,Boolean>() {{
-                    put(type_menu_bar_bookmark, false);
-                    put(type_menu_bar_share, false);
-                    put(type_menu_bar_navigate, false);
+                    put(type_menu_bar_bookmark, true);
+                    put(type_menu_bar_share, true);
+                    put(type_menu_bar_navigate, true);
 
-                    put(type_menu_bar_write_review, false);
-                    put(type_menu_bar_see_reviews, false);
-                    put(type_menu_bar_edit, false);
+                    put(type_menu_bar_write_review, true);
+                    put(type_menu_bar_see_reviews, true);
+                    put(type_menu_bar_edit, true);
 
-                    put(type_menu_bar_add_event, false);
+                    put(type_menu_bar_add_event, true);
                     put(type_menu_bar_select_person, false);
                     put(type_menu_bar_add_food, false);
                 }};
             case AppConstant.SOURCE_EVENT_DETAIL:
                 return new LinkedHashMap<Integer,Boolean>() {{
-                    put(type_menu_bar_bookmark, false);
-                    put(type_menu_bar_share, false);
+                    put(type_menu_bar_bookmark, true);
+                    put(type_menu_bar_share, true);
                     put(type_menu_bar_navigate, false);
 
-                    put(type_menu_bar_write_review, false);
-                    put(type_menu_bar_see_reviews, false);
-                    put(type_menu_bar_edit, false);
+                    put(type_menu_bar_write_review, true);
+                    put(type_menu_bar_see_reviews, true);
+                    put(type_menu_bar_edit, true);
 
                     put(type_menu_bar_add_event, false);
-                    put(type_menu_bar_select_person, false);
+                    put(type_menu_bar_select_person, true);
                     put(type_menu_bar_add_food, false);
                 }};
             case AppConstant.SOURCE_ORDERED_RECIPES:
@@ -65,17 +65,17 @@ public final class MenuBarItemVisibilities {
 
                     put(type_menu_bar_add_event, false);
                     put(type_menu_bar_select_person, false);
-                    put(type_menu_bar_add_food, false);
+                    put(type_menu_bar_add_food, true);
                 }};
             case AppConstant.SOURCE_RECIPE_DETAIL:
                 return new LinkedHashMap<Integer,Boolean>() {{
-                    put(type_menu_bar_bookmark, false);
-                    put(type_menu_bar_share, false);
+                    put(type_menu_bar_bookmark, true);
+                    put(type_menu_bar_share, true);
                     put(type_menu_bar_navigate, false);
 
-                    put(type_menu_bar_write_review, false);
-                    put(type_menu_bar_see_reviews, false);
-                    put(type_menu_bar_edit, false);
+                    put(type_menu_bar_write_review, true);
+                    put(type_menu_bar_see_reviews, true);
+                    put(type_menu_bar_edit, true);
 
                     put(type_menu_bar_add_event, false);
                     put(type_menu_bar_select_person, false);
