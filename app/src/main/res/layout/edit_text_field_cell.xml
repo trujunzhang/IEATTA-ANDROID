@@ -1,16 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.wrapp.floatlabelededittext.FloatLabeledEditText xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/float_edit_text"
     android:layout_width="fill_parent"
     android:layout_height="@dimen/Edit_Cell">
-    <com.wrapp.floatlabelededittext.FloatLabeledEditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
         <EditText
             android:id="@+id/editText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/Search_Hint_Team" />
-    </com.wrapp.floatlabelededittext.FloatLabeledEditText>
-
-</FrameLayout>
+</com.wrapp.floatlabelededittext.FloatLabeledEditText>

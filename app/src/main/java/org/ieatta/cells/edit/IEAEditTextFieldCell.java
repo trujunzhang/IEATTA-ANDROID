@@ -8,7 +8,9 @@ import android.widget.EditText;
 import com.tableview.adapter.IEAViewHolder;
 import com.tableview.adapter.enums.ViewHolderType;
 import com.tableview.storage.models.CellType;
+import com.wrapp.floatlabelededittext.FloatLabeledEditText;
 
+import org.ieatta.IEAApp;
 import org.ieatta.R;
 import org.ieatta.cells.model.EditCellModel;
 import org.ieatta.provide.IEAEditKey;
@@ -24,11 +26,13 @@ public class IEAEditTextFieldCell extends IEAViewHolder {
     }
 
     private EditText editText;
+    private FloatLabeledEditText floatLabeledEditText;
     private EditCellModel model;
 
     public IEAEditTextFieldCell(View itemView) {
         super(itemView);
 
+        this.floatLabeledEditText = (FloatLabeledEditText) itemView.findViewById(R.id.float_edit_text);
         this.editText = (EditText) itemView.findViewById(R.id.editText);
         this.editText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -53,7 +57,7 @@ public class IEAEditTextFieldCell extends IEAViewHolder {
         this.model = (EditCellModel) value;
 
         this.editText.setText(this.model.editValue);
-        this.editText.setHint(this.model.editPlaceHolderResId);
+        this.floatLabeledEditText.setHint(IEAApp.getInstance().getResources().getString(this.model.editPlaceHolderResId));
 
         if (this.model.editKey == IEAEditKey.recipe_price) {
             EditTextLocker decimalEditTextLocker = new EditTextLocker(this.editText);
