@@ -126,7 +126,6 @@ public class DetailPageLoadStrategy implements PageLoadStrategy {
 //        fragment.updatePageInfo(null);
 //        fragment.setPageSaved(false);
         leadImagesHandler.updateMenuItemsVisibilities(historyEntry.getSource());
-        leadImagesHandler.updateNavigate(null);
 
         // kick off an event to the WebView that will cause it to clear its contents,
         // and then report back to us when the clearing is complete, so that we can synchronize
