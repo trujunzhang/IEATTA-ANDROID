@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <style name="floatlabelededittext">
+        <item name="android:textColor">#FF0000</item>
+    </style>
+
     <style name="LargeText" parent="@android:style/TextAppearance">
         <item name="android:textSize">14.0sp</item>
         <item name="android:textColor">@color/black_yoni</item>
