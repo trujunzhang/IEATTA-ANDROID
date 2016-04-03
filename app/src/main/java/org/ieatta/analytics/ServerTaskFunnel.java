@@ -5,7 +5,7 @@ import org.wikipedia.analytics.Funnel;
 
 public class ServerTaskFunnel extends Funnel {
 
-    private static final String SCHEMA_NAME = "PhotoFunnel";
+    private static final String SCHEMA_NAME = "ServerTaskFunnel";
     private static final int REV_ID = 101003;
 
     public ServerTaskFunnel(IEAApp app, String schemaName, int revision) {
