@@ -146,6 +146,10 @@ public class ArticleHeaderView extends FrameLayout implements ObservableWebView.
         }
     }
 
+    public void setRatingImageView(int rating){
+        ratingImageView.setImageLevel(rating);
+    }
+
     public boolean hasImage() {
         return image.hasImage();
     }
