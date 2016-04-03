@@ -2,7 +2,7 @@
 <resources>
 
     <style name="floatlabelededittext">
-        <item name="android:textColor">#FF0000</item>
+        <item name="android:textColor">@color/gray_yoni_light_text</item>
     </style>
 
     <style name="LargeText" parent="@android:style/TextAppearance">
