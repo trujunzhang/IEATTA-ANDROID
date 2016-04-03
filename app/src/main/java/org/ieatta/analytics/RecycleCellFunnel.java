@@ -23,4 +23,8 @@ public class RecycleCellFunnel extends Funnel {
     public void logOtherReviewsCount(int otherCount) {
         log("other review count", otherCount);
     }
+
+    public void logArticleHeaderViewRatingCount(int rating) {
+        log("rating on the article view",rating);
+    }
 }

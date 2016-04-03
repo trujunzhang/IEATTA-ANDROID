@@ -31,6 +31,7 @@ import org.ieatta.IEAApp;
 import org.ieatta.R;
 import org.ieatta.activity.LeadImage;
 import org.ieatta.analytics.PageFragmentFunnel;
+import org.ieatta.analytics.RecycleCellFunnel;
 import org.ieatta.views.ObservableWebView;
 import org.ieatta.views.RatingImageView;
 import org.wikipedia.richtext.LeadingSpan;
@@ -147,6 +148,7 @@ public class ArticleHeaderView extends FrameLayout implements ObservableWebView.
     }
 
     public void setRatingImageView(int rating){
+        new RecycleCellFunnel().logArticleHeaderViewRatingCount(rating);
         ratingImageView.setImageLevel(rating);
     }
 

@@ -2,6 +2,8 @@ package org.ieatta.test.tasks;
 
 import android.support.test.runner.AndroidJUnit4;
 
+import org.ieatta.activity.Page;
+import org.ieatta.activity.PageTitle;
 import org.ieatta.activity.history.HistoryEntry;
 import org.ieatta.cells.model.IEAReviewsCellModel;
 import org.ieatta.database.models.DBEvent;
@@ -42,7 +44,8 @@ public class RestaurantDetailTaskTest {
             @Override
             public Void then(Task<Void> task) throws Exception {
                 RestaurantDetailTask _task = RestaurantDetailTaskTest.this.task;
-//                _task.
+                Page page = _task.getPage();
+                PageTitle pageTitle = page.getTitle();
 
                 RealmResults<DBEvent> events = _task.events;
                 List<IEAReviewsCellModel> cellModelList = _task.reviewsCellModelList;

@@ -218,7 +218,7 @@ public class LeadImagesHandler {
         }
 
         articleHeaderView.setTitle(Html.fromHtml(getPage().getDisplayTitle()));
-//        articleHeaderView.setLocale(getPage().getTitle().getSite().getLanguageCode());
+        articleHeaderView.setRatingImageView(getTitle().getRatingReview());
         // Set the subtitle, too, so text measurements are accurate.
         layoutWikiDataDescription(getTitle().getDescription());
         layoutViews(listener, sequence);
