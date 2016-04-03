@@ -138,6 +138,7 @@ public class ArticleHeaderView extends FrameLayout implements ObservableWebView.
     }
 
     public void loadMapView(@Nullable LeadMapView leadMapView) {
+        menuBar.updateNavigate(false);
         headerMapView.load(leadMapView);
     }
 

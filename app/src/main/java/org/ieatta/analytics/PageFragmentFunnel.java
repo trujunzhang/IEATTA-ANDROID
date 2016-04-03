@@ -25,4 +25,8 @@ public class PageFragmentFunnel extends Funnel {
     public void logLoadLeadImage(String status) {
         log("Load Lead Image", status);
     }
+
+    public void logNavigateActivated(boolean activated) {
+        log("Navigation item on the menubar",activated);
+    }
 }

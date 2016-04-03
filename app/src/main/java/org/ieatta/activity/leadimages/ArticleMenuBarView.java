@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import org.ieatta.R;
+import org.ieatta.analytics.PageFragmentFunnel;
 import org.wikipedia.util.FeedbackUtil;
 import org.wikipedia.util.StringUtil;
 import org.wikipedia.util.log.L;
@@ -148,6 +149,7 @@ public class ArticleMenuBarView extends LinearLayout {
     }
 
     public void updateNavigate(boolean activated) {
+        new PageFragmentFunnel().logNavigateActivated(activated);
         navigate.setActivated(activated);
     }
 
