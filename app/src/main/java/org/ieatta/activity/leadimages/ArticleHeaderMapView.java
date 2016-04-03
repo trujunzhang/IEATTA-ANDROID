@@ -28,7 +28,9 @@ public class ArticleHeaderMapView extends FrameLayout {
     @Bind(R.id.mapview)
     MapView mapView;
 
-    public MapView getMapView(){
+    private boolean isShowing = false;
+
+    public MapView getMapView() {
         return mapView;
     }
 
@@ -53,8 +55,17 @@ public class ArticleHeaderMapView extends FrameLayout {
         init();
     }
 
+    public void toggleMapView() {
+        if (isShowing == true) {
+            setVisibility(GONE);
+        } else {
+            setVisibility(VISIBLE);
+        }
+        isShowing = !isShowing;
+    }
 
     public void load(@Nullable final LeadMapView leadMapView) {
+        isShowing = false;
         if (leadMapView == null) {
             setVisibility(GONE);
         } else {
@@ -85,7 +96,6 @@ public class ArticleHeaderMapView extends FrameLayout {
             });
         }
     }
-
 
 
     public void setAnimationPaused(boolean paused) {
