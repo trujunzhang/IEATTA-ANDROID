@@ -60,4 +60,9 @@
         android:src="@drawable/business_stars"
         android:layout_gravity="bottom" />
 
+    <org.ieatta.activity.leadimages.ArticleHeaderMapView
+        android:id="@+id/view_article_header_MapView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
 </FrameLayout>

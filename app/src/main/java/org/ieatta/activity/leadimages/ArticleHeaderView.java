@@ -50,6 +50,7 @@ import static org.wikipedia.util.ResourceUtil.getThemedAttributeId;
 
 public class ArticleHeaderView extends FrameLayout implements ObservableWebView.OnScrollChangeListener {
     @Bind(R.id.view_article_header_image) ArticleHeaderImageView image;
+    @Bind(R.id.view_article_header_MapView) ArticleHeaderMapView headerMapView;
     @Bind(R.id.view_article_header_text)
     AppTextView text;
     @Bind(R.id.view_article_header_menu_bar) ArticleMenuBarView menuBar;
@@ -133,18 +134,13 @@ public class ArticleHeaderView extends FrameLayout implements ObservableWebView.
         }
     }
 
+    public void loadMapView(@Nullable LeadImage leadImage) {
+        headerMapView.load(leadImage);
+    }
+
     private void setImageViewMinimumHeight() {
         int minumHeight = (int) (DimenUtil.getDisplayHeightPx() * getScreenHeightRatio());
         setMinimumHeight(minumHeight);
-    }
-
-    public void loadImage(@Nullable String url,Boolean local) {
-        image.load(url, local);
-        int height = url == null ? 0 : (int) (DimenUtil.getDisplayHeightPx() * getScreenHeightRatio());
-        setMinimumHeight(height);
-        if (url == null) {
-            resetMenuBarColor();
-        }
     }
 
     public void setRatingImageView(int rating){
