@@ -31,6 +31,8 @@ public class ReviewQuery {
 
     public int reviewsCount = 0;
 
+    public int ratingReview = 0;
+
     public Task<List<IEAReviewsCellModel>> queryReview(String reviewRef, ReviewType type, final int limit) {
         DBBuilder reviewBuilder = new DBBuilder()
                 .whereEqualTo(AppConstant.kPAPFieldReviewRefKey, reviewRef)
@@ -46,6 +48,8 @@ public class ReviewQuery {
 
                 if (ReviewQuery.this.reviewsCount == 0)
                     return Task.forResult(null);
+
+                makeRatingReview(task.getResult());
 
                 DBBuilder builder = new DBBuilder().whereContainedIn(AppConstant.kPAPFieldObjectUUIDKey, getTeamsList(task.getResult(), limit));
                 return new RealmModelReader<DBTeam>(DBTeam.class).fetchResults(builder, false, realmList);
@@ -65,6 +69,16 @@ public class ReviewQuery {
                 return Task.forResult(list);
             }
         });
+    }
+
+    private void makeRatingReview(RealmResults<DBReview> result) {
+        int count = result.size();
+        int sum = 0;
+        for(DBReview item : result){
+            sum +=item.getRate();
+        }
+
+        this.ratingReview = sum/count;
     }
 
     private List<String> getTeamsList(RealmResults<DBReview> reviews, int limit) {
