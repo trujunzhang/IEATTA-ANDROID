@@ -27,8 +27,9 @@
         android:textSize="18sp"
         android:textStyle="bold" />
 
+
     <TextView
-        android:id="@+id/page_license_text"
+        android:id="@+id/subtitle_text"
         style="?android:textAppearanceSmall"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -39,5 +40,20 @@
         android:text="Eating Experience Tracker"
         android:textColor="@color/GreyMidText"
         android:textIsSelectable="true" />
+
+
+    <TextView
+        android:id="@+id/page_license_text"
+        style="?android:textAppearanceSmall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="4dp"
+        android:text="VirtualBreak, LLC"
+        android:textColor="@color/GreyMidText"
+        android:textIsSelectable="true" />
+
 
 </LinearLayout>

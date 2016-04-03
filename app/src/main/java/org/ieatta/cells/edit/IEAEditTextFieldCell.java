@@ -21,6 +21,11 @@ public class IEAEditTextFieldCell extends IEAViewHolder {
     }
 
     @Override
+    protected boolean shouldOnClickItem() {
+        return false;
+    }
+
+    @Override
     public ViewHolderType getViewHolderType() {
         return ViewHolderType.None;
     }
@@ -57,6 +62,7 @@ public class IEAEditTextFieldCell extends IEAViewHolder {
         this.model = (EditCellModel) value;
 
         this.editText.setText(this.model.editValue);
+        this.editText.setHint(this.model.editPlaceHolderResId);
         this.floatLabeledEditText.setHint(IEAApp.getInstance().getResources().getString(this.model.editPlaceHolderResId));
 
         if (this.model.editKey == IEAEditKey.recipe_price) {

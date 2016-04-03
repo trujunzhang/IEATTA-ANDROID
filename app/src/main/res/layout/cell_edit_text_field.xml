@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.wrapp.floatlabelededittext.FloatLabeledEditText xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:float="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/tools"
     android:id="@+id/float_edit_text"
     android:layout_width="fill_parent"
     android:layout_height="@dimen/Edit_Cell_Height"
     style="@style/cell_style"
     float:fletTextAppearance="@style/floatlabelededittext">
 
-    <EditText
+    <org.wikipedia.views.PlainPasteEditText
         android:id="@+id/editText"
-        style="?android:textAppearanceMedium"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:singleLine="true"
+        app:theme="@style/EditTextStyle"
         android:textColor="@color/BlackText" />
 </com.wrapp.floatlabelededittext.FloatLabeledEditText>
