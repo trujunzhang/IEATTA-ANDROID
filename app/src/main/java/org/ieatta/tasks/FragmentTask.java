@@ -10,6 +10,8 @@ import com.tableview.adapter.RecyclerOnItemClickListener;
 import com.tableview.utils.CollectionUtil;
 
 import org.ieatta.R;
+import org.ieatta.activity.PageActivity;
+import org.ieatta.activity.PageFragment;
 import org.ieatta.activity.PageTitle;
 import org.ieatta.activity.PageViewModel;
 import org.ieatta.activity.gallery.GalleryActivity;
@@ -18,6 +20,7 @@ import org.ieatta.activity.gallery.GalleryThumbnailScrollView;
 import org.ieatta.activity.history.HistoryEntry;
 import org.ieatta.activity.leadimages.LeadImagesHandler;
 import org.ieatta.activity.leadimages.MenuBarCallback;
+import org.ieatta.activity.leadimages.MenuBarEventHandler;
 import org.ieatta.analytics.GalleryFunnel;
 import org.ieatta.analytics.RecycleCellFunnel;
 import org.ieatta.cells.IEAGalleryThumbnailCell;
@@ -149,5 +152,12 @@ public abstract class FragmentTask extends MenuBarCallback implements RecyclerOn
 
     public boolean isMainPage() {
         return false;
+    }
+
+    protected MenuBarEventHandler getMenuBarEventHandler() {
+        PageActivity activity = (PageActivity) this.activity;
+        PageFragment pageFragment = activity.getCurPageFragment();
+
+        return pageFragment.getMenuBarEventHandler();
     }
 }

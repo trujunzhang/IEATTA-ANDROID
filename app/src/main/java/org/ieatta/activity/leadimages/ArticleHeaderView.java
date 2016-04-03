@@ -373,4 +373,8 @@ public class ArticleHeaderView extends FrameLayout implements ObservableWebView.
         return headerMapView.getMapView();
     }
 
+    public ArticleHeaderMapView getHeaderMapView(){
+        return headerMapView;
+    }
+
 }

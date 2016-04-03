@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import org.ieatta.IEAApp;
 import org.ieatta.activity.history.HistoryEntry;
+import org.ieatta.activity.leadimages.MenuBarEventHandler;
 import org.ieatta.tasks.FragmentTask;
 import org.ieatta.views.ObservableWebView;
 import org.wikipedia.BackPressedHandler;
@@ -76,6 +77,7 @@ public class PageFragment extends Fragment implements BackPressedHandler {
     private ArticleHeaderView articleHeaderView;
     private LeadImagesHandler leadImagesHandler;
     private SearchBarHideHandler searchBarHideHandler;
+    private MenuBarEventHandler menuBarEventHandler;
 
     private SwipeRefreshLayoutWithScroll refreshView;
     private WikiDrawerLayout tocDrawer;
@@ -260,6 +262,7 @@ public class PageFragment extends Fragment implements BackPressedHandler {
         // TODO: initialize View references in onCreateView().
         articleHeaderView = findById(getView(), R.id.page_header_view);
         leadImagesHandler = new LeadImagesHandler(this, webView, articleHeaderView);
+        menuBarEventHandler = new MenuBarEventHandler(leadImagesHandler,articleHeaderView);
         searchBarHideHandler = getPageActivity().getSearchBarHideHandler();
         searchBarHideHandler.setScrollView(webView);
 
@@ -305,5 +308,9 @@ public class PageFragment extends Fragment implements BackPressedHandler {
     public void onDestroy() {
         super.onDestroy();
         mapView.onDestroy();
+    }
+
+    public MenuBarEventHandler getMenuBarEventHandler() {
+        return menuBarEventHandler;
     }
 }

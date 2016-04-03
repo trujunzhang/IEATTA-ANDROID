@@ -11,10 +11,12 @@ import org.ieatta.activity.LeadImageCollection;
 import org.ieatta.activity.LeadMapView;
 import org.ieatta.activity.Page;
 import org.ieatta.activity.PageActivity;
+import org.ieatta.activity.PageFragment;
 import org.ieatta.activity.PageProperties;
 import org.ieatta.activity.PageTitle;
 import org.ieatta.activity.PageViewModel;
 import org.ieatta.activity.history.HistoryEntry;
+import org.ieatta.activity.leadimages.MenuBarEventHandler;
 import org.ieatta.cells.IEAGalleryThumbnailCell;
 import org.ieatta.cells.IEARestaurantEventsCell;
 import org.ieatta.cells.IEAReviewsCell;
@@ -159,4 +161,12 @@ public class RestaurantDetailTask extends FragmentTask {
 
         return new Page(pageTitle, properties);
     }
+
+    @Override
+    public void onNavigateClick() {
+        MenuBarEventHandler menuBarEventHandler = getMenuBarEventHandler();
+        menuBarEventHandler.toggleMapView();
+    }
+
+
 }
