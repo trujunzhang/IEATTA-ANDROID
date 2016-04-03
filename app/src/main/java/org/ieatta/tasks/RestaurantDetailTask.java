@@ -164,8 +164,7 @@ public class RestaurantDetailTask extends FragmentTask {
 
     @Override
     public void onNavigateClick() {
-        MenuBarEventHandler menuBarEventHandler = getMenuBarEventHandler();
-        menuBarEventHandler.toggleMapView();
+        getMenuBarEventHandler().toggleMapView();
     }
 
 
