@@ -20,6 +20,7 @@ import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import org.ieatta.R;
 import org.ieatta.activity.LeadImage;
 import org.ieatta.activity.LeadMapView;
+import org.ieatta.analytics.PageFragmentFunnel;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -56,6 +57,7 @@ public class ArticleHeaderMapView extends FrameLayout {
     }
 
     public void toggleMapView(boolean activated) {
+        new PageFragmentFunnel().logMapViewActivated(activated);
         if (activated == true) {
             setVisibility(VISIBLE);
         } else {

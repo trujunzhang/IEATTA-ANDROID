@@ -29,4 +29,8 @@ public class PageFragmentFunnel extends Funnel {
     public void logNavigateActivated(boolean activated) {
         log("Navigation item on the menubar",activated);
     }
+
+    public void logMapViewActivated(boolean activated) {
+        log("Map view on the header view",activated);
+    }
 }
