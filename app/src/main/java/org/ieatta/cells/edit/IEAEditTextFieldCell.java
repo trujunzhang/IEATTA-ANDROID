@@ -1,5 +1,6 @@
 package org.ieatta.cells.edit;
 
+import android.support.design.widget.TextInputLayout;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -8,7 +9,6 @@ import android.widget.EditText;
 import com.tableview.adapter.IEAViewHolder;
 import com.tableview.adapter.enums.ViewHolderType;
 import com.tableview.storage.models.CellType;
-import com.wrapp.floatlabelededittext.FloatLabeledEditText;
 
 import org.ieatta.IEAApp;
 import org.ieatta.R;
@@ -31,14 +31,14 @@ public class IEAEditTextFieldCell extends IEAViewHolder {
     }
 
     private EditText editText;
-    private FloatLabeledEditText floatLabeledEditText;
+    private TextInputLayout floatLabeledEditText;
     private EditCellModel model;
 
     public IEAEditTextFieldCell(View itemView) {
         super(itemView);
 
-        this.floatLabeledEditText = (FloatLabeledEditText) itemView.findViewById(R.id.float_edit_text);
-        this.editText = (EditText) itemView.findViewById(R.id.editText);
+        this.floatLabeledEditText = (TextInputLayout) itemView.findViewById(R.id.text_input_message);
+        this.editText = (EditText) itemView.findViewById(R.id.message);
         this.editText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -61,7 +61,7 @@ public class IEAEditTextFieldCell extends IEAViewHolder {
     public void render(Object value) {
         this.model = (EditCellModel) value;
 
-        this.editText.setText(this.model.editValue);
+        this.editText.setText("");
         this.editText.setHint(this.model.editPlaceHolderResId);
         this.floatLabeledEditText.setHint(IEAApp.getInstance().getResources().getString(this.model.editPlaceHolderResId));
 
