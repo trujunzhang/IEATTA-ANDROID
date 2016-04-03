@@ -24,6 +24,7 @@ import org.ieatta.cells.header.IEAMoreReviewsFooterCell;
 import org.ieatta.cells.header.IEAPhotoGalleryFooterCell;
 import org.ieatta.cells.headerfooterview.IEAFooterView;
 import org.ieatta.cells.headerfooterview.IEAHeaderView;
+import org.ieatta.cells.model.EditCellModel;
 import org.ieatta.cells.model.IEAGalleryThumbnail;
 import org.ieatta.cells.model.IEAHeaderViewModel;
 import org.ieatta.cells.model.IEAReviewsCellModel;
@@ -57,12 +58,14 @@ public abstract class FragmentTask implements RecyclerOnItemClickListener, LeadI
     // For showing photo's thumbnail gallery.
     public GalleryCollection thumbnailGalleryCollection;
 
-    // For showing review's list.
+    // For showing reviews list.
     public List<IEAReviewsCellModel> reviewsCellModelList;
-
     protected static List<Realm> realmList = new LinkedList<>();
-
     protected ReviewQuery reviewQuery = new ReviewQuery();
+
+    // For Editing model.
+    protected List<EditCellModel> editCellModelList;
+    protected Object editedModel;
 
     public void onItemClick(View view, NSIndexPath indexPath, Object model, int position, boolean isLongClick) {
 

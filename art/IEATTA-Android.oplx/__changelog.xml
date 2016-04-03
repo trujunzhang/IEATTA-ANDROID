@@ -75,4 +75,20 @@
     <change idref="t8" attribute="internalEffortDone" type="real" from="0" to="28800" resolved="yes"/>
     <change idref="t9" attribute="internalEffortDone" type="real" from="0" to="28800" resolved="yes"/>
   </task-change-set>
+  <task-change-set user="djzhang" date="2016-04-03T06:44:40.507Z" timestamp="2016-04-03T06:44:40.507Z">
+    <change idref="t17" to="t10" to-position="1" resolved="yes">
+      <change idref="t17" attribute="noEarlierThanConstraintDate" type="date" to="2016-04-02T16:00:00.000Z"/>
+      <change idref="t17" attribute="title" type="string" to="DataSheetDialogFragment on the event edit fragment."/>
+    </change>
+    <change idref="t11" attribute="title" type="string" from="Task 1" to="All Edit Fragments." resolved="yes"/>
+  </task-change-set>
+  <task-change-set user="djzhang" date="2016-04-03T06:44:48.541Z" timestamp="2016-04-03T06:44:48.541Z">
+    <change idref="t18" to="t10" to-position="2">
+      <change idref="t18" attribute="noEarlierThanConstraintDate" type="date" to="2016-04-02T16:00:00.000Z"/>
+      <change idref="t18" attribute="title" type="string" to="Task 1"/>
+    </change>
+  </task-change-set>
+  <task-change-set user="djzhang" date="2016-04-03T06:45:43.547Z" timestamp="2016-04-03T06:45:43.547Z">
+    <change idref="t11" attribute="title" type="string" from="All Edit Fragments." to="All Edit Fragments(4)." resolved="yes"/>
+  </task-change-set>
 </changelog>
