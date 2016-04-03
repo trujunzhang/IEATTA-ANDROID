@@ -1,28 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <changelog xmlns="http://www.omnigroup.com/namespace/OmniPlan/v2">
   <version>2.1</version>
-  <task-change-set user="djzhang" date="2016-04-01T08:17:41.818Z" timestamp="2016-04-01T08:17:41.818Z">
-    <change idref="t1" from="t-1" from-position="0" resolved="yes">
-      <change idref="t1" attribute="title" type="string" to="Task 1"/>
-    </change>
-    <change idref="t2" to="t-1" to-position="0" resolved="yes">
-      <change idref="t2" attribute="isGroup" type="real" from="0" to="1"/>
-      <change idref="t2" attribute="noEarlierThanConstraintDate" type="date" to="2016-04-01T00:00:00.000Z"/>
-      <change idref="t2" attribute="taskType" type="real" from="0" to="2"/>
-      <change idref="t2" attribute="title" type="string" to="04-01"/>
-    </change>
-    <change idref="t3" to="t2" to-position="0" resolved="yes">
-      <change idref="t3" attribute="title" type="string" to="Limit thumbnail gallery sort by restaurant type."/>
-    </change>
-    <change idref="t4" to="t2" to-position="1" resolved="yes">
-      <change idref="t4" attribute="noEarlierThanConstraintDate" type="date" to="2016-04-01T00:00:00.000Z"/>
-      <change idref="t4" attribute="title" type="string" to="Limit reviews sort by createdAt."/>
-    </change>
-    <change idref="t5" to="t2" to-position="2" resolved="yes">
-      <change idref="t5" attribute="noEarlierThanConstraintDate" type="date" to="2016-04-01T00:00:00.000Z"/>
-      <change idref="t5" attribute="title" type="string" to="Set page’s background color."/>
-    </change>
-  </task-change-set>
   <task-change-set user="djzhang" date="2016-04-01T08:35:22.304Z" timestamp="2016-04-01T08:35:22.304Z">
     <change idref="t6" to="t2" to-position="3" resolved="yes">
       <change idref="t6" attribute="noEarlierThanConstraintDate" type="date" to="2016-04-01T00:00:00.000Z"/>
@@ -101,5 +79,11 @@
       <change idref="t20" attribute="title" type="string" to="add ordered User on the ArticleHeaderView"/>
     </change>
     <change idref="t18" attribute="title" type="string" from="Task 1" to="add rating view on the ArticleHeaderView." resolved="yes"/>
+  </task-change-set>
+  <task-change-set user="djzhang" date="2016-04-03T08:26:52.288Z" timestamp="2016-04-03T08:26:52.288Z">
+    <change idref="t21" to="t10" to-position="5" resolved="yes">
+      <change idref="t21" attribute="noEarlierThanConstraintDate" type="date" to="2016-04-02T16:00:00.000Z"/>
+      <change idref="t21" attribute="title" type="string" to="add toggle between list and grid on the OrderedRecipesFragment."/>
+    </change>
   </task-change-set>
 </changelog>
