@@ -1,5 +1,7 @@
 package org.ieatta.activity;
 
+import android.text.TextUtils;
+
 import org.ieatta.database.query.OnlineDatabaseQuery;
 import org.ieatta.server.cache.CacheImageUtil;
 
@@ -16,7 +18,8 @@ public class LeadImage {
 
     public LeadImage(String localUrl) {
         this.localUrl = localUrl;
-        this.photoUUID = new File(localUrl).getName().split("_")[1];
+        if(TextUtils.isEmpty(localUrl) ==false)
+            this.photoUUID = new File(localUrl).getName().split("_")[1];
         this.isCached = false;
     }
 
