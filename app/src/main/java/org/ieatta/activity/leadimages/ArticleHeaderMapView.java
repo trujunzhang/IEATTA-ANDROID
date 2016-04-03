@@ -19,6 +19,7 @@ import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 
 import org.ieatta.R;
 import org.ieatta.activity.LeadImage;
+import org.ieatta.activity.LeadMapView;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -53,8 +54,8 @@ public class ArticleHeaderMapView extends FrameLayout {
     }
 
 
-    public void load(@Nullable LeadImage leadImage) {
-        if (leadImage == null) {
+    public void load(@Nullable final LeadMapView leadMapView) {
+        if (leadMapView == null) {
             setVisibility(GONE);
         } else {
             setVisibility(VISIBLE);
@@ -66,8 +67,9 @@ public class ArticleHeaderMapView extends FrameLayout {
                     mapboxMap.setStyleUrl(Style.MAPBOX_STREETS);
 
                     // Set the camera's starting position
+                    LatLng location = new LatLng(leadMapView.getLatitude(), leadMapView.getLongitude());
                     CameraPosition cameraPosition = new CameraPosition.Builder()
-                            .target(new LatLng(41.885, -87.679)) // set the camera's center position
+                            .target(location) // set the camera's center position
                             .zoom(12)  // set the camera's zoom level
                             .tilt(20)  // set the camera's tilt
                             .build();
@@ -76,9 +78,9 @@ public class ArticleHeaderMapView extends FrameLayout {
                     mapboxMap.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
 
                     mapboxMap.addMarker(new MarkerOptions()
-                            .position(new LatLng(41.885, -87.679))
-                            .title("Hello World!")
-                            .snippet("Welcome to my marker."));
+                            .position(location)
+                            .title(leadMapView.getTitle())
+                            .snippet(leadMapView.getSnippet()));
                 }
             });
         }

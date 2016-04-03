@@ -32,6 +32,7 @@ import com.mapbox.mapboxsdk.maps.MapView;
 import org.ieatta.IEAApp;
 import org.ieatta.R;
 import org.ieatta.activity.LeadImage;
+import org.ieatta.activity.LeadMapView;
 import org.ieatta.analytics.PageFragmentFunnel;
 import org.ieatta.analytics.RecycleCellFunnel;
 import org.ieatta.views.ObservableWebView;
@@ -136,8 +137,8 @@ public class ArticleHeaderView extends FrameLayout implements ObservableWebView.
         }
     }
 
-    public void loadMapView(@Nullable LeadImage leadImage) {
-        headerMapView.load(leadImage);
+    public void loadMapView(@Nullable LeadMapView leadMapView) {
+        headerMapView.load(leadMapView);
     }
 
     private void setImageViewMinimumHeight() {

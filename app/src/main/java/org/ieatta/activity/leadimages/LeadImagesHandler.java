@@ -17,6 +17,7 @@ import android.view.animation.AnimationUtils;
 
 import org.ieatta.R;
 import org.ieatta.activity.LeadImage;
+import org.ieatta.activity.LeadMapView;
 import org.ieatta.activity.PageProperties;
 import org.ieatta.activity.PageTitle;
 import org.ieatta.activity.Page;
@@ -223,7 +224,7 @@ public class LeadImagesHandler {
         layoutWikiDataDescription(getTitle().getDescription());
         layoutViews(listener, sequence);
 
-        loadMapView(new LeadImage(""));
+        loadMapView(this.getPage().getPageProperties().getLeadMapView());
     }
 
     private void recurringLeadImages() {
@@ -343,9 +344,9 @@ public class LeadImagesHandler {
         }
     }
 
-    private void loadMapView(@Nullable LeadImage leadImage) {
-        if (!isMainPage() && leadImage != null && isLeadImageEnabled()) {
-            articleHeaderView.loadMapView(leadImage);
+    private void loadMapView(@Nullable LeadMapView leadMapView) {
+        if (!isMainPage() && leadMapView != null && isLeadImageEnabled()) {
+            articleHeaderView.loadMapView(leadMapView);
         } else {
             articleHeaderView.loadMapView(null);
         }
