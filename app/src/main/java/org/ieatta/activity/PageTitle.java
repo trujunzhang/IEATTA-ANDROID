@@ -6,34 +6,40 @@ import android.os.Parcelable;
 import android.support.annotation.Nullable;
 
 import org.ieatta.database.provide.PQueryModelType;
-import org.wikipedia.Site;
 
 import java.util.Date;
 
 import static org.wikipedia.util.StringUtil.capitalizeFirstChar;
 
-public class PageTitle implements Parcelable{
+public class PageTitle implements Parcelable {
 
-    @Nullable private final String namespace;
+    @Nullable
+    private final String namespace;
     private final String text;
     private final String fragment;
-    @Nullable private String thumbUrl;
-    private final String description ;
+    @Nullable
+    private String thumbUrl;
+    private final String description;
     private String uuid;
+    private int ratingReview;
     private Date createdAt;
     private PQueryModelType pmType = PQueryModelType.unkown;
 
-    public PageTitle(String uuid,@Nullable String thumbUrl,@Nullable String description) {
+    public PageTitle(String uuid, @Nullable String thumbUrl, @Nullable String description) {
         this.uuid = uuid;
         this.thumbUrl = thumbUrl;
 
         this.description = description != null ? capitalizeFirstChar(description) : null;
 
         this.namespace = "";
-        this.text ="";
+        this.text = "";
         this.fragment = "";
     }
 
+    public PageTitle(String uuid, @Nullable String thumbUrl, @Nullable String description,int ratingReview) {
+        this(uuid,thumbUrl,description);
+        this.ratingReview = ratingReview;
+    }
 
     @Nullable
     public String getNamespace() {
@@ -48,7 +54,8 @@ public class PageTitle implements Parcelable{
         return fragment;
     }
 
-    @Nullable public String getThumbUrl() {
+    @Nullable
+    public String getThumbUrl() {
         return thumbUrl;
     }
 
@@ -92,6 +99,7 @@ public class PageTitle implements Parcelable{
         thumbUrl = in.readString();
         description = in.readString();
         uuid = in.readString();
+        ratingReview = in .readInt();
         setPmType(PQueryModelType.getInstance(in.readInt()));
     }
 
@@ -103,6 +111,7 @@ public class PageTitle implements Parcelable{
         parcel.writeString(thumbUrl);
         parcel.writeString(description);
         parcel.writeString(uuid);
+        parcel.writeInt(ratingReview);
         parcel.writeInt(getPmType().getType());
     }
 
@@ -112,7 +121,7 @@ public class PageTitle implements Parcelable{
             return false;
         }
 
-        PageTitle other = (PageTitle)o;
+        PageTitle other = (PageTitle) o;
         // Not using namespace directly since that can be null
         return other.getPrefixedText().equals(getPrefixedText());
     }
@@ -120,7 +129,7 @@ public class PageTitle implements Parcelable{
     @Override
     public int hashCode() {
         int result = getPrefixedText().hashCode();
-        result = 31 * result ;
+        result = 31 * result;
         return result;
     }
 
@@ -143,5 +152,13 @@ public class PageTitle implements Parcelable{
 
     public void setPmType(PQueryModelType pmType) {
         this.pmType = pmType;
+    }
+
+    public int getRatingReview() {
+        return ratingReview;
+    }
+
+    public void setRatingReview(int ratingReview) {
+        this.ratingReview = ratingReview;
     }
 }

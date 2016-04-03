@@ -30,7 +30,6 @@ public class ReviewQuery {
     final List<Realm> realmList = new LinkedList<>();
 
     public int reviewsCount = 0;
-
     public int ratingReview = 0;
 
     public Task<List<IEAReviewsCellModel>> queryReview(String reviewRef, ReviewType type, final int limit) {
