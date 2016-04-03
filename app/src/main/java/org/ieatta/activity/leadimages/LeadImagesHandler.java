@@ -341,6 +341,14 @@ public class LeadImagesHandler {
         }
     }
 
+    private void loadMapView(@Nullable LeadImage leadImage) {
+        if (!isMainPage() && leadImage != null && isLeadImageEnabled()) {
+            articleHeaderView.loadMapView(leadImage);
+        } else {
+            articleHeaderView.loadMapView(null);
+        }
+    }
+
 //    /**
 //     * @return Nullable URL with no scheme. For example, foo.bar.com/ instead of
 //     * http://foo.bar.com/.
