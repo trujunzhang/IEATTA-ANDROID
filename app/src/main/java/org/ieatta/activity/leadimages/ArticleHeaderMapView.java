@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.widget.FrameLayout;
 
+import com.mapbox.mapboxsdk.annotations.MarkerOptions;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
 import com.mapbox.mapboxsdk.constants.Style;
@@ -53,7 +54,29 @@ public class ArticleHeaderMapView extends FrameLayout {
             setVisibility(GONE);
         } else {
             setVisibility(VISIBLE);
-//            image.loadMultiImage(leadImage);
+            mapView.getMapAsync(new OnMapReadyCallback() {
+                @Override
+                public void onMapReady(MapboxMap mapboxMap) {
+
+                    // Set map style
+                    mapboxMap.setStyleUrl(Style.MAPBOX_STREETS);
+
+                    // Set the camera's starting position
+                    CameraPosition cameraPosition = new CameraPosition.Builder()
+                            .target(new LatLng(41.885, -87.679)) // set the camera's center position
+                            .zoom(12)  // set the camera's zoom level
+                            .tilt(20)  // set the camera's tilt
+                            .build();
+
+                    // Move the camera to that position
+                    mapboxMap.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+
+                    mapboxMap.addMarker(new MarkerOptions()
+                            .position(new LatLng(41.885, -87.679))
+                            .title("Hello World!")
+                            .snippet("Welcome to my marker."));
+                }
+            });
         }
     }
 
@@ -86,26 +109,6 @@ public class ArticleHeaderMapView extends FrameLayout {
 
         inflate();
         bind();
-
-
-        mapView.getMapAsync(new OnMapReadyCallback() {
-            @Override
-            public void onMapReady(MapboxMap mapboxMap) {
-
-                // Set map style
-                mapboxMap.setStyleUrl(Style.MAPBOX_STREETS);
-
-                // Set the camera's starting position
-                CameraPosition cameraPosition = new CameraPosition.Builder()
-                        .target(new LatLng(41.885, -87.679)) // set the camera's center position
-                        .zoom(12)  // set the camera's zoom level
-                        .tilt(20)  // set the camera's tilt
-                        .build();
-
-                // Move the camera to that position
-                mapboxMap.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-            }
-        });
     }
 
     private void inflate() {
