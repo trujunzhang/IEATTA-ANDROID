@@ -17,6 +17,7 @@ import org.ieatta.activity.gallery.GalleryCollection;
 import org.ieatta.activity.gallery.GalleryThumbnailScrollView;
 import org.ieatta.activity.history.HistoryEntry;
 import org.ieatta.activity.leadimages.LeadImagesHandler;
+import org.ieatta.activity.leadimages.MenuBarCallback;
 import org.ieatta.analytics.GalleryFunnel;
 import org.ieatta.analytics.RecycleCellFunnel;
 import org.ieatta.cells.IEAGalleryThumbnailCell;
@@ -44,7 +45,7 @@ import java.util.List;
 import bolts.Task;
 import io.realm.Realm;
 
-public abstract class FragmentTask implements RecyclerOnItemClickListener, LeadImagesHandler.OnContentHeightChangedListener {
+public abstract class FragmentTask extends MenuBarCallback implements RecyclerOnItemClickListener, LeadImagesHandler.OnContentHeightChangedListener {
     protected String restaurantUUID;
     protected String eventUUID;
     protected String teamUUID;

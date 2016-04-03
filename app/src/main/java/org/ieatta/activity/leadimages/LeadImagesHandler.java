@@ -76,10 +76,8 @@ public class LeadImagesHandler {
 
     public LeadImagesHandler(@NonNull final PageFragment parentFragment,
                              @NonNull ObservableWebView webView,
-                             @NonNull ArticleHeaderView articleHeaderView,
-                             @Nullable ArticleMenuBarView.Callback callback) {
+                             @NonNull ArticleHeaderView articleHeaderView) {
         this.articleHeaderView = articleHeaderView;
-        this.articleHeaderView.setMenuBarCallback(callback);
         this.parentFragment = parentFragment;
         this.webView = webView;
 
@@ -93,6 +91,10 @@ public class LeadImagesHandler {
 
         // hide ourselves by default
         hide();
+    }
+
+    public void setMenuBarCallback(@Nullable ArticleMenuBarView.Callback callback) {
+        this.articleHeaderView.setMenuBarCallback(callback);
     }
 
     private void initWebView() {

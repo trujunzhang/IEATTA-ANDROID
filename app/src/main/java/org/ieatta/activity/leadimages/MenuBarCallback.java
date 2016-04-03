@@ -3,13 +3,6 @@ package org.ieatta.activity.leadimages;
 import org.ieatta.activity.PageLoadStrategy;
 
 public class MenuBarCallback extends ArticleMenuBarView.DefaultCallback {
-    private final PageLoadStrategy pageLoadStrategy;
-
-    public MenuBarCallback(PageLoadStrategy pageLoadStrategy) {
-        super();
-        this.pageLoadStrategy = pageLoadStrategy;
-    }
-
     @Override
     public void onBookmarkClick(boolean bookmarkSaved) {
 //            if (getPage() == null) {

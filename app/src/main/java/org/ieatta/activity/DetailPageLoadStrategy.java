@@ -332,6 +332,8 @@ public class DetailPageLoadStrategy implements PageLoadStrategy {
     private void setupCurrentTask(HistoryEntry entry) {
         fragmentTask = MainSegueIdentifier.getFragment(entry, this.fragment.getActivity(), this.model);
 
+        leadImagesHandler.setMenuBarCallback(fragmentTask);
+
         fragmentTask.setupWebView(webView);
         fragmentTask.prepareUI();
 
