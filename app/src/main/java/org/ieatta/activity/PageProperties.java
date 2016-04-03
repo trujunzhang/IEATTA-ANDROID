@@ -8,6 +8,7 @@ public class PageProperties {
 
     private final String displayTitleText;
     public LeadImageCollection leadImageCollection;
+    private LeadMapView leadMapView;
 
     /**
      * @return Nullable URL with no scheme. For example, foo.bar.com/ instead of
@@ -27,6 +28,10 @@ public class PageProperties {
         return Task.forResult(this.leadImageCollection.getCurrentLeadImage());
     }
 
+    public LeadMapView getLeadMapView(){
+        return leadMapView;
+    }
+
     public boolean isCached(){
         return this.leadImageCollection.isCached();
     }
@@ -35,9 +40,10 @@ public class PageProperties {
         this.leadImageCollection.nextLeadImage();
     }
 
-    public PageProperties(LeadImageCollection leadImageCollection,String displayTitleText) {
+    public PageProperties(LeadImageCollection leadImageCollection,String displayTitleText,LeadMapView leadMapView) {
         this.leadImageCollection = leadImageCollection;
         this.displayTitleText = displayTitleText;
+        this.leadMapView = leadMapView;
     }
 
     public String getDisplayTitle() {

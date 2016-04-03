@@ -156,7 +156,7 @@ public class EventDetailTask extends FragmentTask {
         String title = restaurant.getDisplayName();
         String description = event.getDisplayName();
         PageTitle pageTitle = new PageTitle(this.event.getUUID(),null,description, reviewQuery.ratingReview);
-        PageProperties properties = new PageProperties(this.leadImageCollection, title);
+        PageProperties properties = new PageProperties(this.leadImageCollection, title,null);
 
         return new Page(pageTitle, properties);
     }
