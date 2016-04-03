@@ -58,8 +58,6 @@ public class Page {
     }
 
     public boolean toggleMapView(){
-        boolean last = mapviewActivated;
-        mapviewActivated = !mapviewActivated;
-        return last;
+        return (mapviewActivated = !mapviewActivated);
     }
 }
