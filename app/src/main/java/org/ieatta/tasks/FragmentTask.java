@@ -136,7 +136,7 @@ public abstract class FragmentTask extends MenuBarCallback implements RecyclerOn
             = new GalleryThumbnailScrollView.GalleryViewListener() {
         @Override
         public void onGalleryItemClicked(String imageUUID) {
-            PageTitle imageTitle = new PageTitle(imageUUID);
+            PageTitle imageTitle = new PageTitle(imageUUID,null,null);
             GalleryActivity.showGallery(activity, model.getTitle(), imageTitle,
                     GalleryFunnel.SOURCE_LINK_PREVIEW);
         }

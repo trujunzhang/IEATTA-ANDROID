@@ -128,13 +128,7 @@ public class EventDetailTask extends FragmentTask {
     }
 
 
-    public Page getPage() {
-        String title = restaurant.getDisplayName();
-        PageTitle pageTitle = new PageTitle(this.event.getUUID());
-        PageProperties properties = new PageProperties(this.leadImageCollection, title);
 
-        return new Page(pageTitle, properties);
-    }
 
     @Override
     public void prepareUI() {
@@ -156,5 +150,13 @@ public class EventDetailTask extends FragmentTask {
         postReviews(EventDetailSection.section_reviews.ordinal(),eventUUID, ReviewType.Review_Event, AppConstant.limit_reviews);
 
         model.setPage(this.getPage());
+    }
+
+    public Page getPage() {
+        String title = restaurant.getDisplayName();
+        PageTitle pageTitle = new PageTitle(this.event.getUUID(),null,null);
+        PageProperties properties = new PageProperties(this.leadImageCollection, title);
+
+        return new Page(pageTitle, properties);
     }
 }

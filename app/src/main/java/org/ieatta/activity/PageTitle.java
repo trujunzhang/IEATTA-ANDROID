@@ -18,49 +18,22 @@ public class PageTitle implements Parcelable{
     private final String text;
     private final String fragment;
     @Nullable private String thumbUrl;
-    private String description = null;
+    private final String description ;
     private String uuid;
     private Date createdAt;
     private PQueryModelType pmType = PQueryModelType.unkown;
 
-    public PageTitle(@Nullable final String namespace, final String text, final String fragment, @Nullable final String thumbUrl) {
-        this.namespace = namespace;
-        this.text = text;
-        this.fragment = fragment;
-        this.thumbUrl = thumbUrl;
-    }
-
-    public PageTitle(final String text, final Site site, @Nullable final String thumbUrl, final String description) {
-        this(text, site, thumbUrl);
-        this.description = description;
-    }
-
-    public PageTitle(String uuid,String thumbUrl) {
+    public PageTitle(String uuid,@Nullable String thumbUrl,@Nullable String description) {
         this.uuid = uuid;
         this.thumbUrl = thumbUrl;
 
-        this.namespace = "";
-        this.text ="";
-        this.fragment = "";
-    }
-    public PageTitle(String uuid) {
-        this.uuid = uuid;
+        this.description = description != null ? capitalizeFirstChar(description) : null;
 
         this.namespace = "";
         this.text ="";
         this.fragment = "";
     }
 
-    public PageTitle(String text, final Site site, @Nullable String thumbUrl) {
-        this.namespace = "";
-        this.fragment = "";
-        this.text = text;
-        this.thumbUrl = thumbUrl;
-    }
-
-    public PageTitle(String text, final Site site) {
-        this(text, site, null);
-    }
 
     @Nullable
     public String getNamespace() {
@@ -88,14 +61,9 @@ public class PageTitle implements Parcelable{
         return description;
     }
 
-    public void setDescription(@Nullable String description) {
-        this.description = description != null ? capitalizeFirstChar(description) : null;
-    }
-
     public String getDisplayText() {
         return getPrefixedText().replace("_", " ");
     }
-
 
     public String getPrefixedText() {
         return namespace == null ? getText() : namespace + ":" + getText();

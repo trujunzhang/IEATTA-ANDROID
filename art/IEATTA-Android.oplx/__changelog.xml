@@ -91,4 +91,15 @@
   <task-change-set user="djzhang" date="2016-04-03T06:45:43.547Z" timestamp="2016-04-03T06:45:43.547Z">
     <change idref="t11" attribute="title" type="string" from="All Edit Fragments." to="All Edit Fragments(4)." resolved="yes"/>
   </task-change-set>
+  <task-change-set user="djzhang" date="2016-04-03T07:12:12.362Z" timestamp="2016-04-03T07:12:12.362Z">
+    <change idref="t19" to="t10" to-position="3" resolved="yes">
+      <change idref="t19" attribute="noEarlierThanConstraintDate" type="date" to="2016-04-02T16:00:00.000Z"/>
+      <change idref="t19" attribute="title" type="string" to="add google map on the ArticleHeaderView."/>
+    </change>
+    <change idref="t20" to="t10" to-position="4" resolved="yes">
+      <change idref="t20" attribute="noEarlierThanConstraintDate" type="date" to="2016-04-02T16:00:00.000Z"/>
+      <change idref="t20" attribute="title" type="string" to="add ordered User on the ArticleHeaderView"/>
+    </change>
+    <change idref="t18" attribute="title" type="string" from="Task 1" to="add rating view on the ArticleHeaderView." resolved="yes"/>
+  </task-change-set>
 </changelog>

@@ -127,6 +127,8 @@
     <child-task idref="t11"/>
     <child-task idref="t17"/>
     <child-task idref="t18"/>
+    <child-task idref="t19"/>
+    <child-task idref="t20"/>
     <start-no-earlier-than>2016-04-02T00:00:00.000Z</start-no-earlier-than>
   </task>
   <task id="t11">
@@ -142,7 +144,19 @@
     <start-no-earlier-than>2016-04-02T16:00:00.000Z</start-no-earlier-than>
   </task>
   <task id="t18">
-    <title>Task 1</title>
+    <title>add rating view on the ArticleHeaderView.</title>
+    <effort>28800</effort>
+    <start-constraint-date>2016-04-02T16:00:00.000Z</start-constraint-date>
+    <start-no-earlier-than>2016-04-02T16:00:00.000Z</start-no-earlier-than>
+  </task>
+  <task id="t19">
+    <title>add google map on the ArticleHeaderView.</title>
+    <effort>28800</effort>
+    <start-constraint-date>2016-04-02T16:00:00.000Z</start-constraint-date>
+    <start-no-earlier-than>2016-04-02T16:00:00.000Z</start-no-earlier-than>
+  </task>
+  <task id="t20">
+    <title>add ordered User on the ArticleHeaderView</title>
     <effort>28800</effort>
     <start-constraint-date>2016-04-02T16:00:00.000Z</start-constraint-date>
     <start-no-earlier-than>2016-04-02T16:00:00.000Z</start-no-earlier-than>
