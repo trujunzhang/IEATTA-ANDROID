@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <EditText
+        <org.wikipedia.views.PlainPasteEditText
             android:id="@+id/message"
             style="@style/EditTextStyle"
             android:layout_width="match_parent"
