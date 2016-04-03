@@ -51,9 +51,9 @@ public abstract class ThemedActionBarActivity extends AppCompatActivity {
     }
 
     protected void setActionBarTheme() {
-        setTheme(IEAApp.getInstance().isCurrentThemeLight()
-                ? R.style.Theme_Light_ActionBar
-                : R.style.Theme_Dark_ActionBar);
+        setTheme(
+                 R.style.Theme_Light_ActionBar
+                );
     }
 
     /**

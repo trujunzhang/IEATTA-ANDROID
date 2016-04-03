@@ -10,8 +10,7 @@ import org.ieatta.R;
 
 
 public enum Theme {
-    LIGHT(0, "light", R.style.Theme_Light),
-    DARK(1, "dark", R.style.Theme_Dark);
+    LIGHT(0, "light", R.style.Theme_Light);
 
     private final int marshallingId;
     private final String funnelName;
