@@ -147,8 +147,8 @@ public class LeadImagesHandler {
         articleHeaderView.updateBookmark(bookmarkSaved);
     }
 
-    public void updateNavigate(boolean activited) {
-        articleHeaderView.updateNavigate(activited);
+    public void updateNavigate(boolean activated) {
+        articleHeaderView.updateNavigate(activated);
     }
 
     public void updateMenuItemsVisibilities(int source) {

@@ -55,13 +55,12 @@ public class ArticleHeaderMapView extends FrameLayout {
         init();
     }
 
-    public void toggleMapView(boolean isShowing) {
-        if (isShowing == true) {
-            setVisibility(GONE);
-        } else {
+    public void toggleMapView(boolean activated) {
+        if (activated == true) {
             setVisibility(VISIBLE);
+        } else {
+            setVisibility(GONE);
         }
-        isShowing = !isShowing;
     }
 
     public void load(@Nullable final LeadMapView leadMapView) {

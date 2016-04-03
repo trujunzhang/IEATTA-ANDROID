@@ -1,17 +1,9 @@
 package org.ieatta.activity;
 
-import android.support.annotation.Nullable;
-
 import org.ieatta.activity.gallery.GalleryCollection;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.VisibleForTesting;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class Page {
 
@@ -23,7 +15,7 @@ public class Page {
     private final PageTitle title;
     private final PageProperties pageProperties;
 
-    private boolean isMapShowing = false;
+    private boolean mapviewActivated = false;
 
     /**
      * The media gallery collection associated with this page.
@@ -66,8 +58,8 @@ public class Page {
     }
 
     public boolean toggleMapView(){
-        boolean last = isMapShowing;
-        isMapShowing = ! isMapShowing;
+        boolean last = mapviewActivated;
+        mapviewActivated = !mapviewActivated;
         return last;
     }
 }
