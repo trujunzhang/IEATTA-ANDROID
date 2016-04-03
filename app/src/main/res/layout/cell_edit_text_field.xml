@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="@dimen/Edit_Cell_Height"
+    style="@style/cell_style"
     android:orientation="horizontal">
 
     <android.support.design.widget.TextInputLayout
