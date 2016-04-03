@@ -27,6 +27,8 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.mapbox.mapboxsdk.maps.MapView;
+
 import org.ieatta.IEAApp;
 import org.ieatta.R;
 import org.ieatta.activity.LeadImage;
@@ -366,5 +368,8 @@ public class ArticleHeaderView extends FrameLayout implements ObservableWebView.
         return getResources().getDimensionPixelSize(id);
     }
 
+    public MapView getMapView(){
+        return headerMapView.getMapView();
+    }
 
 }

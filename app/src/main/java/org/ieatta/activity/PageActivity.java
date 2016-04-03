@@ -728,4 +728,5 @@ public class PageActivity extends ThemedActionBarActivity {
 //        widgetIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids);
 //        sendBroadcast(widgetIntent);
     }
+
 }

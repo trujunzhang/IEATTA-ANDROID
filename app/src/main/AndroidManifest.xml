@@ -97,6 +97,8 @@
             android:exported="false"
             android:theme="@style/FullScreen" />
         <activity android:name=".activity.effect.EffectActivity"></activity>
+
+        <service android:name="com.mapbox.mapboxsdk.telemetry.TelemetryService" />
     </application>
 
 </manifest>

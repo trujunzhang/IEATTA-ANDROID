@@ -17,6 +17,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.mapbox.mapboxsdk.maps.MapView;
+
 import org.ieatta.R;
 import org.ieatta.activity.editing.EditHandler;
 import org.ieatta.activity.search.SearchBarHideHandler;
@@ -33,6 +35,8 @@ import static butterknife.ButterKnife.findById;
 
 public class PageFragment extends Fragment implements BackPressedHandler {
     private IEAApp app;
+
+    private MapView mapView;
 
     protected PageLoadStrategy pageLoadStrategy;
     protected PageViewModel model;
@@ -206,18 +210,7 @@ public class PageFragment extends Fragment implements BackPressedHandler {
     }
 
 
-    @Override
-    public void onPause() {
-        super.onPause();
-        closePageScrollFunnel();
-    }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("");
-        initPageScrollFunnel();
-    }
 
 
     private void initPageScrollFunnel() {
@@ -272,10 +265,45 @@ public class PageFragment extends Fragment implements BackPressedHandler {
 
         pageLoadStrategy.setUp(model, this, refreshView, webView, searchBarHideHandler,
                 leadImagesHandler, getCurrentTab().getBackStack());
+
+        mapView = articleHeaderView.getMapView();
+        mapView.onCreate(savedInstanceState);
     }
 
     public int getActionBarHeight() {
         return searchBarHideHandler.getActionBarHeight();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        mapView.onResume();
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("");
+        initPageScrollFunnel();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mapView.onPause();
+        closePageScrollFunnel();
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        mapView.onSaveInstanceState(outState);
+    }
+
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+        mapView.onLowMemory();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mapView.onDestroy();
+    }
 }
