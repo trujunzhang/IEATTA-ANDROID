@@ -61,7 +61,7 @@ public class IEAEditTextFieldCell extends IEAViewHolder {
     public void render(Object value) {
         this.model = (EditCellModel) value;
 
-        this.editText.setText("");
+        this.editText.setText(this.model.editValue);
         this.editText.setHint(this.model.editPlaceHolderResId);
         this.floatLabeledEditText.setHint(IEAApp.getInstance().getResources().getString(this.model.editPlaceHolderResId));
 
