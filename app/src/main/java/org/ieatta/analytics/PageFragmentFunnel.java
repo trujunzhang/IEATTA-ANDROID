@@ -18,4 +18,11 @@ public class PageFragmentFunnel extends Funnel {
         log("scrollY in the ArticleHeaderView", scrollY, "offset", offset);
     }
 
+    public void logLoadMapView(String status) {
+        log("Load map view", status);
+    }
+
+    public void logLoadLeadImage(String status) {
+        log("Load Lead Image", status);
+    }
 }

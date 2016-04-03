@@ -22,6 +22,7 @@ import org.ieatta.activity.PageProperties;
 import org.ieatta.activity.PageTitle;
 import org.ieatta.activity.Page;
 import org.ieatta.activity.PageFragment;
+import org.ieatta.analytics.PageFragmentFunnel;
 import org.ieatta.tasks.FragmentTask;
 import org.ieatta.views.ObservableWebView;
 import org.json.JSONException;
@@ -337,17 +338,21 @@ public class LeadImagesHandler {
      */
     private void loadLeadImage(@Nullable LeadImage leadImage) {
         if (!isMainPage() && leadImage != null && isLeadImageEnabled()) {
+            new PageFragmentFunnel().logLoadLeadImage("have LeadImage");
             articleHeaderView.setImageYScalar(0);
             articleHeaderView.loadImage(leadImage);
         } else {
+            new PageFragmentFunnel().logLoadLeadImage("no LeadImage");
             articleHeaderView.loadImage(null);
         }
     }
 
     private void loadMapView(@Nullable LeadMapView leadMapView) {
         if (!isMainPage() && leadMapView != null && isLeadImageEnabled()) {
+            new PageFragmentFunnel().logLoadMapView("have mapview");
             articleHeaderView.loadMapView(leadMapView);
         } else {
+            new PageFragmentFunnel().logLoadMapView("no mapview");
             articleHeaderView.loadMapView(null);
         }
     }
