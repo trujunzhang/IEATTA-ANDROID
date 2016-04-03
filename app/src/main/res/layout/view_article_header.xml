@@ -36,8 +36,6 @@
             android:textSize="@dimen/titleTextSize"
             tools:text="Title\nSubtitle" />
 
-
-
         <org.ieatta.activity.leadimages.ArticleMenuBarView
             android:id="@+id/view_article_header_menu_bar"
             android:layout_width="match_parent"

@@ -32,6 +32,7 @@ import org.ieatta.R;
 import org.ieatta.activity.LeadImage;
 import org.ieatta.analytics.PageFragmentFunnel;
 import org.ieatta.views.ObservableWebView;
+import org.ieatta.views.RatingImageView;
 import org.wikipedia.richtext.LeadingSpan;
 import org.wikipedia.richtext.ParagraphSpan;
 import org.wikipedia.richtext.RichTextUtil;
@@ -51,6 +52,9 @@ public class ArticleHeaderView extends FrameLayout implements ObservableWebView.
     @Bind(R.id.view_article_header_text)
     AppTextView text;
     @Bind(R.id.view_article_header_menu_bar) ArticleMenuBarView menuBar;
+
+    @Bind(R.id.business_review_star_rating)
+    RatingImageView ratingImageView;
 
     @Bind(R.id.article_header_layout)
     FrameLayout article_header_layout;
