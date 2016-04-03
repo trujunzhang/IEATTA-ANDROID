@@ -210,8 +210,8 @@ public class ArticleHeaderView extends FrameLayout implements ObservableWebView.
         menuBar.updateBookmark(bookmarkSaved);
     }
 
-    public void updateNavigate(boolean geoLocated) {
-        menuBar.updateNavigate(geoLocated);
+    public void updateNavigate(boolean activited) {
+        menuBar.updateNavigate(activited);
     }
 
     public void updateMenuItemsVisibilities(int source) {

@@ -28,7 +28,7 @@ public class ArticleHeaderMapView extends FrameLayout {
     @Bind(R.id.mapview)
     MapView mapView;
 
-    private boolean isShowing = false;
+
 
     public MapView getMapView() {
         return mapView;
@@ -55,20 +55,16 @@ public class ArticleHeaderMapView extends FrameLayout {
         init();
     }
 
-    public void toggleMapView() {
+    public void toggleMapView(boolean isShowing) {
         if (isShowing == true) {
             setVisibility(GONE);
-            mapView.setActivated(false);
         } else {
             setVisibility(VISIBLE);
-            mapView.setActivated(true);
         }
         isShowing = !isShowing;
     }
 
     public void load(@Nullable final LeadMapView leadMapView) {
-        isShowing = false;
-        mapView.setActivated(false);
         if (leadMapView == null) {
             setVisibility(GONE);
         } else {

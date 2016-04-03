@@ -27,8 +27,6 @@ import butterknife.OnClick;
 import butterknife.OnLongClick;
 
 public class ArticleMenuBarView extends LinearLayout {
-
-
     public interface Callback {
         void onBookmarkClick(boolean bookmarkSaved);
 
@@ -142,12 +140,15 @@ public class ArticleMenuBarView extends LinearLayout {
         this.callback = callback == null ? new DefaultCallback() : callback;
     }
 
+    public void updateNavigation(boolean isShowing) {
+        navigate.setActivated(isShowing);
+    }
     public void updateBookmark(boolean bookmarkSaved) {
         bookmark.setActivated(bookmarkSaved);
     }
 
-    public void updateNavigate(boolean geolocated) {
-        navigate.setVisibility(geolocated ? VISIBLE : GONE);
+    public void updateNavigate(boolean activated) {
+        navigate.setActivated(activated);
     }
 
     public void updateMenuItemsVisibilities(int source) {

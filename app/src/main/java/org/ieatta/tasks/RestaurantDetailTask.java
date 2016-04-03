@@ -11,13 +11,10 @@ import org.ieatta.activity.LeadImageCollection;
 import org.ieatta.activity.LeadMapView;
 import org.ieatta.activity.Page;
 import org.ieatta.activity.PageActivity;
-import org.ieatta.activity.PageFragment;
 import org.ieatta.activity.PageProperties;
 import org.ieatta.activity.PageTitle;
 import org.ieatta.activity.PageViewModel;
 import org.ieatta.activity.history.HistoryEntry;
-import org.ieatta.activity.leadimages.MenuBarEventHandler;
-import org.ieatta.cells.IEAGalleryThumbnailCell;
 import org.ieatta.cells.IEARestaurantEventsCell;
 import org.ieatta.cells.IEAReviewsCell;
 import org.ieatta.cells.headerfooterview.IEAFooterView;
@@ -32,7 +29,6 @@ import org.ieatta.database.models.DBRestaurant;
 import org.ieatta.database.provide.PhotoUsedType;
 import org.ieatta.database.provide.ReviewType;
 import org.ieatta.database.query.LocalDatabaseQuery;
-import org.ieatta.database.query.ReviewQuery;
 import org.ieatta.database.realm.DBBuilder;
 import org.ieatta.database.realm.RealmModelReader;
 import org.ieatta.parse.AppConstant;
@@ -164,7 +160,7 @@ public class RestaurantDetailTask extends FragmentTask {
 
     @Override
     public void onNavigateClick() {
-        getMenuBarEventHandler().toggleMapView();
+        getMenuBarEventHandler().toggleMapView(model.getPage().toggleMapView());
     }
 
 

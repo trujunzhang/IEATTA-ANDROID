@@ -23,6 +23,8 @@ public class Page {
     private final PageTitle title;
     private final PageProperties pageProperties;
 
+    private boolean isMapShowing = false;
+
     /**
      * The media gallery collection associated with this page.
      * This will be populated by the Gallery activity when necessary, and will be kept in
@@ -61,5 +63,11 @@ public class Page {
 
     public void setGalleryCollection(GalleryCollection collection) {
         galleryCollection = collection;
+    }
+
+    public boolean toggleMapView(){
+        boolean last = isMapShowing;
+        isMapShowing = ! isMapShowing;
+        return last;
     }
 }

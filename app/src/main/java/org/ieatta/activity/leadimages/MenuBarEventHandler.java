@@ -11,7 +11,8 @@ public class MenuBarEventHandler {
         this.articleHeaderView = articleHeaderView;
     }
 
-    public void toggleMapView() {
-        articleHeaderView.getHeaderMapView().toggleMapView();
+    public void toggleMapView(boolean isMapShowing) {
+        leadImagesHandler.updateNavigate(isMapShowing);
+        articleHeaderView.getHeaderMapView().toggleMapView(isMapShowing);
     }
 }

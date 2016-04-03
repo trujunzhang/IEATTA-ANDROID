@@ -146,8 +146,8 @@ public class LeadImagesHandler {
         articleHeaderView.updateBookmark(bookmarkSaved);
     }
 
-    public void updateNavigate(@Nullable Location geo) {
-        articleHeaderView.updateNavigate(geo != null);
+    public void updateNavigate(boolean activited) {
+        articleHeaderView.updateNavigate(activited);
     }
 
     public void updateMenuItemsVisibilities(int source) {
