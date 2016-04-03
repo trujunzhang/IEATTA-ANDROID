@@ -58,18 +58,21 @@ public class ArticleHeaderMapView extends FrameLayout {
     public void toggleMapView() {
         if (isShowing == true) {
             setVisibility(GONE);
+            mapView.setActivated(false);
         } else {
             setVisibility(VISIBLE);
+            mapView.setActivated(true);
         }
         isShowing = !isShowing;
     }
 
     public void load(@Nullable final LeadMapView leadMapView) {
         isShowing = false;
+        mapView.setActivated(false);
         if (leadMapView == null) {
             setVisibility(GONE);
         } else {
-            setVisibility(VISIBLE);
+            setVisibility(GONE);
             mapView.getMapAsync(new OnMapReadyCallback() {
                 @Override
                 public void onMapReady(MapboxMap mapboxMap) {

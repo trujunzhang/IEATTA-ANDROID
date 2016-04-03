@@ -21,7 +21,7 @@
         android:id="@+id/view_article_menu_bar_navigate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_navigate"
+        android:src="@drawable/mapview"
         android:contentDescription="@string/article_menu_bar_navigate" />
 
     <ImageButton
