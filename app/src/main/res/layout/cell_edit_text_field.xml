@@ -3,7 +3,8 @@
     xmlns:float="http://schemas.android.com/apk/res-auto"
     android:id="@+id/float_edit_text"
     android:layout_width="fill_parent"
-    android:layout_height="@dimen/Edit_Cell"
+    android:layout_height="@dimen/Edit_Cell_Height"
+    style="@style/cell_style"
     float:fletTextAppearance="@style/floatlabelededittext">
 
     <EditText
