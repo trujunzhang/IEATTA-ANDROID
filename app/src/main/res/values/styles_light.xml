@@ -11,9 +11,11 @@
         <item name="listChoiceBackgroundIndicator">@drawable/abc_list_selector_holo_dark</item>
         <item name="colorPrimaryDark">@color/primary_dark_material_dark</item>
         <item name="colorPrimary">@color/primary_material_dark</item>
+        <item name="colorAccent">@color/colorAccent</item>
     </style>
 
     <style name="Theme.Light" parent="Theme.AppCompat.Light.NoActionBar">
+
         <item name="windowActionModeOverlay">true</item>
         <item name="drawerArrowStyle">@style/AppTheme.DrawerArrowStyle</item>
         <item name="actionOverflowButtonStyle">@style/AppTheme.OverflowStyle</item>
@@ -46,7 +48,7 @@
         <!--<item name="tab_item_selector">@drawable/tab_item_selector_light</item>-->
         <!--<item name="tab_shadow_drawable">@drawable/tab_item_bottom_gradient_light</item>-->
         <item name="tab_shadow_color">@color/tab_shadow_light</item>
-        <item name="toc_button_color">@color/toc_button_light</item>
+        <!--<item name="toc_button_color">@color/toc_button_light</item>-->
         <item name="tool_tip_default_color">@color/tool_tip_default_light</item>
         <item name="link_preview_toolbar_color">@color/link_preview_toolbar_light</item>
         <item name="link_preview_background_color">@color/link_preview_background_light</item>
