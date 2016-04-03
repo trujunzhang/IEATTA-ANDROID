@@ -5,7 +5,8 @@ import android.content.res.Resources;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
-import org.ieatta.analytics.ServerTaskFunnel;
+
+import org.ieatta.analytics.SyncHandlerFunnel;
 import org.ieatta.database.models.DBNewRecord;
 import org.ieatta.database.provide.PQueryModelType;
 import org.ieatta.database.realm.RealmModelWriter;
@@ -36,7 +37,7 @@ public final class ServerTask {
 
     private static Task<Void> executeSerialTasks(Task<List<ParseObject>> previous) {
         List<ParseObject> results = previous.getResult();
-        new ServerTaskFunnel().logFetchFromServer(results.size());
+        new SyncHandlerFunnel().logFetchFromServer(results.size());
 
         final SerialTasksManager<ParseObject> manager = new SerialTasksManager<>(results);
         if (manager.hasNext() == false) {

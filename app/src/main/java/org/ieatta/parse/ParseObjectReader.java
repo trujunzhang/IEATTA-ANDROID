@@ -6,7 +6,7 @@ import com.parse.ParseGeoPoint;
 import com.parse.ParseObject;
 
 import org.ieatta.analytics.ModelsFunnel;
-import org.ieatta.analytics.PhotoFunnel;
+import org.ieatta.analytics.SyncHandlerFunnel;
 import org.ieatta.database.models.DBEvent;
 import org.ieatta.database.models.DBNewRecord;
 import org.ieatta.database.models.DBPeopleInEvent;
@@ -132,13 +132,13 @@ public class ParseObjectReader {
         return thumbnailFile.getDataStreamInBackground().onSuccessTask(new Continuation<InputStream, Task<Void>>() {
             @Override
             public Task<Void> then(Task<InputStream> task) throws Exception {
-                new PhotoFunnel().logDownloadThumbnail(thumbnailUrl);
+                new SyncHandlerFunnel().logDownloadThumbnail(thumbnailUrl);
                 return ThumbnailImageUtil.sharedInstance.saveTakenPhoto(task.getResult(),model);
             }
         }).onSuccessTask(new Continuation<Void, Task<RealmObject>>() {
             @Override
             public Task<RealmObject> then(Task<Void> task) throws Exception {
-                // new PhotoFunnel().logCacheThumbnail(ThumbnailImageUtil.sharedInstance.getTakenPhotoFile(uuid));
+//                 new SyncHandlerFunnel().logCacheThumbnail(ThumbnailImageUtil.sharedInstance.getTakenPhotoFile(uuid));
                 return Task.forResult((RealmObject) model);
             }
         });

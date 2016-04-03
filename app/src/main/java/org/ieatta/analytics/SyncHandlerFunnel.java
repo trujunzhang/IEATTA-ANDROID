@@ -3,6 +3,8 @@ package org.ieatta.analytics;
 import org.ieatta.IEAApp;
 import org.wikipedia.analytics.Funnel;
 
+import java.io.File;
+
 public class SyncHandlerFunnel extends Funnel {
 
     private static final String SCHEMA_NAME = "SyncHandlerFunnel";
@@ -14,6 +16,18 @@ public class SyncHandlerFunnel extends Funnel {
 
     public SyncHandlerFunnel() {
         super(IEAApp.getInstance(), SCHEMA_NAME, REV_ID, SAMPLE_LOG_1K);
+    }
+
+    public void logFetchFromServer(int size) {
+        log("Get count after pulling objects from Server: ", size);
+    }
+
+    public void logDownloadThumbnail(String thumbnailUrl) {
+        log("Download thumbnail url", thumbnailUrl);
+    }
+
+    public void logCacheThumbnail(File thumbnailFile) {
+        log("Cached thumbnail path", thumbnailFile.getAbsolutePath());
     }
 
     public void logError(String localizedMessage) {
