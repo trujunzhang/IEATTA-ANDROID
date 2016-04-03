@@ -222,6 +222,8 @@ public class LeadImagesHandler {
         // Set the subtitle, too, so text measurements are accurate.
         layoutWikiDataDescription(getTitle().getDescription());
         layoutViews(listener, sequence);
+
+        loadMapView(new LeadImage(""));
     }
 
     private void recurringLeadImages() {
