@@ -63,6 +63,7 @@
     <org.ieatta.activity.leadimages.ArticleHeaderMapView
         android:id="@+id/view_article_header_MapView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_marginBottom="48dp"/>
 
 </FrameLayout>
