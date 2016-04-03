@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import org.ieatta.IEAApp;
 import org.ieatta.activity.history.HistoryEntry;
+import org.ieatta.activity.leadimages.MenuBarCallback;
 import org.ieatta.tasks.FragmentTask;
 import org.ieatta.views.ObservableWebView;
 import org.wikipedia.BackPressedHandler;
@@ -266,7 +267,7 @@ public class PageFragment extends Fragment implements BackPressedHandler {
 
         // TODO: initialize View references in onCreateView().
         articleHeaderView = findById(getView(), R.id.page_header_view);
-        leadImagesHandler = new LeadImagesHandler(this, webView, articleHeaderView);
+        leadImagesHandler = new LeadImagesHandler(this, webView, articleHeaderView, new MenuBarCallback(pageLoadStrategy));
         searchBarHideHandler = getPageActivity().getSearchBarHideHandler();
         searchBarHideHandler.setScrollView(webView);
 

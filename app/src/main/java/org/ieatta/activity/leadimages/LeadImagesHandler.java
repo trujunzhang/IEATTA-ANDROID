@@ -76,9 +76,10 @@ public class LeadImagesHandler {
 
     public LeadImagesHandler(@NonNull final PageFragment parentFragment,
                              @NonNull ObservableWebView webView,
-                             @NonNull ArticleHeaderView articleHeaderView) {
+                             @NonNull ArticleHeaderView articleHeaderView,
+                             @Nullable ArticleMenuBarView.Callback callback) {
         this.articleHeaderView = articleHeaderView;
-        this.articleHeaderView.setMenuBarCallback(new MenuBarCallback());
+        this.articleHeaderView.setMenuBarCallback(callback);
         this.parentFragment = parentFragment;
         this.webView = webView;
 
@@ -398,47 +399,6 @@ public class LeadImagesHandler {
 
     private FragmentActivity getActivity() {
         return parentFragment.getActivity();
-    }
-
-    private class MenuBarCallback extends ArticleMenuBarView.DefaultCallback {
-        @Override
-        public void onBookmarkClick(boolean bookmarkSaved) {
-//            if (getPage() == null) {
-//                return;
-//            }
-//
-//            if (bookmarkSaved) {
-//                saveBookmark();
-//            } else {
-//                deleteBookmark();
-//            }
-        }
-
-        @Override
-        public void onShareClick() {
-//            if (getPage() != null) {
-//                ShareUtil.shareText(getActivity(), getPage().getTitle());
-//            }
-        }
-
-        @Override
-        public void onNavigateClick() {
-            openGeoIntent();
-        }
-
-        private void saveBookmark() {
-
-        }
-
-        private void deleteBookmark() {
-
-        }
-
-        private void openGeoIntent() {
-            if (getGeo() != null) {
-//                UriUtil.sendGeoIntent(getActivity(), getGeo(), getTitle().getDisplayText());
-            }
-        }
     }
 
     private class ImageLoadListener implements ImageViewWithFace.OnImageLoadListener {
