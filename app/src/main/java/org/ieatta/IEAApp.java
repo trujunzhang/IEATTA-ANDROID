@@ -5,6 +5,7 @@ import android.app.Application;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.location.Location;
 import android.support.annotation.ColorInt;
 import android.support.annotation.IntRange;
 import android.support.annotation.NonNull;
@@ -46,6 +47,8 @@ public class IEAApp extends Application {
     private Database database;
 
     private float screenDensity;
+    public Location lastLocation;
+
     public float getScreenDensity() {
         return screenDensity;
     }
