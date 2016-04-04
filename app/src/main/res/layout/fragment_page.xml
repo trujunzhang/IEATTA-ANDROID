@@ -11,11 +11,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <org.wikipedia.views.SwipeRefreshLayoutWithScroll
-            android:id="@+id/page_refresh_container"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
             <android.support.design.widget.CoordinatorLayout
                 android:id="@+id/page_contents_container"
                 android:layout_width="match_parent"
@@ -33,7 +28,6 @@
 
             </android.support.design.widget.CoordinatorLayout>
 
-        </org.wikipedia.views.SwipeRefreshLayoutWithScroll>
     </org.wikipedia.views.WikiDrawerLayout>
 
 </android.support.percent.PercentFrameLayout>
