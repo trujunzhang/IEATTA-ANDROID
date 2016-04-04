@@ -23,6 +23,8 @@ import org.ieatta.activity.history.HistoryEntry;
 import org.ieatta.activity.settings.SettingsActivity;
 import org.ieatta.location.LocationHandler;
 import org.ieatta.provide.MainSegueIdentifier;
+import org.ieatta.tasks.FragmentTask;
+import org.ieatta.tasks.NearRestaurantsTask;
 import org.ieatta.utils.LocationUtil;
 import org.wikipedia.activity.ThemedActionBarActivity;
 
@@ -58,7 +60,6 @@ import permissions.dispatcher.RuntimePermissions;
 
 @RuntimePermissions
 public class PageActivity extends ThemedActionBarActivity {
-
     public enum TabPosition {
         CURRENT_TAB,
         NEW_TAB_BACKGROUND,
@@ -759,6 +760,14 @@ public class PageActivity extends ThemedActionBarActivity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         // NOTE: delegate the permission handling to generated method
         PageActivityPermissionsDispatcher.onRequestPermissionsResult(this, requestCode, grantResults);
+    }
+
+    // Observer the location changed.
+    public void updateLocation() {
+        FragmentTask task = this.getCurPageFragment().getTask();
+        if(task.isMainPage() ==true){
+            ((NearRestaurantsTask)task).executeTask();
+        }
     }
 
 }

@@ -43,10 +43,6 @@ public class PageFragment extends Fragment implements BackPressedHandler {
     protected PageLoadStrategy pageLoadStrategy;
     protected PageViewModel model;
 
-//    private HistoryEntry entry;
-//    private boolean pushBackStack;
-//    private int stagedScrollY;
-
     protected ObservableWebView webView;
 
     private static final int REFRESH_SPINNER_ADDITIONAL_OFFSET = (int) (16 * IEAApp.getInstance().getScreenDensity());
@@ -211,10 +207,6 @@ public class PageFragment extends Fragment implements BackPressedHandler {
             }
         });
     }
-
-
-
-
 
     private void initPageScrollFunnel() {
         if (model.getPage() != null) {

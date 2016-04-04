@@ -53,6 +53,8 @@ public class NearRestaurantsTask extends FragmentTask {
         }
     }
 
+
+
     enum NearRestaurantSection {
         section_more_items,//= 0
         section_restaurants, //= 1
@@ -79,6 +81,7 @@ public class NearRestaurantsTask extends FragmentTask {
             }
         });
     }
+
 
     @Override
     public void prepareUI() {

@@ -13,6 +13,8 @@ import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.location.LocationSettingsResult;
 import com.google.android.gms.location.LocationSettingsStatusCodes;
 
+import org.ieatta.activity.PageActivity;
+
 import pl.charmas.android.reactivelocation.ReactiveLocationProvider;
 import rx.Observable;
 import rx.Subscription;
@@ -24,13 +26,13 @@ public class LocationHandler {
     private static final int REQUEST_CHECK_SETTINGS = 0;
 
     private final Context context;
-    private final Activity activity;
+    private final PageActivity activity;
 
     private ReactiveLocationProvider locationProvider;
     private Observable<Location> locationUpdatesObservable;
     private Subscription updatableLocationSubscription;
 
-    public LocationHandler(Activity activity) {
+    public LocationHandler(PageActivity activity) {
         this.activity = activity;
         this.context = activity.getApplicationContext();
     }
@@ -38,7 +40,7 @@ public class LocationHandler {
     public void showLastLocation() {
         ReactiveLocationProvider locationProvider = new ReactiveLocationProvider(context);
         locationProvider.getLastKnownLocation()
-                .subscribe(new UpdateLocationAction());
+                .subscribe(new UpdateLocationAction(activity));
     }
 
     public void showUpdateLocation() {
@@ -76,7 +78,7 @@ public class LocationHandler {
                 });
 
         updatableLocationSubscription = locationUpdatesObservable
-                .subscribe(new UpdateLocationAction(), new ErrorHandler());
+                .subscribe(new UpdateLocationAction(activity), new ErrorHandler());
     }
 
     private class ErrorHandler implements Action1<Throwable> {
