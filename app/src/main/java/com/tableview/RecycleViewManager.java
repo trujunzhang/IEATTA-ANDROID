@@ -106,6 +106,10 @@ public class RecycleViewManager {
         getMemoryStorage().updateItem(item, forSectionIndex, row);
     }
 
+    public void updateSectionItems(List items, int forSectionIndex) {
+        getMemoryStorage().updateItems(items, forSectionIndex);
+    }
+
     public void setAndRegisterSectionItems(CellType type,List items, int forSectionIndex) {
         this.setRegisterCellClass(type,forSectionIndex);
         getMemoryStorage().setItems(items, forSectionIndex);

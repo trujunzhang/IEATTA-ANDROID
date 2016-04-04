@@ -82,6 +82,11 @@ public class MemoryStorage {
         this.reloadTableView(this.getRowPosition(forSectionIndex, row));
     }
 
+    public void updateItems(List item, int forSectionIndex) {
+        SectionModel section = this.verifySection(forSectionIndex);
+//        section.items.set(row, item);
+//        this.reloadTableView(this.getRowPosition(forSectionIndex, row));
+    }
     /// Set section header model for MemoryStorage
     /// - Note: This does not update UI
     /// - Parameter model: model for section header at index
