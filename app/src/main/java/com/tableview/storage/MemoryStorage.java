@@ -11,7 +11,9 @@ import com.tableview.storage.models.RowModel;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 public class MemoryStorage {
     private final static int Header_View_Index = Integer.MIN_VALUE;
@@ -24,8 +26,8 @@ public class MemoryStorage {
 
     public MemoryStorage(TableViewControllerAdapter adapter) {
         this.adapter = adapter;
-        this.sections.put(Header_View_Index,new SectionModel());
-        this.sections.put(Footer_View_Index,new SectionModel());
+        this.sections.put(Header_View_Index, new SectionModel());
+        this.sections.put(Footer_View_Index, new SectionModel());
     }
 
     /// Add items to section with `toSection` number.
@@ -35,7 +37,7 @@ public class MemoryStorage {
         // this.sections.put(new Integer(toSection), new SectionModel(items));
     }
 
-    public void updateTableSections(){
+    public void updateTableSections() {
         this.tableViewUtil.generateItems(this.sections);
     }
 
@@ -45,10 +47,10 @@ public class MemoryStorage {
         this.adapter.notifyItemChanged(position);
     }
 
-    private void reloadTableView(int positionStart,int itemCount) {
+    private void reloadTableView(int positionStart, int itemCount) {
         this.updateTableSections();
 
-        this.adapter.notifyItemRangeChanged(positionStart,itemCount);
+        this.adapter.notifyItemRangeChanged(positionStart, itemCount);
     }
 
 
@@ -92,7 +94,7 @@ public class MemoryStorage {
     public void updateItems(List items, int forSectionIndex) {
         SectionModel section = this.verifySection(forSectionIndex);
         section.items = items;
-        this.reloadTableView(this.getRowPosition(forSectionIndex, 0),items.size());
+        this.reloadTableView(this.getRowPosition(forSectionIndex, 0), items.size());
     }
 
     /// Set section header model for MemoryStorage
@@ -182,8 +184,10 @@ public class MemoryStorage {
 
     public int getRowPosition(int forSectionIndex, int row) {
         int position = 0;
+        List<Integer> keys = new LinkedList<>(this.sections.keySet());
         for (int i = 0; i < forSectionIndex; i++) {
-            position += this.sections.get(i).numberOfItems();
+            SectionModel sectionModel = this.sections.get(keys.get(i));
+            position += sectionModel.numberOfItems();
         }
         return position + row;
     }
