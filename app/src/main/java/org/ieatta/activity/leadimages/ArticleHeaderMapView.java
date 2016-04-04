@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.widget.FrameLayout;
 
+import com.mapbox.mapboxsdk.annotations.Marker;
 import com.mapbox.mapboxsdk.annotations.MarkerOptions;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
@@ -29,7 +30,7 @@ public class ArticleHeaderMapView extends FrameLayout {
     @Bind(R.id.mapview)
     MapView mapView;
 
-
+    private Marker lastMarker;
 
     public MapView getMapView() {
         return mapView;
@@ -81,17 +82,23 @@ public class ArticleHeaderMapView extends FrameLayout {
                     LatLng location = new LatLng(leadMapView.getLatitude(), leadMapView.getLongitude());
                     CameraPosition cameraPosition = new CameraPosition.Builder()
                             .target(location) // set the camera's center position
-                            .zoom(12)  // set the camera's zoom level
+                            .zoom(20)  // set the camera's zoom level
                             .tilt(20)  // set the camera's tilt
                             .build();
 
                     // Move the camera to that position
                     mapboxMap.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
 
-                    mapboxMap.addMarker(new MarkerOptions()
+                    new PageFragmentFunnel().logMapboxMarker(leadMapView.getTitle(), leadMapView.getSnippet());
+
+                    MarkerOptions options = new MarkerOptions()
                             .position(location)
                             .title(leadMapView.getTitle())
-                            .snippet(leadMapView.getSnippet()));
+                            .snippet(leadMapView.getSnippet());
+                    if(lastMarker != null)
+                        mapboxMap.removeMarker(lastMarker);
+
+                    lastMarker = mapboxMap.addMarker(options);
                 }
             });
         }

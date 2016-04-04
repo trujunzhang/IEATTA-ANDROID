@@ -33,4 +33,8 @@ public class PageFragmentFunnel extends Funnel {
     public void logMapViewActivated(boolean activated) {
         log("Map view on the header view",activated);
     }
+
+    public void logMapboxMarker(String title, String snippet) {
+        log("title",title,"snippet",snippet);
+    }
 }
