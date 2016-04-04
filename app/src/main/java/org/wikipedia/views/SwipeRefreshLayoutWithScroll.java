@@ -5,8 +5,9 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ScrollView;
 
-public class SwipeRefreshLayoutWithScroll extends SwipeRefreshLayout {
+public class SwipeRefreshLayoutWithScroll extends ScrollView {
 
     public SwipeRefreshLayoutWithScroll(Context context) {
         super(context);
@@ -21,13 +22,13 @@ public class SwipeRefreshLayoutWithScroll extends SwipeRefreshLayout {
         this.scrollableView = scrollableView;
     }
 
-    @Override
-    public boolean canChildScrollUp() {
-        if (scrollableView == null) {
-            return false;
-        }
-        return scrollableView.getScrollY() > 0;
-    }
+//    @Override
+//    public boolean canChildScrollUp() {
+//        if (scrollableView == null) {
+//            return false;
+//        }
+//        return scrollableView.getScrollY() > 0;
+//    }
 
     /**
      * TODO: Remove this override when it's fixed in support-v4.

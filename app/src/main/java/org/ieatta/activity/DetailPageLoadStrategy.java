@@ -16,7 +16,6 @@ import org.ieatta.provide.MainSegueIdentifier;
 import org.ieatta.tasks.FragmentTask;
 import org.ieatta.views.ObservableWebView;
 import org.wikipedia.util.log.L;
-import org.wikipedia.views.SwipeRefreshLayoutWithScroll;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -74,7 +73,7 @@ public class DetailPageLoadStrategy implements PageLoadStrategy {
     private PageFragment fragment;
     private PageActivity activity;
     private ObservableWebView webView;
-    private SwipeRefreshLayoutWithScroll refreshView;
+
     @NonNull
     private final IEAApp app = IEAApp.getInstance();
     private LeadImagesHandler leadImagesHandler;
@@ -85,7 +84,6 @@ public class DetailPageLoadStrategy implements PageLoadStrategy {
     @SuppressWarnings("checkstyle:parameternumber")
     public void setUp(@NonNull PageViewModel model,
                       @NonNull PageFragment fragment,
-                      @NonNull SwipeRefreshLayoutWithScroll refreshView,
                       @NonNull ObservableWebView webView,
                       @NonNull SearchBarHideHandler searchBarHideHandler,
                       @NonNull LeadImagesHandler leadImagesHandler,
@@ -93,7 +91,6 @@ public class DetailPageLoadStrategy implements PageLoadStrategy {
         this.model = model;
         this.fragment = fragment;
         activity = (PageActivity) fragment.getActivity();
-        this.refreshView = refreshView;
         this.webView = webView;
         this.searchBarHideHandler = searchBarHideHandler;
         this.leadImagesHandler = leadImagesHandler;
@@ -323,7 +320,6 @@ public class DetailPageLoadStrategy implements PageLoadStrategy {
             webView.setVisibility(View.VISIBLE);
         }
 
-        refreshView.setRefreshing(false);
 //        activity.updateProgressBar(true, true, 0);
 
 //        leadImagesHandler.updateNavigate(page.getPageProperties().getGeo());

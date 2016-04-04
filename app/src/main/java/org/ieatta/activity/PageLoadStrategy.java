@@ -45,7 +45,6 @@ public interface PageLoadStrategy {
     @SuppressWarnings("checkstyle:parameternumber")
     void setUp(@NonNull PageViewModel model,
                @NonNull PageFragment fragment,
-               @NonNull SwipeRefreshLayoutWithScroll refreshView,
                @NonNull ObservableWebView webView,
                @NonNull SearchBarHideHandler searchBarHideHandler,
                @NonNull LeadImagesHandler leadImagesHandler,

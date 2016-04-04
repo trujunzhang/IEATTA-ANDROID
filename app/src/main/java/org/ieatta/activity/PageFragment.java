@@ -14,7 +14,6 @@ import org.wikipedia.BackPressedHandler;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,8 +28,6 @@ import org.ieatta.activity.leadimages.LeadImagesHandler;
 import org.wikipedia.analytics.PageScrollFunnel;
 import org.wikipedia.analytics.SavedPagesFunnel;
 import org.wikipedia.analytics.TabFunnel;
-import org.wikipedia.util.DimenUtil;
-import org.wikipedia.views.SwipeRefreshLayoutWithScroll;
 import org.wikipedia.views.WikiDrawerLayout;
 
 import static butterknife.ButterKnife.findById;
@@ -76,7 +73,6 @@ public class PageFragment extends Fragment implements BackPressedHandler {
     private SearchBarHideHandler searchBarHideHandler;
     private MenuBarEventHandler menuBarEventHandler;
 
-    private SwipeRefreshLayoutWithScroll refreshView;
     private WikiDrawerLayout tocDrawer;
 
     private EditHandler editHandler;
@@ -137,14 +133,6 @@ public class PageFragment extends Fragment implements BackPressedHandler {
         return model.getTitleOriginal();
     }
 
-    @NonNull
-    private final SwipeRefreshLayout.OnRefreshListener pageRefreshListener = new SwipeRefreshLayout.OnRefreshListener() {
-        @Override
-        public void onRefresh() {
-            PageFragment.this.refreshView.setRefreshing(false);
-//            refreshPage();
-        }
-    };
 
     @Nullable
     @Override
@@ -157,15 +145,6 @@ public class PageFragment extends Fragment implements BackPressedHandler {
 
         tocDrawer = (WikiDrawerLayout) rootView.findViewById(R.id.page_toc_drawer);
         tocDrawer.setDragEdgeWidth(getResources().getDimensionPixelSize(R.dimen.drawer_drag_margin));
-
-        refreshView = (SwipeRefreshLayoutWithScroll) rootView
-                .findViewById(R.id.page_refresh_container);
-        int swipeOffset = DimenUtil.getContentTopOffsetPx(getActivity()) + REFRESH_SPINNER_ADDITIONAL_OFFSET;
-        refreshView.setProgressViewOffset(false, -swipeOffset, swipeOffset);
-        // if we want to give it a custom color:
-        //refreshView.setProgressBackgroundColor(R.color.swipe_refresh_circle);
-        refreshView.setScrollableChild(webView);
-        refreshView.setOnRefreshListener(pageRefreshListener);
 
         return rootView;
     }
@@ -261,7 +240,7 @@ public class PageFragment extends Fragment implements BackPressedHandler {
         searchBarHideHandler = getPageActivity().getSearchBarHideHandler();
         searchBarHideHandler.setScrollView(webView);
 
-        pageLoadStrategy.setUp(model, this, refreshView, webView, searchBarHideHandler,
+        pageLoadStrategy.setUp(model, this, webView, searchBarHideHandler,
                 leadImagesHandler, getCurrentTab().getBackStack());
 
         mapView = articleHeaderView.getMapView();
