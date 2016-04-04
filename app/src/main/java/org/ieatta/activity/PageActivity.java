@@ -204,6 +204,10 @@ public class PageActivity extends ThemedActionBarActivity {
 
         searchBarHideHandler = new SearchBarHideHandler(this, toolbarContainer);
 
+        locationHandler = new LocationHandler(this);
+        PageActivityPermissionsDispatcher.showLastLocationWithCheck(this);
+        PageActivityPermissionsDispatcher.showUpdateLocationWithCheck(this);
+
         if (savedInstanceState != null) {
             isZeroEnabled = savedInstanceState.getBoolean("pausedZeroEnabledState");
             if (savedInstanceState.getBoolean("isSearching")) {

@@ -1,11 +1,11 @@
 package org.ieatta.location;
 
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.IntentSender;
 import android.location.Location;
 import android.util.Log;
-import android.widget.TextView;
 
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.LocationRequest;
@@ -24,32 +24,21 @@ public class LocationHandler {
     private static final int REQUEST_CHECK_SETTINGS = 0;
 
     private final Context context;
-    private final TextView updatableLocationView;
-    private final LocationActivity activity;
+    private final Activity activity;
 
     private ReactiveLocationProvider locationProvider;
     private Observable<Location> locationUpdatesObservable;
     private Subscription updatableLocationSubscription;
 
-    public LocationHandler(Context context, TextView updatableLocationView,LocationActivity activity) {
-        this.context = context;
-        this.updatableLocationView = updatableLocationView;
+    public LocationHandler(Activity activity) {
         this.activity = activity;
+        this.context = activity.getApplicationContext();
     }
 
     public void showLastLocation() {
         ReactiveLocationProvider locationProvider = new ReactiveLocationProvider(context);
         locationProvider.getLastKnownLocation()
-                .subscribe(new Action1<Location>() {
-                    @Override
-                    public void call(Location location) {
-                        doSthImportantWithObtainedLocation(location);
-                    }
-                });
-    }
-
-    private void doSthImportantWithObtainedLocation(Location location) {
-        updatableLocationView.setText("longitude: " + location.getLongitude() + ",Latitude: " + location.getLatitude());
+                .subscribe(new UpdateLocationAction());
     }
 
     public void showUpdateLocation() {
@@ -86,25 +75,13 @@ public class LocationHandler {
                     }
                 });
 
-
         updatableLocationSubscription = locationUpdatesObservable
-                .map(new LocationToStringFunc())
-                .map(new Func1<String, String>() {
-                    int count = 0;
-
-                    @Override
-                    public String call(String s) {
-                        return s + " " + count++;
-                    }
-                })
-                .subscribe(new DisplayTextOnViewAction(updatableLocationView), new ErrorHandler());
+                .subscribe(new UpdateLocationAction(), new ErrorHandler());
     }
-
 
     private class ErrorHandler implements Action1<Throwable> {
         @Override
         public void call(Throwable throwable) {
-//            Toast.makeText(LocationActivity.this, "Error occurred.", Toast.LENGTH_SHORT).show();
             Log.d("LocationActivity", "Error occurred", throwable);
         }
     }
