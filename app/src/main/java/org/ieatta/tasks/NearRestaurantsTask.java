@@ -22,6 +22,7 @@ import org.ieatta.database.models.DBRestaurant;
 import org.ieatta.database.query.LocalDatabaseQuery;
 import org.ieatta.provide.IEAEditKey;
 import org.ieatta.provide.MainSegueIdentifier;
+import org.ieatta.utils.LocationUtil;
 
 import bolts.Continuation;
 import bolts.Task;
@@ -65,8 +66,8 @@ public class NearRestaurantsTask extends FragmentTask {
      * @return
      */
     public Task<Void> executeTask() {
-        final Location location = this.entry.getLocation();
-//        final Location location = IEAApp.getInstance().lastLocation;
+//        final Location location = LocationUtil.getLocation();
+        final Location location = IEAApp.getInstance().lastLocation;
 
         return LocalDatabaseQuery.queryNearRestaurants(location, this.realmList).onSuccess(new Continuation<RealmResults<DBRestaurant>, Void>() {
             @Override
