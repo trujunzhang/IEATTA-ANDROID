@@ -90,6 +90,8 @@ public abstract class FragmentTask extends MenuBarCallback implements RecyclerOn
 
     public abstract Task<Void> executeTask();
 
+    public abstract Task<Void> executeUpdateTask();
+
     public Task<Void> executePhotosGalleryTask() {
         return Task.forResult(null);
     }
