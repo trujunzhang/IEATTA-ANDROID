@@ -82,7 +82,7 @@ public class ArticleHeaderMapView extends FrameLayout {
                     LatLng location = new LatLng(leadMapView.getLatitude(), leadMapView.getLongitude());
                     CameraPosition cameraPosition = new CameraPosition.Builder()
                             .target(location) // set the camera's center position
-                            .zoom(20)  // set the camera's zoom level
+                            .zoom(14)  // set the camera's zoom level
                             .tilt(20)  // set the camera's tilt
                             .build();
 

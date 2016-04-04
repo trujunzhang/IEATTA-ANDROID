@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import org.ieatta.IEAApp;
 import org.ieatta.activity.history.HistoryEntry;
 import org.ieatta.activity.leadimages.MenuBarEventHandler;
+import org.ieatta.analytics.PageFragmentFunnel;
 import org.ieatta.tasks.FragmentTask;
 import org.ieatta.views.ObservableWebView;
 import org.wikipedia.BackPressedHandler;
@@ -231,6 +232,8 @@ public class PageFragment extends Fragment implements BackPressedHandler {
     }
 
     public void loadPage(HistoryEntry entry, boolean pushBackStack, int stagedScrollY, int parallaxScrollY) {
+        new PageFragmentFunnel().logLoadPage(entry,stagedScrollY);
+
         webView.setVisibility(View.GONE);
         searchBarHideHandler.setForceNoFade(false);
         searchBarHideHandler.setFadeEnabled(false);

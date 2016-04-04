@@ -1,6 +1,7 @@
 package org.ieatta.analytics;
 
 import org.ieatta.IEAApp;
+import org.ieatta.activity.history.HistoryEntry;
 import org.wikipedia.analytics.Funnel;
 
 import java.io.File;
@@ -36,5 +37,10 @@ public class PageFragmentFunnel extends Funnel {
 
     public void logMapboxMarker(String title, String snippet) {
         log("title",title,"snippet",snippet);
+    }
+
+    public void logLoadPage(HistoryEntry entry, int stagedScrollY) {
+        log("");
+        log("Load page",stagedScrollY);
     }
 }
