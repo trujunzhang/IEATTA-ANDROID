@@ -63,7 +63,7 @@ public class RestaurantDetailTask extends FragmentTask {
         if (model instanceof DBEvent) {
             DBEvent item = (DBEvent) model;
 
-            ((PageActivity) RestaurantDetailTask.this.activity).loadPage(
+            ((PageActivity) activity).loadPage(
                     new HistoryEntry(MainSegueIdentifier.detailEventSegueIdentifier, item.getUUID()));
         }
     }
@@ -163,5 +163,15 @@ public class RestaurantDetailTask extends FragmentTask {
         getMenuBarEventHandler().toggleMapView(model.getPage().toggleMapView());
     }
 
+    @Override
+    public void onEditClick() {
+        ((PageActivity) activity).loadPage(
+                new HistoryEntry(MainSegueIdentifier.editRestaurantSegueIdentifier, restaurant.getUUID(),false));
+    }
 
+    @Override
+    public void onAddEventClick() {
+        ((PageActivity) activity).loadPage(
+                new HistoryEntry(MainSegueIdentifier.editRestaurantSegueIdentifier, "",true));
+    }
 }
