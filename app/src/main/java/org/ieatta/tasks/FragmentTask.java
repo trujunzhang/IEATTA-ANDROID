@@ -97,10 +97,6 @@ public abstract class FragmentTask extends MenuBarCallback implements RecyclerOn
         return Task.forResult(null);
     }
 
-    public Task<Void> executeReviewsTask() {
-        return Task.forResult(null);
-    }
-
     public void prepareUI() {
         this.manager.setRegisterHeaderView(IEAHeaderView.getType());
         this.manager.setRegisterFooterView(IEAFooterView.getType());

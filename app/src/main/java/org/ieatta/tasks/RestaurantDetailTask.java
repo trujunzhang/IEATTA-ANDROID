@@ -129,11 +129,6 @@ public class RestaurantDetailTask extends FragmentTask {
     }
 
     @Override
-    public Task<Void> executeReviewsTask() {
-        return Task.forResult(null);
-    }
-
-    @Override
     public void prepareUI() {
         super.prepareUI();
         this.manager.setRegisterCellClass(IEARestaurantEventsCell.getType(), RestaurantDetailSection.section_events.ordinal());
