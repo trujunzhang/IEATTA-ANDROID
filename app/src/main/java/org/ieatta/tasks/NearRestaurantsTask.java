@@ -65,8 +65,8 @@ public class NearRestaurantsTask extends FragmentTask {
      * @return
      */
     public Task<Void> executeTask() {
-//        final Location location = this.entry.getLocation();
-        final Location location = IEAApp.getInstance().lastLocation;
+        final Location location = this.entry.getLocation();
+//        final Location location = IEAApp.getInstance().lastLocation;
 
         return LocalDatabaseQuery.queryNearRestaurants(location, this.realmList).onSuccess(new Continuation<RealmResults<DBRestaurant>, Void>() {
             @Override
