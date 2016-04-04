@@ -8,7 +8,7 @@ public class GeoHashUtil {
 
     public static String getEncodeHash(Location location) {
         if(location == null)
-            return "";
+            return "no location";
 
         String encodeHash = GeoHash.encodeHash(location.getLatitude(), location.getLongitude());
         encodeHash = encodeHash.substring(0,6);
