@@ -94,6 +94,7 @@ public class MemoryStorage {
         section.items = items;
         this.reloadTableView(this.getRowPosition(forSectionIndex, 0),items.size());
     }
+
     /// Set section header model for MemoryStorage
     /// - Note: This does not update UI
     /// - Parameter model: model for section header at index
