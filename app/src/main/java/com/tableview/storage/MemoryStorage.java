@@ -45,6 +45,13 @@ public class MemoryStorage {
         this.adapter.notifyItemChanged(position);
     }
 
+    private void reloadTableView(int positionStart,int itemCount) {
+        this.updateTableSections();
+
+        this.adapter.notifyItemRangeChanged(positionStart,itemCount);
+    }
+
+
     public void reloadTableView() {
         this.updateTableSections();
 
@@ -82,10 +89,10 @@ public class MemoryStorage {
         this.reloadTableView(this.getRowPosition(forSectionIndex, row));
     }
 
-    public void updateItems(List item, int forSectionIndex) {
+    public void updateItems(List items, int forSectionIndex) {
         SectionModel section = this.verifySection(forSectionIndex);
-//        section.items.set(row, item);
-//        this.reloadTableView(this.getRowPosition(forSectionIndex, row));
+        section.items = items;
+        this.reloadTableView(this.getRowPosition(forSectionIndex, 0),items.size());
     }
     /// Set section header model for MemoryStorage
     /// - Note: This does not update UI
