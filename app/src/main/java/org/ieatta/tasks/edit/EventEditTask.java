@@ -115,6 +115,10 @@ public class EventEditTask extends FragmentTask {
         });
     }
 
+    @Override
+    public Task<Void> executeUpdateTask() {
+        return null;
+    }
 
 
     @Override

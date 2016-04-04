@@ -113,6 +113,11 @@ public class PeopleEditTask extends FragmentTask {
         });
     }
 
+    @Override
+    public Task<Void> executeUpdateTask() {
+        return null;
+    }
+
 
     @Override
     public void prepareUI() {
