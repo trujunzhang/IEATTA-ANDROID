@@ -31,6 +31,7 @@ import org.ieatta.database.provide.ReviewType;
 import org.ieatta.database.query.LocalDatabaseQuery;
 import org.ieatta.database.realm.DBBuilder;
 import org.ieatta.database.realm.RealmModelReader;
+import org.ieatta.database.utils.DBUtil;
 import org.ieatta.parse.AppConstant;
 import org.ieatta.provide.IEAEditKey;
 import org.ieatta.provide.MainSegueIdentifier;
@@ -172,6 +173,6 @@ public class RestaurantDetailTask extends FragmentTask {
     @Override
     public void onAddEventClick() {
         ((PageActivity) activity).loadPage(
-                new HistoryEntry(MainSegueIdentifier.editRestaurantSegueIdentifier, "",true));
+                new HistoryEntry(MainSegueIdentifier.editRestaurantSegueIdentifier, DBUtil.getUUID(),true));
     }
 }
