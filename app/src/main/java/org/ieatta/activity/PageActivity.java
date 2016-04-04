@@ -1,5 +1,6 @@
 package org.ieatta.activity;
 
+import android.Manifest;
 import android.os.Bundle;
 
 import android.os.Looper;
@@ -20,6 +21,7 @@ import org.ieatta.activity.search.SearchArticlesFragment;
 import org.ieatta.activity.search.SearchBarHideHandler;
 import org.ieatta.activity.history.HistoryEntry;
 import org.ieatta.activity.settings.SettingsActivity;
+import org.ieatta.location.LocationHandler;
 import org.ieatta.provide.MainSegueIdentifier;
 import org.ieatta.utils.LocationUtil;
 import org.wikipedia.activity.ThemedActionBarActivity;
@@ -51,6 +53,10 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import java.util.LinkedList;
 import java.util.List;
 
+import permissions.dispatcher.NeedsPermission;
+import permissions.dispatcher.RuntimePermissions;
+
+@RuntimePermissions
 public class PageActivity extends ThemedActionBarActivity {
 
     public enum TabPosition {
@@ -640,6 +646,7 @@ public class PageActivity extends ThemedActionBarActivity {
     protected void onStop() {
         super.onStop();
         unregisterBus();
+        locationHandler.onStop();
     }
 
     /**
@@ -727,6 +734,27 @@ public class PageActivity extends ThemedActionBarActivity {
 //                new ComponentName(this, WidgetProviderFeaturedPage.class));
 //        widgetIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids);
 //        sendBroadcast(widgetIntent);
+    }
+
+
+    private LocationHandler locationHandler;
+
+    @NeedsPermission(Manifest.permission.ACCESS_COARSE_LOCATION)
+    void showLastLocation() {
+        locationHandler.showLastLocation();
+    }
+
+    @NeedsPermission(Manifest.permission.ACCESS_FINE_LOCATION)
+    void showUpdateLocation() {
+        locationHandler.showUpdateLocation();
+    }
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        // NOTE: delegate the permission handling to generated method
+        PageActivityPermissionsDispatcher.onRequestPermissionsResult(this, requestCode, grantResults);
     }
 
 }

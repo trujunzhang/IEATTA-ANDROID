@@ -170,7 +170,7 @@ dependencies {
     String okHttpVersion = '2.7.2'
     String supportVersion = '23.1.1'
     String espressoVersion = '2.2.1'
-    String permissionsVersion = '2.0.7'
+    String permissionsVersion = '2.1.1'
 
     compile "com.android.support:appcompat-v7:$supportVersion" // includes support-v4
     compile "com.android.support:design:$supportVersion"
@@ -194,12 +194,26 @@ dependencies {
     }
     compile 'net.hockeyapp.android:HockeySDK:3.7.0'
 
-//    compile 'com.google.android.gms:play-services:8.4.0'
+    // == android-maps-utils ==
+    compile 'com.google.android.gms:play-services-maps:8.4.0'
+    compile 'com.google.maps.android:android-maps-utils:0.4.3'
+
+    // == Android-ReactiveLocation ==
+    compile 'pl.charmas.android:android-reactive-location:0.8@aar'
+    compile 'com.google.android.gms:play-services-location:8.4.0'
+    compile 'io.reactivex:rxjava:1.0.14'
+
+    //RxAndroid or NotRxAndroid is not required by library
+    // compile 'io.reactivex:rxandroid:0.25.0'
+
+    // == Permissionsdispatcher ==
+    compile "com.github.hotchemi:permissionsdispatcher:$permissionsVersion"
+    apt "com.github.hotchemi:permissionsdispatcher-processor:$permissionsVersion"
+
+    // == Other libraries ==
     compile 'com.github.pwittchen:reactivenetwork:0.2.0'
     compile 'com.parse:parse-android:1.13.0'
     compile 'com.github.davidmoten:geo:0.7.4'
-    compile "com.github.hotchemi:permissionsdispatcher:$permissionsVersion"
-    apt "com.github.hotchemi:permissionsdispatcher-processor:$permissionsVersion"
     compile ('com.h6ah4i.android.widget.advrecyclerview:advrecyclerview:0.8.6@aar'){
         transitive=true
     }
