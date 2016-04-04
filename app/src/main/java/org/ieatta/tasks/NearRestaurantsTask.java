@@ -66,10 +66,8 @@ public class NearRestaurantsTask extends FragmentTask {
      * @return
      */
     public Task<Void> executeTask() {
-//        final Location location = LocationUtil.getLocation();
-        final Location location = IEAApp.getInstance().lastLocation;
 
-        return LocalDatabaseQuery.queryNearRestaurants(location, this.realmList).onSuccess(new Continuation<RealmResults<DBRestaurant>, Void>() {
+        return LocalDatabaseQuery.queryNearRestaurants(IEAApp.getInstance().lastLocation, this.realmList).onSuccess(new Continuation<RealmResults<DBRestaurant>, Void>() {
             @Override
             public Void then(Task<RealmResults<DBRestaurant>> task) throws Exception {
                 NearRestaurantsTask.this.restaurants = task.getResult();
@@ -80,7 +78,14 @@ public class NearRestaurantsTask extends FragmentTask {
 
     @Override
     public Task<Void> executeUpdateTask(UpdateEntry entry) {
-        return null;
+
+        return LocalDatabaseQuery.queryNearRestaurants(IEAApp.getInstance().lastLocation, this.realmList).onSuccess(new Continuation<RealmResults<DBRestaurant>, Void>() {
+            @Override
+            public Void then(Task<RealmResults<DBRestaurant>> task) throws Exception {
+                NearRestaurantsTask.this.restaurants = task.getResult();
+                return null;
+            }
+        });
     }
 
     @Override
