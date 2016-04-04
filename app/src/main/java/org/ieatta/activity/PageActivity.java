@@ -21,6 +21,7 @@ import org.ieatta.activity.search.SearchArticlesFragment;
 import org.ieatta.activity.search.SearchBarHideHandler;
 import org.ieatta.activity.history.HistoryEntry;
 import org.ieatta.activity.settings.SettingsActivity;
+import org.ieatta.activity.update.UpdateEntry;
 import org.ieatta.location.LocationHandler;
 import org.ieatta.provide.MainSegueIdentifier;
 import org.ieatta.tasks.FragmentTask;
@@ -766,7 +767,7 @@ public class PageActivity extends ThemedActionBarActivity {
     public void updateLocation() {
         FragmentTask task = this.getCurPageFragment().getTask();
         if(task.isMainPage() ==true){
-            ((NearRestaurantsTask)task).executeTask();
+            task.executeUpdateTask(new UpdateEntry());
         }
     }
 
