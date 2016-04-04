@@ -128,6 +128,11 @@ public class RecipeDetailTask extends FragmentTask {
     }
 
     @Override
+    public Task<Void> executeUpdateTask() {
+        return null;
+    }
+
+    @Override
     public void prepareUI() {
         super.prepareUI();
 

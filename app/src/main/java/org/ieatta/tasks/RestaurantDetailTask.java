@@ -118,6 +118,11 @@ public class RestaurantDetailTask extends FragmentTask {
     }
 
     @Override
+    public Task<Void> executeUpdateTask() {
+        return null;
+    }
+
+    @Override
     public Task<Void> executePhotosGalleryTask() {
         return Task.forResult(null);
     }

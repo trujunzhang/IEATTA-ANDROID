@@ -127,7 +127,10 @@ public class EventDetailTask extends FragmentTask {
         });
     }
 
-
+    @Override
+    public Task<Void> executeUpdateTask() {
+        return null;
+    }
 
 
     @Override
