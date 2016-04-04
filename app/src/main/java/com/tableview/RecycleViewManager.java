@@ -7,8 +7,6 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import com.h6ah4i.android.widget.advrecyclerview.draggable.RecyclerViewDragDropManager;
-import com.h6ah4i.android.widget.advrecyclerview.utils.WrapperAdapterUtils;
 import com.tableview.adapter.NSIndexPath;
 import com.tableview.adapter.RecyclerOnItemClickListener;
 import com.tableview.adapter.decoration.TableViewDividerDecoration;
@@ -24,49 +22,16 @@ import org.ieatta.cells.model.EditBaseCellModel;
 import java.util.List;
 
 public class RecycleViewManager {
-    public void onParse() {
-        mRecyclerViewDragDropManager.cancelDrag();
-    }
 
-    public void onDestroyView(RecyclerView mRecyclerView) {
-        if (mRecyclerViewDragDropManager != null) {
-            mRecyclerViewDragDropManager.release();
-            mRecyclerViewDragDropManager = null;
-        }
-
-        if (mRecyclerView != null) {
-            mRecyclerView.setItemAnimator(null);
-            mRecyclerView.setAdapter(null);
-            mRecyclerView = null;
-        }
-
-        if (mWrappedAdapter != null) {
-            WrapperAdapterUtils.releaseAll(mWrappedAdapter);
-            mWrappedAdapter = null;
-        }
-        mAdapter = null;
-    }
 
     private DTTableViewManager manager = new DTTableViewManager();
-    private RecyclerView.Adapter mAdapter;
-    private RecyclerView.Adapter mWrappedAdapter;
-    private RecyclerViewDragDropManager mRecyclerViewDragDropManager;
-
-
-    private void setupDragDropManager(Context context) {
-        // drag & drop manager
-        mRecyclerViewDragDropManager = new RecyclerViewDragDropManager();
-        mRecyclerViewDragDropManager.setDraggingItemShadowDrawable(
-                (NinePatchDrawable) ContextCompat.getDrawable(context, R.drawable.material_shadow_z3));
-    }
+    private TableViewControllerAdapter mAdapter;
 
     @VisibleForTesting
     public RecycleViewManager() {
     }
 
     public RecycleViewManager(Context context) {
-        setupDragDropManager(context);
-
         TableViewConfiguration config =
                 new TableViewConfiguration.Builder(context)
                         .setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false))
@@ -75,12 +40,9 @@ public class RecycleViewManager {
                         .build();
 
         //adapter
-        final TableViewControllerAdapter myItemAdapter = new TableViewControllerAdapter(this.manager);
-        mAdapter = myItemAdapter;
+        mAdapter = new TableViewControllerAdapter(this.manager);
 
-        mWrappedAdapter = mRecyclerViewDragDropManager.createWrappedAdapter(myItemAdapter);      // wrap for dragging
-
-        this.manager.setConfiguration(config, myItemAdapter);
+        this.manager.setConfiguration(config, mAdapter);
 
         this.setRegisterHeaderClass(IEAViewForHeaderInSectionCell.getType());
     }
