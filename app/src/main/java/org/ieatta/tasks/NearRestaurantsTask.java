@@ -13,6 +13,7 @@ import org.ieatta.R;
 import org.ieatta.activity.PageActivity;
 import org.ieatta.activity.PageViewModel;
 import org.ieatta.activity.history.HistoryEntry;
+import org.ieatta.activity.update.UpdateEntry;
 import org.ieatta.cells.IEANearRestaurantsCell;
 import org.ieatta.cells.headerfooterview.IEAHeaderView;
 import org.ieatta.cells.model.IEAHeaderViewModel;
@@ -81,7 +82,7 @@ public class NearRestaurantsTask extends FragmentTask {
     }
 
     @Override
-    public Task<Void> executeUpdateTask() {
+    public Task<Void> executeUpdateTask(UpdateEntry entry) {
         return null;
     }
 

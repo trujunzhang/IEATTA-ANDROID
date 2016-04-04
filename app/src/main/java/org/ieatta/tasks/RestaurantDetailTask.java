@@ -15,6 +15,7 @@ import org.ieatta.activity.PageProperties;
 import org.ieatta.activity.PageTitle;
 import org.ieatta.activity.PageViewModel;
 import org.ieatta.activity.history.HistoryEntry;
+import org.ieatta.activity.update.UpdateEntry;
 import org.ieatta.cells.IEARestaurantEventsCell;
 import org.ieatta.cells.IEAReviewsCell;
 import org.ieatta.cells.headerfooterview.IEAFooterView;
@@ -118,7 +119,7 @@ public class RestaurantDetailTask extends FragmentTask {
     }
 
     @Override
-    public Task<Void> executeUpdateTask() {
+    public Task<Void> executeUpdateTask(UpdateEntry entry) {
         return null;
     }
 

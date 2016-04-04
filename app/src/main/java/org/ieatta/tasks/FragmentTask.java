@@ -21,6 +21,7 @@ import org.ieatta.activity.history.HistoryEntry;
 import org.ieatta.activity.leadimages.LeadImagesHandler;
 import org.ieatta.activity.leadimages.MenuBarCallback;
 import org.ieatta.activity.leadimages.MenuBarEventHandler;
+import org.ieatta.activity.update.UpdateEntry;
 import org.ieatta.analytics.GalleryFunnel;
 import org.ieatta.analytics.RecycleCellFunnel;
 import org.ieatta.cells.IEAGalleryThumbnailCell;
@@ -90,7 +91,7 @@ public abstract class FragmentTask extends MenuBarCallback implements RecyclerOn
 
     public abstract Task<Void> executeTask();
 
-    public abstract Task<Void> executeUpdateTask();
+    public abstract Task<Void> executeUpdateTask(UpdateEntry entry);
 
     public Task<Void> executePhotosGalleryTask() {
         return Task.forResult(null);

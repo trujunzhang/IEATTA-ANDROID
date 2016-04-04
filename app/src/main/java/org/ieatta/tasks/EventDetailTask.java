@@ -14,6 +14,7 @@ import org.ieatta.activity.PageProperties;
 import org.ieatta.activity.PageTitle;
 import org.ieatta.activity.PageViewModel;
 import org.ieatta.activity.history.HistoryEntry;
+import org.ieatta.activity.update.UpdateEntry;
 import org.ieatta.cells.IEAOrderedPeopleCell;
 import org.ieatta.cells.IEAReviewsCell;
 import org.ieatta.cells.headerfooterview.IEAFooterView;
@@ -31,7 +32,6 @@ import org.ieatta.database.models.DBTeam;
 import org.ieatta.database.provide.PhotoUsedType;
 import org.ieatta.database.provide.ReviewType;
 import org.ieatta.database.query.LocalDatabaseQuery;
-import org.ieatta.database.query.ReviewQuery;
 import org.ieatta.database.realm.RealmModelReader;
 import org.ieatta.parse.AppConstant;
 import org.ieatta.provide.IEAEditKey;
@@ -128,7 +128,7 @@ public class EventDetailTask extends FragmentTask {
     }
 
     @Override
-    public Task<Void> executeUpdateTask() {
+    public Task<Void> executeUpdateTask(UpdateEntry entry) {
         return null;
     }
 

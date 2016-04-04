@@ -10,6 +10,7 @@ import org.ieatta.R;
 import org.ieatta.activity.LeadImageCollection;
 import org.ieatta.activity.PageViewModel;
 import org.ieatta.activity.history.HistoryEntry;
+import org.ieatta.activity.update.UpdateEntry;
 import org.ieatta.cells.edit.IEAEditTextFieldCell;
 import org.ieatta.cells.edit.IEAEditTextRecipeFieldCell;
 import org.ieatta.cells.model.IEAOrderedPeople;
@@ -115,7 +116,7 @@ public class RecipeEditTask extends FragmentTask {
     }
 
     @Override
-    public Task<Void> executeUpdateTask() {
+    public Task<Void> executeUpdateTask(UpdateEntry entry) {
         return null;
     }
 
