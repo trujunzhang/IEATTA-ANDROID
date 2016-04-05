@@ -147,8 +147,4 @@ public class HistoryEntry implements Parcelable {
     public boolean isNewModel() {
         return isNewModel;
     }
-
-    public void setIsNewModel(boolean isNewModel) {
-        this.isNewModel = isNewModel;
-    }
 }
