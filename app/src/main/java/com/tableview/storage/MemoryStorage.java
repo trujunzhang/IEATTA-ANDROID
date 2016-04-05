@@ -177,8 +177,9 @@ public class MemoryStorage {
 
     public int getRowPosition(int forSectionIndex, int row) {
         int position = 0;
+        int section = this.sections.get(Header_View_Index).numberOfItems() + forSectionIndex;
         List<Integer> keys = new LinkedList<>(this.sections.keySet());
-        for (int i = 0; i < forSectionIndex; i++) {
+        for (int i = 0; i < section; i++) {
             SectionModel sectionModel = this.sections.get(keys.get(i));
             position += sectionModel.numberOfItems();
         }
