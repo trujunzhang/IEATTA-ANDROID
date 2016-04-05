@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<gpx creator="GPS Visualizer http://www.gpsvisualizer.com/" version="1.1" xmlns="http://www.topografix.com/GPX/1/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
+    <wpt lat="40.7389154" lon="-73.9940632">
+        <name>37 W 17th St, New York, NY 10011, USA</name>
+    </wpt>
+    <wpt lat="40.7439809" lon="-73.994745">
+        <name>159 W 23rd St, New York, NY 10011, USA</name>
+    </wpt>
+    <wpt lat="40.7396687" lon="-73.9924795">
+        <name>17 W 19th St, New York, NY 10011, USA</name>
+    </wpt>
+    <wpt lat="40.7387554" lon="-73.993779">
+        <name>31 W 17th St, New York, NY 10011, USA</name>
+    </wpt>
+    <trk>
+        <name>37 W 17th St, New York, NY 10011, USA - 159 W 23rd St, New York, NY 10011, USA</name>
+        <desc>0.5 mi, 0:09</desc>
+        <trkseg>
+            <trkpt lat="40.73874" lon="-73.99419"></trkpt>
+            <trkpt lat="40.73927" lon="-73.99545"></trkpt>
+            <trkpt lat="40.73927" lon="-73.99545"></trkpt>
+            <trkpt lat="40.73985" lon="-73.99502"></trkpt>
+            <trkpt lat="40.74043" lon="-73.9946"></trkpt>
+            <trkpt lat="40.74102" lon="-73.99417"></trkpt>
+            <trkpt lat="40.74161" lon="-73.99374"></trkpt>
+            <trkpt lat="40.74222" lon="-73.99329"></trkpt>
+            <trkpt lat="40.74262" lon="-73.99301"></trkpt>
+            <trkpt lat="40.74268" lon="-73.99296"></trkpt>
+            <trkpt lat="40.74272" lon="-73.99293"></trkpt>
+            <trkpt lat="40.7429" lon="-73.9928"></trkpt>
+            <trkpt lat="40.7429" lon="-73.9928"></trkpt>
+            <trkpt lat="40.74378" lon="-73.99489"></trkpt>
+        </trkseg>
+    </trk>
+    <trk>
+        <name>159 W 23rd St, New York, NY 10011, USA - 17 W 19th St, New York, NY 10011, USA</name>
+        <desc>0.4 mi, 0:09</desc>
+        <trkseg>
+            <trkpt lat="40.74378" lon="-73.99489"></trkpt>
+            <trkpt lat="40.7429" lon="-73.9928"></trkpt>
+            <trkpt lat="40.7429" lon="-73.9928"></trkpt>
+            <trkpt lat="40.74272" lon="-73.99293"></trkpt>
+            <trkpt lat="40.74268" lon="-73.99296"></trkpt>
+            <trkpt lat="40.74262" lon="-73.99301"></trkpt>
+            <trkpt lat="40.74222" lon="-73.99329"></trkpt>
+            <trkpt lat="40.74161" lon="-73.99374"></trkpt>
+            <trkpt lat="40.74102" lon="-73.99417"></trkpt>
+            <trkpt lat="40.74043" lon="-73.9946"></trkpt>
+            <trkpt lat="40.74043" lon="-73.9946"></trkpt>
+            <trkpt lat="40.73957" lon="-73.99255"></trkpt>
+        </trkseg>
+    </trk>
+    <trk>
+        <name>17 W 19th St, New York, NY 10011, USA - 31 W 17th St, New York, NY 10011, USA</name>
+        <desc>0.3 mi, 0:05</desc>
+        <trkseg>
+            <trkpt lat="40.73957" lon="-73.99255"></trkpt>
+            <trkpt lat="40.73908" lon="-73.99139"></trkpt>
+            <trkpt lat="40.73908" lon="-73.99139"></trkpt>
+            <trkpt lat="40.73849" lon="-73.99181"></trkpt>
+            <trkpt lat="40.7379" lon="-73.99223"></trkpt>
+            <trkpt lat="40.7379" lon="-73.99223"></trkpt>
+            <trkpt lat="40.73861" lon="-73.99389"></trkpt>
+        </trkseg>
+    </trk>
+</gpx>
