@@ -391,7 +391,7 @@ public class LeadImagesHandler {
 
     private boolean isMainPage() {
         FragmentTask task = parentFragment.getTask();
-        return task != null && task.isMainPage();
+        return task != null && (task.haveLeadImage()==false);
     }
 
     private PageTitle getTitle() {

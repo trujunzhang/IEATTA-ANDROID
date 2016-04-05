@@ -153,6 +153,10 @@ public abstract class FragmentTask extends MenuBarCallback implements RecyclerOn
         return false;
     }
 
+    public boolean haveLeadImage() {
+        return true;
+    }
+
     protected MenuBarEventHandler getMenuBarEventHandler() {
         PageActivity activity = (PageActivity) this.activity;
         PageFragment pageFragment = activity.getCurPageFragment();

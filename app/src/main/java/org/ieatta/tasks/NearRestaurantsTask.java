@@ -103,4 +103,8 @@ public class NearRestaurantsTask extends FragmentTask {
         this.manager.setAndRegisterSectionItems(IEANearRestaurantsCell.getType(), this.restaurants, NearRestaurantSection.section_restaurants.ordinal());
     }
 
+    @Override
+    public boolean haveLeadImage() {
+        return false;
+    }
 }

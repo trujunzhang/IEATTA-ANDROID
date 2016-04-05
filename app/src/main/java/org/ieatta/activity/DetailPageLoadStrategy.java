@@ -349,6 +349,7 @@ public class DetailPageLoadStrategy implements PageLoadStrategy {
         fragmentTask.manager.reloadTableView();
 
         this.restoreLastScrollY(model.getStagedScrollY());
+
         this.onLeadSectionLoaded(0);
     }
 
