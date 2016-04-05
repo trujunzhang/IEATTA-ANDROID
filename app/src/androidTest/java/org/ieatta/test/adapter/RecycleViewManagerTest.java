@@ -1,5 +1,6 @@
 package org.ieatta.test.adapter;
 
+import android.content.Context;
 import android.test.ActivityUnitTestCase;
 
 import com.tableview.RecycleViewManager;
@@ -7,6 +8,7 @@ import com.tableview.TableViewControllerAdapter;
 import com.tableview.storage.DTTableViewManager;
 import com.tableview.storage.TableViewConfiguration;
 
+import org.ieatta.TestActivity;
 import org.ieatta.test.adapter.cell.FooterView;
 import org.ieatta.test.adapter.cell.HeaderFooterViewModel;
 import org.ieatta.test.adapter.cell.HeaderView;
@@ -15,15 +17,15 @@ import org.junit.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class RecycleViewManagerTest extends ActivityUnitTestCase {
+public class RecycleViewManagerTest extends ActivityUnitTestCase<TestActivity> {
     private RecycleViewManager manager;
     private DTTableViewManager mProvider;
 
     private final HeaderFooterViewModel headerViewModel = new HeaderFooterViewModel("testHeaderView");
     private final HeaderFooterViewModel footerViewModel = new HeaderFooterViewModel("testFooterView");
 
-    public RecycleViewManagerTest(Class activityClass) {
-        super(activityClass);
+    public RecycleViewManagerTest() {
+        super(TestActivity.class);
     }
 
     @Before
@@ -31,7 +33,7 @@ public class RecycleViewManagerTest extends ActivityUnitTestCase {
         manager = new RecycleViewManager();
         mProvider = manager.getTableManager();
 
-        TableViewConfiguration configuration = new TableViewConfiguration(new TableViewConfiguration.Builder(this.getActivity().getApplicationContext()));
+        TableViewConfiguration configuration = new TableViewConfiguration(new TableViewConfiguration.Builder());
         TableViewControllerAdapter adapter = new TableViewControllerAdapter(this.mProvider);
         mProvider.setConfiguration(configuration, adapter);
     }

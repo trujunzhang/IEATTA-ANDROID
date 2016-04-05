@@ -116,7 +116,7 @@ public class IEAApp extends Application {
         CacheImageUtil.sharedInstance.clearCacheDisk();
 
         ParseAPI.setup(this);
-//        initExceptionHandling();
+        initExceptionHandling();
 
         Fresco.initialize(this);
         bus = new Bus();
