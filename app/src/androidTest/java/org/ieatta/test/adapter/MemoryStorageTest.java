@@ -31,7 +31,7 @@ public class MemoryStorageTest {
     }
 
     @Test
-    public void testEventDetail() throws InterruptedException {
+    public void testEmptySections() throws InterruptedException {
         this.memoryStorage.updateTableSections();
         int itemCount = this.memoryStorage.getItemCount();
         assertThat("Fetched item count", (itemCount == 0));
