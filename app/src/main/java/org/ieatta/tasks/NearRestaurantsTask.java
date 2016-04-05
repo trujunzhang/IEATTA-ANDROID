@@ -83,7 +83,8 @@ public class NearRestaurantsTask extends FragmentTask {
             @Override
             public Void then(Task<RealmResults<DBRestaurant>> task) throws Exception {
                 restaurants = task.getResult();
-                manager.updateSectionItems(restaurants, NearRestaurantSection.section_restaurants.ordinal());
+                manager.setSectionItems(restaurants, NearRestaurantSection.section_restaurants.ordinal());
+                manager.reloadTableView();
                 return null;
             }
         }, Task.UI_THREAD_EXECUTOR);
