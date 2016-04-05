@@ -119,6 +119,6 @@ public class MemoryStorageTest {
         //How
         int rowPosition = this.memoryStorage.getRowPosition(forSectionIndex, 0);
         //Then
-        assertThat("Fetched item count", (rowPosition == 1));
+        assertThat("Get row position", (rowPosition == 1));
     }
 }
