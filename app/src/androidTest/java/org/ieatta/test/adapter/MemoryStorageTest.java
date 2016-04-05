@@ -49,12 +49,25 @@ public class MemoryStorageTest {
     }
 
     @Test
-    public void testPositionStart() throws InterruptedException {
+    /**
+     * -----------------------------------
+     *   headerView
+     *
+     * -----------------------------------
+     *   sectionHeader
+     * ###################################
+     *   items(3)
+     * -----------------------------------
+     *
+     *   footerView
+     * -----------------------------------
+     */
+    public void testSectionsCount() throws InterruptedException {
         //When
         this.memoryStorage.setHeaderItem(headerViewModel, HeaderView.getType());
         this.memoryStorage.setFooterItem(footerViewModel, FooterView.getType());
 
-        int forSectionIndex = 0;
+        final int forSectionIndex = 0;
         this.memoryStorage.setSectionHeaderModel(headerViewModel, forSectionIndex, HeaderView.getType());
         List<Object> items= new LinkedList<Object>(){
             {
@@ -70,5 +83,42 @@ public class MemoryStorageTest {
         int itemCount = this.memoryStorage.getItemCount();
         //Then
         assertThat("Fetched item count", (itemCount == 6));
+    }
+
+    @Test
+    /**
+     * -----------------------------------
+     *   headerView
+     *
+     * -----------------------------------
+     *   sectionHeader
+     * ###################################
+     *   items(3)
+     * -----------------------------------
+     *
+     *   footerView
+     * -----------------------------------
+     */
+    public void testPositionStart() throws InterruptedException {
+        //When
+        this.memoryStorage.setHeaderItem(headerViewModel, HeaderView.getType());
+        this.memoryStorage.setFooterItem(footerViewModel, FooterView.getType());
+
+        final int forSectionIndex = 0;
+        this.memoryStorage.setSectionHeaderModel(headerViewModel, forSectionIndex, HeaderView.getType());
+        List<Object> items= new LinkedList<Object>(){
+            {
+                add(new ItemViewModel("first"));
+                add(new ItemViewModel("second"));
+                add(new ItemViewModel("third"));
+            }
+        };
+        this.memoryStorage.setItems(items, forSectionIndex);
+
+        this.memoryStorage.updateTableSections();
+        //How
+        int rowPosition = this.memoryStorage.getRowPosition(forSectionIndex, 0);
+        //Then
+        assertThat("Fetched item count", (rowPosition == 1));
     }
 }
