@@ -63,7 +63,7 @@ public class MemoryStorageTest {
                 add(new ItemViewModel("third"));
             }
         };
-        this.memoryStorage.addItems(items, forSectionIndex);
+        this.memoryStorage.setItems(items, forSectionIndex);
 
         this.memoryStorage.updateTableSections();
         //How

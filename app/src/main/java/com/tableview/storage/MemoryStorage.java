@@ -30,13 +30,6 @@ public class MemoryStorage {
         this.sections.put(Footer_View_Index, new SectionModel());
     }
 
-    /// Add items to section with `toSection` number.
-    /// - Parameter items: items to add
-    /// - Parameter toSection: index of section to add items
-    public void addItems(List<Object> items, int toSection) {
-        // this.sections.put(new Integer(toSection), new SectionModel(items));
-    }
-
     public void updateTableSections() {
         this.tableViewUtil.generateItems(this.sections);
     }
