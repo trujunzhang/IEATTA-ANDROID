@@ -19,6 +19,7 @@ import org.ieatta.cells.model.SectionTitleCellModel;
 import org.ieatta.database.models.DBEvent;
 import org.ieatta.database.models.DBPeopleInEvent;
 import org.ieatta.database.models.DBPhoto;
+import org.ieatta.database.models.DBRecipe;
 import org.ieatta.database.models.DBRestaurant;
 import org.ieatta.database.models.DBTeam;
 import org.ieatta.database.provide.PhotoUsedType;
@@ -28,9 +29,11 @@ import org.ieatta.database.query.ReviewQuery;
 import org.ieatta.database.realm.RealmModelReader;
 import org.ieatta.parse.AppConstant;
 import org.ieatta.provide.IEAEditKey;
+import org.ieatta.server.cache.ThumbnailImageUtil;
 import org.ieatta.tasks.DBConvert;
 import org.ieatta.tasks.FragmentTask;
 
+import java.io.File;
 import java.util.List;
 
 import bolts.Continuation;
@@ -48,16 +51,12 @@ public class RecipeEditTask extends FragmentTask {
         super(entry, activity, model);
     }
 
-
     enum EditRecipeSection {
         sectionInformation,//= 0
-        sectionPhotos,//= 1
+        section_gallery_thumbnail,//= 1
     }
 
-    public DBRestaurant restaurant;
-    public DBEvent event;
-    public List<IEAOrderedPeople> orderedPeopleList;
-    private LeadImageCollection leadImageCollection; // for restaurants
+    public DBRecipe recipe;
 
     /**
      * Execute Task for Restaurant edit.
@@ -66,9 +65,24 @@ public class RecipeEditTask extends FragmentTask {
      */
     @Override
     public Task<Void> executeTask() {
-        final String eventUUID = this.entry.getHPara();
+        final String recipeUUID = this.entry.getHPara();
+        if (this.entry.isNewModel() == true)
+            return Task.forResult(null);
 
-        return null;
+        return new RealmModelReader<DBRecipe>(DBRecipe.class).getFirstObject(LocalDatabaseQuery.get(recipeUUID), false, realmList).onSuccessTask(new Continuation<DBRecipe, Task<List<File>>>() {
+            @Override
+            public Task<List<File>> then(Task<DBRecipe> task) throws Exception {
+                recipe = task.getResult();
+                return ThumbnailImageUtil.sharedInstance.getImagesListTask(recipeUUID);
+            }
+        }).onSuccessTask(new Continuation<List<File>, Task<Void>>() {
+            @Override
+            public Task<Void> then(Task<List<File>> task) throws Exception {
+                thumbnailGalleryCollection = DBConvert.toGalleryCollection(task.getResult());
+                return null;
+            }
+        });
+
     }
 
     @Override
