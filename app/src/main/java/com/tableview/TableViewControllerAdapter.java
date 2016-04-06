@@ -16,8 +16,7 @@ import org.ieatta.R;
 import org.ieatta.analytics.TableViewControllerAdapterFunnel;
 
 public class TableViewControllerAdapter
-        extends RecyclerView.Adapter<IEAViewHolder>
-         {
+        extends RecyclerView.Adapter<IEAViewHolder> {
     private DTTableViewManager mProvider;
 
     public TableViewControllerAdapter(DTTableViewManager mProvider) {
