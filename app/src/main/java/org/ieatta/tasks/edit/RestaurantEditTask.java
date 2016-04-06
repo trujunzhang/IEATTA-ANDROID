@@ -18,11 +18,16 @@ import org.ieatta.cells.model.IEAHeaderViewModel;
 import org.ieatta.cells.model.IEAOrderedPeople;
 import org.ieatta.cells.model.SectionTitleCellModel;
 import org.ieatta.database.models.DBEvent;
+import org.ieatta.database.models.DBPhoto;
 import org.ieatta.database.models.DBRestaurant;
+import org.ieatta.database.provide.PhotoUsedType;
+import org.ieatta.database.query.LocalDatabaseQuery;
+import org.ieatta.database.realm.RealmModelReader;
 import org.ieatta.provide.IEAEditKey;
 import org.ieatta.server.cache.ThumbnailImageUtil;
 import org.ieatta.tasks.DBConvert;
 import org.ieatta.tasks.FragmentTask;
+import org.ieatta.tasks.RestaurantDetailTask;
 
 import java.io.File;
 import java.util.LinkedList;
@@ -58,11 +63,16 @@ public class RestaurantEditTask extends FragmentTask {
     @Override
     public Task<Void> executeTask() {
         final String restaurantUUID = this.entry.getHPara();
-        boolean newModel = this.entry.isNewModel();
-        if(newModel == true)
+        if(this.entry.isNewModel() == true)
             return Task.forResult(null);
 
-        return ThumbnailImageUtil.sharedInstance.getImagesListTask(restaurantUUID).onSuccessTask(new Continuation<List<File>, Task<Void>>() {
+        return new RealmModelReader<DBRestaurant>(DBRestaurant.class).getFirstObject(LocalDatabaseQuery.get(restaurantUUID), false, realmList).onSuccessTask(new Continuation<DBRestaurant, Task<List<File>>>() {
+            @Override
+            public Task<List<File>> then(Task<DBRestaurant> task) throws Exception {
+                restaurant = task.getResult();
+               return ThumbnailImageUtil.sharedInstance.getImagesListTask(restaurantUUID);
+            }
+        }).onSuccessTask(new Continuation<List<File>, Task<Void>>() {
             @Override
             public Task<Void> then(Task<List<File>> task) throws Exception {
                 RestaurantEditTask.this.thumbnailGalleryCollection = DBConvert.toGalleryCollection(task.getResult());

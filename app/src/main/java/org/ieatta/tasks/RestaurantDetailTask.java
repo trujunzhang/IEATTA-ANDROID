@@ -87,32 +87,32 @@ public class RestaurantDetailTask extends FragmentTask {
         return new RealmModelReader<DBRestaurant>(DBRestaurant.class).getFirstObject(LocalDatabaseQuery.get(restaurantUUID), false, realmList).onSuccessTask(new Continuation<DBRestaurant, Task<RealmResults<DBPhoto>>>() {
             @Override
             public Task<RealmResults<DBPhoto>> then(Task<DBRestaurant> task) throws Exception {
-                RestaurantDetailTask.this.restaurant = task.getResult();
+                restaurant = task.getResult();
                 return LocalDatabaseQuery.queryPhotosByModel(restaurantUUID, PhotoUsedType.PU_Restaurant.getType(), realmList);
             }
         }).onSuccessTask(new Continuation<RealmResults<DBPhoto>, Task<List<File>>>() {
             @Override
             public Task<List<File>> then(Task<RealmResults<DBPhoto>> task) throws Exception {
-                RestaurantDetailTask.this.leadImageCollection = DBConvert.toLeadImageCollection(task.getResult());
+                leadImageCollection = DBConvert.toLeadImageCollection(task.getResult());
                 return ThumbnailImageUtil.sharedInstance.getImagesListTask(restaurantUUID);
             }
         }).onSuccessTask(new Continuation<List<File>, Task<RealmResults<DBEvent>>>() {
             @Override
             public Task<RealmResults<DBEvent>> then(Task<List<File>> task) throws Exception {
-                RestaurantDetailTask.this.thumbnailGalleryCollection = DBConvert.toGalleryCollection(task.getResult());
+                thumbnailGalleryCollection = DBConvert.toGalleryCollection(task.getResult());
                 return new RealmModelReader<DBEvent>(DBEvent.class).fetchResults(
                         new DBBuilder().whereEqualTo(AppConstant.kPAPFieldLocalRestaurantKey, restaurantUUID), false, realmList);
             }
         }).onSuccessTask(new Continuation<RealmResults<DBEvent>, Task<List<IEAReviewsCellModel>>>() {
             @Override
             public Task<List<IEAReviewsCellModel>> then(Task<RealmResults<DBEvent>> task) throws Exception {
-                RestaurantDetailTask.this.events = task.getResult();
+                events = task.getResult();
                 return reviewQuery.queryReview(restaurantUUID, ReviewType.Review_Restaurant, AppConstant.limit_reviews);
             }
         }).onSuccess(new Continuation<List<IEAReviewsCellModel>, Void>() {
             @Override
             public Void then(Task<List<IEAReviewsCellModel>> task) throws Exception {
-                RestaurantDetailTask.this.reviewsCellModelList = task.getResult();
+                reviewsCellModelList = task.getResult();
                 return null;
             }
         });
@@ -171,7 +171,7 @@ public class RestaurantDetailTask extends FragmentTask {
      */
     public void onEditClick() {
         ((PageActivity) activity).loadPage(
-                new HistoryEntry(MainSegueIdentifier.editRestaurantSegueIdentifier, restaurant.getUUID(),true));
+                new HistoryEntry(MainSegueIdentifier.editRestaurantSegueIdentifier, restaurant.getUUID(),false));
     }
 
     @Override
