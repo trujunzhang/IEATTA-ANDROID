@@ -88,9 +88,6 @@ public class RestaurantEditTask extends FragmentTask {
         // Add rows for sections.
         this.manager.appendSectionTitleCell(new SectionTitleCellModel(IEAEditKey.Section_Title, R.string.Restaurant_Information), EditRestaurantSection.sectionInformation.ordinal());
         this.manager.setRegisterCellClass(IEAEditTextFieldCell.getType(), EditRestaurantSection.sectionInformation.ordinal());
-
-//        if (this.entry.isNewModel() == false)
-//            this.manager.showGoogleMapAddress(EditRestaurantSection.sectionGoogleMapAddress.ordinal());
     }
 
     @Override
