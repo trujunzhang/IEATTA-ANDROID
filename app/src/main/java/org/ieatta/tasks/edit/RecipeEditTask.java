@@ -86,4 +86,9 @@ public class RecipeEditTask extends FragmentTask {
     public void postUI() {
 
     }
+
+    @Override
+    public boolean haveLeadImage() {
+        return false;
+    }
 }

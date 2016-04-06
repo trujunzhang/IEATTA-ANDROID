@@ -116,4 +116,10 @@ public class EventEditTask extends FragmentTask {
 
         model.setPage(new Page());
     }
+
+
+    @Override
+    public boolean haveLeadImage() {
+        return false;
+    }
 }
