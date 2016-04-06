@@ -89,7 +89,7 @@ public class RestaurantEditTask extends FragmentTask {
         this.manager.setFooterItem(new IEAFooterViewModel(), IEAFooterView.getType());
 
         List<EditCellModel> editCellModelList = new LinkedList<EditCellModel>(){{
-            new EditCellModel(IEAEditKey.rest_name, restaurant.getDisplayName(), R.string.Restaurant_Name_info);
+            add(new EditCellModel(IEAEditKey.rest_name, restaurant.getDisplayName(), R.string.Restaurant_Name_info));
         }};
         this.manager.setSectionItems(editCellModelList, EditRestaurantSection.sectionInformation.ordinal());
 
