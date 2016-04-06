@@ -8,11 +8,17 @@ import com.tableview.adapter.NSIndexPath;
 
 import org.ieatta.R;
 import org.ieatta.activity.LeadImageCollection;
+import org.ieatta.activity.Page;
 import org.ieatta.activity.PageViewModel;
 import org.ieatta.activity.history.HistoryEntry;
 import org.ieatta.activity.update.UpdateEntry;
 import org.ieatta.cells.edit.IEADatePickerCell;
 import org.ieatta.cells.edit.IEAEditTextFieldCell;
+import org.ieatta.cells.headerfooterview.IEAFooterView;
+import org.ieatta.cells.headerfooterview.IEAHeaderView;
+import org.ieatta.cells.model.EditCellModel;
+import org.ieatta.cells.model.IEAFooterViewModel;
+import org.ieatta.cells.model.IEAHeaderViewModel;
 import org.ieatta.cells.model.IEAOrderedPeople;
 import org.ieatta.cells.model.IEAReviewsCellModel;
 import org.ieatta.cells.model.SectionTitleCellModel;
@@ -28,9 +34,12 @@ import org.ieatta.database.query.ReviewQuery;
 import org.ieatta.database.realm.RealmModelReader;
 import org.ieatta.parse.AppConstant;
 import org.ieatta.provide.IEAEditKey;
+import org.ieatta.server.cache.ThumbnailImageUtil;
 import org.ieatta.tasks.DBConvert;
 import org.ieatta.tasks.FragmentTask;
 
+import java.io.File;
+import java.util.LinkedList;
 import java.util.List;
 
 import bolts.Continuation;
@@ -50,23 +59,36 @@ public class EventEditTask extends FragmentTask {
 
     enum EditEventSection {
         sectionInformation,//= 0
-        sectionPhotos,//= 1
+        section_gallery_thumbnail,//= 1
         sectionDurationDate,//= 2
     }
 
-    public DBRestaurant restaurant;
-    public DBEvent event;
-    public List<IEAOrderedPeople> orderedPeopleList;
-    private LeadImageCollection leadImageCollection; // for restaurants
+    public DBEvent event = new DBEvent();
 
     /**
-     * Execute Task for Restaurant edit.
+     * Execute Task for Event edit.
      *
      * @return
      */
     @Override
     public Task<Void> executeTask() {
         final String eventUUID = this.entry.getHPara();
+        if (this.entry.isNewModel() == true)
+            return Task.forResult(null);
+
+        new RealmModelReader<DBEvent>(DBEvent.class).getFirstObject(LocalDatabaseQuery.get(eventUUID), false, this.realmList).onSuccessTask(new Continuation<DBEvent, Task<List<File>>>() {
+            @Override
+            public Task<List<File>> then(Task<DBEvent> task) throws Exception {
+                event = task.getResult();
+                return ThumbnailImageUtil.sharedInstance.getImagesListTask(restaurantUUID);
+            }
+        }).onSuccessTask(new Continuation<List<File>, Task<Void>>() {
+            @Override
+            public Task<Void> then(Task<List<File>> task) throws Exception {
+                thumbnailGalleryCollection = DBConvert.toGalleryCollection(task.getResult());
+                return null;
+            }
+        });
 
         return null;
     }
@@ -75,18 +97,23 @@ public class EventEditTask extends FragmentTask {
     public void prepareUI() {
         super.prepareUI();
 
-        this.manager.setRegisterCellClass(IEAEditTextFieldCell.getType(), EditEventSection.sectionInformation.ordinal());
-//        this.manager.setRegisterCellClassInSpecialRow(IEAEditWaiterTextFieldCell.getType(), EditEventSection.sectionInformation.ordinal(), EditEventRows.RowWaiter.getRow());
-
-        this.manager.setRegisterCellClass(IEADatePickerCell.getType(), EditEventSection.sectionDurationDate.ordinal());
-
         // Add rows for sections.
         this.manager.appendSectionTitleCell(new SectionTitleCellModel(IEAEditKey.Section_Title, R.string.Event_Information), EditEventSection.sectionInformation.ordinal());
-        this.manager.appendSectionTitleCell(new SectionTitleCellModel(IEAEditKey.Section_Title, R.string.Date_of_Event), EditEventSection.sectionDurationDate.ordinal());
+        this.manager.setRegisterCellClass(IEAEditTextFieldCell.getType(), EditEventSection.sectionInformation.ordinal());
     }
 
     @Override
     public void postUI() {
+        this.manager.setHeaderItem(new IEAHeaderViewModel(this.model.getActionbarHeight()), IEAHeaderView.getType());
+        this.manager.setFooterItem(new IEAFooterViewModel(), IEAFooterView.getType());
 
+        List<EditCellModel> editCellModelList = new LinkedList<EditCellModel>() {{
+            add(new EditCellModel(IEAEditKey.event_name, event.getDisplayName(), R.string.Event_Name_info));
+        }};
+        this.manager.setSectionItems(editCellModelList, EditEventSection.sectionInformation.ordinal());
+
+        postPhotosGallery(EditEventSection.section_gallery_thumbnail.ordinal());
+
+        model.setPage(new Page());
     }
 }

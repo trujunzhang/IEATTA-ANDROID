@@ -75,7 +75,7 @@ public class RestaurantEditTask extends FragmentTask {
         }).onSuccessTask(new Continuation<List<File>, Task<Void>>() {
             @Override
             public Task<Void> then(Task<List<File>> task) throws Exception {
-                RestaurantEditTask.this.thumbnailGalleryCollection = DBConvert.toGalleryCollection(task.getResult());
+                thumbnailGalleryCollection = DBConvert.toGalleryCollection(task.getResult());
                 return null;
             }
         });
