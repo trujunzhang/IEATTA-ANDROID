@@ -113,6 +113,9 @@ public abstract class BaseDiskCache implements DiskCache {
 
     @Override
     public List<File> getList(String imageDir) {
+        if(imageDir== null || imageDir.isEmpty() == true)
+            return new LinkedList<>();
+        
         File imageFolder = new File(cacheDir, imageDir);
         if (imageFolder.exists() == true) {
             final File[] files = imageFolder.listFiles();
