@@ -68,11 +68,6 @@ public class RestaurantEditTask extends FragmentTask {
     }
 
     @Override
-    public Task<Void> executeUpdateTask(UpdateEntry entry) {
-        return null;
-    }
-
-    @Override
     public void prepareUI() {
         super.prepareUI();
 
