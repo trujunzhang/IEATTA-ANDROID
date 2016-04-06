@@ -25,6 +25,7 @@ import org.ieatta.tasks.DBConvert;
 import org.ieatta.tasks.FragmentTask;
 
 import java.io.File;
+import java.util.LinkedList;
 import java.util.List;
 
 import bolts.Continuation;
@@ -47,7 +48,7 @@ public class RestaurantEditTask extends FragmentTask {
         sectionGoogleMapAddress,//= 2
     }
 
-    public DBRestaurant restaurant;
+    public DBRestaurant restaurant = new DBRestaurant();
 
     /**
      * Execute Task for Restaurant edit.
@@ -57,6 +58,9 @@ public class RestaurantEditTask extends FragmentTask {
     @Override
     public Task<Void> executeTask() {
         final String restaurantUUID = this.entry.getHPara();
+        boolean newModel = this.entry.isNewModel();
+        if(newModel == true)
+            return Task.forResult(null);
 
         return ThumbnailImageUtil.sharedInstance.getImagesListTask(restaurantUUID).onSuccessTask(new Continuation<List<File>, Task<Void>>() {
             @Override
@@ -84,9 +88,10 @@ public class RestaurantEditTask extends FragmentTask {
         this.manager.setHeaderItem(new IEAHeaderViewModel(this.model.getActionbarHeight()), IEAHeaderView.getType());
         this.manager.setFooterItem(new IEAFooterViewModel(), IEAFooterView.getType());
 
-        EditCellModel cellModel = new EditCellModel(IEAEditKey.rest_name, "wh", R.string.Restaurant_Name_info);
-        this.editCellModelList.add(cellModel);
-        this.manager.setSectionItems(this.editCellModelList, EditRestaurantSection.sectionInformation.ordinal());
+        List<EditCellModel> editCellModelList = new LinkedList<EditCellModel>(){{
+            new EditCellModel(IEAEditKey.rest_name, restaurant.getDisplayName(), R.string.Restaurant_Name_info);
+        }};
+        this.manager.setSectionItems(editCellModelList, EditRestaurantSection.sectionInformation.ordinal());
 
         postPhotosGallery(EditRestaurantSection.section_gallery_thumbnail.ordinal());
 

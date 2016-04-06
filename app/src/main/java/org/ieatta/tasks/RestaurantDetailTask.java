@@ -167,11 +167,11 @@ public class RestaurantDetailTask extends FragmentTask {
 
     @Override
     /**
-     * Edit for the detailed restaurant.
+     * Edit the detailed restaurant.
      */
     public void onEditClick() {
         ((PageActivity) activity).loadPage(
-                new HistoryEntry(MainSegueIdentifier.editRestaurantSegueIdentifier, restaurant.getUUID(),false));
+                new HistoryEntry(MainSegueIdentifier.editRestaurantSegueIdentifier, restaurant.getUUID(),true));
     }
 
     @Override

@@ -68,10 +68,6 @@ public abstract class FragmentTask extends MenuBarCallback implements RecyclerOn
     protected static List<Realm> realmList = new LinkedList<>();
     protected ReviewQuery reviewQuery = new ReviewQuery();
 
-    // For Editing model.
-    protected List<EditCellModel> editCellModelList = new LinkedList<>();
-    protected Object editedModel;
-
     public void onItemClick(View view, NSIndexPath indexPath, Object model, int position, boolean isLongClick) {
 
     }
