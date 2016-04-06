@@ -61,7 +61,7 @@ public abstract class FragmentTask extends MenuBarCallback implements RecyclerOn
     protected Activity activity;
 
     // For showing photo's thumbnail gallery.
-    public GalleryCollection thumbnailGalleryCollection;
+    public GalleryCollection thumbnailGalleryCollection = new GalleryCollection();
 
     // For showing reviews list.
     public List<IEAReviewsCellModel> reviewsCellModelList;
