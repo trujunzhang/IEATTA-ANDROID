@@ -63,14 +63,14 @@ public class RestaurantEditTask extends FragmentTask {
     @Override
     public Task<Void> executeTask() {
         final String restaurantUUID = this.entry.getHPara();
-        if(this.entry.isNewModel() == true)
+        if (this.entry.isNewModel() == true)
             return Task.forResult(null);
 
         return new RealmModelReader<DBRestaurant>(DBRestaurant.class).getFirstObject(LocalDatabaseQuery.get(restaurantUUID), false, realmList).onSuccessTask(new Continuation<DBRestaurant, Task<List<File>>>() {
             @Override
             public Task<List<File>> then(Task<DBRestaurant> task) throws Exception {
                 restaurant = task.getResult();
-               return ThumbnailImageUtil.sharedInstance.getImagesListTask(restaurantUUID);
+                return ThumbnailImageUtil.sharedInstance.getImagesListTask(restaurantUUID);
             }
         }).onSuccessTask(new Continuation<List<File>, Task<Void>>() {
             @Override
@@ -98,7 +98,7 @@ public class RestaurantEditTask extends FragmentTask {
         this.manager.setHeaderItem(new IEAHeaderViewModel(this.model.getActionbarHeight()), IEAHeaderView.getType());
         this.manager.setFooterItem(new IEAFooterViewModel(), IEAFooterView.getType());
 
-        List<EditCellModel> editCellModelList = new LinkedList<EditCellModel>(){{
+        List<EditCellModel> editCellModelList = new LinkedList<EditCellModel>() {{
             add(new EditCellModel(IEAEditKey.rest_name, restaurant.getDisplayName(), R.string.Restaurant_Name_info));
         }};
         this.manager.setSectionItems(editCellModelList, EditRestaurantSection.sectionInformation.ordinal());
