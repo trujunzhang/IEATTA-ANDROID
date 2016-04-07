@@ -123,7 +123,7 @@ public class EventEditTask extends FragmentTask {
             add(new DatePickerCellModel(IEAEditKey.event_starttime, event.getStartDate(), R.string.Start_Time));
             add(new DatePickerCellModel(IEAEditKey.event_endtime, event.getEndDate(), R.string.End_Time));
         }};
-        this.manager.setSectionItems(dateSectionlList, EditEventSection.sectionInformation.ordinal());
+        this.manager.setSectionItems(dateSectionlList, EditEventSection.sectionDurationDate.ordinal());
 
         postPhotosGallery(EditEventSection.section_gallery_thumbnail.ordinal());
 
