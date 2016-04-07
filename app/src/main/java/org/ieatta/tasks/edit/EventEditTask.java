@@ -10,6 +10,7 @@ import org.ieatta.R;
 import org.ieatta.activity.LeadImageCollection;
 import org.ieatta.activity.Page;
 import org.ieatta.activity.PageViewModel;
+import org.ieatta.activity.gallery.GalleryCollection;
 import org.ieatta.activity.history.HistoryEntry;
 import org.ieatta.activity.update.UpdateEntry;
 import org.ieatta.cells.edit.IEADatePickerCell;
@@ -76,16 +77,16 @@ public class EventEditTask extends FragmentTask {
         if (this.entry.isNewModel() == true)
             return Task.forResult(null);
 
-        new RealmModelReader<DBEvent>(DBEvent.class).getFirstObject(LocalDatabaseQuery.get(eventUUID), false, this.realmList).onSuccessTask(new Continuation<DBEvent, Task<List<File>>>() {
+        new RealmModelReader<DBEvent>(DBEvent.class).getFirstObject(LocalDatabaseQuery.get(eventUUID), false, this.realmList).onSuccessTask(new Continuation<DBEvent, Task<RealmResults<DBPhoto>>>() {
             @Override
-            public Task<List<File>> then(Task<DBEvent> task) throws Exception {
+            public Task<RealmResults<DBPhoto>> then(Task<DBEvent> task) throws Exception {
                 event = task.getResult();
-                return ThumbnailImageUtil.sharedInstance.getImagesListTask(restaurantUUID);
+                return LocalDatabaseQuery.queryPhotosByModel(recipeUUID, PhotoUsedType.PU_Waiter.getType(), realmList);
             }
-        }).onSuccessTask(new Continuation<List<File>, Task<Void>>() {
+        }).onSuccessTask(new Continuation<RealmResults<DBPhoto>, Task<Void>>() {
             @Override
-            public Task<Void> then(Task<List<File>> task) throws Exception {
-                thumbnailGalleryCollection = DBConvert.toGalleryCollection(task.getResult());
+            public Task<Void> then(Task<RealmResults<DBPhoto>> task) throws Exception {
+                thumbnailGalleryCollection = new GalleryCollection(DBConvert.toGalleryItem(task.getResult()));
                 return null;
             }
         });
