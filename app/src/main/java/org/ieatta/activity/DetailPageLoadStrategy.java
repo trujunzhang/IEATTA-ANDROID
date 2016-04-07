@@ -339,7 +339,15 @@ public class DetailPageLoadStrategy implements PageLoadStrategy {
                 DetailPageLoadStrategy.this.postLoadPage();
                 return null;
             }
-        }, Task.UI_THREAD_EXECUTOR);
+        }, Task.UI_THREAD_EXECUTOR).continueWith(new Continuation<Void, Void>() {
+            @Override
+            public Void then(Task<Void> task) throws Exception {
+                if(task.getError() != null){
+                    Exception error = task.getError();
+                }
+                return null;
+            }
+        },Task.UI_THREAD_EXECUTOR);
     }
 
     public void postLoadPage() {

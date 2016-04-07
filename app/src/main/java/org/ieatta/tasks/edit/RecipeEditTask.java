@@ -9,6 +9,7 @@ import com.tableview.adapter.NSIndexPath;
 import org.ieatta.R;
 import org.ieatta.activity.LeadImageCollection;
 import org.ieatta.activity.PageViewModel;
+import org.ieatta.activity.gallery.GalleryCollection;
 import org.ieatta.activity.history.HistoryEntry;
 import org.ieatta.activity.update.UpdateEntry;
 import org.ieatta.cells.edit.IEAEditTextFieldCell;
@@ -69,16 +70,16 @@ public class RecipeEditTask extends FragmentTask {
         if (this.entry.isNewModel() == true)
             return Task.forResult(null);
 
-        return new RealmModelReader<DBRecipe>(DBRecipe.class).getFirstObject(LocalDatabaseQuery.get(recipeUUID), false, realmList).onSuccessTask(new Continuation<DBRecipe, Task<List<File>>>() {
+        return new RealmModelReader<DBRecipe>(DBRecipe.class).getFirstObject(LocalDatabaseQuery.get(recipeUUID), false, realmList).onSuccessTask(new Continuation<DBRecipe, Task<RealmResults<DBPhoto>>>() {
             @Override
-            public Task<List<File>> then(Task<DBRecipe> task) throws Exception {
+            public Task<RealmResults<DBPhoto>> then(Task<DBRecipe> task) throws Exception {
                 recipe = task.getResult();
-                return ThumbnailImageUtil.sharedInstance.getImagesListTask(recipeUUID);
+                return LocalDatabaseQuery.queryPhotosByModel(recipeUUID, PhotoUsedType.PU_Waiter.getType(), realmList);
             }
-        }).onSuccessTask(new Continuation<List<File>, Task<Void>>() {
+        }).onSuccessTask(new Continuation<RealmResults<DBPhoto>, Task<Void>>() {
             @Override
-            public Task<Void> then(Task<List<File>> task) throws Exception {
-                thumbnailGalleryCollection = DBConvert.toGalleryCollection(task.getResult());
+            public Task<Void> then(Task<RealmResults<DBPhoto>> task) throws Exception {
+                thumbnailGalleryCollection = new GalleryCollection(DBConvert.toGalleryItem(task.getResult()));
                 return null;
             }
         });
