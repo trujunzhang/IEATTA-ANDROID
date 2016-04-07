@@ -77,7 +77,7 @@ public class EventEditTask extends FragmentTask {
         if (this.entry.isNewModel() == true)
             return Task.forResult(null);
 
-        new RealmModelReader<DBEvent>(DBEvent.class).getFirstObject(LocalDatabaseQuery.get(eventUUID), false, this.realmList).onSuccessTask(new Continuation<DBEvent, Task<RealmResults<DBPhoto>>>() {
+        return new RealmModelReader<DBEvent>(DBEvent.class).getFirstObject(LocalDatabaseQuery.get(eventUUID), false, this.realmList).onSuccessTask(new Continuation<DBEvent, Task<RealmResults<DBPhoto>>>() {
             @Override
             public Task<RealmResults<DBPhoto>> then(Task<DBEvent> task) throws Exception {
                 event = task.getResult();
@@ -90,8 +90,6 @@ public class EventEditTask extends FragmentTask {
                 return null;
             }
         });
-
-        return null;
     }
 
     @Override
