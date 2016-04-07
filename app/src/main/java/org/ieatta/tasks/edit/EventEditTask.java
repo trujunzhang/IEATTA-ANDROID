@@ -18,6 +18,7 @@ import org.ieatta.cells.edit.IEAEditTextFieldCell;
 import org.ieatta.cells.edit.IEAEditWaiterTextFieldCell;
 import org.ieatta.cells.headerfooterview.IEAFooterView;
 import org.ieatta.cells.headerfooterview.IEAHeaderView;
+import org.ieatta.cells.model.DatePickerCellModel;
 import org.ieatta.cells.model.EditCellModel;
 import org.ieatta.cells.model.EditWaiterCellModel;
 import org.ieatta.cells.model.IEAFooterViewModel;
@@ -102,7 +103,9 @@ public class EventEditTask extends FragmentTask {
         this.manager.appendSectionTitleCell(new SectionTitleCellModel(IEAEditKey.Section_Title, R.string.Event_Information), EditEventSection.sectionInformation.ordinal());
         this.manager.appendSectionTitleCell(new SectionTitleCellModel(IEAEditKey.Section_Title, R.string.Date_of_Event), EditEventSection.sectionDurationDate.ordinal());
         this.manager.setRegisterCellClass(IEAEditTextFieldCell.getType(), EditEventSection.sectionInformation.ordinal());
-        this.manager.setRegisterCellClassInSpecialRow(IEAEditWaiterTextFieldCell.getType(), EditEventSection.sectionInformation.ordinal(),1);
+        this.manager.setRegisterCellClassInSpecialRow(IEAEditWaiterTextFieldCell.getType(), EditEventSection.sectionInformation.ordinal(), 1);
+
+        this.manager.setRegisterCellClass(IEADatePickerCell.getType(), EditEventSection.sectionDurationDate.ordinal());
     }
 
     @Override
@@ -110,11 +113,17 @@ public class EventEditTask extends FragmentTask {
         this.manager.setHeaderItem(new IEAHeaderViewModel(this.model.getActionbarHeight()), IEAHeaderView.getType());
         this.manager.setFooterItem(new IEAFooterViewModel(), IEAFooterView.getType());
 
-        List<EditCellModel> editCellModelList = new LinkedList<EditCellModel>() {{
+        List<EditCellModel> eventInfoSectionList = new LinkedList<EditCellModel>() {{
             add(new EditCellModel(IEAEditKey.event_name, event.getDisplayName(), R.string.Event_Name_info));
             add(new EditWaiterCellModel(IEAEditKey.event_nameofserver, event.getWaiter(), R.string.Name_of_Server));
         }};
-        this.manager.setSectionItems(editCellModelList, EditEventSection.sectionInformation.ordinal());
+        this.manager.setSectionItems(eventInfoSectionList, EditEventSection.sectionInformation.ordinal());
+
+        List<DatePickerCellModel> dateSectionlList = new LinkedList<DatePickerCellModel>() {{
+            add(new DatePickerCellModel(IEAEditKey.event_starttime, event.getStartDate(), R.string.Start_Time));
+            add(new DatePickerCellModel(IEAEditKey.event_endtime, event.getEndDate(), R.string.End_Time));
+        }};
+        this.manager.setSectionItems(dateSectionlList, EditEventSection.sectionInformation.ordinal());
 
         postPhotosGallery(EditEventSection.section_gallery_thumbnail.ordinal());
 

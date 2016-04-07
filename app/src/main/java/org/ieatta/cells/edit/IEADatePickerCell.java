@@ -69,15 +69,15 @@ public class IEADatePickerCell extends IEAViewHolder {
 
     @Override
     public void render(Object value) {
-      this.model = (DatePickerCellModel) value;
+        this.model = (DatePickerCellModel) value;
 
         if (this.model.editKey == IEAEditKey.event_starttime) {
-          this.titleTextView.setText(R.string.Start_Time);
+            this.titleTextView.setText(R.string.Start_Time);
         } else {
-          this.titleTextView.setText(R.string.End_Time);
+            this.titleTextView.setText(R.string.End_Time);
         }
 
-      this.reloadTableRow(this.model.date);
+        this.reloadTableRow(this.model.date);
     }
 
     private SlideDateTimeListener listener = new SlideDateTimeListener() {
@@ -94,9 +94,10 @@ public class IEADatePickerCell extends IEAViewHolder {
     };
 
     private void reloadTableRow(Date date) {
-      this.editedDate = date;
+        this.editedDate = date;
+
         // Cache for EditModel.
-      this.model.date = date;
+        this.model.date = date;
 
         this.editText.setText(dateFormatter.format(editedDate));
         isDialog = false;
