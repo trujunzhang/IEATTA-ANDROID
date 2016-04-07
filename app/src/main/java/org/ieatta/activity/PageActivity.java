@@ -540,7 +540,8 @@ public class PageActivity extends ThemedActionBarActivity {
 //        HistoryEntry entry =new HistoryEntry(MainSegueIdentifier.detailRecipeSegueIdentifier,recipeUUID);
         // Edit
 //        HistoryEntry entry = new HistoryEntry(MainSegueIdentifier.editRestaurantSegueIdentifier, restaurantUUID, true);
-        HistoryEntry entry = new HistoryEntry(MainSegueIdentifier.editEventSegueIdentifier, eventUUID, false);
+//        HistoryEntry entry = new HistoryEntry(MainSegueIdentifier.editEventSegueIdentifier, eventUUID, false);
+        HistoryEntry entry = new HistoryEntry(MainSegueIdentifier.editRecipeSegueIdentifier, recipeUUID, true);
         loadPage(entry, TabPosition.CURRENT_TAB, false, true);
     }
 
