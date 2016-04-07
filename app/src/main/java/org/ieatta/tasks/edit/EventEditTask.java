@@ -81,7 +81,7 @@ public class EventEditTask extends FragmentTask {
             @Override
             public Task<RealmResults<DBPhoto>> then(Task<DBEvent> task) throws Exception {
                 event = task.getResult();
-                return LocalDatabaseQuery.queryPhotosByModel(recipeUUID, PhotoUsedType.PU_Waiter.getType(), realmList);
+                return LocalDatabaseQuery.queryPhotosByModel(eventUUID, PhotoUsedType.PU_Waiter.getType(), realmList);
             }
         }).onSuccessTask(new Continuation<RealmResults<DBPhoto>, Task<Void>>() {
             @Override
