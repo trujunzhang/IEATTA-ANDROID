@@ -15,9 +15,11 @@ import org.ieatta.activity.history.HistoryEntry;
 import org.ieatta.activity.update.UpdateEntry;
 import org.ieatta.cells.edit.IEADatePickerCell;
 import org.ieatta.cells.edit.IEAEditTextFieldCell;
+import org.ieatta.cells.edit.IEAEditWaiterTextFieldCell;
 import org.ieatta.cells.headerfooterview.IEAFooterView;
 import org.ieatta.cells.headerfooterview.IEAHeaderView;
 import org.ieatta.cells.model.EditCellModel;
+import org.ieatta.cells.model.EditWaiterCellModel;
 import org.ieatta.cells.model.IEAFooterViewModel;
 import org.ieatta.cells.model.IEAHeaderViewModel;
 import org.ieatta.cells.model.IEAOrderedPeople;
@@ -98,7 +100,9 @@ public class EventEditTask extends FragmentTask {
 
         // Add rows for sections.
         this.manager.appendSectionTitleCell(new SectionTitleCellModel(IEAEditKey.Section_Title, R.string.Event_Information), EditEventSection.sectionInformation.ordinal());
+        this.manager.appendSectionTitleCell(new SectionTitleCellModel(IEAEditKey.Section_Title, R.string.Date_of_Event), EditEventSection.sectionDurationDate.ordinal());
         this.manager.setRegisterCellClass(IEAEditTextFieldCell.getType(), EditEventSection.sectionInformation.ordinal());
+        this.manager.setRegisterCellClass(IEAEditWaiterTextFieldCell.getType(), EditEventSection.sectionInformation.ordinal());
     }
 
     @Override
@@ -108,6 +112,7 @@ public class EventEditTask extends FragmentTask {
 
         List<EditCellModel> editCellModelList = new LinkedList<EditCellModel>() {{
             add(new EditCellModel(IEAEditKey.event_name, event.getDisplayName(), R.string.Event_Name_info));
+            add(new EditWaiterCellModel(IEAEditKey.event_nameofserver, event.getWaiter(), R.string.Name_of_Server));
         }};
         this.manager.setSectionItems(editCellModelList, EditEventSection.sectionInformation.ordinal());
 
