@@ -49,22 +49,26 @@ public class IEADatePickerCell extends IEAViewHolder {
         this.clickedView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (isDialog == true) {
-                    return;
-                }
-
-                new SlideDateTimePicker.Builder(null)
-                        .setListener(listener)
-                        .setInitialDate(editedDate)
-                                //.setMinDate(minDate)
-                                //.setMaxDate(maxDate)
-                        .setIs24HourTime(true)
-//                                .setTheme(SlideDateTimePicker.HOLO_DARK)
-//                                .setIndicatorColor(Color.parseColor("#990000"))
-                        .build()
-                        .show();
+                showDialog();
             }
         });
+    }
+
+    private void showDialog() {
+        if (isDialog == true) {
+            return;
+        }
+
+        new SlideDateTimePicker.Builder(this.model.fm)
+                .setListener(listener)
+                .setInitialDate(editedDate)
+                        //.setMinDate(minDate)
+                        //.setMaxDate(maxDate)
+                .setIs24HourTime(true)
+//                                .setTheme(SlideDateTimePicker.HOLO_DARK)
+//                                .setIndicatorColor(Color.parseColor("#990000"))
+                .build()
+                .show();
     }
 
     @Override

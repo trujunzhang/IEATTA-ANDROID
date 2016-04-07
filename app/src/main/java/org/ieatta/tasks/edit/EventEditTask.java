@@ -2,6 +2,7 @@ package org.ieatta.tasks.edit;
 
 import android.app.Activity;
 import android.support.annotation.VisibleForTesting;
+import android.support.v4.app.FragmentManager;
 import android.view.View;
 
 import com.tableview.adapter.NSIndexPath;
@@ -9,6 +10,7 @@ import com.tableview.adapter.NSIndexPath;
 import org.ieatta.R;
 import org.ieatta.activity.LeadImageCollection;
 import org.ieatta.activity.Page;
+import org.ieatta.activity.PageActivity;
 import org.ieatta.activity.PageViewModel;
 import org.ieatta.activity.gallery.GalleryCollection;
 import org.ieatta.activity.history.HistoryEntry;
@@ -119,9 +121,10 @@ public class EventEditTask extends FragmentTask {
         }};
         this.manager.setSectionItems(eventInfoSectionList, EditEventSection.sectionInformation.ordinal());
 
+        final FragmentManager fm = ((PageActivity) activity).getSupportFragmentManager();
         List<DatePickerCellModel> dateSectionlList = new LinkedList<DatePickerCellModel>() {{
-            add(new DatePickerCellModel(IEAEditKey.event_starttime, event.getStartDate(), R.string.Start_Time));
-            add(new DatePickerCellModel(IEAEditKey.event_endtime, event.getEndDate(), R.string.End_Time));
+            add(new DatePickerCellModel(IEAEditKey.event_starttime, event.getStartDate(), R.string.Start_Time,fm));
+            add(new DatePickerCellModel(IEAEditKey.event_endtime, event.getEndDate(), R.string.End_Time,fm));
         }};
         this.manager.setSectionItems(dateSectionlList, EditEventSection.sectionDurationDate.ordinal());
 
