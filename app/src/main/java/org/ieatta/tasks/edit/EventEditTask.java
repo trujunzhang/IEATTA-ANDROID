@@ -115,11 +115,11 @@ public class EventEditTask extends FragmentTask {
         this.manager.setHeaderItem(new IEAHeaderViewModel(this.model.getActionbarHeight()), IEAHeaderView.getType());
         this.manager.setFooterItem(new IEAFooterViewModel(), IEAFooterView.getType());
 
-        List<EditCellModel> eventInfoSectionList = new LinkedList<EditCellModel>() {{
+        List<EditCellModel> infoSectionList = new LinkedList<EditCellModel>() {{
             add(new EditCellModel(IEAEditKey.event_name, event.getDisplayName(), R.string.Event_Name_info));
             add(new EditWaiterCellModel(IEAEditKey.event_nameofserver, event.getWaiter(), R.string.Name_of_Server));
         }};
-        this.manager.setSectionItems(eventInfoSectionList, EditEventSection.sectionInformation.ordinal());
+        this.manager.setSectionItems(infoSectionList, EditEventSection.sectionInformation.ordinal());
 
         final FragmentManager fm = ((PageActivity) activity).getSupportFragmentManager();
         List<DatePickerCellModel> dateSectionlList = new LinkedList<DatePickerCellModel>() {{

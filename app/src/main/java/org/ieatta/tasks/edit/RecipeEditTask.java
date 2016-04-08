@@ -13,6 +13,7 @@ import org.ieatta.activity.history.HistoryEntry;
 import org.ieatta.activity.update.UpdateEntry;
 import org.ieatta.cells.edit.IEAEditTextFieldCell;
 import org.ieatta.cells.edit.IEAEditTextRecipeFieldCell;
+import org.ieatta.cells.model.EditCellModel;
 import org.ieatta.cells.model.IEAOrderedPeople;
 import org.ieatta.cells.model.IEAReviewsCellModel;
 import org.ieatta.cells.model.SectionTitleCellModel;
@@ -34,6 +35,7 @@ import org.ieatta.tasks.DBConvert;
 import org.ieatta.tasks.FragmentTask;
 
 import java.io.File;
+import java.util.LinkedList;
 import java.util.List;
 
 import bolts.Continuation;
@@ -92,13 +94,15 @@ public class RecipeEditTask extends FragmentTask {
         // Add rows for sections.
         this.manager.appendSectionTitleCell(new SectionTitleCellModel(IEAEditKey.Section_Title, R.string.Recipe_Information), EditRecipeSection.sectionInformation.ordinal());
         this.manager.setRegisterCellClass(IEAEditTextFieldCell.getType(), EditRecipeSection.sectionInformation.ordinal());
-        // **** Important (just for android)****
-        this.manager.setRegisterCellClassInSpecialRow(IEAEditTextRecipeFieldCell.getType(), EditRecipeSection.sectionInformation.ordinal(), 1);
     }
 
     @Override
     public void postUI() {
-
+        List<EditCellModel> infoSectionList = new LinkedList<EditCellModel>() {{
+            add(new EditCellModel(IEAEditKey.recipe_name, recipe.getDisplayName(), R.string.Recipe_Name_info));
+            add(new EditCellModel(IEAEditKey.recipe_price, recipe.getPrice(), R.string.recipe_price));
+        }};
+        this.manager.setSectionItems(infoSectionList, EditRecipeSection.sectionInformation.ordinal());
     }
 
     @Override

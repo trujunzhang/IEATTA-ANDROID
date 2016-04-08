@@ -95,10 +95,10 @@ public class RestaurantEditTask extends FragmentTask {
         this.manager.setHeaderItem(new IEAHeaderViewModel(this.model.getActionbarHeight()), IEAHeaderView.getType());
         this.manager.setFooterItem(new IEAFooterViewModel(), IEAFooterView.getType());
 
-        List<EditCellModel> editCellModelList = new LinkedList<EditCellModel>() {{
+        List<EditCellModel> infoSectionList = new LinkedList<EditCellModel>() {{
             add(new EditCellModel(IEAEditKey.rest_name, restaurant.getDisplayName(), R.string.Restaurant_Name_info));
         }};
-        this.manager.setSectionItems(editCellModelList, EditRestaurantSection.sectionInformation.ordinal());
+        this.manager.setSectionItems(infoSectionList, EditRestaurantSection.sectionInformation.ordinal());
 
         postPhotosGallery(EditRestaurantSection.section_gallery_thumbnail.ordinal());
 
