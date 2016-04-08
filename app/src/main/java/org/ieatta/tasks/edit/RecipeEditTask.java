@@ -14,7 +14,11 @@ import org.ieatta.activity.history.HistoryEntry;
 import org.ieatta.activity.update.UpdateEntry;
 import org.ieatta.cells.edit.IEAEditTextFieldCell;
 import org.ieatta.cells.edit.IEAEditTextRecipeFieldCell;
+import org.ieatta.cells.headerfooterview.IEAFooterView;
+import org.ieatta.cells.headerfooterview.IEAHeaderView;
 import org.ieatta.cells.model.EditCellModel;
+import org.ieatta.cells.model.IEAFooterViewModel;
+import org.ieatta.cells.model.IEAHeaderViewModel;
 import org.ieatta.cells.model.IEAOrderedPeople;
 import org.ieatta.cells.model.IEAReviewsCellModel;
 import org.ieatta.cells.model.SectionTitleCellModel;
@@ -59,7 +63,7 @@ public class RecipeEditTask extends FragmentTask {
         section_gallery_thumbnail,//= 1
     }
 
-    public DBRecipe recipe;
+    public DBRecipe recipe = new DBRecipe();
 
     /**
      * Execute Task for Restaurant edit.
@@ -99,6 +103,9 @@ public class RecipeEditTask extends FragmentTask {
 
     @Override
     public void postUI() {
+        this.manager.setHeaderItem(new IEAHeaderViewModel(this.model.getActionbarHeight()), IEAHeaderView.getType());
+        this.manager.setFooterItem(new IEAFooterViewModel(), IEAFooterView.getType());
+
         List<EditCellModel> infoSectionList = new LinkedList<EditCellModel>() {{
             add(new EditCellModel(IEAEditKey.recipe_name, recipe.getDisplayName(), R.string.Recipe_Name_info));
             add(new EditCellModel(IEAEditKey.recipe_price, recipe.getPrice(), R.string.recipe_price));
