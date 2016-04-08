@@ -8,6 +8,7 @@ import com.tableview.adapter.NSIndexPath;
 
 import org.ieatta.R;
 import org.ieatta.activity.LeadImageCollection;
+import org.ieatta.activity.Page;
 import org.ieatta.activity.PageViewModel;
 import org.ieatta.activity.history.HistoryEntry;
 import org.ieatta.activity.update.UpdateEntry;
@@ -103,6 +104,10 @@ public class RecipeEditTask extends FragmentTask {
             add(new EditCellModel(IEAEditKey.recipe_price, recipe.getPrice(), R.string.recipe_price));
         }};
         this.manager.setSectionItems(infoSectionList, EditRecipeSection.sectionInformation.ordinal());
+
+        postPhotosGallery(EditRecipeSection.section_gallery_thumbnail.ordinal());
+
+        model.setPage(new Page());
     }
 
     @Override
