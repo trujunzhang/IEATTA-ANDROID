@@ -13,10 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.ieatta.activity.contacts;
+package org.ieatta.activity.dialog.contacts;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.LoaderManager;
 import android.content.Context;
 import android.content.CursorLoader;
@@ -26,7 +25,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract.CommonDataKinds;
 import android.util.Log;
-import android.widget.TextView;
 
 import java.util.LinkedList;
 import java.util.List;

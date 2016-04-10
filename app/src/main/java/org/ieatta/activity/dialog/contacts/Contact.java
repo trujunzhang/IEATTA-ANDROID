@@ -1,4 +1,4 @@
-package org.ieatta.activity.contacts;
+package org.ieatta.activity.dialog.contacts;
 
 
 public class Contact {
