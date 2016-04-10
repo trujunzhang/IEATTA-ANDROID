@@ -50,10 +50,10 @@ import bolts.Task;
 import io.realm.Realm;
 
 public abstract class FragmentTask extends MenuBarCallback implements RecyclerOnItemClickListener, LeadImagesHandler.OnContentHeightChangedListener {
-    protected String restaurantUUID;
-    protected String eventUUID;
-    protected String teamUUID;
-    protected String recipeUUID;
+    protected String mRestaurantUUID;
+    protected String mEventUUID;
+    protected String mTeamUUID;
+    protected String mRecipeUUID;
 
     public RecycleViewManager manager;
     protected PageViewModel model;
@@ -106,7 +106,7 @@ public abstract class FragmentTask extends MenuBarCallback implements RecyclerOn
         this.manager.setRegisterCellClass(IEAGalleryThumbnailCell.getType(), forSectionIndex);
         this.manager.appendSectionTitleCell(new SectionTitleCellModel(IEAEditKey.Section_Title, R.string.PhotosGallery), forSectionIndex);
         this.manager.setSectionItems(CollectionUtil.createList(new IEAGalleryThumbnail(this.thumbnailGalleryCollection, this.galleryViewListener)), forSectionIndex);
-        // this.manager.setFooterModelInSection(new SectionPhotoGalleryFooterCellModel(restaurantUUID, ReviewType.Review_Restaurant), forSectionIndex, IEAPhotoGalleryFooterCell.getType());
+        // this.manager.setFooterModelInSection(new SectionPhotoGalleryFooterCellModel(mRestaurantUUID, ReviewType.Review_Restaurant), forSectionIndex, IEAPhotoGalleryFooterCell.getType());
     }
 
     public void postReviews(int forSectionIndex, String reviewRef, ReviewType type, int limit) {

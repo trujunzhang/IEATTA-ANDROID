@@ -80,15 +80,15 @@ public class OrderedRecipesTask extends FragmentTask {
             public Task<DBRestaurant> then(Task<DBEvent> task) throws Exception {
                 DBEvent event = task.getResult();
                 OrderedRecipesTask.this.event = event;
-                OrderedRecipesTask.this.restaurantUUID = event.getRestaurantRef();
-                return new RealmModelReader<DBRestaurant>(DBRestaurant.class).getFirstObject(LocalDatabaseQuery.get(restaurantUUID), false, realmList);
+                OrderedRecipesTask.this.mRestaurantUUID = event.getRestaurantRef();
+                return new RealmModelReader<DBRestaurant>(DBRestaurant.class).getFirstObject(LocalDatabaseQuery.get(mRestaurantUUID), false, realmList);
             }
         }).onSuccessTask(new Continuation<DBRestaurant, Task<RealmResults<DBPhoto>>>() {
             @Override
             public Task<RealmResults<DBPhoto>> then(Task<DBRestaurant> task) throws Exception {
                 DBRestaurant restaurant = task.getResult();
                 OrderedRecipesTask.this.restaurant = restaurant;
-                return LocalDatabaseQuery.queryPhotosByModel(restaurantUUID, PhotoUsedType.PU_Restaurant.getType(), realmList);
+                return LocalDatabaseQuery.queryPhotosByModel(mRestaurantUUID, PhotoUsedType.PU_Restaurant.getType(), realmList);
             }
         }).onSuccessTask(new Continuation<RealmResults<DBPhoto>, Task<RealmResults<DBRecipe>>>() {
             @Override

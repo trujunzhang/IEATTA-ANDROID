@@ -89,22 +89,22 @@ public class EventDetailTask extends FragmentTask {
             public Task<DBRestaurant> then(Task<DBEvent> task) throws Exception {
                 DBEvent event = task.getResult();
                 EventDetailTask.this.event = event;
-                EventDetailTask.this.restaurantUUID = event.getRestaurantRef();
-                return new RealmModelReader<DBRestaurant>(DBRestaurant.class).getFirstObject(LocalDatabaseQuery.get(EventDetailTask.this.restaurantUUID), false, realmList);
+                EventDetailTask.this.mRestaurantUUID = event.getRestaurantRef();
+                return new RealmModelReader<DBRestaurant>(DBRestaurant.class).getFirstObject(LocalDatabaseQuery.get(EventDetailTask.this.mRestaurantUUID), false, realmList);
             }
         }).onSuccessTask(new Continuation<DBRestaurant, Task<RealmResults<DBPhoto>>>() {
             @Override
             public Task<RealmResults<DBPhoto>> then(Task<DBRestaurant> task) throws Exception {
                 DBRestaurant restaurant = task.getResult();
                 EventDetailTask.this.restaurant = restaurant;
-                return LocalDatabaseQuery.queryPhotosByModel(EventDetailTask.this.restaurantUUID, PhotoUsedType.PU_Restaurant.getType(), realmList);
+                return LocalDatabaseQuery.queryPhotosByModel(EventDetailTask.this.mRestaurantUUID, PhotoUsedType.PU_Restaurant.getType(), realmList);
             }
         }).onSuccessTask(new Continuation<RealmResults<DBPhoto>, Task<RealmResults<DBPeopleInEvent>>>() {
             @Override
             public Task<RealmResults<DBPeopleInEvent>> then(Task<RealmResults<DBPhoto>> task) throws Exception {
                 EventDetailTask.this.leadImageCollection = DBConvert.toLeadImageCollection(task.getResult());
                 return new RealmModelReader<DBPeopleInEvent>(DBPeopleInEvent.class).fetchResults(
-                        LocalDatabaseQuery.getQueryOrderedPeople(EventDetailTask.this.eventUUID), false, realmList);
+                        LocalDatabaseQuery.getQueryOrderedPeople(EventDetailTask.this.mEventUUID), false, realmList);
             }
         }).onSuccessTask(new Continuation<RealmResults<DBPeopleInEvent>, Task<RealmResults<DBTeam>>>() {
             @Override
@@ -116,7 +116,7 @@ public class EventDetailTask extends FragmentTask {
             @Override
             public Task<List<IEAReviewsCellModel>> then(Task<RealmResults<DBTeam>> task) throws Exception {
                 EventDetailTask.this.orderedPeopleList = DBConvert.toOrderedPeopleList(task.getResult(), EventDetailTask.this.event);
-                return reviewQuery.queryReview(EventDetailTask.this.eventUUID, ReviewType.Review_Event, AppConstant.limit_reviews);
+                return reviewQuery.queryReview(EventDetailTask.this.mEventUUID, ReviewType.Review_Event, AppConstant.limit_reviews);
             }
         }).onSuccess(new Continuation<List<IEAReviewsCellModel>, Void>() {
             @Override
@@ -150,7 +150,7 @@ public class EventDetailTask extends FragmentTask {
 
         this.manager.setSectionItems(this.orderedPeopleList, EventDetailSection.section_ordered_people.ordinal());
 
-        postReviews(EventDetailSection.section_reviews.ordinal(),eventUUID, ReviewType.Review_Event, AppConstant.limit_reviews);
+        postReviews(EventDetailSection.section_reviews.ordinal(), mEventUUID, ReviewType.Review_Event, AppConstant.limit_reviews);
 
         model.setPage(this.getPage());
     }

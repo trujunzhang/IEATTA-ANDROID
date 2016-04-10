@@ -159,7 +159,7 @@ public class PageActivity extends ThemedActionBarActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         app = (IEAApp) getApplicationContext();
-//        app.checkCrashes(this);
+        app.checkCrashes(this);
 
         setContentView(R.layout.activity_page);
 
@@ -538,10 +538,11 @@ public class PageActivity extends ThemedActionBarActivity {
 //        HistoryEntry entry =new HistoryEntry(MainSegueIdentifier.detailEventSegueIdentifier,eventUUID);
 //        HistoryEntry entry =new HistoryEntry(MainSegueIdentifier.detailOrderedRecipesSegueIdentifier,eventUUID,teamUUID);
 //        HistoryEntry entry =new HistoryEntry(MainSegueIdentifier.detailRecipeSegueIdentifier,recipeUUID);
-        // Edit
+//         Edit
 //        HistoryEntry entry = new HistoryEntry(MainSegueIdentifier.editRestaurantSegueIdentifier, restaurantUUID, true);
 //        HistoryEntry entry = new HistoryEntry(MainSegueIdentifier.editEventSegueIdentifier, eventUUID, false);
 //        HistoryEntry entry = new HistoryEntry(MainSegueIdentifier.editRecipeSegueIdentifier, recipeUUID, false);
+
         loadPage(entry, TabPosition.CURRENT_TAB, false, true);
     }
 

@@ -18,9 +18,9 @@ public class UpdateLocationAction implements Action1<Location> {
 
     @Override
     public void call(Location location) {
-        IEAApp.getInstance().lastLocation = location;
+//        IEAApp.getInstance().lastLocation = location;
         // TODO: djzhang(test)
-//        IEAApp.getInstance().lastLocation = LocationUtil.getLocation();
+        IEAApp.getInstance().lastLocation = LocationUtil.getLocation();
         this.activity.updateLocation();
     }
 }

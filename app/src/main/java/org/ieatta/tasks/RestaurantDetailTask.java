@@ -82,32 +82,32 @@ public class RestaurantDetailTask extends FragmentTask {
      * @return
      */
     public Task<Void> executeTask() {
-        final String restaurantUUID = this.entry.getHPara();
+        final String _restaurantUUID = this.entry.getHPara();
 
-        return new RealmModelReader<DBRestaurant>(DBRestaurant.class).getFirstObject(LocalDatabaseQuery.get(restaurantUUID), false, realmList).onSuccessTask(new Continuation<DBRestaurant, Task<RealmResults<DBPhoto>>>() {
+        return new RealmModelReader<DBRestaurant>(DBRestaurant.class).getFirstObject(LocalDatabaseQuery.get(_restaurantUUID), false, realmList).onSuccessTask(new Continuation<DBRestaurant, Task<RealmResults<DBPhoto>>>() {
             @Override
             public Task<RealmResults<DBPhoto>> then(Task<DBRestaurant> task) throws Exception {
                 RestaurantDetailTask.this.restaurant = task.getResult();
-                return LocalDatabaseQuery.queryPhotosByModel(RestaurantDetailTask.this.restaurantUUID, PhotoUsedType.PU_Restaurant.getType(), realmList);
+                return LocalDatabaseQuery.queryPhotosByModel(_restaurantUUID, PhotoUsedType.PU_Restaurant.getType(), realmList);
             }
         }).onSuccessTask(new Continuation<RealmResults<DBPhoto>, Task<List<File>>>() {
             @Override
             public Task<List<File>> then(Task<RealmResults<DBPhoto>> task) throws Exception {
                 RestaurantDetailTask.this.leadImageCollection = DBConvert.toLeadImageCollection(task.getResult());
-                return ThumbnailImageUtil.sharedInstance.getImagesListTask(RestaurantDetailTask.this.restaurantUUID);
+                return ThumbnailImageUtil.sharedInstance.getImagesListTask(_restaurantUUID);
             }
         }).onSuccessTask(new Continuation<List<File>, Task<RealmResults<DBEvent>>>() {
             @Override
             public Task<RealmResults<DBEvent>> then(Task<List<File>> task) throws Exception {
                 RestaurantDetailTask.this.thumbnailGalleryCollection = DBConvert.toGalleryCollection(task.getResult());
                 return new RealmModelReader<DBEvent>(DBEvent.class).fetchResults(
-                        new DBBuilder().whereEqualTo(AppConstant.kPAPFieldLocalRestaurantKey, RestaurantDetailTask.this.restaurantUUID), false, realmList);
+                        new DBBuilder().whereEqualTo(AppConstant.kPAPFieldLocalRestaurantKey, _restaurantUUID), false, realmList);
             }
         }).onSuccessTask(new Continuation<RealmResults<DBEvent>, Task<List<IEAReviewsCellModel>>>() {
             @Override
             public Task<List<IEAReviewsCellModel>> then(Task<RealmResults<DBEvent>> task) throws Exception {
                 RestaurantDetailTask.this.events = task.getResult();
-                return reviewQuery.queryReview(RestaurantDetailTask.this.restaurantUUID, ReviewType.Review_Restaurant, AppConstant.limit_reviews);
+                return reviewQuery.queryReview(_restaurantUUID, ReviewType.Review_Restaurant, AppConstant.limit_reviews);
             }
         }).onSuccess(new Continuation<List<IEAReviewsCellModel>, Void>() {
             @Override
@@ -145,7 +145,7 @@ public class RestaurantDetailTask extends FragmentTask {
         this.manager.setSectionItems(this.events, RestaurantDetailSection.section_events.ordinal());
 
         postPhotosGallery(RestaurantDetailSection.section_gallery_thumbnail.ordinal());
-        postReviews(RestaurantDetailSection.section_reviews.ordinal(), restaurantUUID, ReviewType.Review_Restaurant, AppConstant.limit_reviews);
+        postReviews(RestaurantDetailSection.section_reviews.ordinal(), mRestaurantUUID, ReviewType.Review_Restaurant, AppConstant.limit_reviews);
 
         model.setPage(this.getPage());
     }

@@ -197,8 +197,8 @@ dependencies {
     compile 'net.hockeyapp.android:HockeySDK:3.7.0'
 
     // == android-maps-utils ==
-    compile 'com.google.android.gms:play-services-maps:8.4.0'
-    compile 'com.google.maps.android:android-maps-utils:0.4.3'
+//    compile 'com.google.android.gms:play-services-maps:8.4.0'
+//    compile 'com.google.maps.android:android-maps-utils:0.4.3'
 
     // == Android-ReactiveLocation ==
     compile 'pl.charmas.android:android-reactive-location:0.8@aar'
