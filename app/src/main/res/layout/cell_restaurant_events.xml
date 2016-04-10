@@ -8,11 +8,11 @@
     android:layout_height="wrap_content"
     android:gravity="top"
     android:orientation="vertical"
+    android:paddingTop="@dimen/list_item_vertical_padding"
     android:paddingBottom="@dimen/list_item_vertical_padding"
     android:paddingLeft="@dimen/list_item_horizontal_padding"
     android:paddingRight="@dimen/list_item_horizontal_padding"
-    style="@style/cell_style"
-    android:paddingTop="@dimen/list_item_vertical_padding">
+    style="@style/cell_style">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -25,7 +25,6 @@
             android:layout_height="@dimen/Event_Icon_Height"
             android:layout_centerVertical="true"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:src="@drawable/nav_events"
             android:layout_alignParentLeft="true" />
 
@@ -59,7 +58,6 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="false"
-            android:paddingRight="@dimen/activity_horizontal_margin"
             android:singleLine="true"
             android:text="Medium Text"
             android:textColor="@color/GreyMidText"
