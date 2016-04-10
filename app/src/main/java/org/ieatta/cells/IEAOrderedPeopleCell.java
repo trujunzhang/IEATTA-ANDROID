@@ -11,6 +11,7 @@ import org.ieatta.R;
 import org.ieatta.cells.model.IEAOrderedPeople;
 import org.ieatta.database.query.RecipeQuery;
 import org.ieatta.views.AvatarView;
+import org.wikipedia.views.GoneIfEmptyTextView;
 
 import bolts.Continuation;
 import bolts.Task;
@@ -23,13 +24,13 @@ public class IEAOrderedPeopleCell extends IEAViewHolder {
     private AvatarView avatarView;
 
     private TextView nameLabel;
-    private TextView recipesCountLabel;
+    private GoneIfEmptyTextView recipesCountLabel;
 
     public IEAOrderedPeopleCell(View itemView) {
         super(itemView);
-        this.avatarView = (AvatarView) itemView.findViewById(R.id.avatarView);
-        this.nameLabel = (TextView) itemView.findViewById(R.id.titleTextView);
-        this.recipesCountLabel = (TextView) itemView.findViewById(R.id.recipesCountTextView);
+        this.avatarView = (AvatarView) itemView.findViewById(R.id.page_list_item_image);
+        this.nameLabel = (TextView) itemView.findViewById(R.id.page_list_item_title);
+        this.recipesCountLabel = (GoneIfEmptyTextView) itemView.findViewById(R.id.page_list_item_description);
     }
 
     @Override
