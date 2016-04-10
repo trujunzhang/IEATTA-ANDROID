@@ -6,6 +6,8 @@ public class Contact {
     private String phoneNumber;
     private String emailAddress;
 
+    private String avator;
+
     public void setDisplayName(String displayName) {
         this.displayName = displayName;
     }
@@ -20,5 +22,13 @@ public class Contact {
 
     public void setEmailAddress(String emailAddress) {
         this.emailAddress = emailAddress;
+    }
+
+    public String getAvator() {
+        return avator;
+    }
+
+    public void setAvator(String avator) {
+        this.avator = avator;
     }
 }
