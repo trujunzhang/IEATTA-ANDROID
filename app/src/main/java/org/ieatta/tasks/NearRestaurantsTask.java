@@ -82,9 +82,9 @@ public class NearRestaurantsTask extends FragmentTask {
         return LocalDatabaseQuery.queryNearRestaurants(IEAApp.getInstance().lastLocation, this.realmList).onSuccess(new Continuation<RealmResults<DBRestaurant>, Void>() {
             @Override
             public Void then(Task<RealmResults<DBRestaurant>> task) throws Exception {
-                restaurants = task.getResult();
-                manager.setSectionItems(restaurants, NearRestaurantSection.section_restaurants.ordinal());
-                manager.reloadTableView();
+                NearRestaurantsTask.this.restaurants = task.getResult();
+                NearRestaurantsTask.this. manager.setSectionItems(NearRestaurantsTask.this.restaurants, NearRestaurantSection.section_restaurants.ordinal());
+                NearRestaurantsTask.this.manager.reloadTableView();
                 return null;
             }
         }, Task.UI_THREAD_EXECUTOR);
