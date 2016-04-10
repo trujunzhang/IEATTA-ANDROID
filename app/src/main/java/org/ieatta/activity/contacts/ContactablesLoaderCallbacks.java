@@ -56,9 +56,8 @@ public class ContactablesLoaderCallbacks implements LoaderManager.LoaderCallback
         // intent.getStringExtra() method.
 
         // BEGIN_INCLUDE(uri_with_query)
-//        String query = args.getString(QUERY_KEY);
-//        Uri uri = Uri.withAppendedPath(
-//                CommonDataKinds.Contactables.CONTENT_FILTER_URI, query);
+        // String query = args.getString(QUERY_KEY);
+        // Uri uri = Uri.withAppendedPath(CommonDataKinds.Contactables.CONTENT_FILTER_URI, query);
         Uri uri = CommonDataKinds.Contactables.CONTENT_URI;
         // END_INCLUDE(uri_with_query)
 
