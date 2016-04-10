@@ -533,7 +533,7 @@ public class PageActivity extends ThemedActionBarActivity {
         String recipeUUID = "95B62D6F-87DF-47E2-8C84-EADAE131BB5D"; // Dark Gelate
 
 
-//        HistoryEntry entry = new HistoryEntry(MainSegueIdentifier.nearbyRestaurants, LocationUtil.getLocation());
+        HistoryEntry entry = new HistoryEntry(MainSegueIdentifier.nearbyRestaurants, LocationUtil.getLocation());
 //        HistoryEntry entry =new HistoryEntry(MainSegueIdentifier.detailRestaurantSegueIdentifier,restaurantUUID);
 //        HistoryEntry entry =new HistoryEntry(MainSegueIdentifier.detailEventSegueIdentifier,eventUUID);
 //        HistoryEntry entry =new HistoryEntry(MainSegueIdentifier.detailOrderedRecipesSegueIdentifier,eventUUID,teamUUID);
@@ -541,7 +541,7 @@ public class PageActivity extends ThemedActionBarActivity {
         // Edit
 //        HistoryEntry entry = new HistoryEntry(MainSegueIdentifier.editRestaurantSegueIdentifier, restaurantUUID, true);
 //        HistoryEntry entry = new HistoryEntry(MainSegueIdentifier.editEventSegueIdentifier, eventUUID, false);
-        HistoryEntry entry = new HistoryEntry(MainSegueIdentifier.editRecipeSegueIdentifier, recipeUUID, false);
+//        HistoryEntry entry = new HistoryEntry(MainSegueIdentifier.editRecipeSegueIdentifier, recipeUUID, false);
         loadPage(entry, TabPosition.CURRENT_TAB, false, true);
     }
 
@@ -771,6 +771,27 @@ public class PageActivity extends ThemedActionBarActivity {
         if(task.isMainPage() ==true){
             task.executeUpdateTask(new UpdateEntry());
         }
+    }
+
+    @NeedsPermission(Manifest.permission.READ_CONTACTS)
+    void searchContacts(Intent intent) {
+        // Special processing of the incoming intent only occurs if the if the action specified
+//        // by the intent is ACTION_SEARCH.
+//        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+//            // SearchManager.QUERY is the key that a SearchManager will use to send a query string
+//            // to an Activity.
+//            String query = intent.getStringExtra(SearchManager.QUERY);
+//
+//            // We need to create a bundle containing the query string to send along to the
+//            // LoaderManager, which will be handling querying the database and returning results.
+//            Bundle bundle = new Bundle();
+//            bundle.putString(QUERY_KEY, query);
+//
+//            ContactablesLoaderCallbacks loaderCallbacks = new ContactablesLoaderCallbacks(this);
+//
+//            // Start the loader with the new query, and an object that will handle all callbacks.
+//            getLoaderManager().restartLoader(CONTACT_QUERY_LOADER, bundle, loaderCallbacks);
+//        }
     }
 
 }

@@ -1,89 +1,52 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <changelog xmlns="http://www.omnigroup.com/namespace/OmniPlan/v2">
   <version>2.1</version>
-  <task-change-set user="djzhang" date="2016-04-01T08:35:22.304Z" timestamp="2016-04-01T08:35:22.304Z">
-    <change idref="t6" to="t2" to-position="3" resolved="yes">
-      <change idref="t6" attribute="noEarlierThanConstraintDate" type="date" to="2016-04-01T00:00:00.000Z"/>
-      <change idref="t6" attribute="title" type="string" to="Add round in the ImageViews."/>
-    </change>
-  </task-change-set>
-  <task-change-set user="djzhang" date="2016-04-01T08:37:02.448Z" timestamp="2016-04-01T08:37:02.448Z">
-    <change idref="t7" to="t2" to-position="2" resolved="yes">
-      <change idref="t7" attribute="noEarlierThanConstraintDate" type="date" to="2016-04-01T00:00:00.000Z"/>
-      <change idref="t7" attribute="title" type="string" to="Add footview for thumbnail gallery and review section."/>
-    </change>
-  </task-change-set>
-  <task-change-set user="djzhang" date="2016-04-01T08:46:32.343Z" timestamp="2016-04-01T08:46:32.343Z">
-    <change idref="t5" attribute="internalEffortDone" type="real" from="0" to="28800" resolved="yes"/>
-  </task-change-set>
-  <task-change-set user="djzhang" date="2016-04-01T12:40:02.420Z" timestamp="2016-04-01T12:40:02.420Z">
-    <change idref="t4" attribute="internalEffortDone" type="real" from="0" to="28800" resolved="yes"/>
-  </task-change-set>
-  <task-change-set user="djzhang" date="2016-04-01T13:14:17.892Z" timestamp="2016-04-01T13:14:17.892Z">
-    <change idref="t8" to="t2" to-position="5" resolved="yes">
-      <change idref="t8" attribute="noEarlierThanConstraintDate" type="date" to="2016-04-01T00:00:00.000Z"/>
-      <change idref="t8" attribute="title" type="string" to="Add “Camera icon” in the thumbnail gallery cell."/>
-    </change>
-    <change idref="t9" to="t2" to-position="6" resolved="yes">
-      <change idref="t9" attribute="noEarlierThanConstraintDate" type="date" to="2016-04-01T00:00:00.000Z"/>
-      <change idref="t9" attribute="title" type="string" to="Add item’s icons on the toolbar menu."/>
-    </change>
-  </task-change-set>
-  <task-change-set user="djzhang" date="2016-04-02T00:33:31.136Z" timestamp="2016-04-02T00:33:31.136Z">
-    <change idref="t10" to="t-1" to-position="1" resolved="yes">
-      <change idref="t10" attribute="isGroup" type="real" from="0" to="1"/>
-      <change idref="t10" attribute="noEarlierThanConstraintDate" type="date" to="2016-04-02T00:00:00.000Z"/>
-      <change idref="t10" attribute="taskType" type="real" from="0" to="2"/>
-      <change idref="t10" attribute="title" type="string" to="04-02"/>
-    </change>
-    <change idref="t11" to="t10" to-position="0" resolved="yes">
-      <change idref="t11" attribute="noEarlierThanConstraintDate" type="date" to="2016-04-01T16:00:00.000Z"/>
-      <change idref="t11" attribute="title" type="string" to="Task 1"/>
-    </change>
-  </task-change-set>
-  <task-change-set user="djzhang" date="2016-04-02T06:16:20.412Z" timestamp="2016-04-02T06:16:20.412Z">
-    <change idref="t11" attribute="noEarlierThanConstraintDate" type="date" from="2016-04-01T16:00:00.000Z" to="2016-04-02T00:00:00.000Z" resolved="yes"/>
-  </task-change-set>
-  <task-change-set user="djzhang" date="2016-04-02T08:33:09.469Z" timestamp="2016-04-02T08:33:09.469Z">
-    <change idref="t6" attribute="internalEffortDone" type="real" from="0" to="28800" resolved="yes"/>
-    <change idref="t7" attribute="internalEffortDone" type="real" from="0" to="28800" resolved="yes"/>
-  </task-change-set>
-  <task-change-set user="djzhang" date="2016-04-02T11:15:34.518Z" timestamp="2016-04-02T11:15:34.518Z">
-    <change idref="t3" attribute="internalEffortDone" type="real" from="0" to="28800" resolved="yes"/>
-    <change idref="t8" attribute="internalEffortDone" type="real" from="0" to="28800" resolved="yes"/>
-    <change idref="t9" attribute="internalEffortDone" type="real" from="0" to="28800" resolved="yes"/>
-  </task-change-set>
-  <task-change-set user="djzhang" date="2016-04-03T06:44:40.507Z" timestamp="2016-04-03T06:44:40.507Z">
-    <change idref="t17" to="t10" to-position="1" resolved="yes">
-      <change idref="t17" attribute="noEarlierThanConstraintDate" type="date" to="2016-04-02T16:00:00.000Z"/>
-      <change idref="t17" attribute="title" type="string" to="DataSheetDialogFragment on the event edit fragment."/>
-    </change>
-    <change idref="t11" attribute="title" type="string" from="Task 1" to="All Edit Fragments." resolved="yes"/>
-  </task-change-set>
   <task-change-set user="djzhang" date="2016-04-03T06:44:48.541Z" timestamp="2016-04-03T06:44:48.541Z">
     <change idref="t18" to="t10" to-position="2">
       <change idref="t18" attribute="noEarlierThanConstraintDate" type="date" to="2016-04-02T16:00:00.000Z"/>
       <change idref="t18" attribute="title" type="string" to="Task 1"/>
     </change>
   </task-change-set>
-  <task-change-set user="djzhang" date="2016-04-03T06:45:43.547Z" timestamp="2016-04-03T06:45:43.547Z">
-    <change idref="t11" attribute="title" type="string" from="All Edit Fragments." to="All Edit Fragments(4)." resolved="yes"/>
+  <task-change-set user="djzhang" date="2016-04-08T22:58:48.537Z" timestamp="2016-04-08T22:58:48.537Z">
+    <change idref="t17" attribute="title" type="string" from="DataSheetDialogFragment on the event edit fragment." to="DateSheetDialogFragment on the event edit fragment." resolved="yes"/>
+    <change idref="t18" attribute="internalEffortDone" type="real" from="0" to="28800" resolved="yes"/>
   </task-change-set>
-  <task-change-set user="djzhang" date="2016-04-03T07:12:12.362Z" timestamp="2016-04-03T07:12:12.362Z">
-    <change idref="t19" to="t10" to-position="3" resolved="yes">
-      <change idref="t19" attribute="noEarlierThanConstraintDate" type="date" to="2016-04-02T16:00:00.000Z"/>
-      <change idref="t19" attribute="title" type="string" to="add google map on the ArticleHeaderView."/>
-    </change>
-    <change idref="t20" to="t10" to-position="4" resolved="yes">
-      <change idref="t20" attribute="noEarlierThanConstraintDate" type="date" to="2016-04-02T16:00:00.000Z"/>
-      <change idref="t20" attribute="title" type="string" to="add ordered User on the ArticleHeaderView"/>
-    </change>
-    <change idref="t18" attribute="title" type="string" from="Task 1" to="add rating view on the ArticleHeaderView." resolved="yes"/>
+  <task-change-set user="djzhang" date="2016-04-08T22:59:11.625Z" timestamp="2016-04-08T22:59:11.625Z">
+    <change idref="t20" attribute="title" type="string" from="add ordered User on the ArticleHeaderView" to="add ordered User icon on the ArticleHeaderView" resolved="yes"/>
   </task-change-set>
-  <task-change-set user="djzhang" date="2016-04-03T08:26:52.288Z" timestamp="2016-04-03T08:26:52.288Z">
-    <change idref="t21" to="t10" to-position="5" resolved="yes">
-      <change idref="t21" attribute="noEarlierThanConstraintDate" type="date" to="2016-04-02T16:00:00.000Z"/>
-      <change idref="t21" attribute="title" type="string" to="add toggle between list and grid on the OrderedRecipesFragment."/>
+  <task-change-set user="djzhang" date="2016-04-08T22:59:43.022Z" timestamp="2016-04-08T22:59:43.022Z">
+    <change idref="t21" attribute="title" type="string" from="add toggle between list and grid on the OrderedRecipesFragment." to="add menu icon toggles between list and grid on the OrderedRecipesFragment." resolved="yes"/>
+  </task-change-set>
+  <task-change-set user="djzhang" date="2016-04-08T22:59:59.324Z" timestamp="2016-04-08T22:59:59.324Z">
+    <change idref="t17" attribute="internalEffortDone" type="real" from="0" to="28800" resolved="yes"/>
+  </task-change-set>
+  <task-change-set user="djzhang" date="2016-04-08T23:00:14.359Z" timestamp="2016-04-08T23:00:14.359Z">
+    <change idref="t18" attribute="title" type="string" from="add rating view on the ArticleHeaderView." to="add rating image view on the ArticleHeaderView." resolved="yes"/>
+  </task-change-set>
+  <task-change-set user="djzhang" date="2016-04-08T23:01:09.871Z" timestamp="2016-04-08T23:01:09.871Z">
+    <change idref="t22" to="t-1" to-position="2" resolved="yes">
+      <change idref="t22" attribute="isGroup" type="real" from="0" to="1"/>
+      <change idref="t22" attribute="noEarlierThanConstraintDate" type="date" to="2016-04-08T16:00:00.000Z"/>
+      <change idref="t22" attribute="taskType" type="real" from="0" to="2"/>
+      <change idref="t22" attribute="title" type="string" to="04-08"/>
     </change>
+    <change idref="t23" to="t22" to-position="0" resolved="yes">
+      <change idref="t23" attribute="noEarlierThanConstraintDate" type="date" to="2016-04-08T16:00:00.000Z"/>
+      <change idref="t23" attribute="title" type="string" to="Choice People DialogFragment"/>
+    </change>
+  </task-change-set>
+  <task-change-set user="djzhang" date="2016-04-08T23:03:49.330Z" timestamp="2016-04-08T23:03:49.330Z">
+    <change idref="t22" attribute="noEarlierThanConstraintDate" type="date" from="2016-04-08T16:00:00.000Z" to="2016-04-07T16:00:00.000Z" resolved="yes"/>
+    <change idref="t23" attribute="noEarlierThanConstraintDate" type="date" from="2016-04-08T16:00:00.000Z" to="2016-04-07T16:00:00.000Z" resolved="yes"/>
+    <change idref="t23" attribute="noLaterThanConstraintDate" type="date" to="2016-04-08T09:00:00.000Z" resolved="yes"/>
+  </task-change-set>
+  <task-change-set user="djzhang" date="2016-04-09T09:49:10.453Z" timestamp="2016-04-09T09:49:10.453Z">
+    <change idref="t24" to="t22" to-position="1" resolved="yes">
+      <change idref="t24" attribute="noEarlierThanConstraintDate" type="date" to="2016-04-08T00:00:00.000Z"/>
+      <change idref="t24" attribute="title" type="string" to="Import contacts(from sample.vcf)"/>
+    </change>
+  </task-change-set>
+  <task-change-set user="djzhang" date="2016-04-09T09:49:18.943Z" timestamp="2016-04-09T09:49:18.943Z">
+    <change idref="t24" attribute="title" type="string" from="Import contacts(from sample.vcf)" to="Import contacts(from sample.vcf) as Team." resolved="yes"/>
   </task-change-set>
 </changelog>
