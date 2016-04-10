@@ -704,7 +704,6 @@ public class PageActivity extends ThemedActionBarActivity {
 
     private void handleSettingsActivityResult(int resultCode) {
         if (languageChanged(resultCode)) {
-            loadNewLanguageMainPage();
         }
     }
 
@@ -716,21 +715,7 @@ public class PageActivity extends ThemedActionBarActivity {
         return resultCode == SettingsActivity.ACTIVITY_RESULT_LANGUAGE_CHANGED;
     }
 
-    /**
-     * Reload the main page in the new language, after delaying for one second in order to:
-     * (1) Make sure that onStart in PageActivity gets called, thus registering the activity for the bus.
-     * (2) Ensure a smooth transition, which is very jarring without a delay.
-     */
-    private void loadNewLanguageMainPage() {
-        Handler uiThread = new Handler(Looper.getMainLooper());
-//        uiThread.postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                loadMainPageInForegroundTab();
-//                updateFeaturedPageWidget();
-//            }
-//        }, DateUtils.SECOND_IN_MILLIS);
-    }
+
 
     /**
      * Update any instances of our Featured Page widget, since it will change with the currently selected language.
