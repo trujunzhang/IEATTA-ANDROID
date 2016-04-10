@@ -72,9 +72,9 @@ public class RecipeDetailTask extends FragmentTask {
      * @return
      */
     public Task<Void> executeTask() {
-        final String recipeUUID = this.entry.getHPara();
+        final String _recipeUUID = this.entry.getHPara();
 
-        return new RealmModelReader<DBRecipe>(DBRecipe.class).getFirstObject(LocalDatabaseQuery.get(recipeUUID), false, realmList).onSuccessTask(new Continuation<DBRecipe, Task<DBTeam>>() {
+        return new RealmModelReader<DBRecipe>(DBRecipe.class).getFirstObject(LocalDatabaseQuery.get(_recipeUUID), false, realmList).onSuccessTask(new Continuation<DBRecipe, Task<DBTeam>>() {
             @Override
             public Task<DBTeam> then(Task<DBRecipe> task) throws Exception {
                 DBRecipe recipe = task.getResult();
@@ -97,26 +97,26 @@ public class RecipeDetailTask extends FragmentTask {
                 DBEvent event = task.getResult();
                 RecipeDetailTask.this.event = event;
                 RecipeDetailTask.this.mRestaurantUUID = event.getRestaurantRef();
-                return new RealmModelReader<DBRestaurant>(DBRestaurant.class).getFirstObject(LocalDatabaseQuery.get(mRestaurantUUID), false, realmList);
+                return new RealmModelReader<DBRestaurant>(DBRestaurant.class).getFirstObject(LocalDatabaseQuery.get(RecipeDetailTask.this.mRestaurantUUID), false, realmList);
             }
         }).onSuccessTask(new Continuation<DBRestaurant, Task<RealmResults<DBPhoto>>>() {
             @Override
             public Task<RealmResults<DBPhoto>> then(Task<DBRestaurant> task) throws Exception {
                 DBRestaurant restaurant = task.getResult();
                 RecipeDetailTask.this.restaurant = restaurant;
-                return LocalDatabaseQuery.queryPhotosByModel(recipeUUID, PhotoUsedType.PU_Recipe.getType(), realmList);
+                return LocalDatabaseQuery.queryPhotosByModel(_recipeUUID, PhotoUsedType.PU_Recipe.getType(), realmList);
             }
         }).onSuccessTask(new Continuation<RealmResults<DBPhoto>, Task<List<File>>>() {
             @Override
             public Task<List<File>> then(Task<RealmResults<DBPhoto>> task) throws Exception {
                 RecipeDetailTask.this.leadImageCollection = DBConvert.toLeadImageCollection(task.getResult());
-                return ThumbnailImageUtil.sharedInstance.getImagesListTask(recipeUUID);
+                return ThumbnailImageUtil.sharedInstance.getImagesListTask(_recipeUUID);
             }
         }).onSuccessTask(new Continuation<List<File>, Task<List<IEAReviewsCellModel>>>() {
             @Override
             public Task<List<IEAReviewsCellModel>> then(Task<List<File>> task) throws Exception {
                 RecipeDetailTask.this.thumbnailGalleryCollection = DBConvert.toGalleryCollection(task.getResult());
-                return reviewQuery.queryReview(recipeUUID, ReviewType.Review_Recipe, AppConstant.limit_reviews);
+                return reviewQuery.queryReview(_recipeUUID, ReviewType.Review_Recipe, AppConstant.limit_reviews);
             }
         }).onSuccess(new Continuation<List<IEAReviewsCellModel>, Void>() {
             @Override
