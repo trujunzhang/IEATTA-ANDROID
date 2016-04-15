@@ -2,8 +2,10 @@ package org.ieatta.test.query;
 
 import android.support.test.runner.AndroidJUnit4;
 
+import org.ieatta.database.models.DBEvent;
 import org.ieatta.database.models.DBPhoto;
 import org.ieatta.database.query.LocalDatabaseQuery;
+import org.ieatta.database.realm.RealmModelReader;
 import org.ieatta.server.cache.ThumbnailImageUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,13 +26,37 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class LocalDatabaseQueryTest {
     private static final int TASK_COMPLETION_TIMEOUT = 20000;
 
+
+    @Test
+    public void testFirstEvent() throws InterruptedException {
+        final String _eventUUID = "C2F23EDC-106C-4D17-A6D6-8EA04E10732A";
+        final CountDownLatch completionLatch = new CountDownLatch(1);
+
+        new RealmModelReader<DBEvent>(DBEvent.class).getFirstObject(LocalDatabaseQuery.get(_eventUUID), false, new LinkedList<Realm>()).continueWith(new Continuation<DBEvent, Void>() {
+            @Override
+            public Void then(Task<DBEvent> task) throws Exception {
+                if(task.getError() != null){
+                    Exception error = task.getError();
+                }else {
+                    DBEvent event = task.getResult();
+                }
+                completionLatch.countDown();
+                return null;
+            }
+        });
+
+
+        completionLatch.await(TASK_COMPLETION_TIMEOUT, TimeUnit.MILLISECONDS);
+    }
+
+
     @Test
     public void testQueryPhoto() throws InterruptedException {
         final String usedRef = "C2F23EDC-106C-4D17-A6D6-8EA04E10732A"; // for Restaurant(called "Basta Pasta").
 
         final CountDownLatch completionLatch = new CountDownLatch(1);
         final List<Realm> realmList = new LinkedList<>();
-        LocalDatabaseQuery.getPhoto(usedRef, false,realmList).onSuccess(new Continuation<DBPhoto, Object>() {
+        LocalDatabaseQuery.getPhoto(usedRef, false, realmList).onSuccess(new Continuation<DBPhoto, Object>() {
             @Override
             public Object then(Task<DBPhoto> task) throws Exception {
                 DBPhoto photo = task.getResult();

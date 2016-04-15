@@ -92,8 +92,6 @@ public class EventEditTask extends FragmentTask {
     @Override
     public Task<Void> executeTask() {
         final String _eventUUID = this.entry.getHPara();
-        if (this.entry.isNewModel() == true)
-            return Task.forResult(null);
 
         return new RealmModelReader<DBEvent>(DBEvent.class).getFirstObject(LocalDatabaseQuery.get(_eventUUID), false, this.realmList).onSuccessTask(new Continuation<DBEvent, Task<RealmResults<DBPhoto>>>() {
             @Override
