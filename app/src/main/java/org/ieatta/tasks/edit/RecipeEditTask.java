@@ -63,7 +63,7 @@ public class RecipeEditTask extends FragmentTask {
         section_gallery_thumbnail,//= 1
     }
 
-    public DBRecipe recipe = new DBRecipe();
+    public DBRecipe mRecipe = new DBRecipe();
 
     /**
      * Execute Task for Restaurant edit.
@@ -72,15 +72,15 @@ public class RecipeEditTask extends FragmentTask {
      */
     @Override
     public Task<Void> executeTask() {
-        final String recipeUUID = this.entry.getHPara();
+        final String _recipeUUID = this.entry.getHPara();
         if (this.entry.isNewModel() == true)
             return Task.forResult(null);
 
-        return new RealmModelReader<DBRecipe>(DBRecipe.class).getFirstObject(LocalDatabaseQuery.get(recipeUUID), false, realmList).onSuccessTask(new Continuation<DBRecipe, Task<List<File>>>() {
+        return new RealmModelReader<DBRecipe>(DBRecipe.class).getFirstObject(LocalDatabaseQuery.get(_recipeUUID), false, realmList).onSuccessTask(new Continuation<DBRecipe, Task<List<File>>>() {
             @Override
             public Task<List<File>> then(Task<DBRecipe> task) throws Exception {
-                recipe = task.getResult();
-                return ThumbnailImageUtil.sharedInstance.getImagesListTask(recipeUUID);
+                mRecipe = task.getResult();
+                return ThumbnailImageUtil.sharedInstance.getImagesListTask(_recipeUUID);
             }
         }).onSuccessTask(new Continuation<List<File>, Task<Void>>() {
             @Override
@@ -107,8 +107,8 @@ public class RecipeEditTask extends FragmentTask {
         this.manager.setFooterItem(new IEAFooterViewModel(), IEAFooterView.getType());
 
         List<EditCellModel> infoSectionList = new LinkedList<EditCellModel>() {{
-            add(new EditCellModel(IEAEditKey.recipe_name, recipe.getDisplayName(), R.string.Recipe_Name_info));
-            add(new EditCellModel(IEAEditKey.recipe_price, recipe.getPrice(), R.string.recipe_price));
+            add(new EditCellModel(IEAEditKey.recipe_name, mRecipe.getDisplayName(), R.string.Recipe_Name_info));
+            add(new EditCellModel(IEAEditKey.recipe_price, mRecipe.getPrice(), R.string.recipe_price));
         }};
         this.manager.setSectionItems(infoSectionList, EditRecipeSection.sectionInformation.ordinal());
 
