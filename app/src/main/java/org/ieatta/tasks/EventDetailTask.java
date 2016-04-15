@@ -33,6 +33,7 @@ import org.ieatta.database.provide.PhotoUsedType;
 import org.ieatta.database.provide.ReviewType;
 import org.ieatta.database.query.LocalDatabaseQuery;
 import org.ieatta.database.realm.RealmModelReader;
+import org.ieatta.database.utils.DBUtil;
 import org.ieatta.parse.AppConstant;
 import org.ieatta.provide.IEAEditKey;
 import org.ieatta.provide.MainSegueIdentifier;
@@ -161,5 +162,24 @@ public class EventDetailTask extends FragmentTask {
         PageProperties properties = new PageProperties(this.leadImageCollection, title,null);
 
         return new Page(pageTitle, properties);
+    }
+
+
+    @Override
+    /**
+     * Edit the detailed Event.
+     */
+    public void onEditClick() {
+        ((PageActivity) activity).loadPage(
+                new HistoryEntry(MainSegueIdentifier.editEventSegueIdentifier, restaurant.getUUID(),false));
+    }
+
+    @Override
+    /**
+     * Choice an ordered people.
+     */
+    public void onAddEventClick() {
+        ((PageActivity) activity).loadPage(
+                new HistoryEntry(MainSegueIdentifier.choicePeopleSegueIdentifier, DBUtil.getUUID(),true));
     }
 }

@@ -49,9 +49,9 @@ public enum MainSegueIdentifier {
     editRecipeSegueIdentifier(AppConstant.SOURCE_RECIPE_EDIT, "addEditRecipe"),
 
     // Choice Person in the event page.
-//    choicePeopleSegueIdentifier("choicePeople"),
-//
-//    // Show detail review from review list.
+    choicePeopleSegueIdentifier(AppConstant.SOURCE_CHOICE_PEOPLE, "choicePeople"),
+
+    // Show detail review from review list.
 //    postReviewSegueIdentifier("postReview"),
 
     photoPagesControllerSegueIdentifier(100, "photoPagesController");
@@ -90,6 +90,8 @@ public enum MainSegueIdentifier {
             case AppConstant.SOURCE_PEOPLE_EDIT:
                 return new PeopleEditTask(entry, activity, model);
             case AppConstant.SOURCE_RECIPE_EDIT:
+                return new RecipeEditTask(entry, activity, model);
+            case AppConstant.SOURCE_CHOICE_PEOPLE:
                 return new RecipeEditTask(entry, activity, model);
         }
 
