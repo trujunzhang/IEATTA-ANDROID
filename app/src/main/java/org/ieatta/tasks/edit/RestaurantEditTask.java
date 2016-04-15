@@ -53,7 +53,7 @@ public class RestaurantEditTask extends FragmentTask {
         sectionGoogleMapAddress,//= 2
     }
 
-    public DBRestaurant restaurant = new DBRestaurant();
+    public DBRestaurant mRestaurant = new DBRestaurant();
 
     /**
      * Execute Task for Restaurant edit.
@@ -62,15 +62,15 @@ public class RestaurantEditTask extends FragmentTask {
      */
     @Override
     public Task<Void> executeTask() {
-        final String restaurantUUID = this.entry.getHPara();
+        final String _restaurantUUID = this.entry.getHPara();
         if (this.entry.isNewModel() == true)
             return Task.forResult(null);
 
-        return new RealmModelReader<DBRestaurant>(DBRestaurant.class).getFirstObject(LocalDatabaseQuery.get(restaurantUUID), false, realmList).onSuccessTask(new Continuation<DBRestaurant, Task<List<File>>>() {
+        return new RealmModelReader<DBRestaurant>(DBRestaurant.class).getFirstObject(LocalDatabaseQuery.get(_restaurantUUID), false, realmList).onSuccessTask(new Continuation<DBRestaurant, Task<List<File>>>() {
             @Override
             public Task<List<File>> then(Task<DBRestaurant> task) throws Exception {
-                restaurant = task.getResult();
-                return ThumbnailImageUtil.sharedInstance.getImagesListTask(restaurantUUID);
+                mRestaurant = task.getResult();
+                return ThumbnailImageUtil.sharedInstance.getImagesListTask(_restaurantUUID);
             }
         }).onSuccessTask(new Continuation<List<File>, Task<Void>>() {
             @Override
@@ -96,7 +96,7 @@ public class RestaurantEditTask extends FragmentTask {
         this.manager.setFooterItem(new IEAFooterViewModel(), IEAFooterView.getType());
 
         List<EditCellModel> infoSectionList = new LinkedList<EditCellModel>() {{
-            add(new EditCellModel(IEAEditKey.rest_name, restaurant.getDisplayName(), R.string.Restaurant_Name_info));
+            add(new EditCellModel(IEAEditKey.rest_name, mRestaurant.getDisplayName(), R.string.Restaurant_Name_info));
         }};
         this.manager.setSectionItems(infoSectionList, EditRestaurantSection.sectionInformation.ordinal());
 

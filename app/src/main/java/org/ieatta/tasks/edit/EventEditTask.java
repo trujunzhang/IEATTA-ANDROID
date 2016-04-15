@@ -38,6 +38,7 @@ import org.ieatta.database.provide.ReviewType;
 import org.ieatta.database.query.LocalDatabaseQuery;
 import org.ieatta.database.query.ReviewQuery;
 import org.ieatta.database.realm.RealmModelReader;
+import org.ieatta.database.utils.DBUtil;
 import org.ieatta.parse.AppConstant;
 import org.ieatta.provide.IEAEditKey;
 import org.ieatta.server.cache.ThumbnailImageUtil;
@@ -45,6 +46,7 @@ import org.ieatta.tasks.DBConvert;
 import org.ieatta.tasks.FragmentTask;
 
 import java.io.File;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -61,6 +63,7 @@ public class EventEditTask extends FragmentTask {
 
     public EventEditTask(HistoryEntry entry, Activity activity, PageViewModel model) {
         super(entry, activity, model);
+        this.mEvent = this.makeNewEvent();
     }
 
     enum EditEventSection {
@@ -69,7 +72,17 @@ public class EventEditTask extends FragmentTask {
         sectionDurationDate,//= 2
     }
 
-    public DBEvent event = new DBEvent();
+    public DBEvent mEvent = new DBEvent();
+
+    private DBEvent makeNewEvent(){
+        DBEvent event = new DBEvent();
+
+        event.setDisplayName("");
+        event.setStartDate(new Date());
+        event.setEndDate(DBUtil.getNextHourDate());
+
+        return event;
+    }
 
     /**
      * Execute Task for Event edit.
@@ -78,15 +91,15 @@ public class EventEditTask extends FragmentTask {
      */
     @Override
     public Task<Void> executeTask() {
-        final String eventUUID = this.entry.getHPara();
+        final String _eventUUID = this.entry.getHPara();
         if (this.entry.isNewModel() == true)
             return Task.forResult(null);
 
-        return new RealmModelReader<DBEvent>(DBEvent.class).getFirstObject(LocalDatabaseQuery.get(eventUUID), false, this.realmList).onSuccessTask(new Continuation<DBEvent, Task<RealmResults<DBPhoto>>>() {
+        return new RealmModelReader<DBEvent>(DBEvent.class).getFirstObject(LocalDatabaseQuery.get(_eventUUID), false, this.realmList).onSuccessTask(new Continuation<DBEvent, Task<RealmResults<DBPhoto>>>() {
             @Override
             public Task<RealmResults<DBPhoto>> then(Task<DBEvent> task) throws Exception {
-                event = task.getResult();
-                return LocalDatabaseQuery.queryPhotosByModel(eventUUID, PhotoUsedType.PU_Waiter.getType(), realmList);
+                mEvent = task.getResult();
+                return LocalDatabaseQuery.queryPhotosByModel(_eventUUID, PhotoUsedType.PU_Waiter.getType(), realmList);
             }
         }).onSuccessTask(new Continuation<RealmResults<DBPhoto>, Task<Void>>() {
             @Override
@@ -116,15 +129,15 @@ public class EventEditTask extends FragmentTask {
         this.manager.setFooterItem(new IEAFooterViewModel(), IEAFooterView.getType());
 
         List<EditCellModel> infoSectionList = new LinkedList<EditCellModel>() {{
-            add(new EditCellModel(IEAEditKey.event_name, event.getDisplayName(), R.string.Event_Name_info));
-            add(new EditWaiterCellModel(IEAEditKey.event_nameofserver, event.getWaiter(), R.string.Name_of_Server));
+            add(new EditCellModel(IEAEditKey.event_name, mEvent.getDisplayName(), R.string.Event_Name_info));
+            add(new EditWaiterCellModel(IEAEditKey.event_nameofserver, mEvent.getWaiter(), R.string.Name_of_Server));
         }};
         this.manager.setSectionItems(infoSectionList, EditEventSection.sectionInformation.ordinal());
 
         final FragmentManager fm = ((PageActivity) activity).getSupportFragmentManager();
         List<DatePickerCellModel> dateSectionlList = new LinkedList<DatePickerCellModel>() {{
-            add(new DatePickerCellModel(IEAEditKey.event_starttime, event.getStartDate(), R.string.Start_Time,fm));
-            add(new DatePickerCellModel(IEAEditKey.event_endtime, event.getEndDate(), R.string.End_Time,fm));
+            add(new DatePickerCellModel(IEAEditKey.event_starttime, mEvent.getStartDate(), R.string.Start_Time,fm));
+            add(new DatePickerCellModel(IEAEditKey.event_endtime, mEvent.getEndDate(), R.string.End_Time,fm));
         }};
         this.manager.setSectionItems(dateSectionlList, EditEventSection.sectionDurationDate.ordinal());
 
