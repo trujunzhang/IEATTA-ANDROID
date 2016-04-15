@@ -43,7 +43,7 @@ public class ArticleMenuBarView extends LinearLayout {
 
         void onAddEventClick();
 
-        void onSelectPersonClick();
+        void onChoicePersonClick();
 
         void onAddFoodClick();
     }
@@ -82,7 +82,7 @@ public class ArticleMenuBarView extends LinearLayout {
         }
 
         @Override
-        public void onSelectPersonClick() {
+        public void onChoicePersonClick() {
 
         }
 
@@ -220,7 +220,7 @@ public class ArticleMenuBarView extends LinearLayout {
                 callback.onAddEventClick();
                 break;
             case R.id.view_article_menu_bar_select_person:
-                callback.onSelectPersonClick();
+                callback.onChoicePersonClick();
                 break;
             case R.id.view_article_menu_bar_add_food:
                 callback.onAddFoodClick();

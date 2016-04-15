@@ -171,15 +171,15 @@ public class EventDetailTask extends FragmentTask {
      */
     public void onEditClick() {
         ((PageActivity) activity).loadPage(
-                new HistoryEntry(MainSegueIdentifier.editEventSegueIdentifier, restaurant.getUUID(),false));
+                new HistoryEntry(MainSegueIdentifier.editEventSegueIdentifier, this.event.getUUID(),false));
     }
 
     @Override
     /**
      * Choice an ordered people.
      */
-    public void onAddEventClick() {
+    public void onChoicePersonClick() {
         ((PageActivity) activity).loadPage(
-                new HistoryEntry(MainSegueIdentifier.choicePeopleSegueIdentifier, DBUtil.getUUID(),true));
+                new HistoryEntry(MainSegueIdentifier.choicePeopleSegueIdentifier, this.event.getUUID(),true));
     }
 }
