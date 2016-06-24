@@ -5,7 +5,7 @@ buildscript {
         maven { url 'https://jitpack.io' }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.0.0'
+        classpath 'com.android.tools.build:gradle:2.1.2'
         
         classpath 'com.github.JakeWharton:sdk-manager-plugin:d0c113b'
         classpath 'org.gradle.api.plugins:gradle-nexus-plugin:0.7.1'
