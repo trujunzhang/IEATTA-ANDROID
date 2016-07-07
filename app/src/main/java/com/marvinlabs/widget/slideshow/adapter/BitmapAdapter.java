@@ -48,7 +48,7 @@ public abstract class BitmapAdapter extends BaseAdapter implements SlideShowAdap
      */
     public BitmapAdapter(Context context) {
         this.context = context;
-        this.cachedBitmaps = new SparseArray<BitmapCache>(3);
+//        this.cachedBitmaps = new SparseArray<BitmapCache>(3);
     }
 
     /**
@@ -108,7 +108,7 @@ public abstract class BitmapAdapter extends BaseAdapter implements SlideShowAdap
      *
      * @return A new ImageView instance
      */
-    protected ImageView newImageViewInstancexxx() {
+    protected ImageView newImageViewInstance() {
         ImageView iv = new ImageView(context);
         iv.setScaleType(ImageView.ScaleType.CENTER_CROP);
 
@@ -121,26 +121,6 @@ public abstract class BitmapAdapter extends BaseAdapter implements SlideShowAdap
         return iv;
     }
 
-    protected ImageView newImageViewInstance() {
-//        <org.ieatta.activity.leadimages.ImageViewWithFace
-//        android:id="@+id/view_article_header_image_image"
-//        android:layout_width="match_parent"
-//        android:layout_height="match_parent"
-//        app:actualImageScaleType="focusCrop"
-//        android:contentDescription="@null"
-//        android:background="@android:color/transparent" />
-
-        ImageViewWithFace iv = new ImageViewWithFace(context);
-        iv.setScaleType(ImageView.ScaleType.CENTER_CROP);
-
-        // SlideShowView is a subclass of RelativeLayout. Set the layout parameters accordingly
-        RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
-        lp.addRule(RelativeLayout.ALIGN_PARENT_TOP);
-        lp.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
-        iv.setLayoutParams(lp);
-
-        return iv;
-    }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
