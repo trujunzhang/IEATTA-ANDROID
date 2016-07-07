@@ -127,12 +127,13 @@ android {
     // while we still have lint errors; remove once those are fixed
     lintOptions {
         disable 'MissingTranslation'
-        warning 'NewApi' // until https://code.google.com/p/android/issues/detail?id=137195 is released
+        warning 'NewApi'
+        // until https://code.google.com/p/android/issues/detail?id=137195 is released
         disable 'InvalidPackage' // required by Butter Knife
     }
 
     packagingOptions {
-        exclude 'META-INF/services/javax.annotation.processing.Processor' // required by Butter Knife
+        exclude 'META-INF/services/javax.annotation.processing.Processor'// required by Butter Knife
 
         // For Espresso testing libraries. See http://stackoverflow.com/q/33800924/970346.
         exclude 'META-INF/maven/com.google.guava/guava/pom.xml'
@@ -157,7 +158,9 @@ def compileSubprojectOrModule = { String projectName,
                                   String excludeGroup = null,
                                   String excludeModule = null ->
     def dependency = project.findProject(projectName) ?: moduleName
-    project.dependencies.add('compile', dependency, {exclude group: excludeGroup, module: excludeModule })
+    project.dependencies.add('compile', dependency, {
+        exclude group: excludeGroup, module: excludeModule
+    })
 }
 
 dependencies {
@@ -170,7 +173,7 @@ dependencies {
     compile project(':slideDateTimePicker')
 
     String okHttpVersion = '2.7.2'
-    String supportVersion = '23.1.1'
+    String supportVersion = '24.0.0'
     String espressoVersion = '2.2.1'
     String permissionsVersion = '2.1.1'
 
@@ -179,31 +182,32 @@ dependencies {
     compile "com.android.support:recyclerview-v7:$supportVersion"
     compile "com.android.support:percent:$supportVersion"
     compile "com.android.support:palette-v7:$supportVersion"
-    compile ('com.facebook.fresco:fresco:0.9.0') {
+    compile('com.facebook.fresco:fresco:0.11.0') {
         exclude module: 'bolts-android'
     }
     //compile 'com.google.code.gson:gson:2.5'
     //compile "com.squareup.okhttp:okhttp-urlconnection:$okHttpVersion"
     //compile "com.squareup.okhttp:okhttp:$okHttpVersion"
-    compile 'com.squareup:otto:1.3.8'
-    compile 'com.squareup.retrofit:retrofit:1.9.0'
+//    compile 'com.squareup:otto:1.3.8'
+//    compile 'com.squareup.retrofit:retrofit:1.9.0'
     //compile 'com.mobsandgeeks:android-saripaar:2.0.3'
     //compile 'com.github.ryanjohn1:onboarding:1.0.3'
     compile 'com.jakewharton:butterknife:7.0.1'
     //compile 'com.jakewharton:disklrucache:2.0.2'
-    compile ('com.mapbox.mapboxsdk:mapbox-android-sdk:4.0.0@aar'){
-        transitive=true
-    }
+//    compile ('com.mapbox.mapboxsdk:mapbox-android-sdk:4.0.0@aar'){
+//        transitive=true
+//    }
     compile 'net.hockeyapp.android:HockeySDK:3.7.0'
 
-    // == android-maps-utils ==
-//    compile 'com.google.android.gms:play-services-maps:8.4.0'
+    // == android-maps-utils(9.0.2, Must not be updated here) ==
+    compile 'com.google.android.gms:play-services-location:9.0.2'
+    compile 'com.google.android.gms:play-services-maps:9.0.2'
 //    compile 'com.google.maps.android:android-maps-utils:0.4.3'
 
     // == Android-ReactiveLocation ==
-    compile 'pl.charmas.android:android-reactive-location:0.8@aar'
-    compile 'com.google.android.gms:play-services-location:8.4.0'
-    compile 'io.reactivex:rxjava:1.0.14'
+//    compile 'pl.charmas.android:android-reactive-location:0.8@aar'
+//    compile 'com.google.android.gms:play-services-location:8.4.0'
+//    compile 'io.reactivex:rxjava:1.0.14'
 
     //RxAndroid or NotRxAndroid is not required by library
     // compile 'io.reactivex:rxandroid:0.25.0'
@@ -265,7 +269,8 @@ private setSigningConfigKey(config, Properties props) {
     return config
 }
 
-@Nullable private Properties loadProperties(File file) {
+@Nullable
+private Properties loadProperties(File file) {
     Properties props = null
     if (file.canRead()) {
         props = new Properties()

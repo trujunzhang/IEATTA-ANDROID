@@ -42,6 +42,13 @@ public class DetailPageLoadStrategy implements PageLoadStrategy {
 
     private static final String BRIDGE_PAYLOAD_SAVED_PAGE = "savedPage";
 
+
+    private static final int STATE_NO_FETCH = 1;
+    private static final int STATE_INITIAL_FETCH = 2;
+    private static final int STATE_COMPLETE_FETCH = 3;
+
+    private int state = STATE_NO_FETCH;
+
     /**
      * List of lightweight history items to serve as the backstack for this fragment.
      * Since the list consists of Parcelable objects, it can be saved and restored from the
@@ -111,6 +118,8 @@ public class DetailPageLoadStrategy implements PageLoadStrategy {
             pushBackStack();
         }
 
+        state = STATE_NO_FETCH;
+
         HistoryEntry historyEntry = backStack.get(backStack.size() - 1).getHistoryEntry();
 
         // increment our sequence number, so that any async tasks that depend on the sequence
@@ -135,6 +144,11 @@ public class DetailPageLoadStrategy implements PageLoadStrategy {
 
         // Setup new page.
         this.setupCurrentTask(historyEntry);
+    }
+
+    @Override
+    public boolean isLoading() {
+        return state != STATE_COMPLETE_FETCH;
     }
 
     private void restoreLastScrollY(int stagedScrollY) {
@@ -326,6 +340,13 @@ public class DetailPageLoadStrategy implements PageLoadStrategy {
     }
 
     private void setupCurrentTask(HistoryEntry entry) {
+        state = STATE_INITIAL_FETCH;
+
+//        searchBarHideHandler.setForceNoFade(false);
+//        searchBarHideHandler.setFadeEnabled(false);
+
+        leadImagesHandler.hide();
+
         fragmentTask = MainSegueIdentifier.getFragment(entry, this.fragment.getActivity(), this.model);
 
         leadImagesHandler.setMenuBarCallback(fragmentTask);
@@ -342,12 +363,12 @@ public class DetailPageLoadStrategy implements PageLoadStrategy {
         }, Task.UI_THREAD_EXECUTOR).continueWith(new Continuation<Void, Void>() {
             @Override
             public Void then(Task<Void> task) throws Exception {
-                if(task.getError() != null){
+                if (task.getError() != null) {
                     Exception error = task.getError();
                 }
                 return null;
             }
-        },Task.UI_THREAD_EXECUTOR);
+        }, Task.UI_THREAD_EXECUTOR);
     }
 
     public void postLoadPage() {
@@ -359,6 +380,8 @@ public class DetailPageLoadStrategy implements PageLoadStrategy {
         this.restoreLastScrollY(model.getStagedScrollY());
 
         this.onLeadSectionLoaded(0);
+
+        state = STATE_COMPLETE_FETCH;
     }
 
 }

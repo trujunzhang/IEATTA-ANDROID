@@ -3,9 +3,8 @@ package com.tableview.storage;
 import android.content.Context;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.widget.RecyclerView;
-import android.widget.ThemedSpinnerAdapter;
+import android.widget.AdapterView;
 
-import com.tableview.adapter.RecyclerOnItemClickListener;
 
 public class TableViewConfiguration {
     public Builder builder;
@@ -37,7 +36,6 @@ public class TableViewConfiguration {
 
         public RecyclerView.LayoutManager manager;
         public RecyclerView.ItemDecoration decoration;
-        public RecyclerOnItemClickListener itemOnClickListener;
 
         public Builder setLayoutManager(RecyclerView.LayoutManager manager) {
             this.manager = manager;
@@ -46,11 +44,6 @@ public class TableViewConfiguration {
 
         public Builder setItemDecoration(RecyclerView.ItemDecoration decoration) {
             this.decoration = decoration;
-            return this;
-        }
-
-        public Builder setOnItemClickListener(RecyclerOnItemClickListener itemOnClickListener) {
-            this.itemOnClickListener = itemOnClickListener;
             return this;
         }
 

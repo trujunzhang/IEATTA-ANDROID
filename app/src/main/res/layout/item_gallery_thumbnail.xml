@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.facebook.drawee.view.SimpleDraweeView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<com.facebook.drawee.view.SimpleDraweeView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/gallery_thumbnail_image"
     android:layout_width="@dimen/linkPreviewImageSize"
     android:layout_height="@dimen/linkPreviewImageSize"
-    android:layout_marginLeft="5dp"
-    android:layout_marginRight="5dp"
-    app:placeholderImage="@drawable/checkerboard"
-    app:placeholderImageScaleType="centerCrop"
+    android:layout_marginLeft="@dimen/linkPreviewGalleryMarginHorizontal"
+    android:layout_marginRight="@dimen/linkPreviewGalleryMarginHorizontal"
+    android:contentDescription="@null"
+    app:actualImageScaleType="centerCrop"
     app:failureImage="@drawable/checkerboard"
     app:failureImageScaleType="centerCrop"
-    app:actualImageScaleType="centerCrop"
-    android:contentDescription="@null" />
+    app:placeholderImage="@drawable/checkerboard"
+    app:placeholderImageScaleType="centerCrop"
+    app:roundedCornerRadius="2dp" />

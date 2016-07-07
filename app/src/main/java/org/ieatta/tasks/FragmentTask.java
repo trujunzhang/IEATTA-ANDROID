@@ -3,10 +3,13 @@ package org.ieatta.tasks;
 import android.app.Activity;
 import android.support.annotation.VisibleForTesting;
 import android.view.View;
+import android.widget.AdapterView;
 
 import com.tableview.RecycleViewManager;
+import com.tableview.TableViewControllerAdapter;
 import com.tableview.adapter.NSIndexPath;
-import com.tableview.adapter.RecyclerOnItemClickListener;
+
+import com.tableview.storage.models.RowModel;
 import com.tableview.utils.CollectionUtil;
 
 import org.ieatta.R;
@@ -49,7 +52,7 @@ import java.util.List;
 import bolts.Task;
 import io.realm.Realm;
 
-public abstract class FragmentTask extends MenuBarCallback implements RecyclerOnItemClickListener, LeadImagesHandler.OnContentHeightChangedListener {
+public abstract class FragmentTask extends MenuBarCallback implements AdapterView.OnItemClickListener, LeadImagesHandler.OnContentHeightChangedListener {
     protected String mRestaurantUUID;
     protected String mEventUUID;
     protected String mTeamUUID;
@@ -65,11 +68,16 @@ public abstract class FragmentTask extends MenuBarCallback implements RecyclerOn
 
     // For showing reviews list.
     public List<IEAReviewsCellModel> reviewsCellModelList;
-    protected static List<Realm> realmList = new LinkedList<>();
+    protected List<Realm> realmList = new LinkedList<>();
     protected ReviewQuery reviewQuery = new ReviewQuery();
 
     public void onItemClick(View view, NSIndexPath indexPath, Object model, int position, boolean isLongClick) {
+    }
 
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        RowModel item = this.manager.getMemoryStorage().getItem(position);
+        this.onItemClick(view, item.indexPath, item.model, position, false);
     }
 
     @VisibleForTesting
@@ -87,7 +95,7 @@ public abstract class FragmentTask extends MenuBarCallback implements RecyclerOn
 
     public abstract Task<Void> executeTask();
 
-    public  Task<Void> executeUpdateTask(UpdateEntry entry){
+    public Task<Void> executeUpdateTask(UpdateEntry entry) {
         return Task.forResult(null);
     }
 
@@ -113,7 +121,7 @@ public abstract class FragmentTask extends MenuBarCallback implements RecyclerOn
         this.manager.appendSectionTitleCell(new SectionTitleCellModel(IEAEditKey.Section_Title, R.string.Reviews), forSectionIndex);
         this.manager.setSectionItems(this.reviewsCellModelList, forSectionIndex);
 
-        int otherCount =this.reviewQuery.reviewsCount <= 0? 0: (this.reviewQuery.reviewsCount - limit);
+        int otherCount = this.reviewQuery.reviewsCount <= 0 ? 0 : (this.reviewQuery.reviewsCount - limit);
         new RecycleCellFunnel().logOtherReviewsCount(otherCount);
         this.manager.setFooterModelInSection(new SectionMoreReviewsFooterCellModel(otherCount), forSectionIndex, IEAMoreReviewsFooterCell.getType());
     }
@@ -136,7 +144,7 @@ public abstract class FragmentTask extends MenuBarCallback implements RecyclerOn
             = new GalleryThumbnailScrollView.GalleryViewListener() {
         @Override
         public void onGalleryItemClicked(String imageUUID) {
-            PageTitle imageTitle = new PageTitle(imageUUID,null,null);
+            PageTitle imageTitle = new PageTitle(imageUUID, null, null);
             GalleryActivity.showGallery(activity, model.getTitle(), imageTitle,
                     GalleryFunnel.SOURCE_LINK_PREVIEW);
         }

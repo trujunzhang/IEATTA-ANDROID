@@ -1,7 +1,5 @@
 package com.tableview.storage;
 
-import android.content.Intent;
-
 import com.tableview.TableViewControllerAdapter;
 import com.tableview.adapter.NSIndexPath;
 import com.tableview.storage.models.CellType;
@@ -13,7 +11,6 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
 
 public class MemoryStorage {
     private final static int Header_View_Index = Integer.MIN_VALUE;

@@ -96,7 +96,7 @@ public class SearchArticlesFragment extends Fragment implements BackPressedHandl
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         app = (IEAApp) getActivity().getApplicationContext();
-        app.getBus().register(this);
+//        app.getBus().register(this);
         View parentLayout = inflater.inflate(R.layout.fragment_search, container, false);
 
         searchContainerView = parentLayout.findViewById(R.id.search_container);
@@ -143,7 +143,7 @@ public class SearchArticlesFragment extends Fragment implements BackPressedHandl
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        app.getBus().unregister(this);
+//        app.getBus().unregister(this);
     }
 
     @Override

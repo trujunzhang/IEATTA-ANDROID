@@ -43,6 +43,7 @@
     <!-- Default width of swipeable bottom dialogs. -->
     <dimen name="swipeableDialogMaxWidth">480dp</dimen>
     <!-- Default size of images in Link Preview thumbnail gallery -->
+    <dimen name="linkPreviewGalleryMarginHorizontal">5dp</dimen>
     <dimen name="linkPreviewGalleryHeight">112dp</dimen>
     <dimen name="linkPreviewImageSize">112dp</dimen>
     <!-- Default height with which the Link Preview peeks out from the bottom -->
@@ -132,7 +133,6 @@
     <!--Read Reviews-->
     <dimen name="Read_Reviews_Header">50dip</dimen>
     <dimen name="Read_Reviews">40dip</dimen>
-
 
 
     <!--the following is my customize dimens-->

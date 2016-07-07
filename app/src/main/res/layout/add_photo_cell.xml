@@ -3,8 +3,9 @@
     android:id="@+id/add_media_cell_button"
     android:layout_width="@dimen/linkPreviewImageSize"
     android:layout_height="@dimen/linkPreviewImageSize"
-    android:layout_marginRight="5dp"
-    android:background="@drawable/button_add_media_cell">
+    android:layout_marginLeft="@dimen/linkPreviewGalleryMarginHorizontal"
+    android:layout_marginRight="@dimen/linkPreviewGalleryMarginHorizontal"
+    android:background="#3c3c3c">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -18,7 +19,8 @@
             android:drawableTop="@drawable/camera_big_gray"
             android:gravity="center"
             android:includeFontPadding="false"
-            android:text="@string/add"
-            android:textAppearance="@style/LargeBoldLightText" />
+            android:text="@string/take_photo"
+            android:textAppearance="@style/LargeBoldLightText"
+            android:textColor="#747474" />
     </RelativeLayout>
 </RelativeLayout>

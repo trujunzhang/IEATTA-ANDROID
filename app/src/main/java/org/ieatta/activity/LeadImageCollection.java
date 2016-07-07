@@ -7,8 +7,8 @@ import java.util.List;
 import bolts.Task;
 
 public class LeadImageCollection {
-    public int galleryIndex;
     public List<LeadImage> leadImages;
+    public int galleryIndex;
 
     private String usedRef;
 
@@ -47,17 +47,17 @@ public class LeadImageCollection {
     }
 
     public boolean isCached() {
-        if (leadImages.size() == 0) {
+        if (leadImages.size() == 0)
             return true;
-        }
+
         LeadImage leadImage = leadImages.get(this.galleryIndex);
         return leadImage.isCached();
     }
 
     public LeadImage getCurrentLeadImage() {
-        if (leadImages.size() == 0) {
+        if (leadImages.size() == 0)
             return null;
-        }
+
         return leadImages.get(this.galleryIndex);
     }
 

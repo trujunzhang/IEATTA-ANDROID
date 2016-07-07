@@ -3,18 +3,20 @@ package com.tableview.adapter;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 
+import com.tableview.TableViewControllerAdapter;
 import com.tableview.adapter.enums.ViewHolderType;
 
 import org.ieatta.R;
 
-public abstract class IEAViewHolder extends RecyclerView.ViewHolder implements ModelTransfer, View.OnClickListener, View.OnLongClickListener {
+public abstract class IEAViewHolder extends RecyclerView.ViewHolder implements ModelTransfer, View.OnClickListener {
+
+
     protected boolean shouldOnClickItem() {
         return true;
     }
 
-    public boolean haveBackground(){
+    public boolean haveBackground() {
         return true;
     }
 
@@ -24,38 +26,32 @@ public abstract class IEAViewHolder extends RecyclerView.ViewHolder implements M
      */
     public ViewGroup mContainer;
 
+    private TableViewControllerAdapter mAdapter;
+
     @Override
     public ViewHolderType getViewHolderType() {
         return ViewHolderType.cell;
     }
 
-    private ItemClickListener clickListener;
-
     public IEAViewHolder(View itemView) {
         super(itemView);
 
-        if(haveBackground() == true) {
+        if (this.haveBackground())
             this.mContainer = (ViewGroup) itemView.findViewById(R.id.container);
-        }
-        itemView.setTag(this.getViewHolderType().ordinal());
-        if (this.shouldOnClickItem() == true) {
-            itemView.setOnClickListener(this);
-            itemView.setOnLongClickListener(this);
-        }
-    }
 
-    public void setClickListener(ItemClickListener itemClickListener) {
-        this.clickListener = itemClickListener;
+        itemView.setTag(this.getViewHolderType().ordinal());
+
+        if (this.shouldOnClickItem())
+            itemView.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
-        clickListener.onClick(view, getPosition(), false);
+        if (mAdapter != null)
+            mAdapter.onItemHolderClick(this);
     }
 
-    @Override
-    public boolean onLongClick(View view) {
-        clickListener.onClick(view, getPosition(), true);
-        return true;
+    public void setAdapter(TableViewControllerAdapter mAdapter) {
+        this.mAdapter = mAdapter;
     }
 }

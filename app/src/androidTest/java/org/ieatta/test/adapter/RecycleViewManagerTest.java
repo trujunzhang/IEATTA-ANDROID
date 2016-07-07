@@ -1,6 +1,5 @@
 package org.ieatta.test.adapter;
 
-import android.content.Context;
 import android.test.ActivityUnitTestCase;
 
 import com.tableview.RecycleViewManager;
@@ -31,7 +30,7 @@ public class RecycleViewManagerTest extends ActivityUnitTestCase<TestActivity> {
     @Before
     public void setUp() throws Exception {
         manager = new RecycleViewManager();
-        mProvider = manager.getTableManager();
+        mProvider = manager.getProvider();
 
         TableViewConfiguration configuration = new TableViewConfiguration(new TableViewConfiguration.Builder());
         TableViewControllerAdapter adapter = new TableViewControllerAdapter(this.mProvider);

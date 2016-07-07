@@ -1,6 +1,7 @@
 package org.ieatta.activity;
 
 import android.Manifest;
+import android.location.Location;
 import android.os.Bundle;
 
 import android.os.Looper;
@@ -13,7 +14,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
 
-import com.squareup.otto.Bus;
+//import com.squareup.otto.Bus;
 
 import org.ieatta.IEAApp;
 import org.ieatta.R;
@@ -84,7 +85,7 @@ public class PageActivity extends ThemedActionBarActivity {
     private static final String PLAIN_TEXT_MIME_TYPE = "text/plain";
     private static final String LINK_PREVIEW_FRAGMENT_TAG = "link_preview_dialog";
 
-    private Bus bus;
+    //    private Bus bus;
     private EventBusMethods busMethods;
     private IEAApp app;
     private View fragmentContainerView;
@@ -159,7 +160,7 @@ public class PageActivity extends ThemedActionBarActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         app = (IEAApp) getApplicationContext();
-        app.checkCrashes(this);
+//        app.checkCrashes(this);
 
         setContentView(R.layout.activity_page);
 
@@ -167,10 +168,6 @@ public class PageActivity extends ThemedActionBarActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         toolbarContainer = findViewById(R.id.main_toolbar_container);
-
-        busMethods = new EventBusMethods();
-        registerBus();
-
         fragmentContainerView = findViewById(R.id.content_fragment_container);
 
         drawerLayout = (WikiDrawerLayout) findViewById(R.id.drawer_layout);
@@ -207,7 +204,6 @@ public class PageActivity extends ThemedActionBarActivity {
         searchBarHideHandler = new SearchBarHideHandler(this, toolbarContainer);
 
         locationHandler = new LocationHandler(this);
-        PageActivityPermissionsDispatcher.showLastLocationWithCheck(this);
         PageActivityPermissionsDispatcher.showUpdateLocationWithCheck(this);
 
         if (savedInstanceState != null) {
@@ -532,7 +528,6 @@ public class PageActivity extends ThemedActionBarActivity {
         String teamUUID = "197C0BEF-B432-47B8-988B-99406643623A";// Dolores Chavez
         String recipeUUID = "95B62D6F-87DF-47E2-8C84-EADAE131BB5D"; // Dark Gelate
 
-
         HistoryEntry entry = new HistoryEntry(MainSegueIdentifier.nearbyRestaurants, LocationUtil.getLocation());
 //        HistoryEntry entry =new HistoryEntry(MainSegueIdentifier.detailRestaurantSegueIdentifier,restaurantUUID);
 //        HistoryEntry entry =new HistoryEntry(MainSegueIdentifier.detailEventSegueIdentifier,eventUUID);
@@ -597,19 +592,18 @@ public class PageActivity extends ThemedActionBarActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        if (bus == null) {
-            registerBus();
-        }
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        this.locationHandler.onResume();
     }
 
     @Override
     public void onPause() {
         super.onPause();
+        this.locationHandler.onPause();
     }
 
     @Override
@@ -630,9 +624,9 @@ public class PageActivity extends ThemedActionBarActivity {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, final Intent data) {
-        if (bus == null) {
-            registerBus();
-        }
+//        if (bus == null) {
+//            registerBus();
+//        }
 //        if (settingsActivityRequested(requestCode)) {
 //            handleSettingsActivityResult(resultCode);
 //        }else if (newArticleLanguageSelected(requestCode, resultCode) || galleryFilePageSelected(requestCode, resultCode)) {
@@ -655,7 +649,6 @@ public class PageActivity extends ThemedActionBarActivity {
     protected void onStop() {
         super.onStop();
         unregisterBus();
-        locationHandler.onStop();
     }
 
     /**
@@ -692,15 +685,15 @@ public class PageActivity extends ThemedActionBarActivity {
     }
 
     private void registerBus() {
-        bus = app.getBus();
-        bus.register(busMethods);
-        L.d("Registered bus.");
+//        bus = app.getBus();
+//        bus.register(busMethods);
+//        L.d("Registered bus.");
     }
 
     private void unregisterBus() {
-        bus.unregister(busMethods);
-        bus = null;
-        L.d("Unregistered bus.");
+//        bus.unregister(busMethods);
+//        bus = null;
+//        L.d("Unregistered bus.");
     }
 
     private void handleSettingsActivityResult(int resultCode) {
@@ -716,8 +709,6 @@ public class PageActivity extends ThemedActionBarActivity {
         return resultCode == SettingsActivity.ACTIVITY_RESULT_LANGUAGE_CHANGED;
     }
 
-
-
     /**
      * Update any instances of our Featured Page widget, since it will change with the currently selected language.
      */
@@ -730,17 +721,18 @@ public class PageActivity extends ThemedActionBarActivity {
 //        sendBroadcast(widgetIntent);
     }
 
-
     private LocationHandler locationHandler;
-
-    @NeedsPermission(Manifest.permission.ACCESS_COARSE_LOCATION)
-    void showLastLocation() {
-        locationHandler.showLastLocation();
-    }
 
     @NeedsPermission(Manifest.permission.ACCESS_FINE_LOCATION)
     void showUpdateLocation() {
         locationHandler.showUpdateLocation();
+        locationHandler.setUpdateLocationListener(new LocationHandler.UpdateLocationListener() {
+            @Override
+            public void locationOnChanged(Location location) {
+                IEAApp.getInstance().lastLocation = location;
+                PageActivity.this.updateLocation();
+            }
+        });
     }
 
 
@@ -754,7 +746,7 @@ public class PageActivity extends ThemedActionBarActivity {
     // Observer the location changed.
     public void updateLocation() {
         FragmentTask task = this.getCurPageFragment().getTask();
-        if(task.isMainPage() ==true){
+        if (task.isMainPage()) {
             task.executeUpdateTask(new UpdateEntry());
         }
     }

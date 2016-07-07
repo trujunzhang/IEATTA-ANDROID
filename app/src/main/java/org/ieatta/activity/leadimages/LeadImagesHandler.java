@@ -74,7 +74,6 @@ public class LeadImagesHandler {
     private float faceYOffsetNormalized;
     private float displayDensity;
 
-    private RecurringTask task;
 
     public LeadImagesHandler(@NonNull final PageFragment parentFragment,
                              @NonNull ObservableWebView webView,
@@ -93,6 +92,8 @@ public class LeadImagesHandler {
 
         // hide ourselves by default
         hide();
+
+        LeadImagesTask.instance.setLeadImagesHandler(this);
     }
 
     public void setMenuBarCallback(@Nullable ArticleMenuBarView.Callback callback) {
@@ -101,26 +102,6 @@ public class LeadImagesHandler {
 
     private void initWebView() {
         webView.addOnScrollChangeListener(articleHeaderView);
-
-        webView.addOnClickListener(new ObservableWebView.OnClickListener() {
-            @Override
-            public boolean onClick(float x, float y) {
-                // if the click event is within the area of the lead image, then the user
-                // must have wanted to click on the lead image!
-                if (getPage() != null && isLeadImageEnabled() && y < (articleHeaderView.getHeight() - webView.getScrollY())) {
-//                    String imageName = getPage().getPageProperties().getLeadImageName();
-//                    if (imageName != null) {
-//                        PageTitle imageTitle = new PageTitle("File:" + imageName,
-//                                getTitle().getSite());
-//                        GalleryActivity.showGallery(getActivity(),
-//                                parentFragment.getTitleOriginal(), imageTitle,
-//                                GalleryFunnel.SOURCE_LEAD_IMAGE);
-//                    }
-                    return true;
-                }
-                return false;
-            }
-        });
     }
 
     /**
@@ -129,6 +110,7 @@ public class LeadImagesHandler {
      */
     public void hide() {
         articleHeaderView.hide();
+        articleHeaderView.loadImage(null);
     }
 
     @Nullable
@@ -137,7 +119,8 @@ public class LeadImagesHandler {
     }
 
     public boolean isLeadImageEnabled() {
-        return true;
+        FragmentTask task = parentFragment.getTask();
+        return task != null && (task.haveLeadImage()) && displayHeightDp >= MIN_SCREEN_HEIGHT_DP;
 //        return IEAApp.getInstance().isImageDownloadEnabled()
 //                && displayHeightDp >= MIN_SCREEN_HEIGHT_DP
 //                && !TextUtils.isEmpty(getLeadImageUrl());
@@ -194,30 +177,16 @@ public class LeadImagesHandler {
      *
      * @param listener Listener that will receive an event when the layout is completed.
      */
-    public void beginLayout(OnLeadImageLayoutListener listener,
-                            int sequence) {
+    public void beginLayout(OnLeadImageLayoutListener listener, int sequence) {
         if (getPage() == null) {
             return;
         }
 
         initDisplayDimensions();
 
-        if (this.getPage().getPageProperties().getLeadImageCount() < 2) {
-            LeadImagesHandler.this.recurringLeadImages();
-        } else {
-            if (task != null) {
-                task.closeTask();
-                task = null;
-            }
-            task = new RecurringTask();
-            // set the page title text, and honor any HTML formatting in the title
-            task.periodicTask(new RecurringTask.RecurringEvent() {
-                @Override
-                public void everyTask() {
-                    LeadImagesHandler.this.recurringLeadImages();
-                }
-            }, 0, 20);
-        }
+        // set the page title text, and honor any HTML formatting in the title
+        // loadLeadImage();
+        LeadImagesTask.instance.carouselLeadImages();
 
         articleHeaderView.setTitle(Html.fromHtml(getPage().getDisplayTitle()));
         articleHeaderView.setRatingImageView(getTitle().getRatingReview());
@@ -226,21 +195,6 @@ public class LeadImagesHandler {
         layoutViews(listener, sequence);
 
         loadMapView(this.getPage().getPageProperties().getLeadMapView());
-    }
-
-    private void recurringLeadImages() {
-        if (this.getPage() == null) {
-            return;
-        }
-        final PageProperties pageProperties = this.getPage().getPageProperties();
-        pageProperties.getCurrentLeadImage().onSuccess(new Continuation<LeadImage, Void>() {
-            @Override
-            public Void then(Task<LeadImage> task) throws Exception {
-                LeadImagesHandler.this.loadLeadImage(task.getResult());
-                pageProperties.nextLeadImage();
-                return null;
-            }
-        }, Task.UI_THREAD_EXECUTOR);
     }
 
     /**
@@ -328,15 +282,19 @@ public class LeadImagesHandler {
         displayHeightDp = (int) (displayHeightPx / displayDensity);
     }
 
-//    private void loadLeadImage(String url) {
+    //    private void loadLeadImage(String url) {
 //        loadLeadImage(url);
 //    }
+
+    private void loadLeadImage() {
+//        loadLeadImage(getLeadImageUrl());
+    }
 
     /**
      * @param leadImage Nullable URL with no scheme. For example, foo.bar.com/ instead of
      *                  http://foo.bar.com/.
      */
-    private void loadLeadImage(@Nullable LeadImage leadImage) {
+    public void loadLeadImage(@Nullable LeadImage leadImage) {
         if (!isMainPage() && leadImage != null && isLeadImageEnabled()) {
             new PageFragmentFunnel().logLoadLeadImage("have LeadImage");
             articleHeaderView.setImageYScalar(0);
@@ -391,7 +349,7 @@ public class LeadImagesHandler {
 
     private boolean isMainPage() {
         FragmentTask task = parentFragment.getTask();
-        return task != null && (task.haveLeadImage()==false);
+        return task != null && (!task.haveLeadImage());
     }
 
     private PageTitle getTitle() {

@@ -20,7 +20,7 @@ public class RealmModelWriter<T extends RealmObject> {
 
     public Task<Void> save(T model,PQueryModelType type) {
         // Obtain a Realm instance
-        Realm realm = Realm.getInstance(IEAApp.getInstance());
+        Realm realm = RealmInstance.getInstance();
 
         try {
             realm.beginTransaction();

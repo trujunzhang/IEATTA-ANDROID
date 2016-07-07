@@ -4,7 +4,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.tableview.adapter.RecyclerOnItemClickListener;
 import com.tableview.TableViewControllerAdapter;
 import com.tableview.adapter.IEAViewHolder;
 import com.tableview.storage.models.CellType;
@@ -16,13 +15,9 @@ public class DTTableViewManager {
     public TableViewConfiguration configuration;
     public MemoryStorage memoryStorage;
 
-    public void setConfiguration(TableViewConfiguration configuration, TableViewControllerAdapter adapter){
+    public void setConfiguration(TableViewConfiguration configuration, TableViewControllerAdapter adapter) {
         this.configuration = configuration;
         this.memoryStorage = new MemoryStorage(adapter);
-    }
-
-    public RecyclerOnItemClickListener getOnItemClickListener(){
-        return configuration.builder.itemOnClickListener;
     }
 
     public TableViewControllerAdapter getAdapter() {

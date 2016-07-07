@@ -8,8 +8,8 @@ import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 public class RecurringTask {
-    public interface RecurringEvent{
-         void everyTask() ;
+    public interface RecurringEvent {
+        void everyTask();
     }
 
     private ScheduledFuture<?> periodicFuture;
@@ -46,7 +46,7 @@ public class RecurringTask {
 
     public void periodicTask(final RecurringEvent event,
                              long initialDelay,
-                             long period){
+                             long period) {
         // And yet another
         Runnable periodicTask = new Runnable() {
             @Override
@@ -62,8 +62,8 @@ public class RecurringTask {
         this.periodicFuture = sch.scheduleAtFixedRate(periodicTask, initialDelay, period, TimeUnit.SECONDS);
     }
 
-    public void closeTask(){
-        if(sch.isShutdown() ==false)
+    public void closeTask() {
+        if (!sch.isShutdown())
             sch.shutdown();
     }
 

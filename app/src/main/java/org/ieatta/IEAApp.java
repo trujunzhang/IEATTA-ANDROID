@@ -12,7 +12,8 @@ import android.support.annotation.NonNull;
 import android.util.TypedValue;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
-import com.squareup.otto.Bus;
+import com.google.android.gms.maps.MapView;
+//import com.squareup.otto.Bus;
 
 import org.ieatta.activity.search.RecentSearch;
 import org.ieatta.activity.history.HistoryEntry;
@@ -91,7 +92,7 @@ public class IEAApp extends Application {
      */
     private static IEAApp INSTANCE;
 
-    private Bus bus;
+    //    private Bus bus;
     @NonNull
     private Theme currentTheme = Theme.getFallback();
 
@@ -101,7 +102,7 @@ public class IEAApp extends Application {
 
     /**
      * Returns the singleton instance of the IEAApp
-     *
+     * <p/>
      * This is ok, since android treats it as a singleton anyway.
      */
     public static IEAApp getInstance() {
@@ -116,10 +117,10 @@ public class IEAApp extends Application {
         CacheImageUtil.sharedInstance.clearCacheDisk();
 
         ParseAPI.setup(this);
-        initExceptionHandling();
+//        initExceptionHandling();
 
         Fresco.initialize(this);
-        bus = new Bus();
+//        bus = new Bus();
 
         final Resources resources = getResources();
         ViewAnimations.init(resources);
@@ -130,10 +131,11 @@ public class IEAApp extends Application {
         new SyncRecurringTask().prepareTimer();
     }
 
-    public Bus getBus() {
-        return bus;
-    }
+//    public Bus getBus() {
+//        return bus;
+//    }
 
+    private MapView headerMapView;
 
     public Database getDatabase() {
         return database;
@@ -142,6 +144,7 @@ public class IEAApp extends Application {
     /**
      * Get this app's unique install ID, which is a UUID that should be unique for each install
      * of the app. Useful for anonymous analytics.
+     *
      * @return Unique install ID for this app.
      */
     public String getAppInstallID() {
@@ -158,10 +161,11 @@ public class IEAApp extends Application {
      * sampling, that is, whether the user's instance of the app sends any events or not. This is a
      * pure technical measure which is necessary to prevent overloading EventLogging with too many
      * events. This value will persist for the lifetime of the app.
-     *
+     * <p/>
      * Don't use this method when running to determine whether or not the user falls into a control
      * or test group in any kind of tests (such as A/B tests), as that would introduce sampling
      * biases which would invalidate the test.
+     *
      * @return Integer ID for event log sampling.
      */
     @IntRange(from = 0)
@@ -182,6 +186,7 @@ public class IEAApp extends Application {
 
     /**
      * Gets the currently-selected theme for the app.
+     *
      * @return Theme that is currently selected, which is the actual theme ID that can
      * be passed to setTheme() when creating an activity.
      */
@@ -205,7 +210,8 @@ public class IEAApp extends Application {
 
     /**
      * Apply a tint to the provided drawable.
-     * @param d Drawable to be tinted.
+     *
+     * @param d         Drawable to be tinted.
      * @param tintColor Color of the tint. Setting to 0 will remove the tint.
      */
     public void setDrawableTint(Drawable d, int tintColor) {
@@ -219,6 +225,7 @@ public class IEAApp extends Application {
     /**
      * Make adjustments to a Drawable object to look better in the current theme.
      * (e.g. apply a white color filter for night mode)
+     *
      * @param d Drawable to be adjusted.
      */
     public void adjustDrawableToTheme(Drawable d) {
@@ -243,7 +250,8 @@ public class IEAApp extends Application {
     }
 
     public boolean isImageDownloadEnabled() {
-        return Prefs.isImageDownloadEnabled();
+//        return Prefs.isImageDownloadEnabled();
+        return true;
     }
 
     public boolean isLinkPreviewEnabled() {
@@ -279,12 +287,20 @@ public class IEAApp extends Application {
                 client = new DatabaseClient<>(this, HistoryEntry.DATABASE_TABLE);
             } else if (cls.equals(RecentSearch.class)) {
                 client = new DatabaseClient<>(this, RecentSearch.DATABASE_TABLE);
-            }  else {
+            } else {
                 throw new RuntimeException("No persister found for class " + cls.getCanonicalName());
             }
             databaseClients.put(cls, client);
         }
         //noinspection unchecked
         return (DatabaseClient<T>) databaseClients.get(cls);
+    }
+
+    public MapView getHeaderMapView() {
+        return headerMapView;
+    }
+
+    public void setHeaderMapView(MapView headerMapView) {
+        this.headerMapView = headerMapView;
     }
 }

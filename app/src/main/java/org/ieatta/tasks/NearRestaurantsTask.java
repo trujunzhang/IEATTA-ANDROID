@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.location.Location;
 import android.support.annotation.VisibleForTesting;
 import android.view.View;
+import android.widget.AdapterView;
 
 import com.tableview.adapter.NSIndexPath;
 
@@ -43,6 +44,11 @@ public class NearRestaurantsTask extends FragmentTask {
         return true;
     }
 
+    @Override
+    public boolean haveLeadImage() {
+        return false;
+    }
+
     public RealmResults<DBRestaurant> restaurants;
 
     @Override
@@ -66,7 +72,6 @@ public class NearRestaurantsTask extends FragmentTask {
      * @return
      */
     public Task<Void> executeTask() {
-
         return LocalDatabaseQuery.queryNearRestaurants(IEAApp.getInstance().lastLocation, this.realmList).onSuccess(new Continuation<RealmResults<DBRestaurant>, Void>() {
             @Override
             public Void then(Task<RealmResults<DBRestaurant>> task) throws Exception {
@@ -78,12 +83,11 @@ public class NearRestaurantsTask extends FragmentTask {
 
     @Override
     public Task<Void> executeUpdateTask(UpdateEntry entry) {
-
         return LocalDatabaseQuery.queryNearRestaurants(IEAApp.getInstance().lastLocation, this.realmList).onSuccess(new Continuation<RealmResults<DBRestaurant>, Void>() {
             @Override
             public Void then(Task<RealmResults<DBRestaurant>> task) throws Exception {
                 NearRestaurantsTask.this.restaurants = task.getResult();
-                NearRestaurantsTask.this. manager.setSectionItems(NearRestaurantsTask.this.restaurants, NearRestaurantSection.section_restaurants.ordinal());
+                NearRestaurantsTask.this.manager.setSectionItems(NearRestaurantsTask.this.restaurants, NearRestaurantSection.section_restaurants.ordinal());
                 NearRestaurantsTask.this.manager.reloadTableView();
                 return null;
             }
@@ -103,8 +107,5 @@ public class NearRestaurantsTask extends FragmentTask {
         this.manager.setAndRegisterSectionItems(IEANearRestaurantsCell.getType(), this.restaurants, NearRestaurantSection.section_restaurants.ordinal());
     }
 
-    @Override
-    public boolean haveLeadImage() {
-        return false;
-    }
+
 }

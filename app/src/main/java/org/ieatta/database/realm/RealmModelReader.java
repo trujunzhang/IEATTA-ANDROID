@@ -8,6 +8,7 @@ import java.util.List;
 
 import bolts.Task;
 import io.realm.Realm;
+import io.realm.RealmConfiguration;
 import io.realm.RealmObject;
 import io.realm.RealmQuery;
 import io.realm.RealmResults;
@@ -20,10 +21,11 @@ public class RealmModelReader<T extends RealmObject> {
         this.clazz = clazz;
     }
 
+
     public Task<RealmResults<T>> fetchResults(DBBuilder builder, boolean needClose, List<Realm> realmList) {
         RealmResults<T> result = null;
 
-        Realm realm = Realm.getInstance(IEAApp.getInstance());
+        Realm realm = RealmInstance.getInstance();
         try {
             RealmQuery<T> query = realm.where(this.clazz);
 
@@ -50,7 +52,7 @@ public class RealmModelReader<T extends RealmObject> {
     public Task<T> getFirstObject(DBBuilder builder, boolean needClose, List<Realm> realmList) {
         T result = null;
 
-        Realm realm = Realm.getInstance(IEAApp.getInstance());
+        Realm realm = RealmInstance.getInstance();
         try {
             RealmQuery<T> query = realm.where(this.clazz);
 
@@ -73,9 +75,9 @@ public class RealmModelReader<T extends RealmObject> {
     }
 
     public Task<Long> getCountObjects(DBBuilder builder) {
-        Long result = new Long(0);
+        Long result = 0L;
 
-        Realm realm = Realm.getInstance(IEAApp.getInstance());
+        Realm realm = RealmInstance.getInstance();
         try {
             RealmQuery<T> query = realm.where(this.clazz);
 
@@ -99,8 +101,7 @@ public class RealmModelReader<T extends RealmObject> {
         buildContainedListMap(builder, query);
         buildEqualMap(builder, query);
 
-//        if(builder.limit != DBBuilder.NO_LIMIT)
-
+        // if(builder.limit != DBBuilder.NO_LIMIT)
     }
 
     private void buildContainedListMap(DBBuilder builder, RealmQuery<T> query) {

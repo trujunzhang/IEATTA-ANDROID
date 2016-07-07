@@ -1,5 +1,6 @@
 package org.ieatta.activity;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
@@ -18,7 +19,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.mapbox.mapboxsdk.maps.MapView;
+//import com.mapbox.mapboxsdk.maps.MapView;
 
 import org.ieatta.R;
 import org.ieatta.activity.editing.EditHandler;
@@ -35,7 +36,7 @@ import static butterknife.ButterKnife.findById;
 public class PageFragment extends Fragment implements BackPressedHandler {
     private IEAApp app;
 
-    private MapView mapView;
+//    private MapView mapView;
 
     protected PageLoadStrategy pageLoadStrategy;
     protected PageViewModel model;
@@ -203,11 +204,9 @@ public class PageFragment extends Fragment implements BackPressedHandler {
     }
 
     public void loadPage(HistoryEntry entry, boolean pushBackStack, int stagedScrollY, int parallaxScrollY) {
-        new PageFragmentFunnel().logLoadPage(entry,stagedScrollY);
+        new PageFragmentFunnel().logLoadPage(entry, stagedScrollY);
 
         webView.setVisibility(View.GONE);
-        searchBarHideHandler.setForceNoFade(false);
-        searchBarHideHandler.setFadeEnabled(false);
 
         model.setPushBackStack(pushBackStack);
         model.setStagedScrollY(stagedScrollY);
@@ -236,15 +235,15 @@ public class PageFragment extends Fragment implements BackPressedHandler {
         // TODO: initialize View references in onCreateView().
         articleHeaderView = findById(getView(), R.id.page_header_view);
         leadImagesHandler = new LeadImagesHandler(this, webView, articleHeaderView);
-        menuBarEventHandler = new MenuBarEventHandler(leadImagesHandler,articleHeaderView);
+        menuBarEventHandler = new MenuBarEventHandler(leadImagesHandler, articleHeaderView);
         searchBarHideHandler = getPageActivity().getSearchBarHideHandler();
         searchBarHideHandler.setScrollView(webView);
 
         pageLoadStrategy.setUp(model, this, webView, searchBarHideHandler,
                 leadImagesHandler, getCurrentTab().getBackStack());
 
-        mapView = articleHeaderView.getMapView();
-        mapView.onCreate(savedInstanceState);
+//        mapView = articleHeaderView.getMapView();
+//        mapView.onCreate(savedInstanceState);
     }
 
     public int getActionBarHeight() {
@@ -254,34 +253,47 @@ public class PageFragment extends Fragment implements BackPressedHandler {
     @Override
     public void onResume() {
         super.onResume();
-        mapView.onResume();
+//        mapView.onResume();
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("");
         initPageScrollFunnel();
     }
 
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        // if the screen orientation changes, then re-layout the lead image container,
+        // but only if we've finished fetching the page.
+        if (!pageLoadStrategy.isLoading()) {
+            pageLoadStrategy.layoutLeadImage();
+        }
+//        tabsProvider.onConfigurationChanged();
+    }
+
+
     @Override
     public void onPause() {
         super.onPause();
-        mapView.onPause();
+//        mapView.onPause();
         closePageScrollFunnel();
     }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        mapView.onSaveInstanceState(outState);
+//        mapView.onSaveInstanceState(outState);
     }
 
     @Override
     public void onLowMemory() {
         super.onLowMemory();
-        mapView.onLowMemory();
+//        mapView.onLowMemory();
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        mapView.onDestroy();
+//        mapView.onDestroy();
     }
 
     public MenuBarEventHandler getMenuBarEventHandler() {

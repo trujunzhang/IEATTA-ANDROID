@@ -13,7 +13,7 @@ import android.view.View;
 
 import com.tableview.RecycleViewManager;
 import com.tableview.adapter.NSIndexPath;
-import com.tableview.adapter.RecyclerOnItemClickListener;
+
 
 import org.ieatta.R;
 import org.ieatta.cells.IEAGalleryThumbnailCell;

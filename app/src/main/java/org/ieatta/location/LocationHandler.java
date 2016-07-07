@@ -5,92 +5,127 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.IntentSender;
 import android.location.Location;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.util.Log;
 
-import com.google.android.gms.common.api.Status;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
-import com.google.android.gms.location.LocationSettingsRequest;
-import com.google.android.gms.location.LocationSettingsResult;
-import com.google.android.gms.location.LocationSettingsStatusCodes;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
-import org.ieatta.activity.PageActivity;
+public class LocationHandler implements GoogleApiClient.ConnectionCallbacks,
+        GoogleApiClient.OnConnectionFailedListener,
+        LocationListener {
 
-import pl.charmas.android.reactivelocation.ReactiveLocationProvider;
-import rx.Observable;
-import rx.Subscription;
-import rx.functions.Action1;
-import rx.functions.Func1;
+    public interface UpdateLocationListener {
+        public void locationOnChanged(Location location);
+    }
 
+    private UpdateLocationListener listener;
 
-public class LocationHandler {
-    private static final int REQUEST_CHECK_SETTINGS = 0;
+    public void setUpdateLocationListener(UpdateLocationListener listener) {
+        this.listener = listener;
+    }
+
+    private final static int CONNECTION_FAILURE_RESOLUTION_REQUEST = 9000;
+    private final Activity activity;
+
+    private GoogleApiClient mGoogleApiClient;
+    private LocationRequest mLocationRequest;
 
     private final Context context;
-    private final PageActivity activity;
 
-    private ReactiveLocationProvider locationProvider;
-    private Observable<Location> locationUpdatesObservable;
-    private Subscription updatableLocationSubscription;
-
-    public LocationHandler(PageActivity activity) {
+    public LocationHandler(Activity activity) {
         this.activity = activity;
         this.context = activity.getApplicationContext();
     }
 
-    public void showLastLocation() {
-        ReactiveLocationProvider locationProvider = new ReactiveLocationProvider(context);
-        locationProvider.getLastKnownLocation()
-                .subscribe(new UpdateLocationAction(activity));
-    }
 
     public void showUpdateLocation() {
-        final LocationRequest locationRequest = LocationRequest.create() //standard GMS LocationRequest
+        mGoogleApiClient = new GoogleApiClient.Builder(this.context)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .addApi(LocationServices.API)
+                .build();
+
+        // Create the LocationRequest object
+        mLocationRequest = LocationRequest.create()
                 .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
-                .setNumUpdates(5)
-                .setInterval(100);
-
-        locationProvider = new ReactiveLocationProvider(context);
-        locationUpdatesObservable = locationProvider
-                .checkLocationSettings(
-                        new LocationSettingsRequest.Builder()
-                                .addLocationRequest(locationRequest)
-                                .setAlwaysShow(true)  //Refrence: http://stackoverflow.com/questions/29824408/google-play-services-locationservices-api-new-option-never
-                                .build()
-                )
-                .doOnNext(new Action1<LocationSettingsResult>() {
-                    @Override
-                    public void call(LocationSettingsResult locationSettingsResult) {
-                        Status status = locationSettingsResult.getStatus();
-                        if (status.getStatusCode() == LocationSettingsStatusCodes.RESOLUTION_REQUIRED) {
-                            try {
-                                status.startResolutionForResult(activity, REQUEST_CHECK_SETTINGS);
-                            } catch (IntentSender.SendIntentException th) {
-                                Log.e("MainActivity", "Error opening settings activity.", th);
-                            }
-                        }
-                    }
-                })
-                .flatMap(new Func1<LocationSettingsResult, Observable<Location>>() {
-                    @Override
-                    public Observable<Location> call(LocationSettingsResult locationSettingsResult) {
-                        return locationProvider.getUpdatedLocation(locationRequest);
-                    }
-                });
-
-        updatableLocationSubscription = locationUpdatesObservable
-                .subscribe(new UpdateLocationAction(activity), new ErrorHandler());
-    }
-
-    private class ErrorHandler implements Action1<Throwable> {
-        @Override
-        public void call(Throwable throwable) {
-            Log.d("LocationActivity", "Error occurred", throwable);
-        }
+                .setInterval(10 * 1000)        // 10 seconds, in milliseconds
+                .setFastestInterval(1 * 1000); // 1 second, in milliseconds
     }
 
     public void onStop() {
-        if (updatableLocationSubscription != null)
-            updatableLocationSubscription.unsubscribe();
+
     }
+
+    public void onResume() {
+        if (mGoogleApiClient != null)
+            mGoogleApiClient.connect();
+    }
+
+    public void onPause() {
+        if (mGoogleApiClient != null && mGoogleApiClient.isConnected()) {
+            LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
+            mGoogleApiClient.disconnect();
+        }
+    }
+
+
+    @Override
+    public void onConnected(@Nullable Bundle bundle) {
+        Location location = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+        if (location == null) {
+            LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
+        } else {
+            handleNewLocation(location);
+        }
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+//        Log.i(TAG, "Location services suspended. Please reconnect.");
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+        handleNewLocation(location);
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+        if (connectionResult.hasResolution()) {
+            try {
+                // Start an Activity that tries to resolve the error
+                connectionResult.startResolutionForResult(this.activity, CONNECTION_FAILURE_RESOLUTION_REQUEST);
+            } catch (IntentSender.SendIntentException e) {
+                e.printStackTrace();
+            }
+        } else {
+//            Log.i(TAG, "Location services connection failed with code " + connectionResult.getErrorCode());
+        }
+    }
+
+    private void handleNewLocation(Location location) {
+        if (this.listener != null)
+            this.listener.locationOnChanged(location);
+
+
+//        double currentLatitude = location.getLatitude();
+//        double currentLongitude = location.getLongitude();
+//        LatLng latLng = new LatLng(currentLatitude, currentLongitude);
+
+//        MarkerOptions options = new MarkerOptions()
+//                .position(latLng)
+//                .title("I am here!");
+//        mMap.addMarker(options);
+//        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+    }
+
 
 }

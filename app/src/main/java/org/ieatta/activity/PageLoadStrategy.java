@@ -54,6 +54,8 @@ public interface PageLoadStrategy {
 
     void loadFromBackStack();
 
+    boolean isLoading();
+
     /**
      * Update the current topmost backstack item, based on the currently displayed page.
      * (Things like the last y-offset position should be updated here)
