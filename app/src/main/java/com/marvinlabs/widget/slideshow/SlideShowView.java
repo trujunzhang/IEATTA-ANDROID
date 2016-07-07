@@ -428,7 +428,9 @@ public class SlideShowView extends RelativeLayout implements View.OnClickListene
         pl.next();
         final int currentPosition = pl.getCurrentSlide();
 
-        playSlide(currentPosition, previousPosition);
+        // When the playlist is just one, no next.
+        if(currentPosition != previousPosition)
+            playSlide(currentPosition, previousPosition);
     }
 
     /**
