@@ -92,8 +92,6 @@ public class LeadImagesHandler {
 
         // hide ourselves by default
         hide();
-
-        LeadImagesTask.instance.setLeadImagesHandler(this);
     }
 
     public void setMenuBarCallback(@Nullable ArticleMenuBarView.Callback callback) {
@@ -185,9 +183,6 @@ public class LeadImagesHandler {
         initDisplayDimensions();
 
         // set the page title text, and honor any HTML formatting in the title
-        // loadLeadImage();
-        LeadImagesTask.instance.carouselLeadImages();
-
         this.loadLeadImage(this.getPage().getPageProperties().getLeadImages());
 
         articleHeaderView.setTitle(Html.fromHtml(getPage().getDisplayTitle()));
@@ -288,13 +283,13 @@ public class LeadImagesHandler {
 //        loadLeadImage(url);
 //    }
 
-    private void loadLeadImage() {
+//    private void loadLeadImage() {
 //        loadLeadImage(getLeadImageUrl());
-    }
+//    }
 
     /**
-     * @param leadImage Nullable URL with no scheme. For example, foo.bar.com/ instead of
-     *                  http://foo.bar.com/.
+     * @param leadImages Nullable URL with no scheme. For example, foo.bar.com/ instead of
+     *                   http://foo.bar.com/.
      */
     public void loadLeadImage(@Nullable List<LeadImage> leadImages) {
         if (!isMainPage() && leadImages != null && isLeadImageEnabled()) {

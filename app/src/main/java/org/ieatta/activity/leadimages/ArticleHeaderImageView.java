@@ -19,6 +19,7 @@ import org.ieatta.activity.LeadImage;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.LinkedList;
 import java.util.List;
 
 import butterknife.Bind;
@@ -57,9 +58,10 @@ public class ArticleHeaderImageView extends FrameLayout {
     public void load(@Nullable List<LeadImage> leadImages) {
         if (leadImages == null) {
             setVisibility(GONE);
+            this.startSlideShow(this.createResourceAdapter(new LinkedList<LeadImage>()));
         } else {
             setVisibility(VISIBLE);
-//            image.loadMultiImage(leadImage);
+            this.startSlideShow(this.createResourceAdapter(leadImages));
         }
     }
 

@@ -1,12 +1,6 @@
 package org.ieatta.activity;
 
-import android.support.annotation.Nullable;
-
-import org.ieatta.activity.leadimages.LeadImagesTask;
-
 import java.util.List;
-
-import bolts.Task;
 
 public class PageProperties {
 
