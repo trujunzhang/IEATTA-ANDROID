@@ -11,6 +11,8 @@ import android.widget.RelativeLayout;
 
 import com.marvinlabs.widget.slideshow.SlideShowAdapter;
 
+import org.ieatta.activity.leadimages.ImageViewWithFace;
+
 import java.lang.ref.WeakReference;
 
 /**
