@@ -59,8 +59,8 @@ public class LeadImagesTask {
 
     public void refreshLeadImage() {
         LeadImage currentLeadImage = this.leadImageCollection.getCurrentLeadImage();
-        this.leadImagesHandler.loadLeadImage(currentLeadImage);
-        this.leadImageCollection.nextLeadImage();
+//        this.leadImagesHandler.loadLeadImage(currentLeadImage);
+//        this.leadImageCollection.nextLeadImage();
     }
 
     public void setLeadImagesHandler(LeadImagesHandler leadImagesHandler) {

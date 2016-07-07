@@ -10,6 +10,7 @@ import android.widget.FrameLayout;
 
 import com.marvinlabs.widget.slideshow.SlideShowAdapter;
 import com.marvinlabs.widget.slideshow.SlideShowView;
+import com.marvinlabs.widget.slideshow.adapter.LeadImageAdapter;
 import com.marvinlabs.widget.slideshow.adapter.ResourceBitmapAdapter;
 
 import org.ieatta.IEAApp;
@@ -65,7 +66,7 @@ public class ArticleHeaderImageView extends FrameLayout {
     private SlideShowAdapter createResourceAdapter(List<LeadImage> leadImages) {
         BitmapFactory.Options opts = new BitmapFactory.Options();
         opts.inSampleSize = 2;
-        ResourceBitmapAdapter adapter = new ResourceBitmapAdapter(IEAApp.getInstance(), leadImages, opts);
+        LeadImageAdapter adapter = new LeadImageAdapter(IEAApp.getInstance(), leadImages);
         return adapter;
     }
 
