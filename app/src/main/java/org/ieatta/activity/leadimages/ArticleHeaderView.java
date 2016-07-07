@@ -46,6 +46,8 @@ import org.wikipedia.util.StringUtil;
 import org.wikipedia.views.AppTextView;
 import org.wikipedia.views.ViewUtil;
 
+import java.util.List;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
@@ -129,10 +131,10 @@ public class ArticleHeaderView extends FrameLayout implements ObservableWebView.
         image.setLoadListener(listener);
     }
 
-    public void loadImage(@Nullable LeadImage leadImage) {
-        image.load(leadImage);
+    public void loadImage(@Nullable List<LeadImage> leadImages) {
+        image.load(leadImages);
         setImageViewMinimumHeight();
-        if (leadImage == null) {
+        if (leadImages == null) {
             resetMenuBarColor();
         }
     }

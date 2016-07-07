@@ -2,21 +2,30 @@ package org.ieatta.activity.leadimages;
 
 import android.annotation.TargetApi;
 import android.content.Context;
-import android.graphics.PointF;
+import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.widget.FrameLayout;
 
+import com.marvinlabs.widget.slideshow.SlideShowAdapter;
+import com.marvinlabs.widget.slideshow.SlideShowView;
+import com.marvinlabs.widget.slideshow.adapter.ResourceBitmapAdapter;
+
+import org.ieatta.IEAApp;
 import org.ieatta.R;
 import org.ieatta.activity.LeadImage;
+
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class ArticleHeaderImageView extends FrameLayout {
     @Bind(R.id.view_article_header_image_image)
-    ImageViewWithFace image;
+    SlideShowView image;
 
     public ArticleHeaderImageView(Context context) {
         super(context);
@@ -40,17 +49,40 @@ public class ArticleHeaderImageView extends FrameLayout {
     }
 
     public void setLoadListener(@Nullable ImageViewWithFace.OnImageLoadListener listener) {
-        image.setOnImageLoadListener(listener);
+//        image.setOnImageLoadListener(listener);
     }
 
 
-    public void load(@Nullable LeadImage leadImage) {
-        if (leadImage == null) {
+    public void load(@Nullable List<LeadImage> leadImages) {
+        if (leadImages == null) {
             setVisibility(GONE);
         } else {
             setVisibility(VISIBLE);
-            image.loadMultiImage(leadImage);
+//            image.loadMultiImage(leadImage);
         }
+    }
+
+    private SlideShowAdapter createResourceAdapter(List<LeadImage> leadImages) {
+        BitmapFactory.Options opts = new BitmapFactory.Options();
+        opts.inSampleSize = 2;
+        ResourceBitmapAdapter adapter = new ResourceBitmapAdapter(IEAApp.getInstance(), leadImages, opts);
+        return adapter;
+    }
+
+    private void startSlideShow(SlideShowAdapter adapter) {
+        // Create an adapter
+        image.setAdapter(adapter);
+
+        // Optional customisation follows
+//         slideShowView.setTransitionFactory(new ZoomTransitionFactory());
+        // slideShowView.setPlaylist(new RandomPlayList());
+
+        // Some listeners if needed
+//        image.setOnSlideShowEventListener(slideShowListener);
+//        image.setOnSlideClickListener(slideClickListener);
+
+        // Then attach the adapter
+        image.play();
     }
 
     public void load(@Nullable String url, Boolean local) {
@@ -58,22 +90,22 @@ public class ArticleHeaderImageView extends FrameLayout {
             setVisibility(GONE);
         } else {
             setVisibility(VISIBLE);
-            if (local == true) {
-                image.loadOfflineImage(url);
-            } else {
-                image.loadImage(url);
-            }
+//            if (local) {
+//                image.loadOfflineImage(url);
+//            } else {
+//                image.loadImage(url);
+//            }
         }
     }
 
     public void setAnimationPaused(boolean paused) {
-        if (image.getController() != null && image.getController().getAnimatable() != null) {
-            if (paused) {
-                image.getController().getAnimatable().stop();
-            } else {
-                image.getController().getAnimatable().start();
-            }
-        }
+//        if (image.getController() != null && image.getController().getAnimatable() != null) {
+//            if (paused) {
+//                image.getController().getAnimatable().stop();
+//            } else {
+//                image.getController().getAnimatable().start();
+//            }
+//        }
     }
 
     public boolean hasImage() {
@@ -81,12 +113,13 @@ public class ArticleHeaderImageView extends FrameLayout {
     }
 
     public ImageViewWithFace getImage() {
-        return image;
+//        return image;
+        return null;
     }
 
     public void setFocusOffset(float verticalOffset) {
         final float centerHorizontal = 0.5f;
-        image.getHierarchy().setActualImageFocusPoint(new PointF(centerHorizontal, verticalOffset));
+//        image.getHierarchy().setActualImageFocusPoint(new PointF(centerHorizontal, verticalOffset));
     }
 
     private void init() {

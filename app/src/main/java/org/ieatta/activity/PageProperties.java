@@ -4,11 +4,15 @@ import android.support.annotation.Nullable;
 
 import org.ieatta.activity.leadimages.LeadImagesTask;
 
+import java.util.List;
+
 import bolts.Task;
 
 public class PageProperties {
 
     private final String displayTitleText;
+    private final List<LeadImage> leadImages;
+
 
     private LeadMapView leadMapView;
 
@@ -17,7 +21,7 @@ public class PageProperties {
     }
 
     public PageProperties(LeadImageCollection leadImageCollection, String displayTitleText, LeadMapView leadMapView) {
-        LeadImagesTask.instance.setLeadImageCollection(leadImageCollection);
+        this.leadImages = leadImageCollection.leadImages;
 
         this.displayTitleText = displayTitleText;
         this.leadMapView = leadMapView;
@@ -25,5 +29,9 @@ public class PageProperties {
 
     public String getDisplayTitle() {
         return displayTitleText;
+    }
+
+    public List<LeadImage> getLeadImages() {
+        return leadImages;
     }
 }

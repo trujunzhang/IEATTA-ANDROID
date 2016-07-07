@@ -188,6 +188,8 @@ public class LeadImagesHandler {
         // loadLeadImage();
         LeadImagesTask.instance.carouselLeadImages();
 
+        this.loadLeadImage(this.getPage().getPageProperties().getLeadImages());
+
         articleHeaderView.setTitle(Html.fromHtml(getPage().getDisplayTitle()));
         articleHeaderView.setRatingImageView(getTitle().getRatingReview());
         // Set the subtitle, too, so text measurements are accurate.
@@ -294,11 +296,11 @@ public class LeadImagesHandler {
      * @param leadImage Nullable URL with no scheme. For example, foo.bar.com/ instead of
      *                  http://foo.bar.com/.
      */
-    public void loadLeadImage(@Nullable LeadImage leadImage) {
-        if (!isMainPage() && leadImage != null && isLeadImageEnabled()) {
+    public void loadLeadImage(@Nullable List<LeadImage> leadImages) {
+        if (!isMainPage() && leadImages != null && isLeadImageEnabled()) {
             new PageFragmentFunnel().logLoadLeadImage("have LeadImage");
             articleHeaderView.setImageYScalar(0);
-            articleHeaderView.loadImage(leadImage);
+            articleHeaderView.loadImage(leadImages);
         } else {
             new PageFragmentFunnel().logLoadLeadImage("no LeadImage");
             articleHeaderView.loadImage(null);
