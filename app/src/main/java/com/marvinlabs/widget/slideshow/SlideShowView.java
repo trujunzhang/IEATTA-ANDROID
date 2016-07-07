@@ -66,7 +66,7 @@ public class SlideShowView extends RelativeLayout implements View.OnClickListene
     private OnSlideClickListener slideClickListener;
 
     // A selector to show when the view is clicked
-    private StateListDrawable onClickedDrawable;
+//    private StateListDrawable onClickedDrawable;
 
     // Watch the adapter data
     private DataSetObserver adapterObserver = new DataSetObserver() {
@@ -152,14 +152,14 @@ public class SlideShowView extends RelativeLayout implements View.OnClickListene
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.SlideShowView);
 
         // Clicked drawable
-        try {
-            onClickedDrawable = (StateListDrawable) a.getDrawable(R.styleable.SlideShowView_selector);
-        } catch (Exception e) { /* ignored */ }
-
-        if (onClickedDrawable == null) {
-            TypedArray themeAttrs = context.getTheme().obtainStyledAttributes(new int[]{android.R.attr.selectableItemBackground});
-            onClickedDrawable = (StateListDrawable) themeAttrs.getDrawable(0);
-        }
+//        try {
+//            onClickedDrawable = (StateListDrawable) a.getDrawable(R.styleable.SlideShowView_selector);
+//        } catch (Exception e) { /* ignored */ }
+//
+//        if (onClickedDrawable == null) {
+//            TypedArray themeAttrs = context.getTheme().obtainStyledAttributes(new int[]{android.R.attr.selectableItemBackground});
+//            onClickedDrawable = (StateListDrawable) themeAttrs.getDrawable(0);
+//        }
 
         // Playlist stuff
         int playlistType = a.getInteger(R.styleable.SlideShowView_playlist, 1);
@@ -293,9 +293,9 @@ public class SlideShowView extends RelativeLayout implements View.OnClickListene
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
-        if (onClickedDrawable != null) {
-            onClickedDrawable.setBounds(0, 0, w, h);
-        }
+//        if (onClickedDrawable != null) {
+//            onClickedDrawable.setBounds(0, 0, w, h);
+//        }
     }
 
     /*
@@ -304,9 +304,9 @@ public class SlideShowView extends RelativeLayout implements View.OnClickListene
     @Override
     protected void dispatchDraw(Canvas canvas) {
         super.dispatchDraw(canvas);
-        if (onClickedDrawable != null) {
-            onClickedDrawable.draw(canvas);
-        }
+//        if (onClickedDrawable != null) {
+//            onClickedDrawable.draw(canvas);
+//        }
     }
 
     /*
@@ -315,10 +315,10 @@ public class SlideShowView extends RelativeLayout implements View.OnClickListene
     @Override
     protected void drawableStateChanged() {
         super.drawableStateChanged();
-        if (onClickedDrawable != null) {
-            onClickedDrawable.setState(getDrawableState());
-            invalidate();
-        }
+//        if (onClickedDrawable != null) {
+//            onClickedDrawable.setState(getDrawableState());
+//            invalidate();
+//        }
     }
 
     //==============================================================================================
