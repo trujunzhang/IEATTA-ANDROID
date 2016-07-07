@@ -56,7 +56,8 @@ public class ArticleHeaderImageView extends FrameLayout {
 
 
     public void load(@Nullable List<LeadImage> leadImages) {
-        if (leadImages == null) {
+        boolean noLeadImages = (leadImages == null) || (leadImages.size() == 0);
+        if (noLeadImages) {
             setVisibility(GONE);
             image.stop();
         } else {
