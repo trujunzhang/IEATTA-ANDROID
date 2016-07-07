@@ -101,9 +101,10 @@ public class LeadImageAdapter extends BitmapAdapter {
             iv = (ImageViewWithFace) convertView;
         }
 
-        LeadImage current = this.getItem(position);
-
-        iv.loadMultiImage(current);
+        if (this.getCount() != 0) {
+            LeadImage current = this.getItem(position);
+            iv.loadMultiImage(current);
+        }
 
         return iv;
     }
