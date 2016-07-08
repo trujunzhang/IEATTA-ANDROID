@@ -1,10 +1,13 @@
 package org.ieatta.views;
 
 import android.content.Context;
+import android.content.res.TypedArray;
+import android.net.Uri;
 import android.util.AttributeSet;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 
+import org.ieatta.R;
 import org.ieatta.database.models.DBRestaurant;
 import org.ieatta.server.cache.ThumbnailImageUtil;
 import org.wikipedia.util.log.L;
@@ -17,20 +20,46 @@ import bolts.Continuation;
 import bolts.Task;
 
 public class AvatarView extends SimpleDraweeView {
+    private boolean measureHeight;
+
     public AvatarView(Context context) {
         super(context);
+        init(context, null);
     }
 
     public AvatarView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        init(context, attrs);
     }
 
     public AvatarView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        init(context, attrs);
     }
 
     public AvatarView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
+        init(context, attrs);
+    }
+
+    private void init(Context context, AttributeSet attrs) {
+        if (isInEditMode()) {
+            return;
+        }
+        if (attrs != null) {
+            TypedArray gdhAttrs = context.obtainStyledAttributes(attrs, R.styleable.AvatarView);
+            this.measureHeight = gdhAttrs.getBoolean(R.styleable.AvatarView_measureHeight, false);
+
+            // Don't forget to release some memory
+            gdhAttrs.recycle();
+        }
+    }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        if (this.measureHeight)
+            super.onMeasure(widthMeasureSpec, widthMeasureSpec);
     }
 
     public void loadNewPhotoByModel(String uuid) {
@@ -48,7 +77,7 @@ public class AvatarView extends SimpleDraweeView {
         });
     }
 
-    public void loadImageUrl(String url){
+    public void loadImageUrl(String url) {
         ViewUtil.loadImageUrlInto(AvatarView.this, url);
     }
 

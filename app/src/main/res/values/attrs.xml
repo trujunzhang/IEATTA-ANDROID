@@ -52,6 +52,9 @@
         <attr name="link_preview_button_background" format="reference" />
     </declare-styleable>
 
+    <declare-styleable name="AvatarView">
+        <attr name="measureHeight" format="boolean" />
+    </declare-styleable>
 
     <!--For android-slideshow-widget-0.5.0-->
     <declare-styleable name="SlideShowView">
