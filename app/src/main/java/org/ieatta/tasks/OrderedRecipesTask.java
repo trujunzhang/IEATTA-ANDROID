@@ -83,11 +83,11 @@ public class OrderedRecipesTask extends FragmentTask {
 
     @Override
     public void onItemClick(View view, NSIndexPath indexPath, Object model, int position, boolean isLongClick) {
-        if (model instanceof DBRecipe) {
-            DBRecipe item = (DBRecipe) model;
+        if (model instanceof RecipeModel) {
+            RecipeModel item = (RecipeModel) model;
 
             ((PageActivity) OrderedRecipesTask.this.activity).loadPage(
-                    new HistoryEntry(MainSegueIdentifier.detailRecipeSegueIdentifier, item.getUUID()));
+                    new HistoryEntry(MainSegueIdentifier.detailRecipeSegueIdentifier, item.recipeUUID));
         }
     }
 
