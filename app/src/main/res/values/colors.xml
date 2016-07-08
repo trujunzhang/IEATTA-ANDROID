@@ -176,4 +176,6 @@
     <color name="teal500">#009688</color>
     <color name="purple500">#9C27B0</color>
 
+    <item name="textGrey" type="color">#bdbdbd</item>
+
 </resources>

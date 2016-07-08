@@ -1,7 +1,9 @@
 package org.ieatta.cells;
 
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.support.v7.widget.Toolbar;
 
 import com.tableview.adapter.IEAViewHolder;
 import com.tableview.storage.models.CellType;
@@ -20,26 +22,35 @@ public class IEAOrderedRecipeCardCell extends IEAViewHolder {
     }
 
     private AvatarView avatarView;
-
-    private TextView displayNameLabel;
-    private GoneIfEmptyTextView priceLabel;
     private RatingImageView ratingImageView;
+
+//    private TextView displayNameLabel;
+//    private GoneIfEmptyTextView priceLabel;
+
+    private Toolbar toolbar;
 
     public IEAOrderedRecipeCardCell(View itemView) {
         super(itemView);
 
         this.avatarView = (AvatarView) itemView.findViewById(R.id.recipe_pictures);
         this.ratingImageView = (RatingImageView) itemView.findViewById(R.id.recipe_rating_image_view);
-        this.displayNameLabel = (TextView) itemView.findViewById(R.id.recipe_name_text);
-        this.priceLabel = (GoneIfEmptyTextView) itemView.findViewById(R.id.recipe_price_text);
+        this.toolbar = (Toolbar) itemView.findViewById(R.id.card_toolbar);
+
+        toolbar.inflateMenu(R.menu.recipe_card_toolbar);
+        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                return false;
+            }
+        });
     }
 
     private void setRecipeModel(RecipeModel model) {
         this.avatarView.loadLeadImage(model.recipeUUID, model.task);
         this.ratingImageView.queryRatingInReviewsByModel(model.recipeUUID, ReviewType.Review_Recipe, model.task);
 
-        this.displayNameLabel.setText(model.recipeName);
-        this.priceLabel.setText(model.priceValue);
+        toolbar.setTitle(model.recipeName);
+        toolbar.setSubtitle(model.priceValue);
     }
 
     @Override

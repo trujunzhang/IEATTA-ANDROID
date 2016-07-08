@@ -1,10 +1,13 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
+
     <style name="AppTheme" parent="Theme.Light">
-        <item name="editTextAutoSummarizePreferenceStyle">@style/EditTextAutoSummarizePreference</item>
+        <item name="editTextAutoSummarizePreferenceStyle">@style/EditTextAutoSummarizePreference
+        </item>
         <item name="longPreferenceStyle">@style/LongPreference</item>
         <item name="intPreferenceStyle">@style/IntPreference</item>
         <item name="android:windowBackground">@drawable/splash_bg</item>
-        <item name="android:statusBarColor" tools:ignore="NewApi">@color/status_bar_background</item>
+        <item name="android:statusBarColor" tools:ignore="NewApi">@color/status_bar_background
+        </item>
         <item name="lead_image_drawable">@drawable/lead_default_dark</item>
         <item name="lead_disabled_text_color">@color/lead_disabled_text_light</item>
         <item name="list_separator_color">@color/list_separator_light</item>
@@ -43,9 +46,23 @@
         <item name="titleTextStyle">@style/AppTheme.ToolBarTitleText</item>
     </style>
 
-    <style name="AppTheme.ToolBarTitleText"
-        parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
+    <style name="AppTheme.ToolBarTitleText" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
         <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <!--Recipe card view Toolbar-->
+    <style name="ToolbarCard" parent="ThemeOverlay.AppCompat.ActionBar">
+        <item name="colorPrimary">@android:color/black</item>
+        <item name="android:textColorPrimary">@android:color/black</item>
+    </style>
+
+    <style name="Card.Title" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textSize">24sp</item>
+    </style>
+
+    <style name="Card.Subtitle" parent="TextAppearance.Widget.AppCompat.Toolbar.Subtitle">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/textGrey</item>
     </style>
 
 </resources>
