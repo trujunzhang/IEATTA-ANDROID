@@ -36,6 +36,7 @@ public class IEAOrderedRecipeCardCell extends IEAViewHolder {
     @Override
     public void render(Object value) {
         DBRecipe model = (DBRecipe) value;
+
         this.displayNameLabel.setText(model.getDisplayName());
         this.priceLabel.setText("$ " + model.getPrice() + "");
 
