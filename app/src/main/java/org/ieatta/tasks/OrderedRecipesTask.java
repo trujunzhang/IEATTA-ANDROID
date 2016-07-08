@@ -126,7 +126,6 @@ public class OrderedRecipesTask extends FragmentTask {
 
     @Override
     public void postUI() {
-
         this.manager.setHeaderItem(new IEAHeaderViewModel(this.getStatusBarHeight()), IEAHeaderView.getType());
         this.manager.setFooterItem(new IEAFooterViewModel(), IEAFooterView.getType());
 
