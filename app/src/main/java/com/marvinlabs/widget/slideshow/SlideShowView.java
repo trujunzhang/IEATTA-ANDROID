@@ -601,7 +601,10 @@ public class SlideShowView extends RelativeLayout implements View.OnClickListene
         // Add the slide view to our hierarchy
         final View inView = getSlideView(currentPosition);
 
-        // FIXME: 7/8/16 java.lang.IllegalStateException: The specified child already has a parent. You must call removeView() on the child's parent first.
+        // FIXME: 7/8/16 Exception: java.lang.IllegalStateException: The specified child already has a parent. You must call removeView() on the child's parent first.
+        // casting without instanceof just seems wrong.
+        // And (thanks IntelliJ IDEA for telling me) removeView is part of the ViewManager interface.
+        // And one should not cast to a concrete class when a perfectly suitable interface is available.
         final android.view.ViewParent parent = inView.getParent();
         if (parent instanceof android.view.ViewManager) {
             final android.view.ViewManager viewManager = (android.view.ViewManager) parent;
