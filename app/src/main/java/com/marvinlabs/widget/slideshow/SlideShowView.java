@@ -429,7 +429,7 @@ public class SlideShowView extends RelativeLayout implements View.OnClickListene
         final int currentPosition = pl.getCurrentSlide();
 
         // When the playlist is just one, no next.
-        if(currentPosition != previousPosition)
+        if (currentPosition != previousPosition)
             playSlide(currentPosition, previousPosition);
     }
 
@@ -600,6 +600,15 @@ public class SlideShowView extends RelativeLayout implements View.OnClickListene
 
         // Add the slide view to our hierarchy
         final View inView = getSlideView(currentPosition);
+
+        // FIXME: 7/8/16 java.lang.IllegalStateException: The specified child already has a parent. You must call removeView() on the child's parent first.
+        final android.view.ViewParent parent = inView.getParent();
+        if (parent instanceof android.view.ViewManager) {
+            final android.view.ViewManager viewManager = (android.view.ViewManager) parent;
+
+            viewManager.removeView(inView);
+        }
+
         inView.setVisibility(View.INVISIBLE);
         addView(inView);
 

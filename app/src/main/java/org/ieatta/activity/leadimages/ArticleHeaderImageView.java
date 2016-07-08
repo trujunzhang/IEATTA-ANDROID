@@ -59,8 +59,7 @@ public class ArticleHeaderImageView extends FrameLayout {
         boolean noLeadImages = (leadImages == null) || (leadImages.size() == 0);
         if (noLeadImages) {
             setVisibility(GONE);
-//            image.stop();
-            this.startSlideShow(this.createResourceAdapter(new LinkedList<LeadImage>()));
+            image.stop();
         } else {
             setVisibility(VISIBLE);
             this.startSlideShow(this.createResourceAdapter(leadImages));
