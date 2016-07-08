@@ -18,7 +18,7 @@ public class LeadImage {
 
     public LeadImage(String localUrl) {
         this.localUrl = localUrl;
-        if(TextUtils.isEmpty(localUrl) ==false)
+        if (!TextUtils.isEmpty(localUrl))
             this.photoUUID = new File(localUrl).getName().split("_")[1];
         this.isCached = false;
     }
@@ -28,7 +28,7 @@ public class LeadImage {
         this.onlineUrl = onlineUrl;
     }
 
-    public boolean isCached(){
+    public boolean isCached() {
         return this.isCached;
     }
 
@@ -43,16 +43,16 @@ public class LeadImage {
         return Task.forResult(this.localUrl);
     }
 
-    public String getLocalUrl(){
+    public String getLocalUrl() {
         return this.localUrl;
     }
 
-    public String getOnlineUrl(){
+    public String getOnlineUrl() {
         return this.onlineUrl;
     }
 
     public Task<String> getOnlineUrlTask() {
-        if(this.isCached == true){
+        if (this.isCached) {
             return Task.forResult(null);
         }
         return OnlineDatabaseQuery.downloadOriginalPhoto(this.photoUUID).onSuccessTask(new Continuation<Void, Task<String>>() {
