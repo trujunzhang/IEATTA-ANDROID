@@ -142,6 +142,10 @@ public class ObservableWebView extends RecyclerView {
                 ObservableWebView.this.setOnScrollChanged(0, top, 0, ObservableWebView.this.lastTop);
             }
         });
+
+        // use this setting to improve performance if you know that changes
+        // in content do not change the layout size of the RecyclerView
+        this.setHasFixedSize(true);
     }
 
     private void setOnScrollChanged(int left, int top, int oldLeft, int oldTop) {
@@ -229,9 +233,9 @@ public class ObservableWebView extends RecyclerView {
         this.lastTop = lastTop;
     }
 
-    public void scrollToLastTop(int lastTop){
+    public void scrollToLastTop(int lastTop) {
         // Here, we must reset the lastTop to zero.
         this.lastTop = 0;
-        this.smoothScrollBy(0,lastTop);
+        this.smoothScrollBy(0, lastTop);
     }
 }

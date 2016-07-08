@@ -59,7 +59,8 @@ public class ArticleHeaderImageView extends FrameLayout {
         boolean noLeadImages = (leadImages == null) || (leadImages.size() == 0);
         if (noLeadImages) {
             setVisibility(GONE);
-            image.stop();
+//            image.stop();
+            this.startSlideShow(this.createResourceAdapter(new LinkedList<LeadImage>()));
         } else {
             setVisibility(VISIBLE);
             this.startSlideShow(this.createResourceAdapter(leadImages));
@@ -69,8 +70,7 @@ public class ArticleHeaderImageView extends FrameLayout {
     private SlideShowAdapter createResourceAdapter(List<LeadImage> leadImages) {
         BitmapFactory.Options opts = new BitmapFactory.Options();
         opts.inSampleSize = 2;
-        LeadImageAdapter adapter = new LeadImageAdapter(IEAApp.getInstance(), leadImages);
-        return adapter;
+        return new LeadImageAdapter(IEAApp.getInstance(), leadImages);
     }
 
     private void startSlideShow(SlideShowAdapter adapter) {

@@ -133,6 +133,7 @@ public class ArticleHeaderView extends FrameLayout implements ObservableWebView.
 
     public void loadImage(@Nullable List<LeadImage> leadImages) {
         image.load(leadImages);
+
         boolean noLeadImages = (leadImages == null) || (leadImages.size() == 0);
         int height = noLeadImages ? 0 : (int) (DimenUtil.getDisplayHeightPx() * getScreenHeightRatio());
         setMinimumHeight(height);
