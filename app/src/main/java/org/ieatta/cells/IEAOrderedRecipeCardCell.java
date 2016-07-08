@@ -27,10 +27,10 @@ public class IEAOrderedRecipeCardCell extends IEAViewHolder {
     public IEAOrderedRecipeCardCell(View itemView) {
         super(itemView);
 
-        this.avatarView = (AvatarView) itemView.findViewById(R.id.page_list_item_image);
-        this.displayNameLabel = (TextView) itemView.findViewById(R.id.page_list_item_title);
-        this.priceLabel = (GoneIfEmptyTextView) itemView.findViewById(R.id.page_list_item_description);
-        this.ratingImageView = (RatingImageView) itemView.findViewById(R.id.business_review_star_rating);
+        this.avatarView = (AvatarView) itemView.findViewById(R.id.recipe_pictures);
+        this.ratingImageView = (RatingImageView) itemView.findViewById(R.id.recipe_rating_image_view);
+        this.displayNameLabel = (TextView) itemView.findViewById(R.id.recipe_name_text);
+        this.priceLabel = (GoneIfEmptyTextView) itemView.findViewById(R.id.recipe_price_text);
     }
 
     @Override
