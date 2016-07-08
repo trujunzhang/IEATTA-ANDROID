@@ -1,5 +1,7 @@
 package org.ieatta.activity;
 
+import org.ieatta.server.cache.BaseImageUtil;
+
 import java.io.File;
 import java.util.LinkedList;
 import java.util.List;
@@ -16,8 +18,7 @@ public class LeadImageCollection {
         this.usedRef = usedRef;
         this.leadImages = new LinkedList<>();
         for (File file : galleryCollection) {
-            LeadImage leadImage = new LeadImage(String.format("file://%s", file.getAbsolutePath()));
-            this.leadImages.add(leadImage);
+            this.leadImages.add(new LeadImage(BaseImageUtil.getLocalAbstractPath(file)));
         }
     }
 

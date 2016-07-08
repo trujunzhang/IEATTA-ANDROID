@@ -68,7 +68,7 @@ public abstract class BaseImageUtil {
         if (file == null)
             return null;
 
-        return BaseImageUtil.getLocalAbstractPath(file.getAbsolutePath());
+        return BaseImageUtil.getLocalAbstractPath(file);
     }
 
     public File getImageFile(String usedRef) {
@@ -193,7 +193,7 @@ public abstract class BaseImageUtil {
         return Task.forResult(null);
     }
 
-    public static String getLocalAbstractPath(String filePath) {
-        return String.format("file://%s", filePath);
+    public static String getLocalAbstractPath(File file) {
+        return String.format("file://%s", file.getAbsoluteFile());
     }
 }

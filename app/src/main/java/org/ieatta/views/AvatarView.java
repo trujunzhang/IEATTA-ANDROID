@@ -2,7 +2,6 @@ package org.ieatta.views;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.net.Uri;
 import android.util.AttributeSet;
 
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -10,14 +9,11 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import org.ieatta.R;
 import org.ieatta.activity.LeadImage;
 import org.ieatta.database.models.DBPhoto;
-import org.ieatta.database.models.DBRestaurant;
 import org.ieatta.database.query.LocalDatabaseQuery;
 import org.ieatta.server.cache.ThumbnailImageUtil;
 import org.ieatta.tasks.OrderedRecipesTask;
-import org.wikipedia.util.log.L;
 import org.wikipedia.views.ViewUtil;
 
-import java.io.File;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -71,21 +67,32 @@ public class AvatarView extends SimpleDraweeView {
     }
 
     public void loadLeadImage(final String uuid, final OrderedRecipesTask orderedRecipesTask) {
-        List<Realm> realmList = new LinkedList<>();
-        LocalDatabaseQuery.getPhoto(uuid, false, realmList).onSuccess(new Continuation<DBPhoto, Void>() {
-            @Override
-            public Void then(Task<DBPhoto> task) throws Exception {
-                DBPhoto photo = task.getResult();
-                if (photo != null) {
-                    String originalUrl = photo.getOriginalUrl();
-                    String localUrl = ThumbnailImageUtil.sharedInstance.getFirstImageAbstractPath(uuid);
-                    LeadImage leadImage = new LeadImage(localUrl, originalUrl);
-                    orderedRecipesTask.setLeadImage(uuid, leadImage);
-                    ViewUtil.loadMultiImageUrlInto(AvatarView.this, localUrl, originalUrl);
+        LeadImage leadImage = orderedRecipesTask.getLeadImage(uuid);
+        if (leadImage != null) {
+            ViewUtil.loadMultiImageUrlInto(AvatarView.this, leadImage.getLocalUrl(), leadImage.getOnlineUrl());
+        } else {
+            final List<Realm> realmList = new LinkedList<>();
+            LocalDatabaseQuery.getPhoto(uuid, false, realmList).onSuccess(new Continuation<DBPhoto, Void>() {
+                @Override
+                public Void then(Task<DBPhoto> task) throws Exception {
+                    DBPhoto photo = task.getResult();
+                    if (photo != null) {
+                        String originalUrl = photo.getOriginalUrl();
+                        String localUrl = ThumbnailImageUtil.sharedInstance.getFirstImageAbstractPath(uuid);
+                        LeadImage leadImage = new LeadImage(localUrl, originalUrl);
+                        orderedRecipesTask.setLeadImage(uuid, leadImage);
+                        ViewUtil.loadMultiImageUrlInto(AvatarView.this, localUrl, originalUrl);
+                    }
+                    return null;
                 }
-                return null;
-            }
-        });
+            }).continueWith(new Continuation<Void, Void>() {
+                @Override
+                public Void then(Task<Void> task) throws Exception {
+                    LocalDatabaseQuery.closeRealmList(realmList);
+                    return null;
+                }
+            });
+        }
     }
 
     public void loadNewPhotoByModel(String uuid) {
