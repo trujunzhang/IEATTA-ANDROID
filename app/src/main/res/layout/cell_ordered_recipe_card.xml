@@ -1,92 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/page_list_item_container"
-    style="@style/cell_style"
+    android:id="@+id/card_view"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:gravity="top"
-    android:orientation="vertical"
-    android:paddingBottom="@dimen/list_item_vertical_padding"
-    android:paddingLeft="@dimen/list_item_horizontal_padding"
-    android:paddingRight="@dimen/list_item_horizontal_padding"
-    android:paddingTop="@dimen/list_item_vertical_padding">
+    android:layout_height="380dp"
+    android:layout_margin="8dp">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <org.ieatta.views.AvatarView
-            android:id="@+id/page_list_item_image"
-            android:layout_width="@dimen/defaultListItemSize"
-            android:layout_height="@dimen/defaultListItemSize"
-            android:layout_gravity="center_vertical"
-            android:background="@color/window_background_light"
-            android:contentDescription="@null"
-            app:actualImageScaleType="centerCrop"
-            app:failureImage="@drawable/placeholder_photo"
-            app:failureImageScaleType="centerCrop"
-            app:placeholderImage="@drawable/placeholder_photo"
-            app:placeholderImageScaleType="centerCrop"
-            app:roundedCornerRadius="2dp" />
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <LinearLayout
+            <org.ieatta.views.AvatarView
+                android:id="@+id/page_list_item_image"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_gravity="center_vertical"
+                android:background="@color/window_background_light"
+                android:contentDescription="@null"
+                app:actualImageScaleType="centerCrop"
+                app:failureImage="@drawable/placeholder_photo"
+                app:failureImageScaleType="centerCrop"
+                app:placeholderImage="@drawable/placeholder_photo"
+                app:placeholderImageScaleType="centerCrop"
+                app:roundedCornerRadius="2dp" />
+
+            <org.ieatta.views.RatingImageView
+                android:id="@+id/business_review_star_rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|right"
+                android:layout_marginBottom="8dp"
+                android:layout_marginRight="8dp"
+                android:contentDescription="@null"
+                android:src="@drawable/business_stars" />
+        </FrameLayout>
+
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="@dimen/list_item_text_horizontal_padding"
-            android:layout_marginStart="@dimen/list_item_text_horizontal_padding"
-            android:orientation="vertical">
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp">
 
             <TextView
                 android:id="@+id/page_list_item_title"
                 style="@style/RtlAwareTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
                 android:ellipsize="end"
                 android:maxLines="2"
+                android:text="Meat Veal Lion"
                 android:textColor="@color/list_item_text_primary_light"
-                android:textSize="@dimen/textSize"
-                tools:text="Sample title" />
+                android:textSize="@dimen/titleTextSize"
+                android:layout_centerVertical="true" />
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+            <org.wikipedia.views.GoneIfEmptyTextView
+                android:id="@+id/page_list_item_description"
+                style="@style/RtlAwareTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="12dp"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@color/list_item_text_secondary_light"
+                android:textSize="20sp"
+                tools:text="$ 20"
+                android:layout_centerVertical="true" />
+        </RelativeLayout>
 
-                <org.wikipedia.views.GoneIfEmptyTextView
-                    android:id="@+id/page_list_item_description"
-                    style="@style/RtlAwareTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_centerVertical="true"
-                    android:ellipsize="end"
-                    android:maxLines="2"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:textColor="@color/list_item_text_secondary_light"
-                    android:visibility="gone"
-                    tools:text="Sample description" />
 
-                <org.ieatta.views.RatingImageView
-                    android:id="@+id/business_review_star_rating"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="false"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginRight="8dp"
-                    android:contentDescription="@null"
-                    android:src="@drawable/business_stars" />
-            </RelativeLayout>
-
-        </LinearLayout>
     </LinearLayout>
-</LinearLayout>
-
-
-
+</android.support.v7.widget.CardView>
