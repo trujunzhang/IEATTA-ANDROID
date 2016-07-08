@@ -44,6 +44,12 @@ public class OrderedRecipesTask extends FragmentTask {
     private LeadImageCollection leadImageCollection; // for restaurants
 
     @Override
+    public boolean haveLeadImage() {
+        return false;
+    }
+
+
+    @Override
     public void onItemClick(View view, NSIndexPath indexPath, Object model, int position, boolean isLongClick) {
         if (model instanceof DBRecipe) {
             DBRecipe item = (DBRecipe) model;
@@ -113,25 +119,23 @@ public class OrderedRecipesTask extends FragmentTask {
     public void prepareUI() {
         super.prepareUI();
 
-        this.manager.setRegisterCellClass(IEAOrderedRecipeCell.getType(), OrderedRecipesSection.section_recipes.ordinal());
-
         this.manager.appendSectionTitleCell(new SectionTitleCellModel(IEAEditKey.Section_Title, R.string.Ordered_Recipes), OrderedRecipesSection.section_recipes.ordinal());
     }
 
     @Override
     public void postUI() {
-        this.manager.setHeaderItem(new IEAHeaderViewModel(this.getEmptyHeaderViewHeight()), IEAHeaderView.getType());
+//        this.manager.setHeaderItem(new IEAHeaderViewModel(this.getEmptyHeaderViewHeight()), IEAHeaderView.getType());
         this.manager.setFooterItem(new IEAFooterViewModel(), IEAFooterView.getType());
 
-        this.manager.setSectionItems(this.recipes, OrderedRecipesSection.section_recipes.ordinal());
+        this.manager.setAndRegisterSectionItems(IEAOrderedRecipeCell.getType(), this.recipes, OrderedRecipesSection.section_recipes.ordinal());
 
         model.setPage(this.getPage());
     }
 
     public Page getPage() {
         String title = restaurant.getDisplayName();
-        PageTitle pageTitle = new PageTitle(this.restaurant.getUUID(),null,null);
-        PageProperties properties = new PageProperties(this.leadImageCollection, title,null);
+        PageTitle pageTitle = new PageTitle(this.restaurant.getUUID(), null, null);
+        PageProperties properties = new PageProperties(this.leadImageCollection, title, null);
 
         return new Page(pageTitle, properties);
     }

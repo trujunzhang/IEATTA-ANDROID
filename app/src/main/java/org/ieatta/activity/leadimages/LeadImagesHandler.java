@@ -176,7 +176,7 @@ public class LeadImagesHandler {
      * @param listener Listener that will receive an event when the layout is completed.
      */
     public void beginLayout(OnLeadImageLayoutListener listener, int sequence) {
-        if (getPage() == null) {
+        if (getPage() == null || (!this.parentFragment.getTask().haveLeadImage())) {
             return;
         }
 
