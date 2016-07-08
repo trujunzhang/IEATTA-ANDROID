@@ -8,6 +8,7 @@ import android.util.AttributeSet;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import org.ieatta.R;
+import org.ieatta.activity.LeadImage;
 import org.ieatta.database.models.DBPhoto;
 import org.ieatta.database.models.DBRestaurant;
 import org.ieatta.database.query.LocalDatabaseQuery;
@@ -69,7 +70,7 @@ public class AvatarView extends SimpleDraweeView {
         super.onMeasure(widthMeasureSpec, avatarHeight);
     }
 
-    public void loadLeadImage(final String uuid, OrderedRecipesTask orderedRecipesTask) {
+    public void loadLeadImage(final String uuid, final OrderedRecipesTask orderedRecipesTask) {
         List<Realm> realmList = new LinkedList<>();
         LocalDatabaseQuery.getPhoto(uuid, false, realmList).onSuccess(new Continuation<DBPhoto, Void>() {
             @Override
@@ -77,7 +78,10 @@ public class AvatarView extends SimpleDraweeView {
                 DBPhoto photo = task.getResult();
                 if (photo != null) {
                     String originalUrl = photo.getOriginalUrl();
-                    ThumbnailImageUtil.sharedInstance.getCacheImageUrl(uuid);
+                    String localUrl = ThumbnailImageUtil.sharedInstance.getFirstImageAbstractPath(uuid);
+                    LeadImage leadImage = new LeadImage(localUrl, originalUrl);
+                    orderedRecipesTask.setLeadImage(uuid, leadImage);
+                    ViewUtil.loadMultiImageUrlInto(AvatarView.this, localUrl, originalUrl);
                 }
                 return null;
             }
@@ -85,23 +89,8 @@ public class AvatarView extends SimpleDraweeView {
     }
 
     public void loadNewPhotoByModel(String uuid) {
-        String url = ThumbnailImageUtil.sharedInstance.getFirstImageAbstractPath(uuid);
-        ViewUtil.loadImageUrlInto(AvatarView.this, url);
-
-//        ThumbnailImageUtil.sharedInstance.getImagesListTask(uuid).onSuccess(new Continuation<List<File>, Void>() {
-//            @Override
-//            public Void then(Task<List<File>> task) throws Exception {
-//                List<File> files = task.getResult();
-//                if (files.size() > 0) {
-//                    File first = files.get(0);
-//                    String path = first.getAbsolutePath();
-//                    L.d("cached path of the photo: " + path);
-//                    String url = String.format("file://%s", path);
-//                    ViewUtil.loadImageUrlInto(AvatarView.this, url);
-//                }
-//                return null;
-//            }
-//        });
+        String localUrl = ThumbnailImageUtil.sharedInstance.getFirstImageAbstractPath(uuid);
+        ViewUtil.loadImageUrlInto(AvatarView.this, localUrl);
     }
 
     public void loadImageUrl(String url) {

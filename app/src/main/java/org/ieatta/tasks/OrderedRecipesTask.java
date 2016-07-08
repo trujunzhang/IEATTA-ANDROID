@@ -45,7 +45,7 @@ import io.realm.RealmResults;
 
 public class OrderedRecipesTask extends FragmentTask {
     class RecipeCache {
-        public LeadImage image;
+        public LeadImage leadImage;
         public int rating = -1;
     }
 
@@ -65,6 +65,14 @@ public class OrderedRecipesTask extends FragmentTask {
 
     public int getRating(String recipeUUID) {
         return this.getRecipeCache(recipeUUID).rating;
+    }
+
+    public void setLeadImage(String recipeUUID, LeadImage leadImage) {
+        this.getRecipeCache(recipeUUID).leadImage = leadImage;
+    }
+
+    public LeadImage getLeadImage(String recipeUUID) {
+        return this.getRecipeCache(recipeUUID).leadImage;
     }
 
     @Override
