@@ -36,6 +36,7 @@ import org.ieatta.provide.MainSegueIdentifier;
 import org.wikipedia.util.DimenUtil;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import bolts.Continuation;
@@ -45,14 +46,28 @@ import io.realm.RealmResults;
 public class OrderedRecipesTask extends FragmentTask {
     class RecipeCache {
         public LeadImage image;
-        public int rating;
+        public int rating = -1;
     }
 
     public List<RecipeModel> recipeModels;
-    private HashMap<String, RecipeCache> recipeCacheHashMap;
+    private HashMap<String, RecipeCache> recipeCacheHashMap = new LinkedHashMap<>();
 
-    public void cacheLeadImage(){
+    private RecipeCache getRecipeCache(String recipeUUID) {
+        if (recipeCacheHashMap.containsKey(recipeUUID))
+            return recipeCacheHashMap.get(recipeUUID);
 
+        RecipeCache recipeCache = new RecipeCache();
+        recipeCacheHashMap.put(recipeUUID, recipeCache);
+
+        return recipeCache;
+    }
+
+    public void setRating(String recipeUUID, int rating) {
+        this.getRecipeCache(recipeUUID).rating = rating;
+    }
+
+    public int getRating(String recipeUUID) {
+        return this.getRecipeCache(recipeUUID).rating;
     }
 
     @Override

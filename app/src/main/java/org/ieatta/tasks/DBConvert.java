@@ -96,7 +96,7 @@ public class DBConvert {
         return peoplePoints;
     }
 
-    public static List<RecipeModel> toRecipeModels(RealmResults<DBRecipe> recipes, FragmentTask task) {
+    public static List<RecipeModel> toRecipeModels(RealmResults<DBRecipe> recipes, OrderedRecipesTask task) {
         List<RecipeModel> recipeModels = new LinkedList<>();
         for (DBRecipe model : recipes) {
             recipeModels.add(new RecipeModel(model, task));
