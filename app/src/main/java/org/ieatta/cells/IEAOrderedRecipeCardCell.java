@@ -8,6 +8,7 @@ import com.tableview.storage.models.CellType;
 
 import org.ieatta.R;
 import org.ieatta.database.models.DBRecipe;
+import org.ieatta.database.provide.ReviewType;
 import org.ieatta.views.AvatarView;
 import org.ieatta.views.RatingImageView;
 import org.wikipedia.views.GoneIfEmptyTextView;
@@ -38,7 +39,7 @@ public class IEAOrderedRecipeCardCell extends IEAViewHolder {
         this.displayNameLabel.setText(model.getDisplayName());
         this.priceLabel.setText("$ " + model.getPrice() + "");
 
-//        this.ratingImageView.queryRatingInReviewsByModel(model);
+        this.ratingImageView.queryRatingInReviewsByModel(model.getUUID(), ReviewType.Review_Recipe);
 
         this.avatarView.loadNewPhotoByModel(model.getUUID());
     }
