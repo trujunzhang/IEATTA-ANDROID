@@ -57,9 +57,11 @@ public class AvatarView extends SimpleDraweeView {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        int avatarHeight = heightMeasureSpec;
         if (this.measureHeight)
-            super.onMeasure(widthMeasureSpec, widthMeasureSpec);
+            avatarHeight = widthMeasureSpec;
+
+        super.onMeasure(widthMeasureSpec, avatarHeight);
     }
 
     public void loadNewPhotoByModel(String uuid) {
