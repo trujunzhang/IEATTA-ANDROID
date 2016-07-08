@@ -8,17 +8,21 @@ import android.util.AttributeSet;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import org.ieatta.R;
+import org.ieatta.database.models.DBPhoto;
 import org.ieatta.database.models.DBRestaurant;
+import org.ieatta.database.query.LocalDatabaseQuery;
 import org.ieatta.server.cache.ThumbnailImageUtil;
 import org.ieatta.tasks.OrderedRecipesTask;
 import org.wikipedia.util.log.L;
 import org.wikipedia.views.ViewUtil;
 
 import java.io.File;
+import java.util.LinkedList;
 import java.util.List;
 
 import bolts.Continuation;
 import bolts.Task;
+import io.realm.Realm;
 
 public class AvatarView extends SimpleDraweeView {
     private boolean measureHeight;
@@ -66,7 +70,18 @@ public class AvatarView extends SimpleDraweeView {
     }
 
     public void loadLeadImage(String uuid, OrderedRecipesTask orderedRecipesTask) {
+        List<Realm> realmList = new LinkedList<>();
+        LocalDatabaseQuery.getPhoto(uuid, false, realmList).onSuccess(new Continuation<DBPhoto, Void>() {
+            @Override
+            public Void then(Task<DBPhoto> task) throws Exception {
+                DBPhoto photo = task.getResult();
+                if (photo != null) {
+                    String originalUrl = photo.getOriginalUrl();
 
+                }
+                return null;
+            }
+        });
     }
 
     public void loadNewPhotoByModel(String uuid) {

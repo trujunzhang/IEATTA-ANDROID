@@ -7,7 +7,7 @@ import org.ieatta.IEAApp;
 
 import java.io.File;
 
-public class CacheImageUtil extends AbstractImageUtil {
+public class CacheImageUtil extends BaseImageUtil {
 
     public final static CacheImageUtil sharedInstance = new CacheImageUtil();
 

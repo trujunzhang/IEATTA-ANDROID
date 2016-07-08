@@ -42,7 +42,7 @@ public class RealmModelReader<T extends RealmObject> {
         } finally {
             if (needClose) {
                 realm.close();
-            } else {
+            } else if (realm != null) {
                 realmList.add(realm);
             }
         }
@@ -67,7 +67,7 @@ public class RealmModelReader<T extends RealmObject> {
         } finally {
             if (needClose) {
                 realm.close();
-            } else {
+            } else if (realm != null) {
                 realmList.add(realm);
             }
         }

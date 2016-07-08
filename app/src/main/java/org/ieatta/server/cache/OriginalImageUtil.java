@@ -8,7 +8,7 @@ import org.ieatta.database.models.DBPhoto;
 
 import java.io.File;
 
-public class OriginalImageUtil extends AbstractImageUtil {
+public class OriginalImageUtil extends BaseImageUtil {
 
     public final static OriginalImageUtil sharedInstance = new OriginalImageUtil();
 

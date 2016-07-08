@@ -7,7 +7,7 @@ import org.ieatta.IEAApp;
 
 import java.io.File;
 
-public class ThumbnailImageUtil extends AbstractImageUtil {
+public class ThumbnailImageUtil extends BaseImageUtil {
 
     public final static ThumbnailImageUtil sharedInstance = new ThumbnailImageUtil();
 

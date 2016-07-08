@@ -23,7 +23,7 @@ import bolts.Task;
 ///   2.1 When pushing to server, push original and thumbnail images to server.
 ///   2.2 When pushed successfully, delete offline original image.
 ///   3.  When pulling from server, just download a thumbnail image from server.
-public abstract class AbstractImageUtil {
+public abstract class BaseImageUtil {
 
     public static final String data_format = "yyyyMMddhhmm";
 
