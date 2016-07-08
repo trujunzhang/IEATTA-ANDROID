@@ -126,9 +126,8 @@ public class OrderedRecipesTask extends FragmentTask {
 
     @Override
     public void postUI() {
-        float statusBarHeight = DimenUtil.getStatusBarHeightPx(this.activity.getApplicationContext());
-        statusBarHeight = DimenUtil.dpToPx(statusBarHeight);
-        this.manager.setHeaderItem(new IEAHeaderViewModel((int) statusBarHeight), IEAHeaderView.getType());
+
+        this.manager.setHeaderItem(new IEAHeaderViewModel(this.getStatusBarHeight()), IEAHeaderView.getType());
         this.manager.setFooterItem(new IEAFooterViewModel(), IEAFooterView.getType());
 
         this.manager.setAndRegisterSectionItems(IEAOrderedRecipeCell.getType(), this.recipes, OrderedRecipesSection.section_recipes.ordinal());

@@ -142,6 +142,12 @@ public abstract class FragmentTask extends MenuBarCallback implements AdapterVie
         this.manager.updateHeaderItem(new IEAHeaderViewModel(contentHeight));
     }
 
+    protected int getStatusBarHeight() {
+        float statusBarHeight = DimenUtil.getStatusBarHeightPx(this.activity.getApplicationContext());
+        statusBarHeight = DimenUtil.dpToPx(statusBarHeight);
+        return (int) statusBarHeight;
+    }
+
     protected GalleryThumbnailScrollView.GalleryViewListener galleryViewListener
             = new GalleryThumbnailScrollView.GalleryViewListener() {
         @Override
