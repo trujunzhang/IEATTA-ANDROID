@@ -10,6 +10,7 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import org.ieatta.R;
 import org.ieatta.database.models.DBRestaurant;
 import org.ieatta.server.cache.ThumbnailImageUtil;
+import org.ieatta.tasks.OrderedRecipesTask;
 import org.wikipedia.util.log.L;
 import org.wikipedia.views.ViewUtil;
 
@@ -64,16 +65,22 @@ public class AvatarView extends SimpleDraweeView {
         super.onMeasure(widthMeasureSpec, avatarHeight);
     }
 
+    public void loadLeadImage(String uuid, OrderedRecipesTask orderedRecipesTask) {
+
+    }
+
     public void loadNewPhotoByModel(String uuid) {
         ThumbnailImageUtil.sharedInstance.getImagesListTask(uuid).onSuccess(new Continuation<List<File>, Void>() {
             @Override
             public Void then(Task<List<File>> task) throws Exception {
                 List<File> files = task.getResult();
-                File first = files.get(0);
-                String path = first.getAbsolutePath();
-                L.d("cached path of the photo: " + path);
-                String url = String.format("file://%s", path);
-                ViewUtil.loadImageUrlInto(AvatarView.this, url);
+                if (files.size() > 0) {
+                    File first = files.get(0);
+                    String path = first.getAbsolutePath();
+                    L.d("cached path of the photo: " + path);
+                    String url = String.format("file://%s", path);
+                    ViewUtil.loadImageUrlInto(AvatarView.this, url);
+                }
                 return null;
             }
         });
