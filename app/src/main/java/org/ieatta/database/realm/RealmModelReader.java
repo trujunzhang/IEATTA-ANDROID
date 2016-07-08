@@ -1,6 +1,7 @@
 package org.ieatta.database.realm;
 
 import org.ieatta.IEAApp;
+import org.ieatta.database.models.DBReview;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -72,6 +73,39 @@ public class RealmModelReader<T extends RealmObject> {
         }
 
         return Task.forResult(result);
+    }
+
+
+    public Task<Integer> fetchRatingReview(DBBuilder builder) {
+        int rating = 0;
+
+        RealmResults<T> result = null;
+
+        Realm realm = RealmInstance.getInstance();
+        try {
+            RealmQuery<T> query = realm.where(this.clazz);
+
+            buildAll(builder, query);
+
+            // Execute the query:
+            result = query.findAll();
+
+            if (result.size() > 0) {
+                int sum = 0;
+                for (T model : result) {
+                    sum += ((DBReview) model).getRate();
+                }
+                rating = sum / result.size();
+            }
+
+        } catch (Exception e) {
+            return Task.forError(e);
+        } finally {
+            realm.close();
+        }
+
+
+        return Task.forResult(rating);
     }
 
     public Task<Long> getCountObjects(DBBuilder builder) {

@@ -6,6 +6,9 @@ import android.os.Build;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 
+import org.ieatta.database.provide.ReviewType;
+import org.ieatta.database.query.LocalDatabaseQuery;
+
 import bolts.Continuation;
 import bolts.Task;
 
@@ -27,28 +30,17 @@ public class RatingImageView extends ImageView {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
 
+    public void queryRatingInReviewsByModel(String reviewRef, ReviewType reviewType) {
+        this.setImageLevel(0);
+        LocalDatabaseQuery.queryRatingInReviews(reviewRef, reviewType).onSuccess(new Continuation<Integer, Void>() {
+            @Override
+            public Void then(Task<Integer> task) throws Exception {
+                int rating = task.getResult();
+                RatingImageView.this.setImageLevel(rating);
+                return null;
+            }
+        });
+    }
 
-//    public void queryRatingInReviewsByModel(ParseModelAbstract model) {
-//      this.queryRatingInReviewsByReview(new Review(model));
-//    }
-
-//    public void queryRatingInReviewsByReview(final Review review) {
-//        Integer integer = IEACache.sharedInstance.avarageRating(review);
-//        if (integer != null) {
-//          this.setImageLevel(integer.intValue());
-//        } else {
-//            review.queryRatingInReviews().onSuccess(new Continuation<Integer, Object>() {
-//                @Override
-//                public Object then(Task<Integer> task) throws Exception {
-//
-//                    final int count = task.getResult();
-//                    IEACache.sharedInstance.setAvarageRating(count, review);
-//                  this.setImageLevel(count);
-//
-//                    return null;
-//                }
-//            }, Task.UI_THREAD_EXECUTOR);
-//        }
-//    }
 
 }

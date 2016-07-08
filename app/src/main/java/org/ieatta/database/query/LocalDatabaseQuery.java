@@ -4,6 +4,8 @@ import android.location.Location;
 
 import org.ieatta.database.models.DBPhoto;
 import org.ieatta.database.models.DBRestaurant;
+import org.ieatta.database.models.DBReview;
+import org.ieatta.database.provide.ReviewType;
 import org.ieatta.database.realm.DBBuilder;
 import org.ieatta.database.realm.RealmModelReader;
 import org.ieatta.parse.AppConstant;
@@ -21,32 +23,32 @@ public class LocalDatabaseQuery {
     public static Task<RealmResults<DBRestaurant>> queryNearRestaurants(Location location, List<Realm> realmList) {
         DBBuilder builder = new DBBuilder().whereContainedIn(AppConstant.kPAPFieldModelGEOHASH, GeoHashUtil.getEncodeHash(location));
 //        DBBuilder builder = new DBBuilder();
-        return new RealmModelReader<DBRestaurant>(DBRestaurant.class).fetchResults(builder, false,realmList);
+        return new RealmModelReader<DBRestaurant>(DBRestaurant.class).fetchResults(builder, false, realmList);
     }
 
     public static Task<RealmResults<DBPhoto>> queryPhotosForRestaurant(String UUID, List<Realm> realmList) {
         DBBuilder builder = new DBBuilder()
                 .whereEqualTo(AppConstant.kPAPFieldLocalRestaurantKey, UUID)
                 .orderByDescending(AppConstant.kPAPFieldObjectCreatedDateKey);
-        return new RealmModelReader<DBPhoto>(DBPhoto.class).fetchResults(builder, true,realmList);
+        return new RealmModelReader<DBPhoto>(DBPhoto.class).fetchResults(builder, true, realmList);
     }
 
-    public static Task<RealmResults<DBPhoto>> queryPhotosByModel(String usedRef,int usedType, List<Realm> realmList) {
+    public static Task<RealmResults<DBPhoto>> queryPhotosByModel(String usedRef, int usedType, List<Realm> realmList) {
         DBBuilder builder = new DBBuilder()
                 .whereEqualTo(AppConstant.kPAPFieldUsedRefKey, usedRef)
                 .whereEqualTo(AppConstant.kPAPFieldUsedTypeKey, usedType)
                 .orderByDescending(AppConstant.kPAPFieldObjectCreatedDateKey);
-        return new RealmModelReader<DBPhoto>(DBPhoto.class).fetchResults(builder, false,realmList);
+        return new RealmModelReader<DBPhoto>(DBPhoto.class).fetchResults(builder, false, realmList);
     }
 
-    public static Task<RealmResults<DBPhoto>> getPhotos(String usedRef, List<Realm> realmList){
+    public static Task<RealmResults<DBPhoto>> getPhotos(String usedRef, List<Realm> realmList) {
         DBBuilder builder = new DBBuilder()
                 .whereEqualTo(AppConstant.kPAPFieldUsedRefKey, usedRef)
                 .orderByDescending(AppConstant.kPAPFieldObjectCreatedDateKey);
-        return new RealmModelReader<DBPhoto>(DBPhoto.class).fetchResults(builder, false,realmList);
+        return new RealmModelReader<DBPhoto>(DBPhoto.class).fetchResults(builder, false, realmList);
     }
 
-    public static Task<DBPhoto> getPhoto(String usedRef, boolean needClose, List<Realm> realmList){
+    public static Task<DBPhoto> getPhoto(String usedRef, boolean needClose, List<Realm> realmList) {
         DBBuilder builder = new DBBuilder()
                 .whereEqualTo(AppConstant.kPAPFieldUsedRefKey, usedRef)
                 .orderByDescending(AppConstant.kPAPFieldObjectCreatedDateKey);
@@ -69,16 +71,22 @@ public class LocalDatabaseQuery {
                 .orderByDescending(AppConstant.kPAPFieldObjectCreatedDateKey);
     }
 
-    public static DBBuilder getForRecipes(String teamUUID,String eventUUID) {
+    public static DBBuilder getForRecipes(String teamUUID, String eventUUID) {
         return new DBBuilder()
                 .whereEqualTo(AppConstant.kPAPFieldOrderedPeopleRefKey, teamUUID)
                 .whereEqualTo(AppConstant.kPAPFieldEventRefKey, eventUUID)
                 .orderByDescending(AppConstant.kPAPFieldObjectCreatedDateKey);
     }
 
+    public static Task<Integer> queryRatingInReviews(String reviewRef, ReviewType reviewType) {
+        DBBuilder builder = new DBBuilder()
+                .whereEqualTo(AppConstant.kPAPFieldReviewRefKey, reviewRef)
+                .whereEqualTo(AppConstant.kPAPFieldReviewTypeKey, reviewType.ordinal());
+        return new RealmModelReader<DBReview>(DBReview.class).fetchRatingReview(builder);
+    }
 
     public static List<Realm> closeRealmList(List<Realm> realmList) {
-        for(Realm realm : realmList) {
+        for (Realm realm : realmList) {
             if (realm.isClosed() == false)
                 realm.close();
         }

@@ -16,7 +16,6 @@ import org.ieatta.activity.PageViewModel;
 import org.ieatta.activity.history.HistoryEntry;
 import org.ieatta.activity.update.UpdateEntry;
 import org.ieatta.cells.IEAOrderedRecipeCardCell;
-import org.ieatta.cells.IEAOrderedRecipeCell;
 import org.ieatta.cells.headerfooterview.IEAFooterView;
 import org.ieatta.cells.headerfooterview.IEAHeaderView;
 import org.ieatta.cells.model.IEAFooterViewModel;
@@ -129,6 +128,6 @@ public class OrderedRecipesTask extends FragmentTask {
         this.manager.setHeaderItem(new IEAHeaderViewModel(this.getStatusBarHeight()), IEAHeaderView.getType());
         this.manager.setFooterItem(new IEAFooterViewModel(), IEAFooterView.getType());
 
-        this.manager.setAndRegisterSectionItems(IEAOrderedRecipeCell.getType(), this.recipes, OrderedRecipesSection.section_recipes.ordinal());
+        this.manager.setAndRegisterSectionItems(IEAOrderedRecipeCardCell.getType(), this.recipes, OrderedRecipesSection.section_recipes.ordinal());
     }
 }
