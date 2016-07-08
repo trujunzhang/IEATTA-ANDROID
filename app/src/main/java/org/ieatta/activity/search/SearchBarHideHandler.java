@@ -169,6 +169,8 @@ public class SearchBarHideHandler implements ObservableWebView.OnScrollChangeLis
         }
         opacity = Math.max(0, opacity);
         opacity = Math.min(FULL_OPACITY, opacity);
+
+        opacity = 100;
         return opacity;
     }
 
@@ -182,7 +184,7 @@ public class SearchBarHideHandler implements ObservableWebView.OnScrollChangeLis
         return context.getResources();
     }
 
-    public int getActionBarHeight(){
+    public int getActionBarHeight() {
         return quickReturnView.getHeight();
     }
 }
