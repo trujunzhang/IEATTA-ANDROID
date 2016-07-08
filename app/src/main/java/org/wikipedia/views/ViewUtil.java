@@ -60,6 +60,7 @@ public final class ViewUtil {
 
     /**
      * Find the originating view of an ActionMode.
+     *
      * @param mode The ActionMode in question.
      * @return The view from which the ActionMode originated.
      * @throws NoSuchFieldException
@@ -71,7 +72,7 @@ public final class ViewUtil {
         return (View) originatingView.get(mode);
     }
 
-    public static void loadMultiImageUrlInto(@NonNull DraweeView drawee, @Nullable String lowResUri,String highResUri) {
+    public static void loadMultiImageUrlInto(@NonNull DraweeView drawee, @Nullable String lowResUri, String highResUri) {
         DraweeController controller = Fresco.newDraweeControllerBuilder()
                 .setLowResImageRequest(ImageRequest.fromUri(lowResUri))
                 .setImageRequest(ImageRequest.fromUri(highResUri))
@@ -83,7 +84,7 @@ public final class ViewUtil {
     public static void loadImageUrlInto(@NonNull SimpleDraweeView drawee, @Nullable String url) {
         drawee.setController(Fresco.newDraweeControllerBuilder()
                 .setUri(IEAApp.getInstance().isImageDownloadEnabled()
-                        && !TextUtils.isEmpty(url)
+                        && url != null && !TextUtils.isEmpty(url)
                         ? Uri.parse(url) : null)
                 .setAutoPlayAnimations(true)
                 .build());
@@ -96,5 +97,6 @@ public final class ViewUtil {
         return returnedBitmap;
     }
 
-    private ViewUtil() { }
+    private ViewUtil() {
+    }
 }

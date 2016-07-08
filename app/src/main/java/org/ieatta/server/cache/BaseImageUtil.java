@@ -40,7 +40,7 @@ public abstract class BaseImageUtil {
         return this.getImageCache().get(UUID);
     }
 
-    public File getCacheImageUrl( DBPhoto model) {
+    public File getCacheImageUrl(DBPhoto model) {
         String uuid = model.getUUID();
         String usedRef = model.getUsedRef();
         String dateCreatedString = new SimpleDateFormat(data_format).format(model.getObjectCreatedDate());
@@ -63,9 +63,17 @@ public abstract class BaseImageUtil {
         return this.getImageCache().getList(usedRef);
     }
 
+    public String getFirstImageAbstractPath(String usedRef) {
+        File file = this.getImageFile(usedRef);
+        if (file == null)
+            return null;
+
+        return BaseImageUtil.getLocalAbstractPath(file.getAbsolutePath());
+    }
+
     public File getImageFile(String usedRef) {
         List<File> imageFiles = this.getImageFiles(usedRef);
-        if(imageFiles.size() == 0)
+        if (imageFiles.size() == 0)
             return null;
 
         return imageFiles.get(0);
@@ -185,4 +193,7 @@ public abstract class BaseImageUtil {
         return Task.forResult(null);
     }
 
+    public static String getLocalAbstractPath(String filePath) {
+        return String.format("file://%s", filePath);
+    }
 }

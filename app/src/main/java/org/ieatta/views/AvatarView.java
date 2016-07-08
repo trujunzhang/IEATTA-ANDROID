@@ -69,7 +69,7 @@ public class AvatarView extends SimpleDraweeView {
         super.onMeasure(widthMeasureSpec, avatarHeight);
     }
 
-    public void loadLeadImage(String uuid, OrderedRecipesTask orderedRecipesTask) {
+    public void loadLeadImage(final String uuid, OrderedRecipesTask orderedRecipesTask) {
         List<Realm> realmList = new LinkedList<>();
         LocalDatabaseQuery.getPhoto(uuid, false, realmList).onSuccess(new Continuation<DBPhoto, Void>() {
             @Override
@@ -77,7 +77,7 @@ public class AvatarView extends SimpleDraweeView {
                 DBPhoto photo = task.getResult();
                 if (photo != null) {
                     String originalUrl = photo.getOriginalUrl();
-
+                    ThumbnailImageUtil.sharedInstance.getCacheImageUrl(uuid);
                 }
                 return null;
             }
@@ -85,20 +85,23 @@ public class AvatarView extends SimpleDraweeView {
     }
 
     public void loadNewPhotoByModel(String uuid) {
-        ThumbnailImageUtil.sharedInstance.getImagesListTask(uuid).onSuccess(new Continuation<List<File>, Void>() {
-            @Override
-            public Void then(Task<List<File>> task) throws Exception {
-                List<File> files = task.getResult();
-                if (files.size() > 0) {
-                    File first = files.get(0);
-                    String path = first.getAbsolutePath();
-                    L.d("cached path of the photo: " + path);
-                    String url = String.format("file://%s", path);
-                    ViewUtil.loadImageUrlInto(AvatarView.this, url);
-                }
-                return null;
-            }
-        });
+        String url = ThumbnailImageUtil.sharedInstance.getFirstImageAbstractPath(uuid);
+        ViewUtil.loadImageUrlInto(AvatarView.this, url);
+
+//        ThumbnailImageUtil.sharedInstance.getImagesListTask(uuid).onSuccess(new Continuation<List<File>, Void>() {
+//            @Override
+//            public Void then(Task<List<File>> task) throws Exception {
+//                List<File> files = task.getResult();
+//                if (files.size() > 0) {
+//                    File first = files.get(0);
+//                    String path = first.getAbsolutePath();
+//                    L.d("cached path of the photo: " + path);
+//                    String url = String.format("file://%s", path);
+//                    ViewUtil.loadImageUrlInto(AvatarView.this, url);
+//                }
+//                return null;
+//            }
+//        });
     }
 
     public void loadImageUrl(String url) {
