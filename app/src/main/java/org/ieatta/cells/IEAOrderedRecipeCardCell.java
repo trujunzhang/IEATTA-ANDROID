@@ -35,8 +35,8 @@ public class IEAOrderedRecipeCardCell extends IEAViewHolder {
     }
 
     private void setRecipeModel(RecipeModel model) {
-//        this.avatarView.loadLeadImage(model.recipeUUID, model.task);
-        this.avatarView.loadNewPhotoByModel(model.recipeUUID);
+        this.avatarView.loadLeadImage(model.recipeUUID, model.task);
+//        this.avatarView.loadNewPhotoByModel(model.recipeUUID);
         this.ratingImageView.queryRatingInReviewsByModel(model.recipeUUID, ReviewType.Review_Recipe, model.task);
 
         this.displayNameLabel.setText(model.recipeName);
