@@ -53,13 +53,10 @@ public class OrderedRecipesTask extends FragmentTask {
     private HashMap<String, RecipeCache> recipeCacheHashMap = new LinkedHashMap<>();
 
     private RecipeCache getRecipeCache(String recipeUUID) {
-        if (recipeCacheHashMap.containsKey(recipeUUID))
-            return recipeCacheHashMap.get(recipeUUID);
+        if (!recipeCacheHashMap.containsKey(recipeUUID))
+            recipeCacheHashMap.put(recipeUUID, new RecipeCache());
 
-        RecipeCache recipeCache = new RecipeCache();
-        recipeCacheHashMap.put(recipeUUID, recipeCache);
-
-        return recipeCache;
+        return recipeCacheHashMap.get(recipeUUID);
     }
 
     public void setRating(String recipeUUID, int rating) {
