@@ -85,7 +85,7 @@ public class AvatarView extends SimpleDraweeView {
                     }
                     return null;
                 }
-            }).continueWith(new Continuation<Void, Void>() {
+            }, Task.UI_THREAD_EXECUTOR).continueWith(new Continuation<Void, Void>() {
                 @Override
                 public Void then(Task<Void> task) throws Exception {
                     LocalDatabaseQuery.closeRealmList(realmList);
