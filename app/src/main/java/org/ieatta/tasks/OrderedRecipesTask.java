@@ -7,6 +7,7 @@ import android.view.View;
 import com.tableview.adapter.NSIndexPath;
 
 import org.ieatta.R;
+import org.ieatta.activity.LeadImage;
 import org.ieatta.activity.LeadImageCollection;
 import org.ieatta.activity.Page;
 import org.ieatta.activity.PageActivity;
@@ -34,6 +35,7 @@ import org.ieatta.provide.IEAEditKey;
 import org.ieatta.provide.MainSegueIdentifier;
 import org.wikipedia.util.DimenUtil;
 
+import java.util.HashMap;
 import java.util.List;
 
 import bolts.Continuation;
@@ -41,11 +43,17 @@ import bolts.Task;
 import io.realm.RealmResults;
 
 public class OrderedRecipesTask extends FragmentTask {
-    private DBRestaurant restaurant;
-    private DBEvent event;
-    public DBTeam team;
+    class RecipeCache {
+        public LeadImage image;
+        public int rating;
+    }
+
     public List<RecipeModel> recipeModels;
-    private LeadImageCollection leadImageCollection; // for restaurants
+    private HashMap<String, RecipeCache> recipeCacheHashMap;
+
+    public void cacheLeadImage(){
+
+    }
 
     @Override
     public boolean haveLeadImage() {
