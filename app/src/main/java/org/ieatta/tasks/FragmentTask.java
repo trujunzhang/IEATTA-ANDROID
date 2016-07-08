@@ -28,6 +28,7 @@ import org.ieatta.activity.update.UpdateEntry;
 import org.ieatta.analytics.GalleryFunnel;
 import org.ieatta.analytics.RecycleCellFunnel;
 import org.ieatta.cells.IEAGalleryThumbnailCell;
+import org.ieatta.cells.IEAReviewsCell;
 import org.ieatta.cells.header.IEAMoreReviewsFooterCell;
 import org.ieatta.cells.header.IEAPhotoGalleryFooterCell;
 import org.ieatta.cells.headerfooterview.IEAFooterView;
@@ -119,7 +120,8 @@ public abstract class FragmentTask extends MenuBarCallback implements AdapterVie
 
     public void postReviews(int forSectionIndex, String reviewRef, ReviewType type, int limit) {
         this.manager.appendSectionTitleCell(new SectionTitleCellModel(IEAEditKey.Section_Title, R.string.Reviews), forSectionIndex);
-        this.manager.setSectionItems(this.reviewsCellModelList, forSectionIndex);
+
+        this.manager.setAndRegisterSectionItems(IEAReviewsCell.getType(), this.reviewsCellModelList, forSectionIndex);
 
         int otherCount = this.reviewQuery.reviewsCount <= 0 ? 0 : (this.reviewQuery.reviewsCount - limit);
         new RecycleCellFunnel().logOtherReviewsCount(otherCount);

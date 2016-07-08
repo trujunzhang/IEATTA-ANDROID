@@ -103,6 +103,13 @@ public class RecycleViewManager {
         getMemoryStorage().updateItems(items, forSectionIndex);
     }
 
+    /**
+     * Register cell and add rows to the section.
+     *
+     * @param type            cell type
+     * @param items           rows
+     * @param forSectionIndex the index of the section
+     */
     public void setAndRegisterSectionItems(CellType type, List items, int forSectionIndex) {
         this.setRegisterCellClass(type, forSectionIndex);
         getMemoryStorage().setItems(items, forSectionIndex);

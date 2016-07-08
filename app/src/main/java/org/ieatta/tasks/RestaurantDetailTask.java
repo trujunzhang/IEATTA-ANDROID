@@ -131,8 +131,6 @@ public class RestaurantDetailTask extends FragmentTask {
     @Override
     public void prepareUI() {
         super.prepareUI();
-        this.manager.setRegisterCellClass(IEARestaurantEventsCell.getType(), RestaurantDetailSection.section_events.ordinal());
-        this.manager.setRegisterCellClass(IEAReviewsCell.getType(), RestaurantDetailSection.section_reviews.ordinal());
 
         this.manager.appendSectionTitleCell(new SectionTitleCellModel(IEAEditKey.Section_Title, R.string.Events_Recorded), RestaurantDetailSection.section_events.ordinal());
     }
@@ -142,7 +140,7 @@ public class RestaurantDetailTask extends FragmentTask {
         this.manager.setHeaderItem(new IEAHeaderViewModel(this.getEmptyHeaderViewHeight()), IEAHeaderView.getType());
         this.manager.setFooterItem(new IEAFooterViewModel(), IEAFooterView.getType());
 
-        this.manager.setSectionItems(this.events, RestaurantDetailSection.section_events.ordinal());
+        this.manager.setAndRegisterSectionItems(IEARestaurantEventsCell.getType(), this.events, RestaurantDetailSection.section_events.ordinal());
 
         postPhotosGallery(RestaurantDetailSection.section_gallery_thumbnail.ordinal());
         postReviews(RestaurantDetailSection.section_reviews.ordinal(), mRestaurantUUID, ReviewType.Review_Restaurant, AppConstant.limit_reviews);
@@ -154,7 +152,7 @@ public class RestaurantDetailTask extends FragmentTask {
         String title = restaurant.getDisplayName();
         String description = restaurant.getGoogleMapAddress();
         PageTitle pageTitle = new PageTitle(this.restaurant.getUUID(), null, description, reviewQuery.ratingReview);
-        LeadMapView leadMapView = new LeadMapView(restaurant.getLatitude(),restaurant.getLongitude(),title,description);
+        LeadMapView leadMapView = new LeadMapView(restaurant.getLatitude(), restaurant.getLongitude(), title, description);
         PageProperties properties = new PageProperties(this.leadImageCollection, title, leadMapView);
 
         return new Page(pageTitle, properties);
@@ -171,7 +169,7 @@ public class RestaurantDetailTask extends FragmentTask {
      */
     public void onEditClick() {
         ((PageActivity) activity).loadPage(
-                new HistoryEntry(MainSegueIdentifier.editRestaurantSegueIdentifier, restaurant.getUUID(),false));
+                new HistoryEntry(MainSegueIdentifier.editRestaurantSegueIdentifier, restaurant.getUUID(), false));
     }
 
     @Override
@@ -180,6 +178,6 @@ public class RestaurantDetailTask extends FragmentTask {
      */
     public void onAddEventClick() {
         ((PageActivity) activity).loadPage(
-                new HistoryEntry(MainSegueIdentifier.editEventSegueIdentifier, DBUtil.getUUID(),true));
+                new HistoryEntry(MainSegueIdentifier.editEventSegueIdentifier, DBUtil.getUUID(), true));
     }
 }

@@ -125,18 +125,9 @@ public class OrderedRecipesTask extends FragmentTask {
 
     @Override
     public void postUI() {
+        this.manager.setHeaderItem(new IEAHeaderViewModel(0), IEAHeaderView.getType());
         this.manager.setFooterItem(new IEAFooterViewModel(), IEAFooterView.getType());
 
-        this.manager.setAndRegisterSectionItems(IEAOrderedRecipeCardCell.getType(), this.recipes, OrderedRecipesSection.section_recipes.ordinal());
-
-        model.setPage(this.getPage());
-    }
-
-    public Page getPage() {
-        String title = restaurant.getDisplayName();
-        PageTitle pageTitle = new PageTitle(this.restaurant.getUUID(), null, null);
-        PageProperties properties = new PageProperties(this.leadImageCollection, title, null);
-
-        return null;
+        this.manager.setAndRegisterSectionItems(IEAOrderedRecipeCell.getType(), this.recipes, OrderedRecipesSection.section_recipes.ordinal());
     }
 }
