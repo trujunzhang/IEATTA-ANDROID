@@ -86,6 +86,8 @@ public class OrderedRecipesTask extends FragmentTask {
             @Override
             public Void then(Task<RealmResults<DBRecipe>> task) throws Exception {
                 OrderedRecipesTask.this.recipes = task.getResult();
+
+
                 return null;
             }
         });

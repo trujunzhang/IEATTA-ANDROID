@@ -87,7 +87,7 @@ public class LocalDatabaseQuery {
 
     public static List<Realm> closeRealmList(List<Realm> realmList) {
         for (Realm realm : realmList) {
-            if (realm.isClosed() == false)
+            if (!realm.isClosed())
                 realm.close();
         }
         return new LinkedList<>();

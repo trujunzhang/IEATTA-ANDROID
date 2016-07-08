@@ -73,11 +73,11 @@ public class ReviewQuery {
     private void makeRatingReview(RealmResults<DBReview> result) {
         int count = result.size();
         int sum = 0;
-        for(DBReview item : result){
-            sum +=item.getRate();
+        for (DBReview item : result) {
+            sum += item.getRate();
         }
 
-        this.ratingReview = sum/count;
+        this.ratingReview = sum / count;
     }
 
     private List<String> getTeamsList(RealmResults<DBReview> reviews, int limit) {
