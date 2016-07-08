@@ -20,6 +20,7 @@ import org.ieatta.cells.headerfooterview.IEAFooterView;
 import org.ieatta.cells.headerfooterview.IEAHeaderView;
 import org.ieatta.cells.model.IEAFooterViewModel;
 import org.ieatta.cells.model.IEAHeaderViewModel;
+import org.ieatta.cells.model.RecipeModel;
 import org.ieatta.cells.model.SectionTitleCellModel;
 import org.ieatta.database.models.DBEvent;
 import org.ieatta.database.models.DBPhoto;
@@ -33,6 +34,8 @@ import org.ieatta.provide.IEAEditKey;
 import org.ieatta.provide.MainSegueIdentifier;
 import org.wikipedia.util.DimenUtil;
 
+import java.util.List;
+
 import bolts.Continuation;
 import bolts.Task;
 import io.realm.RealmResults;
@@ -41,7 +44,7 @@ public class OrderedRecipesTask extends FragmentTask {
     private DBRestaurant restaurant;
     private DBEvent event;
     public DBTeam team;
-    public RealmResults<DBRecipe> recipes;
+    public List<RecipeModel> recipeModels;
     private LeadImageCollection leadImageCollection; // for restaurants
 
     @Override
@@ -85,9 +88,7 @@ public class OrderedRecipesTask extends FragmentTask {
         return new RealmModelReader<DBRecipe>(DBRecipe.class).fetchResults(LocalDatabaseQuery.getForRecipes(_teamUUID, _eventUUID), false, realmList).onSuccess(new Continuation<RealmResults<DBRecipe>, Void>() {
             @Override
             public Void then(Task<RealmResults<DBRecipe>> task) throws Exception {
-                OrderedRecipesTask.this.recipes = task.getResult();
-
-
+                OrderedRecipesTask.this.recipeModels = DBConvert.toRecipeModels(task.getResult(), OrderedRecipesTask.this);
                 return null;
             }
         });
@@ -110,6 +111,6 @@ public class OrderedRecipesTask extends FragmentTask {
         this.manager.setHeaderItem(new IEAHeaderViewModel(this.getStatusBarHeight()), IEAHeaderView.getType());
         this.manager.setFooterItem(new IEAFooterViewModel(), IEAFooterView.getType());
 
-        this.manager.setAndRegisterSectionItems(IEAOrderedRecipeCardCell.getType(), this.recipes, OrderedRecipesSection.section_recipes.ordinal());
+        this.manager.setAndRegisterSectionItems(IEAOrderedRecipeCardCell.getType(), this.recipeModels, OrderedRecipesSection.section_recipes.ordinal());
     }
 }

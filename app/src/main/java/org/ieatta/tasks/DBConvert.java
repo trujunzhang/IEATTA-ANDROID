@@ -7,9 +7,11 @@ import org.ieatta.activity.gallery.GalleryItem;
 import org.ieatta.analytics.DBConvertFunnel;
 import org.ieatta.cells.model.IEAOrderedPeople;
 import org.ieatta.cells.model.IEAReviewsCellModel;
+import org.ieatta.cells.model.RecipeModel;
 import org.ieatta.database.models.DBEvent;
 import org.ieatta.database.models.DBPeopleInEvent;
 import org.ieatta.database.models.DBPhoto;
+import org.ieatta.database.models.DBRecipe;
 import org.ieatta.database.models.DBReview;
 import org.ieatta.database.models.DBTeam;
 import org.ieatta.parse.AppConstant;
@@ -92,5 +94,13 @@ public class DBConvert {
         }
 
         return peoplePoints;
+    }
+
+    public static List<RecipeModel> toRecipeModels(RealmResults<DBRecipe> recipes, FragmentTask task) {
+        List<RecipeModel> recipeModels = new LinkedList<>();
+        for (DBRecipe model : recipes) {
+            recipeModels.add(new RecipeModel(model, task));
+        }
+        return recipeModels;
     }
 }

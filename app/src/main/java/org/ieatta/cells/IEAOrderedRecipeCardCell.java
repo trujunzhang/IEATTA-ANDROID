@@ -7,6 +7,7 @@ import com.tableview.adapter.IEAViewHolder;
 import com.tableview.storage.models.CellType;
 
 import org.ieatta.R;
+import org.ieatta.cells.model.RecipeModel;
 import org.ieatta.database.models.DBRecipe;
 import org.ieatta.database.provide.ReviewType;
 import org.ieatta.views.AvatarView;
@@ -33,15 +34,16 @@ public class IEAOrderedRecipeCardCell extends IEAViewHolder {
         this.priceLabel = (GoneIfEmptyTextView) itemView.findViewById(R.id.recipe_price_text);
     }
 
+    private void setRecipeModel(RecipeModel model) {
+        this.avatarView.loadNewPhotoByModel(model.recipeUUID);
+        this.ratingImageView.queryRatingInReviewsByModel(model.recipeUUID, ReviewType.Review_Recipe);
+
+        this.displayNameLabel.setText(model.recipeName);
+        this.priceLabel.setText(model.priceValue);
+    }
+
     @Override
     public void render(Object value) {
-        DBRecipe model = (DBRecipe) value;
-
-        this.displayNameLabel.setText(model.getDisplayName());
-        this.priceLabel.setText("$ " + model.getPrice() + "");
-
-        this.ratingImageView.queryRatingInReviewsByModel(model.getUUID(), ReviewType.Review_Recipe);
-
-        this.avatarView.loadNewPhotoByModel(model.getUUID());
+        this.setRecipeModel((RecipeModel) value);
     }
 }

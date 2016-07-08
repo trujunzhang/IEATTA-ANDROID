@@ -6,17 +6,17 @@ import org.ieatta.tasks.FragmentTask;
 
 public class RecipeModel extends EditBaseCellModel {
 
-    private final String title;
-    private final String recipeUUID;
-    private final String priceValue;
-    private final FragmentTask task;
+    public final String recipeName;
+    public final String recipeUUID;
+    public final String priceValue;
+    public final FragmentTask task;
 
     public RecipeModel(DBRecipe review, FragmentTask task) {
         super(IEAEditKey.Unknow);
 
-        this.title = review.getDisplayName();
+        this.recipeName = review.getDisplayName();
         this.recipeUUID = review.getUUID();
-        this.priceValue = review.getPrice();
+        this.priceValue = String.format("$ %s", review.getPrice());
 
         this.task = task;
     }
