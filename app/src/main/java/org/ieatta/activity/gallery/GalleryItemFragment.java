@@ -73,7 +73,7 @@ public class GalleryItemFragment extends Fragment {
         GalleryItemFragment f = new GalleryItemFragment();
         Bundle args = new Bundle();
         args.putParcelable(ARG_PAGETITLE, pageTitle);
-        args.putParcelable(ARG_MEDIATITLE, new PageTitle(galleryItemProto.getUUID(), galleryItemProto.getThumbUrl(), galleryItemProto.getOnlineUrl(), null));
+        args.putParcelable(ARG_MEDIATITLE, new PageTitle(galleryItemProto.getUUID(), galleryItemProto.getThumbUrl(), galleryItemProto.getOnlineUrl(), -1, null));
         args.putString(ARG_MIMETYPE, galleryItemProto.getMimeType());
         f.setArguments(args);
         return f;
