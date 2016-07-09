@@ -283,9 +283,6 @@ public class GalleryActivity extends ThemedActionBarActivity {
         super.onBackPressed();
     }
 
-//    public MediaDownloadReceiver getDownloadReceiver() {
-//        return downloadReceiver;
-//    }
 
     /**
      * Show or hide all the UI controls in this activity (slide them out or in).
@@ -369,11 +366,10 @@ public class GalleryActivity extends ThemedActionBarActivity {
     private void fetchGalleryCollection() {
         String uuid = pageTitle.getUUID();
         final List<Realm> realmList = new LinkedList<>();
-        LocalDatabaseQuery.queryPhotosForRestaurant(uuid,realmList).onSuccessTask(new Continuation<RealmResults<DBPhoto>, Task<Void>>() {
+        LocalDatabaseQuery.queryPhotosForRestaurant(uuid, realmList).onSuccessTask(new Continuation<RealmResults<DBPhoto>, Task<Void>>() {
             @Override
             public Task<Void> then(Task<RealmResults<DBPhoto>> task) throws Exception {
                 GalleryCollection result = new GalleryCollection(DBConvert.toGalleryItem(task.getResult()));
-                LocalDatabaseQuery.closeRealmList(realmList);
                 GalleryActivity.this.page.setGalleryCollection(result);
                 applyGalleryCollection(result);
                 return null;
@@ -381,6 +377,7 @@ public class GalleryActivity extends ThemedActionBarActivity {
         }).continueWith(new Continuation<Void, Void>() {
             @Override
             public Void then(Task<Void> task) throws Exception {
+                LocalDatabaseQuery.closeRealmList(realmList);
                 if (task.getError() != null) {
                     Log.e(TAG, "Failed to fetch gallery collection.", task.getError());
                     FeedbackUtil.showError(GalleryActivity.this, task.getError());
@@ -415,7 +412,7 @@ public class GalleryActivity extends ThemedActionBarActivity {
                 // by default in the gallery)
                 initialImagePos = 0;
                 collection.getItemList().add(initialImagePos,
-                                             new GalleryItem(initialImageTitle.getUUID()));
+                        new GalleryItem(initialImageTitle.getUUID()));
             }
         }
 
