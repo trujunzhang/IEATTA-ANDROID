@@ -71,7 +71,7 @@
                 android:layout_height="60dp"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:src="@drawable/abc_ic_menu_overflow_material"
+                android:src="@drawable/toolbar_menu_overflow"
                 android:tint="@android:color/black"
                 android:scaleType="center" />
 

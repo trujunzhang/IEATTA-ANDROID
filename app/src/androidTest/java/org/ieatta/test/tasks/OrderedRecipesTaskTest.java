@@ -37,8 +37,8 @@ public class OrderedRecipesTaskTest {
         task.executeTask().onSuccess(new Continuation<Void, Void>() {
             @Override
             public Void then(Task<Void> task) throws Exception {
-                OrderedRecipesTask _task = OrderedRecipesTaskTest.this.task;
-                RealmResults<DBRecipe> recipes = _task.recipes;
+//                OrderedRecipesTask _task = OrderedRecipesTaskTest.this.task;
+//                RealmResults<DBRecipe> recipes = _task.recipes;
                 return null;
             }
         }).continueWith(new Continuation<Void, Void>() {
