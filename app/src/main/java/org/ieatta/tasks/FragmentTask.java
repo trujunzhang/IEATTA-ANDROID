@@ -14,6 +14,7 @@ import com.tableview.storage.models.RowModel;
 import com.tableview.utils.CollectionUtil;
 
 import org.ieatta.R;
+import org.ieatta.activity.LeadImage;
 import org.ieatta.activity.PageActivity;
 import org.ieatta.activity.PageFragment;
 import org.ieatta.activity.PageTitle;
@@ -190,6 +191,7 @@ public abstract class FragmentTask extends MenuBarCallback implements AdapterVie
 
     @Override
     public void onItemClick(SlideShowView parent, int position) {
+        LeadImage image = model.getPage().getPageProperties().getLeadImages().get(position);
 
     }
 }
