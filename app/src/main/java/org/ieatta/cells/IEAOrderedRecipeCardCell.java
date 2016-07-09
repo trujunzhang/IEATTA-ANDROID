@@ -20,7 +20,7 @@ import org.ieatta.views.AvatarView;
 import org.ieatta.views.RatingImageView;
 import org.wikipedia.views.GoneIfEmptyTextView;
 
-public class IEAOrderedRecipeCardCell extends IEAViewHolder {
+public class IEAOrderedRecipeCardCell extends IEAViewHolder implements PopupMenu.OnMenuItemClickListener {
     private RecipeModel model;
 
     public static CellType getType() {
@@ -52,12 +52,7 @@ public class IEAOrderedRecipeCardCell extends IEAViewHolder {
                 popup.getMenuInflater().inflate(R.menu.recipe_card_toolbar, popup.getMenu());
 
                 //registering popup with OnMenuItemClickListener
-                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                    public boolean onMenuItemClick(MenuItem item) {
-//                Toast.makeText(MainActivity.this,"You Clicked : " + item.getTitle(),Toast.LENGTH_SHORT).show();
-                        return true;
-                    }
-                });
+                popup.setOnMenuItemClickListener(IEAOrderedRecipeCardCell.this);
 
                 popup.show();
             }
@@ -77,5 +72,10 @@ public class IEAOrderedRecipeCardCell extends IEAViewHolder {
     @Override
     public void render(Object value) {
         this.setRecipeModel((RecipeModel) value);
+    }
+
+    @Override
+    public boolean onMenuItemClick(MenuItem item) {
+        return true;
     }
 }
