@@ -139,15 +139,7 @@ public class ArticleHeaderView extends FrameLayout implements ObservableWebView.
         image.setLoadListener(listener);
     }
 
-    public void loadImage(Page page) {
-        if (page != null)
-            this.loadImage(page.getPageProperties().getLeadImages(), page.getPageProperties().getFragmentTask());
-
-        this.loadImage(null, null);
-    }
-
-    public void loadImage(List<LeadImage> leadImages, SlideShowView.OnSlideClickListener slideClickListener) {
-
+    public void loadImage(@Nullable List<LeadImage> leadImages, SlideShowView.OnSlideClickListener slideClickListener) {
         image.load(leadImages, slideClickListener);
 
         boolean noLeadImages = (leadImages == null) || (leadImages.size() == 0);

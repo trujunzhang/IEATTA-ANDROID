@@ -158,10 +158,7 @@ public abstract class FragmentTask extends MenuBarCallback implements AdapterVie
             = new GalleryThumbnailScrollView.GalleryViewListener() {
         @Override
         public void onGalleryItemClicked(String imageUUID) {
-            PageTitle imageTitle = new PageTitle(imageUUID, -1);
-            PageTitle pageTitle = model.getTitle();
-            GalleryActivity.showGallery(activity, pageTitle, imageTitle,
-                    GalleryFunnel.SOURCE_LINK_PREVIEW);
+            FragmentTask.this.showGalleryActivity(imageUUID);
         }
 
         @Override
@@ -169,6 +166,14 @@ public abstract class FragmentTask extends MenuBarCallback implements AdapterVie
 
         }
     };
+
+    private void showGalleryActivity(String imageUUID) {
+        PageTitle imageTitle = new PageTitle(imageUUID, -1);
+        PageTitle pageTitle = model.getTitle();
+        GalleryActivity.showGallery(activity, pageTitle, imageTitle,
+                GalleryFunnel.SOURCE_LINK_PREVIEW);
+    }
+
 
     public boolean isMainPage() {
         return false;
@@ -191,7 +196,7 @@ public abstract class FragmentTask extends MenuBarCallback implements AdapterVie
 
     @Override
     public void onItemClick(SlideShowView parent, int position) {
-        LeadImage image = model.getPage().getPageProperties().getLeadImages().get(position);
-
+        String imageUUID = model.getPage().getPageProperties().getLeadImages().get(position).getImageUUID();
+        this.showGalleryActivity(imageUUID);
     }
 }

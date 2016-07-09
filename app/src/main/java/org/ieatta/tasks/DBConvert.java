@@ -40,7 +40,7 @@ public class DBConvert {
         List<LeadImage> leadImages = new LinkedList<>();
         for (DBPhoto photo : photos) {
             File file = ThumbnailImageUtil.sharedInstance.getCacheImageUrl(photo);
-            LeadImage item = new LeadImage(BaseImageUtil.getLocalAbstractPath(file), photo.getOriginalUrl());
+            LeadImage item = new LeadImage(BaseImageUtil.getLocalAbstractPath(file), photo.getOriginalUrl(), photo.getUUID());
             new DBConvertFunnel().logToLeadImageCollection(item.getLocalUrl(), item.getOnlineUrl());
             leadImages.add(item);
         }

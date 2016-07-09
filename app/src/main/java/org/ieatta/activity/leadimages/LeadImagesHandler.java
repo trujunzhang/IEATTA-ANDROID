@@ -15,6 +15,8 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
+import com.marvinlabs.widget.slideshow.SlideShowView;
+
 import org.ieatta.R;
 import org.ieatta.activity.LeadImage;
 import org.ieatta.activity.LeadMapView;
@@ -108,7 +110,7 @@ public class LeadImagesHandler {
      */
     public void hide() {
         articleHeaderView.hide();
-        articleHeaderView.loadImage(null);
+        articleHeaderView.loadImage(null, null);
     }
 
     @Nullable
@@ -183,7 +185,7 @@ public class LeadImagesHandler {
         initDisplayDimensions();
 
         // set the page title text, and honor any HTML formatting in the title
-        this.loadLeadImage(this.getPage());
+        this.loadLeadImage(this.getPage().getPageProperties().getLeadImages(), this.getPage().getPageProperties().getFragmentTask());
 
         articleHeaderView.setTitle(Html.fromHtml(getPage().getDisplayTitle()));
         articleHeaderView.setRatingImageView(getTitle().getRatingReview());
@@ -288,18 +290,17 @@ public class LeadImagesHandler {
 //    }
 
     /**
-     * @param page
+     * @param leadImages Nullable URL with no scheme. For example, foo.bar.com/ instead of
+     *                   http://foo.bar.com/.
      */
-    public void loadLeadImage(Page page) {
-        List<LeadImage> leadImages = page.getPageProperties().getLeadImages();
-
+    public void loadLeadImage(@Nullable List<LeadImage> leadImages, SlideShowView.OnSlideClickListener slideClickListener) {
         if (!isMainPage() && leadImages != null && isLeadImageEnabled()) {
             new PageFragmentFunnel().logLoadLeadImage("have LeadImage");
             articleHeaderView.setImageYScalar(0);
-            articleHeaderView.loadImage(page);
+            articleHeaderView.loadImage(leadImages, slideClickListener);
         } else {
             new PageFragmentFunnel().logLoadLeadImage("no LeadImage");
-            articleHeaderView.loadImage(null);
+            articleHeaderView.loadImage(null, null);
         }
     }
 

@@ -14,19 +14,10 @@ public class LeadImageCollection {
 
     private String usedRef;
 
-    public LeadImageCollection(List<File> galleryCollection, String usedRef) {
-        this.usedRef = usedRef;
-        this.leadImages = new LinkedList<>();
-        for (File file : galleryCollection) {
-            this.leadImages.add(new LeadImage(BaseImageUtil.getLocalAbstractPath(file)));
-        }
-    }
-
     public LeadImageCollection(List<LeadImage> leadImages) {
         this.leadImages = leadImages;
         this.usedRef = usedRef;
     }
-
 
     public void nextLeadImage() {
         this.galleryIndex = ((galleryIndex + 1) % leadImages.size());

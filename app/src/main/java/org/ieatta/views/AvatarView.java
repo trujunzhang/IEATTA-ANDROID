@@ -79,7 +79,7 @@ public class AvatarView extends SimpleDraweeView {
                     if (photo != null) {
                         String originalUrl = photo.getOriginalUrl();
                         String localUrl = ThumbnailImageUtil.sharedInstance.getFirstImageAbstractPath(uuid);
-                        LeadImage leadImage = new LeadImage(localUrl, originalUrl);
+                        LeadImage leadImage = new LeadImage(localUrl, originalUrl, photo.getUUID());
                         orderedRecipesTask.setLeadImage(uuid, leadImage);
                         ViewUtil.loadMultiImageUrlInto(AvatarView.this, localUrl, originalUrl);
                     }

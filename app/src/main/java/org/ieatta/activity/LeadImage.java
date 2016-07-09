@@ -14,19 +14,14 @@ import bolts.Task;
 public class LeadImage {
     private String localUrl;
     private String onlineUrl;
-    private boolean isCached;
+    private String imageUUID;
 
-    public LeadImage(String localUrl) {
-        this.localUrl = localUrl;
-//        if (!TextUtils.isEmpty(localUrl))
-//            this.photoUUID = new File(localUrl).getName().split("_")[1];
-        this.isCached = false;
-    }
-
-    public LeadImage(String localUrl, String onlineUrl) {
+    public LeadImage(String localUrl, String onlineUrl, String imageUUID) {
         this.localUrl = localUrl;
         this.onlineUrl = onlineUrl;
+        this.imageUUID = imageUUID;
     }
+
 
     public String getLocalUrl() {
         return this.localUrl;
@@ -34,6 +29,10 @@ public class LeadImage {
 
     public String getOnlineUrl() {
         return this.onlineUrl;
+    }
+
+    public String getImageUUID() {
+        return this.imageUUID;
     }
 
 }
