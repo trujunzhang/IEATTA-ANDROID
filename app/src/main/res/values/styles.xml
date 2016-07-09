@@ -60,7 +60,7 @@
 
     <style name="Card.Title" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
         <item name="android:textSize">24sp</item>
-        <item name="android:textColor">@color/red</item>
+        <item name="android:textColor">@color/blue</item>
     </style>
 
     <style name="Card.Subtitle" parent="TextAppearance.Widget.AppCompat.Toolbar.Subtitle">
