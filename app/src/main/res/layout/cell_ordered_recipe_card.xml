@@ -39,7 +39,8 @@
                 android:maxLines="2"
                 android:textColor="@color/list_item_text_primary_light"
                 android:textSize="@dimen/recipeTextSize"
-                tools:text="Sample title" />
+                tools:text="Sample title"
+                android:layout_toLeftOf="@+id/recipe_toolbar" />
 
             <TextView
                 android:id="@+id/recipe_price_text"
@@ -58,7 +59,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/recipe_name_text"
-                android:layout_marginBottom="8dp"
+                android:layout_marginBottom="12dp"
                 android:layout_marginRight="8dp"
                 android:layout_marginTop="8dp"
                 android:contentDescription="@null"
@@ -66,12 +67,13 @@
 
             <ImageView
                 android:id="@+id/recipe_toolbar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:background="@color/red"
-                android:src="@drawable/abc_ic_menu_overflow_material" />
+                android:src="@drawable/abc_ic_menu_overflow_material"
+                android:tint="@android:color/black"
+                android:scaleType="center" />
 
         </RelativeLayout>
 
