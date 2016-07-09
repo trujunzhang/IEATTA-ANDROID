@@ -158,7 +158,7 @@ public class RecipeDetailTask extends FragmentTask {
     public Page getPage() {
         String title = this.mRecipe.getDisplayName();
         String description = String.format("$ %s", this.mRecipe.getPrice());
-        PageTitle pageTitle = new PageTitle(this.mRecipe.getUUID(), null, description, reviewQuery.ratingReview);
+        PageTitle pageTitle = new PageTitle(this.mRecipe.getUUID(), this.getLeadImageType(), description, reviewQuery.ratingReview);
         PageProperties properties = new PageProperties(this.leadImageCollection, title, null);
 
         return new Page(pageTitle, properties);

@@ -50,8 +50,8 @@ public class PageTitle implements Parcelable {
         this(uuid, thumbUrl, null, -1, description);
     }
 
-    public PageTitle(String uuid, @Nullable String thumbUrl, @Nullable String description, int ratingReview) {
-        this(uuid, thumbUrl, description);
+    public PageTitle(String uuid, @Nullable int leadImageType, @Nullable String description, int ratingReview) {
+        this(uuid, null, null, leadImageType, description);
         this.ratingReview = ratingReview;
     }
 

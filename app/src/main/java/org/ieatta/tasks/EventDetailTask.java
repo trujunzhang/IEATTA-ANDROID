@@ -146,7 +146,7 @@ public class EventDetailTask extends FragmentTask {
         this.manager.setHeaderItem(new IEAHeaderViewModel(DimenUtil.getDisplayWidthPx()), IEAHeaderView.getType());
         this.manager.setFooterItem(new IEAFooterViewModel(), IEAFooterView.getType());
 
-        this.manager.setAndRegisterSectionItems(IEAOrderedPeopleCell.getType(),this.orderedPeopleList, EventDetailSection.section_ordered_people.ordinal());
+        this.manager.setAndRegisterSectionItems(IEAOrderedPeopleCell.getType(), this.orderedPeopleList, EventDetailSection.section_ordered_people.ordinal());
 
         postReviews(EventDetailSection.section_reviews.ordinal(), mEventUUID, ReviewType.Review_Event, AppConstant.limit_reviews);
 
@@ -156,8 +156,8 @@ public class EventDetailTask extends FragmentTask {
     public Page getPage() {
         String title = restaurant.getDisplayName();
         String description = event.getDisplayName();
-        PageTitle pageTitle = new PageTitle(this.event.getUUID(),null,description, reviewQuery.ratingReview);
-        PageProperties properties = new PageProperties(this.leadImageCollection, title,null);
+        PageTitle pageTitle = new PageTitle(this.event.getUUID(), this.getLeadImageType(), description, reviewQuery.ratingReview);
+        PageProperties properties = new PageProperties(this.leadImageCollection, title, null);
 
         return new Page(pageTitle, properties);
     }
@@ -169,7 +169,7 @@ public class EventDetailTask extends FragmentTask {
      */
     public void onEditClick() {
         ((PageActivity) activity).loadPage(
-                new HistoryEntry(MainSegueIdentifier.editEventSegueIdentifier, this.event.getUUID(),false));
+                new HistoryEntry(MainSegueIdentifier.editEventSegueIdentifier, this.event.getUUID(), false));
     }
 
     @Override
@@ -178,6 +178,6 @@ public class EventDetailTask extends FragmentTask {
      */
     public void onChoicePersonClick() {
         ((PageActivity) activity).loadPage(
-                new HistoryEntry(MainSegueIdentifier.choicePeopleSegueIdentifier, this.event.getUUID(),true));
+                new HistoryEntry(MainSegueIdentifier.choicePeopleSegueIdentifier, this.event.getUUID(), true));
     }
 }

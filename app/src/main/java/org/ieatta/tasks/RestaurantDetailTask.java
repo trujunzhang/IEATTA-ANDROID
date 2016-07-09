@@ -156,7 +156,7 @@ public class RestaurantDetailTask extends FragmentTask {
     public Page getPage() {
         String title = restaurant.getDisplayName();
         String description = restaurant.getGoogleMapAddress();
-        PageTitle pageTitle = new PageTitle(this.restaurant.getUUID(), null, description, reviewQuery.ratingReview);
+        PageTitle pageTitle = new PageTitle(this.restaurant.getUUID(), this.getLeadImageType(), description, reviewQuery.ratingReview);
         LeadMapView leadMapView = new LeadMapView(restaurant.getLatitude(), restaurant.getLongitude(), title, description);
         PageProperties properties = new PageProperties(this.leadImageCollection, title, leadMapView);
 
