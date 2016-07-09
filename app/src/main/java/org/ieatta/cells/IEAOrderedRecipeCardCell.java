@@ -2,6 +2,7 @@ package org.ieatta.cells;
 
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.support.v7.widget.Toolbar;
 
@@ -26,6 +27,7 @@ public class IEAOrderedRecipeCardCell extends IEAViewHolder {
     private TextView displayNameLabel;
     private TextView priceLabel;
     private RatingImageView ratingImageView;
+    private ImageView recipeToolbar;
 
     public IEAOrderedRecipeCardCell(View itemView) {
         super(itemView);
@@ -34,6 +36,14 @@ public class IEAOrderedRecipeCardCell extends IEAViewHolder {
         this.ratingImageView = (RatingImageView) itemView.findViewById(R.id.recipe_rating_image_view);
         this.displayNameLabel = (TextView) itemView.findViewById(R.id.recipe_name_text);
         this.priceLabel = (TextView) itemView.findViewById(R.id.recipe_price_text);
+        this.recipeToolbar = (ImageView) itemView.findViewById(R.id.recipe_toolbar);
+
+        this.recipeToolbar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 
     private void setRecipeModel(RecipeModel model) {
