@@ -51,8 +51,10 @@
     </style>
 
     <!--Gallery Activity Toolbar-->
-    <style name="ToolbarCard" parent="ThemeOverlay.AppCompat.ActionBar">
-        <item name="android:textColorSecondary">@color/red</item>
+    <style name="Gallery.Toolbar" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="android:textColorPrimary">@android:color/white</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textColorPrimaryInverse">@android:color/white</item>
     </style>
 
 </resources>

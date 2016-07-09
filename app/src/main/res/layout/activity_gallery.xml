@@ -22,7 +22,7 @@
             android:id="@+id/gallery_toolbar"
             android:layout_width="match_parent"
             android:layout_height="80dp"
-            app:theme="@style/ToolbarCard">
+            app:theme="@style/Gallery.Toolbar">
 
         </android.support.v7.widget.Toolbar>
     </FrameLayout>
