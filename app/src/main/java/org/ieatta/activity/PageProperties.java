@@ -17,15 +17,11 @@ public class PageProperties {
     }
 
     public PageProperties(LeadImageCollection leadImageCollection, String displayTitleText, LeadMapView leadMapView, FragmentTask fragmentTask) {
-        this(leadImageCollection, displayTitleText, leadMapView);
-        this.fragmentTask = fragmentTask;
-    }
-
-    public PageProperties(LeadImageCollection leadImageCollection, String displayTitleText, LeadMapView leadMapView) {
         this.leadImages = leadImageCollection.leadImages;
 
         this.displayTitleText = displayTitleText;
         this.leadMapView = leadMapView;
+        this.fragmentTask = fragmentTask;
     }
 
     public String getDisplayTitle() {
