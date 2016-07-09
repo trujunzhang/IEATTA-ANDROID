@@ -68,6 +68,11 @@ public class RecipeDetailTask extends FragmentTask {
         section_reviews,//= 1
     }
 
+    @Override
+    public int getLeadImageType() {
+        return PhotoUsedType.PU_Recipe.getType();
+    }
+
     /**
      * Execute Task for Recipe detail.
      *
@@ -102,7 +107,7 @@ public class RecipeDetailTask extends FragmentTask {
             @Override
             public Task<RealmResults<DBPhoto>> then(Task<DBRestaurant> task) throws Exception {
                 RecipeDetailTask.this.mRestaurant = task.getResult();
-                return LocalDatabaseQuery.queryPhotosByModel(_recipeUUID, PhotoUsedType.PU_Recipe.getType(), realmList);
+                return LocalDatabaseQuery.queryPhotosByModel(_recipeUUID, getLeadImageType(), realmList);
             }
         }).onSuccessTask(new Continuation<RealmResults<DBPhoto>, Task<List<File>>>() {
             @Override
@@ -153,8 +158,8 @@ public class RecipeDetailTask extends FragmentTask {
     public Page getPage() {
         String title = this.mRecipe.getDisplayName();
         String description = String.format("$ %s", this.mRecipe.getPrice());
-        PageTitle pageTitle = new PageTitle(this.mRecipe.getUUID(),null,description, reviewQuery.ratingReview);
-        PageProperties properties = new PageProperties(this.leadImageCollection, title,null);
+        PageTitle pageTitle = new PageTitle(this.mRecipe.getUUID(), null, description, reviewQuery.ratingReview);
+        PageProperties properties = new PageProperties(this.leadImageCollection, title, null);
 
         return new Page(pageTitle, properties);
     }
@@ -166,6 +171,6 @@ public class RecipeDetailTask extends FragmentTask {
      */
     public void onEditClick() {
         ((PageActivity) activity).loadPage(
-                new HistoryEntry(MainSegueIdentifier.editRecipeSegueIdentifier, this.mRecipe.getUUID(),false));
+                new HistoryEntry(MainSegueIdentifier.editRecipeSegueIdentifier, this.mRecipe.getUUID(), false));
     }
 }

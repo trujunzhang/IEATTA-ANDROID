@@ -76,6 +76,7 @@ public class EventDetailTask extends FragmentTask {
     public List<IEAOrderedPeople> orderedPeopleList;
     private LeadImageCollection leadImageCollection; // for restaurants
 
+
     /**
      * Execute Task for Event detail.
      *

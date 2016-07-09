@@ -169,6 +169,10 @@ public class PageTitle implements Parcelable {
         return uuid;
     }
 
+    public int getLeadImageType() {
+        return leadImageType;
+    }
+
     public void setUUID(String uuid) {
         this.uuid = uuid;
     }

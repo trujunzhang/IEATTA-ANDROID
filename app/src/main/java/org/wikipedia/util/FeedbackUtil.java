@@ -77,8 +77,9 @@ public final class FeedbackUtil {
 
     /**
      * Set message for error popup on a TextView.
+     *
      * @param textView the TextView or EditText to pop the error message from
-     * @param error the error message. Use null message to clear.
+     * @param error    the error message. Use null message to clear.
      * @see TextView#setError
      * @see <a href='http://stackoverflow.com/questions/14413575/how-to-write-style-to-error-text-of-edittext-in-android'>StackOverflow: How to write style to error text of EditText in Android?</a>
      */
@@ -99,7 +100,7 @@ public final class FeedbackUtil {
 //                && ((PageActivity) activity).getCurPageFragment() != null) {
 //            return activity.findViewById(R.id.page_contents_container);
 //        } else {
-            return activity.findViewById(android.R.id.content);
+        return activity.findViewById(android.R.id.content);
 //        }
     }
 

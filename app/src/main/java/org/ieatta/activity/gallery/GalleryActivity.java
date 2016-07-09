@@ -366,7 +366,8 @@ public class GalleryActivity extends ThemedActionBarActivity {
     private void fetchGalleryCollection() {
         String uuid = pageTitle.getUUID();
         final List<Realm> realmList = new LinkedList<>();
-        LocalDatabaseQuery.queryPhotosForRestaurant(uuid, realmList).onSuccessTask(new Continuation<RealmResults<DBPhoto>, Task<Void>>() {
+
+        LocalDatabaseQuery.queryPhotosByModel(uuid, pageTitle.getLeadImageType(), realmList).onSuccessTask(new Continuation<RealmResults<DBPhoto>, Task<Void>>() {
             @Override
             public Task<Void> then(Task<RealmResults<DBPhoto>> task) throws Exception {
                 GalleryCollection result = new GalleryCollection(DBConvert.toGalleryItem(task.getResult()));

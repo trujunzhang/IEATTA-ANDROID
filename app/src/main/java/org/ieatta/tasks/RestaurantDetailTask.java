@@ -77,8 +77,8 @@ public class RestaurantDetailTask extends FragmentTask {
     }
 
     @Override
-    public boolean isRestaurantDetail() {
-        return true;
+    public int getLeadImageType() {
+        return PhotoUsedType.PU_Restaurant.getType();
     }
 
     /**
@@ -93,7 +93,7 @@ public class RestaurantDetailTask extends FragmentTask {
             @Override
             public Task<RealmResults<DBPhoto>> then(Task<DBRestaurant> task) throws Exception {
                 RestaurantDetailTask.this.restaurant = task.getResult();
-                return LocalDatabaseQuery.queryPhotosByModel(_restaurantUUID, PhotoUsedType.PU_Restaurant.getType(), realmList);
+                return LocalDatabaseQuery.queryPhotosByModel(_restaurantUUID, getLeadImageType(), realmList);
             }
         }).onSuccessTask(new Continuation<RealmResults<DBPhoto>, Task<List<File>>>() {
             @Override
