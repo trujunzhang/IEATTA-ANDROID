@@ -41,14 +41,23 @@ public class IEAOrderedRecipeCardCell extends IEAViewHolder {
         this.priceLabel = (TextView) itemView.findViewById(R.id.recipe_price_text);
         this.recipeToolbar = (ImageView) itemView.findViewById(R.id.recipe_toolbar);
 
-        PopupMenu popup = new PopupMenu(IEAApp.getInstance().getApplicationContext(), this.recipeToolbar);
-        MenuInflater inflater = popup.getMenuInflater();
-//        inflater.inflate(R.menu.recipe_card_toolbar);
-
         this.recipeToolbar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Creating the instance of PopupMenu
+                PopupMenu popup = new PopupMenu(IEAApp.getInstance().getApplicationContext(), IEAOrderedRecipeCardCell.this.recipeToolbar);
+                //Inflating the Popup using xml file
+                popup.getMenuInflater().inflate(R.menu.recipe_card_toolbar, popup.getMenu());
 
+                //registering popup with OnMenuItemClickListener
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    public boolean onMenuItemClick(MenuItem item) {
+//                Toast.makeText(MainActivity.this,"You Clicked : " + item.getTitle(),Toast.LENGTH_SHORT).show();
+                        return true;
+                    }
+                });
+
+                popup.show();//showing popup menu
             }
         });
     }
