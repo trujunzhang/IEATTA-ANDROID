@@ -157,7 +157,8 @@ public abstract class FragmentTask extends MenuBarCallback implements AdapterVie
         @Override
         public void onGalleryItemClicked(String imageUUID) {
             PageTitle imageTitle = new PageTitle(imageUUID, FragmentTask.this.getLeadImageType());
-            GalleryActivity.showGallery(activity, model.getTitle(), imageTitle,
+            PageTitle pageTitle = model.getTitle();
+            GalleryActivity.showGallery(activity, pageTitle, imageTitle,
                     GalleryFunnel.SOURCE_LINK_PREVIEW);
         }
 

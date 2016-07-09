@@ -164,7 +164,6 @@ public class RecipeDetailTask extends FragmentTask {
         return new Page(pageTitle, properties);
     }
 
-
     @Override
     /**
      * Edit the detailed restaurant.
