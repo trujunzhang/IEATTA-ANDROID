@@ -22,22 +22,22 @@ public class PageTitle implements Parcelable {
     @Nullable
     private String onlineUrl;
     @Nullable
-    private boolean isRestaurantPage;
+    private int leadImageType;
     private final String description;
     private String uuid;
     private int ratingReview;
     private Date createdAt;
     private PQueryModelType pmType = PQueryModelType.unkown;
 
-    public PageTitle(String uuid, @Nullable boolean isRestaurantPage) {
-        this(uuid, null, null, isRestaurantPage, null);
+    public PageTitle(String uuid, @Nullable int leadImageType) {
+        this(uuid, null, null, leadImageType, null);
     }
 
-    public PageTitle(String uuid, @Nullable String thumbUrl, @Nullable String onlineUrl, @Nullable boolean isRestaurantPage, @Nullable String description) {
+    public PageTitle(String uuid, @Nullable String thumbUrl, @Nullable String onlineUrl, @Nullable int leadImageType, @Nullable String description) {
         this.uuid = uuid;
         this.thumbUrl = thumbUrl;
         this.onlineUrl = onlineUrl;
-        this.isRestaurantPage = isRestaurantPage;
+        this.leadImageType = leadImageType;
 
         this.description = description != null ? capitalizeFirstChar(description) : null;
 
@@ -47,7 +47,7 @@ public class PageTitle implements Parcelable {
     }
 
     public PageTitle(String uuid, @Nullable String thumbUrl, @Nullable String description) {
-        this(uuid, thumbUrl, null, false, description);
+        this(uuid, thumbUrl, null, -1, description);
     }
 
     public PageTitle(String uuid, @Nullable String thumbUrl, @Nullable String description, int ratingReview) {
@@ -120,7 +120,7 @@ public class PageTitle implements Parcelable {
         text = in.readString();
         fragment = in.readString();
         thumbUrl = in.readString();
-        isRestaurantPage = (in.readInt() == 1);
+        leadImageType = in.readInt();
         onlineUrl = in.readString();
         description = in.readString();
         uuid = in.readString();
@@ -134,7 +134,7 @@ public class PageTitle implements Parcelable {
         parcel.writeString(text);
         parcel.writeString(fragment);
         parcel.writeString(thumbUrl);
-        parcel.writeInt(isRestaurantPage ? 1 : 0);
+        parcel.writeInt(leadImageType);
         parcel.writeString(onlineUrl);
         parcel.writeString(description);
         parcel.writeString(uuid);

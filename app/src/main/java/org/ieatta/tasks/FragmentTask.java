@@ -156,7 +156,7 @@ public abstract class FragmentTask extends MenuBarCallback implements AdapterVie
             = new GalleryThumbnailScrollView.GalleryViewListener() {
         @Override
         public void onGalleryItemClicked(String imageUUID) {
-            PageTitle imageTitle = new PageTitle(imageUUID, FragmentTask.this.isRestaurantDetail());
+            PageTitle imageTitle = new PageTitle(imageUUID, FragmentTask.this.getLeadImageType());
             GalleryActivity.showGallery(activity, model.getTitle(), imageTitle,
                     GalleryFunnel.SOURCE_LINK_PREVIEW);
         }
@@ -171,8 +171,8 @@ public abstract class FragmentTask extends MenuBarCallback implements AdapterVie
         return false;
     }
 
-    public boolean isRestaurantDetail() {
-        return false;
+    public int getLeadImageType() {
+        return -1;
     }
 
     public boolean haveLeadImage() {
