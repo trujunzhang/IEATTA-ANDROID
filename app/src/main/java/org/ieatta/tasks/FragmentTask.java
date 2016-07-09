@@ -5,6 +5,7 @@ import android.support.annotation.VisibleForTesting;
 import android.view.View;
 import android.widget.AdapterView;
 
+import com.marvinlabs.widget.slideshow.SlideShowView;
 import com.tableview.RecycleViewManager;
 import com.tableview.TableViewControllerAdapter;
 import com.tableview.adapter.NSIndexPath;
@@ -53,7 +54,7 @@ import java.util.List;
 import bolts.Task;
 import io.realm.Realm;
 
-public abstract class FragmentTask extends MenuBarCallback implements AdapterView.OnItemClickListener, LeadImagesHandler.OnContentHeightChangedListener {
+public abstract class FragmentTask extends MenuBarCallback implements AdapterView.OnItemClickListener, LeadImagesHandler.OnContentHeightChangedListener, SlideShowView.OnSlideClickListener {
     protected String mRestaurantUUID;
     protected String mEventUUID;
     protected String mTeamUUID;
@@ -185,5 +186,10 @@ public abstract class FragmentTask extends MenuBarCallback implements AdapterVie
         PageFragment pageFragment = activity.getCurPageFragment();
 
         return pageFragment.getMenuBarEventHandler();
+    }
+
+    @Override
+    public void onItemClick(SlideShowView parent, int position) {
+
     }
 }

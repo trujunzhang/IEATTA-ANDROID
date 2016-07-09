@@ -11,15 +11,11 @@ import android.widget.FrameLayout;
 import com.marvinlabs.widget.slideshow.SlideShowAdapter;
 import com.marvinlabs.widget.slideshow.SlideShowView;
 import com.marvinlabs.widget.slideshow.adapter.LeadImageAdapter;
-import com.marvinlabs.widget.slideshow.adapter.ResourceBitmapAdapter;
 
 import org.ieatta.IEAApp;
 import org.ieatta.R;
 import org.ieatta.activity.LeadImage;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.LinkedList;
 import java.util.List;
 
 import butterknife.Bind;
@@ -55,14 +51,14 @@ public class ArticleHeaderImageView extends FrameLayout {
     }
 
 
-    public void load(@Nullable List<LeadImage> leadImages) {
+    public void load(@Nullable List<LeadImage> leadImages, SlideShowView.OnSlideClickListener slideClickListener) {
         boolean noLeadImages = (leadImages == null) || (leadImages.size() == 0);
         if (noLeadImages) {
             setVisibility(GONE);
             image.stop();
         } else {
             setVisibility(VISIBLE);
-            this.startSlideShow(this.createResourceAdapter(leadImages));
+            this.startSlideShow(this.createResourceAdapter(leadImages), slideClickListener);
         }
     }
 
@@ -72,7 +68,7 @@ public class ArticleHeaderImageView extends FrameLayout {
         return new LeadImageAdapter(IEAApp.getInstance(), leadImages);
     }
 
-    private void startSlideShow(SlideShowAdapter adapter) {
+    private void startSlideShow(SlideShowAdapter adapter, SlideShowView.OnSlideClickListener slideClickListener) {
         // Create an adapter
         image.setAdapter(adapter);
 
@@ -82,7 +78,7 @@ public class ArticleHeaderImageView extends FrameLayout {
 
         // Some listeners if needed
 //        image.setOnSlideShowEventListener(slideShowListener);
-//        image.setOnSlideClickListener(slideClickListener);
+        image.setOnSlideClickListener(slideClickListener);
 
         // Then attach the adapter
         image.play();

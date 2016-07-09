@@ -183,7 +183,7 @@ public class LeadImagesHandler {
         initDisplayDimensions();
 
         // set the page title text, and honor any HTML formatting in the title
-        this.loadLeadImage(this.getPage().getPageProperties().getLeadImages());
+        this.loadLeadImage(this.getPage());
 
         articleHeaderView.setTitle(Html.fromHtml(getPage().getDisplayTitle()));
         articleHeaderView.setRatingImageView(getTitle().getRatingReview());
@@ -288,14 +288,15 @@ public class LeadImagesHandler {
 //    }
 
     /**
-     * @param leadImages Nullable URL with no scheme. For example, foo.bar.com/ instead of
-     *                   http://foo.bar.com/.
+     * @param page
      */
-    public void loadLeadImage(@Nullable List<LeadImage> leadImages) {
+    public void loadLeadImage(Page page) {
+        List<LeadImage> leadImages = page.getPageProperties().getLeadImages();
+
         if (!isMainPage() && leadImages != null && isLeadImageEnabled()) {
             new PageFragmentFunnel().logLoadLeadImage("have LeadImage");
             articleHeaderView.setImageYScalar(0);
-            articleHeaderView.loadImage(leadImages);
+            articleHeaderView.loadImage(page);
         } else {
             new PageFragmentFunnel().logLoadLeadImage("no LeadImage");
             articleHeaderView.loadImage(null);

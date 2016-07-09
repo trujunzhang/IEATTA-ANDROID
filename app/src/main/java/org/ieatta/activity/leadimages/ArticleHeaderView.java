@@ -29,10 +29,13 @@ import android.widget.LinearLayout;
 
 //import com.mapbox.mapboxsdk.maps.MapView;
 
+import com.marvinlabs.widget.slideshow.SlideShowView;
+
 import org.ieatta.IEAApp;
 import org.ieatta.R;
 import org.ieatta.activity.LeadImage;
 import org.ieatta.activity.LeadMapView;
+import org.ieatta.activity.Page;
 import org.ieatta.analytics.PageFragmentFunnel;
 import org.ieatta.analytics.RecycleCellFunnel;
 import org.ieatta.views.ObservableWebView;
@@ -54,11 +57,14 @@ import butterknife.ButterKnife;
 import static org.wikipedia.util.ResourceUtil.getThemedAttributeId;
 
 public class ArticleHeaderView extends FrameLayout implements ObservableWebView.OnScrollChangeListener {
-    @Bind(R.id.view_article_header_image) ArticleHeaderImageView image;
-    @Bind(R.id.view_article_header_MapView) ArticleHeaderMapView headerMapView;
+    @Bind(R.id.view_article_header_image)
+    ArticleHeaderImageView image;
+    @Bind(R.id.view_article_header_MapView)
+    ArticleHeaderMapView headerMapView;
     @Bind(R.id.view_article_header_text)
     AppTextView text;
-    @Bind(R.id.view_article_header_menu_bar) ArticleMenuBarView menuBar;
+    @Bind(R.id.view_article_header_menu_bar)
+    ArticleMenuBarView menuBar;
 
     @Bind(R.id.business_review_star_rating)
     RatingImageView ratingImageView;
@@ -66,8 +72,10 @@ public class ArticleHeaderView extends FrameLayout implements ObservableWebView.
     @Bind(R.id.article_header_layout)
     FrameLayout article_header_layout;
 
-    @NonNull private CharSequence title = "";
-    @NonNull private CharSequence subtitle = "";
+    @NonNull
+    private CharSequence title = "";
+    @NonNull
+    private CharSequence subtitle = "";
 
     public int parallaxScrollY;
 
@@ -131,8 +139,11 @@ public class ArticleHeaderView extends FrameLayout implements ObservableWebView.
         image.setLoadListener(listener);
     }
 
-    public void loadImage(@Nullable List<LeadImage> leadImages) {
-        image.load(leadImages);
+    public void loadImage(Page page) {
+        final List<LeadImage> leadImages = page.getPageProperties().getLeadImages();
+        final SlideShowView.OnSlideClickListener slideClickListener = page.getPageProperties().getFragmentTask();
+
+        image.load(leadImages, slideClickListener);
 
         boolean noLeadImages = (leadImages == null) || (leadImages.size() == 0);
         int height = noLeadImages ? 0 : (int) (DimenUtil.getDisplayHeightPx() * getScreenHeightRatio());
@@ -152,7 +163,7 @@ public class ArticleHeaderView extends FrameLayout implements ObservableWebView.
         setMinimumHeight(minumHeight);
     }
 
-    public void setRatingImageView(int rating){
+    public void setRatingImageView(int rating) {
         new RecycleCellFunnel().logArticleHeaderViewRatingCount(rating);
         ratingImageView.setImageLevel(rating);
     }
@@ -379,7 +390,7 @@ public class ArticleHeaderView extends FrameLayout implements ObservableWebView.
 //        return headerMapView.getMapView();
 //    }
 
-    public ArticleHeaderMapView getHeaderMapView(){
+    public ArticleHeaderMapView getHeaderMapView() {
         return headerMapView;
     }
 
