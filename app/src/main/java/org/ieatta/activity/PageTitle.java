@@ -28,18 +28,23 @@ public class PageTitle implements Parcelable {
     private PQueryModelType pmType = PQueryModelType.unkown;
 
     public PageTitle(String uuid) {
-        this(uuid, null, null);
+        this(uuid, null, null, null);
     }
 
-    public PageTitle(String uuid, @Nullable String thumbUrl, @Nullable String description) {
+    public PageTitle(String uuid, @Nullable String thumbUrl, @Nullable String onlineUrl, @Nullable String description) {
         this.uuid = uuid;
         this.thumbUrl = thumbUrl;
+        this.onlineUrl = onlineUrl;
 
         this.description = description != null ? capitalizeFirstChar(description) : null;
 
         this.namespace = "";
         this.text = "";
         this.fragment = "";
+    }
+
+    public PageTitle(String uuid, @Nullable String thumbUrl, @Nullable String description) {
+        this(uuid, thumbUrl, null, description);
     }
 
     public PageTitle(String uuid, @Nullable String thumbUrl, @Nullable String description, int ratingReview) {
@@ -67,6 +72,15 @@ public class PageTitle implements Parcelable {
 
     public void setThumbUrl(@Nullable String thumbUrl) {
         this.thumbUrl = thumbUrl;
+    }
+
+    @Nullable
+    public String getOnlineUrl() {
+        return onlineUrl;
+    }
+
+    public void setOnlineUrl(@Nullable String onlineUrl) {
+        this.onlineUrl = onlineUrl;
     }
 
     @Nullable
@@ -103,6 +117,7 @@ public class PageTitle implements Parcelable {
         text = in.readString();
         fragment = in.readString();
         thumbUrl = in.readString();
+        onlineUrl = in.readString();
         description = in.readString();
         uuid = in.readString();
         ratingReview = in.readInt();
@@ -115,6 +130,7 @@ public class PageTitle implements Parcelable {
         parcel.writeString(text);
         parcel.writeString(fragment);
         parcel.writeString(thumbUrl);
+        parcel.writeString(onlineUrl);
         parcel.writeString(description);
         parcel.writeString(uuid);
         parcel.writeInt(ratingReview);
