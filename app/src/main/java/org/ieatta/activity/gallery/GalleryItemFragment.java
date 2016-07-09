@@ -187,60 +187,6 @@ public class GalleryItemFragment extends Fragment {
         String onlineUrl = this.imageTitle.getOnlineUrl();
 
         this.loadImage(thumbUrl, onlineUrl);
-
-//        leadImage.getLocalUrlTask().onSuccessTask(new Continuation<String, Task<String>>() {
-//            @Override
-//            public Task<String> then(Task<String> task) throws Exception {
-//                GalleryItemFragment.this.loadImage(task.getResult());
-//                return leadImage.getOnlineUrlTask();
-//            }
-//        }, Task.UI_THREAD_EXECUTOR).onSuccess(new Continuation<String, Void>() {
-//            @Override
-//            public Void then(Task<String> task) throws Exception {
-//                String onlineUrl = task.getResult();
-//                if (!TextUtils.isEmpty(onlineUrl)) {
-//                    GalleryItemFragment.this.loadImage(onlineUrl);
-//                }
-//                return null;
-//            }
-//        }, Task.UI_THREAD_EXECUTOR);
-
-//        String uuid = this.imageTitle.getUUID();
-//        String usedRef = this.pageTitle.getUUID();
-//        DBPhoto photo = new DBPhoto();
-//        photo.setUUID(uuid);
-//        photo.setUsedRef(usedRef);
-////        photo.setObjectCreatedDate(this.imageTitle.);
-//        ThumbnailImageUtil.sharedInstance.getCacheImageUrl(photo);
-
-//        new GalleryItemFetchTask(app.getAPIForSite(pageTitle.getSite()),
-//                pageTitle.getSite(), imageTitle, FileUtil.isVideo(mimeType)) {
-//            @Override
-//            public void onFinish(Map<PageTitle, GalleryItem> result) {
-//                if (!isAdded()) {
-//                    return;
-//                }
-//                if (result.size() > 0) {
-//                    galleryItem = (GalleryItem) result.values().toArray()[0];
-//                    parentActivity.getGalleryCache().put((PageTitle) result.keySet().toArray()[0],
-//                            galleryItem);
-//                    loadMedia();
-//                } else {
-//                    updateProgressBar(false, true, 0);
-//                    FeedbackUtil.showMessage(getActivity(), R.string.error_network_error);
-//                }
-//            }
-//
-//            @Override
-//            public void onCatch(Throwable caught) {
-//                Log.e("Wikipedia", "caught " + caught.getMessage());
-//                if (!isAdded()) {
-//                    return;
-//                }
-//                updateProgressBar(false, true, 0);
-//                FeedbackUtil.showError(getActivity(), caught);
-//            }
-//        }.execute();
     }
 
     /**
@@ -280,17 +226,9 @@ public class GalleryItemFragment extends Fragment {
 
     }
 
-    private void loadImage(LeadImage leadImage) {
-        imageView.setVisibility(View.VISIBLE);
-        ViewUtil.loadMultiImageUrlInto(this.imageView, leadImage.getLocalUrl(), leadImage.getOnlineUrl());
-    }
-
     private void loadImage(String lowResUri, String highResUri) {
         imageView.setVisibility(View.VISIBLE);
-//        Log.d(TAG, "Loading image from highResUri: " + highResUri);
-
         AbstractDraweeController build = Fresco.newDraweeControllerBuilder()
-//                .setUri(highResUri)
                 .setLowResImageRequest(ImageRequest.fromUri(lowResUri))
                 .setImageRequest(ImageRequest.fromUri(highResUri))
                 .setAutoPlayAnimations(true)
@@ -301,9 +239,6 @@ public class GalleryItemFragment extends Fragment {
                         if (!isAdded()) {
                             return;
                         }
-//                        if (shouldHaveWhiteBackground(galleryItem.getMimeType())) {
-//                            imageView.setBackgroundColor(Color.WHITE);
-//                        }
                         parentActivity.supportInvalidateOptionsMenu();
                     }
 

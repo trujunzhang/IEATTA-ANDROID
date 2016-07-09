@@ -76,6 +76,11 @@ public class RestaurantDetailTask extends FragmentTask {
         section_reviews,//= 2
     }
 
+    @Override
+    public boolean isRestaurantDetail() {
+        return true;
+    }
+
     /**
      * Execute Task for Restaurant detail.
      *

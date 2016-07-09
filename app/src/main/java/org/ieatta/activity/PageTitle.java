@@ -21,20 +21,23 @@ public class PageTitle implements Parcelable {
     private String thumbUrl;
     @Nullable
     private String onlineUrl;
+    @Nullable
+    private boolean isRestaurantPage;
     private final String description;
     private String uuid;
     private int ratingReview;
     private Date createdAt;
     private PQueryModelType pmType = PQueryModelType.unkown;
 
-    public PageTitle(String uuid) {
-        this(uuid, null, null, null);
+    public PageTitle(String uuid, @Nullable boolean isRestaurantPage) {
+        this(uuid, null, null, isRestaurantPage, null);
     }
 
-    public PageTitle(String uuid, @Nullable String thumbUrl, @Nullable String onlineUrl, @Nullable String description) {
+    public PageTitle(String uuid, @Nullable String thumbUrl, @Nullable String onlineUrl, @Nullable boolean isRestaurantPage, @Nullable String description) {
         this.uuid = uuid;
         this.thumbUrl = thumbUrl;
         this.onlineUrl = onlineUrl;
+        this.isRestaurantPage = isRestaurantPage;
 
         this.description = description != null ? capitalizeFirstChar(description) : null;
 
@@ -44,7 +47,7 @@ public class PageTitle implements Parcelable {
     }
 
     public PageTitle(String uuid, @Nullable String thumbUrl, @Nullable String description) {
-        this(uuid, thumbUrl, null, description);
+        this(uuid, thumbUrl, null, false, description);
     }
 
     public PageTitle(String uuid, @Nullable String thumbUrl, @Nullable String description, int ratingReview) {
@@ -117,6 +120,7 @@ public class PageTitle implements Parcelable {
         text = in.readString();
         fragment = in.readString();
         thumbUrl = in.readString();
+        isRestaurantPage = (in.readInt() == 1);
         onlineUrl = in.readString();
         description = in.readString();
         uuid = in.readString();
@@ -130,6 +134,7 @@ public class PageTitle implements Parcelable {
         parcel.writeString(text);
         parcel.writeString(fragment);
         parcel.writeString(thumbUrl);
+        parcel.writeInt(isRestaurantPage ? 1 : 0);
         parcel.writeString(onlineUrl);
         parcel.writeString(description);
         parcel.writeString(uuid);
