@@ -72,7 +72,7 @@ public class GalleryItemFragment extends Fragment {
         GalleryItemFragment f = new GalleryItemFragment();
         Bundle args = new Bundle();
         args.putParcelable(ARG_PAGETITLE, pageTitle);
-        args.putParcelable(ARG_MEDIATITLE, new PageTitle(galleryItemProto.getUUID(), galleryItemProto.getThumbUrl(), null));
+        args.putParcelable(ARG_MEDIATITLE, new PageTitle(galleryItemProto.getUUID(), galleryItemProto.getThumbUrl(), galleryItemProto.getOnlineUrl(), null));
         args.putString(ARG_MIMETYPE, galleryItemProto.getMimeType());
         f.setArguments(args);
         return f;
@@ -183,8 +183,9 @@ public class GalleryItemFragment extends Fragment {
      */
     private void loadGalleryItem() {
         String thumbUrl = this.imageTitle.getThumbUrl();
+        String onlineUrl = this.imageTitle.getOnlineUrl();
 
-        final LeadImage leadImage = new LeadImage(thumbUrl);
+        this.loadImage(onlineUrl);
 
 //        leadImage.getLocalUrlTask().onSuccessTask(new Continuation<String, Task<String>>() {
 //            @Override
