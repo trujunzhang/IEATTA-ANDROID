@@ -15,6 +15,7 @@ import org.ieatta.database.models.DBRecipe;
 import org.ieatta.database.models.DBReview;
 import org.ieatta.database.models.DBTeam;
 import org.ieatta.parse.AppConstant;
+import org.ieatta.server.cache.BaseImageUtil;
 import org.ieatta.server.cache.ThumbnailImageUtil;
 
 import java.io.File;
@@ -30,7 +31,7 @@ public class DBConvert {
         for (DBPhoto photo : photos) {
             File file = ThumbnailImageUtil.sharedInstance.getCacheImageUrl(photo);
             new DBConvertFunnel().logToGalleryItem("toGalleryItem", "photo's path: " + file.getAbsolutePath());
-            list.add(new GalleryItem(photo.getUUID(), "file://" + file.getAbsolutePath()));
+            list.add(new GalleryItem(photo.getUUID(), BaseImageUtil.getLocalAbstractPath(file)));
         }
         return list;
     }
@@ -38,8 +39,8 @@ public class DBConvert {
     public static LeadImageCollection toLeadImageCollection(RealmResults<DBPhoto> photos) {
         List<LeadImage> leadImages = new LinkedList<>();
         for (DBPhoto photo : photos) {
-            File localFile = ThumbnailImageUtil.sharedInstance.getCacheImageUrl(photo);
-            LeadImage item = new LeadImage("file://" + localFile.getAbsolutePath(), photo.getOriginalUrl());
+            File file = ThumbnailImageUtil.sharedInstance.getCacheImageUrl(photo);
+            LeadImage item = new LeadImage(BaseImageUtil.getLocalAbstractPath(file), photo.getOriginalUrl());
             new DBConvertFunnel().logToLeadImageCollection(item.getLocalUrl(), item.getOnlineUrl());
             leadImages.add(item);
         }
@@ -51,8 +52,7 @@ public class DBConvert {
         List<GalleryItem> galleryItems = new LinkedList<>();
         for (File photoFile : files) {
             String uuid = photoFile.getName().split("_")[1];
-            String thumbUrl = "file://" + photoFile.getAbsolutePath();
-            GalleryItem item = new GalleryItem(uuid, thumbUrl);
+            GalleryItem item = new GalleryItem(uuid, BaseImageUtil.getLocalAbstractPath(photoFile));
             galleryItems.add(item);
         }
         return new GalleryCollection(galleryItems);
