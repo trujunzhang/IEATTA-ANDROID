@@ -27,6 +27,7 @@ import com.facebook.drawee.generic.GenericDraweeHierarchy;
 import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.facebook.imagepipeline.image.ImageInfo;
+import com.facebook.imagepipeline.request.ImageRequest;
 import com.facebook.samples.zoomable.ZoomableDraweeView;
 
 import org.ieatta.IEAApp;
@@ -185,7 +186,7 @@ public class GalleryItemFragment extends Fragment {
         String thumbUrl = this.imageTitle.getThumbUrl();
         String onlineUrl = this.imageTitle.getOnlineUrl();
 
-        this.loadImage(onlineUrl);
+        this.loadImage(thumbUrl, onlineUrl);
 
 //        leadImage.getLocalUrlTask().onSuccessTask(new Continuation<String, Task<String>>() {
 //            @Override
@@ -246,21 +247,21 @@ public class GalleryItemFragment extends Fragment {
      * Load the actual media associated with our gallery item into the UI.
      */
     private void loadMedia() {
-        if (FileUtil.isVideo(mimeType)) {
-            loadVideo();
-        } else {
-            // it's actually OK to use the thumbUrl in all cases, and here's why:
-            // - in the case of a JPG or PNG image:
-            //     - if the image is bigger than the requested thumbnail size, then the
-            //       thumbnail will correctly be a scaled-down version of the image, so
-            //       that it won't overload the device's bitmap buffer.
-            //     - if the image is smaller than the requested thumbnail size, then the
-            //       thumbnail url will be the same as the actual image url.
-            // - in the case of an SVG file:
-            //     - we need the thumbnail image anyway, since the ImageView can't
-            //       display SVGs.
-            loadImage(galleryItem.getThumbUrl());
-        }
+//        if (FileUtil.isVideo(mimeType)) {
+//            loadVideo();
+//        } else {
+//            // it's actually OK to use the thumbUrl in all cases, and here's why:
+//            // - in the case of a JPG or PNG image:
+//            //     - if the image is bigger than the requested thumbnail size, then the
+//            //       thumbnail will correctly be a scaled-down version of the image, so
+//            //       that it won't overload the device's bitmap buffer.
+//            //     - if the image is smaller than the requested thumbnail size, then the
+//            //       thumbnail url will be the same as the actual image url.
+//            // - in the case of an SVG file:
+//            //     - we need the thumbnail image anyway, since the ImageView can't
+//            //       display SVGs.
+////            loadImage(galleryItem.getThumbUrl());
+//        }
 
         parentActivity.supportInvalidateOptionsMenu();
         parentActivity.layoutGalleryDescription();
@@ -284,12 +285,14 @@ public class GalleryItemFragment extends Fragment {
         ViewUtil.loadMultiImageUrlInto(this.imageView, leadImage.getLocalUrl(), leadImage.getOnlineUrl());
     }
 
-    private void loadImage(String url) {
+    private void loadImage(String lowResUri, String highResUri) {
         imageView.setVisibility(View.VISIBLE);
-        Log.d(TAG, "Loading image from url: " + url);
+//        Log.d(TAG, "Loading image from highResUri: " + highResUri);
 
         AbstractDraweeController build = Fresco.newDraweeControllerBuilder()
-                .setUri(url)
+//                .setUri(highResUri)
+                .setLowResImageRequest(ImageRequest.fromUri(lowResUri))
+                .setImageRequest(ImageRequest.fromUri(highResUri))
                 .setAutoPlayAnimations(true)
                 .setOldController(imageView.getController())
                 .setControllerListener(new BaseControllerListener<ImageInfo>() {
