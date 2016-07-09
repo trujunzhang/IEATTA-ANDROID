@@ -301,9 +301,9 @@ public class GalleryItemFragment extends Fragment {
                         if (!isAdded()) {
                             return;
                         }
-                        if (shouldHaveWhiteBackground(galleryItem.getMimeType())) {
-                            imageView.setBackgroundColor(Color.WHITE);
-                        }
+//                        if (shouldHaveWhiteBackground(galleryItem.getMimeType())) {
+//                            imageView.setBackgroundColor(Color.WHITE);
+//                        }
                         parentActivity.supportInvalidateOptionsMenu();
                     }
 
