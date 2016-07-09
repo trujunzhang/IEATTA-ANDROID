@@ -21,7 +21,7 @@
         android:orientation="vertical">
 
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -34,40 +34,37 @@
                 style="@style/RtlAwareTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
                 android:ellipsize="end"
                 android:maxLines="2"
                 android:textColor="@color/list_item_text_primary_light"
-                android:textSize="@dimen/textSize"
+                android:textSize="@dimen/recipeTextSize"
                 tools:text="Sample title" />
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/recipe_price_text"
+                style="@style/RtlAwareTextView"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/recipe_name_text"
+                android:layout_marginTop="8dp"
+                android:layout_toRightOf="@+id/recipe_rating_image_view"
+                android:text="$ 123"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@color/list_item_text_secondary_light" />
 
-                <org.wikipedia.views.GoneIfEmptyTextView
-                    android:id="@+id/recipe_price_text"
-                    style="@style/RtlAwareTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:textColor="@color/list_item_text_secondary_light"
-                    android:visibility="gone"
-                    tools:text="Sample description" />
+            <org.ieatta.views.RatingImageView
+                android:id="@+id/recipe_rating_image_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/recipe_name_text"
+                android:layout_marginBottom="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="8dp"
+                android:contentDescription="@null"
+                android:src="@drawable/business_stars" />
 
-                <org.ieatta.views.RatingImageView
-                    android:id="@+id/recipe_rating_image_view"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_gravity="bottom|right"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginRight="8dp"
-                    android:contentDescription="@null"
-                    android:src="@drawable/business_stars" />
-            </RelativeLayout>
-
-        </LinearLayout>
+        </RelativeLayout>
 
 
         <FrameLayout

@@ -27,6 +27,7 @@
     <item name="articleHeaderViewScreenHeightRatio" format="float" type="dimen">0.571</item>
     <!-- Default font size of the page title -->
     <dimen name="titleTextSize">28sp</dimen>
+    <dimen name="recipeTextSize">24sp</dimen>
     <!-- Default font size of the Wikidata description for the page -->
     <dimen name="descriptionTextSize">14sp</dimen>
 

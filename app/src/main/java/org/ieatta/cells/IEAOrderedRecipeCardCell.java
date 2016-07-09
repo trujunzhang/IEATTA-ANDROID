@@ -24,7 +24,7 @@ public class IEAOrderedRecipeCardCell extends IEAViewHolder {
     private AvatarView avatarView;
 
     private TextView displayNameLabel;
-    private GoneIfEmptyTextView priceLabel;
+    private TextView priceLabel;
     private RatingImageView ratingImageView;
 
     public IEAOrderedRecipeCardCell(View itemView) {
@@ -33,7 +33,7 @@ public class IEAOrderedRecipeCardCell extends IEAViewHolder {
         this.avatarView = (AvatarView) itemView.findViewById(R.id.recipe_pictures);
         this.ratingImageView = (RatingImageView) itemView.findViewById(R.id.recipe_rating_image_view);
         this.displayNameLabel = (TextView) itemView.findViewById(R.id.recipe_name_text);
-        this.priceLabel = (GoneIfEmptyTextView) itemView.findViewById(R.id.recipe_price_text);
+        this.priceLabel = (TextView) itemView.findViewById(R.id.recipe_price_text);
     }
 
     private void setRecipeModel(RecipeModel model) {
