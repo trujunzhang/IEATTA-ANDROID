@@ -3,15 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/menu_gallery_share"
-        android:icon="@drawable/ic_share_dark"
-        android:title="@string/gallery_menu_share"
-        app:showAsAction="never" />
+        android:title="@string/gallery_menu_share" />
     <item
         android:id="@+id/menu_gallery_save"
-        android:title="@string/gallery_menu_save"
-        app:showAsAction="never" />
+        android:title="@string/gallery_menu_save" />
     <item
         android:id="@+id/menu_gallery_visit_page"
-        android:title="Visit page"
-        app:showAsAction="never" />
+        android:title="Visit page" />
 </menu>

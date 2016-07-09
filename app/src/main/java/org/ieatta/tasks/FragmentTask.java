@@ -64,6 +64,10 @@ public abstract class FragmentTask extends MenuBarCallback implements AdapterVie
     public HistoryEntry entry;
     protected Activity activity;
 
+    public Activity getActivity() {
+        return this.activity;
+    }
+
     // For showing photo's thumbnail gallery.
     public GalleryCollection thumbnailGalleryCollection = new GalleryCollection();
 

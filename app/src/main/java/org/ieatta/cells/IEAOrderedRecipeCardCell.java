@@ -21,6 +21,8 @@ import org.ieatta.views.RatingImageView;
 import org.wikipedia.views.GoneIfEmptyTextView;
 
 public class IEAOrderedRecipeCardCell extends IEAViewHolder {
+    private RecipeModel model;
+
     public static CellType getType() {
         return new CellType(IEAOrderedRecipeCardCell.class, R.layout.cell_ordered_recipe_card);
     }
@@ -45,7 +47,7 @@ public class IEAOrderedRecipeCardCell extends IEAViewHolder {
             @Override
             public void onClick(View v) {
                 //Creating the instance of PopupMenu
-                PopupMenu popup = new PopupMenu(IEAApp.getInstance().getApplicationContext(), IEAOrderedRecipeCardCell.this.recipeToolbar);
+                PopupMenu popup = new PopupMenu(IEAOrderedRecipeCardCell.this.model.task.getActivity(), IEAOrderedRecipeCardCell.this.recipeToolbar);
                 //Inflating the Popup using xml file
                 popup.getMenuInflater().inflate(R.menu.recipe_card_toolbar, popup.getMenu());
 
@@ -57,12 +59,14 @@ public class IEAOrderedRecipeCardCell extends IEAViewHolder {
                     }
                 });
 
-                popup.show();//showing popup menu
+                popup.show();
             }
         });
     }
 
     private void setRecipeModel(RecipeModel model) {
+        this.model = model;
+
         this.avatarView.loadLeadImage(model.recipeUUID, model.task);
         this.ratingImageView.queryRatingInReviewsByModel(model.recipeUUID, ReviewType.Review_Recipe, model.task);
 
