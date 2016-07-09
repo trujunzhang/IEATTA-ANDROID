@@ -19,11 +19,17 @@ public class PageTitle implements Parcelable {
     private final String fragment;
     @Nullable
     private String thumbUrl;
+    @Nullable
+    private String onlineUrl;
     private final String description;
     private String uuid;
     private int ratingReview;
     private Date createdAt;
     private PQueryModelType pmType = PQueryModelType.unkown;
+
+    public PageTitle(String uuid) {
+        this(uuid, null, null);
+    }
 
     public PageTitle(String uuid, @Nullable String thumbUrl, @Nullable String description) {
         this.uuid = uuid;
@@ -36,8 +42,8 @@ public class PageTitle implements Parcelable {
         this.fragment = "";
     }
 
-    public PageTitle(String uuid, @Nullable String thumbUrl, @Nullable String description,int ratingReview) {
-        this(uuid,thumbUrl,description);
+    public PageTitle(String uuid, @Nullable String thumbUrl, @Nullable String description, int ratingReview) {
+        this(uuid, thumbUrl, description);
         this.ratingReview = ratingReview;
     }
 
@@ -99,7 +105,7 @@ public class PageTitle implements Parcelable {
         thumbUrl = in.readString();
         description = in.readString();
         uuid = in.readString();
-        ratingReview = in .readInt();
+        ratingReview = in.readInt();
         setPmType(PQueryModelType.getInstance(in.readInt()));
     }
 
