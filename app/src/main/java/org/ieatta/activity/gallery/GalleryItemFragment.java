@@ -72,7 +72,7 @@ public class GalleryItemFragment extends Fragment {
         GalleryItemFragment f = new GalleryItemFragment();
         Bundle args = new Bundle();
         args.putParcelable(ARG_PAGETITLE, pageTitle);
-        args.putParcelable(ARG_MEDIATITLE, new PageTitle(galleryItemProto.getUUID(), galleryItemProto.getThumbUrl(),null));
+        args.putParcelable(ARG_MEDIATITLE, new PageTitle(galleryItemProto.getUUID(), galleryItemProto.getThumbUrl(), null));
         args.putString(ARG_MIMETYPE, galleryItemProto.getMimeType());
         f.setArguments(args);
         return f;
@@ -183,24 +183,25 @@ public class GalleryItemFragment extends Fragment {
      */
     private void loadGalleryItem() {
         String thumbUrl = this.imageTitle.getThumbUrl();
+
         final LeadImage leadImage = new LeadImage(thumbUrl);
 
-        leadImage.getLocalUrlTask().onSuccessTask(new Continuation<String, Task<String>>() {
-            @Override
-            public Task<String> then(Task<String> task) throws Exception {
-                GalleryItemFragment.this.loadImage(task.getResult());
-                return leadImage.getOnlineUrlTask();
-            }
-        }, Task.UI_THREAD_EXECUTOR).onSuccess(new Continuation<String, Void>() {
-            @Override
-            public Void then(Task<String> task) throws Exception {
-                String onlineUrl = task.getResult();
-                if (TextUtils.isEmpty(onlineUrl) == false) {
-                    GalleryItemFragment.this.loadImage(onlineUrl);
-                }
-                return null;
-            }
-        }, Task.UI_THREAD_EXECUTOR);
+//        leadImage.getLocalUrlTask().onSuccessTask(new Continuation<String, Task<String>>() {
+//            @Override
+//            public Task<String> then(Task<String> task) throws Exception {
+//                GalleryItemFragment.this.loadImage(task.getResult());
+//                return leadImage.getOnlineUrlTask();
+//            }
+//        }, Task.UI_THREAD_EXECUTOR).onSuccess(new Continuation<String, Void>() {
+//            @Override
+//            public Void then(Task<String> task) throws Exception {
+//                String onlineUrl = task.getResult();
+//                if (!TextUtils.isEmpty(onlineUrl)) {
+//                    GalleryItemFragment.this.loadImage(onlineUrl);
+//                }
+//                return null;
+//            }
+//        }, Task.UI_THREAD_EXECUTOR);
 
 //        String uuid = this.imageTitle.getUUID();
 //        String usedRef = this.pageTitle.getUUID();

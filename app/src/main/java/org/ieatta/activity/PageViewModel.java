@@ -8,7 +8,8 @@ import org.ieatta.activity.history.HistoryEntry;
  * Shared data between PageFragment and PageLoadStrategy
  */
 public class PageViewModel {
-    @Nullable private Page page;
+    @Nullable
+    private Page page;
     private PageTitle title;
     private PageTitle titleOriginal;
     private HistoryEntry curEntry;
@@ -25,6 +26,7 @@ public class PageViewModel {
 
     public void setPage(@Nullable Page page) {
         this.page = page;
+        assert page != null;
         this.setTitle(page.getTitle());
     }
 

@@ -14,34 +14,18 @@ import bolts.Task;
 public class LeadImage {
     private String localUrl;
     private String onlineUrl;
-    private String photoUUID;
     private boolean isCached;
 
     public LeadImage(String localUrl) {
         this.localUrl = localUrl;
-        if (!TextUtils.isEmpty(localUrl))
-            this.photoUUID = new File(localUrl).getName().split("_")[1];
+//        if (!TextUtils.isEmpty(localUrl))
+//            this.photoUUID = new File(localUrl).getName().split("_")[1];
         this.isCached = false;
     }
 
     public LeadImage(String localUrl, String onlineUrl) {
         this.localUrl = localUrl;
         this.onlineUrl = onlineUrl;
-    }
-
-    public boolean isCached() {
-        return this.isCached;
-    }
-
-    public Task<String> getLocalUrlTask() {
-        // Already cached in the local.
-        File cacheImageFile = CacheImageUtil.sharedInstance.getCacheImageUrl(this.photoUUID);
-        if (cacheImageFile != null && cacheImageFile.exists()) {
-            this.isCached = true;
-            return Task.forResult(BaseImageUtil.getLocalAbstractPath(cacheImageFile));
-        }
-        // Return the local url.
-        return Task.forResult(this.localUrl);
     }
 
     public String getLocalUrl() {
@@ -52,16 +36,4 @@ public class LeadImage {
         return this.onlineUrl;
     }
 
-    public Task<String> getOnlineUrlTask() {
-        if (this.isCached) {
-            return Task.forResult(null);
-        }
-        return OnlineDatabaseQuery.downloadOriginalPhoto(this.photoUUID).onSuccessTask(new Continuation<Void, Task<String>>() {
-            @Override
-            public Task<String> then(Task<Void> task) throws Exception {
-                File file = CacheImageUtil.sharedInstance.getCacheImageUrl(LeadImage.this.photoUUID);
-                return Task.forResult(BaseImageUtil.getLocalAbstractPath(file));
-            }
-        });
-    }
 }

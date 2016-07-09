@@ -27,32 +27,9 @@ public class LeadImageCollection {
         this.usedRef = usedRef;
     }
 
-    public Task<String> leadImageLocal() {
-        if (leadImages.size() == 0) {
-            return Task.forError(new Exception("Lead Images is empty!"));
-        }
-        LeadImage leadImage = leadImages.get(this.galleryIndex);
-        return leadImage.getLocalUrlTask();
-    }
-
-    public Task<String> leadImageOnline() {
-        if (leadImages.size() == 0) {
-            return Task.forError(new Exception("Lead Images is empty!"));
-        }
-        LeadImage leadImage = leadImages.get(this.galleryIndex);
-        return leadImage.getOnlineUrlTask();
-    }
 
     public void nextLeadImage() {
         this.galleryIndex = ((galleryIndex + 1) % leadImages.size());
-    }
-
-    public boolean isCached() {
-        if (leadImages.size() == 0)
-            return true;
-
-        LeadImage leadImage = leadImages.get(this.galleryIndex);
-        return leadImage.isCached();
     }
 
     public LeadImage getCurrentLeadImage() {
