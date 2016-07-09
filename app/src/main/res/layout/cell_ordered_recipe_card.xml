@@ -54,7 +54,7 @@
                 android:textSize="@dimen/textSize"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textColor="@color/list_item_text_secondary_light"
-                android:layout_marginTop="6dp"
+                android:layout_marginTop="4dp"
                 android:layout_marginLeft="4dp" />
 
             <org.ieatta.views.RatingImageView

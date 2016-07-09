@@ -29,6 +29,7 @@
             app:actualImageScaleType="centerCrop"
             app:failureImage="@drawable/blank_biz"
             app:failureImageScaleType="centerCrop"
+            app:roundedCornerRadius="3dp"
             app:placeholderImage="@drawable/blank_biz"
             app:placeholderImageScaleType="centerCrop" />
 
