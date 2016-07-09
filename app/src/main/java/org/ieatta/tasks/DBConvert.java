@@ -31,7 +31,7 @@ public class DBConvert {
         for (DBPhoto photo : photos) {
             File file = ThumbnailImageUtil.sharedInstance.getCacheImageUrl(photo);
             new DBConvertFunnel().logToGalleryItem("toGalleryItem", "photo's path: " + file.getAbsolutePath());
-            list.add(new GalleryItem(photo.getUUID(), BaseImageUtil.getLocalAbstractPath(file)));
+            list.add(new GalleryItem(photo.getUUID(), BaseImageUtil.getLocalAbstractPath(file), photo.getOriginalUrl()));
         }
         return list;
     }

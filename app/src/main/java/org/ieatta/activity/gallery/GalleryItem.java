@@ -34,6 +34,8 @@ public class GalleryItem {
 
     private final String thumbUrl;
 
+    private final String onlineUrl;
+
     public String getThumbUrl() {
         return thumbUrl;
     }
@@ -55,6 +57,7 @@ public class GalleryItem {
         this.url = null;
         this.mimeType = "*/*";
         this.thumbUrl = null;
+        this.onlineUrl = null;
         this.metadata = null;
         this.width = 0;
         this.height = 0;
@@ -65,6 +68,18 @@ public class GalleryItem {
         this.url = null;
         this.mimeType = "*/*";
         this.thumbUrl = thumbUrl;
+        this.onlineUrl = null;
+        this.metadata = null;
+        this.width = 0;
+        this.height = 0;
+    }
+
+    public GalleryItem(String uuid, String thumbUrl, String onlineUrl) {
+        this.uuid = uuid;
+        this.url = null;
+        this.mimeType = "*/*";
+        this.thumbUrl = thumbUrl;
+        this.onlineUrl = onlineUrl;
         this.metadata = null;
         this.width = 0;
         this.height = 0;
@@ -72,5 +87,9 @@ public class GalleryItem {
 
     public String getUUID() {
         return uuid;
+    }
+
+    public String getOnlineUrl() {
+        return this.onlineUrl;
     }
 }
