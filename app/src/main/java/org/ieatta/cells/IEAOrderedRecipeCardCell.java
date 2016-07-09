@@ -1,5 +1,7 @@
 package org.ieatta.cells;
 
+import android.support.v7.widget.PopupMenu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -9,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import com.tableview.adapter.IEAViewHolder;
 import com.tableview.storage.models.CellType;
 
+import org.ieatta.IEAApp;
 import org.ieatta.R;
 import org.ieatta.cells.model.RecipeModel;
 import org.ieatta.database.models.DBRecipe;
@@ -37,6 +40,10 @@ public class IEAOrderedRecipeCardCell extends IEAViewHolder {
         this.displayNameLabel = (TextView) itemView.findViewById(R.id.recipe_name_text);
         this.priceLabel = (TextView) itemView.findViewById(R.id.recipe_price_text);
         this.recipeToolbar = (ImageView) itemView.findViewById(R.id.recipe_toolbar);
+
+        PopupMenu popup = new PopupMenu(IEAApp.getInstance().getApplicationContext(), this.recipeToolbar);
+        MenuInflater inflater = popup.getMenuInflater();
+//        inflater.inflate(R.menu.recipe_card_toolbar);
 
         this.recipeToolbar.setOnClickListener(new View.OnClickListener() {
             @Override
