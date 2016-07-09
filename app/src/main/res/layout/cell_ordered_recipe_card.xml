@@ -51,9 +51,10 @@
                 android:layout_below="@+id/recipe_name_text"
                 android:layout_toRightOf="@+id/recipe_rating_image_view"
                 android:text="$ 123"
+                android:textSize="@dimen/textSize"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textColor="@color/list_item_text_secondary_light"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="6dp"
                 android:layout_marginLeft="4dp" />
 
             <org.ieatta.views.RatingImageView
