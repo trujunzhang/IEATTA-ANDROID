@@ -364,10 +364,11 @@ public class GalleryActivity extends ThemedActionBarActivity {
      * scrollable gallery of media.
      */
     private void fetchGalleryCollection() {
-        String uuid = pageTitle.getUUID();
+        final String uuid = pageTitle.getUUID();
+        final int leadImageType = pageTitle.getLeadImageType();
         final List<Realm> realmList = new LinkedList<>();
 
-        LocalDatabaseQuery.queryPhotosByModel(uuid, pageTitle.getLeadImageType(), realmList).onSuccessTask(new Continuation<RealmResults<DBPhoto>, Task<Void>>() {
+        LocalDatabaseQuery.queryPhotosByModel(uuid, leadImageType, realmList).onSuccessTask(new Continuation<RealmResults<DBPhoto>, Task<Void>>() {
             @Override
             public Task<Void> then(Task<RealmResults<DBPhoto>> task) throws Exception {
                 GalleryCollection result = new GalleryCollection(DBConvert.toGalleryItem(task.getResult()));
