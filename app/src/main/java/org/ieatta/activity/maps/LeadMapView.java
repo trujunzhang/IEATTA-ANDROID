@@ -1,8 +1,10 @@
 package org.ieatta.activity.maps;
 
-import org.ieatta.activity.leadimages.ArticleHeaderMapView;
 
-public class LeadMapView {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class LeadMapView implements Parcelable {
     private double latitude;
     private double longitude;
 
@@ -15,6 +17,18 @@ public class LeadMapView {
         this.title = title;
         this.description = description;
     }
+
+    public static final Creator<LeadMapView> CREATOR = new Creator<LeadMapView>() {
+        @Override
+        public LeadMapView createFromParcel(Parcel in) {
+            return new LeadMapView(in);
+        }
+
+        @Override
+        public LeadMapView[] newArray(int size) {
+            return new LeadMapView[size];
+        }
+    };
 
     public double getLatitude() {
         return latitude;
@@ -48,5 +62,43 @@ public class LeadMapView {
         this.description = description;
     }
 
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    private LeadMapView(Parcel in) {
+        latitude = in.readDouble();
+        longitude = in.readDouble();
+        title = in.readString();
+        description = in.readString();
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int flags) {
+        parcel.writeDouble(latitude);
+        parcel.writeDouble(longitude);
+        parcel.writeString(title);
+        parcel.writeString(description);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof LeadMapView)) {
+            return false;
+        }
+
+        LeadMapView other = (LeadMapView) o;
+        // Not using namespace directly since that can be null
+        return other.getLatitude() == ((LeadMapView) o).getLatitude() && other.getLongitude() == ((LeadMapView) o).getLongitude();
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getTitle().hashCode();
+        result = 32 * result;
+        return result;
+    }
 
 }
