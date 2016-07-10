@@ -2,6 +2,63 @@ package org.ieatta.activity.maps;
 
 
 import android.app.Activity;
+import android.app.DownloadManager;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.Uri;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewPager;
+import android.support.v7.widget.Toolbar;
+import android.text.Html;
+import android.text.TextUtils;
+import android.util.Log;
+import android.util.SparseArray;
+import android.view.Gravity;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+
+import org.ieatta.IEAApp;
+import org.ieatta.R;
+import org.ieatta.activity.Page;
+import org.ieatta.activity.PageActivity;
+import org.ieatta.activity.PageTitle;
+import org.ieatta.analytics.GalleryFunnel;
+import org.ieatta.database.models.DBPhoto;
+import org.ieatta.database.provide.PQueryModelType;
+import org.ieatta.database.query.LocalDatabaseQuery;
+import org.ieatta.tasks.DBConvert;
+import org.wikipedia.Site;
+import org.wikipedia.ViewAnimations;
+import org.wikipedia.activity.ActivityUtil;
+import org.wikipedia.activity.ThemedActionBarActivity;
+
+import org.wikipedia.theme.Theme;
+import org.wikipedia.util.FeedbackUtil;
+import org.wikipedia.util.GradientUtil;
+import org.wikipedia.views.ViewUtil;
+
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+
+import bolts.Continuation;
+import bolts.Task;
+import io.realm.Realm;
+import io.realm.RealmResults;
+
+import static org.wikipedia.util.StringUtil.trim;
+import static org.wikipedia.util.UriUtil.handleExternalLink;
+import static org.wikipedia.util.UriUtil.resolveProtocolRelativeUrl;
+
+import android.app.Activity;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.location.Location;
@@ -45,11 +102,19 @@ public class MapsActivity extends ThemedActionBarActivity implements OnMapReadyC
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+
+        final Toolbar toolbar = (Toolbar) findViewById(R.id.gallery_toolbar);
+        // give it a gradient background
+        ViewUtil.setBackgroundDrawable(toolbar, GradientUtil.getCubicGradient(
+                getResources().getColor(R.color.lead_gradient_start), Gravity.TOP));
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("");
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-
 
         leadMapView = getIntent().getParcelableExtra(EXTRA_LEADMAPVIEW);
 
