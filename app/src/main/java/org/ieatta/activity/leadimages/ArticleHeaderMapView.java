@@ -26,6 +26,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import org.ieatta.R;
 import org.ieatta.activity.LeadImage;
 import org.ieatta.activity.LeadMapView;
+import org.ieatta.activity.MapInfo;
 import org.ieatta.analytics.PageFragmentFunnel;
 
 import butterknife.Bind;
@@ -62,7 +63,7 @@ public class ArticleHeaderMapView extends FrameLayout {
         init();
     }
 
-    public void toggleMapView(boolean activated) {
+    public void toggleMapView(boolean activated, MapInfo mapInfo) {
         new PageFragmentFunnel().logMapViewActivated(activated);
         setVisibility(GONE);
         if (activated)

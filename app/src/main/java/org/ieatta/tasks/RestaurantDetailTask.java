@@ -165,7 +165,7 @@ public class RestaurantDetailTask extends FragmentTask {
 
     @Override
     public void onNavigateClick() {
-        getMenuBarEventHandler().toggleMapView(model.getPage().toggleMapView());
+        getMenuBarEventHandler().toggleMapView(model.getPage());
     }
 
     @Override

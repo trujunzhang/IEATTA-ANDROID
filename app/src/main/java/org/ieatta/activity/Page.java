@@ -15,7 +15,9 @@ public class Page {
     private final PageTitle title;
     private final PageProperties pageProperties;
 
+    // Defined variables for Google map view.
     private boolean mapviewActivated = false;
+    private MapInfo mapInfo;
 
     /**
      * The media gallery collection associated with this page.
@@ -25,7 +27,9 @@ public class Page {
      */
     private GalleryCollection galleryCollection;
 
-    /** Regular constructor */
+    /**
+     * Regular constructor
+     */
     public Page(@NonNull PageTitle title,
                 @NonNull PageProperties pageProperties) {
         this.title = title;
@@ -57,7 +61,11 @@ public class Page {
         galleryCollection = collection;
     }
 
-    public boolean toggleMapView(){
+    public boolean toggleMapView() {
         return (mapviewActivated = !mapviewActivated);
+    }
+
+    public MapInfo getMapInfo() {
+        return this.mapInfo;
     }
 }

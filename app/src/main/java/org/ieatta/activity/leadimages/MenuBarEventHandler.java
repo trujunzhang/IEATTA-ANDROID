@@ -1,6 +1,8 @@
 package org.ieatta.activity.leadimages;
 
 
+import org.ieatta.activity.Page;
+
 public class MenuBarEventHandler {
 
     private final LeadImagesHandler leadImagesHandler;
@@ -11,8 +13,12 @@ public class MenuBarEventHandler {
         this.articleHeaderView = articleHeaderView;
     }
 
-    public void toggleMapView(boolean activated) {
+    public void toggleMapView(Page page) {
+        boolean activated = page.toggleMapView();
+
+        // Toggle map icon on the menu bar.
         leadImagesHandler.updateNavigate(activated);
-        articleHeaderView.getHeaderMapView().toggleMapView(activated);
+        // Toggle map view on the header view map.
+        articleHeaderView.getHeaderMapView().toggleMapView(activated, page.getMapInfo());
     }
 }
