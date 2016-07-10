@@ -6,16 +6,15 @@ import android.view.View;
 import android.widget.AdapterView;
 
 import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.model.Marker;
 import com.marvinlabs.widget.slideshow.SlideShowView;
 import com.tableview.RecycleViewManager;
-import com.tableview.TableViewControllerAdapter;
 import com.tableview.adapter.NSIndexPath;
 
 import com.tableview.storage.models.RowModel;
 import com.tableview.utils.CollectionUtil;
 
 import org.ieatta.R;
-import org.ieatta.activity.LeadImage;
 import org.ieatta.activity.PageActivity;
 import org.ieatta.activity.PageFragment;
 import org.ieatta.activity.PageTitle;
@@ -36,15 +35,12 @@ import org.ieatta.analytics.RecycleCellFunnel;
 import org.ieatta.cells.IEAGalleryThumbnailCell;
 import org.ieatta.cells.IEAReviewsCell;
 import org.ieatta.cells.header.IEAMoreReviewsFooterCell;
-import org.ieatta.cells.header.IEAPhotoGalleryFooterCell;
 import org.ieatta.cells.headerfooterview.IEAFooterView;
 import org.ieatta.cells.headerfooterview.IEAHeaderView;
-import org.ieatta.cells.model.EditCellModel;
 import org.ieatta.cells.model.IEAGalleryThumbnail;
 import org.ieatta.cells.model.IEAHeaderViewModel;
 import org.ieatta.cells.model.IEAReviewsCellModel;
 import org.ieatta.cells.model.SectionMoreReviewsFooterCellModel;
-import org.ieatta.cells.model.SectionPhotoGalleryFooterCellModel;
 import org.ieatta.cells.model.SectionTitleCellModel;
 import org.ieatta.database.provide.ReviewType;
 import org.ieatta.database.query.LocalDatabaseQuery;
@@ -208,7 +204,7 @@ public abstract class FragmentTask extends MenuBarCallback implements AdapterVie
     }
 
     @Override
-    public void onMapViewClick(MapView mapView) {
+    public void onMapViewClick(MapView mapView, Marker marker) {
         LeadMapView leadMapView = this.model.getPage().getPageProperties().getLeadMapView();
         MapsActivity.showMaps(activity, leadMapView);
     }

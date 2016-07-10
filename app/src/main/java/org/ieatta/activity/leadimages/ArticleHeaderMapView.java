@@ -6,7 +6,6 @@ import android.location.Location;
 import android.os.Build;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
-import android.view.View;
 import android.widget.FrameLayout;
 
 //import com.mapbox.mapboxsdk.annotations.Marker;
@@ -26,6 +25,7 @@ import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import org.ieatta.R;
@@ -37,7 +37,7 @@ import butterknife.ButterKnife;
 
 public class ArticleHeaderMapView extends FrameLayout {
     public interface OnLeadMapViewListener {
-        void onMapViewClick(MapView mapView);
+        void onMapViewClick(MapView mapView, Marker marker);
     }
 
     private OnLeadMapViewListener listener;
@@ -107,6 +107,16 @@ public class ArticleHeaderMapView extends FrameLayout {
                         .position(latLng)
                         .title(leadMapView.getTitle());
                 map.addMarker(options);
+
+                map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                    @Override
+                    public boolean onMarkerClick(Marker marker) {
+                        if (ArticleHeaderMapView.this.listener != null) {
+                            ArticleHeaderMapView.this.listener.onMapViewClick(ArticleHeaderMapView.this.mapView, marker);
+                        }
+                        return true;
+                    }
+                });
             }
         });
     }
@@ -139,15 +149,6 @@ public class ArticleHeaderMapView extends FrameLayout {
 
         inflate();
         bind();
-
-        this.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (ArticleHeaderMapView.this.listener != null) {
-                    ArticleHeaderMapView.this.listener.onMapViewClick(ArticleHeaderMapView.this.mapView);
-                }
-            }
-        });
     }
 
     private void inflate() {
