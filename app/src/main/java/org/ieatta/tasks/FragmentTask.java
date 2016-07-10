@@ -205,7 +205,7 @@ public abstract class FragmentTask extends MenuBarCallback implements AdapterVie
 
     @Override
     public void onMapViewClick(MapView mapView, Marker marker) {
-        LeadMapView leadMapView = this.model.getPage().getPageProperties().getLeadMapView();
+        LeadMapView leadMapView = new LeadMapView(marker.getPosition(),marker.getTitle());
         MapsActivity.showMaps(activity, leadMapView);
     }
 }

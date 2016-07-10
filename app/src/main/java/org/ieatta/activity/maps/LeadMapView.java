@@ -4,6 +4,8 @@ package org.ieatta.activity.maps;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.android.gms.maps.model.LatLng;
+
 public class LeadMapView implements Parcelable {
     private double latitude;
     private double longitude;
@@ -18,6 +20,13 @@ public class LeadMapView implements Parcelable {
         this.description = description;
     }
 
+    public LeadMapView(LatLng position, String title) {
+        this.latitude = position.latitude;
+        this.longitude = position.longitude;
+        this.title = title;
+        this.description = null;
+    }
+
     public static final Creator<LeadMapView> CREATOR = new Creator<LeadMapView>() {
         @Override
         public LeadMapView createFromParcel(Parcel in) {
@@ -29,6 +38,7 @@ public class LeadMapView implements Parcelable {
             return new LeadMapView[size];
         }
     };
+
 
     public double getLatitude() {
         return latitude;
