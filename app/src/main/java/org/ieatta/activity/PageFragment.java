@@ -25,6 +25,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
+import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 
 import org.ieatta.R;
@@ -153,20 +154,8 @@ public class PageFragment extends Fragment implements BackPressedHandler {
         tocDrawer = (WikiDrawerLayout) rootView.findViewById(R.id.page_toc_drawer);
         tocDrawer.setDragEdgeWidth(getResources().getDimensionPixelSize(R.dimen.drawer_drag_margin));
 
-//        MapView mapView = this.articleHeaderView.getMapView();
-//        mapView.onCreate(savedInstanceState);
-//
-//        // Gets to GoogleMap from the MapView and does initialization stuff
-//        GoogleMap map = mapView.getMap();
-//        map.getUiSettings().setMyLocationButtonEnabled(false);
-//        map.setMyLocationEnabled(true);
-//
-//        // Needs to call MapsInitializer before doing any CameraUpdateFactory calls
-//        MapsInitializer.initialize(this.getActivity());
-//
-//        // Updates the location and zoom of the MapView
-//        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(new LatLng(43.1, -87.9), 10);
-//        map.animateCamera(cameraUpdate);
+        // Needs to call MapsInitializer before doing any CameraUpdateFactory calls
+        MapsInitializer.initialize(this.getActivity());
 
         return rootView;
     }
@@ -234,7 +223,6 @@ public class PageFragment extends Fragment implements BackPressedHandler {
         model.setCurEntry(entry);
         model.setActionbarHeight(this.getActionBarHeight());
 
-
 //        this.pageRefreshed = pageRefreshed;
 //        if (!pageRefreshed) {
 //            savedPageCheckComplete = false;
@@ -265,6 +253,20 @@ public class PageFragment extends Fragment implements BackPressedHandler {
 
         mapView = articleHeaderView.getMapView();
         mapView.onCreate(savedInstanceState);
+
+        // Gets to GoogleMap from the MapView and does initialization stuff
+        mapView.getMapAsync(new OnMapReadyCallback() {
+            @Override
+            public void onMapReady(GoogleMap map) {
+                map.getUiSettings().setMyLocationButtonEnabled(false);
+                map.setMyLocationEnabled(true);
+
+                // Updates the location and zoom of the MapView
+                CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(new LatLng(43.1, -87.9), 10);
+                map.animateCamera(cameraUpdate);
+            }
+        });
+
     }
 
     public int getActionBarHeight() {
@@ -274,7 +276,7 @@ public class PageFragment extends Fragment implements BackPressedHandler {
     @Override
     public void onResume() {
         super.onResume();
-//        mapView.onResume();
+        mapView.onResume();
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("");
         initPageScrollFunnel();
     }
@@ -295,26 +297,26 @@ public class PageFragment extends Fragment implements BackPressedHandler {
     @Override
     public void onPause() {
         super.onPause();
-//        mapView.onPause();
+        mapView.onPause();
         closePageScrollFunnel();
     }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-//        mapView.onSaveInstanceState(outState);
+        mapView.onSaveInstanceState(outState);
     }
 
     @Override
     public void onLowMemory() {
         super.onLowMemory();
-//        mapView.onLowMemory();
+        mapView.onLowMemory();
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-//        mapView.onDestroy();
+        mapView.onDestroy();
     }
 
     public MenuBarEventHandler getMenuBarEventHandler() {
