@@ -23,6 +23,7 @@ import org.ieatta.activity.gallery.GalleryActivity;
 import org.ieatta.activity.gallery.GalleryCollection;
 import org.ieatta.activity.gallery.GalleryThumbnailScrollView;
 import org.ieatta.activity.history.HistoryEntry;
+import org.ieatta.activity.leadimages.ArticleHeaderMapView;
 import org.ieatta.activity.leadimages.LeadImagesHandler;
 import org.ieatta.activity.leadimages.MenuBarCallback;
 import org.ieatta.activity.leadimages.MenuBarEventHandler;
@@ -55,7 +56,10 @@ import java.util.List;
 import bolts.Task;
 import io.realm.Realm;
 
-public abstract class FragmentTask extends MenuBarCallback implements AdapterView.OnItemClickListener, LeadImagesHandler.OnContentHeightChangedListener, SlideShowView.OnSlideClickListener {
+public abstract class FragmentTask extends MenuBarCallback implements AdapterView.OnItemClickListener,
+        LeadImagesHandler.OnContentHeightChangedListener,
+        SlideShowView.OnSlideClickListener,
+        ArticleHeaderMapView.OnLeadMapViewListener {
     protected String mRestaurantUUID;
     protected String mEventUUID;
     protected String mTeamUUID;
