@@ -2,70 +2,15 @@ package org.ieatta.activity.maps;
 
 
 import android.app.Activity;
-import android.app.DownloadManager;
-import android.content.Intent;
-import android.content.IntentFilter;
-import android.net.Uri;
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.ViewPager;
-import android.support.v7.widget.Toolbar;
-import android.text.Html;
-import android.text.TextUtils;
-import android.util.Log;
-import android.util.SparseArray;
-import android.view.Gravity;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
-import android.widget.TextView;
-
-import org.ieatta.IEAApp;
-import org.ieatta.R;
-import org.ieatta.activity.Page;
-import org.ieatta.activity.PageActivity;
-import org.ieatta.activity.PageTitle;
-import org.ieatta.analytics.GalleryFunnel;
-import org.ieatta.database.models.DBPhoto;
-import org.ieatta.database.provide.PQueryModelType;
-import org.ieatta.database.query.LocalDatabaseQuery;
-import org.ieatta.tasks.DBConvert;
-import org.wikipedia.Site;
-import org.wikipedia.ViewAnimations;
-import org.wikipedia.activity.ActivityUtil;
-import org.wikipedia.activity.ThemedActionBarActivity;
-
-import org.wikipedia.theme.Theme;
-import org.wikipedia.util.FeedbackUtil;
-import org.wikipedia.util.GradientUtil;
-import org.wikipedia.views.ViewUtil;
-
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-
-import bolts.Continuation;
-import bolts.Task;
-import io.realm.Realm;
-import io.realm.RealmResults;
-
-import static org.wikipedia.util.StringUtil.trim;
-import static org.wikipedia.util.UriUtil.handleExternalLink;
-import static org.wikipedia.util.UriUtil.resolveProtocolRelativeUrl;
-
-import android.app.Activity;
 import android.content.Intent;
 import android.content.IntentSender;
-import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.MenuItem;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -81,9 +26,11 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import org.ieatta.IEAApp;
 import org.ieatta.R;
-import org.ieatta.activity.LeadImage;
 import org.ieatta.activity.PageActivity;
+import org.wikipedia.activity.ActivityUtil;
 import org.wikipedia.activity.ThemedActionBarActivity;
+import org.wikipedia.util.GradientUtil;
+import org.wikipedia.views.ViewUtil;
 
 public class MapsActivity extends ThemedActionBarActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
     private static final String TAG = "MapsActivity";
@@ -103,7 +50,7 @@ public class MapsActivity extends ThemedActionBarActivity implements OnMapReadyC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
 
-        final Toolbar toolbar = (Toolbar) findViewById(R.id.gallery_toolbar);
+        final Toolbar toolbar = (Toolbar) findViewById(R.id.map_toolbar);
         // give it a gradient background
         ViewUtil.setBackgroundDrawable(toolbar, GradientUtil.getCubicGradient(
                 getResources().getColor(R.color.lead_gradient_start), Gravity.TOP));
@@ -189,16 +136,29 @@ public class MapsActivity extends ThemedActionBarActivity implements OnMapReadyC
     }
 
     public static void showMaps(Activity activity, LeadMapView leadMapView) {
-        Intent galleryIntent = new Intent();
-        galleryIntent.setClass(activity, MapsActivity.class);
-        galleryIntent.putExtra(EXTRA_LEADMAPVIEW, leadMapView);
-        activity.startActivityForResult(galleryIntent, PageActivity.ACTIVITY_REQUEST_MAP);
+        Intent mapsIntent = new Intent();
+        mapsIntent.setClass(activity, MapsActivity.class);
+        mapsIntent.putExtra(EXTRA_LEADMAPVIEW, leadMapView);
+        activity.startActivityForResult(mapsIntent, PageActivity.ACTIVITY_REQUEST_MAP);
     }
 
     @Override
     public void onBackPressed() {
-        // log the "gallery close" event only upon explicit closing of the activity
+        // log the "maps close" event only upon explicit closing of the activity
         // (back button, or home-as-up button in the toolbar)
         super.onBackPressed();
     }
+
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        return ActivityUtil.defaultOnOptionsItemSelected(this, item)
+                || super.onOptionsItemSelected(item);
+    }
+
 }
