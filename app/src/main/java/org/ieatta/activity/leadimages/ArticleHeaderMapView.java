@@ -30,6 +30,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import org.ieatta.R;
 import org.ieatta.activity.maps.LeadMapView;
+import org.ieatta.activity.maps.MapsUtil;
 import org.ieatta.analytics.PageFragmentFunnel;
 
 import butterknife.Bind;
@@ -90,23 +91,7 @@ public class ArticleHeaderMapView extends FrameLayout {
             public void onMapReady(GoogleMap map) {
                 map.getUiSettings().setMyLocationButtonEnabled(false);
 
-                // Updates the location and zoom of the MapView
-                LatLng latLng = new LatLng(leadMapView.getLatitude(), leadMapView.getLongitude());
-                final CameraPosition BONDI =
-                        new CameraPosition.Builder().target(latLng)
-                                .zoom(15.5f)
-                                .bearing(300)
-                                .tilt(50)
-                                .build();
-
-                // The duration must be strictly positive so we make it at least 1.
-                CameraUpdate update = CameraUpdateFactory.newCameraPosition(BONDI);
-                map.animateCamera(update, null);
-
-                MarkerOptions options = new MarkerOptions()
-                        .position(latLng)
-                        .title(leadMapView.getTitle());
-                map.addMarker(options);
+                MapsUtil.handleNewLocation(map, leadMapView);
 
                 map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
                     @Override

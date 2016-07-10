@@ -88,7 +88,7 @@ public class MapsActivity extends ThemedActionBarActivity implements OnMapReadyC
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        this.handleNewLocation(googleMap);
+        MapsUtil.handleNewLocation(googleMap, this.leadMapView);
     }
 
     @Override
@@ -115,25 +115,6 @@ public class MapsActivity extends ThemedActionBarActivity implements OnMapReadyC
         }
     }
 
-    private void handleNewLocation(GoogleMap map) {
-        // Updates the location and zoom of the MapView
-        LatLng latLng = new LatLng(leadMapView.getLatitude(), leadMapView.getLongitude());
-        final CameraPosition BONDI =
-                new CameraPosition.Builder().target(latLng)
-                        .zoom(15.5f)
-                        .bearing(300)
-                        .tilt(50)
-                        .build();
-
-        // The duration must be strictly positive so we make it at least 1.
-        CameraUpdate update = CameraUpdateFactory.newCameraPosition(BONDI);
-        map.animateCamera(update, null);
-
-        MarkerOptions options = new MarkerOptions()
-                .position(latLng)
-                .title(leadMapView.getTitle());
-        map.addMarker(options);
-    }
 
     public static void showMaps(Activity activity, LeadMapView leadMapView) {
         Intent mapsIntent = new Intent();
