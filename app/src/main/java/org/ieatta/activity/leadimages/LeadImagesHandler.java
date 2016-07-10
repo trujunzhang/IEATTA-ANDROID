@@ -19,8 +19,7 @@ import com.marvinlabs.widget.slideshow.SlideShowView;
 
 import org.ieatta.R;
 import org.ieatta.activity.LeadImage;
-import org.ieatta.activity.LeadMapView;
-import org.ieatta.activity.PageProperties;
+import org.ieatta.activity.maps.LeadMapView;
 import org.ieatta.activity.PageTitle;
 import org.ieatta.activity.Page;
 import org.ieatta.activity.PageFragment;
@@ -29,15 +28,11 @@ import org.ieatta.tasks.FragmentTask;
 import org.ieatta.views.ObservableWebView;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.wikipedia.concurrency.RecurringTask;
 import org.wikipedia.util.DimenUtil;
 
 
 import java.util.LinkedList;
 import java.util.List;
-
-import bolts.Continuation;
-import bolts.Task;
 
 import static org.wikipedia.util.DimenUtil.getContentTopOffsetPx;
 

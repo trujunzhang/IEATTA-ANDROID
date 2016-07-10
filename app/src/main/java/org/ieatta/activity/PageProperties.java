@@ -1,5 +1,6 @@
 package org.ieatta.activity;
 
+import org.ieatta.activity.maps.LeadMapView;
 import org.ieatta.tasks.FragmentTask;
 
 import java.util.List;

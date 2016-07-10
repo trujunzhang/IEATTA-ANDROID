@@ -8,7 +8,7 @@ import com.tableview.adapter.NSIndexPath;
 
 import org.ieatta.R;
 import org.ieatta.activity.LeadImageCollection;
-import org.ieatta.activity.LeadMapView;
+import org.ieatta.activity.maps.LeadMapView;
 import org.ieatta.activity.Page;
 import org.ieatta.activity.PageActivity;
 import org.ieatta.activity.PageProperties;
@@ -17,7 +17,6 @@ import org.ieatta.activity.PageViewModel;
 import org.ieatta.activity.history.HistoryEntry;
 import org.ieatta.activity.update.UpdateEntry;
 import org.ieatta.cells.IEARestaurantEventsCell;
-import org.ieatta.cells.IEAReviewsCell;
 import org.ieatta.cells.headerfooterview.IEAFooterView;
 import org.ieatta.cells.headerfooterview.IEAHeaderView;
 import org.ieatta.cells.model.IEAFooterViewModel;

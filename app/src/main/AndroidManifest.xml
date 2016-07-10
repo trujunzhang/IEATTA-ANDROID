@@ -114,6 +114,12 @@
             android:exported="false"
             android:theme="@style/FullScreen" />
 
+        <activity
+            android:name=".activity.maps.MapsActivity"
+            android:configChanges="orientation|screenSize"
+            android:exported="false"
+            android:theme="@style/FullScreen" />
+
     </application>
 
 </manifest>

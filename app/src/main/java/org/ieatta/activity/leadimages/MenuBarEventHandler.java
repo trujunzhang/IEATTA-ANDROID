@@ -1,7 +1,7 @@
 package org.ieatta.activity.leadimages;
 
 
-import org.ieatta.activity.LeadMapView;
+import org.ieatta.activity.maps.LeadMapView;
 import org.ieatta.activity.Page;
 
 public class MenuBarEventHandler {

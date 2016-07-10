@@ -2,7 +2,6 @@ package org.ieatta.activity.leadimages;
 
 import android.annotation.TargetApi;
 import android.content.Context;
-import android.graphics.PointF;
 import android.location.Location;
 import android.os.Build;
 import android.support.annotation.Nullable;
@@ -29,8 +28,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import org.ieatta.R;
-import org.ieatta.activity.LeadImage;
-import org.ieatta.activity.LeadMapView;
+import org.ieatta.activity.maps.LeadMapView;
 import org.ieatta.analytics.PageFragmentFunnel;
 
 import butterknife.Bind;

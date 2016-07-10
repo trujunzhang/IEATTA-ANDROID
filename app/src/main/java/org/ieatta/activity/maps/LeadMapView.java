@@ -1,4 +1,4 @@
-package org.ieatta.activity;
+package org.ieatta.activity.maps;
 
 public class LeadMapView {
     private double latitude;
