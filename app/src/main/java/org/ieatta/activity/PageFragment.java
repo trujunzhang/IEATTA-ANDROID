@@ -19,7 +19,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-//import com.mapbox.mapboxsdk.maps.MapView;
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.MapsInitializer;
+import com.google.android.gms.maps.model.LatLng;
 
 import org.ieatta.R;
 import org.ieatta.activity.editing.EditHandler;
@@ -36,7 +42,7 @@ import static butterknife.ButterKnife.findById;
 public class PageFragment extends Fragment implements BackPressedHandler {
     private IEAApp app;
 
-//    private MapView mapView;
+    private MapView mapView;
 
     protected PageLoadStrategy pageLoadStrategy;
     protected PageViewModel model;
@@ -147,6 +153,21 @@ public class PageFragment extends Fragment implements BackPressedHandler {
         tocDrawer = (WikiDrawerLayout) rootView.findViewById(R.id.page_toc_drawer);
         tocDrawer.setDragEdgeWidth(getResources().getDimensionPixelSize(R.dimen.drawer_drag_margin));
 
+//        MapView mapView = this.articleHeaderView.getMapView();
+//        mapView.onCreate(savedInstanceState);
+//
+//        // Gets to GoogleMap from the MapView and does initialization stuff
+//        GoogleMap map = mapView.getMap();
+//        map.getUiSettings().setMyLocationButtonEnabled(false);
+//        map.setMyLocationEnabled(true);
+//
+//        // Needs to call MapsInitializer before doing any CameraUpdateFactory calls
+//        MapsInitializer.initialize(this.getActivity());
+//
+//        // Updates the location and zoom of the MapView
+//        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(new LatLng(43.1, -87.9), 10);
+//        map.animateCamera(cameraUpdate);
+
         return rootView;
     }
 
@@ -242,8 +263,8 @@ public class PageFragment extends Fragment implements BackPressedHandler {
         pageLoadStrategy.setUp(model, this, webView, searchBarHideHandler,
                 leadImagesHandler, getCurrentTab().getBackStack());
 
-//        mapView = articleHeaderView.getMapView();
-//        mapView.onCreate(savedInstanceState);
+        mapView = articleHeaderView.getMapView();
+        mapView.onCreate(savedInstanceState);
     }
 
     public int getActionBarHeight() {

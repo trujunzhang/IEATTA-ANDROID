@@ -29,6 +29,7 @@ import android.widget.LinearLayout;
 
 //import com.mapbox.mapboxsdk.maps.MapView;
 
+import com.google.android.gms.maps.MapView;
 import com.marvinlabs.widget.slideshow.SlideShowView;
 
 import org.ieatta.IEAApp;
@@ -383,9 +384,9 @@ public class ArticleHeaderView extends FrameLayout implements ObservableWebView.
         return getResources().getDimensionPixelSize(id);
     }
 
-//    public MapView getMapView(){
-//        return headerMapView.getMapView();
-//    }
+    public MapView getMapView(){
+        return headerMapView.getMapView();
+    }
 
     public ArticleHeaderMapView getHeaderMapView() {
         return headerMapView;
