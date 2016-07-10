@@ -13,10 +13,12 @@ import android.util.Log;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -102,15 +104,23 @@ public class MapsActivity extends ThemedActionBarActivity implements OnMapReadyC
     }
 
     private void handleNewLocation(GoogleMap map) {
-        double currentLatitude = leadMapView.getLatitude();
-        double currentLongitude = leadMapView.getLongitude()
-        LatLng latLng = new LatLng(currentLatitude, currentLongitude);
+        // Updates the location and zoom of the MapView
+        LatLng latLng = new LatLng(leadMapView.getLatitude(), leadMapView.getLongitude());
+        final CameraPosition BONDI =
+                new CameraPosition.Builder().target(latLng)
+                        .zoom(15.5f)
+                        .bearing(300)
+                        .tilt(50)
+                        .build();
+
+        // The duration must be strictly positive so we make it at least 1.
+        CameraUpdate update = CameraUpdateFactory.newCameraPosition(BONDI);
+        map.animateCamera(update, null);
 
         MarkerOptions options = new MarkerOptions()
                 .position(latLng)
                 .title(leadMapView.getTitle());
         map.addMarker(options);
-        map.moveCamera(CameraUpdateFactory.newLatLng(latLng));
     }
 
     public static void showMaps(Activity activity, LeadMapView leadMapView) {
