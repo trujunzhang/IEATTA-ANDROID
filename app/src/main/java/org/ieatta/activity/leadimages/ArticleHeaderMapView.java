@@ -35,11 +35,11 @@ public class ArticleHeaderMapView extends FrameLayout {
     @Bind(R.id.mapview)
     MapView mapView;
 
-//    private Marker lastMarker;
+    //    private Marker lastMarker;
 //
-//    public MapView getMapView() {
-//        return mapView;
-//    }
+    public MapView getMapView() {
+        return mapView;
+    }
 
     public ArticleHeaderMapView(Context context) {
         super(context);
