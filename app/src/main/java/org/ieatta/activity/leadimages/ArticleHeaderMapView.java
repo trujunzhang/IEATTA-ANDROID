@@ -19,14 +19,18 @@ import android.widget.FrameLayout;
 //import com.mapbox.mapboxsdk.maps.MapboxMap;
 //import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import org.ieatta.R;
 import org.ieatta.activity.LeadImage;
 import org.ieatta.activity.LeadMapView;
-import org.ieatta.activity.MapInfo;
 import org.ieatta.analytics.PageFragmentFunnel;
 
 import butterknife.Bind;
@@ -63,18 +67,44 @@ public class ArticleHeaderMapView extends FrameLayout {
         init();
     }
 
-    public void toggleMapView(boolean activated, MapInfo mapInfo) {
+    public void toggleMapView(boolean activated, LeadMapView leadMapView) {
         new PageFragmentFunnel().logMapViewActivated(activated);
         setVisibility(GONE);
-        if (activated)
+        if (activated) {
             setVisibility(VISIBLE);
+            this.load(leadMapView);
+        }
     }
 
     public void load(@Nullable final LeadMapView leadMapView) {
-        if (leadMapView == null) {
-            setVisibility(GONE);
-        } else {
-            setVisibility(GONE);
+        // Gets to GoogleMap from the MapView and does initialization stuff
+        mapView.getMapAsync(new OnMapReadyCallback() {
+            @Override
+            public void onMapReady(GoogleMap map) {
+                map.getUiSettings().setMyLocationButtonEnabled(false);
+
+
+                // Updates the location and zoom of the MapView
+                LatLng latLng = new LatLng(-33.891614, 151.276417);
+                final CameraPosition BONDI =
+                        new CameraPosition.Builder().target(latLng)
+                                .zoom(15.5f)
+                                .bearing(300)
+                                .tilt(50)
+                                .build();
+
+                // The duration must be strictly positive so we make it at least 1.
+                CameraUpdate update = CameraUpdateFactory.newCameraPosition(BONDI);
+                map.animateCamera(update, null);
+
+                MarkerOptions options = new MarkerOptions()
+                        .position(latLng)
+                        .title("I am here!");
+                map.addMarker(options);
+            }
+        });
+
+
 //            mapView.getMapAsync(new OnMapReadyCallback() {
 //                @Override
 //                public void onMapReady(MapboxMap mapboxMap) {
@@ -105,7 +135,7 @@ public class ArticleHeaderMapView extends FrameLayout {
 //                    lastMarker = mapboxMap.addMarker(options);
 //                }
 //            });
-        }
+
     }
 
 

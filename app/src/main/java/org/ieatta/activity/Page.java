@@ -17,7 +17,6 @@ public class Page {
 
     // Defined variables for Google map view.
     private boolean mapviewActivated = false;
-    private MapInfo mapInfo;
 
     /**
      * The media gallery collection associated with this page.
@@ -65,7 +64,4 @@ public class Page {
         return (mapviewActivated = !mapviewActivated);
     }
 
-    public MapInfo getMapInfo() {
-        return this.mapInfo;
-    }
 }
