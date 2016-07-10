@@ -33,7 +33,6 @@ public class MapsActivity extends ThemedActionBarActivity implements OnMapReadyC
 
     private LeadMapView leadMapView;
 
-    private GoogleMap mMap;
     private GoogleApiClient mGoogleApiClient;
 
     public static final String EXTRA_LEADMAPVIEW = "leadmapview";
@@ -75,12 +74,12 @@ public class MapsActivity extends ThemedActionBarActivity implements OnMapReadyC
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-
+        this.handleNewLocation(googleMap);
     }
 
     @Override
     public void onConnected(@Nullable Bundle bundle) {
-        this.handleNewLocation(null);
+
     }
 
     @Override
@@ -102,18 +101,16 @@ public class MapsActivity extends ThemedActionBarActivity implements OnMapReadyC
         }
     }
 
-    private void handleNewLocation(Location location) {
-        Log.d(TAG, location.toString());
-
-        double currentLatitude = location.getLatitude();
-        double currentLongitude = location.getLongitude();
+    private void handleNewLocation(GoogleMap map) {
+        double currentLatitude = leadMapView.getLatitude();
+        double currentLongitude = leadMapView.getLongitude()
         LatLng latLng = new LatLng(currentLatitude, currentLongitude);
 
         MarkerOptions options = new MarkerOptions()
                 .position(latLng)
-                .title("I am here!");
-        mMap.addMarker(options);
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+                .title(leadMapView.getTitle());
+        map.addMarker(options);
+        map.moveCamera(CameraUpdateFactory.newLatLng(latLng));
     }
 
     public static void showMaps(Activity activity, LeadMapView leadMapView) {
