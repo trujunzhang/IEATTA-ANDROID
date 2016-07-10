@@ -28,6 +28,8 @@ import org.ieatta.activity.leadimages.ArticleHeaderMapView;
 import org.ieatta.activity.leadimages.LeadImagesHandler;
 import org.ieatta.activity.leadimages.MenuBarCallback;
 import org.ieatta.activity.leadimages.MenuBarEventHandler;
+import org.ieatta.activity.maps.LeadMapView;
+import org.ieatta.activity.maps.MapsActivity;
 import org.ieatta.activity.update.UpdateEntry;
 import org.ieatta.analytics.GalleryFunnel;
 import org.ieatta.analytics.RecycleCellFunnel;
@@ -207,6 +209,7 @@ public abstract class FragmentTask extends MenuBarCallback implements AdapterVie
 
     @Override
     public void onMapViewClick(MapView mapView) {
-
+        LeadMapView leadMapView = this.model.getPage().getPageProperties().getLeadMapView();
+        MapsActivity.showMaps(activity, leadMapView);
     }
 }

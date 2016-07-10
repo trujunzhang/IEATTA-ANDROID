@@ -71,6 +71,7 @@ public class PageActivity extends ThemedActionBarActivity {
     public static final int ACTIVITY_REQUEST_LANGLINKS = 0;
     public static final int ACTIVITY_REQUEST_EDIT_SECTION = 1;
     public static final int ACTIVITY_REQUEST_GALLERY = 2;
+    public static final int ACTIVITY_REQUEST_MAP = 3;
 
     public static final int PROGRESS_BAR_MAX_VALUE = 10000;
 

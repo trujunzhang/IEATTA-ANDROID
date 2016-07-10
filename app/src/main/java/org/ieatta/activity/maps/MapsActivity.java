@@ -1,6 +1,8 @@
 package org.ieatta.activity.maps;
 
 
+import android.app.Activity;
+import android.content.Intent;
 import android.content.IntentSender;
 import android.location.Location;
 import android.os.Bundle;
@@ -20,6 +22,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import org.ieatta.IEAApp;
 import org.ieatta.R;
+import org.ieatta.activity.LeadImage;
+import org.ieatta.activity.PageActivity;
 import org.wikipedia.activity.ThemedActionBarActivity;
 
 public class MapsActivity extends ThemedActionBarActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
@@ -27,13 +31,12 @@ public class MapsActivity extends ThemedActionBarActivity implements OnMapReadyC
 
     private final static int CONNECTION_FAILURE_RESOLUTION_REQUEST = 9000;
 
+    private LeadMapView leadMapView;
+
     private GoogleMap mMap;
     private GoogleApiClient mGoogleApiClient;
 
-
-    public static final String EXTRA_PAGETITLE = "pageTitle";
-    public static final String EXTRA_IMAGETITLE = "imageTitle";
-    public static final String EXTRA_SOURCE = "source";
+    public static final String EXTRA_LEADMAPVIEW = "leadmapview";
 
     private IEAApp app;
 
@@ -45,6 +48,9 @@ public class MapsActivity extends ThemedActionBarActivity implements OnMapReadyC
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+
+        leadMapView = getIntent().getParcelableExtra(EXTRA_LEADMAPVIEW);
 
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
@@ -108,5 +114,12 @@ public class MapsActivity extends ThemedActionBarActivity implements OnMapReadyC
                 .title("I am here!");
         mMap.addMarker(options);
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+    }
+
+    public static void showMaps(Activity activity, LeadMapView leadMapView) {
+        Intent galleryIntent = new Intent();
+        galleryIntent.setClass(activity, MapsActivity.class);
+        galleryIntent.putExtra(EXTRA_LEADMAPVIEW, leadMapView);
+        activity.startActivityForResult(galleryIntent, PageActivity.ACTIVITY_REQUEST_MAP);
     }
 }
