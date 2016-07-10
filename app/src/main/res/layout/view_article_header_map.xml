@@ -7,18 +7,4 @@
         android:id="@+id/mapview"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone"
-        android:background="@android:color/holo_red_dark">
-
-    </View>
-
-    <!--<com.mapbox.mapboxsdk.maps.MapView-->
-    <!--android:id="@+id/mapview"-->
-    <!--android:layout_width="fill_parent"-->
-    <!--android:layout_height="fill_parent"-->
-    <!--mapbox:access_token="@string/mapbox_public_token"/>-->
 </merge>
