@@ -194,4 +194,11 @@ public class MapsActivity extends ThemedActionBarActivity implements OnMapReadyC
         galleryIntent.putExtra(EXTRA_LEADMAPVIEW, leadMapView);
         activity.startActivityForResult(galleryIntent, PageActivity.ACTIVITY_REQUEST_MAP);
     }
+
+    @Override
+    public void onBackPressed() {
+        // log the "gallery close" event only upon explicit closing of the activity
+        // (back button, or home-as-up button in the toolbar)
+        super.onBackPressed();
+    }
 }
