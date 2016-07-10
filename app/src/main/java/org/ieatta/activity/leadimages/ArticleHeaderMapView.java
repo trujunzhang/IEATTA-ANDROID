@@ -6,6 +6,7 @@ import android.location.Location;
 import android.os.Build;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.view.View;
 import android.widget.FrameLayout;
 
 //import com.mapbox.mapboxsdk.annotations.Marker;
@@ -48,8 +49,6 @@ public class ArticleHeaderMapView extends FrameLayout {
     @Bind(R.id.mapview)
     MapView mapView;
 
-    //    private Marker lastMarker;
-//
     public MapView getMapView() {
         return mapView;
     }
@@ -140,6 +139,15 @@ public class ArticleHeaderMapView extends FrameLayout {
 
         inflate();
         bind();
+
+        this.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (ArticleHeaderMapView.this.listener != null) {
+                    ArticleHeaderMapView.this.listener.onMapViewClick(ArticleHeaderMapView.this.mapView);
+                }
+            }
+        });
     }
 
     private void inflate() {
