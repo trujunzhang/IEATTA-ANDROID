@@ -190,7 +190,7 @@ public class LeadImagesHandler {
         layoutWikiDataDescription(getTitle().getDescription());
         layoutViews(listener, sequence);
 
-        loadMapView(this.getPage().getPageProperties().getLeadMapView());
+        articleHeaderView.hideMapView();
     }
 
     /**
@@ -300,25 +300,6 @@ public class LeadImagesHandler {
             articleHeaderView.loadImage(null, null);
         }
     }
-
-    private void loadMapView(@Nullable LeadMapView leadMapView) {
-        if (!isMainPage() && leadMapView != null && isLeadImageEnabled()) {
-            new PageFragmentFunnel().logLoadMapView("have mapview");
-            articleHeaderView.loadMapView(leadMapView);
-        } else {
-            new PageFragmentFunnel().logLoadMapView("no mapview");
-            articleHeaderView.loadMapView(null);
-        }
-    }
-
-//    /**
-//     * @return Nullable URL with no scheme. For example, foo.bar.com/ instead of
-//     * http://foo.bar.com/.
-//     */
-//    @Nullable
-//    private String getLeadImageUrl() {
-//        return getPage() == null ? null : getPage().getPageProperties().getLeadImageUrl();
-//    }
 
     @Nullable
     private Location getGeo() {

@@ -144,17 +144,7 @@ public class ArticleHeaderMapView extends FrameLayout {
         ButterKnife.bind(this);
     }
 
-    private void handleNewLocation(Location location) {
-//        Log.d(TAG, location.toString());
-
-        double currentLatitude = location.getLatitude();
-        double currentLongitude = location.getLongitude();
-        LatLng latLng = new LatLng(currentLatitude, currentLongitude);
-
-        MarkerOptions options = new MarkerOptions()
-                .position(latLng)
-                .title("I am here!");
-//        mMap.addMarker(options);
-//        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+    public void hideMapView() {
+        setVisibility(GONE);
     }
 }

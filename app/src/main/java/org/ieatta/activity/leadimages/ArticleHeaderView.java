@@ -150,9 +150,9 @@ public class ArticleHeaderView extends FrameLayout implements ObservableWebView.
         }
     }
 
-    public void loadMapView(@Nullable LeadMapView leadMapView) {
+    public void hideMapView() {
         menuBar.updateNavigate(false);
-        headerMapView.load(leadMapView);
+        headerMapView.hideMapView();
     }
 
     private void setImageViewMinimumHeight() {
