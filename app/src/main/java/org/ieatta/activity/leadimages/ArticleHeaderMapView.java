@@ -83,9 +83,8 @@ public class ArticleHeaderMapView extends FrameLayout {
             public void onMapReady(GoogleMap map) {
                 map.getUiSettings().setMyLocationButtonEnabled(false);
 
-
                 // Updates the location and zoom of the MapView
-                LatLng latLng = new LatLng(-33.891614, 151.276417);
+                LatLng latLng = new LatLng(leadMapView.getLatitude(), leadMapView.getLongitude());
                 final CameraPosition BONDI =
                         new CameraPosition.Builder().target(latLng)
                                 .zoom(15.5f)
@@ -99,43 +98,10 @@ public class ArticleHeaderMapView extends FrameLayout {
 
                 MarkerOptions options = new MarkerOptions()
                         .position(latLng)
-                        .title("I am here!");
+                        .title(leadMapView.getTitle());
                 map.addMarker(options);
             }
         });
-
-
-//            mapView.getMapAsync(new OnMapReadyCallback() {
-//                @Override
-//                public void onMapReady(MapboxMap mapboxMap) {
-//
-//                    // Set map style
-//                    mapboxMap.setStyleUrl(Style.MAPBOX_STREETS);
-//
-//                    // Set the camera's starting position
-//                    LatLng location = new LatLng(leadMapView.getLatitude(), leadMapView.getLongitude());
-//                    CameraPosition cameraPosition = new CameraPosition.Builder()
-//                            .target(location) // set the camera's center position
-//                            .zoom(14)  // set the camera's zoom level
-//                            .tilt(20)  // set the camera's tilt
-//                            .build();
-//
-//                    // Move the camera to that position
-//                    mapboxMap.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-//
-//                    new PageFragmentFunnel().logMapboxMarker(leadMapView.getTitle(), leadMapView.getSnippet());
-//
-//                    MarkerOptions options = new MarkerOptions()
-//                            .position(location)
-//                            .title(leadMapView.getTitle())
-//                            .snippet(leadMapView.getSnippet());
-//                    if(lastMarker != null)
-//                        mapboxMap.removeMarker(lastMarker);
-//
-//                    lastMarker = mapboxMap.addMarker(options);
-//                }
-//            });
-
     }
 
 

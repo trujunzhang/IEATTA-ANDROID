@@ -1,27 +1,17 @@
 package org.ieatta.activity;
 
-import android.text.TextUtils;
-
-import org.ieatta.database.query.OnlineDatabaseQuery;
-import org.ieatta.server.cache.CacheImageUtil;
-
-import java.io.File;
-
-import bolts.Continuation;
-import bolts.Task;
-
 public class LeadMapView {
     private double latitude;
     private double longitude;
 
     private String title;
-    private String snippet;
+    private String description;
 
-    public LeadMapView(double latitude, double longitude, String title, String snippet) {
+    public LeadMapView(double latitude, double longitude, String title, String description) {
         this.latitude = latitude;
         this.longitude = longitude;
         this.title = title;
-        this.snippet = snippet;
+        this.description = description;
     }
 
     public double getLatitude() {
@@ -48,11 +38,11 @@ public class LeadMapView {
         this.title = title;
     }
 
-    public String getSnippet() {
-        return snippet;
+    public String getDescription() {
+        return description;
     }
 
-    public void setSnippet(String snippet) {
-        this.snippet = snippet;
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
