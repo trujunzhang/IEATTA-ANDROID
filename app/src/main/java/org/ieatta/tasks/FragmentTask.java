@@ -5,6 +5,7 @@ import android.support.annotation.VisibleForTesting;
 import android.view.View;
 import android.widget.AdapterView;
 
+import com.google.android.gms.maps.MapView;
 import com.marvinlabs.widget.slideshow.SlideShowView;
 import com.tableview.RecycleViewManager;
 import com.tableview.TableViewControllerAdapter;
@@ -202,5 +203,10 @@ public abstract class FragmentTask extends MenuBarCallback implements AdapterVie
     public void onItemClick(SlideShowView parent, int position) {
         String imageUUID = model.getPage().getPageProperties().getLeadImages().get(position).getImageUUID();
         this.showGalleryActivity(imageUUID);
+    }
+
+    @Override
+    public void onMapViewClick(MapView mapView) {
+
     }
 }

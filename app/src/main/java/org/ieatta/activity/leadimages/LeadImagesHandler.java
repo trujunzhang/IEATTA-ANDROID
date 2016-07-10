@@ -182,6 +182,8 @@ public class LeadImagesHandler {
         // set the page title text, and honor any HTML formatting in the title
         this.loadLeadImage(this.getPage().getPageProperties().getLeadImages(), this.getPage().getPageProperties().getFragmentTask());
 
+        articleHeaderView.getHeaderMapView().setListener(this.parentFragment.getTask());
+
         articleHeaderView.setTitle(Html.fromHtml(getPage().getDisplayTitle()));
         articleHeaderView.setRatingImageView(getTitle().getRatingReview());
         // Set the subtitle, too, so text measurements are accurate.

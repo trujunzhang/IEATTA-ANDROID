@@ -1,5 +1,7 @@
 package org.ieatta.activity.maps;
 
+import org.ieatta.activity.leadimages.ArticleHeaderMapView;
+
 public class LeadMapView {
     private double latitude;
     private double longitude;

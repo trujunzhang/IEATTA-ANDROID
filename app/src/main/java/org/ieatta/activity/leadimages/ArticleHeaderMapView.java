@@ -36,7 +36,13 @@ import butterknife.ButterKnife;
 
 public class ArticleHeaderMapView extends FrameLayout {
     public interface OnLeadMapViewListener {
-        void mapViewClicked(MapView mapView);
+        void onMapViewClick(MapView mapView);
+    }
+
+    private OnLeadMapViewListener listener;
+
+    public void setListener(OnLeadMapViewListener listener) {
+        this.listener = listener;
     }
 
     @Bind(R.id.mapview)
